@@ -137,11 +137,11 @@
 %% Helper Methods
 %% -----------------------------------------------------------------------------
 
-\def\sob@thesoversion#1#2#3#4\@nil{%
+\def\sob@thesobversion#1#2#3#4\@nil{%
     \bgroup{}v#1.#2.#3#4\egroup%
 }
 \def\thesobversion{%
-    \edef\@tmp{\noexpand\sob@thesoversion\arabic{sobversion}\noexpand\@nil}%
+    \edef\@tmp{\noexpand\sob@thesobversion\arabic{sobversion}\noexpand\@nil}%
     \@tmp%
 }
 
