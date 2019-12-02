@@ -1,0 +1,152 @@
+\documentclass{sopra-base} 
+
+\usepackage{sopra-documentation}
+\usepackage{sopra-models}
+
+\title{Das 'sopra-models'-Paket}
+\subtitle[Dokumentation für das 'sopra-models'-Paket]{Dokumentation für das 'sopra-models'-Paket~$\mid$~Version \thesomversion}
+
+\duedate{2019-12-2}
+
+\keywords{Dokumentation,sopra-models,sopra,uni ulm,uulm,Paket}
+\authors{Florian Sihler (florian.sihler@uni-ulm.de)}
+
+\group{Die Affenbande}
+\begin{document}
+    \maketitle%
+%
+    %\tableofcontents
+%
+
+%
+%
+% ....###....##.......##........######...########.##.....##.########.####.##....##.########..######.
+% ...##.##...##.......##.......##....##..##.......###...###.##........##..###...##.##.......##....##
+% ..##...##..##.......##.......##........##.......####.####.##........##..####..##.##.......##......
+% .##.....##.##.......##.......##...####.######...##.###.##.######....##..##.##.##.######....######.
+% .#########.##.......##.......##....##..##.......##.....##.##........##..##..####.##.............##
+% .##.....##.##.......##.......##....##..##.......##.....##.##........##..##...###.##.......##....##
+% .##.....##.########.########..######...########.##.....##.########.####.##....##.########..######.
+%
+%
+
+\section{Allgemeines}
+\subsection{Warum, wieso, weshalb?}
+    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im 
+    Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
+    Grundlage für die Präsentation von (UML)-Diagrammen und Modellen
+    des \imptext{Teams 20}. Diese Dokumentation wurde zusammen mit der 
+    \T{sopra-base.cls} sowie dem Paket \T{sopra-documentation.sty} kreiert.\par
+    \imptext{Wichtig: Ein großteil dieses Pakets basiert auf \T{tikz-uml} und 
+    wird hier dokumentiert: \url{https://perso.ensta-paris.fr/~kielbasi/tikzuml/}}
+    Zum Visualisieren der einzelnen Code-Ausschnitte wurde die 
+    \T{LILLYxLISTINGS}-Bibliothek des Lilly-Frameworks\footnote{\url{https://github.com/EagleoutIce/LILLY}} von
+    Florian Sihler verwendet. Es ist für die Verwendung des Pakets (\jmark[\T{nolistings}]{mrk:nolistings})
+    nicht relevant.\par
+    Das zugehörige Paket sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile[subject={sopra-models.sty}]{sopra-models.sty}}.
+\subsection{Abhängigkeiten}
+    Dieses Paket bindet die folgenden Paketen mit ein:
+    \begin{multicols}{3}
+        \begin{itemize}
+            \def\pkgparse#1:#2\@nil{%
+                \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
+            }
+            \foreach \pkg in {tikz:,newfloat:,caption:,float:,ifthen:,xstring:,calc:,pgfopts:} {
+                \item \expandafter\pkgparse\pkg\@nil
+            }
+        \end{itemize}
+    \end{multicols}
+    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein. Weiter werden von Ti\textit{k}Z die folgenden
+    Bibliotheken benutzt: \T{backgrounds}, \T{arrows}, \T{shapes}, \T{fit}, \T{shadows} und \T{decorations.markings}.
+
+\subsection{Die Installation}
+    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die 
+    folgenden Möglichkeiten ergeben:
+    \begin{itemize}
+        \item Das Paket kann in dasselbe Verzeichnis wie das Dokument
+                gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+\begin{plainlatex}
+\usepackage{sopra-models}
+\end{plainlatex}
+        \item Das Paket kann in ein Unterverzeichnis/in ein mit
+                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
+                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+\begin{plainlatex}
+\usepackage{./Mein/Pfad/zu/sopra-models}
+\end{plainlatex}
+        \item Man kann das Paket (mittels eines Symlinks oder ähnlichem)
+              in einen eigenen \emph{texmf}-Baum ablegen.
+              So kann zum Beispiel auf Linux unter der Verwendung von texlive
+              das Paket hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
+              Das Verzeichnis kann erstellt und anschließend mittels
+              \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
+              das Paket wie jede andere installierte Paket verwendet werden:
+\begin{plainlatex}
+\usepackage{sopra-models}
+\end{plainlatex}
+    \end{itemize}
+
+\subsection{Weitere Besonderheiten}
+In Version \thesomversion{} (\cmdref{thesomversion}) gibt es keine weiteren
+Besonderheiten.
+
+%
+%
+% .##....##..#######..##....##.########.####..######...##.....##.########.....###....########.####..#######..##....##
+% .##...##..##.....##.###...##.##........##..##....##..##.....##.##.....##...##.##......##.....##..##.....##.###...##
+% .##..##...##.....##.####..##.##........##..##........##.....##.##.....##..##...##.....##.....##..##.....##.####..##
+% .#####....##.....##.##.##.##.######....##..##...####.##.....##.########..##.....##....##.....##..##.....##.##.##.##
+% .##..##...##.....##.##..####.##........##..##....##..##.....##.##...##...#########....##.....##..##.....##.##..####
+% .##...##..##.....##.##...###.##........##..##....##..##.....##.##....##..##.....##....##.....##..##.....##.##...###
+% .##....##..#######..##....##.##.......####..######....#######..##.....##.##.....##....##....####..#######..##....##
+%
+%
+
+
+\section{Paket-Konfiguration}    
+    \subsection{Akzeptierte Parameter}
+    Dieses Paket akzeptiert selbst keine weiteren Pakete!
+
+%
+%
+% .########..########.########.########.##.....##.##.......########
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..######...######...######...#########.##.......######..
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..########.##.......########.##.....##.########.########
+%
+%
+
+\section{Befehle- und Umgebungen}
+
+Es gilt zu beachten, dass das Präfix \T{env@} nur auf die Natur einer Umgebung hinweist und nicht zum eigentlichen Bezeichner zuzuordnen ist!
+
+
+\subsection{Floats}
+
+\begin{environment}{model}{\optArg{Placement}}
+    Ein \T{float}, ganz analog zu \env{figure} und \env{table}.
+\end{environment}
+
+Beispiel:
+\begin{plainlatex}[morekeywords={[3]{model}}]
+    \begin{model}
+        \centering
+        Isch bin ein Modell.
+        \caption[Und ich eigentlich kürzer.]{Ich bin der Titel.}
+    \end{model}
+\end{plainlatex}
+Ergibt:
+\begin{model}
+    \centering
+    Isch bin ein Modell.
+    \caption[Und ich eigentlich kürzer.]{Ich bin der Titel.}
+\end{model}
+
+Diese lassen durch \cmd{listofmodel} auflisten:
+
+\listofmodel
+
+\end{document}
