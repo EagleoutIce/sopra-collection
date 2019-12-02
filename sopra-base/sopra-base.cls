@@ -22,7 +22,7 @@
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
 
-\newcounter{sobversion} \setcounter{sobversion}{1000}
+\newcounter{sobversion} \setcounter{sobversion}{1001}
 
 
 \newif\ifsob@usedraft@% in draft mode we won't render everything
@@ -182,13 +182,16 @@
     {\expandafter\noexpand\gdef\csname sob@register@\field\endcsname{##1}%
     \expandafter\noexpand\gdef\csname sob@register@short@\field\endcsname{##1}}
     \expandafter\gdef\csname sob@register@\field\endcsname{}
+    \expandafter\gdef\csname sob@register@short@\field\endcsname{}
 }
 
 
 % iterators for handling and parsing author information.
 \def\sob@@add@author#1{%
     \let\sob@@tmp@old@authors\sob@register@authors%
-    \xdef\sob@register@authors{\sob@@tmp@old@authors,#1}%
+    \expandafter\ifx\expandafter\\\sob@@tmp@old@authors\\%
+    \xdef\sob@register@authors{#1}\else%
+    \xdef\sob@register@authors{\sob@@tmp@old@authors,#1}\fi%
 }
 \let\addAuthor\sob@@add@author
 
