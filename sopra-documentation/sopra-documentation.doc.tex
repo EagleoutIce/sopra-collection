@@ -1,0 +1,225 @@
+\documentclass{sopra-base} 
+
+\usepackage{sopra-documentation}
+
+\title{Das 'sopra-documentation'-Paket}
+\subtitle[Dokumentation für das 'sopra-documentation'-Paket]{Dokumentation für das 'sopra-documentation'-Paket~$\mid$~Version \thesodversion}
+
+\duedate{2019-12-2}
+
+\keywords{Dokumentation,sopra-documentation,sopra,uni ulm,uulm,Paket}
+\authors{Florian Sihler (florian.sihler@uni-ulm.de)}
+
+\group{Die Affenbande}
+\begin{document}
+    \maketitle%
+%
+    %\tableofcontents
+%
+
+%
+%
+% ....###....##.......##........######...########.##.....##.########.####.##....##.########..######.
+% ...##.##...##.......##.......##....##..##.......###...###.##........##..###...##.##.......##....##
+% ..##...##..##.......##.......##........##.......####.####.##........##..####..##.##.......##......
+% .##.....##.##.......##.......##...####.######...##.###.##.######....##..##.##.##.######....######.
+% .#########.##.......##.......##....##..##.......##.....##.##........##..##..####.##.............##
+% .##.....##.##.......##.......##....##..##.......##.....##.##........##..##...###.##.......##....##
+% .##.....##.########.########..######...########.##.....##.########.####.##....##.########..######.
+%
+%
+
+\section{Allgemeines}
+\subsection{Warum, wieso, weshalb?}
+    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im 
+    Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
+    Grundlage für die Erstellung von Dokumentationen für die anderen Pakete und Klassen
+    des \imptext{Teams 20}, welche zusammen mit der \T{sopra-base.cls} kreiert
+    werden.\par
+    Zum Visualisieren der einzelnen Code-Ausschnitte wurde die 
+    \T{LILLYxLISTINGS}-Bibliothek des Lilly-Frameworks\footnote{\url{https://github.com/EagleoutIce/LILLY}} von
+    Florian Sihler verwendet. Es ist für die Verwendung des Pakets (\jmark[\T{nolistings}]{mrk:nolistings})
+    nicht relevant.\par
+    Das zugehörige Paket sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile[subject={sopra-documentation.sty}]{sopra-documentation.sty}}.
+\subsection{Abhängigkeiten}
+    Dieses Paket bindet die folgenden Paketen mit ein:
+    \begin{multicols}{3}
+        \begin{itemize}
+            \def\pkgparse#1:#2\@nil{%
+                \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
+            }
+            \foreach \pkg in {xcolor:,attachfile2:,multicol:,LILLYxLISTINGS:{nur \jmark[\T{listings}]{mrk:listings}},blindtext:{nur \jmark[\T{dummy}]{mrk:dummy}},
+                hyperref:} {
+                \item \expandafter\pkgparse\pkg\@nil
+            }
+        \end{itemize}
+    \end{multicols}
+    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein.
+
+\subsection{Die Installation}
+    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die 
+    folgenden Möglichkeiten ergeben:
+    \begin{itemize}
+        \item Das Paket kann in dasselbe Verzeichnis wie das Dokument
+                gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+\begin{plainlatex}
+\usepackage{sopra-documentation}
+\end{plainlatex}
+        \item Das Paket kann in ein Unterverzeichnis/in ein mit
+                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
+                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+\begin{plainlatex}
+\usepackage{./Mein/Pfad/zu/sopra-documentation}
+\end{plainlatex}
+        \item Man kann das Paket (mittels eines Symlinks oder ähnlichem)
+              in einen eigenen \emph{texmf}-Baum ablegen.
+              So kann zum Beispiel auf Linux unter der Verwendung von texlive
+              das Paket hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
+              Das Verzeichnis kann erstellt und anschließend mittels
+              \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
+              das Paket wie jede andere installierte Paket verwendet werden:
+\begin{plainlatex}
+\usepackage{sopra-documentation}
+\end{plainlatex}
+    \end{itemize}
+    \subsection{Weitere Besonderheiten}
+    In Version \thesodversion{} (\cmdref{thesodversion}) gibt es keine weiteren
+    Besonderheiten.
+
+%
+%
+% .##....##..#######..##....##.########.####..######...##.....##.########.....###....########.####..#######..##....##
+% .##...##..##.....##.###...##.##........##..##....##..##.....##.##.....##...##.##......##.....##..##.....##.###...##
+% .##..##...##.....##.####..##.##........##..##........##.....##.##.....##..##...##.....##.....##..##.....##.####..##
+% .#####....##.....##.##.##.##.######....##..##...####.##.....##.########..##.....##....##.....##..##.....##.##.##.##
+% .##..##...##.....##.##..####.##........##..##....##..##.....##.##...##...#########....##.....##..##.....##.##..####
+% .##...##..##.....##.##...###.##........##..##....##..##.....##.##....##..##.....##....##.....##..##.....##.##...###
+% .##....##..#######..##....##.##.......####..######....#######..##.....##.##.....##....##....####..#######..##....##
+%
+%
+
+
+\section{Paket-Konfiguration}    
+    \subsection{Akzeptierte Parameter}
+    Das Paket akzeptiert, so wie die meisten, Argumente. 
+    Bei Argumenten mit einer \say{Counter}-Option wird das jeweils standardmäßig aktive zuerst und das andere in Klammern
+    geschrieben. So wird implizit:
+\begin{plainlatex}
+    \usepackage[nodebug,dummy,listings]{sopra-documentation}
+\end{plainlatex}
+    aufgerufen. Während wir mit:
+\begin{plainlatex}
+    \usepackage[nolistings]{sopra-documentation}
+\end{plainlatex}
+    das Dokument ohne das \T{LILLYxLISTINGS}-Paket kompilieren.
+
+    \begin{argument}{nodebug}{debug}
+        \label{mrk:debug}Im \T{debug}-Modus wird der Log, dank \cmd{errorcontextlines} ausführlicher gefasst (im Falle eines Fehlers).
+    \end{argument}
+
+    \begin{argument}{dummy}{nodummy}
+        \label{mrk:nodummy}Im \T{dummy}-Modus wird das Paket \T{blindtext} eingebunden, sonst nicht.
+    \end{argument}
+
+    \begin{argument}{listings}{nolistings}
+        \label{mrk:nolistings}Im \T{listings}-Modus wird das Paket \T{LILLYxLISTINGS} eingebunden, sonst nicht.
+    \end{argument}
+
+%
+%
+% .########..########.########.########.##.....##.##.......########
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..######...######...######...#########.##.......######..
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..########.##.......########.##.....##.########.########
+%
+%
+
+\section{Befehle- und Umgebungen}
+
+Es gilt zu beachten, dass das Präfix \T{env@} nur auf die Natur einer Umgebung hinweist und nicht zum eigentlichen Bezeichner zuzuordnen ist!
+
+
+\subsection{Kompatibilitätsmodus}
+
+Diese Befehle werden nur mit \jmark[\T{nolistings}]{mrk:nolistings} definiert, da sie sonst von \T{LILLYxLISTINGS} eingebunden
+werden würden:
+
+\begin{command}{T}{\manArg{Text}}
+    Wird hier als Alias für \cmd{texttt} umgesetzt; setzt \T{Text} also in Schreibmaschinenschrift.
+\end{command}
+
+
+\begin{command}{lstcomment}{\manArg{Text}}
+    Analog existieren \cmd{lstkwone}, \cmd{lstkwtwo}, \cmd{lstkwthree}, \cmd{lstkwfour}, \cmd{lstkwfive}, \cmd{lstkwsix}, \cmd{lststring} und \cmd{lstnumber} die \T{Text} farblich hervorheben.
+\end{command}
+
+
+\subsection{Generelle Befehle}
+
+\begin{command}{email}{\manArg{E-Mail}}
+    Setzt \T{E-Mail} als klickbare E-Mail-Adresse.
+\end{command}
+
+\begin{command}{thesodversion}{}
+    Liefert die aktuelle Version des Pakets. So ergibt: \cmd{thesodversion}: \thesodversion\\
+    \notetext{Hinweis: über \blatex{\\value\{sodversion\}} lässt sich
+    die Version als $4$-stellige Nummer erhalten: \arabic{sodversion}.}
+\end{command}
+
+\begin{command}{manArg}{\manArg{Text}}
+    Erlaubt es in \envref{command} oder vergleichbaren Umgebungen ein verpflichtendes Argument anzugeben. \notetext{So ist \T{Text} in der Befehlsdefinition mittels \cmd{manArg} gesetzt!}
+\end{command}
+
+\begin{command}{optArg}{\manArg{Text}}
+    Erlaubt es in \envref{command} oder vergleichbaren Umgebungen ein optionales Argument anzugeben.
+\end{command}
+
+\begin{command}{cmd}{\manArg{Name}}
+    Setzt \T{Name} als Befehl: \T{\cmd{cmd}\{Hi\}}: \cmd{Hi}.
+\end{command}
+
+\begin{command}{env}{\manArg{Name}}
+    Setzt \T{Name} als Umgebung: \T{\cmd{env}\{Hi\}}: \env{Hi}.
+\end{command}
+
+\begin{command}{cmdref}{\manArg{Name}}
+    Analog zu \cmdref{cmd}, allerdings wird (so wie genau hier auch) ein Link zur Erklärung von \T{Name} erstellt.
+\end{command}
+
+\begin{command}{envref}{\manArg{Name}}
+    Analog zu \cmdref{env}, allerdings wird ein Link zur Erklärung von \T{Name} erstellt.
+\end{command}
+
+\begin{environment}{command}{\manArg{Name}\manArg{Argumente}}
+    Startet die Erklärung eines neuen Befehls mit Bezeichner \T{Name} (für \cmdref{cmdref}) und den Argumenten \T{Argumente}.
+\end{environment}
+
+\begin{environment}{environment}{\manArg{Name}\manArg{Argumente}}
+    Startet die Erklärung einer neuen Umgebung mit Bezeichner \T{Name} (für \cmdref{envref}) und den Argumenten \T{Argumente} (so wie hier).
+\end{environment}
+
+\begin{environment}{argument}{\manArg{Name}\manArg{Conter-Name}}
+    Startet die Erklärung eins neuen Arguments für das Paket/die Klase mit Bezeichner \T{Name} und dem Konter-Bezeichner \T{Conter-Name}.
+\end{environment}
+
+\subsection{Weitere Befehle}
+
+Diese Befehle entstammen den eingebundenen Paketen und werden lediglich konfiguriert.
+
+\begin{command}{attachfile}{\optArg{Options}\manArg{Pfad}}
+    Bindet die Datei in \T{Pfad} ein. Als \T{Options} bietet sich zumindest \T{subject} an. So wird in dieser Dokumentation zum Beispiel das Paket mit folgender Zeile eingebunden:
+\begin{plainlatex}
+\attachfile[subject={sopra-documentation.sty}]{sopra-documentation.sty}
+\end{plainlatex}
+\end{command}
+
+\begin{command}{textattachfile}{\optArg{Options}\manArg{Pfad}\manArg{Text}}
+    Bindet die Datei in \T{Pfad} ein, macht aber anstelle eines Symbols \T{Text} zum klickbaren Link zum öffnen. Die Optionen sind analog zu \cmdref{attachfile}.
+\end{command}
+
+Für alle anderen verwendeten Methoden emfpiehlt es sich, den Quellcode selbst oder den Quellcode der Dokumentation näher zu betrachten.
+
+\end{document}
