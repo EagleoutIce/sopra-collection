@@ -41,3 +41,5 @@ Weil ich doch immer so viel vergesse:
 - tikz-uml oder vergleichbares soll dem Sammelsurium hinzugefügt werden.
 - Das Dokument soll bezüglich seines Layouts hübscher werden.
 - Es muss ein Beamer-Layout estellt werden (präsentationen und so :smiley:).
+- Listings paket anpassen, zum einen damit abhängigkit von Lilly auflösen
+  zum anderen Farblich an das Farbthema der Uni anpassen.
