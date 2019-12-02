@@ -2,7 +2,7 @@
 
 ## Motivation
 Dies ist eine Ansammlung (hoffentlich) wundertoller LaTeX2e Klassen und Pakete, für das Softwaregrundprojekt
-im Rahmen des Informatikstudiums an der Universität Ulm im Wintersemester 19/20 sowie dem sich anschließendem
+im Rahmen des Informatikstudiums an der Universität Ulm im Wintersemester 2019/20 sowie dem sich anschließendem
 Sommersemester. Es grüßt: `team-020`.
 
 ## Was es so alles gibt
