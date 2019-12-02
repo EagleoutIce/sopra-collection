@@ -1,63 +1,9 @@
-\errorcontextlines 99999
 \documentclass{sopra-base} 
 
-\usepackage{blindtext}
-\usepackage{attachfile2}% todo make this auto-configured:
-
-\attachfilesetup{%
-    author={Florian Sihler},
-    subject={sopra-base.cls},
-    color=0.6392 0.149 0.2314,
-    description={Basic Documentclass for the sopra-team-020},
-    icon=Tag,
-    mimetype=text/plain
-}
-
-%%%%% NOTE: the following stuff is only needed for the documentation
-\usepackage{LILLYxLISTINGS}
-
-\def\email#1{\href{mailto:#1}{#1}}
-
-\def\manArg#1{\T{\{#1\}}}
-\def\optArg#1{\T{\itshape[#1]}}
-
-\def\cmd#1{\lstkwfive{\textbackslash#1}}
-\def\env#1{\lstkwthree{env@#1}}
-
-\def\cmdref#1{\hyperref[mrk:#1]{\lstkwfive{\textbackslash#1}}\textsuperscript{\(\rightarrow\,\)p. \pageref{mrk:#1}}}
-\def\envref#1{\hyperref[mrk:#1]{\lstkwthree{env@#1}}\textsuperscript{\(\rightarrow\,\)p. \pageref{mrk:#1}}}
-
-\makeatletter
-% #1: name of the present-sequence
-% #2: Args of the present-sequence
-% #3: presenter style
-% #4: prefix of cs-name
-\newenvironment{present}[4]{\phantomsection\label{mrk:#1}%
-    \bgroup\leavevmode\newline\noindent\hspace*{-0.75cm}\parbox{0.75cm}{\(\triangleright\)\quad}{\@nameuse{#3}{#4#1}}{\T{#2}}\par\nopagebreak% done on purpose
-}{\egroup\bigskip}
-\makeatother
-
-% #1: name of the command-sequence
-% #2: Args of the command-sequence
-\newenvironment{command}[2]{\present{#1}{#2}{lstkwfive}{\textbackslash}}{\endpresent}
-
-% #1: name of the environment
-% #2: Args of the environment
-\newenvironment{environment}[2]{\present{#1}{#2}{lstkwthree}{env@}}{\endpresent}
-
-
-% #1: name of the arg
-% #2: name of the counter-Arg
-\newenvironment{argument}[2]{\present{#1}{\qquad(\T{#2})}{T}{}}{\endpresent}
-
-
-%%% END of DOCUMENTATION SPECIFICS
-
-
+\usepackage{sopra-documentation}
 
 \title{Die 'sopra-base'-Klasse}
 \subtitle[Dokumentation für die 'sopra-base'-Klasse]{Dokumentation für die 'sopra-base'-Klasse~$\mid$~Version \thesobversion}
-
 
 \duedate{2019-12-2}
 
@@ -98,7 +44,7 @@
     Lilly-Frameworks\footnote{\url{https://github.com/EagleoutIce/LILLY}} von
     Florian Sihler verwendet. Es ist für die Verwendung der Dokumentklasse
     nicht relevant.\par
-    Die zugehörige Klasse sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile{sopra-base.cls}}.
+    Die zugehörige Klasse sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile[subject={sopra-base.cls}]{sopra-base.cls}}.
 \subsection{Abhängigkeiten}
     Dieses Paket basiert auf der, jeder \LaTeX-Distribution beigelegten, 
     \T{article}-Klasse\footnote{\url{https://ctan.org/pkg/article}},
@@ -137,9 +83,9 @@
 \documentclass{./Mein/Pfad/zu/sopra-base}
 \end{plainlatex}
         \item Man kann die Klasse (mittels eines Symlinks oder ähnlichem)
-              ein einen eigenen \emph{texmf}-Baum ablegen.
+              in einen eigenen \emph{texmf}-Baum ablegen.
               So kann zum Beispiel auf Linux unter der Verwendung von texlive
-              das Paket hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
+              die Klasse hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
               Das Verzeichnis kann erstellt und anschließend mittels
               \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
               die Klasse wie jede andere installierte Klasse verwendet werden:
@@ -167,7 +113,7 @@
     \subsection{Akzeptierte Parameter}
     Die Dokumentklasse akzeptiert, so wie die meisten, Argumente. So können
     nebst den für \T{article} akzeptierten Argumente die im folgenden
-    aufgelistet werden, wobei bei argumenten mit einer \say{Counter}-Option
+    aufgelistet werden, wobei bei Argumenten mit einer \say{Counter}-Option
     das jeweils standardmäßig aktive zuerst und das andere in Klammern
     geschrieben. So wird implizit:
 \begin{plainlatex}
@@ -211,6 +157,8 @@
     Stile und Varianten unterstützt. Sie werden vermutlich über weitere
     Parameter oder Subklassen realisiert werden.
 
+%
+%
 % .########..########.########.########.##.....##.##.......########
 % .##.....##.##.......##.......##.......##.....##.##.......##......
 % .##.....##.##.......##.......##.......##.....##.##.......##......
@@ -218,10 +166,12 @@
 % .##.....##.##.......##.......##.......##.....##.##.......##......
 % .##.....##.##.......##.......##.......##.....##.##.......##......
 % .########..########.##.......########.##.....##.########.########
+%
+%
 
 \section{Befehlsübersicht}
 
-Die Klasse stellt als \emph{base}-Klasse keinen großen Satz an Befehlen für
+Die Klasse fügt als \emph{base}-Klasse keinen großen Satz an Befehlen für
 den Nutzer hinzu. Diese Aufgabe gebührt den erweiternden Klassen und Paketen.
 
 \subsection{Daten setzen}
@@ -298,8 +248,8 @@ das Dokument beginnt). \notetext{Entwicklernotiz: Alle diese Felder stehen über
 \end{command}
 
 \begin{command}{thesobversion}{}
-    Gibt die aktuelle Version der \T{sopra-base}-Dokumentklasse aus. Hinweis: über \blatex{\\value\{sobversion\}} lässt sich
-    die Version als $4$-stellige Nummer erhalten: \arabic{sobversion}.
+    Gibt die aktuelle Version der \T{sopra-base}-Dokumentklasse aus. \notetext{Hinweis: über \blatex{\\value\{sobversion\}} lässt sich
+    die Version als $4$-stellige Nummer erhalten: \arabic{sobversion}.}
 \end{command}
 
 \begin{command}{DateConvert}{\manArg{YYYY-MM-DD}}
@@ -318,6 +268,18 @@ das Dokument beginnt). \notetext{Entwicklernotiz: Alle diese Felder stehen über
 \begin{command}{notetext}{\manArg{Text}}
     Setzt \T{Text} als eine \notetext{beiläufige Notiz}.
 \end{command}
+
+%
+%
+% ....###....##....##.##.....##....###....##....##..######..
+% ...##.##...###...##.##.....##...##.##...###...##.##....##.
+% ..##...##..####..##.##.....##..##...##..####..##.##.......
+% .##.....##.##.##.##.#########.##.....##.##.##.##.##...####
+% .#########.##..####.##.....##.#########.##..####.##....##.
+% .##.....##.##...###.##.....##.##.....##.##...###.##....##.
+% .##.....##.##....##.##.....##.##.....##.##....##..######..
+%
+%
 
 \appendix
 \section{Verbundene Klassen und Pakete}
