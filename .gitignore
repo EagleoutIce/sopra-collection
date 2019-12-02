@@ -1,6 +1,15 @@
 ## KDE-Files:
 .directory
 
+## PDF-/Binary-Files
+*.pdf
+*.png
+*.jpg
+*.bmp
+*.zip
+*.tar.gz
+*.rar
+
 ## Attached files:
 *.atfi
 
