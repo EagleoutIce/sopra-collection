@@ -284,11 +284,11 @@ das Dokument beginnt). \notetext{Entwicklernotiz: Alle diese Felder stehen über
 \appendix
 \section{Verbundene Klassen und Pakete}
 
-Im Zuge dieser \LaTeXe-Dokumentklasse sind noch einige andere Pakete entstanden. Zum aktuellen Kompilierstand existiert:
+Im Zuge dieser \LaTeXe-Dokumentklasse sind noch einige andere Pakete entstanden. Zum aktuellen Kompilierstand existiert (Pakete und Klassen, ohne Link sind dieser beigelegt und hier: \url{https://github.com/EagleoutIce/sopra-collection} zu finden):
 \begin{multicols}{2}
     \begin{itemize}
-        \foreach \i/\u in {eagle-maps/{https://github.com/EagleoutIce/eagle-maps},LILLY-Framework/{https://github.com/EagleoutIce/LILLY}} {
-            \item \T{\i}\footnote{\url{\u}}
+        \foreach \i/\u in {eagle-maps/{https://github.com/EagleoutIce/eagle-maps},LILLY-Framework/{https://github.com/EagleoutIce/LILLY},sopra-documentation/,sopra-models/} {
+            \item \T{\i}\expandafter\ifx\expandafter\\\u\\\else\footnote{\url{\u}}\fi
         }
     \end{itemize}    
 \end{multicols}
