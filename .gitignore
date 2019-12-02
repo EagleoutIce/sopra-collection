@@ -1,3 +1,9 @@
+## KDE-Files:
+.directory
+
+## Attached files:
+*.atfi
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
