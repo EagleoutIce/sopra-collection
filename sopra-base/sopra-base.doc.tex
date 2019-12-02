@@ -1,0 +1,331 @@
+\errorcontextlines 99999
+\documentclass{sopra-base} 
+
+% TODO: make package for 'model' etc. environemnts
+% TODO: make package for requirements (add option to link by name, not by number)
+
+\usepackage{blindtext}
+\usepackage{attachfile2}% todo make this auto-configured:
+
+\attachfilesetup{%
+    author={Florian Sihler},
+    subject={sopra-base.cls},
+    color=0.6392 0.149 0.2314,
+    description={Basic Documentclass for the sopra-team-020},
+    icon=Tag,
+    mimetype=text/plain
+}
+
+%%%%% NOTE: the following stuff is only needed for the documentation
+\usepackage{LILLYxLISTINGS}
+
+\def\email#1{\href{mailto:#1}{#1}}
+
+\def\manArg#1{\T{\{#1\}}}
+\def\optArg#1{\T{\itshape[#1]}}
+
+\def\cmd#1{\lstkwfive{\textbackslash#1}}
+\def\env#1{\lstkwthree{env@#1}}
+
+\def\cmdref#1{\hyperref[mrk:#1]{\lstkwfive{\textbackslash#1}}\textsuperscript{\(\rightarrow\,\)p. \pageref{mrk:#1}}}
+\def\envref#1{\hyperref[mrk:#1]{\lstkwthree{env@#1}}\textsuperscript{\(\rightarrow\,\)p. \pageref{mrk:#1}}}
+
+\makeatletter
+% #1: name of the present-sequence
+% #2: Args of the present-sequence
+% #3: presenter style
+% #4: prefix of cs-name
+\newenvironment{present}[4]{\phantomsection\label{mrk:#1}%
+    \bgroup\leavevmode\newline\noindent\hspace*{-0.75cm}\parbox{0.75cm}{\(\triangleright\)\quad}{\@nameuse{#3}{#4#1}}{\T{#2}}\par\nopagebreak% done on purpose
+}{\egroup\bigskip}
+\makeatother
+
+% #1: name of the command-sequence
+% #2: Args of the command-sequence
+\newenvironment{command}[2]{\present{#1}{#2}{lstkwfive}{\textbackslash}}{\endpresent}
+
+% #1: name of the environment
+% #2: Args of the environment
+\newenvironment{environment}[2]{\present{#1}{#2}{lstkwthree}{env@}}{\endpresent}
+
+
+% #1: name of the arg
+% #2: name of the counter-Arg
+\newenvironment{argument}[2]{\present{#1}{\qquad(\T{#2})}{T}{}}{\endpresent}
+
+
+%%% END of DOCUMENTATION SPECIFICS
+
+
+
+\title{Die 'sopra-base'-Klasse}
+\subtitle[Dokumentation für die 'sopra-base'-Klasse]{Dokumentation für die 'sopra-base'-Klasse~$\mid$~Version \thesobversion}
+
+
+\duedate{2019-12-2}
+
+\keywords{Dokumentation,sopra-base,sopra,uni ulm,uulm}
+\addAuthor{Florian Sihler (florian.sihler@uni-ulm.de)}
+% \addAuthor{Florian Gebieter (florian.gebieter@uni-ulm.de)}
+
+% \setTeam{Team 20}
+\group{Die Affenbande}
+\begin{document}
+    \maketitle%
+%
+    %\tableofcontents
+%
+
+%
+%
+% ....###....##.......##........######...########.##.....##.########.####.##....##.########..######.
+% ...##.##...##.......##.......##....##..##.......###...###.##........##..###...##.##.......##....##
+% ..##...##..##.......##.......##........##.......####.####.##........##..####..##.##.......##......
+% .##.....##.##.......##.......##...####.######...##.###.##.######....##..##.##.##.######....######.
+% .#########.##.......##.......##....##..##.......##.....##.##........##..##..####.##.............##
+% .##.....##.##.......##.......##....##..##.......##.....##.##........##..##...###.##.......##....##
+% .##.....##.########.########..######...########.##.....##.########.####.##....##.########..######.
+%
+%
+
+\section{Allgemeines}
+\subsection{Warum, wieso, weshalb?}
+    Diese \LaTeXe-Dokumentlasse wurde im Rahmen des Sopras im 
+    Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
+    Grundlage für die Optik aller Dokumente des \imptext{Teams 20} und kann
+    binnen seiner Entwicklung noch grundlegend verändert werden. Das
+    bisherige Design ist an das Aufgabentemplate der Universität Ulm, wobei
+    eine Schnittstelle geschaffen wurde, die auch bei varrierenden optischen
+    Eigenschaftendes Dokuments keine Änderungen im \LaTeX-Codes erfordern 
+    sollten.\par
+    Zum Visualisieren der einzelnen Code-Ausschnitte wurde die 
+    \T{LILLYxLISTINGS}-Bibliothek des 
+    Lilly-Frameworks\footnote{\url{https://github.com/EagleoutIce/LILLY}} von
+    Florian Sihler verwendet. Es ist für die Verwendung der Dokumentklasse
+    nicht relevant.\par
+    Die zugehörige Klasse sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile{sopra-base.cls}}.
+\subsection{Abhängigkeiten}
+    Dieses Paket basiert auf der, jeder \LaTeX-Distribution beigelegten, 
+    \T{article}-Klasse\footnote{\url{https://ctan.org/pkg/article}},
+    sowie den folgenden Paketen (alle übergebenen Argumente werden ebenfalls 
+    angegeben, wobei im Fall einer Werteübergabe ein Stern gesetzt wird.):
+    \begin{multicols}{3}
+        \begin{itemize}
+            \def\pkgparse#1:#2\@nil{%
+                \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
+            }
+            \foreach \pkg in {tikz:,fontenc:T1, inputenc:utf8,
+                babel:{english,main=ngerman},geometry:{margin*,
+                a4paper,bottom*},sfmath:,lmodern:,microtype:,
+                scrlayer-scrpage:,titlesec:,nowidow:all,hyperref:hidelinks}{
+                \item \expandafter\pkgparse\pkg\@nil
+            }
+        \end{itemize}
+    \end{multicols}
+    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein (weiter
+    wird noch die Ti\textit{k}Z-Bibliothek \T{calc} verwendet, sowie \T{shapes}
+    wenn eine Grupennummer mittels \cmdref{groupnum} oder \cmdref{setTeam}
+    angegeben wird.)
+\subsection{Die Installation}
+    Die Klasse wird nicht als \T{.dtx} ausgeliefert, weswegen sich die 
+    folgenden Möglichkeiten ergeben:
+    \begin{itemize}
+        \item Die Dokumentklasse kann in dasselbe Verzeichnis wie das Dokument
+                gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+\begin{plainlatex}
+\documentclass{sopra-base}
+\end{plainlatex}
+        \item Die Dokumentklasse kann in ein Unterverzeichnis/in ein mit
+                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
+                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+\begin{plainlatex}
+\documentclass{./Mein/Pfad/zu/sopra-base}
+\end{plainlatex}
+        \item Man kann die Klasse (mittels eines Symlinks oder ähnlichem)
+              ein einen eigenen \emph{texmf}-Baum ablegen.
+              So kann zum Beispiel auf Linux unter der Verwendung von texlive
+              das Paket hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
+              Das Verzeichnis kann erstellt und anschließend mittels
+              \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
+              die Klasse wie jede andere installierte Klasse verwendet werden:
+\begin{plainlatex}
+\documentclass{sopra-base}
+\end{plainlatex}
+    \end{itemize}
+    \subsection{Weitere Besonderheiten}
+    In Version \thesobversion{} (\cmdref{thesobversion}) gibt es keine weiteren
+    Besonderheiten.
+
+%
+%
+% .##....##.##..........###.....######...######..########.##....##.##....##..#######..##....##.########.####..######...##.....##.########.....###....########.####..#######..##....##
+% .##...##..##.........##.##...##....##.##....##.##.......###...##.##...##..##.....##.###...##.##........##..##....##..##.....##.##.....##...##.##......##.....##..##.....##.###...##
+% .##..##...##........##...##..##.......##.......##.......####..##.##..##...##.....##.####..##.##........##..##........##.....##.##.....##..##...##.....##.....##..##.....##.####..##
+% .#####....##.......##.....##..######...######..######...##.##.##.#####....##.....##.##.##.##.######....##..##...####.##.....##.########..##.....##....##.....##..##.....##.##.##.##
+% .##..##...##.......#########.......##.......##.##.......##..####.##..##...##.....##.##..####.##........##..##....##..##.....##.##...##...#########....##.....##..##.....##.##..####
+% .##...##..##.......##.....##.##....##.##....##.##.......##...###.##...##..##.....##.##...###.##........##..##....##..##.....##.##....##..##.....##....##.....##..##.....##.##...###
+% .##....##.########.##.....##..######...######..########.##....##.##....##..#######..##....##.##.......####..######....#######..##.....##.##.....##....##....####..#######..##....##
+%
+%
+
+\section{Klassen-Konfiguration}    
+    \subsection{Akzeptierte Parameter}
+    Die Dokumentklasse akzeptiert, so wie die meisten, Argumente. So können
+    nebst den für \T{article} akzeptierten Argumente die im folgenden
+    aufgelistet werden, wobei bei argumenten mit einer \say{Counter}-Option
+    das jeweils standardmäßig aktive zuerst und das andere in Klammern
+    geschrieben. So wird implizit:
+\begin{plainlatex}
+    \documentclass[final,nopar,sffont,defaultmode,showmail]{sopra-base}
+\end{plainlatex}
+    aufgerufen. Während wir mit:
+\begin{plainlatex}
+    \documentclass[rmfont]{sopra-base}
+\end{plainlatex}
+    das Dokument in der altbekannten \emph{Roman}-Schrift setzen lassen können.
+
+    \begin{argument}{final}{draft}
+        Im \T{draft}-Modus können einige Elemente so wie Grafiken nicht
+        gesetzt werden um so den Kompilierprozess zu beschleunigen. 
+        Diese Option wird analog auch von vielen weiteren Paketen akzeptiert.
+    \end{argument}
+
+    \begin{argument}{nopar}{dopar}
+        Mittels \T{dopar} setzen wir die Einrückung bei einem Paragraphen
+        auf den von \LaTeX-gesetzten Standartwert.
+    \end{argument}
+
+
+    \begin{argument}{sffont}{rmfont}
+        Durch \T{rmfont} wird die Schriftart wieder auf \emph{Roman} gesetzt.
+    \end{argument}
+
+    \begin{argument}{defaultmode}{print}
+        Mittels \T{print} werden die Farben verringt beziehungsweise in Teilen
+        komplett entfernt (in Graustufen konvertiert) um ein besseres Ergebnis
+        im Druck zu erzielen.
+    \end{argument}
+
+    \begin{argument}{showmail}{hidemail}
+        Mit \T{hidemail} wird die E-Mail-Adresse bei der Angabe der Autoren
+        nicht angezeigt.
+    \end{argument}
+
+    \subsection{Weitere Stile}
+    In der aktuellen Version (\thesobversion) werden noch keine alternativen
+    Stile und Varianten unterstützt. Sie werden vermutlich über weitere
+    Parameter oder Subklassen realisiert werden.
+
+% .########..########.########.########.##.....##.##.......########
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..######...######...######...#########.##.......######..
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..########.##.......########.##.....##.########.########
+
+\section{Befehlsübersicht}
+
+Die Klasse stellt als \emph{base}-Klasse keinen großen Satz an Befehlen für
+den Nutzer hinzu. Diese Aufgabe gebührt den erweiternden Klassen und Paketen.
+
+\subsection{Daten setzen}
+\label{sec:DatenSetzen}
+Die Folgenden Befehle sollten in der Präambel gesetzt werden und konfigurieren
+auch die Metadaten des jeweiligen Dokuments (also die Dokumenteigenschaften).
+Sie können beliebig oft überschrieben werden (bis zu dem Punkt, an dem
+das Dokument beginnt). \notetext{Entwicklernotiz: Alle diese Felder stehen über
+\T{\textbackslash sob@register@$\langle$Name$\rangle$}, beziehungsweise ihre 'short'-Varianten
+über \T{\textbackslash sob@register@short@$\langle$Name$\rangle$} zur Verfügung.}
+
+\begin{command}{title}{\optArg{short}\manArg{NeuerTitel}}
+    Setzt den Titel des Dokuments auf \T{NeuerTitel}.
+\end{command}
+
+\begin{command}{subtitle}{\optArg{short}\manArg{NeuerTitel}}
+    Setzt den Untertitel des Dokuments auf \T{NeuerTitel}.
+\end{command}
+
+\begin{command}{brief}{\optArg{short}\manArg{Kurzbeschreibung}}
+    Setzt die Kurzbeschreibung des Dokuments auf \T{Kurzbeschreibung}.
+    Dieses Datenfeld wird in der Basis-Klasse nicht verwendet. 
+\end{command}
+
+\begin{command}{authors}{\optArg{short}\manArg{Autorenliste}}
+    Hierrüber kann die Liste der Autoren gesetzt werden. Es empfiehlt sich
+    hierfür \cmdref{addAuthor} zu verwenden.
+\end{command}
+
+\begin{command}{duedate}{\optArg{short}\manArg{YYYY-MM-DD}}
+   Setzt das Datum des Dokuments. Zur Konvertierung wird \cmdref{DateConvert}
+   verwendet. 
+\end{command}
+
+\begin{command}{supervisor}{\optArg{short}\manArg{Name}}
+    Setzt den Betreuer auf \T{Name}. Dieses Datenfeld wird in der Basis-Klasse nicht verwendet. 
+\end{command}
+
+\begin{command}{keywords}{\optArg{short}\manArg{Schlüsselwörter}}
+    Setzt die Keywords für die Metadaten auf T{Schlüselwörter}. 
+\end{command}
+
+\begin{command}{group}{\optArg{short}\manArg{Name}}
+    Setzt die Gruppe des jeweiligen Erstellers auf \T{Name}.
+\end{command}
+
+\begin{command}{groupnum}{\optArg{short}\manArg{Nummer}}
+    Setzt im Falle einer Nummerierung (oder Symbol, etc.) der Gruppe dieses
+    auf \T{Nummer}.
+\end{command}
+
+\subsection{Beim Datensetzen hilfreiches}
+
+\begin{command}{addAuthor}{\manArg{Name (Email)}}
+    Fügt einen Autor der Liste der Autoren (\cmdref{authors}) hinzu. So zum
+    Beispiel: \T{\cmd{addAuthor}\{Florian Sihler (florian.sihler@uni-ulm.de)\}}.
+\end{command}
+
+\begin{command}{setTeam}{\manArg{Name Nummer}}
+    Erlaubt es \cmdref{group} und \cmdref{groupnum} in einem Aufruf zu setzen.
+    So zum Beispiel: \T{\cmd{setTeam}\{Affenbande 42\}} oder
+    \T{\cmd{setTeam}\{\{Mega Team\} A\}}.
+\end{command}
+
+\subsection{Die Daten anzeigen}
+
+\begin{command}{typesetAuthors}{}
+    Setzt die Autoren gemäß \jmark[\T{showmail}]{mrk:showmail} mit oder
+    ohne E-Mail-Adresse, so ergibt \cmd{typesetAuthors}: \typesetAuthors.
+    Bei mehreren werden Kommas und das \say{und} korrekt gesetzt.
+\end{command}
+
+\begin{command}{maketitle}{}
+    Setzt den Titel auf Basis der \jmark[gesetzten Daten]{sec:DatenSetzen}
+\end{command}
+
+\begin{command}{thesobversion}{}
+    Gibt die aktuelle Version der \T{sopra-base}-Dokumentklasse aus. Hinweis: über \blatex{\\value\{sobversion\}} lässt sich
+    die Version als $4$-stellige Nummer erhalten: \arabic{sobversion}.
+\end{command}
+
+\begin{command}{DateConvert}{\manArg{YYYY-MM-DD}}
+    Konvertiert ein Datum in eine schönere Form, so:
+\begin{plainlatex}[morekeywords={[5]{\\DateConvert}}]
+\DateConvert{2019-12-02} % :yields: !*\lstcomment{\DateConvert{2019-12-02}}*!
+\end{plainlatex}
+\end{command}
+
+
+\appendix
+\section{Verbundene Klassen und Pakete}
+
+Im Zuge dieser \LaTeXe-Dokumentklasse sind noch einige andere Pakete entstanden. Zum aktuellen Kompilierstand existiert:
+\begin{multicols}{2}
+    \begin{itemize}
+        \foreach \i/\u in {eagle-maps/{https://github.com/EagleoutIce/eagle-maps},LILLY-Framework/{https://github.com/EagleoutIce/LILLY}} {
+            \item \T{\i}\footnote{\url{\u}}
+        }
+    \end{itemize}    
+\end{multicols}
+
+\end{document}
