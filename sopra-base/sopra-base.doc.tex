@@ -261,7 +261,7 @@ das Dokument beginnt). \notetext{Entwicklernotiz: Alle diese Felder stehen über
 \end{command}
 
 \begin{command}{keywords}{\optArg{short}\manArg{Schlüsselwörter}}
-    Setzt die Keywords für die Metadaten auf T{Schlüselwörter}. 
+    Setzt die Keywords für die Metadaten auf \T{Schlüselwörter}. 
 \end{command}
 
 \begin{command}{group}{\optArg{short}\manArg{Name}}
@@ -274,7 +274,6 @@ das Dokument beginnt). \notetext{Entwicklernotiz: Alle diese Felder stehen über
 \end{command}
 
 \subsection{Beim Datensetzen hilfreiches}
-
 \begin{command}{addAuthor}{\manArg{Name (Email)}}
     Fügt einen Autor der Liste der Autoren (\cmdref{authors}) hinzu. So zum
     Beispiel: \blatex[morekeywords={[5]{\\addAuthor}}]{\\addAuthor\{Florian Sihler (florian.sihler@uni-ulm.de)\}}.
@@ -310,6 +309,15 @@ das Dokument beginnt). \notetext{Entwicklernotiz: Alle diese Felder stehen über
 \end{plainlatex}
 \end{command}
 
+\subsection{Generelle Formatierungsbefehle}
+
+\begin{command}{imptext}{\manArg{Text}}
+    Hebt \T{Text} als \imptext{sehr wichtig} hervor.
+\end{command}
+
+\begin{command}{notetext}{\manArg{Text}}
+    Setzt \T{Text} als eine \notetext{beiläufige Notiz}.
+\end{command}
 
 \appendix
 \section{Verbundene Klassen und Pakete}
