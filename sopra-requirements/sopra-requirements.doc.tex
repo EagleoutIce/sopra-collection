@@ -192,6 +192,12 @@ zu können!}
 % TODO: make it possible to change description and-stuff-labels
 \subsection{Allgemeine Befehle}
 
+\begin{command}{thesorversion}{}
+    Liefert die aktuelle Version des Pakets. So ergibt: \cmd{thesorversion}: \thesorversion\\
+    \notetext{Hinweis: über \blatex{\\value\{thesorversion\}} lässt sich
+    die Version als $4$-stellige Nummer erhalten: \arabic{thesorversion}.}
+\end{command}
+
 \begin{command}{iskip}{}
     Setzt einen \emph{Negativabstand}, der dann verwendet werden kann, wenn einem ein Abstand zu groß gesetzt ist. Dies wird nur dann nötig sein, wenn man eigene Umgebungen oder vergleichbares einbringt und ist hier nur eine Art Inspiration.
 \end{command}
