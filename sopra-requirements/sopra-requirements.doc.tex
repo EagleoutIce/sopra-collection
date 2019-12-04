@@ -1,0 +1,246 @@
+\documentclass{sopra-base} 
+
+\usepackage{sopra-documentation}
+\usepackage{sopra-requirements}
+
+\title{Das 'sopra-requirements'-Paket}
+\subtitle[Dokumentation für das 'sopra-requirements'-Paket]{Dokumentation für das 'sopra-requirements'-Paket~$\mid$~Version \thesorversion}
+
+\duedate{2019-12-2}
+
+\keywords{Dokumentation,sopra-requirements,sopra,uni ulm,uulm,Paket}
+\authors{Florian Sihler (florian.sihler@uni-ulm.de)}
+
+\group{Die Affenbande}
+\begin{document}
+
+    \maketitle%
+%
+    %\tableofcontents
+%
+
+%
+%
+% ....###....##.......##........######...########.##.....##.########.####.##....##.########..######.
+% ...##.##...##.......##.......##....##..##.......###...###.##........##..###...##.##.......##....##
+% ..##...##..##.......##.......##........##.......####.####.##........##..####..##.##.......##......
+% .##.....##.##.......##.......##...####.######...##.###.##.######....##..##.##.##.######....######.
+% .#########.##.......##.......##....##..##.......##.....##.##........##..##..####.##.............##
+% .##.....##.##.......##.......##....##..##.......##.....##.##........##..##...###.##.......##....##
+% .##.....##.########.########..######...########.##.....##.########.####.##....##.########..######.
+%
+%
+
+\section{Allgemeines}
+\subsection{Warum, wieso, weshalb?}
+    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im 
+    Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
+    Grundlage für die Definition von Anforderungen (funktional, qualitativ, \ldots)
+    des \imptext{Teams 20}. Diese Dokumentation wurde zusammen mit der 
+    \T{sopra-base.cls} sowie dem Paket \T{sopra-documentation.sty} kreiert.\par
+    Zum Visualisieren der einzelnen Code-Ausschnitte wurde die 
+    \T{LILLYxLISTINGS}-Bibliothek des Lilly-Frameworks\footnote{\url{https://github.com/EagleoutIce/LILLY}} von
+    Florian Sihler verwendet.
+    Das zugehörige Paket sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile[subject={sopra-requirements.sty}]{sopra-requirements.sty}}.
+\subsection{Abhängigkeiten}
+    Dieses Paket bindet die folgenden Paketen mit ein:
+    \begin{multicols}{3}
+        \begin{itemize}
+            \def\pkgparse#1:#2\@nil{%
+                \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
+            }
+            \foreach \pkg in {tabu:{\jmark[\T{usetabu}]{mrk:usetabu}},booktabs:{\jmark[\T{notabu}]{mrk:usetabu}},makecell:,longtable:,hyperref:} {
+                \item \expandafter\pkgparse\pkg\@nil
+            }
+        \end{itemize}
+    \end{multicols}
+    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein.
+
+\subsection{Die Installation}
+    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die 
+    folgenden Möglichkeiten ergeben:
+    \begin{itemize}
+        \item Das Paket kann in dasselbe Verzeichnis wie das Dokument
+                gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+\begin{plainlatex}
+\usepackage{sopra-requirements}
+\end{plainlatex}
+        \item Das Paket kann in ein Unterverzeichnis/in ein mit
+                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
+                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+\begin{plainlatex}
+\usepackage{./Mein/Pfad/zu/sopra-requirements}
+\end{plainlatex}
+        \item Man kann das Paket (mittels eines Symlinks oder ähnlichem)
+              in einen eigenen \emph{texmf}-Baum ablegen.
+              So kann zum Beispiel auf Linux unter der Verwendung von texlive
+              das Paket hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
+              Das Verzeichnis kann erstellt und anschließend mittels
+              \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
+              das Paket wie jede andere installierte Paket verwendet werden:
+\begin{plainlatex}
+\usepackage{sopra-requirements}
+\end{plainlatex}
+    \end{itemize}
+
+\subsection{Weitere Besonderheiten}
+In Version \thesorversion{} (\cmdref{thesorversion}) gibt es keine weiteren
+Besonderheiten.
+
+%
+%
+% .##....##..#######..##....##.########.####..######...##.....##.########.....###....########.####..#######..##....##
+% .##...##..##.....##.###...##.##........##..##....##..##.....##.##.....##...##.##......##.....##..##.....##.###...##
+% .##..##...##.....##.####..##.##........##..##........##.....##.##.....##..##...##.....##.....##..##.....##.####..##
+% .#####....##.....##.##.##.##.######....##..##...####.##.....##.########..##.....##....##.....##..##.....##.##.##.##
+% .##..##...##.....##.##..####.##........##..##....##..##.....##.##...##...#########....##.....##..##.....##.##..####
+% .##...##..##.....##.##...###.##........##..##....##..##.....##.##....##..##.....##....##.....##..##.....##.##...###
+% .##....##..#######..##....##.##.......####..######....#######..##.....##.##.....##....##....####..#######..##....##
+%
+%
+
+
+\section{Paket-Konfiguration}    
+    \subsection{Akzeptierte Parameter}
+
+\begin{argument}{usetabu}{notabu}
+    Standardmäßig verwendet dieses Paket aus optischen Gründen \T{tabu} um die Tabellen zu visualisieren. Sollten die in diesem paket enthaltenen (bug-)fixes (nicht mehr) funktionieren, oder einem die in \T{notabu} verwendeten \T{booktabs} Tabellen einem
+    bessere gefallen, so kann diese Option entsprechend umgestellt werden. 
+\end{argument}
+
+\begin{argument}{intoc}{notoc}
+    Standardmäßig fügt das \T{tabu}-Paket die Requirements in den table of contents mit ein (als subsubsection, wird also in der Standardmäßig nur im TOC des PDF-Viewers angezeigt). Wenn dies nicht gewünscht ist, kann man es durch \T{notoc} deaktivieren.
+\end{argument}
+
+\begin{argument}{showtag}{noshowtag}
+    Zeigt nebst der ID auch noch den (internen) Bezeichner der Anforderung an. Hierbei handelt es sich lediglich um eine optische Option, die nach Wunsch frei modifiziert werden kann.
+\end{argument}
+
+\begin{argument}{noshowallfields}{showallfields}
+    Wird \T{showallfields} gesetzt, so werden auch dann Felder in \envref{requirement} angezeigt, wenn sie keinen Wert erhalten haben.
+\end{argument}
+
+\subsection{Farben}
+
+Mit \jmark[\T{usetabu}]{mrk:usetabu} definiert die Farbe \T{HeaderColor} die Farbe der Titelspalte und \T{NextHeaderColor} die Farbe im Falle eines Seitenumbruchs. Die Farben können wie jede andere geändert werden. Innerhalb von \T{sopra-base} wird automatisch eine dem Design angepasste Farbe gewählt.
+
+%
+%
+% .########..########.########.########.##.....##.##.......########
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..######...######...######...#########.##.......######..
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..########.##.......########.##.....##.########.########
+%
+%
+
+\section{Befehle- und Umgebungen}
+
+Es gilt zu beachten, dass das Präfix \T{env@} nur auf die Natur einer Umgebung hinweist und nicht zum eigentlichen Bezeichner zuzuordnen ist!\par{}
+Weiter gilt: Damit alle Titel und Längen richtig aufgelöst werden können, muss das Dokument
+in der Regel zwei mal kompiliert werden um eine korrekte Anzeige zu erzeugen.
+
+\subsection{Definition von Anforderungen}
+
+\begin{environment}{requirements}{\optArg{Start-ID}\manArg{functional/quality}}
+    Startet einen neuen Block an Anforderungen, wobei innerhalb von hier \envref{requirement} zur Verfügung steht. Standardmäßig werden die Anforderungen
+    von $1$ an für das ganze Dokument durchnummeriert, sollte dieser Startwert allerdings geändert werden (wofür es, abseits von Testzwecken eigentlich keinen Sinn geben sollte,
+    da es so manche Anforderungen doppelt geben kann!) so ist dies durch das Setzen
+    von \T{Start-ID} möglich. Verpflichtend muss angegeben werden, ob es sich
+    um \emph{funktionale} (\T{functional}) oder \emph{non-funktionale} (\T{quality})
+    Anforderungen handelt. Alle hierrin verschatelten Anforderungen werden als solche
+    gewertet. Die beiden Varianten besitzen ihre eigenen Zähler!. \notetext{Entwicklernotiz:
+    Die benötigten Werte sind in \cmd{@sor@fnctl} und \cmd{@sor@qltl} gespeichert.
+    Das Präfix entsprechend in \cmd{sor@functional@requirementprefix} und \cmd{sor@quality@requirementprefix}.}
+\end{environment}
+% TODO: make example.
+
+\begin{environment}{requirement}{\optArg{ID}\manArg{Bezeichner}}
+    \imptext{Diese Umgebung steht nur innerhalb von \envref{requirements} zur Verfügung!} Hiermit kann eine einzelne Anforderung definiert werden, wobei die \T{ID} sich
+    entweder sinnvoll durch ein hochzählen des Zählers oder durch die explizite Angabe ergibt. Eine \T{ID} muss stets numerisch sein. Weiter kann hier ein \T{Bezeichner} angegeben werden, wobei dieser Standardmäßig den Titel der Anforderung repräsentiert,
+    solange dieser nicht explizit mittels \cmdref{setTitle} geänert wird. Ein \T{Bezeichner} darf keine Umlaute oder andere Sonderzeichen enthalten. Auch Formatierungs- und andere
+    \LaTeXe/\TeX-Befehle können hier nicht verwendet werden. Der \manArg{Bezeichner} kann ebenfalls dafür verwendet werden um mittels \cmdref{preqref} auf diese Anforderung
+    zu referenzieren. Es darf keinen doppelten \T{Bezeichner} geben. 
+\end{environment}
+
+\subsection{Daten in einer Anforderung setzen}
+
+\imptext{Die folgenden Befehle können nur innerhalb von \envref{requirement} verwendet werden!} \notetext{Es steht noch aus an einem Verfahren zu arbeiten, welches
+es erlaubt eigene Felder zu definieren. Es ist geplant \T{translate} zu verwenden
+um zumindest die Datenfelder übersetzen beziehungsweise allgemein frei definieren
+zu können!}
+
+\begin{command}{setDescription}{\manArg{Beischreibungstext}}
+    Setzt eine Erklärung zu der jeweiligen Anforderung. Hier kann prinzipiell alles gesetzt werden, von einer \env{eagle-map} über \env{itemize} bis hin zu ganz normalem LaTeX.
+\end{command}
+
+\begin{command}{setJustification}{\manArg{Begründungstext}}
+    Setzt die Begründung für die jeweilige Anforderung. Es gilt bezüglich des Inhalts das gleiche wie für \cmdref{setDescription}.
+\end{command}
+
+\begin{command}{setDependencies}{\manArg{Kommaseparierte Liste}}
+    Erlaubt das auflisten aller Abhängigkeiten mit von \cmdref{preqref} akzeptierten Schemata. So zum Beispiel: \T{\cmd{setDependencies}\{FA1,QA42,main-menu\}}.
+\end{command}
+
+\begin{command}{setTitle}{\manArg{Titel}}
+    Erlaubt es den Titel der Anforderung zu ändern. Dies ändert nicht den in \envref{requirement} gesetzten Bezeichner! (Dies kann durch \jmark[\T{showtag}]{mrk:showtag}) verdeutlicht werden. 
+\end{command}
+
+% TODO make a normal ref command like reqref without showig the page number
+% TODO: make it possible to change description and-stuff-labels
+\subsection{Allgemeine Befehle}
+
+\begin{command}{iskip}{}
+    Setzt einen \emph{Negativabstand}, der dann verwendet werden kann, wenn einem ein Abstand zu groß gesetzt ist. Dies wird nur dann nötig sein, wenn man eigene Umgebungen oder vergleichbares einbringt und ist hier nur eine Art Inspiration.
+\end{command}
+
+\begin{command}{preqref}{\manArg{Anforderungsmarker}}
+    Dieser Befehl setzt einen Verweis auf eine mittels \envref{requirement} gesetzt Anfroderung. Für jede werden zwei gültige Marker generiert: \begin{itemize}
+        \item Es kann der Bezeichner verwendet werden.
+        \item Es kann das Kürzel für den Anforderungstyp plus die jeweilige Nummer verwendet werden (\T{FA13}, \T{QA9}, \ldots)
+    \end{itemize}
+    Dieser Befehl kann auch mit einem Sternchen benutzt werden. In diesem Fall wird der
+    Bezeichner der Anforderung nicht ausgegen, sondern nur das Kürzel (zum Beispiel \T{FA42}) samt der Seite auf der die Anforderung definiert wird.
+\end{command}
+
+\begin{command}{pref}{\manArg{Hypermarker}\manArg{Text}}
+    Wird von \cmdref{preqref} verwendet und gibt einfach nur einen Link mit Seitenzahl an.
+    Kann modifiziert(/überschrieben) werden um das Verhalten von \cmdref{preqref} anzupassen.
+\end{command}
+
+\subsection{Beispiele}
+Definieren wir uns im Folgenden einmal zwei Anforderungen:
+\begin{latex}
+\begin{requirements}{functional}
+    \begin{requirement}{a-duck}
+        \setTitle{Ente}
+        \setDescription{Es muss Enten geben. Damit sie am Leben bleiben, gibt es \preqref{feed-ducks}}
+        \setJustification{Weil sie Knuffig sind}
+    \end{requirement}
+
+    \begin{requirement}{feed-ducks}
+        \setTitle{Ente füttern}
+        \setDescription{Es muss möglich sein, die Enten aus \preqref{FA1} zu füttern}
+        \setJustification{Enten müssen Leben (dürfen)!!}
+        \setDependencies{a-duck}
+    \end{requirement}
+\end{requirements}
+\end{latex}
+Das Ergebnis ist (mit \T{tabu}) das folgende:
+\begin{requirements}{functional}
+    \begin{requirement}{a-duck}
+        \setTitle{Ente}
+        \setDescription{Es muss Enten geben. Damit sie am Leben bleiben, gibt es \preqref{feed-ducks}}
+        \setJustification{Weil sie Knuffig sind}
+    \end{requirement}
+
+    \begin{requirement}{feed-ducks}
+        \setTitle{Ente füttern}
+        \setDescription{Es muss möglich sein, die Enten aus \preqref{FA1} zu füttern}
+        \setJustification{Enten müssen Leben (dürfen)!!}
+        \setDependencies{a-duck}
+    \end{requirement}
+\end{requirements}
+\end{document}

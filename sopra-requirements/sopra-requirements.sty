@@ -1,0 +1,264 @@
+%% sopra-requirements.sty
+%%
+%% -----------------------------------------------------------------------------
+%% Version: 1.0
+%% Author:  Florian Sihler, 03.12.2019
+%% 
+%% Will contain all the definitions to easily typeset and reference
+%% Functional-, Qualitative- and other Requirements.
+
+% TODO: allow to customize fields and make new commands for them
+% TODO: make an option to always show all fields!
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{sopra-requirements}[2019/12/03 EagleoutIce - requirementsfor the sopra-team-020]
+
+%% -----------------------------------------------------------------------------
+%% Lengths and Registers
+%% -----------------------------------------------------------------------------
+
+\newcounter{sorversion} \setcounter{sorversion}{1000}
+\newcounter{sor@counter@functional@requirement}%
+\newcounter{sor@counter@quality@requirement}%
+
+\newlength{\sor@length@list@compensation}%
+\setlength\sor@length@list@compensation{-0.5\baselineskip}
+
+% 'Key'-column
+\newcolumntype{K}{p{0.175\linewidth}}%>{\small}
+% 'Value'-column
+\newcolumntype{V}{p{0.725\linewidth}}
+
+\def\sor@table@headerstyle{\color{white}}
+
+% expected keys for the requirements:
+\def\@sor@fnctl{functional} % => \sor@functional@requirementprefix
+\def\@sor@qltl{quality} % => \sor@quality@requirementprefix
+
+\def\@sor@currequirementprefix{}
+\def\sor@functional@requirementprefix{FA}
+\def\sor@quality@requirementprefix{QA}
+
+\newif\ifsor@usetabu@ % we can use regular tabular - if tabu won't work.
+\newif\ifsor@intoc@ % it is posible to place the reqs in the toc
+\newif\ifsor@showtag@ % should the nametag be shown?
+\newif\ifsor@showall@ % should all fields be shown?
+
+
+% TODO: highlight first, option to disable highlihgting of headerrow
+
+%% -----------------------------------------------------------------------------
+%% Package-Args
+%% -----------------------------------------------------------------------------
+
+% allow debug-options :D
+\DeclareOption{usetabu}{ \sor@usetabu@true }%
+\DeclareOption{notabu}{ \sor@usetabu@false }%
+
+\DeclareOption{intoc}{ \sor@intoc@true }%
+\DeclareOption{notoc}{ \sor@intoc@false }%
+
+\DeclareOption{showtag}{ \sor@showtag@true }%
+\DeclareOption{noshowtag}{ \sor@showtag@false }%
+
+\DeclareOption{showallfields}{ \sor@showall@true }
+\DeclareOption{noshowallfields}{ \sor@showall@false }
+
+\ExecuteOptions{usetabu,intoc,showtag,noshowallfields}% set it explicitly
+\ProcessOptions\relax%
+
+%% -----------------------------------------------------------------------------
+%% Basic Packages
+%% -----------------------------------------------------------------------------
+
+\ifsor@usetabu@ \RequirePackage{tabu} \else \RequirePackage{booktabs} \fi
+\RequirePackage{makecell,longtable,hyperref}
+
+
+%% -----------------------------------------------------------------------------
+%% Color Definitions
+%% -----------------------------------------------------------------------------
+
+\@ifundefined{thesobversion}{% not called from sopra-base-class
+    \colorlet{HeaderColor}{purple}
+    \colorlet{NextHeaderColor}{purple!75!white}
+}{% we will use the secondary/akzent color as default
+    \colorlet{HeaderColor}{sob@col@uulm@akzent}
+    \colorlet{NextHeaderColor}{sob@col@uulm@akzent!75!white}
+}
+
+%% -----------------------------------------------------------------------------
+%% Fixes for the tabu-package
+%% -----------------------------------------------------------------------------
+
+\ifsor@usetabu@ 
+\def\tabu@classz{%
+    %  \ifx\tabu@prepnext@tok\prepnext@tok% in tabu
+        %    \expandafter\tabu@classz@oldarray
+        %  \else
+        \tabu@classzORI
+        %  \fi
+    }%
+    \def\tabu@ignorehfil{\tabu@nohfil}
+\fi
+
+%% -----------------------------------------------------------------------------
+%% Define the Header and next-header commands
+%% -----------------------------------------------------------------------------
+
+\ifsor@usetabu@ 
+    \def\sor@table@headerrow{%
+        \rowfont{\normalfont\bfseries\leavevmode\sor@table@headerstyle}%
+        \rowcolor{HeaderColor}\@ifstar{}{\Gape[0.5mm][0.25mm]{}}%
+    }
+    \def\sor@table@headerrow@next{% maybe use llap for the symbol?
+        \rowfont{\normalfont\bfseries\leavevmode\sor@table@headerstyle}%
+        \rowcolor{NextHeaderColor}\@ifstar{}{\Gape[0.5mm][0.25mm]{}}{%
+            \hspace*{-2.3em}%
+            \textcolor{HeaderColor!40!white}{$\blacktriangledown$}%
+        }\hspace*{1.4em}\;%
+    }
+\else
+    \def\sor@table@headerrow{\bfseries\@ifstar{}{}}
+    \def\sor@table@headerrow@next{\bfseries\@ifstar{}{}} % maybe use llap for the symbol?
+\fi
+
+% make the basic tets!  think about the naming references and mabe make it possible to change the actual name in the settings
+% also: allow to add more fields and to give them names
+% further: allow them to be ordered
+% think about the tokens
+
+%% -----------------------------------------------------------------------------
+%% Helper Functions
+%% -----------------------------------------------------------------------------
+
+% i don't want to use collectcell for that, so:
+\def\sor@requirement@leftcolstyle#1{\footnotesize\MakeUppercase{#1}}
+
+\def\sor@deflinker#1#2{%
+    \expandafter\gdef\csname#1\endcsname{#2}%
+}
+
+% #1: \@sor@currequirementprefix
+% #2: \@sor@r@id
+% #3: \@sor@r@title
+% #4: nmsc pref
+% #5: cont nmsc
+\def\sor@write@@linkpos#1#2#3#4#5{
+    \@ifundefined{@sor@r@titles@#4#5}{%
+        \expandafter\xdef\csname @sor@r@titles@#4#5\endcsname{#1#2: '#3'}
+    }{}
+    \protected@write\@auxout{\let\deflinker\relax}{\protect\sor@deflinker{@sor@r@titles@#4#5}{#1#2: '#3'}}
+}
+
+% #1: check for given if not forced
+% #2: 
+\long\def\sor@showifgivenorforced#1#2{%
+    \ifsor@showall@#2\else\expandafter\ifx\expandafter\\#1\\\else#2\fi\fi%
+}
+
+%% -----------------------------------------------------------------------------
+%% Create the basic environments to filter for requirementstype :D
+%% -----------------------------------------------------------------------------
+
+% #1 will initialize the functional@requirement:counter
+% #2 should be 'functional' or 'quality' to determine type
+\newenvironment{requirements}[2][-1]{%
+    \def\@sor@tmp@a{#2}% keep to compare
+    \ifx\@sor@tmp@a\@sor@fnctl\else\ifx\@sor@tmp@a\@sor@qltl\else
+        \PackageError{sopra-requirements}{requirements second argument MUST be '\@sor@fnctl' or '\@sor@qltl', not '#2'}%
+    \fi\fi
+    % only set counter if valid:
+    \ifnum#1<0\else\setcounter{sor@counter@#2@requirement}{#1}\fi
+    % every requirement will be set by its own table
+    % we want to store the curent tableprefix
+    \expandafter\global\expandafter\let\expandafter\@sor@currequirementprefix\csname sor@#2@requirementprefix\endcsname%
+    % #1: allows to set a specific counter, otherwise default will be used
+    % #2: is the title, and has to be given to create a little structure :D
+    %     it is possible to overwrite this title. #2 will always be used for linkage
+    \NewEnviron{requirement}[2][-1]{%
+        \stepcounter{sor@counter@#2@requirement}%
+        \ifnum##1<0\def\@sor@r@id{\@nameuse{thesor@counter@#2@requirement}}%
+        \else\def\@sor@r@id{##1}\fi%
+        \def\@sor@r@title{##2}%
+        % \@ifundefined{@sor@r@titles@\@sor@currequirementprefix\@sor@r@id}{%
+        %     \expandafter\gdef\csname @sor@r@titles@\@sor@currequirementprefix\@sor@r@id\endcsname{##2}
+        % }{}
+        \gdef\@sor@r@title{##2}
+        \long\def\@sor@r@description{}%
+        \long\def\@sor@r@justification{}\long\def\@sor@r@dependencies{}%
+        \long\def\setDescription####1{\gdef\@sor@r@description{####1}}%
+        \long\def\setJustification####1{\gdef\@sor@r@justification{####1}}%
+        \def\setDependencies####1{\gdef\@sor@r@dependencies{####1}}%
+        \def\setTitle####1{\gdef\@sor@r@title{####1}}%
+
+        \ignorespaces\BODY{}% typeset table:
+        % Store the Title for the link :D -> we won't use newlabel structure
+        \sor@write@@linkpos{\@sor@currequirementprefix}{\@sor@r@id}{\@sor@r@title}{\@sor@currequirementprefix}{\@sor@r@id}
+        \sor@write@@linkpos{\@sor@currequirementprefix}{\@sor@r@id}{\@sor@r@title}{}{##2} % maybe make parseable?
+
+        % create the label :D
+        \phantomsection\label{tbl:requirement:\@sor@currequirementprefix\@sor@r@id}%
+        \label{tbl:requirement:##2}
+        % for the table of contents (pdf-viewer)
+        \ifsor@intoc@\addcontentsline{toc}{subsubsection}{\@sor@currequirementprefix\@sor@r@id:\space\@sor@r@title}\fi
+        % do not use \Gape for spacing :D
+        % Now, we're constructing the longtabu
+        \ifsor@usetabu@%
+        \taburowcolors[1] 2{MudWhite!10 .. MudWhite!90}
+        \everyrow{\tabucline[.4mm  white]{}}
+        \tabulinesep = ^2mm_2mm
+        \begin{longtabu}{>{~}KV<{~}}
+            % init the headerrow
+            \sor@table@headerrow* ID & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\ifsor@showtag@\hfill\T{##2}\fi\\\endfirsthead
+            \sor@table@headerrow@next* ID & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\\\endhead
+            % i do not want to make a token iter, i'm sorry
+            \sor@requirement@leftcolstyle{Titel:} & \@sor@r@title\\
+            % only typeset them if they are not empty :D
+            \sor@showifgivenorforced{\@sor@r@description}{\sor@requirement@leftcolstyle{Beschreibung:} & \@sor@r@description \\}
+            \sor@showifgivenorforced{\@sor@r@justification}{\sor@requirement@leftcolstyle{Begründung:} & \@sor@r@justification \\}
+            \sor@showifgivenorforced{\@sor@r@dependencies}{\sor@requirement@leftcolstyle{Abhängigkeiten:} & \foreach[count=\i] \@sor@dpc in \@sor@r@dependencies{%
+                \ifnum\i>1\relax{},\space{}\fi% correct comma
+                \preqref*{\@sor@dpc}%
+            }}% \\}
+        \end{longtabu}
+        \else\bgroup\renewcommand{\arraystretch}{1.25}
+        \begin{longtable}{>{~}KV<{~}}
+            % init the headerrow
+            \toprule%
+            \sor@table@headerrow* ID & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\ifsor@showtag@\hfill\T{##2}\fi\\\midrule\endfirsthead
+            \sor@table@headerrow@next* ID & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\\\midrule\endhead
+            % i do not want to make a token iter, i'm sorry
+            \sor@requirement@leftcolstyle{Titel:} & \@sor@r@title\\
+            % only typeset them if they are not empty :D
+            \sor@showifgivenorforced{\@sor@r@description}{\sor@requirement@leftcolstyle{Beschreibung:} & \@sor@r@description \\}
+            \sor@showifgivenorforced{\@sor@r@justification}{\sor@requirement@leftcolstyle{Begründung:} & \@sor@r@justification \\}
+            \sor@showifgivenorforced{\@sor@r@dependencies}{\sor@requirement@leftcolstyle{Abhängigkeiten:} & \foreach[count=\i] \@sor@dpc in \@sor@r@dependencies{%
+                \ifnum\i>1\relax{},\space{}\fi% correct comma
+                \preqref*{\@sor@dpc}%
+            }\\}% \\}
+            \bottomrule
+        \end{longtable}\egroup\fi
+    }
+}%
+
+%% -----------------------------------------------------------------------------
+%% The additional User-Functions :D
+%% -----------------------------------------------------------------------------
+
+% Note: I've written them before, sloppy, for own use - there is no need to
+%       change that so he following commands will have some funny schduff
+
+
+%% we want to automate the requirement structure,
+%% Please not that, preqref can be used by number AND by ID whereas the ID shouldl never be a number
+\def\preqref{\@ifstar{\@sor@starred@preqref}{\@sor@unstarred@preqref}}
+% This one will set the Name too :D
+\def\@sor@unstarred@preqref#1{\pref{tbl:requirement:#1}{\@nameuse{@sor@r@titles@#1}}}
+\def\@sor@starred@preqref#1{\pref{tbl:requirement:#1}{#1}}
+
+\def\pref#1#2{\hyperref[#1]{#2\textsuperscript{$\,\to p.\,$\pageref{#1}}}}
+
+\def\iskip{\vspace*{\sor@length@list@compensation}}
+
+\endinput
