@@ -18,8 +18,6 @@
 *.lof
 *.log
 *.lot
-## List of models :D
-*.lom
 *.fls
 *.out
 *.toc
