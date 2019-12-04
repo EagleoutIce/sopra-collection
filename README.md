@@ -31,14 +31,16 @@ besitzen und weitestgehend unabhängig voneinander verwendet werden können:
     - [sopra-models.sty](sopra-models/sopra-models.sty): Dies ist das versprochene Paket.
     - [sopra-models.doc.tex](sopra-models/sopra-models.doc.tex): Dieses Dokument erzeugt die zugehörige Dokumentation. Für sie wird das [LILLY-Framework](https://github.com/EagleoutIce/LILLY) benötigt - sofern es installiert ist, reicht: `pdflatex sopra-models.doc.tex`.
         Eine kompilierte Variante sollte allerdings auch jeweils den Veröffentlichungen (Releases) beiliegen.
+- [Modelle mit: sopra-requirements](sopra-requirements):
+    Dieses Paket erlaubt es, funktionale und nicht-funktionale Anforderungen zu definieren und zu referenzieren.
+    - [sopra-requirements.sty](sopra-requirements/sopra-requirements.sty): Dies ist das versprochene Paket.
+    - [sopra-requirements.doc.tex](sopra-requirements/sopra-requirements.doc.tex): Dieses Dokument erzeugt die zugehörige Dokumentation. Für sie wird das [LILLY-Framework](https://github.com/EagleoutIce/LILLY) benötigt - sofern es installiert ist, reicht: `pdflatex sopra-requirements.doc.tex`.
+        Eine kompilierte Variante sollte allerdings auch jeweils den Veröffentlichungen (Releases) beiliegen.
 
 ## Aktuelle ToDo's
 
 Weil ich doch immer so viel vergesse:
 
-- Es soll ein Paket für die automatische Definition von (nicht-)funktionalen, welches
-  weiter unabhängig ist, hinzugefügt werden.
-- tikz-uml oder vergleichbares soll dem Sammelsurium hinzugefügt werden.
 - Das Dokument soll bezüglich seines Layouts hübscher werden.
 - Es muss ein Beamer-Layout estellt werden (präsentationen und so :smiley:).
 - Listings paket anpassen, zum einen damit abhängigkit von Lilly auflösen
