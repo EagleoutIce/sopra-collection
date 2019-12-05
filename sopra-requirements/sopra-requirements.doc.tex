@@ -194,8 +194,8 @@ zu können!}
 
 \begin{command}{thesorversion}{}
     Liefert die aktuelle Version des Pakets. So ergibt: \cmd{thesorversion}: \thesorversion\\
-    \notetext{Hinweis: über \blatex{\\value\{thesorversion\}} lässt sich
-    die Version als $4$-stellige Nummer erhalten: \arabic{thesorversion}.}
+    \notetext{Hinweis: über \blatex{\\value\{sorversion\}} lässt sich
+    die Version als $4$-stellige Nummer erhalten: \arabic{sorversion}.}
 \end{command}
 
 \begin{command}{iskip}{}
@@ -203,7 +203,7 @@ zu können!}
 \end{command}
 
 \begin{command}{preqref}{\manArg{Anforderungsmarker}}
-    Dieser Befehl setzt einen Verweis auf eine mittels \envref{requirement} gesetzt Anfroderung. Für jede werden zwei gültige Marker generiert: \begin{itemize}
+    Dieser Befehl setzt einen Verweis auf eine mittels \envref{requirement} gesetzt Anforderung. Für jede werden zwei gültige Marker generiert: \begin{itemize}\setlength{\itemsep}{0pt}
         \item Es kann der Bezeichner verwendet werden.
         \item Es kann das Kürzel für den Anforderungstyp plus die jeweilige Nummer verwendet werden (\T{FA13}, \T{QA9}, \ldots)
     \end{itemize}
