@@ -49,7 +49,7 @@
             \def\pkgparse#1:#2\@nil{%
                 \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
             }
-            \foreach \pkg in {tabu:{\jmark[\T{usetabu}]{mrk:usetabu}},booktabs:{\jmark[\T{notabu}]{mrk:usetabu}},makecell:,longtable:,hyperref:} {
+            \foreach \pkg in {tabu:{\jmark[\T{usetabu}]{mrk:usetabu}},booktabs:{\jmark[\T{notabu}]{mrk:usetabu}},makecell:,longtable:,xcolor:,hyperref:} {
                 \item \expandafter\pkgparse\pkg\@nil
             }
         \end{itemize}
