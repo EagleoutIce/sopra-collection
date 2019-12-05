@@ -1,0 +1,207 @@
+\documentclass{sopra-base} 
+
+\usepackage{sopra-documentation}
+\usepackage{sopra-tables}
+
+\title{Das 'sopra-tables'-Paket}
+\subtitle[Dokumentation für das 'sopra-tables'-Paket]{Dokumentation für das 'sopra-tables'-Paket~$\mid$~Version \thesotversion}
+\duedate{2019-12-5}
+
+\keywords{Dokumentation,sopra-tables,sopra,uni ulm,uulm,Paket}
+\authors{Florian Sihler (florian.sihler@uni-ulm.de)}
+
+\group{Die Affenbande}
+\begin{document}
+
+    \maketitle%
+%
+    %\tableofcontents
+%
+
+%
+%
+% ....###....##.......##........######...########.##.....##.########.####.##....##.########..######.
+% ...##.##...##.......##.......##....##..##.......###...###.##........##..###...##.##.......##....##
+% ..##...##..##.......##.......##........##.......####.####.##........##..####..##.##.......##......
+% .##.....##.##.......##.......##...####.######...##.###.##.######....##..##.##.##.######....######.
+% .#########.##.......##.......##....##..##.......##.....##.##........##..##..####.##.............##
+% .##.....##.##.......##.......##....##..##.......##.....##.##........##..##...###.##.......##....##
+% .##.....##.########.########..######...########.##.....##.########.####.##....##.########..######.
+%
+%
+
+\section{Allgemeines}
+\subsection{Warum, wieso, weshalb?}
+    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im 
+    Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
+    Grundlage für die Erstellung von Tabellen
+    des \imptext{Teams 20}. Diese Dokumentation wurde zusammen mit der 
+    \T{sopra-base.cls} sowie dem Paket \T{sopra-documentation.sty} kreiert.\par
+    Zum Visualisieren der einzelnen Code-Ausschnitte wurde die 
+    \T{LILLYxLISTINGS}-Bibliothek des Lilly-Frameworks\footnote{\url{https://github.com/EagleoutIce/LILLY}} von
+    Florian Sihler verwendet.
+    Das zugehörige Paket sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile[subject={sopra-tables.sty}]{sopra-tables.sty}}.
+\subsection{Abhängigkeiten}
+    Dieses Paket bindet die folgenden Paketen mit ein:
+    \begin{multicols}{3}
+        \begin{itemize}
+            \def\pkgparse#1:#2\@nil{%
+                \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
+            }
+            \foreach \pkg in {tabu:{\jmark[\T{usetabu}]{mrk:usetabu}},booktabs:{\jmark[\T{notabu}]{mrk:usetabu}},makecell:,longtable:,xcolor:} {
+                \item \expandafter\pkgparse\pkg\@nil
+            }
+        \end{itemize}
+    \end{multicols}
+    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein.
+
+\subsection{Die Installation}
+    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die 
+    folgenden Möglichkeiten ergeben:
+    \begin{itemize}
+        \item Das Paket kann in dasselbe Verzeichnis wie das Dokument
+                gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+\begin{plainlatex}
+\usepackage{sopra-tables}
+\end{plainlatex}
+        \item Das Paket kann in ein Unterverzeichnis/in ein mit
+                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
+                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+\begin{plainlatex}
+\usepackage{./Mein/Pfad/zu/sopra-tables}
+\end{plainlatex}
+        \item Man kann das Paket (mittels eines Symlinks oder ähnlichem)
+              in einen eigenen \emph{texmf}-Baum ablegen.
+              So kann zum Beispiel auf Linux unter der Verwendung von texlive
+              das Paket hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
+              Das Verzeichnis kann erstellt und anschließend mittels
+              \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
+              das Paket wie jede andere installierte Paket verwendet werden:
+\begin{plainlatex}
+\usepackage{sopra-tables}
+\end{plainlatex}
+    \end{itemize}
+
+\subsection{Weitere Besonderheiten}
+In Version \thesotversion{} (\cmdref{thesotversion}) gibt es keine weiteren
+Besonderheiten.
+
+%
+%
+% .##....##..#######..##....##.########.####..######...##.....##.########.....###....########.####..#######..##....##
+% .##...##..##.....##.###...##.##........##..##....##..##.....##.##.....##...##.##......##.....##..##.....##.###...##
+% .##..##...##.....##.####..##.##........##..##........##.....##.##.....##..##...##.....##.....##..##.....##.####..##
+% .#####....##.....##.##.##.##.######....##..##...####.##.....##.########..##.....##....##.....##..##.....##.##.##.##
+% .##..##...##.....##.##..####.##........##..##....##..##.....##.##...##...#########....##.....##..##.....##.##..####
+% .##...##..##.....##.##...###.##........##..##....##..##.....##.##....##..##.....##....##.....##..##.....##.##...###
+% .##....##..#######..##....##.##.......####..######....#######..##.....##.##.....##....##....####..#######..##....##
+%
+%
+
+\subsection{Akzeptierte Parameter}
+    Das Paket akzeptiert, so wie die meisten, Argumente. 
+    Bei Argumenten mit einer \say{Counter}-Option wird das jeweils standardmäßig aktive zuerst und das andere in Klammern
+    geschrieben. So wird implizit:
+\begin{plainlatex}
+    \usepackage[usetabu]{sopra-tables}
+\end{plainlatex}
+    aufgerufen. Während wir mit:
+\begin{plainlatex}
+    \usepackage[notabu]{sopra-tables}
+\end{plainlatex}
+    das Dokument ohne das \T{tabu}-Paket kompilieren.
+
+    \begin{argument}{usetabu}{notabu}
+        Analog zur \T{notabu} option der \T{sopra-requirements.sty}: Standardmäßig verwendet dieses Paket aus optischen Gründen \T{tabu} um die Tabellen zu visualisieren. Sollten die in diesem paket enthaltenen (bug-)fixes (nicht mehr) funktionieren, oder einem die in \T{notabu} verwendeten \T{booktabs} Tabellen einem bessere gefallen, so kann diese Option entsprechend umgestellt werden.  \notetext{Hinweis: Mit \T{usetabu} wird innerhalb von \env{mtabular} auf \cmd{relax} gesetzt, damit kein Fehler/keine horizontalen Linien entstehen, wenn man für beide designs schreiben möchte.}
+    \end{argument}
+
+
+    \subsection{Farben}
+
+    Mit \jmark[\T{usetabu}]{mrk:usetabu} definiert die Farbe \T{MaterialHeaderColor} die Farbe der Titelspalte und \T{NextMaterialHeaderColor} die Farbe im Falle eines Seitenumbruchs. Die Farben können wie jede andere geändert werden. Innerhalb von \T{sopra-base} wird automatisch eine dem Design angepasste Farbe gewählt.
+
+%
+%
+% .########..########.########.########.##.....##.##.......########
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..######...######...######...#########.##.......######..
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..########.##.......########.##.....##.########.########
+%
+%
+
+\section{Befehle- und Umgebungen}
+
+Es gilt zu beachten, dass das Präfix \T{env@} nur auf die Natur einer Umgebung hinweist und nicht zum eigentlichen Bezeichner zuzuordnen ist!
+
+\subsection{Die Tabellen}
+
+\begin{environment}{mtabular}{\manArg{Spaltendefinition}}
+    Setzt eine \T{tabu}/\T{tabular} Tabelle, wobei die erste Zeile automatisch zur Titelzeile wird und entsprechend farblich hervorgehoben. 
+\end{environment}
+
+\begin{environment}{mltabular}{\optArg{Header}\manArg{Spaltendefinition}}
+    Setzt eine \T{longtabu}/\T{longtable} Tabelle, wobei man durch Angabe des \T{Header} die Kopfspalte definiert, die im Falle eines Seitenumbruchs immer angefügt wird. Sollte dies nicht gewünscht sein, so genügt es den \T{Header} nicht anzugeben und ganz normal die erste Zeile als Titelzeile zu schreiben, 
+    die nicht an jeden Seitenanfang gesetzt werden. Es gelten die von \T{longtable} bekannten und typischen Einschränkungen.
+\end{environment}
+
+\subsection{Allgemeine Hinweise und Tipps}
+
+Damit ein \T{longtabu}/\T{longtable} korrekt angezeigt wird, wird in der Regel ein zweiter Kompiliervorgang benötigt.\par{}
+Es empfiehlt sich die \env{table}-Umgebung zusammen mit \cmd{caption} zu verwenden umd die Tabelle sinnvoll einzubetten. Es kommt auch \env{wrapfigure} in Frage.\par{}
+Wird auch das \T{sopra-requirements}-Paket eingebunden, können für zweispaltige Tabellen die Spaltentypen \T{K} und \T{V} verwendet werden.
+
+\subsection{Beispiel}
+
+Im Folgenden seien zwei Tabellen veranschaulicht, es gilt zu beachten, dass \envref{mltabular} seines Ursprungs wegen automatisch zentriert vorliegt.
+\begin{latex}
+\begin{mtabular}{lcr}
+    Hallo & Welt & \texttt{Wie} gehts? \\ 
+    Wie stehts & denn heute & so dir und so? \\
+    Bi & Bu & bo \\
+    Hi & Hi & Hi \\
+\end{mtabular}
+\end{latex}
+\textit{Ergibt:}\par{}
+ \begin{mtabular}{lcr}
+    Hallo & Welt & \texttt{Wie} gehts? \\ 
+    Wie stehts & denn heute & so dir und so? \\
+    Hi & Hi & Hi \\
+    Bi & Bu & bo \\
+\end{mtabular}\par{}
+Und analog:\par{}
+\begin{latex}
+\begin{mltabular}[Isch & bin & a Hädder! & Epic-Row]%
+        {lcr>{\raggedleft!**!\arraybackslash}m{5cm}}
+    Hallo & Welt & \texttt{Wie} gehts? & HUHU ERDE \\ 
+    Wie stehts & denn heute & so dir und so? &  Hi\\
+    Bi & Bu & bo & Man merkt ich bin \\
+    Suuper & Lange Tabelle & Weil Grund  & echt Kreativ\\
+    A1 & B8 & C1 & D8 \\
+    A2 & B7 & C2 & D7 \\
+    A3 & B6 & C3 & D6 \\
+    A4 & B5 & C4 & D5 \\
+    A5 & B4 & C5 & D4 \\
+    A6 & B3 & C6 & D3 \\
+    A7 & B2 & C7 & D2 \\
+    A8 & B1 & C8 & D1 \\ 
+\end{mltabular}
+\end{latex}
+\textit{Ergibt \notetext{Hinweis: der extra Abstand hier ist künstlich und dient der Veranschualichung eiens Seitenumbruchs}:}\vspace*{4cm}
+\begin{mltabular}[Isch & bin & a Hädder! & Epic-Row]{lcr>{\raggedleft\arraybackslash}m{5cm}}
+    Hallo & Welt & \texttt{Wie} gehts? & HUHU ERDE \\ 
+    Wie stehts & denn heute & so dir und so? & Hi\\
+    Bi & Bu & bo & Man merkt ich bin \\
+    Suuper & Lange Tabelle & Weil Grund  & echt Kreativ\\
+    A1 & B8 & C1 & D8 \\
+    A2 & B7 & C2 & D7 \\
+    A3 & B6 & C3 & D6 \\
+    A4 & B5 & C4 & D5 \\
+    A5 & B4 & C5 & D4 \\
+    A6 & B3 & C6 & D3 \\
+    A7 & B2 & C7 & D2 \\
+    A8 & B1 & C8 & D1 \\ 
+\end{mltabular}
+\end{document}

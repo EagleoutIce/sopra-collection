@@ -1,0 +1,157 @@
+%% sopra-tables.sty
+%%
+%% -----------------------------------------------------------------------------
+%% Version: 1.0
+%% Author:  Florian Sihler, 03.12.2019
+%% 
+%% Will contain all the definitions to easily typeset and reference
+%% Tables with tabu or booktabs. The design might be a reminiscence 
+%% to sopra-requirements but won't need the package to be happy :D
+
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{sopra-tables}[2019/12/03 EagleoutIce - tables the sopra-team-020]
+
+%% -----------------------------------------------------------------------------
+%% Lengths and Registers
+%% -----------------------------------------------------------------------------
+
+\newcounter{sotversion} \setcounter{sotversion}{1000}
+
+\newif\ifsot@usetabu@ % we can use regular tabular - if tabu won't work.
+
+\def\sor@table@headerstyle{\color{white}}
+
+%% -----------------------------------------------------------------------------
+%% Package-Args
+%% -----------------------------------------------------------------------------
+
+% allow debug-options :D
+\DeclareOption{usetabu}{ \sot@usetabu@true }%
+\DeclareOption{notabu}{ \sot@usetabu@false }%
+
+\ExecuteOptions{usetabu}% set it explicitly
+\ProcessOptions\relax%
+
+%% -----------------------------------------------------------------------------
+%% Basic Packages
+%% -----------------------------------------------------------------------------
+
+\ifsot@usetabu@ \RequirePackage{tabu} \else \RequirePackage{booktabs} \fi
+\RequirePackage{makecell,longtable,xcolor}
+
+%% -----------------------------------------------------------------------------
+%% Color Definitions
+%% -----------------------------------------------------------------------------
+
+\@ifundefined{thesobversion}{% not called from sopra-base-class
+    \colorlet{MaterialHeaderColor}{purple}
+    \colorlet{NextMaterialHeaderColor}{purple!75!white}
+}{% we will use the secondary/akzent color as default
+    \colorlet{MaterialHeaderColor}{sob@col@uulm@akzent}
+    \colorlet{NextMaterialHeaderColor}{sob@col@uulm@akzent!75!white}
+}
+
+
+%% -----------------------------------------------------------------------------
+%% Fixes for the tabu-package
+%% -----------------------------------------------------------------------------
+
+\ifsot@usetabu@ 
+\def\tabu@classz{%
+    %  \ifx\tabu@prepnext@tok\prepnext@tok% in tabu
+        %    \expandafter\tabu@classz@oldarray
+        %  \else
+        \tabu@classzORI
+        %  \fi
+    }%
+    \def\tabu@ignorehfil{\tabu@nohfil}
+\fi
+
+%% -----------------------------------------------------------------------------
+%% Define the Header and next-header commands
+%% -----------------------------------------------------------------------------
+
+\ifsot@usetabu@ 
+    \def\sor@table@headerrow{%
+        \rowfont{\normalfont\bfseries\leavevmode\sor@table@headerstyle}%
+        \rowcolor{MaterialHeaderColor}\@ifstar{}{\Gape[0.5mm][0.25mm]{}}%
+    }
+    \def\sor@table@headerrow@next{% maybe use llap for the symbol?
+        \rowfont{\normalfont\bfseries\leavevmode\sor@table@headerstyle}%
+        \rowcolor{NextMaterialHeaderColor}\@ifstar{}{\Gape[0.5mm][0.25mm]{}}{%
+            \hspace*{-2.3em}%
+            \textcolor{MaterialHeaderColor!40!white}{$\blacktriangledown$}%
+        }\hspace*{1.4em}\;%
+    }
+\else
+    \def\sor@table@headerrow{\bfseries\@ifstar{}{}}
+    \def\sor@table@headerrow@next{\bfseries\@ifstar{}{}} % maybe use llap for the symbol?
+\fi
+
+%% -----------------------------------------------------------------------------
+%% Helper Functions
+%% -----------------------------------------------------------------------------
+
+\def\sot@thesotversion#1#2#3#4\@nil{%
+    \bgroup{}v#1.#2.#3#4\egroup%
+}
+\def\thesotversion{%
+    \edef\@tmp{\noexpand\sot@thesotversion\arabic{sotversion}\noexpand\@nil}%
+    \@tmp%
+}
+ 
+%% -----------------------------------------------------------------------------
+%% Create the basic environments
+%% -----------------------------------------------------------------------------
+
+\ifsot@usetabu@ 
+    % Material styled table. Works similar to tabular
+    \newenvironment{mtabular}[1]{\bgroup
+        \taburowcolors[1] 2{MudWhite!90 .. MudWhite!10}
+        \everyrow{\tabucline[.4mm  white]{}}
+        \tabulinesep = ^2mm_2mm
+        \let\midrule\relax
+        \begin{tabu}{>{~}#1<{~}}
+            \sor@table@headerrow*% style the first row :D
+    }{
+        \end{tabu}\egroup
+    }
+
+    % Matieal styled long table. 
+    \newenvironment{mltabular}[2][]{%
+        \taburowcolors[1] 2{MudWhite!10 .. MudWhite!90}
+        \everyrow{\tabucline[.4mm  white]{}}
+        \tabulinesep = ^2mm_2mm
+        \begin{longtabu}{>{~}#2<{~}}
+            \ifx\\#1\\\sor@table@headerrow*\else% style the first row :D
+            \sor@table@headerrow*#1\vspace*{-0.1\baselineskip}\\\endfirsthead
+            \sor@table@headerrow@next#1\vspace*{-0.1\baselineskip}\\\endhead\fi
+    }{
+        \end{longtabu}
+    }
+\else
+    % Material styled table. Works similar to tabular
+    \newenvironment{mtabular}[1]{%
+        \begin{tabular}{>{~}#1<{~}}
+            \toprule%
+            \sor@table@headerrow*% style the first row :D
+    }{
+        \bottomrule
+        \end{tabu}
+    }
+
+    % Matieal styled long table. 
+    \newenvironment{mltabular}[2][]{%
+        \begin{longtable}{>{~}#2<{~}}
+            \toprule 
+            \ifx\\#1\\\sor@table@headerrow*\else% style the first row :D
+            \sor@table@headerrow*#1\vspace*{-0.1\baselineskip}\\\midrule\endfirsthead
+            \sor@table@headerrow@next#1\vspace*{-0.1\baselineskip}\\\midrule\endhead\fi
+    }{
+        \bottomrule
+        \end{longtabu}
+    }
+\fi
+
+\endinput
