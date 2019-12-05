@@ -36,11 +36,15 @@ besitzen und weitestgehend unabhängig voneinander verwendet werden können:
     - [sopra-requirements.sty](sopra-requirements/sopra-requirements.sty): Dies ist das versprochene Paket.
     - [sopra-requirements.doc.tex](sopra-requirements/sopra-requirements.doc.tex): Dieses Dokument erzeugt die zugehörige Dokumentation. Für sie wird das [LILLY-Framework](https://github.com/EagleoutIce/LILLY) benötigt - sofern es installiert ist, reicht: `pdflatex sopra-requirements.doc.tex`.
         Eine kompilierte Variante sollte allerdings auch jeweils den Veröffentlichungen (Releases) beiliegen.
+- [Tabellen mit: sopra-requirements](sopra-requirements):
+    Dieses Paket erlaubt es, Tabellen hübsch zu gestalten:
+    - [sopra-tables.sty](sopra-tables/sopra-tables.sty): Dies ist das versprochene Paket.
+    - [sopra-tables.doc.tex](sopra-tables/sopra-tables.doc.tex): Dieses Dokument erzeugt die zugehörige Dokumentation. Für sie wird das [LILLY-Framework](https://github.com/EagleoutIce/LILLY) benötigt - sofern es installiert ist, reicht: `pdflatex sopra-tables.doc.tex`.
+        Eine kompilierte Variante sollte allerdings auch jeweils den Veröffentlichungen (Releases) beiliegen.
 
 ## Aktuelle ToDo's
 
 Weil ich doch immer so viel vergesse:
-
 - Das Dokument soll bezüglich seines Layouts hübscher werden.
 - Es muss ein Beamer-Layout estellt werden (präsentationen und so :smiley:).
 - Listings paket anpassen, zum einen damit abhängigkit von Lilly auflösen
