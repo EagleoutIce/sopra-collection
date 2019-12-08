@@ -38,9 +38,8 @@
     Grundlage für die Definition von Anforderungen (funktional, qualitativ, \ldots)
     des \imptext{Teams 20}. Diese Dokumentation wurde zusammen mit der 
     \T{sopra-base.cls} sowie dem Paket \T{sopra-documentation.sty} kreiert.\par
-    Zum Visualisieren der einzelnen Code-Ausschnitte wurde die 
-    \T{LILLYxLISTINGS}-Bibliothek des Lilly-Frameworks\footnote{\url{https://github.com/EagleoutIce/LILLY}} von
-    Florian Sihler verwendet.
+    Zum Visualisieren der einzelnen Code-Ausschnitte wird das
+    \T{sopra-listings}-Paket verwendet.
     Das zugehörige Paket sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile[subject={sopra-requirements.sty}]{sopra-requirements.sty}}.
 \subsection{Abhängigkeiten}
     Dieses Paket bindet die folgenden Paketen mit ein:
@@ -49,7 +48,7 @@
             \def\pkgparse#1:#2\@nil{%
                 \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
             }
-            \foreach \pkg in {tabu:{\jmark[\T{usetabu}]{mrk:usetabu}},booktabs:{\jmark[\T{notabu}]{mrk:usetabu}},makecell:,longtable:,xcolor:,hyperref:} {
+            \foreach \pkg in {tabu:{\jmark[\T{usetabu}]{mrk:usetabu}},booktabs:{\jmark[\T{notabu}]{mrk:usetabu}},colortbl:{\jmark[\T{usetabu}]{mrk:usetabu}},makecell:,longtable:,xcolor:,environ:,amssymb:,hyperref:} {
                 \item \expandafter\pkgparse\pkg\@nil
             }
         \end{itemize}

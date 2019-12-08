@@ -23,11 +23,6 @@
 \newlength{\sor@length@list@compensation}%
 \setlength\sor@length@list@compensation{-0.5\baselineskip}
 
-% 'Key'-column
-\newcolumntype{K}{p{0.175\linewidth}}%>{\small}
-% 'Value'-column
-\newcolumntype{V}{p{0.725\linewidth}}
-
 \def\sor@table@headerstyle{\color{white}}
 
 % expected keys for the requirements:
@@ -70,8 +65,17 @@
 %% Basic Packages
 %% -----------------------------------------------------------------------------
 
-\ifsor@usetabu@ \RequirePackage{tabu} \else \RequirePackage{booktabs} \fi
-\RequirePackage{makecell,longtable,xcolor,hyperref}
+\ifsor@usetabu@ \RequirePackage{tabu} \RequirePackage{colortbl} \else \RequirePackage{booktabs} \fi
+\RequirePackage{makecell,longtable,xcolor,environ,amssymb,hyperref}
+
+%% -----------------------------------------------------------------------------
+%% New Columns
+%% -----------------------------------------------------------------------------
+
+% 'Key'-column
+\newcolumntype{K}{p{0.175\linewidth}}%>{\small}
+% 'Value'-column
+\newcolumntype{V}{p{0.725\linewidth}}
 
 %% -----------------------------------------------------------------------------
 %% Color Definitions
@@ -114,7 +118,7 @@
         \rowcolor{NextHeaderColor}\@ifstar{}{\Gape[0.5mm][0.25mm]{}}{%
             \hspace*{-2.3em}%
             \textcolor{HeaderColor!40!white}{$\blacktriangledown$}%
-        }\hspace*{1.4em}\;%
+        }\hspace*{1.4em}$\;$%
     }
 \else
     \def\sor@table@headerrow{\bfseries\@ifstar{}{}}
@@ -203,7 +207,7 @@
         % do not use \Gape for spacing :D
         % Now, we're constructing the longtabu
         \ifsor@usetabu@%
-        \taburowcolors[1] 2{MudWhite!10 .. MudWhite!90}
+        \taburowcolors[1] 2{lightgray!5 .. lightgray!25}
         \everyrow{\tabucline[.4mm  white]{}}
         \tabulinesep = ^2mm_2mm
         \begin{longtabu}{>{~}KV<{~}}
