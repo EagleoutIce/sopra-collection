@@ -16,7 +16,7 @@
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
 
-\newcounter{sotversion} \setcounter{sotversion}{1000}
+\newcounter{sotversion} \setcounter{sotversion}{1003}
 
 \newif\ifsot@usetabu@ % we can use regular tabular - if tabu won't work.
 
@@ -37,8 +37,8 @@
 %% Basic Packages
 %% -----------------------------------------------------------------------------
 
-\ifsot@usetabu@ \RequirePackage{tabu} \else \RequirePackage{booktabs} \fi
-\RequirePackage{makecell,longtable,xcolor}
+\ifsot@usetabu@ \RequirePackage{tabu} \RequirePackage{colortbl} \else \RequirePackage{booktabs} \fi
+\RequirePackage{makecell,longtable,amssymb,xcolor}
 
 %% -----------------------------------------------------------------------------
 %% Color Definitions
@@ -82,7 +82,7 @@
         \rowcolor{NextMaterialHeaderColor}\@ifstar{}{\Gape[0.5mm][0.25mm]{}}{%
             \hspace*{-2.3em}%
             \textcolor{MaterialHeaderColor!40!white}{$\blacktriangledown$}%
-        }\hspace*{1.4em}\;%
+        }\hspace*{1.4em}$\;$%
     }
 \else
     \def\sor@table@headerrow{\bfseries\@ifstar{}{}}
@@ -108,7 +108,7 @@
 \ifsot@usetabu@ 
     % Material styled table. Works similar to tabular
     \newenvironment{mtabular}[1]{\bgroup
-        \taburowcolors[1] 2{MudWhite!90 .. MudWhite!10}
+        \taburowcolors[1] 2{lightgray!25 .. lightgray!5}
         \everyrow{\tabucline[.4mm  white]{}}
         \tabulinesep = ^2mm_2mm
         \let\midrule\relax
@@ -120,7 +120,7 @@
 
     % Matieal styled long table. 
     \newenvironment{mltabular}[2][]{%
-        \taburowcolors[1] 2{MudWhite!10 .. MudWhite!90}
+        \taburowcolors[1] 2{lightgray!5 .. lightgray!25}
         \everyrow{\tabucline[.4mm  white]{}}
         \tabulinesep = ^2mm_2mm
         \begin{longtabu}{>{~}#2<{~}}
