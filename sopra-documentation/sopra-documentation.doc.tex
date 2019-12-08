@@ -36,9 +36,8 @@
     Grundlage für die Erstellung von Dokumentationen für die anderen Pakete und Klassen
     des \imptext{Teams 20}, welche zusammen mit der \T{sopra-base.cls} kreiert
     werden.\par
-    Zum Visualisieren der einzelnen Code-Ausschnitte wurde die 
-    \T{LILLYxLISTINGS}-Bibliothek des Lilly-Frameworks\footnote{\url{https://github.com/EagleoutIce/LILLY}} von
-    Florian Sihler verwendet. Es ist für die Verwendung des Pakets (\jmark[\T{nolistings}]{mrk:nolistings})
+    Zum Visualisieren der einzelnen Code-Ausschnitte wird das
+    \T{sopra-listings}-Paket verwendet. Es ist für die Verwendung des Pakets (\jmark[\T{nolistings}]{mrk:nolistings})
     nicht relevant.\par
     Das zugehörige Paket sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile[subject={sopra-documentation.sty}]{sopra-documentation.sty}}.
 \subsection{Abhängigkeiten}
@@ -48,13 +47,13 @@
             \def\pkgparse#1:#2\@nil{%
                 \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
             }
-            \foreach \pkg in {xcolor:,attachfile2:,multicol:,LILLYxLISTINGS:{nur \jmark[\T{listings}]{mrk:listings}},blindtext:{nur \jmark[\T{dummy}]{mrk:dummy}},
+            \foreach \pkg in {xcolor:,attachfile2:,multicol:,sopra-listings:{nur \jmark[\T{listings}]{mrk:listings}},blindtext:{nur \jmark[\T{dummy}]{mrk:dummy}},
                 hyperref:} {
                 \item \expandafter\pkgparse\pkg\@nil
             }
         \end{itemize}
     \end{multicols}
-    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein.
+    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution/mit diesem ausgeliefert worden sein.
 
 \subsection{Die Installation}
     Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die 
@@ -83,8 +82,10 @@
 \end{plainlatex}
     \end{itemize}
     \subsection{Weitere Besonderheiten}
-    In Version \thesodversion{} (\cmdref{thesodversion}) gibt es keine weiteren
-    Besonderheiten.
+    \paragraph{v1.0.0:}
+    In dieser Version gibt es keine weiteren Besonderheiten.
+    \paragraph{\protect\thesodversion:}
+    In dieser Version wurde \T{LILLYxLISTINGS} durch \T{sopra-listings} ersetzt!
 
 %
 %
@@ -143,6 +144,10 @@ Es gilt zu beachten, dass das Präfix \T{env@} nur auf die Natur einer Umgebung 
 
 
 \subsection{Kompatibilitätsmodus}
+
+\begin{center}
+    \imptext{Dieser Modus steht in \thesodversion{} nicht zur Verfügung!}
+\end{center}
 
 Diese Befehle werden nur mit \jmark[\T{nolistings}]{mrk:nolistings} definiert, da sie sonst von \T{LILLYxLISTINGS} eingebunden
 werden würden:
@@ -204,6 +209,14 @@ werden würden:
 \begin{environment}{argument}{\manArg{Name}\manArg{Conter-Name}}
     Startet die Erklärung eins neuen Arguments für das Paket/die Klase mit Bezeichner \T{Name} und dem Konter-Bezeichner \T{Conter-Name}.
 \end{environment}
+
+\begin{command}{say}{\manArg{Text}}
+    Setzt \T{Text} in \say{Anführungszeichen}.
+\end{command}
+
+\begin{command}{jmark}{\optArg{Text}\manArg{Linkziel}}
+    Funktioniert analog zum Pendant in \T{Lilly}, weil ich es so lieber mag und aus Reflex schreibe :D.
+\end{command}
 
 \subsection{Weitere Befehle}
 

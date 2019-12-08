@@ -14,7 +14,7 @@
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
 
-\newcounter{sodversion} \setcounter{sodversion}{1000}
+\newcounter{sodversion} \setcounter{sodversion}{1102}
 
 
 \newif\ifsod@usedummy@
@@ -59,16 +59,8 @@
 \def\email#1{\href{mailto:#1}{#1}}
 
 \ifsod@uselistings@%
-    \RequirePackage{LILLYxLISTINGS}
-\else%
-    \let\T\texttt% typewriter 'T'
-
-    \def\lstcomment#1{\bgroup\ttfamily\color{gray}#1\egroup}
-    \foreach \col/\sig in {purple/one,green/two,orange/three,teal/four,gray/five,black/six}{
-        \expandafter\xdef\csname lstkw\sig\endcsname##1{\bgroup\noexpand\ttfamily\noexpand\color{\col}##1\egroup}
-    }
-    \def\lststring#1{\bgroup\ttfamily\color{orange!90!purple}#1\egroup}
-    \def\lstnumber#1{\bgroup\ttfamily\itshape\color{blue}#1\egroup}
+    \RequirePackage{sopra-listings}
+    \solLoadLanguage{latex,bash}
 \fi
 
 %% -----------------------------------------------------------------------------
@@ -89,10 +81,10 @@
 
 \def\manArg#1{\T{\{#1\}}}
 \def\optArg#1{\T{\itshape[#1]}}
-\def\cmd#1{\lstkwfive{\textbackslash#1}}
-\def\env#1{\lstkwthree{env@#1}}
-\def\cmdref#1{\hyperref[mrk:#1]{\lstkwfive{\textbackslash#1}}\textsuperscript{\(\rightarrow\,\)p. \pageref{mrk:#1}}}
-\def\envref#1{\hyperref[mrk:#1]{\lstkwthree{env@#1}}\textsuperscript{\(\rightarrow\,\)p. \pageref{mrk:#1}}}
+\def\cmd#1{\solGet{command}{\textbackslash#1}}
+\def\env#1{\solGet{keywordC}{env@#1}}
+\def\cmdref#1{\hyperref[mrk:#1]{\solGet{command}{\textbackslash#1}}\textsuperscript{\(\rightarrow\,\)p. \pageref{mrk:#1}}}
+\def\envref#1{\hyperref[mrk:#1]{\solGet{keywordC}{env@#1}}\textsuperscript{\(\rightarrow\,\)p. \pageref{mrk:#1}}}
 
 \makeatletter
 % #1: name of the present-sequence
@@ -100,22 +92,28 @@
 % #3: presenter style
 % #4: prefix of cs-name
 \newenvironment{present}[4]{\phantomsection\label{mrk:#1}%
-    \bgroup\leavevmode\newline\noindent\hspace*{-0.75cm}\parbox{0.75cm}{\(\triangleright\)\quad}{\@nameuse{#3}{#4#1}}{\T{#2}}\par\nopagebreak% done on purpose
+    \bgroup\leavevmode\newline\noindent\hspace*{-0.75cm}\parbox{0.75cm}{\(\triangleright\)\quad}{#3{#4#1}}{\T{#2}}\par\nopagebreak% done on purpose
 }{\egroup\bigskip}
 \makeatother
 
 % #1: name of the command-sequence
 % #2: Args of the command-sequence
-\newenvironment{command}[2]{\present{#1}{#2}{lstkwfive}{\textbackslash}}{\endpresent}
+\newenvironment{command}[2]{\present{#1}{#2}{\solGet{command}}{\textbackslash}}{\endpresent}
 
 % #1: name of the environment
 % #2: Args of the environment
-\newenvironment{environment}[2]{\present{#1}{#2}{lstkwthree}{env@}}{\endpresent}
+\newenvironment{environment}[2]{\present{#1}{#2}{\solGet{keywordC}}{env@}}{\endpresent}
 
 
 % #1: name of the arg
 % #2: name of the counter-Arg
-\newenvironment{argument}[2]{\present{#1}{\qquad(\T{#2})}{T}{}}{\endpresent}
+\newenvironment{argument}[2]{\present{#1}{\qquad(\T{#2})}{\T}{}}{\endpresent}
 
+%% -----------------------------------------------------------------------------
+%% Comfort-Methods and linkers
+%% -----------------------------------------------------------------------------
+
+\long\def\say#1{\glqq{#1}\grqq{}}
+\newcommand\jmark[2][Linkname]{\hyperref[#2]{#1}}
 
 \endinput
