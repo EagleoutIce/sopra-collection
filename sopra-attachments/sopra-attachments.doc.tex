@@ -1,0 +1,173 @@
+\documentclass{sopra-base} 
+
+\usepackage{sopra-documentation}
+\usepackage{sopra-attachments}
+
+\title{Das 'sopra-attachments'-Paket}
+\subtitle[Dokumentation für das 'sopra-attachments'-Paket]{Dokumentation für das 'sopra-attachments'-Paket~$\mid$~Version \thesoaversion}
+\duedate{2019-12-8}
+
+\keywords{Dokumentation,sopra-attachments,sopra,uni ulm,uulm,Paket}
+\authors{Florian Sihler (florian.sihler@uni-ulm.de)}
+
+\group{Die Affenbande}
+\begin{document}
+
+    \maketitle%
+%
+    %\tableofcontents
+%
+
+%
+%
+% ....###....##.......##........######...########.##.....##.########.####.##....##.########..######.
+% ...##.##...##.......##.......##....##..##.......###...###.##........##..###...##.##.......##....##
+% ..##...##..##.......##.......##........##.......####.####.##........##..####..##.##.......##......
+% .##.....##.##.......##.......##...####.######...##.###.##.######....##..##.##.##.######....######.
+% .#########.##.......##.......##....##..##.......##.....##.##........##..##..####.##.............##
+% .##.....##.##.......##.......##....##..##.......##.....##.##........##..##...###.##.......##....##
+% .##.....##.########.########..######...########.##.....##.########.####.##....##.########..######.
+%
+%
+
+\section{Allgemeines}
+\subsection{Warum, wieso, weshalb?}
+    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im 
+    Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
+    kleiner Wrapper zum Einbinden von Dokumenten
+    des \imptext{Teams 20}. Diese Dokumentation wurde zusammen mit der 
+    \T{sopra-base.cls} sowie dem Paket \T{sopra-documentation.sty} kreiert.\par
+    Zum Visualisieren der einzelnen Code-Ausschnitte wurde die 
+    \T{LILLYxLISTINGS}-Bibliothek des Lilly-Frameworks\footnote{\url{https://github.com/EagleoutIce/LILLY}} von
+    Florian Sihler verwendet.
+    Das zugehörige Paket sollte ebenfalls in dieses Dokument eingebettet sein: \attachTex{sopra-attachments.sty}.
+\subsection{Abhängigkeiten}
+    Dieses Paket bindet die folgenden Paketen mit ein:
+    \begin{multicols}{3}
+        \begin{itemize}
+            \def\pkgparse#1:#2\@nil{%
+                \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
+            }
+            \foreach \pkg in {xcolor:,attachfile2:,graphicx:{\jmark[\T{attsymbols}]{mrk:attsymbols}}} {
+                \item \expandafter\pkgparse\pkg\@nil
+            }
+        \end{itemize}
+    \end{multicols}
+    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein.
+
+\subsection{Die Installation}
+    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die 
+    folgenden Möglichkeiten ergeben:
+    \begin{itemize}
+        \item Das Paket kann in dasselbe Verzeichnis wie das Dokument
+                gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+\begin{plainlatex}
+\usepackage{sopra-attachments}
+\end{plainlatex}
+        \item Das Paket kann in ein Unterverzeichnis/in ein mit
+                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
+                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+\begin{plainlatex}
+\usepackage{./Mein/Pfad/zu/sopra-attachments}
+\end{plainlatex}
+        \item Man kann das Paket (mittels eines Symlinks oder ähnlichem)
+              in einen eigenen \emph{texmf}-Baum ablegen.
+              So kann zum Beispiel auf Linux unter der Verwendung von texlive
+              das Paket hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
+              Das Verzeichnis kann erstellt und anschließend mittels
+              \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
+              das Paket wie jede andere installierte Paket verwendet werden:
+\begin{plainlatex}
+\usepackage{sopra-attachments}
+\end{plainlatex}
+    \end{itemize}
+
+\subsection{Weitere Besonderheiten}
+In Version \thesoaversion{} (\cmdref{thesoaversion}) gibt es keine weiteren
+Besonderheiten.
+
+%
+%
+% .##....##..#######..##....##.########.####..######...##.....##.########.....###....########.####..#######..##....##
+% .##...##..##.....##.###...##.##........##..##....##..##.....##.##.....##...##.##......##.....##..##.....##.###...##
+% .##..##...##.....##.####..##.##........##..##........##.....##.##.....##..##...##.....##.....##..##.....##.####..##
+% .#####....##.....##.##.##.##.######....##..##...####.##.....##.########..##.....##....##.....##..##.....##.##.##.##
+% .##..##...##.....##.##..####.##........##..##....##..##.....##.##...##...#########....##.....##..##.....##.##..####
+% .##...##..##.....##.##...###.##........##..##....##..##.....##.##....##..##.....##....##.....##..##.....##.##...###
+% .##....##..#######..##....##.##.......####..######....#######..##.....##.##.....##....##....####..#######..##....##
+%
+%
+
+\subsection{Akzeptierte Parameter}
+    Das Paket akzeptiert, so wie die meisten, Argumente. 
+    Bei Argumenten mit einer \say{Counter}-Option wird das jeweils standardmäßig aktive zuerst und das andere in Klammern
+    geschrieben. So wird implizit:
+\begin{plainlatex}
+    \usepackage[attsymbols,nodocheck]{sopra-attachments}
+\end{plainlatex}
+    aufgerufen. Während wir mit:
+\begin{plainlatex}
+    \usepackage[docheck]{sopra-attachments}
+\end{plainlatex}
+    kein Fehler geworfen wird wenn die Datei nicht existiert!
+
+    \begin{argument}{attsymbols}{noattsymbols}
+        Mit \T{noattsymbols} wird auch dann, wenn eigentlich ein Symbol verwendet werden
+        soll auf Text zurückgegriffen.
+    \end{argument}
+
+    \begin{argument}{nodocheck}{docheck}
+        Mit \T{docheck} wird geprüft, ob es die Datei auch gibt. Sie wird nur im Existenzfall
+        angehängt, andernfalls wird \emph{kein} Fehler geworfen. Dies kann zum Beispiel dann
+        nützlich sein, wenn man die einzubindende Grafik mit Ti\textit{k}Z-\T{external} erst
+        später im Dokument generiert.
+    \end{argument}
+
+\subsection{Weitere Hinweise}
+
+    Mittels \cmd{attachfilesetup} des Pakets \T{attachfile2} lassen sich weitere
+    Einstellungen vornehmen. Wird nicht \T{sopra-base} verwendet, muss man den Author
+    der Dokumente durch \cmd{author} setzen.
+
+%
+%
+% .########..########.########.########.##.....##.##.......########
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..######...######...######...#########.##.......######..
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..########.##.......########.##.....##.########.########
+%
+%
+
+\section{Befehle- und Umgebungen}
+
+\subsection{Allgemeine Befehle}
+
+\begin{command}{thesoaversion}{}
+    Liefert die aktuelle Version des Pakets. So ergibt: \cmd{thesoaversion}: \thesoaversion\\
+    \notetext{Hinweis: über \blatex{\\value\{soaversion\}} lässt sich
+    die Version als $4$-stellige Nummer erhalten: \arabic{soaversion}.}
+\end{command}
+
+\begin{command}{attachPdf}{\optArg{Suchpfad}\manArg{Datei}}
+    Versucht \T{Datei} einzubinden. Befindet sie sich nicht im gleichen Ordner, so kann
+    \T{Suchpfad} als Präfix angegeben werden. \notetext{Ein \say{slash} am Ende wird
+    erwartet!}
+\end{command}
+
+\begin{command}{attachPdfText}{\optArg{Suchpfad}\manArg{Datei}\manArg{Text}}
+    Analog zu \cmdref{attachPdf}, allerdings wird anstelle des Symbols (sofern aktiviert),
+    der \T{Text} angezeigt.
+\end{command}
+
+\begin{command}{attachDocument}{\optArg{Suchpfad}\manArg{Datei}}
+    Analog zu \cmdref{attachPdf}, allerdings wird der Dokumenttyp auf \T{text/plain} gesetzt. \notetext{Es existiert das Alias \cmd{attachTex}.}
+\end{command}
+
+\begin{command}{attachDocumentText}{\optArg{Suchpfad}\manArg{Datei}\manArg{Text}}
+    Analog zu \cmdref{attachPdfText}, allerdings wird der Dokumenttyp auf \T{text/plain} gesetzt. \notetext{Es existiert das Alias \cmd{attachTexText}.}
+\end{command}
+
+\end{document}

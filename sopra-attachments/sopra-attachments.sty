@@ -1,0 +1,136 @@
+%% sopra-attachments.sty
+%%
+%% -----------------------------------------------------------------------------
+%% Version: 1.0
+%% Author:  Florian Sihler, 08.12.2019
+%% 
+%% Provides a useful wrapper to attach files to an PDF
+%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{sopra-attachments}[2019/12/03 EagleoutIce - attach documents for the sopra-team-020]
+
+%% -----------------------------------------------------------------------------
+%% Lengths and Registers
+%% -----------------------------------------------------------------------------
+
+\newcounter{soaversion} \setcounter{soaversion}{1000}
+
+% make switches for use of tcolorbox..
+\newif\ifsol@symbols@ %  Allow symbols like bookmark
+\newif\ifsol@notfound@isfail@ %  Don't check if file exists
+
+
+%% -----------------------------------------------------------------------------
+%% Package-Args
+%% -----------------------------------------------------------------------------
+
+\DeclareOption{attsymbols}{ \sol@symbols@true }
+\DeclareOption{noattsymbols}{ \sol@symbols@false }
+
+\DeclareOption{docheck}{ \sol@notfound@isfail@false }
+\DeclareOption{nodocheck}{ \sol@notfound@isfail@true }
+
+\ExecuteOptions{attsymbols,nodocheck}% set it explicitly
+\ProcessOptions\relax%
+
+%% -----------------------------------------------------------------------------
+%% Basic Packages
+%% -----------------------------------------------------------------------------
+
+\ifsol@symbols@ \RequirePackage{graphicx} \fi % \scalebox
+\RequirePackage{xcolor,attachfile2}
+
+%% -----------------------------------------------------------------------------
+%% Configure
+%% -----------------------------------------------------------------------------
+
+\def\soa@setAuthor#1{\gdef\@author{#1}} % not used currently
+
+\@ifundefined{thesobversion}{
+    \attachfilesetup{%
+        author={\@author},
+        color=0.5 0 0.5,
+        icon=Tag,
+        mimetype=text/plain % we assume
+    }
+}{
+    \attachfilesetup{%
+        author={\sob@register@authors},
+        color=0.6392 0.149 0.2314,
+        icon=Tag,
+        mimetype=text/plain % we assume
+    }
+}
+
+% it should be noted in docs on how to change
+
+%% -----------------------------------------------------------------------------
+%% Helper Functions
+%% -----------------------------------------------------------------------------
+
+\def\soa@thesoaversion#1#2#3#4\@nil{%
+    \bgroup{}v#1.#2.#3#4\egroup%
+}
+\def\thesoaversion{%
+    \edef\@tmp{\noexpand\soa@thesoaversion\arabic{soaversion}\noexpand\@nil}%
+    \@tmp%
+}
+
+% #1 config
+% #2 File Name
+% #3 search-path-addition
+\def\sol@@attachfile@symbol#1#2#3{%
+    \ifsol@symbols@%
+        \edef\@sol@tmp{\noexpand\scalebox{0.65}{\noexpand\attachfile[#1,subject={#2}]{#3#2}}}%
+    \else\edef\@sol@tmp{\noexpand\textattachfile[#1,subject={#2}]{#3#2}{#2}}\fi%
+    \@sol@tmp{}%
+}
+
+\def\sol@attachfile@symbol#1#2#3{%
+    \ifsol@notfound@isfail@%
+        \sol@@attachfile@symbol{#1}{#2}{#3}%
+    \else% check
+        \IfFileExists{#3#2}{\sol@@attachfile@symbol{#1}{#2}{#3}}%
+        {<Attachment not found!>}%
+    \fi%
+}
+
+% #1 config
+% #2 File Name
+% #3 search-path-addition
+% #4 text
+\long\def\sol@@attachfile@text#1#2#3#4{%
+    \edef\@sol@tmp{\noexpand\textattachfile[#1,subject={#2}]{#3#2}{#4}}%
+    \@sol@tmp{}%
+}
+
+\def\sol@attachfile@text#1#2#3#4{%
+    \ifsol@notfound@isfail@%
+        \sol@@attachfile@text{#1}{#2}{#3}{#4}%
+    \else% check
+        \IfFileExists{#3#2}{\sol@@attachfile@text{#1}{#2}{#3}{#4}}%
+        {<Attachment not found!>}%
+    \fi%
+}
+
+%% -----------------------------------------------------------------------------
+%% User Functions
+%% -----------------------------------------------------------------------------
+
+% #1 path to search
+% #2 Name of the PDF
+\newcommand*\attachPdf[2][]{\sol@attachfile@symbol{mimetype=application/pdf}{#2}{#1}}
+% #3 text
+\newcommand\attachPdfText[3][]{\sol@attachfile@text{mimetype=application/pdf}{#2}{#1}{#3}}
+% #1 path to search
+% #2 Name of the PDF
+\newcommand*\attachDocument[2][]{\sol@attachfile@symbol{mimetype=text/plain}{#2}{#1}}
+% #3 text
+\newcommand\attachDocumentText[3][]{\sol@attachfile@text{mimetype=text/plain}{#2}{#1}{#3}}
+
+\let\attachTex\attachDocument
+\let\attachTexText\attachDocumentText
+
+
+\endinput
