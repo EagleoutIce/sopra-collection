@@ -39,10 +39,8 @@
     eine Schnittstelle geschaffen wurde, die auch bei varrierenden optischen
     Eigenschaftendes Dokuments keine Änderungen im \LaTeX-Codes erfordern 
     sollten.\par
-    Zum Visualisieren der einzelnen Code-Ausschnitte wurde die 
-    \T{LILLYxLISTINGS}-Bibliothek des 
-    Lilly-Frameworks\footnote{\url{https://github.com/EagleoutIce/LILLY}} von
-    Florian Sihler verwendet. Es ist für die Verwendung der Dokumentklasse
+    Zum Visualisieren der einzelnen Code-Ausschnitte wird das
+    \T{sopra-listings}-Paket verwendet. Es ist für die Verwendung der Dokumentklasse
     nicht relevant.\par
     Die zugehörige Klasse sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile[subject={sopra-base.cls}]{sopra-base.cls}}.
 \subsection{Abhängigkeiten}
@@ -255,7 +253,7 @@ das Dokument beginnt). \notetext{Entwicklernotiz: Alle diese Felder stehen über
 \begin{command}{DateConvert}{\manArg{YYYY-MM-DD}}
     Konvertiert ein Datum in eine schönere Form, so:
 \begin{plainlatex}[morekeywords={[5]{\\DateConvert}}]
-\DateConvert{2019-12-02} % :yields: !*\lstcomment{\DateConvert{2019-12-02}}*!
+\DateConvert{2019-12-02} % :yields: !*\solGet{comments}{\DateConvert{2019-12-02}}*!
 \end{plainlatex}
 \end{command}
 
@@ -285,9 +283,9 @@ das Dokument beginnt). \notetext{Entwicklernotiz: Alle diese Felder stehen über
 \section{Verbundene Klassen und Pakete}
 
 Im Zuge dieser \LaTeXe-Dokumentklasse sind noch einige andere Pakete entstanden. Zum aktuellen Kompilierstand existiert (Pakete und Klassen, ohne Link sind dieser beigelegt und hier: \url{https://github.com/EagleoutIce/sopra-collection} zu finden):
-\begin{multicols}{2}
+\begin{multicols}{3}
     \begin{itemize}
-        \foreach \i/\u in {eagle-maps/{https://github.com/EagleoutIce/eagle-maps},LILLY-Framework/{https://github.com/EagleoutIce/LILLY},sopra-documentation/,sopra-models/} {
+        \foreach \i/\u in {eagle-maps/{https://github.com/EagleoutIce/eagle-maps},LILLY-Framework/{https://github.com/EagleoutIce/LILLY},sopra-documentation/,sopra-models/,sopra-listings/,sopra-requirements/,sopra-attachments/} {
             \item \T{\i}\expandafter\ifx\expandafter\\\u\\\else\footnote{\url{\u}}\fi
         }
     \end{itemize}    
