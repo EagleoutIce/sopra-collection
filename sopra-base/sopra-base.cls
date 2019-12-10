@@ -77,6 +77,7 @@
     bottom=\sob@footheight pt]{geometry}
 % beautify:
 \RequirePackage{sfmath,lmodern,microtype,scrlayer-scrpage,titlesec}
+\RequirePackage{enumitem}
 \RequirePackage[all]{nowidow}
 
 \RequirePackage[hidelinks]{hyperref}
