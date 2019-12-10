@@ -201,13 +201,14 @@ zu können!}
     Setzt einen \emph{Negativabstand}, der dann verwendet werden kann, wenn einem ein Abstand zu groß gesetzt ist. Dies wird nur dann nötig sein, wenn man eigene Umgebungen oder vergleichbares einbringt und ist hier nur eine Art Inspiration.
 \end{command}
 
-\begin{command}{preqref}{\manArg{Anforderungsmarker}}
+\begin{command}{preqref}{\optArg{Text}\manArg{Anforderungsmarker}}
     Dieser Befehl setzt einen Verweis auf eine mittels \envref{requirement} gesetzt Anforderung. Für jede werden zwei gültige Marker generiert: \begin{itemize}\setlength{\itemsep}{0pt}
         \item Es kann der Bezeichner verwendet werden.
         \item Es kann das Kürzel für den Anforderungstyp plus die jeweilige Nummer verwendet werden (\T{FA13}, \T{QA9}, \ldots)
     \end{itemize}
     Dieser Befehl kann auch mit einem Sternchen benutzt werden. In diesem Fall wird der
-    Bezeichner der Anforderung nicht ausgegen, sondern nur das Kürzel (zum Beispiel \T{FA42}) samt der Seite auf der die Anforderung definiert wird.
+    Bezeichner der Anforderung nicht ausgegen, sondern nur das Kürzel (zum Beispiel \T{FA42}) samt der Seite auf der die Anforderung definiert wird. Wird \T{Text} gesetzt, so wird
+    dieser anstelle des Anforderungsnamen angezeigt.
 \end{command}
 
 \begin{command}{pref}{\manArg{Hypermarker}\manArg{Text}}
@@ -227,7 +228,7 @@ Definieren wir uns im Folgenden einmal zwei Anforderungen:
 
     \begin{requirement}{feed-ducks}
         \setTitle{Ente füttern}
-        \setDescription{Es muss möglich sein, die Enten aus \preqref{FA1} zu füttern}
+        \setDescription{Es muss möglich sein, die Enten aus \preqref{FA1} zu füttern.  Wir haben: \preqref[Enten]{FA1}.}
         \setJustification{Enten müssen Leben (dürfen)!!}
         \setDependencies{a-duck}
     \end{requirement}
@@ -243,7 +244,7 @@ Das Ergebnis ist (mit \T{tabu}) das folgende:
 
     \begin{requirement}{feed-ducks}
         \setTitle{Ente füttern}
-        \setDescription{Es muss möglich sein, die Enten aus \preqref{FA1} zu füttern}
+        \setDescription{Es muss möglich sein, die Enten aus \preqref{FA1} zu füttern. Wir haben: \preqref[Enten]{FA1}.}
         \setJustification{Enten müssen Leben (dürfen)!!}
         \setDependencies{a-duck}
     \end{requirement}

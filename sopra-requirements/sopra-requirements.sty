@@ -16,7 +16,7 @@
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
 
-\newcounter{sorversion} \setcounter{sorversion}{1000}
+\newcounter{sorversion} \setcounter{sorversion}{1005}
 \newcounter{sor@counter@functional@requirement}%
 \newcounter{sor@counter@quality@requirement}%
 
@@ -263,11 +263,15 @@
 %% Please not that, preqref can be used by number AND by ID whereas the ID shouldl never be a number
 \def\preqref{\@ifstar{\@sor@starred@preqref}{\@sor@unstarred@preqref}}
 % This one will set the Name too :D
-\def\@sor@unstarred@preqref#1{\pref{tbl:requirement:#1}{\@nameuse{@sor@r@titles@#1}}}
-\def\@sor@starred@preqref#1{\pref{tbl:requirement:#1}{#1}}
+\newcommand\@sor@unstarred@preqref[2][]{\ifx\\#1\\\pref{tbl:requirement:#2}{\@nameuse{@sor@r@titles@#2}}\else\sor@cstpreqref{#2}{#1}\fi}
+\newcommand\@sor@starred@preqref[2][]{\ifx\\#1\\\pref{tbl:requirement:#2}{#2}\else\sor@cstpreqref{#2}{#1}\fi}
 
 \def\pref#1#2{\hyperref[#1]{#2\textsuperscript{$\,\to p.\,$\pageref{#1}}}}
 
 \def\iskip{\vspace*{\sor@length@list@compensation}}
+
+\def\sor@splittag#1:#2\@nil{#1}
+\def\sor@getreqnum#1{\edef\@tmp{\noexpand\sor@splittag\@nameuse{@sor@r@titles@#1}: \noexpand\@nil}\@tmp}
+\def\sor@cstpreqref#1#2{\pref{tbl:requirement:#1}{#2 (\sor@getreqnum{#1})}}
 
 \endinput
