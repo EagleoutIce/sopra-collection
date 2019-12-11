@@ -141,7 +141,7 @@
     \colorlet{sol@colors@lst@numbers}{teal!60!gray} % 
     \colorlet{sol@colors@lst@literals}{sob@col@uulm!90!blue} %
     \colorlet{sol@colors@lst@comments}{lightgray!65!darkgray} %
-    \colorlet{sol@colors@lst@highlight}{green!60!brown} %
+    \colorlet{sol@colors@lst@highlight}{purple} %
 }
 
 % define the styling definitions
@@ -173,7 +173,7 @@
         {linenumbers:   \color{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
         {literals:      \color{sol@colors@lst@literals}},%
         {comments:      \color{sol@colors@lst@comments}},% \scshape
-        {highlight:     \color{sol@colors@lst@highlight}},%
+        {highlight:     \color{sol@colors@lst@highlight}\itshape},%
         {basic:         \color{black}\sol@ttfamily}%
     }
 \else 
@@ -186,7 +186,7 @@
         {linenumbers:   \color{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
         {literals:      \color{sol@colors@lst@literals}},%
         {comments:      \color{sol@colors@lst@comments}},%
-        {highlight:     \color{sol@colors@lst@highlight}},%
+        {highlight:     \color{sol@colors@lst@highlight}\itshape},%
         {basic:         \color{black}\sol@ttfamily}%
     }
 \fi
