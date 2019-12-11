@@ -66,7 +66,7 @@
 %% -----------------------------------------------------------------------------
 
 \ifsor@usetabu@ \RequirePackage{tabu} \RequirePackage{colortbl} \else \RequirePackage{booktabs} \fi
-\RequirePackage{makecell,longtable,xcolor,environ,amssymb,hyperref}
+\RequirePackage{makecell,longtable,xcolor,environ,amssymb,etoolbox,hyperref}
 
 %% -----------------------------------------------------------------------------
 %% New Columns
@@ -265,6 +265,8 @@
 % This one will set the Name too :D
 \newcommand\@sor@unstarred@preqref[2][]{\ifx\\#1\\\pref{tbl:requirement:#2}{\@nameuse{@sor@r@titles@#2}}\else\sor@cstpreqref{#2}{#1}\fi}
 \newcommand\@sor@starred@preqref[2][]{\ifx\\#1\\\pref{tbl:requirement:#2}{#2}\else\sor@cstpreqref{#2}{#1}\fi}
+
+\robustify{\preqref}
 
 \def\pref#1#2{\hyperref[#1]{#2\textsuperscript{$\,\to p.\,$\pageref{#1}}}}
 
