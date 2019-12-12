@@ -117,8 +117,8 @@
         \rowfont{\normalfont\bfseries\leavevmode\sor@table@headerstyle}%
         \rowcolor{NextHeaderColor}\@ifstar{}{\Gape[0.5mm][0.25mm]{}}{%
             \hspace*{-2.3em}%
-            \textcolor{HeaderColor!40!white}{$\blacktriangledown$}%
-        }\hspace*{1.4em}$\;$%
+            \llap{\textcolor{HeaderColor!40!white}{$\blacktriangledown$}}%
+        }\hspace*{2.3em}$\;$%
     }
 \else
     \def\sor@table@headerrow{\bfseries\@ifstar{}{}}
