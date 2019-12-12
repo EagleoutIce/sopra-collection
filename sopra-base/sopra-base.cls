@@ -199,7 +199,7 @@
 \ifsob@showmail@
 \def\sob@@parse@author#1 (#2)\@nil{\bgroup#1 (\mail{#2})\egroup}
 \else
-\def\sob@@parse@author#1 (#2)\@nil{\bgroup#1\egroup}
+\def\sob@@parse@author#1 (#2)\@nil{\bgroup\href{mailto:#2}{#1}\egroup}
 \fi
 \def\sob@@typeset@author#1{%
     \setcounter{sob@counter@tmp@a}{0}% start with an offset
