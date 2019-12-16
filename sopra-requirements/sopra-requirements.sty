@@ -116,9 +116,9 @@
     \def\sor@table@headerrow@next{% maybe use llap for the symbol?
         \rowfont{\normalfont\bfseries\leavevmode\sor@table@headerstyle}%
         \rowcolor{NextHeaderColor}\@ifstar{}{\Gape[0.5mm][0.25mm]{}}{%
-            \hspace*{-2.3em}%
-            \llap{\textcolor{HeaderColor!40!white}{$\blacktriangledown$}}%
-        }\hspace*{2.3em}$\;$%
+            \hspace*{-6mm}%
+            \llap{\textcolor{NextHeaderColor!40!white}{$\blacktriangledown$}}%
+        }\hspace*{6mm}$\;$%
     }
 \else
     \def\sor@table@headerrow{\bfseries\@ifstar{}{}}
@@ -212,8 +212,8 @@
         \tabulinesep = ^2mm_2mm
         \begin{longtabu}{>{~}KV<{~}}
             % init the headerrow
-            \sor@table@headerrow* ID & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\ifsor@showtag@\hfill\T{##2}\fi\\\endfirsthead
-            \sor@table@headerrow@next ID & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\\\endhead
+            \sor@table@headerrow*{ID} & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\ifsor@showtag@\hfill\T{##2}\fi\\\endfirsthead
+            \sor@table@headerrow@next{ID} & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\\\endhead
             % i do not want to make a token iter, i'm sorry
             \sor@requirement@leftcolstyle{Titel:} & \@sor@r@title\\
             % only typeset them if they are not empty :D
