@@ -86,6 +86,11 @@
 \def\cmdref#1{\hyperref[mrk:#1]{\solGet{command}{\textbackslash#1}}\textsuperscript{\(\rightarrow\,\)p. \pageref{mrk:#1}}}
 \def\envref#1{\hyperref[mrk:#1]{\solGet{keywordC}{env@#1}}\textsuperscript{\(\rightarrow\,\)p. \pageref{mrk:#1}}}
 
+% TODO: document
+% #2 counter
+\def\argref#1#2{\hyperref[mrk:#1]{\T{#1 (#2)}}\textsuperscript{\(\rightarrow\,\)p. \pageref{mrk:#1}}}
+
+
 \makeatletter
 % #1: name of the present-sequence
 % #2: Args of the present-sequence
