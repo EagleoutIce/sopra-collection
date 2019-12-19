@@ -9,7 +9,7 @@ from shutil import copyfile
 
 print("Please enter your texmf home path!")
 print("Note, if you don't know the path, there are defaults:")
-print("     - texlive on linux: '<home>/texmf/'")
+print("     - texlive on linux: '<upshome>/texmf/'")
 print("     - macTeX on Darwin: '/Users/<yourUsername>/Library/texmf/'")
 
 target_path = os.path.expanduser(input('TEXMF> '))
@@ -39,18 +39,35 @@ def getPkgClsName(dirname : str):
     else:
         return dirname + '.cls'
 
+def updateOrInstallComponent(source_file : str, tar_dirname : str, tar_filename:str,indent:int):
+    # Check for dir creation:
+    (tar_dirname/tar_filename).parent.mkdir(parents=True,exist_ok=True)
+    # print("called with: " + tar_filename)
+    if not os.path.isfile(tar_dirname/tar_filename):
+        print(" "*indent + "Installing: '%s'" % tar_filename)
+        copyfile(source_file,tar_dirname / tar_filename)
+    elif os.path.getmtime(source_file) > os.path.getmtime(tar_dirname/tar_filename):
+        print(" "*indent + "Updating: '%s'" % tar_filename)
+        copyfile(source_file,tar_dirname / tar_filename)
+    else:
+        print(" "*indent + "Is up to date: '%s'" % tar_filename)
+
 # Walk current path and filter for sopra'
 for root, dirs, files in os.walk("."):
     for dirname in dirs:
         if "sopra-" in dirname:
             
             filename = getPkgClsName(dirname)
-            target_file = Path.cwd() / Path(dirname) / filename
-            if not os.path.isfile(target_fm/filename):
-                print("Installing: '%s'" % filename)
-                copyfile(target_file,target_fm / filename)
-            elif os.path.getmtime(target_file) > os.path.getmtime(target_fm/filename):
-                print("Updating: '%s'" % filename)
-                copyfile(target_file,target_fm / filename)
-            else:
-                print("Is up to date: '%s'" % filename)
+            source_dir = Path.cwd() / Path(dirname)
+            source_file = source_dir / filename
+            updateOrInstallComponent(source_file, target_fm, filename,0)
+
+            # We'll now check, if there are additional installer-files
+            extra_f = source_dir/".install-extras"
+            if os.path.isfile(extra_f):
+                print("  * Package has extras!")
+                with open(extra_f) as read_extras:
+                    for f in read_extras.readlines():
+                        f = f.replace("\n","")
+                        updateOrInstallComponent(source_dir/f,target_fm,f,4)
+                    
