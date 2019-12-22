@@ -4474,7 +4474,7 @@
     \draw (\tikzumlFragment@name-Part-tmp.north east |- \tikzumlCallBottomSrc)+(0,-0.4*\tikzumlFragment@paddingy ex) node[name=\tikzumlFragment@name-PartEast-\thetikzumlFragmentPartNum] {};%
     \draw[dashed] (\tikzumlFragment@name-PartWest-\thetikzumlFragmentPartNum) -- (\tikzumlFragment@name-PartEast-\thetikzumlFragmentPartNum);
     \draw (\tikzumlFragment@name-PartType-\thetikzumlFragmentPartNum)+(0,-0.4*\tikzumlFragment@paddingy ex) node[name=tikzumlTmpNode] {\phantom{\tikzumlFragmentType}};%
-    \node[anchor=north west] at (tikzumlTmpNode.south west) {[##1]};%
+    \ifx\\##1\\\else \node[anchor=north west] at (tikzumlTmpNode.south west) {[##1]}; \fi %
   }%
   %
   \stepcounter{tikzumlFragmentNum}%
