@@ -55,9 +55,15 @@ besitzen und weitestgehend unabhängig voneinander verwendet werden können:
     - [sopra-attachments.doc.tex](sopra-attachments/sopra-attachments.doc.tex): Für sie wird das `sopra-listings`-Paket - sofern es installiert ist, reicht: `pdflatex sopra-attachments.doc.tex`.
         Eine kompilierte Variante sollte allerdings auch jeweils den Veröffentlichungen (Releases) beiliegen.
 - [Listings mit: sopra-listings](sopra-listings):
-    Dieses Paket erlaubt es, Dokumente in eine PDF einzubetten:
+    Dieses Paket erlaubt es, Quellcode in PDF mit Syntaxhighlighting zu setzen:
     - [sopra-listings.sty](sopra-listings/sopra-listings.sty): Dies ist das versprochene Paket.
     - [sopra-listings.doc.tex](sopra-listings/sopra-listings.doc.tex): Für sie wird das Paket selbst benötigt, dann reicht: `pdflatex sopra-attachments.doc.tex`.
+        Eine kompilierte Variante sollte allerdings auch jeweils den Veröffentlichungen (Releases) beiliegen.
+
+- [Changelogs mit: sopra-changelog](sopra-changelog):
+    Dieses Paket erlaubt es, Änderungen in Dokumenten festzuhalten:
+    - [sopra-changelog.sty](sopra-changelog/sopra-changelog.sty): Dies ist das versprochene Paket.
+    - [sopra-changelog.doc.tex](sopra-changelog/sopra-changelog.doc.tex): Für sie wird das `sopra-listings`-Paket - sofern es installiert ist, reicht: `pdflatex sopra-changelog.doc.tex`.
         Eine kompilierte Variante sollte allerdings auch jeweils den Veröffentlichungen (Releases) beiliegen.
 
 ## Aktuelle ToDo's
