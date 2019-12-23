@@ -707,10 +707,14 @@
 
 \def\sol@LoadLanguage@searchPath@iter#1,#2\@nil{%
     % \typeout{#1:#2}
-    \ifx\\#1\\\else\InputIfFileExists{#1language_\sol@curlanginputfile.cfg}{%
+    \ifx\\#1\\\else%
+    \InputIfFileExists{#1language_\sol@curlanginputfile.cfg}{%
         \typeout{Loaded '\sol@curlanginputfile' from '#1language_\sol@curlanginputfile.cfg'}
     }{%
-        \ifx\\#2\\\else\sol@LoadLanguage@iter#2,\@nil}\fi%
+        \ifx\\#2\\\else%
+        \sol@LoadLanguage@iter#2,\@nil%
+        \fi%
+    }%
     \fi%
 }
 \def\sol@LoadLanguage@searchPath@resolve%
@@ -724,7 +728,7 @@
 \def\sol@LoadLanguage@iter#1,#2\@nil{%
     \ifx\\#1\\\else\sol@LoadLanguage@single#1\@nil%
         \ifx\\#2\\\else\sol@LoadLanguage@iter#2,\@nil%
-    \fi%
+    \fi\fi%
 }
 \def\sol@LoadLanguage#1{\sol@LoadLanguage@iter#1,\@nil}
 \let\solLoadLanguage\sol@LoadLanguage
