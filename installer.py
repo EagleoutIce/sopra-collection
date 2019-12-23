@@ -9,7 +9,7 @@ from shutil import copyfile
 
 print("Please enter your texmf home path!")
 print("Note, if you don't know the path, there are defaults:")
-print("     - texlive on linux: '<upshome>/texmf/'")
+print("     - texlive on linux: '<home>/texmf/'")
 print("     - macTeX on Darwin: '/Users/<yourUsername>/Library/texmf/'")
 
 target_path = os.path.expanduser(input('TEXMF> '))
