@@ -1,0 +1,246 @@
+%% sopra-changelog.sty
+%%
+%% -----------------------------------------------------------------------------
+%% Version: 1.0
+%% Author:  Florian Sihler, 23.12.2019
+%% 
+%% Will contain all the definitions to easily typeset and reference
+%% Changelogs in a document. Please note that using this package
+%% will introduce the version environment and a Version-Flag
+%% to automatically register any changes
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{sopra-changelog}[2019/12/23 EagleoutIce - changelogs for the sopra-team-020]
+
+%% -----------------------------------------------------------------------------
+%% Lengths and Registers
+%% -----------------------------------------------------------------------------
+
+\newcounter{socversion} \setcounter{socversion}{1000}
+\newcounter{soc@compile@target@version}%
+\newcounter{soc@counter@tmp@a}%
+
+\def\soc@compile@target@version@date{}
+
+%% -----------------------------------------------------------------------------
+%% Package-Args
+%% -----------------------------------------------------------------------------
+
+%% -----------------------------------------------------------------------------
+%% Basic Packages
+%% -----------------------------------------------------------------------------
+
+\RequirePackage{environ,fontawesome,marginfix,hyperref}
+
+%% -----------------------------------------------------------------------------
+%% Versioning
+%% -----------------------------------------------------------------------------
+
+\def\@soc@@parse@versionenvs@all{}
+
+% ensure empty if not overwritten
+\providecommand\@soc@register@versionenvs{}
+
+\def\@soc@register@new@versionenv#1{
+    \expandafter\ifx\expandafter\\\@soc@@parse@versionenvs@all\\% was empty:
+        \gdef\@soc@@parse@versionenvs@all{#1}%
+    \else% append:
+        \let\tmp@cur@a\@soc@@parse@versionenvs@all
+        \xdef\@soc@@parse@versionenvs@all{\@soc@@parse@versionenvs@all,#1}%
+    \fi
+}
+
+% Register in the end:
+\AtEndDocument{%
+\protected@write\@auxout{\let\defcommand\relax}{\protect\soc@defcommand{@soc@register@versionenvs}{\@soc@@parse@versionenvs@all}}
+}
+
+\def\@soc@@parse@change@pattern{changed in}
+\def\@soc@@parse@remove@pattern{removed in}
+\def\@soc@@parse@current@envtag{}
+
+\def\soc@defcommand#1#2{%
+    \expandafter\gdef\csname#1\endcsname{#2}%
+}
+
+% #1 envtag
+% #2 version
+% #3 removed/changed
+% #4 brief
+\def\soc@write@@changeloc#1#2#3#4{%
+    \protected@write\@auxout{\let\defcommand\relax}{\protect\soc@defcommand{@sop@registers@#1@#3@#2}{#4}}%
+}
+
+% note: #4 will be dropped and is there for space consume
+\def\soc@@parse@@version@optargs#1: #2 (#3)#4\@nil{%
+    \def\tmp@a{#1}% store key
+    \ifx\tmp@a\@soc@@parse@change@pattern% is change:
+        % we will create a changes-register:
+        \soc@write@@changeloc{\@soc@@parse@current@envtag}{#2}{changes}{#3}%
+        % \expandafter\gdef\csname @sop@registers@\@soc@@parse@current@envtag @changes@#2{#3}%
+    \else\ifx\tmp@a\@soc@@parse@remove@pattern% set removed!
+        \soc@write@@changeloc{\@soc@@parse@current@envtag}{#2}{removed}{#3}%
+        % \expandafter\gdef\csname @sop@registers@@soc@@parse@current@envtag @removed@#2\endcsname{#3}%
+        \expandafter\gdef\csname @sop@registers@\@soc@@parse@current@envtag @removed\endcsname{#2}%
+    \else% unknown
+        \PackageError{sopra-changelog}{The Key '#2' is unkown. Use either: '\@soc@@parse@change@pattern' or '\@soc@@parse@remove@pattern' as key for '\@soc@@parse@current@envtag' please.}%
+    \fi\fi
+}
+
+\def\soc@@parse@version@optargs#1,#2\@nil{\ignorespaces%
+    % \typeout{got: '#1,#2'}
+    \ifx\\#1\\\else%
+        % now do single parse
+        \expandafter\soc@@parse@@version@optargs#1 \@nil%
+        \ifx\\#2\\\else% recursive call
+            \expandafter\soc@@parse@version@optargs#2,\@nil%
+        \fi%
+    \fi%
+}
+
+% #1 opt args
+% #2 name for registers
+\def\soc@parse@version@optargs#1#2{%
+    \ifx\\#1\\\else%
+        \protected@edef\@soc@@parse@current@envtag{#2}%
+        % setup registers:
+        \expandafter\gdef\csname @sop@registers@#2@introduced\endcsname{}% TODO: set
+        % \expandafter\gdef\csname @sop@registers@#2@changes\endcsname{}%
+        % \expandafter\gdef\csname @sop@registers@#2@removed\endcsname{}% used to check for typeset
+        \expandafter\soc@@parse@version@optargs#1,\@nil%
+    \fi
+}
+
+% #1: determines further version information
+%     can be: 'changed in: XXXXX (description)' or 'removed in: XXXXX (description)'
+% #2: Introduced in Version-Number
+% #3: Title
+\NewEnviron{version}[3][]{\ignorespaces%
+    \soc@parse@version@optargs{#1}{#3}%
+    \@soc@register@new@versionenv{#3}%
+    \expandafter\gdef\csname @sop@registers@#3@introduced\endcsname{#2}%
+    \label{soc@version:#3}%
+    % check: should it be typeset?
+    \@ifundefined{@sop@registers@#3@removed}{% not removed!
+        % check if already created :D
+        % \typeout{Not removed: #3}
+        \ifnum\value{soc@compile@target@version}<#2% nope
+        \else%
+        \marginpar{\tiny\faPlusCircle{} V. \@nameuse{@sop@registers@#3@introduced}}%
+        \unskip\BODY\fi% jepp
+    }{% Got removed, are we pre-removed?
+        \ifnum\value{soc@compile@target@version}<\@nameuse{@sop@registers@#3@removed}% nope
+        \marginpar{\tiny\faPlusCircle{} V. \@nameuse{@sop@registers@#3@introduced}}%
+        \else
+        \marginpar{\tiny\faTimesCircle{} V. \@nameuse{@sop@registers@#3@introduced}\(\,\)-\(\,\)\@nameuse{@sop@registers@#3@removed}}%\fi% jepp
+        \fi
+        \unskip\BODY%
+    }%
+}
+
+\newcommand\simpleversion[4][]{%
+    \begin{version}[#1]{#2}{#3}%
+        #4%
+    \end{version}%
+}
+
+
+\def\soc@@changelog@envs@iter#1,#2\@nil{%
+    % \typeout{got: '#1','#2'}%
+    \ifx\\#1\\\else%
+        % now do single parse
+        % Check for Changes
+        %\typeout{AT: \tmp@counterval{} in '#1' is: '\@nameuse{@sop@registers@#1@introduced}'}%
+        \def\soc@curtag{\hyperref[soc@version:#1]{\emph{#1}}: }
+        \ifnum\@nameuse{@sop@registers@#1@introduced}>\tmp@counterval\relax%
+        \else% only set if in range:
+            \ifnum\@nameuse{@sop@registers@#1@introduced}=\tmp@counterval\relax%
+                \item[\faPlusCircle] \soc@curtag Neues Element! 
+            \else%check if there is a edit in this version:
+                \@ifundefined{@sop@registers@#1@changes@\tmp@counterval}{
+                    \@ifundefined{@sop@registers@#1@removed@\tmp@counterval}{}%nosching
+                {\item[\faTimesCircle] \soc@curtag\@nameuse{@sop@registers@#1@removed@\tmp@counterval} }%
+                }%nosching
+                {\item \soc@curtag\@nameuse{@sop@registers@#1@changes@\tmp@counterval} }%
+        \fi\fi
+        % Delte: Fatimescircle
+        \ifx\\#2\\\else% recursive call
+            \expandafter\soc@@changelog@envs@iter#2,\@nil
+        \fi%
+    \fi%
+}
+
+\def\soc@month@to@name#1{%
+    \ifcase#1\or{Januar}\or{Februar}\or{M\"{a}rz}\or{April}\or{Mai}\or{Juni}%
+    \or{Juli}\or{August}\or{September}\or{Oktober}\or{November}\or{Dezember}%
+    \else\@ctrerr\fi%
+}
+
+\def\soc@date@convert#1-#2-#3\@nil{%
+    \bgroup#3.\space{\soc@month@to@name{#2}}\space{} #1\egroup%
+}
+\def\soc@DateConvert#1%
+{\expandafter\ifx\expandafter\\#1\\\else\expandafter\soc@date@convert#1\@nil\fi}
+
+
+\def\soc@changelog@version@format#1:#2\@nil{%
+    #2% \textbf{\soc@DateConvert{#1}}: 
+}
+
+\def\soc@@changelog@getDate#1:#2\@nil{\soc@DateConvert{#1}}
+\def\soc@changelog@getDate#1{\expandafter\soc@@changelog@getDate#1\@nil}
+\def\soc@changelog@typeset@iter{%
+    \ifnum\value{soc@counter@tmp@a}>\value{soc@compile@target@version}% we've finished
+    \else% typeset this version:
+        % do we have date for this version?
+        \edef\tmp@counterval{\arabic{soc@counter@tmp@a}}
+        \@ifundefined{soc@versions@data@\tmp@counterval}{% Dummy Tag:
+            \subsection{Changelog für Version \tmp@counterval}
+        }{%
+            \edef\soc@tmpdate{\@nameuse{soc@versions@data@\tmp@counterval}}
+            \subsection{Changelog für Version \tmp@counterval{} (\soc@changelog@getDate{\soc@tmpdate})}
+        }%
+        % now we have to iter through all registered environments and 
+        % check if there is a tag for this version :D
+        % recursive call:
+        % \edef\@tmp@soc@chlg@{}
+        % \typeout{Expand revealed: '\@tmp@soc@chlg@'}
+        % \expandafter\ifx\expandafter\\\@tmp@soc@chlg@\\\else
+        \begin{itemize}
+            \@ifundefined{soc@versions@data@\tmp@counterval}{% Dummy Tag:
+                \item[\faInfoCircle] Für diese Version liegen keine Informationen vor.
+            }{%
+                \item[\faInfoCircle] \edef\soc@tmp{\noexpand\soc@changelog@version@format\@nameuse{soc@versions@data@\tmp@counterval}\noexpand\@nil}\soc@tmp%
+            }%
+            \expandafter\soc@@changelog@envs@iter\@soc@register@versionenvs,\@nil%\@tmp@soc@chlg@%  
+        \end{itemize}
+        % \fi
+        \stepcounter{soc@counter@tmp@a}%
+        \soc@changelog@typeset@iter\relax
+    \fi
+}
+
+\def\soc@changelog@typeset{%
+    % iterate over all registered envs in \@soc@register@versionenvs
+    \setcounter{soc@counter@tmp@a}{0}%
+    \section{Changelog}
+    {\soc@changelog@typeset@iter}
+}
+
+%% -----------------------------------------------------------------------------
+%% User Commands
+%% -----------------------------------------------------------------------------
+
+% sets the to-compile target versionnumber
+\def\setTargetVersion#1{ \setcounter{soc@compile@target@version}{#1} }
+\def\setTargetVersionDate#1{ \gdef{\soc@compile@target@version@date}{#1} }
+
+% #1: Version Number, #2: Version Date, #3: Version description
+\def\setVersionData#1#2#3{%
+\expandafter\gdef\csname soc@versions@data@#1\endcsname{#2:#3}%
+}
+
+\let\thechangelog\soc@changelog@typeset%
+
+
+\endinput

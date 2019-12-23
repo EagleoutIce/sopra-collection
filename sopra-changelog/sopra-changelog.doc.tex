@@ -1,0 +1,178 @@
+\documentclass{sopra-base} 
+
+\usepackage{sopra-documentation}
+\usepackage{sopra-changelog}
+
+\title{Das 'sopra-changelog'-Paket}
+\subtitle[Dokumentation für das 'sopra-changelog'-Paket]{Dokumentation für das 'sopra-changelog'-Paket~$\mid$~Version \thesocversion}
+
+\duedate{2019-12-2}
+
+\keywords{Dokumentation,sopra-changelog,sopra,uni ulm,uulm,Paket}
+\authors{Florian Sihler (florian.sihler@uni-ulm.de)}
+
+\group{Die Affenbande}
+
+\setTargetVersion{5}
+
+\begin{document}
+
+    \maketitle%
+%
+    %\tableofcontents
+%
+
+%
+%
+% ....###....##.......##........######...########.##.....##.########.####.##....##.########..######.
+% ...##.##...##.......##.......##....##..##.......###...###.##........##..###...##.##.......##....##
+% ..##...##..##.......##.......##........##.......####.####.##........##..####..##.##.......##......
+% .##.....##.##.......##.......##...####.######...##.###.##.######....##..##.##.##.######....######.
+% .#########.##.......##.......##....##..##.......##.....##.##........##..##..####.##.............##
+% .##.....##.##.......##.......##....##..##.......##.....##.##........##..##...###.##.......##....##
+% .##.....##.########.########..######...########.##.....##.########.####.##....##.########..######.
+%
+%
+
+\section{Allgemeines}
+\subsection{Warum, wieso, weshalb?}
+    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im 
+    Wintersemester 2019 und Sommersemester 2020 verfasst und dient zur automatischen generierung von Changelogs für das \imptext{Teams 20}. Diese Dokumentation wurde zusammen mit der 
+    \T{sopra-base.cls} sowie dem Paket \T{sopra-documentation.sty} kreiert.\par
+    Zum Visualisieren der einzelnen Code-Ausschnitte wird das
+    \T{sopra-listings}-Paket verwendet.
+    Das zugehörige Paket sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile[subject={sopra-changelog.sty}]{sopra-changelog.sty}}. \notetext{Date Paket wurde binnen drei Stunden entwickelt und programmiert, es befindet sich aktuell in der Entwicklung.}
+\subsection{Abhängigkeiten}
+    Dieses Paket bindet die folgenden Paketen mit ein:
+    \begin{multicols}{4}
+        \begin{itemize}
+            \def\pkgparse#1:#2\@nil{%
+                \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
+            }
+            \foreach \pkg in {environ:,fontawesome:,marginfix:,hyperref:} {
+                \item \expandafter\pkgparse\pkg\@nil
+            }
+        \end{itemize}
+    \end{multicols}
+    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein.
+
+\subsection{Die Installation}
+    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die 
+    folgenden Möglichkeiten ergeben:
+    \begin{itemize}
+        \item Das Paket kann in dasselbe Verzeichnis wie das Dokument
+                gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+\begin{plainlatex}
+\usepackage{sopra-changelog}
+\end{plainlatex}
+        \item Das Paket kann in ein Unterverzeichnis/in ein mit
+                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
+                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+\begin{plainlatex}
+\usepackage{./Mein/Pfad/zu/sopra-changelog}
+\end{plainlatex}
+        \item Man kann das Paket (mittels eines Symlinks oder ähnlichem)
+              in einen eigenen \emph{texmf}-Baum ablegen.
+              So kann zum Beispiel auf Linux unter der Verwendung von texlive
+              das Paket hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
+              Das Verzeichnis kann erstellt und anschließend mittels
+              \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
+              das Paket wie jede andere installierte Paket verwendet werden:
+\begin{plainlatex}
+\usepackage{sopra-changelog}
+\end{plainlatex}
+    \end{itemize}
+
+\subsection{Weitere Besonderheiten}
+In Version \thesocversion{} (\cmdref{thesocversion}) gibt es keine weiteren
+Besonderheiten.
+
+%
+%
+% .##....##..#######..##....##.########.####..######...##.....##.########.....###....########.####..#######..##....##
+% .##...##..##.....##.###...##.##........##..##....##..##.....##.##.....##...##.##......##.....##..##.....##.###...##
+% .##..##...##.....##.####..##.##........##..##........##.....##.##.....##..##...##.....##.....##..##.....##.####..##
+% .#####....##.....##.##.##.##.######....##..##...####.##.....##.########..##.....##....##.....##..##.....##.##.##.##
+% .##..##...##.....##.##..####.##........##..##....##..##.....##.##...##...#########....##.....##..##.....##.##..####
+% .##...##..##.....##.##...###.##........##..##....##..##.....##.##....##..##.....##....##.....##..##.....##.##...###
+% .##....##..#######..##....##.##.......####..######....#######..##.....##.##.....##....##....####..#######..##....##
+%
+%
+
+
+\section{Paket-Konfiguration}    
+    \subsection{Akzeptierte Parameter}
+    In Version \thesocversion{} werden keine Parameter akzeptiert.
+
+%
+%
+% .########..########.########.########.##.....##.##.......########
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..######...######...######...#########.##.......######..
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..########.##.......########.##.....##.########.########
+%
+%
+
+\section{Befehle- und Umgebungen}
+
+Es gilt zu beachten, dass das Präfix \T{env@} nur auf die Natur einer Umgebung hinweist und nicht zum eigentlichen Bezeichner zuzuordnen ist!\par{}
+Weiter gilt: Damit die Änderungen richtig aufgelöst werden können, muss das Dokument
+in der Regel zwei mal kompiliert werden um eine korrekte Anzeige zu erzeugen.
+
+\subsection{Versionsänderungen angeben}
+
+\begin{environment}{version}{\optArg{changes}\manArg{Introduced Version}\manArg{Title}}
+    Die Hauptumgebung des Paketes und wird für die Versionierung verwendet. Ein wichtiger Hinweis vorne weg: \imptext{Der Inhalt der Umgebung wird nur dann gesetzt, wenn \cmdref{setTargetVersion} mindestens auf \T{Introduced Version} gesetzt ist! Sonst gibt es die Änderung ja noch nicht.}\par{}
+    Das Feld \T{Introduced Version} gibt an mit welcher Versionsnummer (von \(0\) an gezählt) die in der Umgebung eingeschlossenen Komponenten zur Verfügung stehen. Identifiziert werden diese durch den \emph{eindeutigen} Titel in \T{Title}.\par{}
+    Das wichtigste Feld ist allerdings \T{changes}. Hierbei kann eine kommaseparierte Liste an Feldern übergeben die entweder der Syntax \say{\bvoid{changed in: :lan:VerID:ran: (:lan:Description:ran:)}} oder der Syntax \say{\bvoid{removed in: :lan:VerID:ran: (:lan:Description:ran:)}} gehorchen müssen. Ein Beispiel:
+\begin{latex}
+\begin{version}[%
+    changed in: 2 (Added Some funny stuff),%
+    changed in: 3 (Removed stupid sentences),%
+    removed in: 4 (Rendered to be stupid!)
+]{1}{Koordinaten des Spielfeldes}
+    Hier kann nun alles stehen was man sich so vorstellen kann. Auch normaler \LaTeX-Code!
+\end{version}
+\end{latex}
+    Dies erzeugt (Hinweis: Dieses Dokuent wurde mit \blatex{\\setTargetVersion\{5\}} kompiliert):\\
+\begin{version}[%
+    changed in: 2 (Added Some funny stuff),%
+    changed in: 3 (Removed stupid sentences),%
+    removed in: 4 (Rendered to be stupid!)
+]{1}{Koordinaten des Spielfeldes}
+Hier kann nun alles stehen was man sich so vorstellen kann. Auch normaler \LaTeX-Code!
+\end{version}
+\end{environment}
+
+\begin{command}{simpleversion}{\optArg{changes}\manArg{Introduced Version}\manArg{Title}\manArg{Content}}
+    Einfach nur ein kleiner Wrapper, der \envref{version} mit \T{Content} aufruft.
+\end{command}
+
+\begin{command}{setVersionData}{\manArg{Version ID}\manArg{Version Date}\manArg{Version Description}}
+    Speichert für \cmdref{thechangelog} Metadaten zur Version mit Versionsnummer \T{Version ID}. Das \T{Version-Date} ist in \T{YYYY-MM-DD} anzugeben!
+\end{command}
+
+\subsection{Versionänderungen setzen}
+
+\begin{command}{thechangelog}{}
+    Setzt den Verlauf über alle Änderungen. Für die Gliederung wird \cmd{section} und \cmd{subsection} verwendet.
+\end{command}
+
+\subsection{Weitere Daten zuweisen}
+
+\begin{command}{setTargetVersionDate}{\manArg{Date}}
+    Bisher ohne Bedeutung!
+\end{command}
+
+
+\subsection{Hilfreiche Befehle}
+
+\begin{command}{thesocversion}{}
+    Gibt die aktuelle Version der \T{sopra-paper}-Dokumentklasse aus. \notetext{Hinweis: über \blatex{\\value\{socversion\}} lässt sich
+    die Version als $4$-stellige Nummer erhalten: \arabic{socversion}.}
+\end{command}
+
+\end{document}
