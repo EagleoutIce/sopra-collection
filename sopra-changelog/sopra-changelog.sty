@@ -20,6 +20,8 @@
 \newcounter{soc@compile@target@version}%
 \newcounter{soc@counter@tmp@a}%
 
+\newif\ifsoc@printthis@version@
+
 \def\soc@compile@target@version@date{}
 
 %% -----------------------------------------------------------------------------
@@ -111,32 +113,42 @@
     \fi
 }
 
+
+% \long\def\soc@version@skimmer#1{%\end
+%     \ifsoc@printthis@version@\unskip#1\fi%
+%     %\end%keep end-consumer alive to end environment
+% }
 % #1: determines further version information
 %     can be: 'changed in: XXXXX (description)' or 'removed in: XXXXX (description)'
 % #2: Introduced in Version-Number
 % #3: Title
-\NewEnviron{version}[3][]{\ignorespaces%
+\newenvironment{version}[3][]{\ignorespaces%
     \soc@parse@version@optargs{#1}{#3}%
     \@soc@register@new@versionenv{#3}%
     \expandafter\gdef\csname @sop@registers@#3@introduced\endcsname{#2}%
     \label{soc@version:#3}%
+    \soc@printthis@version@true% should be printed by default
     % check: should it be typeset?
     \@ifundefined{@sop@registers@#3@removed}{% not removed!
         % check if already created :D
         % \typeout{Not removed: #3}
-        \ifnum\value{soc@compile@target@version}<#2% nope
-        \else%
+        \ifnum\value{soc@compile@target@version}<#2\relax% nope
+        \soc@printthis@version@false\else%
         \marginpar{\tiny\faPlusCircle{} V. \@nameuse{@sop@registers@#3@introduced}}%
-        \unskip\BODY\fi% jepp
+        \fi% jepp
     }{% Got removed, are we pre-removed?
         \ifnum\value{soc@compile@target@version}<\@nameuse{@sop@registers@#3@removed}% nope
         \marginpar{\tiny\faPlusCircle{} V. \@nameuse{@sop@registers@#3@introduced}}%
         \else
         \marginpar{\tiny\faTimesCircle{} V. \@nameuse{@sop@registers@#3@introduced}\(\,\)-\(\,\)\@nameuse{@sop@registers@#3@removed}}%\fi% jepp
-        \fi
-        \unskip\BODY%
+        \fi%
     }%
-}
+    %Defining skimmer:
+    \ifsoc@printthis@version@%
+        \newenvironment{version@read}{\bgroup}{\egroup}% no consumption!
+        \else\NewEnviron{version@read}{}\fi%
+    \version@read%
+    }{\endversion@read}
 
 \newcommand\simpleversion[4][]{%
     \begin{version}[#1]{#2}{#3}%
