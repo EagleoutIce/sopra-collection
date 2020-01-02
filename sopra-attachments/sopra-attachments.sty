@@ -14,7 +14,7 @@
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
 
-\newcounter{soaversion} \setcounter{soaversion}{1000}
+\newcounter{soaversion} \setcounter{soaversion}{1001}
 
 % make switches for use of tcolorbox..
 \newif\ifsol@symbols@ %  Allow symbols like bookmark
@@ -47,6 +47,7 @@
 
 \def\soa@setAuthor#1{\gdef\@author{#1}} % not used currently
 
+\AtBeginDocument{
 \@ifundefined{thesobversion}{
     \attachfilesetup{%
         author={\@author},
@@ -62,7 +63,7 @@
         mimetype=text/plain % we assume
     }
 }
-
+}
 % it should be noted in docs on how to change
 
 %% -----------------------------------------------------------------------------
