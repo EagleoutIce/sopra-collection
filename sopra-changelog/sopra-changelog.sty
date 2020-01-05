@@ -2,7 +2,7 @@
 %%
 %% -----------------------------------------------------------------------------
 %% Version: 1.0
-%% Author:  Florian Sihler, 23.12.2019
+%% Author:  Florian Sihler, 05.01.2020
 %% 
 %% Will contain all the definitions to easily typeset and reference
 %% Changelogs in a document. Please note that using this package
@@ -16,7 +16,7 @@
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
 
-\newcounter{socversion} \setcounter{socversion}{1000}
+\newcounter{socversion} \setcounter{socversion}{1001}
 \newcounter{soc@compile@target@version}%
 \newcounter{soc@counter@tmp@a}%
 
@@ -113,7 +113,9 @@
     \fi
 }
 
-
+\def\soc@format@versionnumber@marginpar#1{\hyperref[soc@changelog@version:#1]{#1}}
+% so much shorter
+\let\@socmp\soc@format@versionnumber@marginpar
 % \long\def\soc@version@skimmer#1{%\end
 %     \ifsoc@printthis@version@\unskip#1\fi%
 %     %\end%keep end-consumer alive to end environment
@@ -134,13 +136,13 @@
         % \typeout{Not removed: #3}
         \ifnum\value{soc@compile@target@version}<#2\relax% nope
         \soc@printthis@version@false\else%
-        \marginpar{\tiny\faPlusCircle{} V. \@nameuse{@sop@registers@#3@introduced}}%
+        \marginpar{\tiny\faPlusCircle{} V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}}%
         \fi% jepp
     }{% Got removed, are we pre-removed?
         \ifnum\value{soc@compile@target@version}<\@nameuse{@sop@registers@#3@removed}% nope
-        \marginpar{\tiny\faPlusCircle{} V. \@nameuse{@sop@registers@#3@introduced}}%
+        \marginpar{\tiny\faPlusCircle{} V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}}%
         \else
-        \marginpar{\tiny\faTimesCircle{} V. \@nameuse{@sop@registers@#3@introduced}\(\,\)-\(\,\)\@nameuse{@sop@registers@#3@removed}}%\fi% jepp
+        \marginpar{\tiny\faTimesCircle{} V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}\(\,\)-\(\,\)\@socmp{\@nameuse{@sop@registers@#3@removed}}}%\fi% jepp
         \fi%
     }%
     %Defining skimmer:
@@ -198,6 +200,7 @@
 \def\soc@changelog@version@format#1:#2\@nil{%
     #2% \textbf{\soc@DateConvert{#1}}: 
 }
+\let\soc@changelog@upper@subsection\subsection
 
 \def\soc@@changelog@getDate#1:#2\@nil{\soc@DateConvert{#1}}
 \def\soc@changelog@getDate#1{\expandafter\soc@@changelog@getDate#1\@nil}
@@ -207,11 +210,11 @@
         % do we have date for this version?
         \edef\tmp@counterval{\arabic{soc@counter@tmp@a}}
         \@ifundefined{soc@versions@data@\tmp@counterval}{% Dummy Tag:
-            \subsection{Changelog für Version \tmp@counterval}
+            \soc@changelog@upper@subsection{Changelog für Version \tmp@counterval}
         }{%
             \edef\soc@tmpdate{\@nameuse{soc@versions@data@\tmp@counterval}}
-            \subsection{Changelog für Version \tmp@counterval{} (\soc@changelog@getDate{\soc@tmpdate})}
-        }%
+            \soc@changelog@upper@subsection{Changelog für Version \tmp@counterval{} (\soc@changelog@getDate{\soc@tmpdate})}
+        }\label{soc@changelog@version:\tmp@counterval}%
         % now we have to iter through all registered environments and 
         % check if there is a tag for this version :D
         % recursive call:
@@ -231,11 +234,11 @@
         \soc@changelog@typeset@iter\relax
     \fi
 }
-
+\let\soc@changelog@upper@section\section
 \def\soc@changelog@typeset{%
     % iterate over all registered envs in \@soc@register@versionenvs
-    \setcounter{soc@counter@tmp@a}{0}%
-    \section{Changelog}
+    \setcounter{soc@counter@tmp@a}{1}%
+    \soc@changelog@upper@section{Changelog}
     {\soc@changelog@typeset@iter}
 }
 

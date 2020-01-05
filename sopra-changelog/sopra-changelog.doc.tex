@@ -13,8 +13,8 @@
 
 \group{Die Affenbande}
 
-\setTargetVersion{5}
-
+\setTargetVersion{4}
+\setVersionData{4}{2019-12-2}{Hier war alles voll supi und so. Diese Version fügt Affen hinzu!}
 \begin{document}
 
     \maketitle%
@@ -158,7 +158,7 @@ Hier kann nun alles stehen was man sich so vorstellen kann. Auch normaler \LaTeX
 \subsection{Versionänderungen setzen}
 
 \begin{command}{thechangelog}{}
-    Setzt den Verlauf über alle Änderungen. Für die Gliederung wird \cmd{section} und \cmd{subsection} verwendet.
+    Setzt den Verlauf über alle Änderungen. Für die Gliederung wird \cmd{section} und \cmd{subsection} verwendet. Ein Beispiel findet sich am \jmark[Ende des Dokuments]{mrk:docend}.
 \end{command}
 
 \subsection{Weitere Daten zuweisen}
@@ -174,5 +174,8 @@ Hier kann nun alles stehen was man sich so vorstellen kann. Auch normaler \LaTeX
     Gibt die aktuelle Version der \T{sopra-paper}-Dokumentklasse aus. \notetext{Hinweis: über \blatex{\\value\{socversion\}} lässt sich
     die Version als $4$-stellige Nummer erhalten: \arabic{socversion}.}
 \end{command}
+
+\phantomsection\label{mrk:docend}
+\thechangelog
 
 \end{document}
