@@ -126,7 +126,7 @@ in der Regel zwei mal kompiliert werden um eine korrekte Anzeige zu erzeugen.
 
 \begin{environment}{version}{\optArg{changes}\manArg{Introduced Version}\manArg{Title}}
     Die Hauptumgebung des Paketes und wird für die Versionierung verwendet. Ein wichtiger Hinweis vorne weg: \imptext{Der Inhalt der Umgebung wird nur dann gesetzt, wenn \cmdref{setTargetVersion} mindestens auf \T{Introduced Version} gesetzt ist! Sonst gibt es die Änderung ja noch nicht.}\par{}
-    Das Feld \T{Introduced Version} gibt an mit welcher Versionsnummer (von \(0\) an gezählt) die in der Umgebung eingeschlossenen Komponenten zur Verfügung stehen. Identifiziert werden diese durch den \emph{eindeutigen} Titel in \T{Title}.\par{}
+    Das Feld \T{Introduced Version} gibt an mit welcher Versionsnummer (von \(1\) an gezählt) die in der Umgebung eingeschlossenen Komponenten zur Verfügung stehen. Identifiziert werden diese durch den \emph{eindeutigen} Titel in \T{Title}.\par{}
     Das wichtigste Feld ist allerdings \T{changes}. Hierbei kann eine kommaseparierte Liste an Feldern übergeben die entweder der Syntax \say{\bvoid{changed in: :lan:VerID:ran: (:lan:Description:ran:)}} oder der Syntax \say{\bvoid{removed in: :lan:VerID:ran: (:lan:Description:ran:)}} gehorchen müssen. Ein Beispiel:
 \begin{latex}
 \begin{version}[%
@@ -162,6 +162,10 @@ Hier kann nun alles stehen was man sich so vorstellen kann. Auch normaler \LaTeX
 \end{command}
 
 \subsection{Weitere Daten zuweisen}
+
+\begin{command}{setTargetVersion}{\manArg{VersionID}}
+    Sorgt dafür, dass alle Änderungen bis zur Version \T{VersionID} ausgegeben werden (bezüglich des Changelogs). Dieser Wert sollte mit jedem Änderungsdurchlauf inkrementiert werden. \imptext{Bisher ist keine automatisierte Lösung vorgehesehen!}
+\end{command}
 
 \begin{command}{setTargetVersionDate}{\manArg{Date}}
     Bisher ohne Bedeutung!
