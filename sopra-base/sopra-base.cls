@@ -157,7 +157,7 @@
 
 
 \def\sob@date@convert#1-#2-#3\@nil{%
-    \bgroup#3.\space{\sob@month@to@name{#2}}\space{} #1\egroup%
+    \bgroup#3.\space{\sob@month@to@name{#2}}\space{}#1\egroup%
 }
 \def\DateConvert#1%
 {\expandafter\ifx\expandafter\\#1\\\else\expandafter\sob@date@convert#1\@nil\fi}
