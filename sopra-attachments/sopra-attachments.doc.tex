@@ -5,7 +5,7 @@
 
 \title{Das 'sopra-attachments'-Paket}
 \subtitle[Dokumentation für das 'sopra-attachments'-Paket]{Dokumentation für das 'sopra-attachments'-Paket~$\mid$~Version \thesoaversion}
-\duedate{2019-12-8}
+\duedate{2020-01-5}
 
 \keywords{Dokumentation,sopra-attachments,sopra,uni ulm,uulm,Paket}
 \authors{Florian Sihler (florian.sihler@uni-ulm.de)}
@@ -39,7 +39,7 @@
     \T{sopra-base.cls} sowie dem Paket \T{sopra-documentation.sty} kreiert.\par
     Zum Visualisieren der einzelnen Code-Ausschnitte wird das
     \T{sopra-listings}-Paket verwendet.
-    Das zugehörige Paket sollte ebenfalls in dieses Dokument eingebettet sein: \attachTex{sopra-attachments.sty}.
+    Das zugehörige Paket sollte ebenfalls in dieses Dokument eingebettet sein: \attachTexText{sopra-attachments.sty}{sopra-attachments.sty}.
 \subsection{Abhängigkeiten}
     Dieses Paket bindet die folgenden Paketen mit ein:
     \begin{multicols}{3}
@@ -47,7 +47,7 @@
             \def\pkgparse#1:#2\@nil{%
                 \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
             }
-            \foreach \pkg in {xcolor:,attachfile2:,graphicx:{\jmark[\T{attsymbols}]{mrk:attsymbols}}} {
+            \foreach \pkg in {xcolor:,attachfile2:,graphicx:{\jmark[\T{attsymbols}]{mrk:attsymbols}, \jmark[\T{usefa}]{mrk:usefa}},fontawesome:{\jmark[\T{usefa}]{mrk:usefa}}} {
                 \item \expandafter\pkgparse\pkg\@nil
             }
         \end{itemize}
@@ -82,8 +82,7 @@
     \end{itemize}
 
 \subsection{Weitere Besonderheiten}
-In Version \thesoaversion{} (\cmdref{thesoaversion}) gibt es keine weiteren
-Besonderheiten.
+In Version \thesoaversion{} (\cmdref{thesoaversion}) gilt: es wird keine Standardfarbe mehr gesetzt um es einefacher zu machen diese selbst zu konfigurieren. Weiter wurde \argref{usefa}{nousefa} hinzugefügt.
 
 %
 %
@@ -102,7 +101,7 @@ Besonderheiten.
     Bei Argumenten mit einer \say{Counter}-Option wird das jeweils standardmäßig aktive zuerst und das andere in Klammern
     geschrieben. So wird implizit:
 \begin{plainlatex}
-    \usepackage[attsymbols,nodocheck]{sopra-attachments}
+    \usepackage[attsymbols,nodocheck,usefa]{sopra-attachments}
 \end{plainlatex}
     aufgerufen. Während wir mit:
 \begin{plainlatex}
@@ -120,6 +119,10 @@ Besonderheiten.
         angehängt, andernfalls wird \emph{kein} Fehler geworfen. Dies kann zum Beispiel dann
         nützlich sein, wenn man die einzubindende Grafik mit Ti\textit{k}Z-\T{external} erst
         später im Dokument generiert.
+    \end{argument}
+
+    \begin{argument}{usefa}{nousefa}
+        Mit \T{usefa} werden die Pakete \emph{fontawesome} sowie \emph{graphicx} geladen. Vor den angehängten Dateien wird bei den Text-Kommandos wie \cmdref{attachDocumentText} eine Papierklammer vorangestellt um das Anhängen deutlich zu machen. Mit \T{nousefa} erhält man das Verhalten vor Version \T{v1.1.00} zurück.
     \end{argument}
 
 \subsection{Weitere Hinweise}

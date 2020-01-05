@@ -1,7 +1,7 @@
 %% sopra-attachments.sty
 %%
 %% -----------------------------------------------------------------------------
-%% Version: 1.0
+%% Version: 1.1, added fontAwesome 
 %% Author:  Florian Sihler, 08.12.2019
 %% 
 %% Provides a useful wrapper to attach files to an PDF
@@ -14,12 +14,13 @@
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
 
-\newcounter{soaversion} \setcounter{soaversion}{1001}
+\newcounter{soaversion} \setcounter{soaversion}{1100}
 
 % make switches for use of tcolorbox..
 \newif\ifsol@symbols@ %  Allow symbols like bookmark
-\newif\ifsol@notfound@isfail@ %  Don't check if file exists
+\newif\ifsol@notfound@isfail@ % Don't check if file exists
 
+\newif\ifsol@fontawesome@use@ % Should fontawesome be used?
 
 %% -----------------------------------------------------------------------------
 %% Package-Args
@@ -31,7 +32,10 @@
 \DeclareOption{docheck}{ \sol@notfound@isfail@false }
 \DeclareOption{nodocheck}{ \sol@notfound@isfail@true }
 
-\ExecuteOptions{attsymbols,nodocheck}% set it explicitly
+\DeclareOption{usefa}{ \sol@fontawesome@use@true }
+\DeclareOption{nousefa}{ \sol@fontawesome@use@false }
+
+\ExecuteOptions{attsymbols,nodocheck,usefa}% set it explicitly
 \ProcessOptions\relax%
 
 %% -----------------------------------------------------------------------------
@@ -39,6 +43,8 @@
 %% -----------------------------------------------------------------------------
 
 \ifsol@symbols@ \RequirePackage{graphicx} \fi % \scalebox
+\ifsol@fontawesome@use@ \RequirePackage{graphicx,fontawesome} \fi %\faPaperclip
+
 \RequirePackage{xcolor,attachfile2}
 
 %% -----------------------------------------------------------------------------
@@ -51,7 +57,7 @@
 \@ifundefined{thesobversion}{
     \attachfilesetup{%
         author={\@author},
-        color=0.5 0 0.5,
+        % color=0.5 0 0.5,
         icon=Tag,
         mimetype=text/plain % we assume
     }
@@ -97,12 +103,20 @@
     \fi%
 }
 
+
+\def\sol@textprefix{}
+
+\ifsol@fontawesome@use@%
+\def\sol@textprefix{%
+\noexpand\expandafter\noexpand\smash\noexpand\rotatebox[origin=c]{282}{\noexpand\small\noexpand\faPaperclip{}}\noexpand\,%
+}\fi
+
 % #1 config
 % #2 File Name
 % #3 search-path-addition
 % #4 text
 \long\def\sol@@attachfile@text#1#2#3#4{%
-    \edef\@sol@tmp{\noexpand\textattachfile[#1,subject={#2}]{#3#2}{#4}}%
+    \edef\@sol@tmp{\noexpand\textattachfile[#1,subject={#2}]{#3#2}{\sol@textprefix#4}}%
     \@sol@tmp{}%
 }
 
@@ -132,6 +146,5 @@
 
 \let\attachTex\attachDocument
 \let\attachTexText\attachDocumentText
-
 
 \endinput
