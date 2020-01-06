@@ -232,7 +232,7 @@
 \def\solStyles{\sol@lst@showstyles{basic,keywordA,keywordB,keywordC,keywordD,numbers,linenumbers,literals,comments,highlight}}
 
 \def\sol@style@get#1{%
-    \@nameuse{\sol@lst@style@prefix#1}%
+\@nameuse{\sol@lst@style@prefix basic}\@nameuse{\sol@lst@style@prefix#1}%
 }
 \long\def\solGet#1#2{\bgroup\solGetStyle{#1}#2\egroup}
 \let\solGetStyle\sol@style@get
