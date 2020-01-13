@@ -16,7 +16,7 @@
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
 
-\newcounter{sorversion} \setcounter{sorversion}{1005}
+\newcounter{sorversion} \setcounter{sorversion}{1007}
 \newcounter{sor@counter@functional@requirement}%
 \newcounter{sor@counter@quality@requirement}%
 
@@ -274,7 +274,14 @@
 
 \robustify{\preqref}
 
-\def\pref#1#2{\hyperref[#1]{#2\textsuperscript{$\,\to p.\,$\pageref{#1}}}}
+\newlength\sor@ctheight@
+\DeclareRobustCommand*\sor@textsuperscript[1]{%
+\@sor@textsuperscript{\selectfont#1}}
+\def\@sor@textsuperscript#1{%
+\settoheight\sor@ctheight@{\fontsize\f@size\z@ A}%
+{\m@th\ensuremath{\raise.275\sor@ctheight@\hbox{\fontsize\sf@size\z@#1}}}}
+
+\def\pref#1#2{\hyperref[#1]{#2\sor@textsuperscript{$\,\to p.\,$\pageref{#1}}}}
 
 \def\iskip{\vspace*{\sor@length@list@compensation}}
 
