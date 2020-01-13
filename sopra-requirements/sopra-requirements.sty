@@ -66,7 +66,7 @@
 %% -----------------------------------------------------------------------------
 
 \ifsor@usetabu@ \RequirePackage{tabu} \RequirePackage{colortbl} \else \RequirePackage{booktabs} \fi
-\RequirePackage{makecell,longtable,xcolor,environ,amssymb,etoolbox,hyperref}
+\RequirePackage{makecell,longtable,xcolor,environ,amssymb,etoolbox,fontawesome,hyperref}
 
 %% -----------------------------------------------------------------------------
 %% New Columns
@@ -159,6 +159,9 @@
     \ifsor@showall@#2\else\expandafter\ifx\expandafter\\#1\\\else#2\fi\fi%
 }
 
+% \ifcase#1 Unwichtig\or Niedrig\or Nett\or Neutral\or Wichtig\or Elementar\else Nicht angegeben\fi
+\def\sor@setpriority#1{\ifnum#1<0\else\foreach \i in {5,...,1}{\ifnum\i>#1\relax \faStarO\else\faStar\fi}\fi}
+
 %% -----------------------------------------------------------------------------
 %% Create the basic environments to filter for requirementstype :D
 %% -----------------------------------------------------------------------------
@@ -188,8 +191,10 @@
         % }{}
         \gdef\@sor@r@title{##2}
         \long\def\@sor@r@description{}%
+        \long\def\@sor@r@priority{-1}%
         \long\def\@sor@r@justification{}\long\def\@sor@r@dependencies{}%
         \long\def\setDescription####1{\gdef\@sor@r@description{####1}}%
+        \long\def\setPriority####1{\gdef\@sor@r@priority{####1}}%
         \long\def\setJustification####1{\gdef\@sor@r@justification{####1}}%
         \def\setDependencies####1{\gdef\@sor@r@dependencies{####1}}%
         \def\setTitle####1{\gdef\@sor@r@title{####1}}%
@@ -215,8 +220,9 @@
             \sor@table@headerrow*{ID} & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\ifsor@showtag@\hfill\T{##2}\fi\\\endfirsthead
             \sor@table@headerrow@next{ID} & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\\\endhead
             % i do not want to make a token iter, i'm sorry
-            \sor@requirement@leftcolstyle{Titel:} & \@sor@r@title\\
+            \sor@requirement@leftcolstyle{Titel:} & \@sor@r@title \hfill\sor@setpriority{\@sor@r@priority}\\
             % only typeset them if they are not empty :D
+            % \sor@showifgivenorforced{\@sor@r@priority}{\sor@requirement@leftcolstyle{Priorität:} & \sor@setpriority{\@sor@r@priority} \\}
             \sor@showifgivenorforced{\@sor@r@description}{\sor@requirement@leftcolstyle{Beschreibung:} & \@sor@r@description \\}
             \sor@showifgivenorforced{\@sor@r@justification}{\sor@requirement@leftcolstyle{Begründung:} & \@sor@r@justification \\}
             \sor@showifgivenorforced{\@sor@r@dependencies}{\sor@requirement@leftcolstyle{Abhängigkeiten:} & \foreach[count=\i] \@sor@dpc in \@sor@r@dependencies{%
@@ -231,7 +237,7 @@
             \sor@table@headerrow* ID & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\ifsor@showtag@\hfill\T{##2}\fi\\\midrule\endfirsthead
             \sor@table@headerrow@next ID & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\\\midrule\endhead
             % i do not want to make a token iter, i'm sorry
-            \sor@requirement@leftcolstyle{Titel:} & \@sor@r@title\\
+            \sor@requirement@leftcolstyle{Titel:} & \@sor@r@title \hfill\sor@setpriority{\@sor@r@priority}\\
             % only typeset them if they are not empty :D
             \sor@showifgivenorforced{\@sor@r@description}{\sor@requirement@leftcolstyle{Beschreibung:} & \@sor@r@description \\}
             \sor@showifgivenorforced{\@sor@r@justification}{\sor@requirement@leftcolstyle{Begründung:} & \@sor@r@justification \\}

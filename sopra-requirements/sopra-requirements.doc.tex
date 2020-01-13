@@ -48,7 +48,7 @@
             \def\pkgparse#1:#2\@nil{%
                 \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
             }
-            \foreach \pkg in {tabu:{\jmark[\T{usetabu}]{mrk:usetabu}},booktabs:{\jmark[\T{notabu}]{mrk:usetabu}},colortbl:{\jmark[\T{usetabu}]{mrk:usetabu}},makecell:,longtable:,xcolor:,environ:,amssymb:,etoolbox:,hyperref:} {
+            \foreach \pkg in {tabu:{\jmark[\T{usetabu}]{mrk:usetabu}},booktabs:{\jmark[\T{notabu}]{mrk:usetabu}},colortbl:{\jmark[\T{usetabu}]{mrk:usetabu}},makecell:,longtable:,xcolor:,environ:,amssymb:,etoolbox:,fontawesome:,hyperref:} {
                 \item \expandafter\pkgparse\pkg\@nil
             }
         \end{itemize}
@@ -187,6 +187,11 @@ zu können!}
     Erlaubt es den Titel der Anforderung zu ändern. Dies ändert nicht den in \envref{requirement} gesetzten Bezeichner! (Dies kann durch \jmark[\T{showtag}]{mrk:showtag}) verdeutlicht werden. 
 \end{command}
 
+
+\begin{command}{setPriority}{\manArg{Zahl}}
+    Erlaubt es die Priorität der jeweiligen Anforderung zu definieren. Die Zahl muss zwischen (inklusiv) \(0\) und \(5\) liegen.
+\end{command}
+
 % TODO make a normal ref command like reqref without showig the page number
 % TODO: make it possible to change description and-stuff-labels
 \subsection{Allgemeine Befehle}
@@ -231,6 +236,7 @@ Definieren wir uns im Folgenden einmal zwei Anforderungen:
         \setDescription{Es muss möglich sein, die Enten aus \preqref{FA1} zu füttern.  Wir haben: \preqref[Enten]{FA1}.}
         \setJustification{Enten müssen Leben (dürfen)!!}
         \setDependencies{a-duck}
+        \setPriority{4}
     \end{requirement}
 \end{requirements}
 \end{latex}
@@ -247,6 +253,7 @@ Das Ergebnis ist (mit \T{tabu}) das folgende:
         \setDescription{Es muss möglich sein, die Enten aus \preqref{FA1} zu füttern. Wir haben: \preqref[Enten]{FA1}.}
         \setJustification{Enten müssen Leben (dürfen)!!}
         \setDependencies{a-duck}
+        \setPriority{4}
     \end{requirement}
 \end{requirements}
 \end{document}
