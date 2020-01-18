@@ -16,7 +16,7 @@
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
 
-\newcounter{sorversion} \setcounter{sorversion}{1007}
+\newcounter{sorversion} \setcounter{sorversion}{1009}
 \newcounter{sor@counter@functional@requirement}%
 \newcounter{sor@counter@quality@requirement}%
 
@@ -160,7 +160,9 @@
 }
 
 % \ifcase#1 Unwichtig\or Niedrig\or Nett\or Neutral\or Wichtig\or Elementar\else Nicht angegeben\fi
-\def\sor@setpriority#1{\ifnum#1<0\else\foreach \i in {5,...,1}{\ifnum\i>#1\relax \faStarO\else\faStar\fi}\fi}
+% \colorlet{sor@color@star}{HeaderColor}
+\def\sor@setpriority#1{\bgroup\ifnum#1<0\else\color{HeaderColor}\foreach \i in {5,...,1}{\ifnum\i<5\relax \,\fi\ifnum\i>#1\relax \faStarO\else\faStar\fi}\fi\egroup}
+\let\sorSetPriority\sor@setpriority
 
 %% -----------------------------------------------------------------------------
 %% Create the basic environments to filter for requirementstype :D
@@ -198,17 +200,19 @@
         \long\def\setJustification####1{\gdef\@sor@r@justification{####1}}%
         \def\setDependencies####1{\gdef\@sor@r@dependencies{####1}}%
         \def\setTitle####1{\gdef\@sor@r@title{####1}}%
-
+        %
         \ignorespaces\BODY{}% typeset table:
         % Store the Title for the link :D -> we won't use newlabel structure
         \sor@write@@linkpos{\@sor@currequirementprefix}{\@sor@r@id}{\@sor@r@title}{\@sor@currequirementprefix}{\@sor@r@id}
         \sor@write@@linkpos{\@sor@currequirementprefix}{\@sor@r@id}{\@sor@r@title}{}{##2} % maybe make parseable?
-
+        %
         % create the label :D
         \phantomsection\label{tbl:requirement:\@sor@currequirementprefix\@sor@r@id}%
         \label{tbl:requirement:##2}
         % for the table of contents (pdf-viewer)
-        \ifsor@intoc@\addcontentsline{toc}{subsubsection}{\@sor@currequirementprefix\@sor@r@id:\space\@sor@r@title}\fi
+        \ifsor@intoc@\addcontentsline{toc}{subsubsection}{\@sor@currequirementprefix\@sor@r@id:\space\@sor@r@title}\else%
+            \pdfbookmark[4]{\@sor@currequirementprefix\@sor@r@id:\space\@sor@r@title}{sor@shead@@bg@\@sor@currequirementprefix\@sor@r@id}%
+        \fi
         % do not use \Gape for spacing :D
         % Now, we're constructing the longtabu
         \ifsor@usetabu@%
@@ -229,7 +233,7 @@
                 \ifnum\i>1\relax{},\space{}\fi% correct comma
                 \preqref*{\@sor@dpc}%
             }}% \\}
-        \end{longtabu}
+        \end{longtabu}%
         \else\bgroup\renewcommand{\arraystretch}{1.25}
         \begin{longtable}{>{~}KV<{~}}
             % init the headerrow
@@ -246,8 +250,8 @@
                 \preqref*{\@sor@dpc}%
             }\\}% \\}
             \bottomrule
-        \end{longtable}\egroup\fi
-    }
+        \end{longtable}\egroup\fi\smallskip%
+    }%\par%
 }%
 
 %% -----------------------------------------------------------------------------
