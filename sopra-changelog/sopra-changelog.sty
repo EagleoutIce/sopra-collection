@@ -43,18 +43,19 @@
 % ensure empty if not overwritten
 \providecommand\@soc@register@versionenvs{}
 
-\def\@soc@register@new@versionenv#1{
+\def\@soc@register@new@versionenv#1{%
     \expandafter\ifx\expandafter\\\@soc@@parse@versionenvs@all\\% was empty:
         \gdef\@soc@@parse@versionenvs@all{#1}%
     \else% append:
-        \let\tmp@cur@a\@soc@@parse@versionenvs@all
+        \let\tmp@cur@a\@soc@@parse@versionenvs@all%
         \xdef\@soc@@parse@versionenvs@all{\@soc@@parse@versionenvs@all,#1}%
-    \fi
+    \fi%
 }
 
 % Register in the end:
 \AtEndDocument{%
-\protected@write\@auxout{\let\defcommand\relax}{\protect\soc@defcommand{@soc@register@versionenvs}{\@soc@@parse@versionenvs@all}}
+% \typeout{AtEND, writing '\@soc@@parse@versionenvs@all'}%
+\immediate\write\@auxout{\noexpand\soc@defcommand{@soc@register@versionenvs}{\@soc@@parse@versionenvs@all}}
 }
 
 \def\@soc@@parse@change@pattern{changed in}
@@ -153,7 +154,7 @@
         \newenvironment{version@read}{\bgroup}{\egroup}% no consumption!
         \else\NewEnviron{version@read}{}\fi%
     \version@read%
-    }{\endversion@read}
+    }{\endversion@read}%
 
 \newcommand\simpleversion[4][]{%
     \begin{version}[#1]{#2}{#3}%
@@ -168,21 +169,24 @@
         % now do single parse
         % Check for Changes
         %\typeout{AT: \tmp@counterval{} in '#1' is: '\@nameuse{@sop@registers@#1@introduced}'}%
-        \def\soc@curtag{\hyperref[soc@version:#1]{\emph{#1}}: }
+        \def\soc@curtag{\hyperref[soc@version:#1]{\emph{#1}}: }%
+        % \typeout{Checking: \tmp@counterval{} for: \@nameuse{@sop@registers@#1@introduced}}%
         \ifnum\@nameuse{@sop@registers@#1@introduced}>\tmp@counterval\relax%
         \else% only set if in range:
             \ifnum\@nameuse{@sop@registers@#1@introduced}=\tmp@counterval\relax%
-                \item[\faPlusCircle] \soc@curtag Neues Element! 
+                \@ifundefined{@sop@registers@#1@changes@\tmp@counterval}{%
+                    \item[\faPlusCircle] \soc@curtag Neues Element! %
+                }{\item[\faPlusCircle] \soc@curtag\@nameuse{@sop@registers@#1@changes@\tmp@counterval} }%
             \else%check if there is a edit in this version:
-                \@ifundefined{@sop@registers@#1@changes@\tmp@counterval}{
+                \@ifundefined{@sop@registers@#1@changes@\tmp@counterval}{%
                     \@ifundefined{@sop@registers@#1@removed@\tmp@counterval}{}%nosching
                 {\item[\faTimesCircle] \soc@curtag\@nameuse{@sop@registers@#1@removed@\tmp@counterval} }%
                 }%nosching
                 {\item \soc@curtag\@nameuse{@sop@registers@#1@changes@\tmp@counterval} }%
-        \fi\fi
+        \fi\fi%
         % Delte: Fatimescircle
         \ifx\\#2\\\else% recursive call
-            \expandafter\soc@@changelog@envs@iter#2,\@nil
+            \expandafter\soc@@changelog@envs@iter#2,\@nil%
         \fi%
     \fi%
 }
