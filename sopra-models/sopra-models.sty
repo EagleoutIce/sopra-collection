@@ -4970,6 +4970,7 @@
       \fi%
 }%
 %
+\def\tikzumlAssemblyConnectorLabelPosition{above}
 \newcommand{\umlassemblyconnectorsymbol}[2]{%
   \ifthenelse{\NOT\equal{\tikzumlAssemblyConnectorLabel}{}}{%
   \edef\tikzuml@ACStart@name{#1}%
@@ -5018,8 +5019,8 @@
   \clip (\tikzuml@ACInterface@nodeName-trc) --  (\tikzuml@ACInterface@nodeName-tlc) -- (\tikzuml@ACInterface@nodeName-blc) -- (\tikzuml@ACInterface@nodeName-brc) -- cycle;%
   \node[inner sep=0, text width=\tikzuml@AC@width, circle, draw=\tikzumlAssemblyConnectorDrawColor, fill=\tikzumlAssemblyConnectorFillColor] (\tikzuml@ACInterface@nodeName-ic) at (\tikzuml@AC@xic,\tikzuml@AC@yic) {};%
   \end{scope}%
-  \node[above, font=\tikzumlDefaultFont] at (\tikzuml@ACInterface@nodeName-interface.north)
- {\tikzumlAssemblyConnectorLabel};%
+  \edef\tmp{\noexpand\node[\tikzumlAssemblyConnectorLabelPosition, font=\noexpand\tikzumlDefaultFont] at (\noexpand\tikzuml@ACInterface@nodeName-interface.north)
+ {\noexpand\tikzumlAssemblyConnectorLabel};}\tmp%
   }{}%
 }%
 %
