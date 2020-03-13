@@ -3833,7 +3833,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \tikzstyle{tikzuml synchron-msg style}=[color=\tikzumlDefaultDrawColor, -triangle 45]%
-\tikzstyle{tikzuml asynchron-msg style}=[color=\tikzumlDefaultDrawColor, -angle 45]%
+\tikzstyle{tikzuml asynchron-msg style}=[color=\tikzumlDefaultDrawColor, dashed, -angle 45]%
 \tikzstyle{tikzuml return-msg style}=[color=\tikzumlDefaultDrawColor, dashed, -angle 45]%
 \tikzstyle{tikzuml call return style}=[color=\tikzumlDefaultDrawColor, dashed, -angle 45]%
 \tikzstyle{tikzuml activity style}=[inner xsep=1ex, inner ysep=1ex]%
@@ -4179,7 +4179,7 @@
   \gdef\tikzumlCallBottom{0}%
   %
   \pgfkeys{/tikzuml/call/.cd, dt/.initial=\tikzumlCallDefaultDT, name/.initial={call-\thetikzumlCallNum},%
-                              op/.initial={}, return/.initial={}, type/.initial=\tikzumlCallDefaultType,%
+                              op/.initial={}, op-style/.initial={above=-0.4ex}, return/.initial={}, type/.initial=\tikzumlCallDefaultType,%
                               draw/.initial=\tikzumlDefaultDrawColor, fill/.initial=\tikzumlCallDefaultFillColor,%
                               text/.initial=\tikzumlDefaultTextColor,%
                               padding/.initial=\tikzumlCallDefaultPadding,%
@@ -4195,6 +4195,7 @@
   }%
   \pgfkeys{/tikzuml/call/.cd, #1}%
   \pgfkeys{/tikzuml/call/.cd, dt/.get=\tikzumlCallDT, name/.get=\tikzumlCallName, op/.get=\tikzumlCallOp,%
+                              op-style/.get=\tikzumlCallOpStyle,
                               return/.get=\tikzumlCallReturn, type/.get=\tikzumlCallType,%
                               padding/.get=\tikzumlCallPadding,%
                               draw/.get=\tikzumlCallDrawColor, fill/.get=\tikzumlCallFillColor,%
@@ -4382,7 +4383,7 @@
   \ifthenelse{\equal{\tikzumlCallStartNodeName}{\tikzumlCallEndNodeName}}{%
     \draw[\tikzumlcallstyle, \tikzumldrawcall] (st-\tikzumlCall@nodeName.east) -- ++(2.5*\tikzumlCallPadding ex,0) %
                                                -- ++(0,-0.75*\tikzumlCallPadding ex) %
-                                               node[font=\tikzumlDefaultFont, text=\tikzumltextcall, midway, right, name=\tikzumlCall@nodeName-op] {\tikzumlCallOp} %
+                                               node[font=\tikzumlDefaultFont, text=\tikzumltextcall, midway, right, name=\tikzumlCall@nodeName-op,align=center] {\tikzumlCallOp} %
                                                -- (et-\tikzumlCall@nodeName.east);%
     %
     % draw return arrow and update fit for parent fragment
@@ -4415,11 +4416,11 @@
     \pgfextractx{\tikzumlCall@xb}{\pgfpointanchor{\tikzumlCallEndNodeName}{center}}%
     %
     \ifthenelse{\tikzumlCall@xb>\tikzumlCall@xa}{%
-      \draw[\tikzumlcallstyle, \tikzumldrawcall] (st-\tikzumlCall@nodeName.east) -- (et-\tikzumlCall@nodeName.west) %
-                                                 node[font=\tikzumlDefaultFont, text=\tikzumltextcall, midway, above=-0.4ex, name=\tikzumlCall@nodeName-op] {\tikzumlCallOp};%
+      \edef\@tmp{\noexpand\draw[\tikzumlcallstyle, \tikzumldrawcall] (st-\tikzumlCall@nodeName.east) -- (et-\tikzumlCall@nodeName.west) %
+                                                 node[font=\noexpand\tikzumlDefaultFont, text=\noexpand\tikzumltextcall, midway, \tikzumlCallOpStyle,name=\tikzumlCall@nodeName-op,align=center] {\noexpand\tikzumlCallOp};}\@tmp%
     }{%
-      \draw[\tikzumlcallstyle, \tikzumldrawcall] (st-\tikzumlCall@nodeName.west) -- (et-\tikzumlCall@nodeName.east) %
-                                                 node[font=\tikzumlDefaultFont, text=\tikzumltextcall, midway, above=-0.4ex, name=\tikzumlCall@nodeName-op] {\tikzumlCallOp};%
+      \edef\@tmp{\noexpand\draw[\tikzumlcallstyle, \tikzumldrawcall] (st-\tikzumlCall@nodeName.west) -- (et-\tikzumlCall@nodeName.east) %
+                                                 node[font=\noexpand\tikzumlDefaultFont, text=\noexpand\tikzumltextcall, midway, \tikzumlCallOpStyle, name=\tikzumlCall@nodeName-op,align=center] {\noexpand\tikzumlCallOp};}\@tmp%
     }%
     %
     % draw return arrow and update fit for parent fragment

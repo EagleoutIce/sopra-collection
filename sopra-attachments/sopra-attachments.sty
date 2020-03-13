@@ -140,11 +140,11 @@
 \newcommand\attachPdfText[3][]{\sol@attachfile@text{mimetype=application/pdf}{#2}{#1}{#3}}
 \newcommand\attachPdfTextDesc[4][]{\sol@attachfile@text{mimetype=application/pdf,description={#4}}{#2}{#1}{#3}}
 
-% #1 path to search
+% #1 additional settings
 % #2 Name of the PDF
-\newcommand*\attachDocument[2][]{\sol@attachfile@symbol{mimetype=text/plain}{#2}{#1}}
+\newcommand*\attachDocument[2][]{\sol@attachfile@symbol{mimetype=text/plain,#1}{#2}{}}
 % #3 text
-\newcommand\attachDocumentText[3][]{\sol@attachfile@text{mimetype=text/plain}{#2}{#1}{#3}}
+\newcommand\attachDocumentText[3][]{\sol@attachfile@text{mimetype=text/plain,#1}{#2}{}{#3}}
 
 \let\attachTex\attachDocument
 \let\attachTexText\attachDocumentText
