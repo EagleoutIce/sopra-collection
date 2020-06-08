@@ -45,7 +45,7 @@
 \ifsol@symbols@ \RequirePackage{graphicx} \fi % \scalebox
 \ifsol@fontawesome@use@ \RequirePackage{graphicx,fontawesome} \fi %\faPaperclip
 
-\RequirePackage{xcolor,attachfile2}
+\RequirePackage{xcolor,attachfile2} % embedfile
 
 %% -----------------------------------------------------------------------------
 %% Configure
@@ -133,11 +133,11 @@
 %% User Functions
 %% -----------------------------------------------------------------------------
 
-% #1 path to search
+% #1 additional options
 % #2 Name of the PDF
-\newcommand*\attachPdf[2][]{\sol@attachfile@symbol{mimetype=application/pdf}{#2}{#1}}
+\newcommand*\attachPdf[2][]{\sol@attachfile@symbol{mimetype=application/pdf,#1}{#2}{}}
 % #3 text
-\newcommand\attachPdfText[3][]{\sol@attachfile@text{mimetype=application/pdf}{#2}{#1}{#3}}
+\newcommand\attachPdfText[3][]{\sol@attachfile@text{mimetype=application/pdf,#1}{#2}{}{#3}}
 \newcommand\attachPdfTextDesc[4][]{\sol@attachfile@text{mimetype=application/pdf,description={#4}}{#2}{#1}{#3}}
 
 % #1 additional settings

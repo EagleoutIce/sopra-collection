@@ -145,13 +145,13 @@
     }{% Got removed, are we pre-removed?
         \ifnum\value{soc@compile@target@version}<\@nameuse{@sop@registers@#3@removed}% nope
         \marginpar{\tiny\faPlusCircle{} V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}}%
-        \else
+        \else%
         \marginpar{\tiny\faTimesCircle{} V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}\(\,\)-\(\,\)\@socmp{\@nameuse{@sop@registers@#3@removed}}}%\fi% jepp
         \fi%
     }%
     %Defining skimmer:
     \ifsoc@printthis@version@%
-        \newenvironment{version@read}{\bgroup}{\egroup}% no consumption!
+        \newenvironment{version@read}{\bgroup\ignorespaces}{\egroup}% no consumption!
         \else\NewEnviron{version@read}{}\fi%
     \version@read%
     }{\endversion@read}%
@@ -191,14 +191,15 @@
     \fi%
 }
 
+\def\soc@month@unknown{??}
 \def\soc@month@to@name#1{%
-    \ifcase#1\or{Januar}\or{Februar}\or{M\"{a}rz}\or{April}\or{Mai}\or{Juni}%
+    \def\tmp@a{#1}\ifx\soc@month@unknown\tmp@a??\else\ifcase#1\or{Januar}\or{Februar}\or{M\"{a}rz}\or{April}\or{Mai}\or{Juni}%
     \or{Juli}\or{August}\or{September}\or{Oktober}\or{November}\or{Dezember}%
-    \else\@ctrerr\fi%
+    \else\@ctrerr\fi\fi%
 }
 
 \def\soc@date@convert#1-#2-#3\@nil{%
-    \bgroup#3.\space{\soc@month@to@name{#2}}\space{} #1\egroup%
+    \bgroup#3.\space{\protect\soc@month@to@name{#2}}\space{}#1\egroup%
 }
 \def\soc@DateConvert#1%
 {\expandafter\ifx\expandafter\\#1\\\else\expandafter\soc@date@convert#1\@nil\fi}

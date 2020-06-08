@@ -4381,10 +4381,10 @@
   % draw call arrows
   \begin{pgfonlayer}{connections}%
   \ifthenelse{\equal{\tikzumlCallStartNodeName}{\tikzumlCallEndNodeName}}{%
-    \draw[\tikzumlcallstyle, \tikzumldrawcall] (st-\tikzumlCall@nodeName.east) -- ++(2.5*\tikzumlCallPadding ex,0) %
+    \edef\@tmp{\noexpand\draw[\tikzumlcallstyle, \tikzumldrawcall] (st-\tikzumlCall@nodeName.east) -- ++(2.5*\tikzumlCallPadding ex,0) %
                                                -- ++(0,-0.75*\tikzumlCallPadding ex) %
-                                               node[font=\tikzumlDefaultFont, text=\tikzumltextcall, midway, right, name=\tikzumlCall@nodeName-op,align=center] {\tikzumlCallOp} %
-                                               -- (et-\tikzumlCall@nodeName.east);%
+                                               node[font=\noexpand\tikzumlDefaultFont, text=\tikzumltextcall, midway, right, name=\tikzumlCall@nodeName-op,align=center,\tikzumlCallOpStyle] {\noexpand\tikzumlCallOp} %
+                                               -- (et-\tikzumlCall@nodeName.east);}\@tmp%
     %
     % draw return arrow and update fit for parent fragment
     \ifthenelse{\equal{\tikzumltypecall}{synchron}}{%
@@ -4417,10 +4417,10 @@
     %
     \ifthenelse{\tikzumlCall@xb>\tikzumlCall@xa}{%
       \edef\@tmp{\noexpand\draw[\tikzumlcallstyle, \tikzumldrawcall] (st-\tikzumlCall@nodeName.east) -- (et-\tikzumlCall@nodeName.west) %
-                                                 node[font=\noexpand\tikzumlDefaultFont, text=\noexpand\tikzumltextcall, midway, \tikzumlCallOpStyle,name=\tikzumlCall@nodeName-op,align=center] {\noexpand\tikzumlCallOp};}\@tmp%
+                                                 node[font=\noexpand\tikzumlDefaultFont, text=\noexpand\tikzumltextcall, midway, name=\tikzumlCall@nodeName-op,align=center,\tikzumlCallOpStyle] {\noexpand\tikzumlCallOp};}\@tmp%
     }{%
       \edef\@tmp{\noexpand\draw[\tikzumlcallstyle, \tikzumldrawcall] (st-\tikzumlCall@nodeName.west) -- (et-\tikzumlCall@nodeName.east) %
-                                                 node[font=\noexpand\tikzumlDefaultFont, text=\noexpand\tikzumltextcall, midway, \tikzumlCallOpStyle, name=\tikzumlCall@nodeName-op,align=center] {\noexpand\tikzumlCallOp};}\@tmp%
+                                                 node[font=\noexpand\tikzumlDefaultFont, text=\noexpand\tikzumltextcall, midway, name=\tikzumlCall@nodeName-op,align=center,\tikzumlCallOpStyle] {\noexpand\tikzumlCallOp};}\@tmp%
     }%
     %
     % draw return arrow and update fit for parent fragment
