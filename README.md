@@ -1,16 +1,18 @@
 # sopra-collection
 
 ## Motivation
+
 Dies ist eine Ansammlung (hoffentlich) wundertoller LaTeX2e Klassen und Pakete, für das Softwaregrundprojekt
 im Rahmen des Informatikstudiums an der Universität Ulm im Wintersemester 2019/20 sowie dem sich anschließendem
 Sommersemester. Es grüßt: `team-020`.
 
 ## Installation
+
 Die Installation kann entweder je nach Dokumentation, oder durch das mitgelieferte python-skript erfolgen. Bei
 einem installierten python3.5+ interpreter genügt:
 `python3 installer.py`
 
-Genaure Informationen zur Angabe des Pfades lassen sich hier finden: [wikibooks](https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages)
+Genauere Informationen zur Angabe des Pfades lassen sich hier finden: [wikibooks](https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages).
 
 
 ## Was es so alles gibt
@@ -23,7 +25,7 @@ besitzen und weitestgehend unabhängig voneinander verwendet werden können:
     für alle Dokumente im Rahmen der Arbeit definiert.
     Es steht frei sie während der Arbeit hinsichtlich
     ihres Erscheinungsbild zu erweitern und/oder zu
-    modifizieren. Hierbei soll die Kompatibiltät mit
+    modifizieren. Hierbei soll die Kompatibilität mit
     bereits erstellten Dokumenten nicht verletzt
     werden:
     - [sopra-base.cls](sopra-base/sopra-base.cls): Dies ist die versprochene Klassendatei.
@@ -57,7 +59,7 @@ besitzen und weitestgehend unabhängig voneinander verwendet werden können:
 - [Listings mit: sopra-listings](sopra-listings):
     Dieses Paket erlaubt es, Quellcode in PDF mit Syntaxhighlighting zu setzen:
     - [sopra-listings.sty](sopra-listings/sopra-listings.sty): Dies ist das versprochene Paket.
-    - [sopra-listings.doc.tex](sopra-listings/sopra-listings.doc.tex): Für sie wird das Paket selbst benötigt, dann reicht: `pdflatex sopra-attachments.doc.tex`.
+    - [sopra-listings.doc.tex](sopra-listings/sopra-listings.doc.tex): Für sie wird das Paket selbst benötigt, dann reicht: `pdflatex sopra-listings.doc.tex`.
         Eine kompilierte Variante sollte allerdings auch jeweils den Veröffentlichungen (Releases) beiliegen.
 
 - [Changelogs mit: sopra-changelog](sopra-changelog):
@@ -66,9 +68,14 @@ besitzen und weitestgehend unabhängig voneinander verwendet werden können:
     - [sopra-changelog.doc.tex](sopra-changelog/sopra-changelog.doc.tex): Für sie wird das `sopra-listings`-Paket - sofern es installiert ist, reicht: `pdflatex sopra-changelog.doc.tex`.
         Eine kompilierte Variante sollte allerdings auch jeweils den Veröffentlichungen (Releases) beiliegen.
 
-## Aktuelle ToDo's
+- [Das Dokumentlayout mit: sopra-paper](sopra-paper):
+    Diese Dokumentklasse wurde für den Standard, und die Meilensteine von Team020 verwendet:
+    - [sopra-paper.cls](sopra-paper/sopra-paper.cls): Dies ist die versprochene Dokumentklasse.
+    - [sopra-paper.doc.tex](sopra-listings/sopra-paper.doc.tex): Für sie wird das Paket selbst benötigt, dann reicht: `pdflatex sopra-paper.doc.tex`.
+        Eine kompilierte Variante sollte allerdings auch jeweils den Veröffentlichungen (Releases) beiliegen.
 
-Weil ich doch immer so viel vergesse:
-- Das Dokument soll bezüglich seines Layouts hübscher werden.
-- Es muss ein Beamer-Layout estellt werden (präsentationen und so :smiley:).
-- Paket für Verlinkungen
+- [Präsentationen mit: sopra-seraphim](sopra-seraphim):
+    Diese Dokumentklasse wurde für die Telegramme und die Abschlusspräsentation von Team020 verwendet:
+    - [sopra-seraphim.cls](sopra-changelog/sopra-seraphim.cls): Dies ist das versprochene Dokumentklasse.
+    - [sopra-seraphim.doc.tex](sopra-changelog/sopra-seraphim.doc.tex): Für sie wird das `sopra-listings`-Paket - sofern es installiert ist, reicht: `pdflatex sopra-seraphim.doc.tex`.
+        Eine kompilierte Variante sollte allerdings auch jeweils den Veröffentlichungen (Releases) beiliegen.

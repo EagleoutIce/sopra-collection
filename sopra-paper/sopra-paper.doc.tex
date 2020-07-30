@@ -1,0 +1,309 @@
+\errorcontextlines 99999
+\documentclass[useartcl,notoc]{sopra-paper} 
+
+\usepackage[dummy]{sopra-documentation}
+\usepackage{sopra-attachments}
+
+\title{Die 'sopra-paper'-Klasse}
+\subtitle[Dokumentation für die 'sopra-paper'-Klasse]{Dokumentation für die 'sopra-paper'-Klasse, Version \thesopversion}
+
+\duedate{2019-12-13}
+
+\keywords{Dokumentation,sopra-paper,sopra,uni ulm,uulm}
+\authors{Florian Sihler (florian.sihler@uni-ulm.de)}
+
+\brief{Diese Dokumentation gibt einen umfassenden Einblick in die Verwendung der eigenständigen 'sopra-paper'-Klasse.}
+
+% \group{Die Affenbande}
+\groupnum{020}
+
+\begin{document}
+
+%
+%
+% ....###....##.......##........######...########.##.....##.########.####.##....##.########..######.
+% ...##.##...##.......##.......##....##..##.......###...###.##........##..###...##.##.......##....##
+% ..##...##..##.......##.......##........##.......####.####.##........##..####..##.##.......##......
+% .##.....##.##.......##.......##...####.######...##.###.##.######....##..##.##.##.######....######.
+% .#########.##.......##.......##....##..##.......##.....##.##........##..##..####.##.............##
+% .##.....##.##.......##.......##....##..##.......##.....##.##........##..##...###.##.......##....##
+% .##.....##.########.########..######...########.##.....##.########.####.##....##.########..######.
+%
+%
+
+\section{Allgemeines}
+\subsection{Warum, wieso, weshalb?}
+    Diese \LaTeXe-Dokumentlasse wurde im Rahmen des Sopras im 
+    Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
+    Grundlage für die Optik aller Dokumente des \notetext{Teams 20}.
+    Das Layout kann sowohl als klassisches \T{book} als auch als \T{article} agieren (siehe: \argref{usebook}{useartcl}). Die Dokumentation wurde aus strukturellen Gründen in letzterem angefertigt, es werden also keine Titel platziert, analog passt sich die Kopfzeile an den Umstand an!\par
+    Zum Visualisieren der einzelnen Code-Ausschnitte wird das
+    \T{sopra-listings}-Paket verwendet. Es ist für die Verwendung der Dokumentklasse
+    nicht relevant.\par
+    Die zugehörige Klasse sollte ebenfalls in dieses Dokument eingebettet sein: \textattachfile[subject={sopra-paper.cls}]{sopra-paper.cls}{sopra-paper.cls}.
+\subsection{Abhängigkeiten}
+    Dieses Paket basiert auf den, KOMA-Skript Klassen \T{scrbook}\footnote{\url{https://www.ctan.org/pkg/scrbook}} oder \T{scrartcl}\footnote{\url{https://www.ctan.org/pkg/scrartcl}} (siehe:  \argref{usebook}{useartcl}) 
+    sowie den folgenden Paketen (alle übergebenen Argumente werden ebenfalls 
+    angegeben, wobei im Fall einer Werteübergabe ein Stern gesetzt wird. Ein Ausrufezeichen vor einem \say{Argument} deklariert, dass es sich hier um eine Option handelt die das Laden des Pakets kontrolliert):
+    \begin{multicols}{3}
+        \begin{itemize}
+            \def\pkgparse#1:#2\@nil{%
+                \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
+            }
+            \foreach \pkg in {tikz:,fontenc:T1, inputenc:utf8,
+                babel:{english,main=ngerman},geometry:{margin*,
+                a4paper,bottom*},CormorantGaramond:{!\jmark[\T{rmfont}]{mrk:sffont}},sfmath:{!\jmark[\T{sffont}]{mrk:sffont}},montserrat:{!\jmark[\T{sffont}]{mrk:sffont},defaultfam,*},lmodern:,microtype:,
+                scrlayer-scrpage:,titlesec:,enumitem:,nowidow:all,hyperref:hidelinks}{
+                \item \expandafter\pkgparse\pkg\@nil
+            }
+        \end{itemize}
+    \end{multicols}
+    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein (weiter
+    wird noch die Ti\textit{k}Z-Bibliothek \T{calc} verwendet.
+
+\subsection{Die Installation}
+    Die Klasse wird nicht als \T{.dtx} ausgeliefert, weswegen sich die 
+    folgenden Möglichkeiten ergeben:
+    \begin{itemize}
+        \item Die Dokumentklasse kann in dasselbe Verzeichnis wie das Dokument
+                gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+\begin{plainlatex}
+\documentclass{sopra-paper}
+\end{plainlatex}
+        \item Die Dokumentklasse kann in ein Unterverzeichnis/in ein mit
+                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
+                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+\begin{plainlatex}
+\documentclass{./Mein/Pfad/zu/sopra-paper}
+\end{plainlatex}
+        \item Man kann die Klasse (mittels eines Symlinks oder ähnlichem)
+              in einen eigenen \emph{texmf}-Baum ablegen.
+              So kann zum Beispiel auf Linux unter der Verwendung von texlive
+              die Klasse hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
+              Das Verzeichnis kann erstellt und anschließend mittels
+              \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
+              die Klasse wie jede andere installierte Klasse verwendet werden:
+\begin{plainlatex}
+\documentclass{sopra-paper}
+\end{plainlatex}
+              \notetext{Hinweis: Hierfür existiert ein Python3.5-Skript namens \textattachfile{installer.py}{installer.py} welches, im darüberliegenden Ordner plaziert, die Installation/Aktualisierung übernehmen kann.}
+    \end{itemize}
+    \subsection{Weitere Besonderheiten}
+    In Version \thesopversion{} (\cmdref{thesopversion}) gibt es keine weiteren
+    Besonderheiten.
+
+%
+%
+% .##....##.##..........###.....######...######..########.##....##.##....##..#######..##....##.########.####..######...##.....##.########.....###....########.####..#######..##....##
+% .##...##..##.........##.##...##....##.##....##.##.......###...##.##...##..##.....##.###...##.##........##..##....##..##.....##.##.....##...##.##......##.....##..##.....##.###...##
+% .##..##...##........##...##..##.......##.......##.......####..##.##..##...##.....##.####..##.##........##..##........##.....##.##.....##..##...##.....##.....##..##.....##.####..##
+% .#####....##.......##.....##..######...######..######...##.##.##.#####....##.....##.##.##.##.######....##..##...####.##.....##.########..##.....##....##.....##..##.....##.##.##.##
+% .##..##...##.......#########.......##.......##.##.......##..####.##..##...##.....##.##..####.##........##..##....##..##.....##.##...##...#########....##.....##..##.....##.##..####
+% .##...##..##.......##.....##.##....##.##....##.##.......##...###.##...##..##.....##.##...###.##........##..##....##..##.....##.##....##..##.....##....##.....##..##.....##.##...###
+% .##....##.########.##.....##..######...######..########.##....##.##....##..#######..##....##.##.......####..######....#######..##.....##.##.....##....##....####..#######..##....##
+%
+%
+
+\section{Klassen-Konfiguration}    
+    \subsection{Akzeptierte Parameter}
+    Die Dokumentklasse akzeptiert, so wie die meisten, Argumente. So können
+    nebst den für \T{article} akzeptierten Argumente die im folgenden
+    aufgelistet werden, wobei bei Argumenten mit einer \say{Counter}-Option
+    das jeweils standardmäßig aktive zuerst und das andere in Klammern
+    geschrieben. So wird implizit:
+\begin{plainlatex}
+\documentclass[final,nopar,sffont,defaultmode,showmail,dotoc,usebook,setstyle]%
+    {sopra-paper}
+\end{plainlatex}
+    aufgerufen. Während dieses Dokument mit:
+\begin{plainlatex}
+\documentclass[useartcl,notoc]{sopra-paper}
+\end{plainlatex}
+    die \T{scrartcl}-Klasse verwendet und (zumindest automatisch) keine Inhaltsübersicht generiert.
+
+    \begin{argument}{final}{draft}
+        Im \T{draft}-Modus können einige Elemente so wie Grafiken nicht
+        gesetzt werden um so den Kompilierprozess zu beschleunigen. 
+        Diese Option wird analog auch von vielen weiteren Paketen akzeptiert.
+    \end{argument}
+
+    \begin{argument}{nopar}{dopar}
+        Mittels \T{dopar} setzen wir die Einrückung bei einem Paragraphen
+        auf den von \LaTeX-gesetzten Standartwert.
+    \end{argument}
+
+
+    \begin{argument}{sffont}{rmfont}
+        Durch \T{rmfont} wird die Schriftart wieder auf \emph{Roman} gesetzt.
+    \end{argument}
+
+    \begin{argument}{defaultmode}{print}
+        Mittels \T{print} werden die Farben verringt beziehungsweise in Teilen
+        komplett entfernt (in Graustufen konvertiert) um ein besseres Ergebnis
+        im Druck zu erzielen.
+    \end{argument}
+
+    \begin{argument}{showmail}{hidemail}
+        Mit \T{hidemail} wird die E-Mail-Adresse bei der Angabe der Autoren
+        nicht angezeigt.
+    \end{argument}
+
+    \begin{argument}{dotoc}{notoc}
+        Mit \T{notoc} wird das automatische Setzen einer Inhaltsübersicht deaktiviert.
+    \end{argument}
+
+    \begin{argument}{usebook}{useartcl}
+        Kontrollieren ob \T{scrbook}\footnote{\url{https://www.ctan.org/pkg/scrbook}} (\T{usebook}) oder \T{scrartcl}\footnote{\url{https://www.ctan.org/pkg/scrartcl}} (\T{userartcl}) zum Setzen des Dokuments verwendet wird. \notetext{Mit \T{scrartcl} stehen keine Kapitel zur Verfügung! Weiter ändert sich die Kopfzeile in sofern, dass nun die einzelnen Abschnitte verfolgt werden. Soll das Format gewechselt werden, nach dem es bereits einmal anders generiert wurde, gilt es die \bvoid{:lan:Dokumentname:ran:.aux} und die \bvoid{:lan:Dokumentname:ran:.toc}-Dateien zu löschen!}
+    \end{argument}
+
+    \begin{argument}{setstyle}{nosetstyle}
+        Mit \T{setstyle} wird automatisch geprüft, welche Pakete der \T{sopra-collection}\footnote{\url{https://github.com/EagleoutIce/sopra-collection}} geladen sind und entsprechende Stile gesetzt um ein einheitliches Layout zu erzeugen.
+    \end{argument}
+
+    \subsection{Weitere Informationen}
+    An einem adäquaten Layout für Präsentationen wird aktuell gearbeitet.    
+
+%
+%
+% .########..########.########.########.##.....##.##.......########
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..######...######...######...#########.##.......######..
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..########.##.......########.##.....##.########.########
+%
+%
+
+\section{Befehlsübersicht}
+
+Die Klasse fügt als Basis-Klasse keinen großen Satz an Befehlen für
+den Nutzer hinzu. Diese Aufgabe gebührt den erweiternden Paketen.
+
+\subsection{Daten setzen}
+\label{sec:DatenSetzen}
+Die Folgenden Befehle sollten in der Präambel gesetzt werden und konfigurieren
+auch die Metadaten des jeweiligen Dokuments (also die Dokumenteigenschaften).
+Sie können beliebig oft überschrieben werden (bis zu dem Punkt, an dem
+das Dokument beginnt). \notetext{Entwicklernotiz: Alle diese Felder stehen über
+\T{\textbackslash sop@register@$\langle$Name$\rangle$}, beziehungsweise ihre 'short'-Varianten
+über \T{\textbackslash sop@register@short@$\langle$Name$\rangle$} zur Verfügung.}
+
+\begin{command}{title}{\optArg{short}\manArg{NeuerTitel}}
+    Setzt den Titel des Dokuments auf \T{NeuerTitel}.
+\end{command}
+
+\begin{command}{subtitle}{\optArg{short}\manArg{NeuerTitel}}
+    Setzt den Untertitel des Dokuments auf \T{NeuerTitel}.
+\end{command}
+
+\begin{command}{brief}{\optArg{short}\manArg{Kurzbeschreibung}}
+    Setzt die Kurzbeschreibung des Dokuments auf \T{Kurzbeschreibung}. Sie wird auf der Titelseite links unten angezeigt.
+\end{command}
+
+\begin{command}{authors}{\optArg{short}\manArg{Autorenliste}}
+    Hierrüber kann die Liste der Autoren gesetzt werden. Es empfiehlt sich
+    hierfür \cmdref{addAuthor} zu verwenden.
+\end{command}
+
+\begin{command}{duedate}{\optArg{short}\manArg{YYYY-MM-DD}}
+   Setzt das Datum des Dokuments. Zur Konvertierung wird \cmdref{DateConvert}
+   verwendet. 
+\end{command}
+
+\begin{command}{supervisor}{\optArg{short}\manArg{Name}}
+    Setzt den Betreuer auf \T{Name}. Dieses Datenfeld wird in der Basis-Klasse nicht verwendet. 
+\end{command}
+
+\begin{command}{keywords}{\optArg{short}\manArg{Schlüsselwörter}}
+    Setzt die Keywords für die Metadaten auf \T{Schlüselwörter}. 
+\end{command}
+
+\begin{command}{group}{\optArg{short}\manArg{Name}}
+    Setzt die Gruppe des jeweiligen Erstellers auf \T{Name}.% Maybe show?
+\end{command}
+
+\begin{command}{groupnum}{\optArg{short}\manArg{Nummer}}
+    Setzt im Falle einer Nummerierung (oder Symbol, etc.) der Gruppe dieses
+    auf \T{Nummer}.
+\end{command}
+
+\subsection{Beim Datensetzen hilfreiches}
+\begin{command}{addAuthor}{\manArg{Name (Email)}}
+    Fügt einen Autor der Liste der Autoren (\cmdref{authors}) hinzu. So zum
+    Beispiel: \blatex[morekeywords={[5]{\\addAuthor}}]{\\addAuthor\{Florian Sihler (florian.sihler@uni-ulm.de)\}}.
+\end{command}
+
+\begin{command}{setTeam}{\manArg{Name Nummer}}
+    Erlaubt es \cmdref{group} und \cmdref{groupnum} in einem Aufruf zu setzen.
+    So zum Beispiel: \T{\cmd{setTeam}\{Affenbande 42\}} oder
+    \T{\cmd{setTeam}\{\{Mega Team\} A\}}.
+\end{command}
+
+\begin{command}{sopDisableTocRegister}{}
+    Deaktiviert die Aufzeichnung von Abschnitten (im Header).
+\end{command}
+
+\begin{command}{sopEnableTocRegister}{}
+    Aktiviert die Aufzeichnung von Abschnitten (im Header).
+\end{command}
+
+\subsection{Die Daten anzeigen}
+
+\begin{command}{typesetAuthors}{}
+    Setzt die Autoren gemäß \jmark[\T{showmail}]{mrk:showmail} mit oder
+    ohne E-Mail-Adresse, so ergibt \cmd{typesetAuthors}: \typesetAuthors.
+    Bei mehreren werden Kommas und das \say{und} korrekt gesetzt.
+\end{command}
+
+\begin{command}{thesopversion}{}
+    Gibt die aktuelle Version der \T{sopra-paper}-Dokumentklasse aus. \notetext{Hinweis: über \blatex{\\value\{sopversion\}} lässt sich
+    die Version als $4$-stellige Nummer erhalten: \arabic{sopversion}.}
+\end{command}
+
+\begin{command}{DateConvert}{\manArg{YYYY-MM-DD}}
+    Konvertiert ein Datum in eine schönere Form, so:
+\begin{plainlatex}[morekeywords={[5]{\\DateConvert}}]
+\DateConvert{2019-12-02} % :yields: !*\solGet{comments}{\DateConvert{2019-12-02}}*!
+\end{plainlatex}
+\end{command}
+
+\subsection{Generelle Formatierungsbefehle}
+
+\begin{command}{imptext}{\manArg{Text}}
+    Hebt \T{Text} als \imptext{sehr wichtig} hervor.
+\end{command}
+
+\begin{command}{notetext}{\manArg{Text}}
+    Setzt \T{Text} als eine \notetext{beiläufige Notiz}.
+\end{command}
+
+\subsection{Farben}
+\def\colshow#1{\T{#1}~\tikz[baseline=-0.6ex]{\draw[fill=#1] circle (4pt);}}
+Die folgenden Farben stehen zur Verfügung: \foreach[count=\i] \col in {cprimary,cakzent,clight,cimportant,cwhite} {\ifnum\i>1,~\fi\colshow{\col}} und \colshow{chighlight}.
+
+%
+%
+% ....###....##....##.##.....##....###....##....##..######..
+% ...##.##...###...##.##.....##...##.##...###...##.##....##.
+% ..##...##..####..##.##.....##..##...##..####..##.##.......
+% .##.....##.##.##.##.#########.##.....##.##.##.##.##...####
+% .#########.##..####.##.....##.#########.##..####.##....##.
+% .##.....##.##...###.##.....##.##.....##.##...###.##....##.
+% .##.....##.##....##.##.....##.##.....##.##....##..######..
+%
+%
+
+\appendix
+\section{Verbundene Klassen und Pakete}
+
+Im Zuge dieser \LaTeXe-Dokumentklasse sind noch einige andere Pakete entstanden. Zum aktuellen Kompilierstand existiert (Pakete und Klassen, ohne Link sind dieser beigelegt und hier: \url{https://github.com/EagleoutIce/sopra-collection} zu finden):
+\begin{multicols}{3}
+    \begin{itemize}
+        \foreach \i/\u in {eagle-maps/{https://github.com/EagleoutIce/eagle-maps},LILLY-Framework/{https://github.com/EagleoutIce/LILLY},sopra-documentation/,sopra-models/,sopra-listings/,sopra-requirements/,sopra-attachments/} {
+            \item \T{\i}\expandafter\ifx\expandafter\\\u\\\else\footnote{\url{\u}}\fi
+        }
+    \end{itemize}    
+\end{multicols}
+
+\end{document}
