@@ -6,7 +6,7 @@
 
 Dies ist eine Ansammlung (hoffentlich) wundertoller LaTeX2e Klassen und Pakete, für das Softwaregrundprojekt
 im Rahmen des Informatikstudiums an der Universität Ulm im Wintersemester 2019/20 sowie dem sich anschließendem
-Sommersemester. Es grüßt: `team-020`.
+Sommersemester. Es grüßt: Florian (`team-020`).
 
 ## Installation
 
