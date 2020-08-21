@@ -104,7 +104,7 @@ jobs:
           working_directory: sopra-tables
           root_file: sopra-tables.doc.tex
           # Ensure that all packages are present:
-          pre_compile: "find \"../\" \\( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \\) -type f -not -path \"../sopra-standard/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages"
+          pre_compile: "find \"../\" \\( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \\) -type f -not -path \"../sopra-tables/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages"
 
       - name: Commit PDF
         run: |
