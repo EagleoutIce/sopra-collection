@@ -24,7 +24,7 @@ jobs:
           working_directory: sopra-attachments
           root_file: sopra-attachments.doc.tex
           # Ensure that all packages are present:
-          pre_compile: "rm *.sty && cp -lu ../**/*.sty ./ && rm *.cls && cp -lu ../**/*.cls ./"
+          pre_compile: "rm -f *.sty && cp -lu ../**/*.sty ./ && rm -f *.cls && cp -lu ../**/*.cls ./"
 
       - name: Compile sopra-base
         uses: xu-cheng/latex-action@v2
@@ -32,7 +32,7 @@ jobs:
           working_directory: sopra-base
           root_file: sopra-base.doc.tex
           # Ensure that all packages are present:
-          pre_compile: "rm *.sty && cp -lu ../**/*.sty ./ && rm *.cls && cp -lu ../**/*.cls ./"
+          pre_compile: "rm -f *.sty && cp -lu ../**/*.sty ./ && rm -f *.cls && cp -lu ../**/*.cls ./"
 
       - name: Compile sopra-changelog
         uses: xu-cheng/latex-action@v2
@@ -40,7 +40,7 @@ jobs:
           working_directory: sopra-changelog
           root_file: sopra-changelog.doc.tex
           # Ensure that all packages are present:
-          pre_compile: "rm *.sty && cp -lu ../**/*.sty ./ && rm *.cls && cp -lu ../**/*.cls ./"
+          pre_compile: "rm -f *.sty && cp -lu ../**/*.sty ./ && rm -f *.cls && cp -lu ../**/*.cls ./"
 
       - name: Compile sopra-documentation
         uses: xu-cheng/latex-action@v2
@@ -48,7 +48,7 @@ jobs:
           working_directory: sopra-documentation
           root_file: sopra-documentation.doc.tex
           # Ensure that all packages are present:
-          pre_compile: "rm *.sty && cp -lu ../**/*.sty ./ && rm *.cls && cp -lu ../**/*.cls ./"
+          pre_compile: "rm -f *.sty && cp -lu ../**/*.sty ./ && rm -f *.cls && cp -lu ../**/*.cls ./"
 
       - name: Compile sopra-listings
         uses: xu-cheng/latex-action@v2
@@ -56,7 +56,7 @@ jobs:
           working_directory: sopra-listings
           root_file: sopra-listings.doc.tex
           # Ensure that all packages are present:
-          pre_compile: "rm *.sty && cp -lu ../**/*.sty ./ && rm *.cls && cp -lu ../**/*.cls ./"
+          pre_compile: "rm -f *.sty && cp -lu ../**/*.sty ./ && rm -f *.cls && cp -lu ../**/*.cls ./"
 
       - name: Compile sopra-models
         uses: xu-cheng/latex-action@v2
@@ -64,7 +64,7 @@ jobs:
           working_directory: sopra-listings
           root_file: sopra-listings.doc.tex
           # Ensure that all packages are present:
-          pre_compile: "rm *.sty && cp -lu ../**/*.sty ./ && rm *.cls && cp -lu ../**/*.cls ./"
+          pre_compile: "rm -f *.sty && cp -lu ../**/*.sty ./ && rm -f *.cls && cp -lu ../**/*.cls ./"
 
       - name: Compile sopra-paper
         uses: xu-cheng/latex-action@v2
@@ -72,7 +72,7 @@ jobs:
           working_directory: sopra-paper
           root_file: sopra-paper.doc.tex
           # Ensure that all packages are present:
-          pre_compile: "rm *.sty && cp -lu ../**/*.sty ./ && rm *.cls && cp -lu ../**/*.cls ./"
+          pre_compile: "rm -f *.sty && cp -lu ../**/*.sty ./ && rm -f *.cls && cp -lu ../**/*.cls ./"
 
       - name: Compile sopra-requirements
         uses: xu-cheng/latex-action@v2
@@ -80,7 +80,7 @@ jobs:
           working_directory: sopra-requirements
           root_file: sopra-requirements.doc.tex
           # Ensure that all packages are present:
-          pre_compile: "rm *.sty && cp -lu ../**/*.sty ./ && rm *.cls && cp -lu ../**/*.cls ./"
+          pre_compile: "rm -f *.sty && cp -lu ../**/*.sty ./ && rm -f *.cls && cp -lu ../**/*.cls ./"
 
       - name: Compile sopra-seraphim
         uses: xu-cheng/latex-action@v2
@@ -88,7 +88,7 @@ jobs:
           working_directory: sopra-seraphim
           root_file: sopra-seraphim.doc.tex
           # Ensure that all packages are present:
-          pre_compile: "rm *.sty && cp -lu ../**/*.sty ./ && rm *.cls && cp -lu ../**/*.cls ./"
+          pre_compile: "rm -f *.sty && cp -lu ../**/*.sty ./ && rm -f *.cls && cp -lu ../**/*.cls ./"
 
       - name: Compile sopra-standard
         uses: xu-cheng/latex-action@v2
@@ -96,7 +96,7 @@ jobs:
           working_directory: sopra-standard
           root_file: sopra-standard.doc.tex
           # Ensure that all packages are present:
-          pre_compile: "rm *.sty && cp -lu ../**/*.sty ./ && rm *.cls && cp -lu ../**/*.cls ./"
+          pre_compile: "rm -f *.sty && cp -lu ../**/*.sty ./ && rm -f *.cls && cp -lu ../**/*.cls ./"
 
       - name: Compile sopra-tables
         uses: xu-cheng/latex-action@v2
@@ -104,7 +104,7 @@ jobs:
           working_directory: sopra-tables
           root_file: sopra-tables.doc.tex
           # Ensure that all packages are present:
-          pre_compile: "rm *.sty && cp -lu ../**/*.sty ./ && rm *.cls && cp -lu ../**/*.cls ./"
+          pre_compile: "rm -f *.sty && cp -lu ../**/*.sty ./ && rm -f *.cls && cp -lu ../**/*.cls ./"
 
       - name: Commit PDF
         run: |
