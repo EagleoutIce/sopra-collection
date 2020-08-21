@@ -1,0 +1,184 @@
+\documentclass{sopra-base} 
+
+\usepackage{sopra-documentation}
+\usepackage{sopra-standard}
+
+\title{Das 'sopra-standard'-Paket}
+\subtitle[Dokumentation für das 'sopra-standard'-Paket]{Dokumentation für das 'sopra-standard'-Paket~$\mid$~Version \thesosversion}
+
+\duedate{2019-12-2}
+
+\keywords{Dokumentation,sopra-standard,sopra,uni ulm,uulm,Paket}
+\authors{Florian Sihler (florian.sihler@uni-ulm.de)}
+
+\group{Die Affenbande}
+
+
+
+\begin{document}
+
+    \maketitle%
+%
+    %\tableofcontents
+%
+
+%
+%
+% ....###....##.......##........######...########.##.....##.########.####.##....##.########..######.
+% ...##.##...##.......##.......##....##..##.......###...###.##........##..###...##.##.......##....##
+% ..##...##..##.......##.......##........##.......####.####.##........##..####..##.##.......##......
+% .##.....##.##.......##.......##...####.######...##.###.##.######....##..##.##.##.######....######.
+% .#########.##.......##.......##....##..##.......##.....##.##........##..##..####.##.............##
+% .##.....##.##.......##.......##....##..##.......##.....##.##........##..##...###.##.......##....##
+% .##.....##.########.########..######...########.##.....##.########.####.##....##.########..######.
+%
+%
+
+\section{Allgemeines}
+\subsection{Warum, wieso, weshalb?}
+    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im 
+    Wintersemester 2019 und Sommersemester 2020 verfasst und diente der Gestaltung des Standarddokuments. Diese Dokumentation wurde zusammen mit der 
+    \T{sopra-base.cls} sowie dem Paket \T{sopra-documentation.sty} kreiert.\par
+    Zum Visualisieren der einzelnen Code-Ausschnitte wird das
+    \T{sopra-listings}-Paket verwendet.
+    Das zugehörige Paket sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile[subject={sopra-standard.sty}]{sopra-standard.sty}}.
+\subsection{Abhängigkeiten}
+    Dieses Paket bindet die folgenden Paketen mit ein:
+    \begin{multicols}{4}
+        \begin{itemize}
+            \def\pkgparse#1:#2\@nil{%
+                \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
+            }
+            \foreach \pkg in {fontawesome:,xstring:,array:,sopra-changelog:} {
+                \item \expandafter\pkgparse\pkg\@nil
+            }
+        \end{itemize}
+    \end{multicols}
+    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein, beziehungsweise zusammen mit diesem Paket ausgeliefert werden.
+
+\subsection{Die Installation}
+    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die 
+    folgenden Möglichkeiten ergeben:
+    \begin{itemize}
+        \item Das Paket kann in dasselbe Verzeichnis wie das Dokument
+                gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+\begin{plainlatex}
+\usepackage{sopra-standard}
+\end{plainlatex}
+        \item Das Paket kann in ein Unterverzeichnis/in ein mit
+                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
+                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+\begin{plainlatex}
+\usepackage{./Mein/Pfad/zu/sopra-standard}
+\end{plainlatex}
+        \item Man kann das Paket (mittels eines Symlinks oder ähnlichem)
+              in einen eigenen \emph{texmf}-Baum ablegen.
+              So kann zum Beispiel auf Linux unter der Verwendung von texlive
+              das Paket hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
+              Das Verzeichnis kann erstellt und anschließend mittels
+              \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
+              das Paket wie jede andere installierte Paket verwendet werden:
+\begin{plainlatex}
+\usepackage{sopra-standard}
+\end{plainlatex}
+    \end{itemize}
+
+\subsection{Weitere Besonderheiten}
+In Version \thesosversion{} (\cmdref{thesosversion}) gibt es keine weiteren
+Besonderheiten.
+
+%
+%
+% .##....##..#######..##....##.########.####..######...##.....##.########.....###....########.####..#######..##....##
+% .##...##..##.....##.###...##.##........##..##....##..##.....##.##.....##...##.##......##.....##..##.....##.###...##
+% .##..##...##.....##.####..##.##........##..##........##.....##.##.....##..##...##.....##.....##..##.....##.####..##
+% .#####....##.....##.##.##.##.######....##..##...####.##.....##.########..##.....##....##.....##..##.....##.##.##.##
+% .##..##...##.....##.##..####.##........##..##....##..##.....##.##...##...#########....##.....##..##.....##.##..####
+% .##...##..##.....##.##...###.##........##..##....##..##.....##.##....##..##.....##....##.....##..##.....##.##...###
+% .##....##..#######..##....##.##.......####..######....#######..##.....##.##.....##....##....####..#######..##....##
+%
+%
+
+
+\section{Paket-Konfiguration}    
+    \subsection{Akzeptierte Parameter}
+    In Version \thesosversion{} werden keine Parameter akzeptiert.
+
+%
+%
+% .########..########.########.########.##.....##.##.......########
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..######...######...######...#########.##.......######..
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .##.....##.##.......##.......##.......##.....##.##.......##......
+% .########..########.##.......########.##.....##.########.########
+%
+%
+
+\section{Befehle- und Umgebungen}
+
+Es gilt zu beachten, dass das Präfix \T{env@} nur auf die Natur einer Umgebung hinweist und nicht zum eigentlichen Bezeichner zuzuordnen ist!\par{}
+Das Paket definiert zugrundeliegende Umgebungen die es zur stilisierung verwendet.
+Diese werden in der Dokumentation nicht vorgestellt und sollten auch nicht direkt
+verwendet werden.
+
+\subsection{Die Umgebungen}
+\begin{command}{CreateNewStandardType}{\manArg{settings}\manArg{environment name}\manArg{counter name}}
+    Erstellt eine neue Umgebung mit dem Bezeichner \T{environment name}. Die Umgebung wird versioniert, die Schlüssel sind als kommaseparierte Liste aus \say{key: value}-Paaren zu übergeben. Als Beispiel dient hier die Definition
+    des Kommentars:
+\begin{plainlatex}[morekeywords={[5]{\\CreateNewStandardType,\\footnotesize,\\faCommentsO}}]
+\CreateNewStandardType{symbol: \footnotesize!**!\faCommentsO,title: Kommentar}
+    {comment}{ctrcomment}
+\end{plainlatex}
+Es sind die folgenden Einstellungen möglich: \begin{description}
+    \item[author:] Setzt einen Autor, kann mehrfach angegeben werden um mehrere zu vermerken.
+    \item[bookmark:] Setzt die bookmark-Tiefe bis zu der die Umgebung vermerkt werden soll.
+    \item[symbol:] Setzt das Symbol, welches zum Text angezeigt wird.
+    \item[title:] Setzt den Titel der Umgebung.
+    \item[flags:] Erlaubt es Flaggen zusätzlich zur Box zur vermerken die Metadaten bezeichnen.
+    \item[status:] Erlaubt es den Status für den Kommentar oder die Definition zu setzen (zum Beispiel: \T{OK}).
+    \item[counter:] Setzt den Zähler, den es zu verwenden gilt.
+\end{description}
+Alle diese Einstellungen können auch manuell bei der Angabe der Umgebung überschrieben werden (dies empfiehlt sich zum Beispiel im Falle des Autoren-Tags).
+\end{command}
+
+Es werden die folgenden Umgebungen definiert: \env{filedef}, \env{comment}, \env{datadef}, \env{messagedef}, \env{cmdlinedef} und \env{begdef}.
+
+\subsection{Querverweise im Code}
+
+\begin{command}{CreateCodeHyperLink}{\optArg{Sequenz}\manArg{Ziel}}
+    Benötigt \blatex{sopra-listings} und sorgt dafür, dass die \say{Sequenz} nun zu einem Hyperlink wird, welcher auf den durch \blatex{\\label} gesetzten Marker \say{\T{std:Ziel}} zeigt. Das \T{std:} wird hierbei \emph{nur genau dann} automatisch angehängt, wenn keine \say{explizite} Sequenz übergeben wird. In diesem Fall erwartet der Befehl eine Liste an Begriffen, die automatisch zu gleichnamigen Markern springen:
+\begin{plainlatex}[morekeywords={[5]{\\CreateCodeHyperLink}}]
+\CreateCodeHyperLink{CharacterDescription,GenderEnum,PropertyEnum,GadgetEnum,Gadget,NPCEnum,FieldStateEnum}
+\end{plainlatex}
+    Gegenüber:
+\begin{plainlatex}[morekeywords={[5]{\\CreateCodeHyperLink}}]
+\CreateCodeHyperLink[RequestItemChoiceMessage]{std:Nachricht: Charakter- und Gadgetangebot}
+\CreateCodeHyperLink[ItemChoiceMessage]{std:Nachricht: Charakter- oder Gadgetwahl}
+\end{plainlatex}
+\end{command}
+
+\begin{command}{setComment}{\manArg{Kommentar}}
+    Setzt den Kommentar, der mit dem nächsten \cmdref{Chapter}-Befehl in den Table-Of-Contents gesetzt wird.
+\end{command}
+
+\begin{command}{Chapter}{\manArg{Bezeichner}}
+    Arbeitet wie \cmd{chapter}, bindet aber \cmdref{setComment} mit ein:
+\begin{plainlatex}[morekeywords={[5]{\\setComment,\\Chapter}}]
+\setComment{Grundlegende Informationen, wie dieses Dokument zu lesen ist.}
+\Chapter{Allgemeines}
+\end{plainlatex}
+\end{command}
+
+\subsection{Allgemeine Befehle}
+
+\begin{command}{thesosversion}{}
+    Liefert die aktuelle Version des Pakets. So ergibt: \cmd{thesosversion}: \thesosversion\\
+    \notetext{Hinweis: über \blatex{\\value\{sosversion\}} lässt sich
+    die Version als $4$-stellige Nummer erhalten: \arabic{sosversion}.}
+\end{command}
+
+Weiter definiert werden noch einige Shortcuts wie \cmd{say} und \cmd{info}, die hier bald Dokumentiert werden sollen\ldots
+
+\end{document}

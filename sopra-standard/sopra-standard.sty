@@ -1,0 +1,336 @@
+%% sopra-standard.sty
+%%
+%% -----------------------------------------------------------------------------
+%% Version: 1.0
+%% Author:  Florian Sihler, 23.01.2020
+%%
+%% This LaTeX2e Package offers environments and further commands
+%% to allow the management of file-, type-, message-, ... definitions
+%%                      ulm university, WiSe2019
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{sopra-standard}[2020/01/23 EagleoutIce - Definition-Environments]
+
+%% -----------------------------------------------------------------------------
+%% Lengths and Registers
+%% -----------------------------------------------------------------------------
+
+\newcounter{sosversion} \setcounter{sosversion}{1000}
+
+\def\resetRegisters{
+    \gdef\sos@reg@authors{}
+    \gdef\sos@reg@authors@multiple{}%
+    \gdef\sos@reg@bookmarklvl{3}
+    \gdef\sos@reg@presentsymbol{\(\circ\)}
+    \gdef\sos@reg@prefixtitle{Definition}
+    \gdef\sos@reg@counter{ctrdef}
+    \gdef\sos@reg@flags{}
+    \gdef\sos@reg@status{OK}
+}
+
+% make command to create new environment
+% till then we will fake a counter:
+\newcounter{ctrdef}
+ 
+%% -----------------------------------------------------------------------------
+%% Basic Packages
+%% -----------------------------------------------------------------------------
+
+% nicer symbols for definitions
+\RequirePackage{fontawesome}
+
+% easy my way - baibai
+\RequirePackage{xstring,array}
+% \RequirePackage{zref-savepos}
+% \RequirePackage{needspace}
+% We will integrate the changelog-mechanism
+\RequirePackage{sopra-changelog}
+
+%% -----------------------------------------------------------------------------
+%% The Basic Environment
+%% -----------------------------------------------------------------------------
+
+% Calculate left Space:
+% \newcommand*\@zmeasurepage[1]{\dimexpr\pagegoal-\zposy{#1}sp\relax}
+% \newcommand\@zsosensure[2]{\zsavepos{zposmarker:#2}\pgfmathsetmacro\@cgoal{\@zmeasurepage{zposmarker:#2}}Goal: \@cgoal; Target: \pgfmathsetmacro\@TT{#1\baselineskip}\@TT; pagetotal: \the\pagetotal, pagegoal: \the\pagegoal\ifdim\@cgoal pt>650pt\relax\null\newpage\relax\fi}%
+
+\newcommand\measurepage{\dimexpr\pagegoal-\pagetotal-\baselineskip\relax}
+\newcommand\@sosensure[1]{\ifdim\measurepage<#1\baselineskip\relax\null\newpage\relax\fi}%
+% the basic layout of an definition 
+% #1 opt args
+% #2 internal name
+% #3 titel
+% #4 Startersion
+% #5 Änderungen für die Version ein bettung
+\newenvironment{sos@definition}[5][]{%
+    \addvspace{1.25em plus 0.75em minus 0.275em}\phantomsection\bgroup%
+    \resetRegisters{}% reset author, bookmark....
+    % Start the Parser for the optargs:
+    \expandafter\sos@@parser@optargs#1,\@nil%
+    % \typeout{Sos-Definition erkannt! Counter: \sos@reg@counter (\@nameuse{the\sos@reg@counter}), Prefix-Titel:\sos@reg@prefixtitle, Bookmark-Level:  \sos@reg@bookmarklvl}%
+    \relax\leavevmode\noindent%
+    % \@zsosensure{2.5}{#2}%
+    % \@sosensure{0.5}
+    %\textbf{\zposy{zposmarker:#2}}%
+    % Step counter:
+    \refstepcounter{\sos@reg@counter}%
+    %
+    \label{std:#2}% label it :D
+    \ignorespaces\begin{version}[#5]{#4}{#2}%
+        % Set the Symbol outside of Text-Block
+        \@ifundefined{@sop@registers@#2@removed}{\pdfbookmark[\sos@reg@bookmarklvl]{\sosFormatTitle{\sos@reg@prefixtitle}{\@nameuse{the\sos@reg@counter}}#3}{sos@id@\sos@reg@prefixtitle @\@nameuse{the\sos@reg@counter}}}% removed - ag
+        {\pdfbookmark[\sos@reg@bookmarklvl]{[ENTFERNT] \sosFormatTitle{\sos@reg@prefixtitle}{\@nameuse{the\sos@reg@counter}}#3}{sos@id@\sos@reg@prefixtitle @\@nameuse{the\sos@reg@counter}}}% handle might-bees:
+    \relax\leavevmode\noindent%
+    \begin{minipage}{\textwidth}\ignorespaces%
+    \hspace*{-1ex}\llap{\sos@reg@presentsymbol}\hspace*{1ex}% Title
+        \sosFormatTitle{\sos@reg@prefixtitle}{\@nameuse{the\sos@reg@counter}}#3% leftside maybe ensure with parbox?
+        \hbox{}\hfill\sosFormatFlags{\sos@reg@flags}\\*%
+    % now we will deploy the changelog and author section referencing all important metadata for the definiton.
+    \nopagebreak[4]\hbox{}\hfill{}\begin{minipage}{0.975\textwidth}%
+        \scriptsize\expandafter\ifx\expandafter\\\sos@reg@authors@multiple\\Autor:\else Autoren:\fi%z
+        \space\sos@reg@authors.\hfill{}(\sos@reg@status)\relax\\*%
+    \end{minipage}\end{minipage}\hfill\hbox{}\smallskip\\*%
+    \@ifundefined{@sop@registers@#2@removed}{}{% already-removed?
+    \ifnum\value{soc@compile@target@version}<\@nameuse{@sop@registers@#2@removed}% nope
+    \else\noindent\imptext{Hinweis: Diese Definition wurde in Version \@socmp{\@nameuse{@sop@registers@#2@removed}} des Dokuments entfernt!}\quad\fi%
+    }%
+    }{%
+    \end{version}%
+    \egroup\par{}\ignorespacesafterend%
+}
+
+%% -----------------------------------------------------------------------------
+%% The (custom) KV-Parser
+%% -----------------------------------------------------------------------------
+
+\def\sos@trimspace#1{#1}
+
+\def\sos@@parser@optargs@parse#1: #2\@nil{%
+    \edef\farg{\expandafter\sos@trimspace #1}%
+    \@ifundefined{@sos@parser@keyhandler@\farg}{%
+        % not unkown
+        \PackageError{sopra-standard}{The Key '\farg' is unknown. No registered handler was found!}%
+    }
+    {% 
+        % found a handler, call it:
+        \@nameuse{@sos@parser@keyhandler@\farg}{\farg}{#2}%   
+    }%
+}
+
+\def\sos@@parser@optargs#1,#2\@nil{\ignorespaces%
+    % \typeout{got: '#1','#2'}
+    \ifx\\#1\\\else%
+        % now do single parse
+        \expandafter\sos@@parser@optargs@parse#1\@nil%
+        \ifx\\#2\\\else% recursive call
+            \expandafter\sos@@parser@optargs#2,\@nil%
+        \fi%
+    \fi%
+}
+
+
+% the keyhandler to handler 'author: AUTHORNAME'
+% the anme will be appeded to the list
+% will be called with: '#1 = author' and '#2 = <supplied name>'
+\def\@sos@parser@keyhandler@author#1#2{% will append the author
+    \expandafter\ifx\expandafter\\\sos@reg@authors\\% was empty:
+        \gdef\sos@reg@authors{#2}%
+    \else% append:
+    \let\tmp@cur@a\sos@reg@authors%
+    \xdef\sos@reg@authors{\tmp@cur@a, #2}%
+    \gdef\sos@reg@authors@multiple{XXX}% Set append flag!
+    \fi
+}
+
+\def\@sos@parser@keyhandler@bookmark#1#2{% will set bookmark depth
+    \gdef\sos@reg@bookmarklvl{#2}%
+}
+
+\@namedef{@sos@parser@keyhandler@symbol}#1#2{% will set symbol to be set
+    \gdef\sos@reg@presentsymbol{#2}%     
+}
+
+\@namedef{@sos@parser@keyhandler@title}#1#2{% will set symbol to be set
+    \gdef\sos@reg@prefixtitle{#2}%     
+}
+
+\def\@sos@parser@keyhandler@flags#1#2{% will set special flags for the environment
+    \gdef\sos@reg@flags{#2}%
+}
+
+\def\@sos@parser@keyhandler@status#1#2{% will set the status flag
+    \gdef\sos@reg@status{#2}%
+}
+
+
+\def\@sos@parser@keyhandler@counter#1#2{% will set the counter flag
+    \gdef\sos@reg@counter{#2}%
+}
+
+%% -----------------------------------------------------------------------------
+%% The additional User-Functions :D
+%% -----------------------------------------------------------------------------
+
+\def\sos@thesosversion#1#2#3#4\@nil{%
+    \bgroup{}v#1.#2.#3#4\egroup%
+}
+\def\thesosversion{%
+    \edef\@tmp{\noexpand\sos@thesosversion\arabic{sosversion}\noexpand\@nil}%
+    \@tmp%
+}
+
+
+%% -----------------------------------------------------------------------------
+%% Formtters
+%% -----------------------------------------------------------------------------
+
+\def\sosFormatTitle#1#2{\bgroup\bfseries#1 #2:\space\egroup}
+
+\def\sosFormatFlags#1{\bgroup\scriptsize\itshape#1\egroup}
+
+
+%% -----------------------------------------------------------------------------
+%% Create new Environment type
+%% -----------------------------------------------------------------------------
+
+% #1 optional Args to be passed every Time
+% #2 environment name
+% #3 counter name
+\def\CreateNewStandardType#1#2#3{
+    % \bgroup\globaldefs=1
+    \global\newcounter{#3}
+    \newenvironment{#2}[5][]{%
+        \sos@definition[#1,counter: #3,##1]{##2}{##3}{##4}{##5}%
+    }{%
+        \endsos@definition%
+    }
+    %\egroup
+}
+
+%% -----------------------------------------------------------------------------
+%% Basic Environments
+%% -----------------------------------------------------------------------------
+
+\CreateNewStandardType{symbol: \raisebox{1pt}{\footnotesize\faFileTextO},title: Datei Definition}{filedef}{ctrfiledefs}
+\CreateNewStandardType{symbol: \footnotesize\faCommentsO,title: Kommentar}{comment}{ctrcomment}
+\CreateNewStandardType{symbol: \raisebox{2pt}{\footnotesize\{\}},title: Datentyp Definition}{datadef}{ctrdatatype}
+\CreateNewStandardType{symbol: \footnotesize\faCode,title: Nachricht Definition}{messagedef}{ctrjsonmessage}
+\CreateNewStandardType{symbol: \footnotesize\faTerminal,title: Kommandozeilenparameter}{cmdlinedef}{ctrcommandline}
+\CreateNewStandardType{title: Begriffsdefinition}{begdef}{ctrbegref}
+
+%% -----------------------------------------------------------------------------
+%% Extra Handler for sopra-listings
+%% -----------------------------------------------------------------------------
+
+% Note: this code should only be used if sopra-listings is in effect
+% it will add hyperlinks for datatypes inside of the code
+
+% #1 Length
+% #2 Codefragment
+% #3 hltarget
+\def\@CreateCodeHyperLink#1#2#3{%
+    \typeout{Create HL for '#2' using length '#1' and target '#3'}%
+    \expandafter\gdef\csname#2\endcsname{\solGet{keywordC}{\hyperref[#3]{#2}{}}}
+    \lstset{add to literate={:#2}{{\@nameuse{#2}}}{#1}}%
+    \lstset{add to literate={|#2|}{{\@nameuse{#2}}}{#1}}% Sicher gehen und so :/
+}
+
+% #1 Codefragment
+% #2 hltarget
+\newcommand\CreateCodeHyperLink[2][]{%
+    \IfStrEq{#1}{}{%
+        \@for\@elem:=#2\do{%
+            \StrLen{\@elem}[\@cclen]%
+            \edef\@tmp{\noexpand\@CreateCodeHyperLink{\@cclen}{\@elem}{std:\@elem}}\@tmp%
+        }
+    }{
+        \StrLen{#1}[\@cclen]%
+        \@CreateCodeHyperLink{\@cclen}{#1}{#2}%
+    }
+}
+
+\solSetLeftMargin{21pt} % find ich übersichtlicher mit den ganzen Defs...
+
+%% -----------------------------------------------------------------------------
+%% Toc - Annotations
+%% -----------------------------------------------------------------------------
+
+% get little setion summaries in the toc - this will hopefully look nice - even
+% if the LaTeX-Code isn't :D
+
+% register for current s-comment - wuuup wuup
+\def\currentTocComment{}
+
+% acts basically as \chapter{#1}, but will be '\setComment' aware
+\def\Chapter#1{%
+    \expandafter\ifx\expandafter\\\currentTocComment\\\chapter{#1}\else%
+        \bgroup
+        % \newcommand\voidpdfbookmark[3][]{}%
+        % \let\pdfbookmark\voidpdfbookmark%
+        \pgfmathsetmacro\nextchap{int(\value{chapter}+1)}%
+        \hypertarget{sopchapter.\nextchap}{}\nopagebreak%
+        \chapter[{\parbox[t]{\linewidth-1.5cm}{#1\\[0.5\topsep]\strut\mdseries{\itshape\scriptsize{\currentTocComment}\strut}}}]{#1}% ~~~
+        \egroup
+        % \egroup
+    \fi\gdef\currentTocComment{}%
+    \pdfbookmark[0]{#1}{ms@chp@@id@\thechapter}%
+}
+
+\let\oldsection\section
+\def\section{\@sosensure{6.25}\@ifstar\@star@section\@nostar@section}
+\def\@star@section#1{\oldsection*{#1}}
+\def\@nostar@section#1{\oldsection{#1}%
+\pdfbookmark[1]{#1}{ms@sec@@id@\thesection}}
+
+\let\oldsubsection\subsection
+    \def\subsection#1{%
+        %\@sosensure{2.25}%
+        \oldsubsection{#1}%
+        \pdfbookmark[2]{#1}{ms@sec@@id@\thesection @\thesubsection}%
+    }
+    \let\oldsubsubsection\subsubsection
+    \def\subsubsubsection#1{%
+        %\@sosensure{2.25}%
+        \oldsubsubsection{#1}%
+        \pdfbookmark[3]{#1}{ms@sec@@id@\thesection @\thesubsection @\thesubsubsection}%
+    }
+
+    \def\longspread{\setstretch{1.007}\scriptsize}% hihi
+
+    \long\def\setComment#1{\gdef\currentTocComment{\color{cprimary!75!cwhite}\faAngleDoubleRight~\parbox[t]{\linewidth-0.75em}{\protect\longspread#1}}}
+
+%% -----------------------------------------------------------------------------
+%% Generic Stuff
+%% -----------------------------------------------------------------------------
+% optional Arguments
+\def\opt{\mdseries\itshape}
+
+\setlist{nolistsep}
+\setlist[description,1]{align=left,style=standard}
+\newlist{specs}{description}{1}
+\setlist[specs,1]{widest=Beschreibung:,leftmargin=*,font=\mdseries\itshape,itemsep=4pt plus 3pt minus 0pt,align=right}
+
+\newcounter{counterDefinitions}
+
+\def\begriff#1{\phantomsection\label{BEGRIFF:#1}\refstepcounter{counterDefinitions}%
+%\addcontentsline{toc}{subsubsection}{Begriff \thecounterDefinitions: #1}
+\pdfbookmark[3]{Begriff \thecounterDefinitions: #1}{ms@shead@@bg@#1}
+}
+\newcommand\begriffref[2][]{\pref{BEGRIFF:#2}{\ifx\\#1\\#2\else#1\fi}} % => sopra-tables
+\newcolumntype{B}{>{\bfseries}K}
+\long\def\say#1{\glqq#1\grqq{}}
+% Change the behaviour - sadly, this will enable be to keep hyperlinks inside of the Grahics, which i consider to be more effective
+% \newcommand*\GetSopra[2][1]{\centering\includegraphics[width=#1\linewidth]{figures/sopra_#2-compressed}}% -compressed
+\newcommand*\GetSopra[2][1]{\centering\resizebox{#1\linewidth}{!}{\input{figures/sopra_#2.tex}}}% -compressed
+\newcommand*{\figref}[1]{\hyperref[{#1}]{\autoref*{#1} (\nameref*{#1})}} % One single link
+
+% \attachfilesetup{% sopra-paper support, somewhat hardcoded, but this is the original version
+%     author={\sop@register@authors},
+%     color=cimportant, % it is somewhat of a try to be honest :D 
+%     icon=Tag,
+%     mimetype=text/plain % we assume
+% }
+
+\newcommand\info[1]{\bgroup\footnotesize\itshape#1\egroup}
+
+\endinput
