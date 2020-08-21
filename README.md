@@ -1,3 +1,5 @@
+[![made-with-latex](https://img.shields.io/badge/Made%20with-LaTeX-1f425f.svg)](https://www.latex-project.org/) [![GPL license](https://img.shields.io/badge/License-GPL-blue.svg)](http://perso.crans.org/besson/LICENSE.html) ![Compile all documentations](https://github.com/EagleoutIce/sopra-collection/workflows/Compile%20all%20documentations/badge.svg)
+
 # sopra-collection
 
 ## Motivation
