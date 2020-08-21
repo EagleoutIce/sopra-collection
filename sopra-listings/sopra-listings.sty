@@ -19,7 +19,7 @@
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
 
-\newcounter{solversion} \setcounter{solversion}{1009}
+\newcounter{solversion} \setcounter{solversion}{1010}
 
 % note this will be used with tcb:
 \newlength{\sol@length@lst@outer@spacing}%
@@ -108,9 +108,15 @@
 \long\def\T#1{\bgroup\sol@ttfamily#1\egroup}
 
 
-% \def\sol@font@fs@basic{\linespread{1}}
 \def\sol@font@fs@numbers{\footnotesize}
 \def\solNumFs#1{\gdef\sol@font@fs@numbers{#1}}
+\def\sol@font@fs@normal{}
+\newcommand{\lstfs}[2][1]{%
+    \def\sol@font@fs@normal{\fontsize{#2}{#2}\selectfont\linespread{#1}}%
+    \ifnum#2>7\def\sol@font@fs@numbers{\edef\@@subfs{\the\numexpr #2-4\relax}\fontsize{\@@subfs}{\@@subfs}\selectfont\linespread{#1}}%
+    \else\def\sol@font@fs@numbers{\tiny\linespread{#1}}\fi%
+}
+
 %% -----------------------------------------------------------------------------
 %% Color & Style Definitions
 %% -----------------------------------------------------------------------------
@@ -174,7 +180,7 @@
         {literals:      \color{sol@colors@lst@literals}},%
         {comments:      \color{sol@colors@lst@comments}},% \scshape
         {highlight:     \color{sol@colors@lst@highlight}\itshape},%
-        {basic:         \color{black}\sol@ttfamily}%
+        {basic:         \sol@font@fs@normal\color{black}\sol@ttfamily}%
     }
 \else 
     \sol@list@define@styles{%
@@ -187,7 +193,7 @@
         {literals:      \color{sol@colors@lst@literals}},%
         {comments:      \color{sol@colors@lst@comments}},%
         {highlight:     \color{sol@colors@lst@highlight}\itshape},%
-        {basic:         \color{black}\sol@ttfamily}%
+        {basic:         \sol@font@fs@normal\color{black}\sol@ttfamily}%
     }
 \fi
 

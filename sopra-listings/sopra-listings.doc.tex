@@ -97,8 +97,10 @@
 
 \subsection{Weitere Besonderheiten}
 \paragraph{Version v1.0.0:} Es wird \cmd{ttfamily} modifiziert, so dass die \say{Typewriter}-Schrift auch hier identisch zu der allgemein verwendeten ist.
+\paragraph{Version v1.0.10:} Der Befehl \cmdref{lstfs} wurde hinzugefügt um die
+Schriftgrößen von Listings anzupassen.
 \paragraph{Version \thesolversion:}
-In Version \thesolversion{} (\cmdref{thesolversion}) gibt es keine weiteren
+In Version \thesolversion{} (\cmdref{thesolversion}) gibt es (sonst) keine weiteren
 Besonderheiten.
 
 %
@@ -153,7 +155,7 @@ Besonderheiten.
 \begin{plainlatex}
 \colorlet{sol@colors@lst@comments}{orange}
 \end{plainlatex}
-    Wir erhalten(examplarisch in Java):
+    Wir erhalten(exemplarisch in Java):
     \bgroup
 \begin{java}
 // Vor der Neuzuweisung der Farbe
@@ -175,8 +177,8 @@ public static void main(...){ /* ... */ }
     Alle im folgenden aufgeführten Befehle tragen (sofern nicht modifiziert) das Präfix 
     \T{sol@styles@lst@} und können (ohne dieses Präfix) mittels \cmdref{solGet} beziehungsweise \cmdref{solGetStyle} abgefragt werden. Einzelne Sprachen können
     weitere Befehle und Stile fordern und hinzufügen, davon sollte aber nur im Notfall gebraucht gemacht werden (so fügt die Sprache \T{Latex} den Stil \T{command} hinzu. Für mehr Informationen, siehe: \jmark[Abschnitt \ref{sec:vordefinierteSprachen} (Vordefinierte Sprachen)]{sec:vordefinierteSprachen})\par{}
-    Es gibt die folgenden Stile: \T{keywordA}, \T{keywordB}, \T{keywordC}, \T{keywordD}, \T{numbers}, \T{linenumbers}, \T{literals}, \T{comments}, \T{highlight} und \T{basic}, wobei letzterer jedem Stil vorangestellt wird. Die neudefinition eines Stils sollte
-    nicht leichtfertig getätigt werden und benltigt deswegen etwas mehr Aufwand. Hier ein Beispiel:
+    Es gibt die folgenden Stile: \T{keywordA}, \T{keywordB}, \T{keywordC}, \T{keywordD}, \T{numbers}, \T{linenumbers}, \T{literals}, \T{comments}, \T{highlight} und \T{basic}, wobei letzterer jedem Stil vorangestellt wird. Die Neudefinition eines Stils sollte
+    nicht leichtfertig getätigt werden und benötigt deswegen etwas mehr Aufwand. Hier ein Beispiel:
 \begin{plainlatex}[morekeywords={[5]{\\sol@list@define@styles,\\scshape}}]
 {\makeatletter
     \sol@list@define@styles{%
@@ -184,7 +186,7 @@ public static void main(...){ /* ... */ }
     }
 }
 \end{plainlatex}
-Wir erhalten(examplarisch in Java):
+Wir erhalten(exemplarisch in Java):
     \bgroup
 \begin{java}
 // Vor der Neuzuweisung des Stils
@@ -382,6 +384,46 @@ public static void main(...){ /* ... */ }
     Ändert die Schriftgröße der Zeilennummern separat.
 \end{command}
 
+\begin{command}{lstfs}{\optArg{linespread}\manArg{size}}
+    Passt die Schriftgröße des Codes wie auch die der Zeilennummern an. Bei letzteren wird versucht eine geeignete Größe zu finden:
+\begin{latex}[morekeywords={[5]{\\lstfs}}]
+\begin{java}
+public static int add(int a, int b){ return a + b; }
+\end{java}
+{\lstfs{5}
+\begin{java}
+public static int add(int a, int b){ return a + b; }
+\end{java}
+}
+\begin{java}
+public static int add(int a, int b){ return a + b; }
+\end{java}
+{\tiny
+\begin{java}
+public static int add(int a, int b){ return a + b; }
+\end{java}
+}
+\end{latex}
+Ergibt:
+\begin{java}
+public static int add(int a, int b){ return a + b; }
+\end{java}
+{\lstfs{5}
+\begin{java}
+public static int add(int a, int b){ return a + b; }
+\end{java}
+}
+\begin{java}
+public static int add(int a, int b){ return a + b; }
+\end{java}
+{\tiny
+\begin{java}
+public static int add(int a, int b){ return a + b; }
+\end{java}
+}
+\end{command}
+
+
 \appendix
 \section{Sprachdefinition}
 
@@ -389,7 +431,7 @@ public static void main(...){ /* ... */ }
 \label{sec:vordefinierteSprachen}
 
 Die hier definierten Sprachdateien befinden sich im Unterordner \T{Languages} und können auch nur als Basis für eine eigene Sprachdefinition genutzt werden. Sie enthalten schon einige Beispielwerte, so wie ich sie verwende, können aber in der Hinsicht auch komplett
-auf \say{Blank} zurückgesetzt werden. \notetext{Hinweis: Die Definition der Sprachen verläuft, Überraschung, analog zu Lilly (\url{https://github.com/EagleoutIce/LILLY}, nur die gefordete Dateinennung und die weiteren Möglichkeiten unterscheiden sich.), also können auch
+auf \say{Blank} zurückgesetzt werden. \notetext{Hinweis: Die Definition der Sprachen verläuft, Überraschung, analog zu Lilly (\url{https://github.com/EagleoutIce/LILLY}, nur die geforderte Dateinennung und die weiteren Möglichkeiten unterscheiden sich.), also können auch
 diese Sprachdefinitionen als Beispiel herangezogen werden. Weitere Informationen bietet die Dokumentation zu \T{listings}.}
 
 \paragraph{Java (\T{lJava}, \T{java})}
