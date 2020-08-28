@@ -147,9 +147,13 @@ Besonderheiten.
         Lädt mittels \cmdref{solLoadLanguage} die Sprachen \T{java}, \T{xml} und \T{json} (siehe \jmark[Abschnitt \ref{sec:vordefinierteSprachen} (Vordefinierte Sprachen)]{sec:vordefinierteSprachen} für mehr Informationen). Dies kann durch \T{noloadlangs} deaktiviert werden. \notetext{Hinweis: Die Sprachen werden nur geladen, wenn die Konfigurationsdateien gefunden werden. Siehe hierzu \cmdref{solLoadLanguage}.}
     \end{argument}
 
+    \begin{argument}{cpalette}{nocpalette}
+        Bietet Unterstützung für \href{color-palettes}{https://github.com/EagleoutIce/color-palettes}. In diesem Fall wird das code-highlighting automatisch an die aktuelle Palette angepasst.
+    \end{argument}
+    
 \subsection{Farben}
 
-    Dieses Paket definiert einige Farben mittels \cmd{colorlet}. Wird \T{sopra-base} als geladen erkannt, wird versucht passende Farben zu setzen. \imptext{Alle folgenden Farben tragen das Präfix \T{sol@colors@}}: \T{border}, \T{background}, \T{lst@keywordA}, \T{lst@keywordB}, \T{lst@keywordC}, \T{lst@numbers}, \T{lst@literals}, \T{lst@comments} und \T{lst@highlight}, wobei die Bedeutung der einzelnen Farben aufgrund ihres Namens hervorgehen sollte (jeder Sprache steht es frei die gleich zu besprechenden Stile, die
+    Dieses Paket definiert einige Farben mittels \cmd{colorlet}. Wird \T{sopra-base} als geladen erkannt, wird versucht passende Farben zu setzen. \imptext{Alle folgenden Farben tragen das Präfix \T{sol@colors@}}: \T{border}, \T{background}, \T{lst@keywordA}, \T{lst@keywordB}, \T{lst@keywordC}, \T{lst@numbers}, \T{lst@literals}, \T{lst@comments}, \T{lst@highlight} und \T{lst@command}, wobei die Bedeutung der einzelnen Farben aufgrund ihres Namens hervorgehen sollte (jeder Sprache steht es frei die gleich zu besprechenden Stile, die
     auf diesen Farben aufbauen, (beliebig) zu verwenden). Beispielsweise kann man die Farbe
     von Kommentaren wie folgt ändern:
 \begin{plainlatex}
@@ -177,7 +181,7 @@ public static void main(...){ /* ... */ }
     Alle im folgenden aufgeführten Befehle tragen (sofern nicht modifiziert) das Präfix 
     \T{sol@styles@lst@} und können (ohne dieses Präfix) mittels \cmdref{solGet} beziehungsweise \cmdref{solGetStyle} abgefragt werden. Einzelne Sprachen können
     weitere Befehle und Stile fordern und hinzufügen, davon sollte aber nur im Notfall gebraucht gemacht werden (so fügt die Sprache \T{Latex} den Stil \T{command} hinzu. Für mehr Informationen, siehe: \jmark[Abschnitt \ref{sec:vordefinierteSprachen} (Vordefinierte Sprachen)]{sec:vordefinierteSprachen})\par{}
-    Es gibt die folgenden Stile: \T{keywordA}, \T{keywordB}, \T{keywordC}, \T{keywordD}, \T{numbers}, \T{linenumbers}, \T{literals}, \T{comments}, \T{highlight} und \T{basic}, wobei letzterer jedem Stil vorangestellt wird. Die Neudefinition eines Stils sollte
+    Es gibt die folgenden Stile: \T{keywordA}, \T{keywordB}, \T{keywordC}, \T{keywordD}, \T{numbers}, \T{linenumbers}, \T{literals}, \T{comments}, \T{highlight}, \T{command} und \T{basic}, wobei letzterer jedem Stil vorangestellt wird. Die Neudefinition eines Stils sollte
     nicht leichtfertig getätigt werden und benötigt deswegen etwas mehr Aufwand. Hier ein Beispiel:
 \begin{plainlatex}[morekeywords={[5]{\\sol@list@define@styles,\\scshape}}]
 {\makeatletter
@@ -424,6 +428,7 @@ public static int add(int a, int b){ return a + b; }
 \end{command}
 
 
+\clearpage
 \appendix
 \section{Sprachdefinition}
 

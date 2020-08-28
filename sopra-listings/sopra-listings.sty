@@ -19,7 +19,7 @@
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
 
-\newcounter{solversion} \setcounter{solversion}{1010}
+\newcounter{solversion} \setcounter{solversion}{1012}
 
 % note this will be used with tcb:
 \newlength{\sol@length@lst@outer@spacing}%
@@ -40,6 +40,7 @@
 
 \newif\ifsol@printmode@% in print, ink will be reduced, adapted to grayscale
 \newif\ifsol@defaultlang@% if enabled, listings will try to load some langs
+\newif\ifsol@cpalette@% if enabled, listings will adapt their colors according to the color-palettes package
 
 % number-highlighting
 \newif\ifsol@highlight@numbers@ % should numbers be highlighted?  
@@ -65,6 +66,9 @@
 % Auto-Language
 \DeclareOption{loadlangs}{ \sol@defaultlang@true }%
 \DeclareOption{noloadlangs}{ \sol@defaultlang@false }%
+% Color-Palettes
+\DeclareOption{cpalette}{ \sol@cpalette@true }%
+\DeclareOption{nocpalette}{ \sol@cpalette@false }%
 
 % if sob is loaded, the default for the printmode will be passed,
 % otherwise we will use defaultmode as the default :D
@@ -139,6 +143,7 @@
     \colorlet{sol@colors@lst@literals}{orange!90!brown} % well, numbers
     \colorlet{sol@colors@lst@comments}{lightgray!65!gray} % well, comments
     \colorlet{sol@colors@lst@highlight}{lime} % sweetspots
+    \colorlet{sol@colors@lst@command}{sol@colors@lst@keywordB} % sweetspots
 }{% we will use the secondary/akzent color as default and choose matching colors
     % TODO: create a pleasing colorprofile :D
     \colorlet{sol@colors@lst@keywordA}{sob@col@uulm@cs} % Examples as above
@@ -148,6 +153,7 @@
     \colorlet{sol@colors@lst@literals}{sob@col@uulm!90!blue} %
     \colorlet{sol@colors@lst@comments}{lightgray!65!darkgray} %
     \colorlet{sol@colors@lst@highlight}{purple} %
+    \colorlet{sol@colors@lst@command}{sol@colors@lst@keywordB} %
 }
 
 % define the styling definitions
@@ -180,7 +186,8 @@
         {literals:      \color{sol@colors@lst@literals}},%
         {comments:      \color{sol@colors@lst@comments}},% \scshape
         {highlight:     \color{sol@colors@lst@highlight}\itshape},%
-        {basic:         \sol@font@fs@normal\color{black}\sol@ttfamily}%
+        {basic:         \sol@font@fs@normal\color{black}\sol@ttfamily},%
+        {command:       \color{sol@colors@lst@command}}%
     }
 \else 
     \sol@list@define@styles{%
@@ -193,7 +200,8 @@
         {literals:      \color{sol@colors@lst@literals}},%
         {comments:      \color{sol@colors@lst@comments}},%
         {highlight:     \color{sol@colors@lst@highlight}\itshape},%
-        {basic:         \sol@font@fs@normal\color{black}\sol@ttfamily}%
+        {basic:         \sol@font@fs@normal\color{black}\sol@ttfamily},%
+        {command:       \color{sol@colors@lst@command}}%
     }
 \fi
 
@@ -701,4 +709,33 @@
 \ifsol@defaultlang@
     \solLoadLanguage{java,xml,json}
 \fi
+
+%% -----------------------------------------------------------------------------
+%% Cp-Palette support
+%% -----------------------------------------------------------------------------
+
+\ifsol@cpalette@
+\@ifundefined{cpl@registered@palettes}{%
+    \PackageError{sopra-listings}{cpalette requested, but package not loaded}
+    {You have to load the 'color-palettes' package yourself if you use the 'cpalette'-Option.}%
+}{% Add to the hook..
+}
+\let\sol@old@cpl@hooks\cpl@hooks%
+\def\cpl@hooks{% Add to the hook
+    \sol@old@cpl@hooks%
+    \sol@cpalette@hook%
+}
+\def\sol@cpalette@hook{%
+\colorlet{sol@colors@lst@keywordA}{paletteA}%
+\colorlet{sol@colors@lst@keywordB}{paletteB}%
+\colorlet{sol@colors@lst@keywordC}{paletteC}%
+\colorlet{sol@colors@lst@numbers}{paletteB!60!gray}% 
+\colorlet{sol@colors@lst@literals}{paletteA!90!black}%
+\colorlet{sol@colors@lst@comments}{lightgray!65!darkgray}%
+\colorlet{sol@colors@lst@highlight}{paletteD}%
+\colorlet{sol@colors@lst@command}{paletteB}%
+}
+\fi
+
+% TODO: Easier way to change colors 'lstcolorset'?
 \endinput
