@@ -24,8 +24,6 @@ jobs:
         with:
           working_directory: sopra-listings/examples
           root_file: cp-listings.example.tex
-          # Ensure that all packages are present:
-          pre_compile: "find \"../\" \\( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \\) -type f -not -path \"../sopra-listings/examples/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\""
 
       - name: Commit PDF
         run: |
