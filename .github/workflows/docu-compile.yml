@@ -6,27 +6,111 @@ on:
   pull_request:
     branches: [ master ]
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  # This workflow contains a single job called "build"
   build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v2
 
-      - name: Compile sopra-listings example
+      - name: Compile sopra-attachments
         uses: xu-cheng/latex-action@v2
         with:
-          working_directory: sopra-listings/examples
-          root_file: cp-listings.example.tex
+          working_directory: sopra-attachments
+          root_file: sopra-attachments.doc.tex
+          # Ensure that all packages are present:
+          pre_compile: "find \"../\" \\( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \\) -type f -not -path \"../sopra-attachments/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages"
+
+      - name: Compile sopra-base
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: sopra-base
+          root_file: sopra-base.doc.tex
+          # Ensure that all packages are present:
+          pre_compile: "find \"../\" \\( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \\) -type f -not -path \"../sopra-base/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages"
+
+      - name: Compile sopra-changelog
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: sopra-changelog
+          root_file: sopra-changelog.doc.tex
+          # Ensure that all packages are present:
+          pre_compile: "find \"../\" \\( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \\) -type f -not -path \"../sopra-changelog/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages"
+
+      - name: Compile sopra-documentation
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: sopra-documentation
+          root_file: sopra-documentation.doc.tex
+          # Ensure that all packages are present:
+          pre_compile: "find \"../\" \\( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \\) -type f -not -path \"../sopra-documentation/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages"
+
+      - name: Compile sopra-listings
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: sopra-listings
+          root_file: sopra-listings.doc.tex
           # Ensure that all packages are present:
           pre_compile: "find \"../\" \\( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \\) -type f -not -path \"../sopra-listings/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\""
+
+      - name: Compile sopra-models
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: sopra-models
+          root_file: sopra-models.doc.tex
+          # Ensure that all packages are present:
+          pre_compile: "find \"../\" \\( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \\) -type f -not -path \"../sopra-models/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages"
+
+      - name: Compile sopra-paper
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: sopra-paper
+          root_file: sopra-paper.doc.tex
+          # Ensure that all packages are present:
+          pre_compile: "find \"../\" \\( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \\) -type f -not -path \"../sopra-paper/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages"
+
+      - name: Compile sopra-requirements
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: sopra-requirements
+          root_file: sopra-requirements.doc.tex
+          # Ensure that all packages are present:
+          pre_compile: "find \"../\" \\( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \\) -type f -not -path \"../sopra-requirements/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages"
+
+      - name: Compile sopra-seraphim
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: sopra-seraphim
+          root_file: sopra-seraphim.doc.tex
+          # Ensure that all packages are present:
+          pre_compile: "find \"../\" \\( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \\) -type f -not -path \"../sopra-seraphim/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages"
+
+      - name: Compile sopra-standard
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: sopra-standard
+          root_file: sopra-standard.doc.tex
+          # Ensure that all packages are present:
+          pre_compile: "find \"../\" \\( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \\) -type f -not -path \"../sopra-standard/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages"
+
+      - name: Compile sopra-tables
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: sopra-tables
+          root_file: sopra-tables.doc.tex
+          # Ensure that all packages are present:
+          pre_compile: "find \"../\" \\( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \\) -type f -not -path \"../sopra-tables/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages"
 
       - name: Commit PDF
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -f ./**/*.example.pdf
+          git add -f ./**/*.doc.pdf
           git commit -m "Updated documentation PDFs by workflow"
           
       - name: Push changes
