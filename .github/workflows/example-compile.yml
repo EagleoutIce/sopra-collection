@@ -24,7 +24,7 @@ jobs:
         with:
           working_directory: sopra-listings/examples
           root_file: cp-listings.example.tex
-          pre_compile: cp -r ../sopra-listings/Languages ./Languages"
+          pre_compile: "cp -r ../Languages ./Languages"
 
       - name: Commit PDF
         run: |
