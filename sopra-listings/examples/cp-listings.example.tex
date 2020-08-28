@@ -1,0 +1,24 @@
+\documentclass{article}
+
+\usepackage{../../color-palettes/color-palettes}
+\usepackage[cpalette,encoding]{sopra-listings}
+\usepackage{tikz}
+
+\title{Listings-Beispiel}
+\author{Florian Sihler}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{Die Auswirkungen der Paletten}
+\edef\AP{\AllPalettes}
+\foreach \i in \AP {\UsePalette{\i}%
+\subsection{Palette: \CurrentPalette}%
+\begin{center}
+    \ShowcaseCurrentPalette%
+\end{center}
+\ijava{Example.java}\clearpage}
+\end{document}
