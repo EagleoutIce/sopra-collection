@@ -1,4 +1,4 @@
-[![made-with-latex](https://img.shields.io/badge/Made%20with-LaTeX-1f425f.svg)](https://www.latex-project.org/) [![GPL license](https://img.shields.io/badge/License-GPL-blue.svg)](http://perso.crans.org/besson/LICENSE.html) ![Compile all documentations](https://github.com/EagleoutIce/sopra-collection/workflows/Compile%20all%20documentations/badge.svg) ![Compile all examples](https://github.com/EagleoutIce/sopra-collection/workflows/Compile%20all%20examples/badge.svg)
+[![made-with-latex](https://img.shields.io/badge/Made%20with-LaTeX-1f425f.svg)](https://www.latex-project.org/) [![GPL license](https://img.shields.io/badge/License-GPL-blue.svg)](http://perso.crans.org/besson/LICENSE.html) ![Compile all documentations and examples](https://github.com/EagleoutIce/sopra-collection/workflows/Compile%20all%20documentations%20and%20examples/badge.svg)
 
 # sopra-collection
 
