@@ -2,7 +2,8 @@ name: Compile all examples
 
 on:
   push:
-    branches: [ master ]
+    paths:
+      - '**/*.example.tex'
   pull_request:
     branches: [ master ]
 
