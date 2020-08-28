@@ -99,6 +99,8 @@
 \paragraph{Version v1.0.0:} Es wird \cmd{ttfamily} modifiziert, so dass die \say{Typewriter}-Schrift auch hier identisch zu der allgemein verwendeten ist.
 \paragraph{Version v1.0.10:} Der Befehl \cmdref{lstfs} wurde hinzugefügt um die
 Schriftgrößen von Listings anzupassen.
+\paragraph{Version v1.0.12:} Die Paketoption \texttt{cpalette} wurde samt Gegenoption hinzugefügt.
+\paragraph{Version v1.0.13:} Die Befehle \cmdref{lstcolorlet} und \cmdref{lstcolordef} wurden zur einfachen Farbmanipulation hinzugefügt.
 \paragraph{Version \thesolversion:}
 In Version \thesolversion{} (\cmdref{thesolversion}) gibt es (sonst) keine weiteren
 Besonderheiten.
@@ -155,9 +157,9 @@ Besonderheiten.
 
     Dieses Paket definiert einige Farben mittels \cmd{colorlet}. Wird \T{sopra-base} als geladen erkannt, wird versucht passende Farben zu setzen. \imptext{Alle folgenden Farben tragen das Präfix \T{sol@colors@}}: \T{border}, \T{background}, \T{lst@keywordA}, \T{lst@keywordB}, \T{lst@keywordC}, \T{lst@numbers}, \T{lst@literals}, \T{lst@comments}, \T{lst@highlight} und \T{lst@command}, wobei die Bedeutung der einzelnen Farben aufgrund ihres Namens hervorgehen sollte (jeder Sprache steht es frei die gleich zu besprechenden Stile, die
     auf diesen Farben aufbauen, (beliebig) zu verwenden). Beispielsweise kann man die Farbe
-    von Kommentaren wie folgt ändern:
-\begin{plainlatex}
-\colorlet{sol@colors@lst@comments}{orange}
+    von Kommentaren wie folgt ändern (\cmdref{lstcolorlet}):
+\begin{plainlatex}[morekeywords={[2]{\\lstcolorlet}}]
+\lstcolorlet{comments}{orange}
 \end{plainlatex}
     Wir erhalten(exemplarisch in Java):
     \bgroup
@@ -165,13 +167,13 @@ Besonderheiten.
 // Vor der Neuzuweisung der Farbe
 public static void main(...){ /* ... */ }
 \end{java}
-\colorlet{sol@colors@lst@comments}{orange}
-    \begin{java}
+\lstcolorlet{comments}{orange}
+\begin{java}
 // Nach Neuzuweisung der Farbe
 public static void main(...){ /* ... */ }
     \end{java}
     \egroup
- Es ist möglich jede Farbe (nach \T{xcolor}) zu verwenden.
+ Es ist möglich jede Farbe (nach \T{xcolor}) zu verwenden (siehe auch \cmdref{lstcolordef}).
 
 \subsection{Stile}
     Zur Hervorhebung der einzelnen Segmente im Listing werden den Farben entlehnte Stile definiert, die ebenfalls frei verändert werden können. \notetext{Entwicklernotiz, die 
@@ -427,6 +429,13 @@ public static int add(int a, int b){ return a + b; }
 }
 \end{command}
 
+\begin{command}{lstcolorlet}{\manArg{lstcolor}\manArg{normalcolor}}
+    Weißt eine Farbe mittels \cmd{colorlet} zu. Hierbei darf \emph{lstcolor} nur einen der folgenden Werte annehmen: \emph{keywordA}, \emph{keywordB}, \emph{keywordC}, \emph{numbers}, \emph{literals}, \emph{comments}, \emph{highlight} oder \emph{command}. 
+\end{command}
+
+\begin{command}{lstcolordef}{\optArg{mode=RGB}\manArg{lstcolor}\manArg{colorcode}}
+    Weißt eine Farbe mittels \cmd{definecolor} zu. Hierbei darf \emph{lstcolor} nur einen der folgenden Werte annehmen: \emph{keywordA}, \emph{keywordB}, \emph{keywordC}, \emph{numbers}, \emph{literals}, \emph{comments}, \emph{highlight} oder \emph{command}. Das erste Argument gibt den Modus nach \emph{xcolor} an.
+\end{command}
 
 \clearpage
 \appendix
