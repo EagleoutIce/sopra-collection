@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection>
+    <book category="Roman">
+        <!-- Ich bin ein Kommentar -->
+        <title>Tolles Buch</title>
+        <author>Netter Mensch</author>
+        <date> heute, wann sonst? </date>
+    </book>
+    <book category="Gute Bücher" />
+</collection>

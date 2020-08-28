@@ -1,8 +1,9 @@
 \documentclass{article}
 
-\usepackage{../../color-palettes/color-palettes}
+\usepackage{hyperref}
+\usepackage[hyperref]{../../color-palettes/color-palettes}
 \usepackage[cpalette,encoding]{../sopra-listings}
-\usepackage{tikz}
+\usepackage{pgffor}
 
 \title{Listings-Beispiel}
 \author{Florian Sihler}
@@ -19,6 +20,9 @@
 \subsection{Palette: \CurrentPalette}%
 \begin{center}
     \ShowcaseCurrentPalette%
-\end{center}
-\ijava{Example.java}\clearpage}%
+\end{center}\medskip
+\emph{Java-Example}:
+\ijava{Example.java}
+\noindent\emph{JSON-Example}:
+\ixml[morekeywords={[3]{collection,book,title,date,author}}]{Example.xml}\clearpage}%
 \end{document}
