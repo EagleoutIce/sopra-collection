@@ -297,19 +297,9 @@
             \fi
             \ifx\lst@next\@empty%
                 \ifx\lst@OutputBox\@gobble\else%
-                %\def\@@repl{#2}\typeout{#2}
-                %\ifx\@@repl\@@crerpl\inhexmodefalse\firstchartrue\else\iffirstchar%
-                %% start of a word
-                %\fi\firstcharfalse\fi% is space
-                %\ifx\@@repl\@@crehex\inhexmodetrue\fi%
-                %   \ifnum\lst@mode=\lst@Pmode\relax%
-                %     {\digitstyle #2}
-                %   \else #2\fi
-                % \else
                 \lst@XPrintToken \let\lst@scanmode\lst@scan@m%
                 \lst@token{#2}\lst@length#3\relax%
                 \lst@XPrintToken
-                %\fi%
                 \lst@whitespacefalse\@nc%
                 \fi
                 \let\lst@next\lst@CArgEmptyGobble
@@ -476,24 +466,13 @@
       listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
       % % #1 language name (java, latex, ..-)
       % % #2 lst language name (lJava, lLatex,...)
-      % command name/.code 2 args={#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ....
+      % command name/.code 2 args={#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ...
       command name prefix/.initial = {plain},%
       command name suffix/.initial = {},%
       %draw environment/.initial={plainlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions and one mandatory for the language
       constructor command/.initial={sol@NewLstEnvironPlain}
 }
 
-% \pgfkeys{/sol@lst@family/presentation/.is family,%
-%     /sol@lst@family/presentation,
-%       listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
-%       % % #1 language name (java, latex, ..-)
-%       % % #2 lst language name (lJava, lLatex,...)
-%       % command name/.code 2 args={#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ....
-%       command name prefix/.initial = {s},% This one was used to create the show environment. it's kept for historcal reasons
-%       command name suffix/.initial = {},%
-%       %draw environment/.initial={presentlst} % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions and one mandatory for the language
-%       constructor command/.initial={sol@NewLstEnvironPresent} % TODO: handle you
-% }
 
 %%% Inlines
 
@@ -524,14 +503,6 @@
       draw command/.initial={sol@writelst@input} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
 }
 
-% \pgfkeys{/sol@lst@family/inline present/.is family,%
-%     /sol@lst@family/inline present,
-%       listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
-%       command name prefix/.initial = {p},
-%       command name suffix/.initial = {},
-%       draw command/.initial={sol@xLSTINLINExADVANCED} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
-% }
-
 %% -----------------------------------------------------------------------------
 %% Language-Registration-Helper
 %% -----------------------------------------------------------------------------
@@ -544,15 +515,6 @@
 \def\sol@NewLstEnvironCore#1#2#3#4#5{%
         %This does already work, but has the drawback of not being able to provide the (wanted) different styles
       \lstnewenvironment{#1}[1][]{#3\lstset{##1}}{#4}%
-      % \newtcblisting{#1}[1][]{%
-      %   enhanced jigsaw,breakable,blankest,listing only,
-      %   listing options={%
-      %     style=MAIN,
-      %     language=#2,%set known plain options:
-      %     xleftmargin=0pt,xrightmargin=0pt,%
-      %     numbers=none,numbersep=0pt,frame=none,%
-      %     rulecolor={},backgroundcolor={},##1},#3%
-      % }{#4}%\typeout{deep: \the\currentgrouplevel} => 4
 }
 
 % #1 Name
@@ -573,8 +535,6 @@
   \lstnewenvironment{#1}[1][]{#3\lstset{xleftmargin=0pt,xrightmargin=0pt,%
   numbers=none,numbersep=0pt,frame=none,%
   rulecolor={},backgroundcolor={},##1}}{#4}%
-  % \expandafter\xdef\csname#1\endcsname{\noexpand\leavevmode\noexpand\vspace*{-0.45\noexpand\baselineskip}\noexpand\plainlst{#5}}
-  % \expandafter\xdef\csname end#1\endcsname{\noexpand\endplainlst}
 }
 
 % #1 Name
@@ -612,9 +572,6 @@
 \def\RegisterLanguage#1#2{\bgroup\makeatletter%
   % Register the Environments
   %
-  %\DeclareDocumentEnvironment{slatex}{O{}}{
-  %   \presentlst{lLatex}
-  % }{\endpresentlst}
   \def\sol@foreach@basic@env@iter##1,##2\@nil{
       \ifx\\##1\\\else 
         \def\environName{##1}
@@ -706,7 +663,6 @@
 %% Now we will define some languages
 %% -----------------------------------------------------------------------------
 
-
 \def\solLanguageSearchPath{{Languages/}}
 % a language will be loaded by the default latex-file mechanis
 % the file has to have the signature: 'language_<Name>.cfg'
@@ -740,7 +696,6 @@
 \let\solLoadLanguage\sol@LoadLanguage
 
 % we also want to make it possible to add a folder to the lang-path:
-
 
 % Maybe load defaults?
 \ifsol@defaultlang@
