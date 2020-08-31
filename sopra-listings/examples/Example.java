@@ -1,6 +1,5 @@
 import java.util.Scanner;
 // Further imports, maybe
-
 |ihl|Diese Zeile wird künstlich hervorgehoben|ihl|
 
 @ImportantAnnotation
