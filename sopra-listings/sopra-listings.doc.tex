@@ -92,7 +92,7 @@
 
     \imptext{Wichtiger Hinweis:} Dieses Paket kommt mit Sprachkonfigurationen, die sich im Unterordner \say{\T{Languages}} befinden. Die Sprachen stehen nur dann zur Verfügung,
     wenn sie mit dem Paket platziert werden (nach einer der eben genannten Möglichkeiten) oder sie sich im gleichen Verzeichnis wie die \LaTeXe-Datei befinden. Sollte dies
-    nicht gewünscht oder möglich sein, so \emph{muss} \cmdref{solLanguageSearchPath} angepasst werden! Es steht jedem Frei, das Laden der Sprachen mittels \jmark[\T{noloadlangs}]{mrk:noloadlangs} zu deaktivieren und seine eigenen Sprachdefinitionen
+    nicht gewünscht oder möglich sein, so \emph{muss} \cmdref{solLanguageSearchPath} angepasst werden! Es steht jedem Frei, das Laden der Sprachen mittels \jmark[\T{noloadlangs}]{mrk:loadlangs} zu deaktivieren und seine eigenen Sprachdefinitionen
     oder Sprachen zu verwenden. Damit dieses Paket allerdings Sinn macht, sollte das \cmdref{RegisterLanguage}-Makro verwendet werden.
 
 \subsection{Weitere Besonderheiten}
@@ -150,7 +150,7 @@ Besonderheiten.
     \end{argument}
 
     \begin{argument}{cpalette}{nocpalette}
-        Bietet Unterstützung für \href{color-palettes}{https://github.com/EagleoutIce/color-palettes}. In diesem Fall wird das code-highlighting automatisch an die aktuelle Palette angepasst.
+        Bietet Unterstützung für \href{color-palettes}{https://github.com/EagleoutIce/color-palettes}. In diesem Fall wird das code-highlighting automatisch an die aktuelle Palette angepasst und auch mit dem Ändern der Palette von da an aktualisiert.
     \end{argument}
     
 \subsection{Farben}

@@ -74,7 +74,7 @@
 \pgfmathsetmacro\sob@headheight{2.6cm + \sob@len@logoheight/2}
 \pgfmathsetmacro\sob@footheight{\sob@len@header-8mm}
 \RequirePackage[margin=\sob@len@header,a4paper,%
-    bottom=\sob@footheight pt]{geometry}
+    bottom=\sob@footheight pt,headheight=13.3pt]{geometry}
 % beautify:
 \RequirePackage{sfmath,lmodern,microtype,scrlayer-scrpage,titlesec}
 \RequirePackage{enumitem}
