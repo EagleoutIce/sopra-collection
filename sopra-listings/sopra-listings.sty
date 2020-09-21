@@ -358,17 +358,17 @@
 %% -----------------------------------------------------------------------------
 
 % please note, that they will apply under every condition!
-\newcommand{\sol@writelst@default}[2][]{%
+\newcommand{\sol@dlst@default}[2][]{%
     \begingroup\setlength{\fboxsep}{0pt}\fcolorbox{sol@colors@border}{sol@colors@background}{%
         \,\strut\lstinline[#1]`#2`\,%
     }\endgroup%
 }
 
-\newcommand{\sol@writelst@blank}[2][]{%
+\newcommand{\sol@dlst@blank}[2][]{%
     \begingroup\,\strut\lstinline[#1]`#2`\endgroup%
 }
 
-\newcommand{\sol@writelst@input}[2][]{%
+\newcommand{\sol@dlst@input}[2][]{%
     \begingroup\lstinputlisting[#1]{#2}\endgroup%
 }
 
@@ -453,7 +453,7 @@
       command name prefix/.initial = {},%
       command name suffix/.initial = {},%
       %draw environment/.initial={defaultlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions
-      constructor command/.initial={sol@NewLstEnvironCore}
+      constructor command/.initial={sol@NewLstEnvCore}
 }
 
 \pgfkeys{/sol@lst@family/nonumber/.is family,%
@@ -465,7 +465,7 @@
       command name prefix/.initial = {},%
       command name suffix/.initial = {*},%
       %draw environment/.initial={defaultlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions
-      constructor command/.initial={sol@NewLstEnvironCoreStarred}
+      constructor command/.initial={sol@NewLstEnvCoreStarred}
 }
 
 \pgfkeys{/sol@lst@family/plain/.is family,%
@@ -477,7 +477,7 @@
       command name prefix/.initial = {plain},%
       command name suffix/.initial = {},%
       %draw environment/.initial={plainlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions and one mandatory for the language
-      constructor command/.initial={sol@NewLstEnvironPlain}
+      constructor command/.initial={sol@NewLstEnvPlain}
 }
 
 
@@ -491,7 +491,7 @@
       % command name/.code 2 args={c#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ....
       command name prefix/.initial = {c},
       command name suffix/.initial = {},
-      draw command/.initial={sol@writelst@default} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
+      draw command/.initial={sol@dlst@default} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
 }
 
 \pgfkeys{/sol@lst@family/inline blank/.is family,%
@@ -499,7 +499,7 @@
       listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
       command name prefix/.initial = {b},
       command name suffix/.initial = {},
-      draw command/.initial={sol@writelst@blank} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
+      draw command/.initial={sol@dlst@blank} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
 }
 
 \pgfkeys{/sol@lst@family/inline input/.is family,%
@@ -507,7 +507,7 @@
       listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
       command name prefix/.initial = {i},
       command name suffix/.initial = {},
-      draw command/.initial={sol@writelst@input} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
+      draw command/.initial={sol@dlst@input} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
 }
 
 %% -----------------------------------------------------------------------------
@@ -519,7 +519,7 @@
 % #3 In Extra
 % #4 Out Extra
 % #5 Language
-\def\sol@NewLstEnvironCore#1#2#3#4#5{%
+\def\sol@NewLstEnvCore#1#2#3#4#5{%
         %This does already work, but has the drawback of not being able to provide the (wanted) different styles
       \lstnewenvironment{#1}[1][]{#3\lstset{##1}}{#4}%
 }
@@ -529,7 +529,7 @@
 % #3 In Extra
 % #4 Out Extra
 % #5 Language
-\def\sol@NewLstEnvironCoreStarred#1#2#3#4#5{%
+\def\sol@NewLstEnvCoreStarred#1#2#3#4#5{%
       \lstnewenvironment{#1}[1][]{#3\lstset{style=nonum,##1}}{#4}%
 }
 
@@ -538,7 +538,7 @@
 % #3 In Extra
 % #4 Out Extra
 % #5 Language
-\def\sol@NewLstEnvironPlain#1#2#3#4#5{%
+\def\sol@NewLstEnvPlain#1#2#3#4#5{%
   \lstnewenvironment{#1}[1][]{#3\lstset{xleftmargin=0pt,xrightmargin=0pt,%
   numbers=none,numbersep=0pt,frame=none,%
   rulecolor={},backgroundcolor={},##1}}{#4}%
@@ -550,7 +550,7 @@
 % #4 Out Extra
 % #5 Language
 % NOTE: currently no opt arg, as \@ifnextchar breaks scanning of lst@next
-\def\sol@NewLstEnvironPresent#1#2#3#4#5{%
+\def\sol@NewLstEnvPresent#1#2#3#4#5{%
 %\lstnewenvironment{#1}[1][]{\lstset{##1}#3}{#4}
 \expandafter\xdef\csname#1\endcsname{\noexpand\leavevmode\noexpand\presentlst{#5}}
 \expandafter\xdef\csname end#1\endcsname{\noexpand\endpresentlst}
@@ -559,7 +559,7 @@
 % #1 KeyName
 % #2 LanguageName
 % #3 EnvironName
-\def\sol@@NewLstEnviron#1#2#3{%
+\def\sol@@NewLstEnv#1#2#3{%
 \bgroup%
   %\globaldefs=1%
       \edef\sol@xcurlst{\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/\environName/constructor command}\endcsname{#3}{#1}{\noexpand\lstset{style=\pgfkeysvalueof{/sol@lst@family/\environName/listing style},language=#2}}{}{#2}}
@@ -583,8 +583,8 @@
       \ifx\\##1\\\else 
         \def\environName{##1}
         \edef\environCurName{\pgfkeysvalueof{/sol@lst@family/\environName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/\environName/command name suffix}}% assign
-        \typeout{Register 'env ##1' for #1/#2 (name: \environCurName, constructor: \pgfkeysvalueof{/sol@lst@family/\environName/constructor command})}%
-        \edef\sol@CreateAnLstEnviron{\noexpand\sol@@NewLstEnviron{\environName}{#2}{\environCurName}}% fully expand the Name, otherwise it would be undefined when the environment gets used
+        \typeout{> #1/#2 e '##1' (name: \environCurName, ctor: \pgfkeysvalueof{/sol@lst@family/\environName/constructor command})}%
+        \edef\sol@CreateAnLstEnviron{\noexpand\sol@@NewLstEnv{\environName}{#2}{\environCurName}}% fully expand the Name, otherwise it would be undefined when the environment gets used
         \sol@CreateAnLstEnviron%
         \ifx\\##2\\\else\sol@foreach@basic@env@iter##2,\@nil\fi%
       \fi
@@ -598,7 +598,7 @@
     \ifx\\##1\\\else 
         \def\inlineName{##1}
         \edef\inlineCurName{\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name suffix}}% assign
-        \typeout{Register 'inline \inlineName' for #1/#2 (cmd: \inlineCurName, style: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style}, draw: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command})}%
+        \typeout{> #1/#2 i '\inlineName' (cmd: \inlineCurName, style: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style}, draw: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command})}%
         %% We will construct those with optional arguments, to give the user a chance to pass optional Arguments :D
         % luckily we can construct the main Argument without any expansion problems :D
         \expandafter\xdef\csname\inlineCurName\endcsname{\noexpand\protect\noexpand\@ifnextchar[{\noexpand\protect\expandafter\noexpand\csname @@hasopt@@\inlineCurName\endcsname}{\noexpand\protect\expandafter\noexpand\csname @@noopt@@\inlineCurName\endcsname}}%
