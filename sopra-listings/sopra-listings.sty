@@ -160,7 +160,6 @@
 % as we don't know, if 'foreach' is available, we will built our own iter:
 
 \def\sol@lst@style@iter@step#1: #2\@nil{%
-    % \typeout{#1: #2}
     \ifx\\#1\\\else
         \expandafter\gdef\csname#1\endcsname{#2}%
     \fi
@@ -583,10 +582,8 @@
   \def\sol@foreach@basic@env@iter##1,##2\@nil{
       \ifx\\##1\\\else 
         \def\environName{##1}
-        \typeout{Register 'env ##1' for #1/#2}%
         \edef\environCurName{\pgfkeysvalueof{/sol@lst@family/\environName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/\environName/command name suffix}}% assign
-        \typeout{\space > Environment Name: [\environCurName]}%
-        \typeout{\space > Constructor: [\pgfkeysvalueof{/sol@lst@family/\environName/constructor command}]}%
+        \typeout{Register 'env ##1' for #1/#2 (name: \environCurName; constructor: \pgfkeysvalueof{/sol@lst@family/\environName/constructor command})}%
         \edef\sol@CreateAnLstEnviron{\noexpand\sol@@NewLstEnviron{\environName}{#2}{\environCurName}}% fully expand the Name, otherwise it would be undefined when the environment gets used
         \sol@CreateAnLstEnviron%
         \ifx\\##2\\\else\sol@foreach@basic@env@iter##2,\@nil\fi%
@@ -600,22 +597,16 @@
   \def\sol@foreach@inline@env@iter##1,##2\@nil{
     \ifx\\##1\\\else 
         \def\inlineName{##1}
-    \typeout{Register 'inline \inlineName' for #1/#2}%
-      \edef\inlineCurName{\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name suffix}}% assign
-      \typeout{\space > Command Name: [\inlineCurName]}%
-      \typeout{\space > Style: [\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style}]}%
-      \typeout{\space > Draw Command: [\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}]}%
-      %% We will construct those with optional arguments, to give the user a chance to pass optional Arguments :D
-      % luckily we can construct the main Argument without any expansion problems :D
-      \expandafter\xdef\csname\inlineCurName\endcsname{\noexpand\protect\noexpand\@ifnextchar[{\noexpand\protect\expandafter\noexpand\csname @@hasopt@@\inlineCurName\endcsname}{\noexpand\protect\expandafter\noexpand\csname @@noopt@@\inlineCurName\endcsname}}%
-      %% Variant without optionals :D
-      \expandafter\xdef\csname @@noopt@@\inlineCurName\endcsname####1{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#2]{####1}}%
-      % Variant with one optional argument, it will be matched by the default delimiter
-      \expandafter\xdef\csname @@hasopt@@\inlineCurName\endcsname[####1]####2{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#2,####1]{####2}}%
-      \expandafter\robustify\csname\inlineCurName\endcsname% robustify
-      %\expandafter\robustify\csname @@noopt@@\inlineCurName\endcsname% robustify
-      %\expandafter\robustify\csname @@hasopt@@\inlineCurName\endcsname% robustify
-      \ifx\\##2\\\else\sol@foreach@inline@env@iter##2,\@nil\fi%
+        \edef\inlineCurName{\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name suffix}}% assign
+        \typeout{Register 'inline \inlineName' for #1/#2 (cmd: \inlineCurName, style: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style}, draw: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command})}%
+        %% We will construct those with optional arguments, to give the user a chance to pass optional Arguments :D
+        % luckily we can construct the main Argument without any expansion problems :D
+        \expandafter\xdef\csname\inlineCurName\endcsname{\noexpand\protect\noexpand\@ifnextchar[{\noexpand\protect\expandafter\noexpand\csname @@hasopt@@\inlineCurName\endcsname}{\noexpand\protect\expandafter\noexpand\csname @@noopt@@\inlineCurName\endcsname}}%
+        %% Variant without optionals :D
+        \expandafter\xdef\csname @@noopt@@\inlineCurName\endcsname####1{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#2]{####1}}%
+        \expandafter\xdef\csname @@hasopt@@\inlineCurName\endcsname[####1]####2{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#2,####1]{####2}}%
+        \expandafter\robustify\csname\inlineCurName\endcsname% robustify
+        \ifx\\##2\\\else\sol@foreach@inline@env@iter##2,\@nil\fi%
       \fi
   }%
   \def\sol@foreach@inline@env##1{\sol@foreach@inline@env@iter##1,\@nil}
@@ -676,7 +667,6 @@
 % the file has to have the signature: 'language_<Name>.cfg'
 
 \def\sol@LoadLanguage@searchPath@iter#1,#2\@nil{%
-    % \typeout{#1:#2}
     \ifx\\#1\\\else%
     \InputIfFileExists{#1language_\sol@curlanginputfile.cfg}{%
         \typeout{Loaded '\sol@curlanginputfile' from '#1language_\sol@curlanginputfile.cfg'}
