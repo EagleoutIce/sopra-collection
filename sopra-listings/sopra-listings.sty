@@ -583,7 +583,7 @@
       \ifx\\##1\\\else 
         \def\environName{##1}
         \edef\environCurName{\pgfkeysvalueof{/sol@lst@family/\environName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/\environName/command name suffix}}% assign
-        \typeout{Register 'env ##1' for #1/#2 (name: \environCurName; constructor: \pgfkeysvalueof{/sol@lst@family/\environName/constructor command})}%
+        \typeout{Register 'env ##1' for #1/#2 (name: \environCurName, constructor: \pgfkeysvalueof{/sol@lst@family/\environName/constructor command})}%
         \edef\sol@CreateAnLstEnviron{\noexpand\sol@@NewLstEnviron{\environName}{#2}{\environCurName}}% fully expand the Name, otherwise it would be undefined when the environment gets used
         \sol@CreateAnLstEnviron%
         \ifx\\##2\\\else\sol@foreach@basic@env@iter##2,\@nil\fi%
