@@ -299,21 +299,22 @@
     \lst@CArgX #1\relax\lst@CDef%
         {}%
         {\let\lst@next\@empty%
-            \lst@ifxliterate%
-            \lst@ifmode \let\lst@next\lst@CArgEmpty \fi%
+        \lst@ifxliterate%
+        \lst@ifmode \let\lst@next\lst@CArgEmpty \fi%
+        \fi
+        \ifx\lst@next\@empty%
+            \ifx\lst@OutputBox\@gobble\else%
+            \lst@XPrintToken \let\lst@scanmode\lst@scan@m%
+            \lst@token{#2}\lst@length#3\relax%
+            \lst@XPrintToken%
+            \lst@whitespacefalse\@nc%
             \fi
-            \ifx\lst@next\@empty%
-                \ifx\lst@OutputBox\@gobble\else%
-                \lst@XPrintToken \let\lst@scanmode\lst@scan@m%
-                \lst@token{#2}\lst@length#3\relax%
-                \lst@XPrintToken
-                \lst@whitespacefalse\@nc%
-                \fi
-                \let\lst@next\lst@CArgEmptyGobble
-            \fi
-            \lst@next}%
-        \@empty
-    \expandafter\lst@Literate
+            % gobble the replaced text
+            \let\lst@next\lst@CArgEmptyGobble%
+        \fi
+        \lst@next}%
+        \@empty% splitter for constants
+    \expandafter\lst@Literate%
 \fi}
 
 %% -----------------------------------------------------------------------------
@@ -648,7 +649,9 @@
     prebreak            = {\sol@lst@prebreak{}},
     % escapes:
     escapeinside        = {!*}{*!},
-    mathescape          = false%
+    mathescape          = false,%
+    % space control
+    keepspaces           = true%
 }
 
 %% -----------------------------------------------------------------------------
