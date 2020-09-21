@@ -1,0 +1,67 @@
+\documentclass{article}
+
+\usepackage{hyperref}
+\usepackage[hyperref,addons]{../../color-palettes/color-palettes}
+\usepackage[cpalette]{../sopra-tables}
+\usepackage{pgffor}
+
+\UsePalette{PurpleSand}
+
+\title{Tables-Beispiel}
+\author{Florian Sihler}
+\date{\today}
+
+\makeatletter%
+\def\doinvert{%
+    \sot@invert@true%
+    \let\sot@table@headerstyle\sot@table@headerstyle@inv%
+    \sot@init%
+}
+\makeatother%
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\clearpage
+\edef\AP{\AllPalettes}
+\foreach \mode/\c in {Normal/{},Invertiert/\doinvert} {
+\section{Die Auswirkungen der Paletten (\mode)}
+\c%
+\foreach \i in \AP {\UsePalette{\i}%
+% to assure the breaks :D
+\subsection{Palette: \CurrentPalette}%
+\begin{center}
+    \ShowcaseCurrentPalette%
+\end{center}\medskip
+\begin{mtabular}{lcr}
+    Kleine & Feine & Tabelle \\
+    Ja was & denkt man & auf die \\
+    schnelle & denn vom & Gefährten \\
+    der da & wandelt. & \\
+    Er strandet gar & im Glücke war & und lebte \\
+    dar was & ewig war & und offen bar \\
+    Jap & dap & jeah. 
+\end{mtabular}
+
+\begin{mltabular}[Ich bin & ein langer & Tabular]{lcr}
+    Hipp & Hipp & Jaha \\
+    Ja ich & bin ein & tabular \\
+    und ein & langer offen & bar. \\
+    Ganz zentriert, & dass bin ich & Tscha-ka\\
+    & Ich brauch noch & ein zwei Zeilen ja \\
+    und schon & ist der & Seitenumbruch \\
+    da. & Hoffe ich & denn irgendwie \\
+    schreibe ich die & Zeilen nie & ohne einen Plan. \\
+    & Wer das & liest \\
+    der & sei gewarnt & \\
+    verzählten & & Zeilen stählen \\
+    Unsinn er- & zählen & \\
+    Tra- & la- & la. \\
+    Neue Seite & Sonna klar  & \\
+    Ih mag net mehr & soh'n schwachsinn & mach-a \\
+    Ha & Ha & Ha 
+\end{mltabular}\clearpage
+}
+}
+\end{document}

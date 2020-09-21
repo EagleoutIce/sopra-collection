@@ -20,7 +20,8 @@
 
 \newif\ifsot@usetabu@ % we can use regular tabular - if tabu won't work.
 
-\def\sor@table@headerstyle{\color{white}}
+\newif\ifsot@cpalette@ % if enabled, tables will adapt to color-palettes
+\newif\ifsot@invert@ % if enabled invert color definitions
 
 %% -----------------------------------------------------------------------------
 %% Package-Args
@@ -29,6 +30,13 @@
 % allow debug-options :D
 \DeclareOption{usetabu}{ \sot@usetabu@true }%
 \DeclareOption{notabu}{ \sot@usetabu@false }%
+
+% Color-Palettes
+\DeclareOption{cpalette}{ \sot@cpalette@true }%
+\DeclareOption{nocpalette}{ \sot@cpalette@false }%
+
+\DeclareOption{invert}{ \sot@invert@true }%
+\DeclareOption{noinvert}{ \sot@invert@false }%
 
 \ExecuteOptions{usetabu}% set it explicitly
 \ProcessOptions\relax%
@@ -43,6 +51,13 @@
 %% -----------------------------------------------------------------------------
 %% Color Definitions
 %% -----------------------------------------------------------------------------
+
+\def\sot@table@headerstyle@inv{\color{MaterialHeaderColor}}
+\def\sot@table@headerstyle@norm{\color{white}}
+\ifsot@invert@\let\sot@table@headerstyle\def\sot@table@headerstyle@inv%
+\else\let\sot@table@headerstyle\sot@table@headerstyle@norm\fi%
+
+
 
 \@ifundefined{thesobversion}{% not called from sopra-base-class
     \colorlet{MaterialHeaderColor}{purple}
@@ -72,22 +87,25 @@
 %% Define the Header and next-header commands
 %% -----------------------------------------------------------------------------
 
+\def\sot@init{%
 \ifsot@usetabu@ 
-    \def\sor@table@headerrow{%
-        \rowfont{\normalfont\bfseries\leavevmode\sor@table@headerstyle}%
-        \rowcolor{MaterialHeaderColor}\@ifstar{}{\Gape[0.5mm][0.25mm]{}}%
+    \def\sot@table@headerrow{%
+        \rowfont{\normalfont\bfseries\leavevmode\sot@table@headerstyle}%
+        \ifsot@invert@\rowcolor{white}\else\rowcolor{MaterialHeaderColor}\fi\@ifstar{}{\Gape[0.5mm][0.25mm]{}}%
     }
-    \def\sor@table@headerrow@next{% maybe use llap for the symbol?
-        \rowfont{\normalfont\bfseries\leavevmode\sor@table@headerstyle}%
-        \rowcolor{NextMaterialHeaderColor}\@ifstar{}{\Gape[0.5mm][0.25mm]{}}{%
+    \def\sot@table@headerrow@next{% maybe use llap for the symbol?
+        \rowfont{\normalfont\bfseries\leavevmode\sot@table@headerstyle}%
+        \ifsot@invert@\rowcolor{white}\else\rowcolor{NextMaterialHeaderColor}\fi\@ifstar{}{\Gape[0.5mm][0.25mm]{}}{%
             \hspace*{-6mm}%
             \llap{\textcolor{NextMaterialHeaderColor!40!white}{$\blacktriangledown$}}%
         }\hspace*{6mm}%$\;$%
     }
 \else
-    \def\sor@table@headerrow{\bfseries\@ifstar{}{}}
-    \def\sor@table@headerrow@next{\bfseries\@ifstar{}{}} % maybe use llap for the symbol?
+    \def\sot@table@headerrow{\bfseries\@ifstar{}{}}
+    \def\sot@table@headerrow@next{\bfseries\@ifstar{}{}} % maybe use llap for the symbol?
 \fi
+}
+\sot@init
 
 %% -----------------------------------------------------------------------------
 %% Helper Functions
@@ -108,25 +126,25 @@
 \ifsot@usetabu@ 
     % Material styled table. Works similar to tabular
     \newenvironment{mtabular}[1]{\bgroup
-        \taburowcolors[1] 2{lightgray!25 .. lightgray!5}
+        \ifsot@invert@\else\taburowcolors[1] 2{lightgray!25 .. lightgray!5}\fi
         \everyrow{\tabucline[.4mm  white]{}}
         \tabulinesep = ^2mm_2mm
         \let\midrule\relax
         \begin{tabu}{>{~}#1<{~}}
-            \sor@table@headerrow*\ignorespaces% style the first row :D
+            \sot@table@headerrow*\ignorespaces% style the first row :D
     }{
         \end{tabu}\egroup
     }
 
     % Matieal styled long table. 
     \newenvironment{mltabular}[2][]{%
-        \taburowcolors[1] 2{lightgray!5 .. lightgray!25}
+        \ifsot@invert@\else\taburowcolors[1] 2{lightgray!5 .. lightgray!25}\fi
         \everyrow{\tabucline[.4mm  white]{}}
         \tabulinesep = ^2mm_2mm
         \begin{longtabu}{>{~}#2<{~}}
-            \ifx\\#1\\\sor@table@headerrow*\else% style the first row :D
-            \sor@table@headerrow*#1\vspace*{-0.1\baselineskip}\\\endfirsthead
-            \sor@table@headerrow@next#1\vspace*{-0.1\baselineskip}\\\endhead\fi
+            \ifx\\#1\\\sot@table@headerrow*\else% style the first row :D
+            \sot@table@headerrow*#1\vspace*{-0.1\baselineskip}\\\endfirsthead
+            \sot@table@headerrow@next#1\vspace*{-0.1\baselineskip}\\\endhead\fi
     }{
         \end{longtabu}
     }
@@ -135,7 +153,7 @@
     \newenvironment{mtabular}[1]{%
         \begin{tabular}{>{~}#1<{~}}
             \toprule%
-            \sor@table@headerrow*% style the first row :D
+            \sot@table@headerrow*% style the first row :D
     }{
         \bottomrule
         \end{tabu}
@@ -145,13 +163,35 @@
     \newenvironment{mltabular}[2][]{%
         \begin{longtable}{>{~}#2<{~}}
             \toprule 
-            \ifx\\#1\\\sor@table@headerrow*\else% style the first row :D
-            \sor@table@headerrow*#1\vspace*{-0.1\baselineskip}\\\midrule\endfirsthead
-            \sor@table@headerrow@next#1\vspace*{-0.1\baselineskip}\\\midrule\endhead\fi
+            \ifx\\#1\\\sot@table@headerrow*\else% style the first row :D
+            \sot@table@headerrow*#1\vspace*{-0.1\baselineskip}\\\midrule\endfirsthead
+            \sot@table@headerrow@next#1\vspace*{-0.1\baselineskip}\\\midrule\endhead\fi
     }{
         \bottomrule
         \end{longtabu}
     }
+\fi
+
+%% -----------------------------------------------------------------------------
+%% Cp-Palette support
+%% -----------------------------------------------------------------------------
+
+\ifsot@cpalette@
+\@ifundefined{cpl@registered@palettes}{%
+    \PackageError{sopra-tables}{cpalette requested, but package not loaded}
+    {You have to load the 'color-palettes' package yourself if you use the 'cpalette'-Option.}%
+}{% Add to the hook..
+}
+\let\sot@old@cpl@hooks\cpl@hooks%
+\def\cpl@hooks{% Add to the hook
+    \sot@old@cpl@hooks%
+    \sot@cpalette@hook%
+}
+% TODO: maybe change later?
+\def\sot@cpalette@hook{%
+    \colorlet{MaterialHeaderColor}{paletteA}%
+    \colorlet{NextMaterialHeaderColor}{paletteA!75!white}%
+}
 \fi
 
 \endinput

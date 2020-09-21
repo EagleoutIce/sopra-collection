@@ -114,6 +114,13 @@ Besonderheiten.
         Analog zur \T{notabu} option der \T{sopra-requirements.sty}: Standardmäßig verwendet dieses Paket aus optischen Gründen \T{tabu} um die Tabellen zu visualisieren. Sollten die in diesem paket enthaltenen (bug-)fixes (nicht mehr) funktionieren, oder einem die in \T{notabu} verwendeten \T{booktabs} Tabellen einem bessere gefallen, so kann diese Option entsprechend umgestellt werden.  \notetext{Hinweis: Mit \T{usetabu} wird innerhalb von \env{mtabular} auf \cmd{relax} gesetzt, damit kein Fehler/keine horizontalen Linien entstehen, wenn man für beide designs schreiben möchte.}
     \end{argument}
 
+    \begin{argument}{cpalette}{nocpalette}
+        Bietet Unterstützung für \href{color-palettes}{https://github.com/EagleoutIce/color-palettes}. In diesem Fall wird das highlighting der Tabelle automatisch an die aktuelle Palette angepasst.
+    \end{argument}
+
+    \begin{argument}{invert}{noinvert}
+        Invertiert die Hervorhebungen für die Kopfzeile.
+    \end{argument}
 
     \subsection{Farben}
 
