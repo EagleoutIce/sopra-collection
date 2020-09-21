@@ -98,7 +98,7 @@ Listings mit: [sopra-listings](sopra-listings):
 - [sopra-listings.sty](sopra-listings/sopra-listings.sty): Dies ist das versprochene Paket.
 - [sopra-listings.doc.tex](sopra-listings/sopra-listings.doc.tex): Für sie wird das Paket selbst benötigt, dann reicht: `pdflatex sopra-listings.doc.tex`.
 
-Das Paket bietet eine Unterstützung für [color-palettes](https://github.com/EagleoutIce/color-palettes), ein Beispiel befindet sich [hier](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-listings/examples/cp-listings.example.pdf).
+Das Paket bietet eine Unterstützung für [color-palettes](https://github.com/EagleoutIce/color-palettes), Beispiele befinden sich [hier](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-listings/examples/cp-listings.example.pdf) und [hier](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-tables/examples/cp-tables.example.pdf).
 
 ### sopra-changelog ([Dokumentation](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-changelog/sopra-changelog.doc.pdf))
 
