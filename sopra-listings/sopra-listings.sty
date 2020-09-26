@@ -19,7 +19,7 @@
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
 
-\newcounter{solversion} \setcounter{solversion}{1013}
+\newcounter{solversion} \setcounter{solversion}{1014}
 
 % note this will be used with tcb:
 \newlength{\sol@length@lst@outer@spacing}%
@@ -50,6 +50,8 @@
 \newif\ifsol@lst@lastwas@charkeep@  % in char-mode (pass through)
     \sol@lst@lastwas@charkeep@false % explicitly false
 
+\newif\ifsol@lst@style@upshape@  % add upshape to basicstyle
+    \sol@lst@style@upshape@false % explicitly false
 %% -----------------------------------------------------------------------------
 %% Package-Args
 %% -----------------------------------------------------------------------------
@@ -69,6 +71,9 @@
 % Color-Palettes
 \DeclareOption{cpalette}{ \sol@cpalette@true }%
 \DeclareOption{nocpalette}{ \sol@cpalette@false }%
+% upshape
+\DeclareOption{upshape}{ \sol@lst@style@upshape@true }%
+\DeclareOption{noupshape}{ \sol@lst@style@upshape@false }%
 
 % if sob is loaded, the default for the printmode will be passed,
 % otherwise we will use defaultmode as the default :D
@@ -203,6 +208,13 @@
         {command:       \color{sol@colors@lst@command}}%
     }
 \fi
+
+\ifsol@lst@style@upshape@
+\sol@list@define@styles{%
+    {basic:         \sol@font@fs@normal\color{black}\sol@ttfamily\upshape},%
+}
+\fi
+
 
 %% -----------------------------------------------------------------------------
 %% Helper Functions
