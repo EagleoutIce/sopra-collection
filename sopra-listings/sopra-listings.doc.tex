@@ -120,9 +120,9 @@ Besonderheiten.
 \subsection{Akzeptierte Parameter}
     Das Paket akzeptiert, so wie die meisten, Argumente. 
     Bei Argumenten mit einer \say{Counter}-Option wird das jeweils standardmäßig aktive zuerst und das andere in Klammern
-    geschrieben. So wird implizit: % TODO:
+    geschrieben. So wird implizit:
 \begin{plainlatex}
-    \usepackage[noencoding,hlnumbers,loadlangs]{sopra-listings}
+    \usepackage[noencoding,hlnumbers,loadlangs,guardspace]{sopra-listings}
 \end{plainlatex}
     aufgerufen. Während mit:
 \begin{plainlatex}
@@ -157,7 +157,12 @@ Besonderheiten.
     \end{argument}
 
     \begin{argument}{guardspace}{noguardspace}
-        Mit \emph{Guardspace} werden dem Listing jeweils auch zugesichert, dass es die nächste Zeile setzen darf. Dies kann dafür sorgen, dass ein Seitenumbruch erzeugt wird (wenn weniger als eine Zeile des Listings noch auf die Seite passt). Der Zweck dieser Option ist es, bei einer Hintergrundfarbe anfängliche Streifen zu vermeiden.
+        Mit \T{guardspace} werden dem Listing jeweils auch zugesichert, dass es die nächste Zeile setzen darf. Dies kann dafür sorgen, dass ein Seitenumbruch erzeugt wird (wenn weniger als eine Zeile des Listings noch auf die Seite passt). Der Zweck dieser Option ist es, bei einer Hintergrundfarbe anfängliche Streifen zu vermeiden.
+    \end{argument}
+
+    \begin{argument}{nonuminpar}{numinpar}
+        Kurzform für \cmdref{solSetLeftMargin} mit dem Wert {\makeatletter\@@sol@numinpar@length}, kann also dazu verwendet
+        werden um die Listings automatisch einzurücken und die Nummern so nicht über den Dokumentenrand hinausragen zu lassen.
     \end{argument}
 
 \subsection{Farben}

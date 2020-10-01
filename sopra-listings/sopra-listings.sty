@@ -19,7 +19,7 @@
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
 
-\newcounter{solversion} \setcounter{solversion}{1015}
+\newcounter{solversion} \setcounter{solversion}{1016}
 
 % note this will be used with tcb:
 \newlength{\sol@length@lst@outer@spacing}%
@@ -42,6 +42,7 @@
 \newif\ifsol@defaultlang@% if enabled, listings will try to load some langs
 \newif\ifsol@cpalette@% if enabled, listings will adapt their colors according to the color-palettes package
 \newif\ifsol@guardspace@% if enabled (default) it will ensure lines
+\newif\ifsol@numinpar@% if enabled numbers would be outside of leftmarg
 
 % number-highlighting
 \newif\ifsol@highlight@numbers@ % should numbers be highlighted?  
@@ -78,6 +79,9 @@
 % guard
 \DeclareOption{guardspace}{ \sol@guardspace@true }%
 \DeclareOption{noguardspace}{ \sol@guardspace@false }%
+% numinpar
+\DeclareOption{numinpar}{ \sol@numinpar@true }%
+\DeclareOption{nonuminpar}{ \sol@numinpar@false }%
 
 % if sob is loaded, the default for the printmode will be passed,
 % otherwise we will use defaultmode as the default :D
@@ -270,6 +274,11 @@
 \def\solSetRightMargin#1{\setlength{\sol@length@lst@xrightmargin}{#1}}
 \def\solSetNumSep#1{\setlength{\sol@length@lst@numsep}{#1}}
 \def\solSetFrameRule#1{\setlength{\sol@length@lst@famerule}{#1}}
+
+\def\@@sol@numinpar@length{2em}
+\ifsol@numinpar@%
+\solSetLeftMargin{\@@sol@numinpar@length}
+\fi
 
 %% -----------------------------------------------------------------------------
 %% Handling of automated number-highlighting in listings;
