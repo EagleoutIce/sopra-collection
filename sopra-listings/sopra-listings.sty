@@ -547,7 +547,11 @@
 \def\sol@ensure#1{\needspace{#1\baselineskip}}
 \def\solguard#1{\gdef\@sol@guard@default{#1}}
 \solguard{.8}
-\def\sol@guardspace{\par\ifsol@guardspace@\sol@ensure{\@sol@guard@default}\fi}
+% {\setlength\parskip{0pt}\setlength\parindent{0pt}\par}
+\def\sol@guardspace{\ifsol@guardspace@\sol@ensure{\@sol@guard@default}\fi}
+\def\sol@guardend{\ifsol@guardspace@\nobreak\fi}
+% on line:
+\lst@AddToHook{ExitVars}{\sol@guardend}
 
 % #1 Name
 % #2 Key

@@ -51,6 +51,7 @@
             }
             \foreach \pkg in {fontenc:{\T{T1}, \jmark[\T{encoding}]{mrk:encoding}},%
                 inputenc:{\T{utf8}, \jmark[\T{encoding}]{mrk:encoding}},%
+                needspace:{\jmark[\T{guardspace}]{mrk:guardspace}},%
                 etoolbox:,xcolor:,pgfkeys:,listingsutf8:$\ll$try$\gg$,listings:$\ll$fallback$\gg$,accsupp:$\ll$try$\gg$} {
                 \item \expandafter\pkgparse\pkg\@nil
             }
@@ -105,8 +106,9 @@ Schriftgrößen von Listings anzupassen.
 \paragraph{Version v1.0.15:} Mit \argref{guardspace}{noguardspace} wurde eine (vertikale) Abstands-sicherungs-option hinzugefügt.
 \paragraph{Version v1.0.17:} Mit \T{autogobble} können nun anführende Leerfelder entfernt werden.
 \paragraph{Version \thesolversion:}
-In Version \thesolversion{} (\cmdref{thesolversion}) gibt es (sonst) keine weiteren
-Besonderheiten.
+Sichert nun auch die letzte Zeile eines Listings im Falle von \argref{guardspace}{noguardspace}.
+% In Version \thesolversion{} (\cmdref{thesolversion}) gibt es (sonst) keine weiteren
+% Besonderheiten.
 
 %
 %
@@ -455,7 +457,7 @@ public static int add(int a, int b){ return a + b; }
 
 \begin{command}{solguard}{\manArg{Zeilen}}
     Mit der Paketoption \argref{guardspace}{noguardspace} kann so angegeben werden, wie viele Zeilen geschützt werden müssen.
-    Der Standard ist: \glqq{}{\makeatletter\@sol@guard@default}\grqq.
+    Der Standard ist: \glqq{}{\makeatletter\@sol@guard@default}\grqq. Hinweis: Dies betrifft nur die Zeilen für den Beginn. Die letzte Zeile wird aktuell immer mit \cmd{nobreak} gesichert.
 \end{command}
 
 \clearpage

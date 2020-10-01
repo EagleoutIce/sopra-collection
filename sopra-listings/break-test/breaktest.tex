@@ -20,6 +20,7 @@ Hier erzwingen wir einen Bruch auf der ersten Zeile:\par
 public static void main(String[] args) {
     System.out.println("Hallo Welt");
 }
+// Superzeile
 \end{java}
 \clearpage
 {\makeatletter\global\sol@guardspace@true}
@@ -29,5 +30,26 @@ Analog mit Guard:\par
 public static void main(String[] args) {
     System.out.println("Hallo Welt");
 }
+// Superzeile
+\end{java}
+\clearpage
+{\makeatletter\global\sol@guardspace@false}
+Nun Break am Ende ohne Guard:\par
+\vspace*{18.4cm}
+\begin{java}
+public static void main(String[] args) {
+    System.out.println("Hallo Welt");
+}
+// Superzeile
+\end{java}
+\clearpage
+{\makeatletter\global\sol@guardspace@true}
+Break am Ende mit Guard:\par
+\vspace*{18.4cm}
+\begin{java}
+public static void main(String[] args) {
+    System.out.println("Hallo Welt");
+}
+// Superzeile
 \end{java}
 \end{document}
