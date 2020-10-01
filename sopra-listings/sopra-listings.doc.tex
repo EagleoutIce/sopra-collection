@@ -9,7 +9,7 @@
 
 \title{Das 'sopra-listings'-Paket}
 \subtitle[Dokumentation für das 'sopra-listings'-Paket]{Dokumentation für das 'sopra-listings'-Paket~$\mid$~Version \thesolversion}
-\duedate{2019-12-8}
+\duedate{2020-10-1}
 
 \keywords{Dokumentation,sopra-listings,sopra,uni ulm,uulm,Paket}
 \authors{Florian Sihler (florian.sihler@uni-ulm.de)}
@@ -176,7 +176,7 @@ Besonderheiten.
 \begin{plainlatex}[morekeywords={[2]{\\lstcolorlet}}]
 \lstcolorlet{comments}{orange}
 \end{plainlatex}
-    Wir erhalten(exemplarisch in Java):
+    Wir erhalten(exemplarisch in Java, zuerst standard, danach mit geänderter Farbe):
     \bgroup
 \begin{java}
 // Vor der Neuzuweisung der Farbe
@@ -193,7 +193,7 @@ public static void main(...){ /* ... */ }
 \subsection{Stile}
     Zur Hervorhebung der einzelnen Segmente im Listing werden den Farben entlehnte Stile definiert, die ebenfalls frei verändert werden können. \notetext{Entwicklernotiz, die 
     Stile sollten bei einer kompletten Neudefintion über \cmd{sol@list@define@styles} 
-    definiert werden. Sonst ist das Präfix, das im folgenden verwendet werden soll in
+    definiert werden. Sonst ist das Präfix, das im Folgenden verwendet werden soll in
     \cmd{sol@lst@style@prefix} abgespeichert.}\par{}
     Alle im folgenden aufgeführten Befehle tragen (sofern nicht modifiziert) das Präfix 
     \T{sol@styles@lst@} und können (ohne dieses Präfix) mittels \cmdref{solGet} beziehungsweise \cmdref{solGetStyle} abgefragt werden. Einzelne Sprachen können
