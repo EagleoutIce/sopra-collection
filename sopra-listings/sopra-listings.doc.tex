@@ -101,6 +101,8 @@
 Schriftgrößen von Listings anzupassen.
 \paragraph{Version v1.0.12:} Die Paketoption \texttt{cpalette} wurde samt Gegenoption hinzugefügt.
 \paragraph{Version v1.0.13:} Die Befehle \cmdref{lstcolorlet} und \cmdref{lstcolordef} wurden zur einfachen Farbmanipulation hinzugefügt.
+\paragraph{Version v1.0.14:} Abstände bei Literates korrigiert. Sollten nun auch beim Ersetzen von Ziffern in inline-Listings die korrekte Anzahl an Leerfeldern behalten
+\paragraph{Version v1.0.15:} Mit \argref{guardspace}{noguardspace} wurde eine (vertikale) Abstands-sicherungs-option hinzugefügt.
 \paragraph{Version \thesolversion:}
 In Version \thesolversion{} (\cmdref{thesolversion}) gibt es (sonst) keine weiteren
 Besonderheiten.
@@ -121,7 +123,7 @@ Besonderheiten.
     Das Paket akzeptiert, so wie die meisten, Argumente. 
     Bei Argumenten mit einer \say{Counter}-Option wird das jeweils standardmäßig aktive zuerst und das andere in Klammern
     geschrieben. So wird implizit:
-\begin{plainlatex}
+\begin{plainlatex}[autogobble]
     \usepackage[noencoding,hlnumbers,loadlangs,guardspace]{sopra-listings}
 \end{plainlatex}
     aufgerufen. Während mit:
@@ -157,11 +159,11 @@ Besonderheiten.
     \end{argument}
 
     \begin{argument}{guardspace}{noguardspace}
-        Mit \T{guardspace} werden dem Listing jeweils auch zugesichert, dass es die nächste Zeile setzen darf. Dies kann dafür sorgen, dass ein Seitenumbruch erzeugt wird (wenn weniger als eine Zeile des Listings noch auf die Seite passt). Der Zweck dieser Option ist es, bei einer Hintergrundfarbe anfängliche Streifen zu vermeiden.
+        Mit \T{guardspace} werden dem Listing jeweils auch zugesichert, dass es die nächste Zeile setzen darf. Dies kann dafür sorgen, dass ein Seitenumbruch erzeugt wird (wenn weniger als eine Zeile des Listings noch auf die Seite passt). Der Zweck dieser Option ist es, bei einer Hintergrundfarbe anfängliche Streifen zu vermeiden. Siehe \cmdref{solguard}.
     \end{argument}
 
     \begin{argument}{nonuminpar}{numinpar}
-        Kurzform für \cmdref{solSetLeftMargin} mit dem Wert {\makeatletter\@@sol@numinpar@length}, kann also dazu verwendet
+        Kurzform für \cmdref{solSetLeftMargin} mit dem Wert \glqq{}{\makeatletter\@@sol@numinpar@length}\grqq{}, kann also dazu verwendet
         werden um die Listings automatisch einzurücken und die Nummern so nicht über den Dokumentenrand hinausragen zu lassen.
     \end{argument}
 
@@ -451,7 +453,8 @@ public static int add(int a, int b){ return a + b; }
 \end{command}
 
 \begin{command}{solguard}{\manArg{Zeilen}}
-    Mit der Paketoption \argref{noguardspace}{guardspace}
+    Mit der Paketoption \argref{guardspace}{noguardspace} kann so angegeben werden, wie viele Zeilen geschützt werden müssen.
+    Der Standard ist: \glqq{}{\makeatletter\@sol@guard@default}\grqq.
 \end{command}
 
 \clearpage
