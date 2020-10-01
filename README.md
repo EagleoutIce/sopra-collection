@@ -6,14 +6,18 @@
 
 Dies ist eine Ansammlung (hoffentlich) wundertoller LaTeX2e Klassen und Pakete, für das Softwaregrundprojekt
 im Rahmen des Informatikstudiums an der Universität Ulm im Wintersemester 2019/20 sowie dem sich anschließendem
-Sommersemester. Es grüßt: Florian (`team-020`).
+Sommersemester.
+Einige Pakete, wie `sopra-listings` wurden im Anschluss noch bedeutend Weiterentwickelt.
+
+Es grüßt: Florian (`team-020`).
 
 ## Inhaltsübersicht
 
 1. [Motivation](#motivation)
 2. [Inhaltsübersicht](#inhaltsübersicht)
 3. [Installation](#installation)
-   1. [Installation mit sltx](#installation-mit-sltx)
+   1. [Eigenständige Installtion](#eigenständige-installtion)
+   2. [Installation mit sltx](#installation-mit-sltx)
 4. [Paketübersicht](#paketübersicht)
    1. [sopra-base (Dokumentation)](#sopra-base-dokumentation)
    2. [sopra-documentation (Dokumentation)](#sopra-documentation-dokumentation)
@@ -28,6 +32,8 @@ Sommersemester. Es grüßt: Florian (`team-020`).
    11. [sopra-seraphim (Dokumentation)](#sopra-seraphim-dokumentation)
 
 ## Installation
+
+### Eigenständige Installtion
 
 Die Installation kann entweder je nach Dokumentation, oder durch das mitgelieferte python-skript erfolgen. Bei
 einem installierten python3.5+ Interpreter genügt:
