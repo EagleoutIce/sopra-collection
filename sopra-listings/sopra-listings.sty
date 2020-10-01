@@ -19,7 +19,7 @@
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
 
-\newcounter{solversion} \setcounter{solversion}{1014}
+\newcounter{solversion} \setcounter{solversion}{1015}
 
 % note this will be used with tcb:
 \newlength{\sol@length@lst@outer@spacing}%
@@ -41,6 +41,7 @@
 \newif\ifsol@printmode@% in print, ink will be reduced, adapted to grayscale
 \newif\ifsol@defaultlang@% if enabled, listings will try to load some langs
 \newif\ifsol@cpalette@% if enabled, listings will adapt their colors according to the color-palettes package
+\newif\ifsol@guardspace@% if enabled (default) it will ensure lines
 
 % number-highlighting
 \newif\ifsol@highlight@numbers@ % should numbers be highlighted?  
@@ -74,6 +75,9 @@
 % upshape
 \DeclareOption{upshape}{ \sol@lst@style@upshape@true }%
 \DeclareOption{noupshape}{ \sol@lst@style@upshape@false }%
+% guard
+\DeclareOption{guardspace}{ \sol@guardspace@true }%
+\DeclareOption{noguardspace}{ \sol@guardspace@false }%
 
 % if sob is loaded, the default for the printmode will be passed,
 % otherwise we will use defaultmode as the default :D
@@ -84,7 +88,7 @@
         \else\global\sol@printmode@false\fi%
 }
 
-\ExecuteOptions{noencoding,hlnumbers,loadlangs}% set it explicitly
+\ExecuteOptions{noencoding,hlnumbers,loadlangs,guardspace}% set it explicitly
 \ProcessOptions\relax%
 
 %% -----------------------------------------------------------------------------
@@ -97,7 +101,7 @@
 \RequirePackage[utf8]{inputenc} %
 \fi
 
-\RequirePackage{etoolbox,xcolor} % color definitions and making stuff robust
+\RequirePackage{etoolbox,xcolor,needspace} % color definitions and making stuff robust
 \RequirePackage{pgfkeys} % for cleaner access
 
 % Listings-Base:
@@ -527,6 +531,14 @@
 %% Language-Registration-Helper
 %% -----------------------------------------------------------------------------
 
+% spacing control
+%\def\sol@measurepage{\dimexpr\pagegoal-\pagetotal-\baselineskip\relax}
+%\def\sol@ensure#1{\ifdim\sol@measurepage<#1\baselineskip\relax\null\newpage\relax\fi}%
+\def\sol@ensure#1{\needspace{#1\baselineskip}}
+\def\solguard#1{\gdef\@sol@guard@default{#1}}
+\solguard{.8}
+\def\sol@guardspace{\par\ifsol@guardspace@\sol@ensure{\@sol@guard@default}\fi}
+
 % #1 Name
 % #2 Key
 % #3 In Extra
@@ -534,7 +546,7 @@
 % #5 Language
 \def\sol@NewLstEnvCore#1#2#3#4#5{%
         %This does already work, but has the drawback of not being able to provide the (wanted) different styles
-      \lstnewenvironment{#1}[1][]{#3\lstset{##1}}{#4}%
+      \lstnewenvironment{#1}[1][]{#3\lstset{##1}\sol@guardspace}{#4}%
 }
 
 % #1 Name
@@ -543,7 +555,7 @@
 % #4 Out Extra
 % #5 Language
 \def\sol@NewLstEnvCoreStarred#1#2#3#4#5{%
-      \lstnewenvironment{#1}[1][]{#3\lstset{style=nonum,##1}}{#4}%
+      \lstnewenvironment{#1}[1][]{#3\lstset{style=nonum,##1}\sol@guardspace}{#4}%
 }
 
 % #1 Name
@@ -554,7 +566,7 @@
 \def\sol@NewLstEnvPlain#1#2#3#4#5{%
   \lstnewenvironment{#1}[1][]{#3\lstset{xleftmargin=0pt,xrightmargin=0pt,%
   numbers=none,numbersep=0pt,frame=none,%
-  rulecolor={},backgroundcolor={},##1}}{#4}%
+  rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 }
 
 % #1 Name

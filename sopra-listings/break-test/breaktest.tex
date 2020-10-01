@@ -1,0 +1,33 @@
+\documentclass{scrartcl}
+
+\usepackage[encoding]{../sopra-listings}
+\usepackage{microtype}
+\usepackage[main=ngerman,english]{babel}
+
+\title{Break-Test}
+\author{Florian Sihler}
+\date{\today}
+
+\begin{document}
+\maketitle    
+
+Um die Seitengröße konstant zu halten beginnt der Test auf der
+nächsten Seite.\clearpage
+{\makeatletter\global\sol@guardspace@false}
+Hier erzwingen wir einen Bruch auf der ersten Zeile:\par
+\vspace*{20cm}
+\begin{java}
+public static void main(String[] args) {
+    System.out.println("Hallo Welt");
+}
+\end{java}
+\clearpage
+{\makeatletter\global\sol@guardspace@true}
+Analog mit Guard:\par
+\vspace*{20cm}
+\begin{java}
+public static void main(String[] args) {
+    System.out.println("Hallo Welt");
+}
+\end{java}
+\end{document}

@@ -138,7 +138,6 @@ Besonderheiten.
         Das Paket versucht automatisch Zahlen zu markieren und zwar nur da, wo es sich auch um eine Zahl handelt. Dieses Verfahren funktioniert gut, kann aber - sofern als störend empfunden, oder es sich doch als unartig herausstellen sollte - mittels \T{nohlnumbers} deaktiviert werden.
     \end{argument}
 
-
     \begin{argument}{defaultmode}{print}
         Diese Funktionen arbeiten analog zu den gleichnamigen Vertretern in \T{sopra-base.cls}. Wird \T{print} gewählt, so wird versucht möglichst Tinte einzusparen (kein Hintegrund bei Codes, \ldots) und weiter werden gewisse
         Schlüsselbegriffe fett/kursiv gedruckt um auch im einfarbigen Ausdruck eine 
@@ -149,12 +148,16 @@ Besonderheiten.
         Lädt mittels \cmdref{solLoadLanguage} die Sprachen \T{java}, \T{xml} und \T{json} (siehe \jmark[Abschnitt \ref{sec:vordefinierteSprachen} (Vordefinierte Sprachen)]{sec:vordefinierteSprachen} für mehr Informationen). Dies kann durch \T{noloadlangs} deaktiviert werden. \notetext{Hinweis: Die Sprachen werden nur geladen, wenn die Konfigurationsdateien gefunden werden. Siehe hierzu \cmdref{solLoadLanguage}.}
     \end{argument}
 
-    \begin{argument}{cpalette}{nocpalette}
+    \begin{argument}{nocpalette}{cpalette}
         Bietet Unterstützung für \href{color-palettes}{https://github.com/EagleoutIce/color-palettes}. In diesem Fall wird das code-highlighting automatisch an die aktuelle Palette angepasst und auch mit dem Ändern der Palette von da an aktualisiert.
     \end{argument}
     
-    \begin{argument}{upshape}{noupshape}
+    \begin{argument}{noupshape}{upshape}
         Fügt \cmd{upshape} zum Stil hinzu. Dies sorgt dafür, dass sich Listings nichtmehr an kursiv gesetzte Schrift anpassen.
+    \end{argument}
+
+    \begin{argument}{guardspace}{noguardspace}
+        Mit \emph{Guardspace} werden dem Listing jeweils auch zugesichert, dass es die nächste Zeile setzen darf. Dies kann dafür sorgen, dass ein Seitenumbruch erzeugt wird (wenn weniger als eine Zeile des Listings noch auf die Seite passt). Der Zweck dieser Option ist es, bei einer Hintergrundfarbe anfängliche Streifen zu vermeiden.
     \end{argument}
 
 \subsection{Farben}
@@ -206,7 +209,8 @@ public static void main(...){ /* ... */ }
     \sol@list@define@styles{%
         {comments: \color{sol@colors@lst@comments}\scshape}%
     }
-}   \begin{java}
+}
+\begin{java}
 // Nach Neuzuweisung des Stils
 public static void main(...){ /* ... */ }
     \end{java}
@@ -439,6 +443,10 @@ public static int add(int a, int b){ return a + b; }
 
 \begin{command}{lstcolordef}{\optArg{mode=RGB}\manArg{lstcolor}\manArg{colorcode}}
     Weißt eine Farbe mittels \cmd{definecolor} zu. Hierbei darf \emph{lstcolor} nur einen der folgenden Werte annehmen: \emph{keywordA}, \emph{keywordB}, \emph{keywordC}, \emph{numbers}, \emph{literals}, \emph{comments}, \emph{highlight} oder \emph{command}. Das erste Argument gibt den Modus nach \emph{xcolor} an.
+\end{command}
+
+\begin{command}{solguard}{\manArg{Zeilen}}
+    Mit der Paketoption \argref{noguardspace}{guardspace}
 \end{command}
 
 \clearpage
