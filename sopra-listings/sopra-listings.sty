@@ -377,12 +377,12 @@
 % please note, that they will apply under every condition!
 \newcommand{\sol@dlst@default}[2][]{%
     \begingroup\setlength{\fboxsep}{0pt}\fcolorbox{sol@colors@border}{sol@colors@background}{%
-        \,\strut\lstinline[#1]`#2`\,%
+        \,\strut\lstinline[#1,keepspaces=true]`#2`\,%
     }\endgroup%
 }
 
 \newcommand{\sol@dlst@blank}[2][]{%
-    \begingroup\,\strut\lstinline[#1]`#2`\endgroup%
+    \begingroup\,\strut\lstinline[#1,keepspaces=true]`#2`\endgroup%
 }
 
 \newcommand{\sol@dlst@input}[2][]{%
@@ -545,8 +545,8 @@
 % #4 Out Extra
 % #5 Language
 \def\sol@NewLstEnvCore#1#2#3#4#5{%
-        %This does already work, but has the drawback of not being able to provide the (wanted) different styles
-      \lstnewenvironment{#1}[1][]{#3\lstset{##1}\sol@guardspace}{#4}%
+    %This does already work, but has the drawback of not being able to provide the (wanted) different styles
+    \lstnewenvironment{#1}[1][]{#3\lstset{##1}\sol@guardspace}{#4}%
 }
 
 % #1 Name
@@ -555,7 +555,7 @@
 % #4 Out Extra
 % #5 Language
 \def\sol@NewLstEnvCoreStarred#1#2#3#4#5{%
-      \lstnewenvironment{#1}[1][]{#3\lstset{style=nonum,##1}\sol@guardspace}{#4}%
+    \lstnewenvironment{#1}[1][]{#3\lstset{style=nonum,##1}\sol@guardspace}{#4}%
 }
 
 % #1 Name
@@ -675,7 +675,7 @@
     escapeinside        = {!*}{*!},
     mathescape          = false,%
     % space control
-    keepspaces           = true%
+    keepspaces           = false%
 }
 
 %% -----------------------------------------------------------------------------
