@@ -10,30 +10,36 @@ Sommersemester. Es grüßt: Florian (`team-020`).
 
 ## Inhaltsübersicht
 
-1. [sopra-collection](#sopra-collection)
-   1. [Motivation](#motivation)
-   2. [Inhaltsübersicht](#inhaltsübersicht)
-   3. [Installation](#installation)
-   4. [Paketübersicht](#paketübersicht)
-      1. [sopra-base (Dokumentation)](#sopra-base-dokumentation)
-      2. [sopra-documentation (Dokumentation)](#sopra-documentation-dokumentation)
-      3. [sopra-models (Dokumentation)](#sopra-models-dokumentation)
-      4. [sopra-requirements (Dokumentation)](#sopra-requirements-dokumentation)
-      5. [sopra-tables (Dokumentation)](#sopra-tables-dokumentation)
-      6. [sopra-attachments (Dokumentation)](#sopra-attachments-dokumentation)
-      7. [sopra-listings (Dokumentation)](#sopra-listings-dokumentation)
-      8. [sopra-changelog (Dokumentation)](#sopra-changelog-dokumentation)
-      9. [sopra-standard (Dokumentation)](#sopra-standard-dokumentation)
-      10. [sopra-paper (Dokumentation)](#sopra-paper-dokumentation)
-      11. [sopra-seraphim (Dokumentation)](#sopra-seraphim-dokumentation)
+1. [Motivation](#motivation)
+2. [Inhaltsübersicht](#inhaltsübersicht)
+3. [Installation](#installation)
+   1. [Installation mit sltx](#installation-mit-sltx)
+4. [Paketübersicht](#paketübersicht)
+   1. [sopra-base (Dokumentation)](#sopra-base-dokumentation)
+   2. [sopra-documentation (Dokumentation)](#sopra-documentation-dokumentation)
+   3. [sopra-models (Dokumentation)](#sopra-models-dokumentation)
+   4. [sopra-requirements (Dokumentation)](#sopra-requirements-dokumentation)
+   5. [sopra-tables (Dokumentation)](#sopra-tables-dokumentation)
+   6. [sopra-attachments (Dokumentation)](#sopra-attachments-dokumentation)
+   7. [sopra-listings (Dokumentation)](#sopra-listings-dokumentation)
+   8. [sopra-changelog (Dokumentation)](#sopra-changelog-dokumentation)
+   9. [sopra-standard (Dokumentation)](#sopra-standard-dokumentation)
+   10. [sopra-paper (Dokumentation)](#sopra-paper-dokumentation)
+   11. [sopra-seraphim (Dokumentation)](#sopra-seraphim-dokumentation)
 
 ## Installation
 
 Die Installation kann entweder je nach Dokumentation, oder durch das mitgelieferte python-skript erfolgen. Bei
-einem installierten python3.5+ interpreter genügt:
-`python3 installer.py`
+einem installierten python3.5+ Interpreter genügt:
+`python3 installer.py`.
 
 Genauere Informationen zur Angabe des Pfades lassen sich hier finden: [wikibooks](https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages).
+
+### Installation mit sltx
+
+Die Kollektion wird auch mit [sltx](https://github.com/EagleoutIce/sltx) geliefert.
+Sie befindet sich hier in den vorgeschlagenen Paketquellen und im Docker-Container ab `tx-default`.
+Die Verwendung wird hier über [lithie-util](https://github.com/EagleoutIce/lithie-util) eingerichtet.
 
 ## Paketübersicht
 
