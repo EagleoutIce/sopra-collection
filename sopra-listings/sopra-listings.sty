@@ -19,7 +19,7 @@
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
 
-\newcounter{solversion} \setcounter{solversion}{1016}
+\newcounter{solversion} \setcounter{solversion}{1017}
 
 % note this will be used with tcb:
 \newlength{\sol@length@lst@outer@spacing}%
@@ -105,7 +105,7 @@
 \RequirePackage[utf8]{inputenc} %
 \fi
 
-\RequirePackage{etoolbox,xcolor,needspace} % color definitions and making stuff robust
+\RequirePackage{etoolbox,xcolor,lstautogobble}% color definitions and making stuff robust
 \RequirePackage{pgfkeys} % for cleaner access
 
 % Listings-Base:
@@ -115,6 +115,10 @@
 \IfFileExists{accsupp.sty}{ \RequirePackage{accsupp} %
      \global\sol@accuspp@available@true }%
     { \global\sol@accuspp@available@false }%
+
+\ifsol@guardspace@
+\RequirePackage{needspace}
+\fi
 
 %% -----------------------------------------------------------------------------
 %% Font Definitions

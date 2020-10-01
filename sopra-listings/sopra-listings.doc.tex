@@ -103,6 +103,7 @@ Schriftgrößen von Listings anzupassen.
 \paragraph{Version v1.0.13:} Die Befehle \cmdref{lstcolorlet} und \cmdref{lstcolordef} wurden zur einfachen Farbmanipulation hinzugefügt.
 \paragraph{Version v1.0.14:} Abstände bei Literates korrigiert. Sollten nun auch beim Ersetzen von Ziffern in inline-Listings die korrekte Anzahl an Leerfeldern behalten
 \paragraph{Version v1.0.15:} Mit \argref{guardspace}{noguardspace} wurde eine (vertikale) Abstands-sicherungs-option hinzugefügt.
+\paragraph{Version v1.0.17:} Mit \T{autogobble} können nun anführende Leerfelder entfernt werden.
 \paragraph{Version \thesolversion:}
 In Version \thesolversion{} (\cmdref{thesolversion}) gibt es (sonst) keine weiteren
 Besonderheiten.
@@ -127,7 +128,7 @@ Besonderheiten.
     \usepackage[noencoding,hlnumbers,loadlangs,guardspace]{sopra-listings}
 \end{plainlatex}
     aufgerufen. Während mit:
-\begin{plainlatex}
+\begin{plainlatex}[autogobble]
     \usepackage[noloadlangs]{sopra-listings}
 \end{plainlatex}
     das automatische Laden gewisser Sprachen verhindert wird.
