@@ -127,7 +127,7 @@
 \def\sol@ttfamily{\fontfamily{AnonymousPro}\selectfont}
 \let\ttfamily\sol@ttfamily
 \long\def\T#1{\bgroup\sol@ttfamily#1\egroup}
-
+\robustify{\T}
 
 \def\sol@font@fs@numbers{\footnotesize}
 \def\solNumFs#1{\gdef\sol@font@fs@numbers{#1}}
