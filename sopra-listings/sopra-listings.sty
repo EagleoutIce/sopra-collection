@@ -773,7 +773,7 @@
 %% -----------------------------------------------------------------------------
 %% Cp-Palette support
 %% -----------------------------------------------------------------------------
-
+\AtEndPreamble{%
 \ifsol@cpalette@
 \@ifundefined{cpl@registered@palettes}{%
     \PackageError{sopra-listings}{cpalette requested, but package not loaded}
@@ -796,6 +796,6 @@
 \lstcolorlet{command}{paletteB!90!black}%
 }
 \fi
-
+}
 
 \endinput

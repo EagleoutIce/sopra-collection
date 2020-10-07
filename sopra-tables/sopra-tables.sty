@@ -175,7 +175,7 @@
 %% -----------------------------------------------------------------------------
 %% Cp-Palette support
 %% -----------------------------------------------------------------------------
-
+\AtEndPreamble{%
 \ifsot@cpalette@
 \@ifundefined{cpl@registered@palettes}{%
     \PackageError{sopra-tables}{cpalette requested, but package not loaded}
@@ -193,5 +193,6 @@
     \colorlet{NextMaterialHeaderColor}{paletteA!75!white}%
 }
 \fi
+}
 
 \endinput
