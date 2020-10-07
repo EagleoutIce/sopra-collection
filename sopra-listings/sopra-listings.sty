@@ -3,7 +3,7 @@
 %% -----------------------------------------------------------------------------
 %% Version: 1.0
 %% Author:  Florian Sihler, 08.12.2019
-%% 
+%%
 %% Will contain all the definitions to highlight listings in a document. Note:
 %% I've reused huge parts of the code I've written for sol@lst@family but ported
 %% them to be standalone. Furthermore This Package contains 'other' mechanisms.
@@ -13,7 +13,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-listings}[2019/12/03 EagleoutIce - listings for the sopra-team-020]
 
-% TODO: TCBox, runtimes, 
+% TODO: TCBox, runtimes,
 
 %% -----------------------------------------------------------------------------
 %% Lengths and Registers
@@ -45,7 +45,7 @@
 \newif\ifsol@numinpar@% if enabled numbers would be outside of leftmarg
 
 % number-highlighting
-\newif\ifsol@highlight@numbers@ % should numbers be highlighted?  
+\newif\ifsol@highlight@numbers@ % should numbers be highlighted?
 % internals:
 \newif\ifsol@lst@lastwas@character@ % last segment was from char-class
     \sol@lst@lastwas@character@false% explicitly false
@@ -85,7 +85,7 @@
 
 % if sob is loaded, the default for the printmode will be passed,
 % otherwise we will use defaultmode as the default :D
-\@ifundefined{ifsob@printmode@}{% not called from sopra-base-class, we use a 
+\@ifundefined{ifsob@printmode@}{% not called from sopra-base-class, we use a
     \sol@printmode@false%
 }{%
     \ifsob@printmode@\global\sol@printmode@true%
@@ -99,7 +99,7 @@
 %% Basic Packages
 %% -----------------------------------------------------------------------------
 
-% Encoding: 
+% Encoding:
 \ifsol@encoding@ %
 \RequirePackage[T1]{fontenc}    %
 \RequirePackage[utf8]{inputenc} %
@@ -151,7 +151,7 @@
 \fi
 % TODO: print switch
 
-\@ifundefined{thesobversion}{% not called from sopra-base-class, we use a 
+\@ifundefined{thesobversion}{% not called from sopra-base-class, we use a
                              % default palette
     \colorlet{sol@colors@lst@keywordA}{purple} % e.g.: class, public, static...
     \colorlet{sol@colors@lst@keywordB}{purple!75!white} % e.g.: int, double ...
@@ -166,7 +166,7 @@
     \colorlet{sol@colors@lst@keywordA}{sob@col@uulm@cs} % Examples as above
     \colorlet{sol@colors@lst@keywordB}{sob@col@uulm@cs!75!white} %
     \colorlet{sol@colors@lst@keywordC}{sob@col@uulm@cs!20!gray} %
-    \colorlet{sol@colors@lst@numbers}{teal!60!gray} % 
+    \colorlet{sol@colors@lst@numbers}{teal!60!gray} %
     \colorlet{sol@colors@lst@literals}{sob@col@uulm!90!blue} %
     \colorlet{sol@colors@lst@comments}{lightgray!65!darkgray} %
     \colorlet{sol@colors@lst@highlight}{purple} %
@@ -189,7 +189,7 @@
 }
 
 \def\sol@list@define@styles#1{ \sol@lst@style@iter#1,\@nil }
-% we will write the colors anyway. This way it is easy visible on how to change the 
+% we will write the colors anyway. This way it is easy visible on how to change the
 % styles. Will define e.g. \sol@styles@lst@keywo
 \ifsol@printmode@
     \sol@list@define@styles{%
@@ -205,7 +205,7 @@
         {basic:         \sol@font@fs@normal\color{black}\sol@ttfamily},%
         {command:       \color{sol@colors@lst@command}}%
     }
-\else 
+\else
     \sol@list@define@styles{%
         {keywordA:      \color{sol@colors@lst@keywordA}},%
         {keywordB:      \color{sol@colors@lst@keywordB}},%
@@ -247,7 +247,7 @@
 \def\sol@lst@addToLiterate#1{\protected@edef\lst@literate{\unexpanded\expandafter{\lst@literate}\unexpanded{#1}}}
 \lst@Key{add to literate}{}{\sol@lst@addToLiterate{#1}}
 
- 
+
 % If possible we want to make the line numbers unmarkable, so you can copy
 % code without selecting them:
 \ifsol@accuspp@available@%
@@ -309,7 +309,7 @@
 \fi
 % ^--- shorter and better to read
 
-% overwrite processor routines to adapt to number 
+% overwrite processor routines to adapt to number
 \def\lst@ProcessLetter{%
   \lst@whitespacefalse\sol@lst@lastwas@character@true\lst@AppendLetter%
 }%
@@ -619,7 +619,7 @@
   % Register the Environments
   %
   \def\sol@foreach@basic@env@iter##1,##2\@nil{
-      \ifx\\##1\\\else 
+      \ifx\\##1\\\else
         \def\environName{##1}
         \edef\environCurName{\pgfkeysvalueof{/sol@lst@family/\environName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/\environName/command name suffix}}% assign
         \typeout{> #1/#2 e '##1' (name: \environCurName, ctor: \pgfkeysvalueof{/sol@lst@family/\environName/constructor command})}%
@@ -634,7 +634,7 @@
   % This procedure can be used in persistence to iterate over the pgf-keys
   %% Register 'inline default'
   \def\sol@foreach@inline@env@iter##1,##2\@nil{
-    \ifx\\##1\\\else 
+    \ifx\\##1\\\else
         \def\inlineName{##1}
         \edef\inlineCurName{\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name suffix}}% assign
         \typeout{> #1/#2 i '\inlineName' (cmd: \inlineCurName, style: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style}, draw: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command})}%
@@ -789,7 +789,7 @@
 \lstcolorlet{keywordA}{paletteA!90!black}%
 \lstcolorlet{keywordB}{paletteB!90!black}%
 \lstcolorlet{keywordC}{paletteC!90!black}%
-\lstcolorlet{numbers}{paletteD!60!gray!90!black}% 
+\lstcolorlet{numbers}{paletteD!60!gray!90!black}%
 \lstcolorlet{literals}{paletteD!80!black}%
 \lstcolorlet{comments}{lightgray!65!darkgray!90!black}%
 \lstcolorlet{highlight}{paletteD!90!black}%

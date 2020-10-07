@@ -3,9 +3,9 @@
 %% -----------------------------------------------------------------------------
 %% Version: 1.0
 %% Author:  Florian Sihler, 03.12.2019
-%% 
+%%
 %% Will contain all the definitions to easily typeset and reference
-%% Tables with tabu or booktabs. The design might be a reminiscence 
+%% Tables with tabu or booktabs. The design might be a reminiscence
 %% to sopra-requirements but won't need the package to be happy :D
 %%
 
@@ -54,7 +54,7 @@
 
 \def\sot@table@headerstyle@inv{\color{MaterialHeaderColor}}
 \def\sot@table@headerstyle@norm{\color{white}}
-\ifsot@invert@\let\sot@table@headerstyle\def\sot@table@headerstyle@inv%
+\ifsot@invert@\let\sot@table@headerstyle\sot@table@headerstyle@inv%
 \else\let\sot@table@headerstyle\sot@table@headerstyle@norm\fi%
 
 
@@ -72,7 +72,7 @@
 %% Fixes for the tabu-package
 %% -----------------------------------------------------------------------------
 
-\ifsot@usetabu@ 
+\ifsot@usetabu@
 \def\tabu@classz{%
     %  \ifx\tabu@prepnext@tok\prepnext@tok% in tabu
         %    \expandafter\tabu@classz@oldarray
@@ -88,7 +88,7 @@
 %% -----------------------------------------------------------------------------
 
 \def\sot@init{%
-\ifsot@usetabu@ 
+\ifsot@usetabu@
     \def\sot@table@headerrow{%
         \rowfont{\normalfont\bfseries\leavevmode\sot@table@headerstyle}%
         \ifsot@invert@\rowcolor{white}\else\rowcolor{MaterialHeaderColor}\fi\@ifstar{}{\Gape[0.5mm][0.25mm]{}}%
@@ -118,12 +118,12 @@
     \edef\@tmp{\noexpand\sot@thesotversion\arabic{sotversion}\noexpand\@nil}%
     \@tmp%
 }
- 
+
 %% -----------------------------------------------------------------------------
 %% Create the basic environments
 %% -----------------------------------------------------------------------------
 
-\ifsot@usetabu@ 
+\ifsot@usetabu@
     % Material styled table. Works similar to tabular
     \newenvironment{mtabular}[1]{\bgroup
         \ifsot@invert@\else\taburowcolors[1] 2{lightgray!25 .. lightgray!5}\fi
@@ -136,7 +136,7 @@
         \end{tabu}\egroup
     }
 
-    % Matieal styled long table. 
+    % Matieal styled long table.
     \newenvironment{mltabular}[2][]{%
         \ifsot@invert@\else\taburowcolors[1] 2{lightgray!5 .. lightgray!25}\fi
         \everyrow{\tabucline[.4mm  white]{}}
@@ -159,10 +159,10 @@
         \end{tabu}
     }
 
-    % Matieal styled long table. 
+    % Matieal styled long table.
     \newenvironment{mltabular}[2][]{%
         \begin{longtable}{>{~}#2<{~}}
-            \toprule 
+            \toprule
             \ifx\\#1\\\sot@table@headerrow*\else% style the first row :D
             \sot@table@headerrow*#1\vspace*{-0.1\baselineskip}\\\midrule\endfirsthead
             \sot@table@headerrow@next#1\vspace*{-0.1\baselineskip}\\\midrule\endhead\fi
