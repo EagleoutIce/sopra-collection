@@ -36,13 +36,13 @@
 % list of models page-style fix :D
 \addtocontents{lom}{\protect\thispagestyle{scrheadings}\protect\pagestyle{scrheadings}}%
 
-\AtBeginDocument{
-  \@ifundefined{thesobversion}{% not called from sopra-base-class
-    \tikzumlset{fill usecase=gray, fill system=gray!20, fill state=gray,fill object=gray, fill class=gray,fill note=purple!12!white, font=\small\ttfamily}
-  }{% we will use the secondary/akzent color as default
-    \tikzumlset{fill usecase=gray, fill system=gray!20, fill state=gray,fill object=gray, fill class=gray,fill note=sob@col@uulm@cs!12!white, font=\small\ttfamily}
-  }
-}
+% \AtEndPreamble{%
+%   \@ifundefined{thesobversion}{% not called from sopra-base-class
+%     \tikzumlset{fill usecase=gray, fill system=gray!20, fill state=gray,fill object=gray, fill class=gray,fill note=purple!12!white, font=\small\ttfamily}
+%   }{% we will use the secondary/akzent color as default
+%     \tikzumlset{fill usecase=gray, fill system=gray!20, fill state=gray,fill object=gray, fill class=gray,fill note=sob@col@uulm@cs!12!white, font=\small\ttfamily}
+%   }
+% }
 
 %% -----------------------------------------------------------------------------
 %% Lengths and Registers
