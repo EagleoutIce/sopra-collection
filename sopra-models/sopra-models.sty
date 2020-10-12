@@ -3969,6 +3969,7 @@
   \node[fill, draw, circle, inner sep=0, minimum size=\tikzumlControlScale*5ex, postaction={decorate}] (center) at (0,0) {};
   \end{tikzpicture}
 }%
+\def\tikzumlPreObjectName{}
 %
 % define a uml object for a sequence diagram
 % args : name of the object
@@ -4031,9 +4032,9 @@
   }%
   %
   \ifnum\tikzumlInCreateCall=1%
-    \draw (\tikzumlCreateCallObjectSrc -| \tikzumlObjectX,0) node[tikzuml object box style] (\tikzumlObjectName) {\tikzumlObjectName\tikzumlobject@ddot\tikzumlObjectClass};%
+    \draw (\tikzumlCreateCallObjectSrc -| \tikzumlObjectX,0) node[tikzuml object box style] (\tikzumlObjectName) {\tikzumlPreObjectName\tikzumlObjectName\tikzumlobject@ddot\tikzumlObjectClass};%
   \else%
-    \node[tikzuml object box style] (\tikzumlObjectName) at (\tikzumlObjectX,\tikzumlObjectY) {\tikzumlObjectName\tikzumlobject@ddot\tikzumlObjectClass};%
+    \node[tikzuml object box style] (\tikzumlObjectName) at (\tikzumlObjectX,\tikzumlObjectY) {\tikzumlPreObjectName\tikzumlObjectName\tikzumlobject@ddot\tikzumlObjectClass};%
   \fi%
   %
   \ifthenelse{\equal{\tikzumlObjectStereo}{multi}}{%
@@ -4568,6 +4569,7 @@
     \stepcounter{tikzumlCallEndFragmentNum}%
   \fi%
 }%
+\def\tikzumlCreatePlainText{create}
 %
 % define a constructor call
 % arg : call sender
@@ -4665,7 +4667,7 @@
   \xdef\tikzumlCallBottomSrc{sb-\tikzumlCreateCall@nodeName}%
   %
   \begin{pgfonlayer}{connections}%
-  \draw[tikzuml synchron-msg style, \tikzumlCreateCallDrawColor] (st-\tikzumlCreateCall@nodeName) -- (#3) node[midway, above, font=\tikzumlDefaultFont, text=\tikzumlCreateCallTextColor, name=\tikzumlCreateCall@nodeName-op] {create};%
+  \draw[tikzuml synchron-msg style, \tikzumlCreateCallDrawColor] (st-\tikzumlCreateCall@nodeName) -- (#3) node[midway, above, font=\tikzumlDefaultFont, text=\tikzumlCreateCallTextColor, name=\tikzumlCreateCall@nodeName-op] {\tikzumlCreatePlainText};%
   \end{pgfonlayer}%
   %
   \ifnum\thetikzumlCallLevel=0%
