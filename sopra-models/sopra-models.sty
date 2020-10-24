@@ -4696,15 +4696,16 @@
 \newif\iftikzumlcomponentWithoutCoords%
 %
 \newcommand{\picturedcomponent}[1]{%
-  \pgfkeys{/tikzuml/component/picture/.cd, scale/.initial=1, .unknown/.code={}}%
+  \pgfkeys{/tikzuml/component/picture/.cd, scale/.initial, .unknown/.code={}}%
   \pgfkeys{/tikzuml/component/picture/.cd,#1}%
   \pgfkeys{/tikzuml/component/picture/.cd, scale/.get=\tikzumlComponentScale}%
   \begin{tikzpicture}[#1]%
-  \filldraw (0,0) rectangle (1ex,1.5ex);%
-  \filldraw (-0.2ex,0.4ex) rectangle (0.2ex,0.6ex);%
-  \filldraw (-0.2ex,0.9ex) rectangle (0.2ex,1.1ex);%
+  \filldraw (-0.4ex,0) rectangle ++(1.1ex,1.7ex);%
+  \filldraw (-0.65ex,0.4ex) rectangle ++(0.5ex,0.25ex);%
+  \filldraw (-0.65ex,1.05ex) rectangle ++(0.5ex,0.25ex);%
   \end{tikzpicture}%
 }%
+\newif\iftikzumldrawumlcomponentsymbol@
 %
 % define a uml component
 % args : name of the component
@@ -4724,6 +4725,9 @@
   %
   \pgfkeys{/tikzuml/component/.cd, x/.initial=\tikzumlDefaultX, y/.initial=\tikzumlDefaultX, width/.initial=\tikzumlComponentDefaultWidth, name/.initial={},%
     draw/.initial=\tikzumlDefaultDrawColor, fill/.initial=\tikzumlComponentDefaultFillColor,%
+    stereotype/.initial=component,
+    symbol/.is if=tikzumldrawumlcomponentsymbol@,
+    symbol=true,
     text/.initial=\tikzumlDefaultTextColor, style/.style={},%
     no coords/.is if=tikzumlcomponentWithoutCoords,%
     no coords=false,%
@@ -4754,7 +4758,8 @@
   \pgfkeys{/tikzuml/component/.cd, x/.get=\tikzumlComponentXShift, y/.get=\tikzumlComponentYShift,%
                                    width/.get=\tikzumlComponentMinimumWidth, name/.get=\tikzumlComponentName,%
                                    draw/.get=\tikzumlComponentDrawColor, fill/.get=\tikzumlComponentFillColor,%
-                                   text/.get=\tikzumlComponentTextColor%
+                                   text/.get=\tikzumlComponentTextColor,%
+                                   stereotype/.get=\tikzumlStereotype
   }%
   %
   \ifthenelse{\equal{\tikzumlComponentName}{}}{%
@@ -4800,11 +4805,14 @@
   \fi%
   %
   \node[inner sep=2ex, font=\tikzumlDefaultFont, fit = \csname tikzumlComponentFit\tikzumlComponent@parent @@\tikzumlComponent@fitname\endcsname] (\tikzumlComponent@nodeName-body) {};%
-  \node[above, font=\tikzumlDefaultFont] (\tikzumlComponent@nodeName-captiontmp) at (\tikzumlComponent@nodeName-body.north) {\tikzumlComponent@caption};%
-  \node (\tikzumlComponent@nodeName-logotmp) at (\tikzumlComponent@nodeName-captiontmp.north -| \tikzumlComponent@nodeName-body.east) {\picturedcomponent{draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, font=\tikzumlDefaultFont} };%
+  \node[above, font=\tikzumlDefaultFont,align=center] (\tikzumlComponent@nodeName-captiontmp) at (\tikzumlComponent@nodeName-body.north) {\scriptsize$\ll$\tikzumlStereotype$\gg$\\\tikzumlComponent@caption};%
+  % \node (\tikzumlComponent@nodeName-logotmp) at (\tikzumlComponent@nodeName-captiontmp.north -| \tikzumlComponent@nodeName-body.east) {\picturedcomponent{draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, font=\tikzumlDefaultFont} };%
   \node[draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, name=\tikzumlComponent@nodeName, /tikzuml/component/style, fit=(\tikzumlComponent@nodeName-body) (\tikzumlComponent@nodeName-captiontmp)] {};%
-  \node[font=\tikzumlDefaultFont] (\tikzumlComponent@nodeName-caption) at (\tikzumlComponent@nodeName-captiontmp) {\tikzumlComponent@caption};%
+  \node[font=\tikzumlDefaultFont,align=center] (\tikzumlComponent@nodeName-caption) at (\tikzumlComponent@nodeName-captiontmp) {\scriptsize $\ll$\tikzumlStereotype$\gg$\\\tikzumlComponent@caption};%
+  %
+  \iftikzumldrawumlcomponentsymbol@
   \draw (\tikzumlComponent@nodeName-caption.north -| \tikzumlComponent@nodeName.east) node[font=\tikzumlDefaultFont, xshift=-1ex, below=-1ex, name=\tikzumlComponent@nodeName-logo] {\picturedcomponent{draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, font=\tikzumlDefaultFont} };%
+  \fi
   \draw (\tikzumlComponent@nodeName-caption.south -| \tikzumlComponent@nodeName.north west) -- (\tikzumlComponent@nodeName-caption.south -| \tikzumlComponent@nodeName.north east);%
   \coordinate (\tikzumlComponent@nodeName-west-port) at (\tikzumlComponent@nodeName.west);
   \coordinate (\tikzumlComponent@nodeName-east-port) at (\tikzumlComponent@nodeName.east);
