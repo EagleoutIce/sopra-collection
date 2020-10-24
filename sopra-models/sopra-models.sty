@@ -4713,7 +4713,6 @@
   \begin{tikzpicture}[#1]%
   \filldraw (-0.4ex,0) -| ++(1.2ex,1.4ex) -- ++(-0.3ex,0.3ex) -| cycle;%
   \filldraw[line join=bevel] (0.8ex,1.4ex) -| ++(-0.3ex,0.3ex) -- cycle;
-  \node at(1.2ex,0ex) {};% padding node
   \end{tikzpicture}%
 }%
 \newif\iftikzumldrawumlcomponentsymbol@
@@ -4803,25 +4802,34 @@
   \begin{pgfonlayer}{component\thetikzumlComponentLevel}%
   %
   % if contains nothing, one define a fictive node to enable the fit option
-  \ifnum\c@tikzumlComponentSubComponentNum=0%
+  \ifnum\c@tikzumlComponentSubComponentNum=0\relax%
+    \iftikzumldrawumlcomponentsymbolartefact@
     \iftikzumlcomponentWithoutCoords%
-      \node[inner ysep=0.5ex, minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root)  {\phantom{\tikzumlComponent@nodeName}};%
+      \node[inner ysep=-2ex, minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root)  {    \iftikzumldrawumlcomponentsymbolartefact@\else\phantom{\tikzumlComponent@nodeName}\fi};%
     \else%
-      \node[inner ysep=0.5ex, minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root) at (0,0) {\phantom{\tikzumlComponent@nodeName}};%
+      \node[inner ysep=-2ex,minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root) at (0,0) {    \iftikzumldrawumlcomponentsymbolartefact@\else\hphantom{\tikzumlComponent@nodeName}\fi};%
     \fi%
     \expandafter\xdef\csname tikzumlComponentFit\tikzumlComponent@parent @@\tikzumlComponent@fitname\endcsname{(\tikzumlComponent@nodeName-root)}%
   \fi%
   %
-  \ifnum\c@tikzumlComponentLevel>0%
+  \ifnum\c@tikzumlComponentLevel>0\relax%
     \def\tikzumlComponentFitTmp{\csname tikzumlComponentFit\tikzumlComponent@parent\endcsname}%
     \expandafter\xdef\csname tikzumlComponentFit\tikzumlComponent@parent\endcsname{\tikzumlComponentFitTmp (\tikzumlComponent@nodeName-body) (\tikzumlComponent@nodeName-caption)}%
     \stepcounter{tikzumlComponentSubComponentNum}%
   \fi%
   %
+  \iftikzumldrawumlcomponentsymbolartefact@
+  \node[inner sep=0ex, font=\tikzumlDefaultFont] (\tikzumlComponent@nodeName-body) {};%
+  \else
   \node[inner sep=2ex, font=\tikzumlDefaultFont, fit = \csname tikzumlComponentFit\tikzumlComponent@parent @@\tikzumlComponent@fitname\endcsname] (\tikzumlComponent@nodeName-body) {};%
+  \fi
   \node[above, font=\tikzumlDefaultFont,align=center] (\tikzumlComponent@nodeName-captiontmp) at (\tikzumlComponent@nodeName-body.north) {\tiny$\ll$\tikzumlStereotype$\gg$\\\tikzumlComponent@caption};%
   % \node (\tikzumlComponent@nodeName-logotmp) at (\tikzumlComponent@nodeName-captiontmp.north -| \tikzumlComponent@nodeName-body.east) {\picturedcomponent{draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, font=\tikzumlDefaultFont} };%
+  \iftikzumldrawumlcomponentsymbolartefact@
+  \node[draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, name=\tikzumlComponent@nodeName, /tikzuml/component/style, fit=(\tikzumlComponent@nodeName-captiontmp)] {};%
+  \else
   \node[draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, name=\tikzumlComponent@nodeName, /tikzuml/component/style, fit=(\tikzumlComponent@nodeName-body) (\tikzumlComponent@nodeName-captiontmp)] {};%
+  \fi
   \node[font=\tikzumlDefaultFont,align=center] (\tikzumlComponent@nodeName-caption) at (\tikzumlComponent@nodeName-captiontmp) {\tiny $\ll$\tikzumlStereotype$\gg$\\\iftikzumldrawumlcomponentsymbolartefact@\expandafter\underline\fi\tikzumlComponent@caption};%
   %
   \iftikzumldrawumlcomponentsymbol@
@@ -4831,7 +4839,9 @@
       \draw (\tikzumlComponent@nodeName-caption.north -| \tikzumlComponent@nodeName.east) node[font=\tikzumlDefaultFont, xshift=-1ex, below=-1ex, name=\tikzumlComponent@nodeName-logo] {\picturedcomponent{draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, font=\tikzumlDefaultFont} };%
     \fi
   \fi
+  \iftikzumldrawumlcomponentsymbolartefact@\else% cheat
   \draw (\tikzumlComponent@nodeName-caption.south -| \tikzumlComponent@nodeName.north west) -- (\tikzumlComponent@nodeName-caption.south -| \tikzumlComponent@nodeName.north east);%
+  \fi
   \coordinate (\tikzumlComponent@nodeName-west-port) at (\tikzumlComponent@nodeName.west);
   \coordinate (\tikzumlComponent@nodeName-east-port) at (\tikzumlComponent@nodeName.east);
   \coordinate (\tikzumlComponent@nodeName-south-port) at (\tikzumlComponent@nodeName.south);
@@ -4840,7 +4850,7 @@
   \end{scope}%
   %
   % add to fit
-  \ifnum\c@tikzumlPackageLevel>0%
+  \ifnum\c@tikzumlPackageLevel>0\relax%
     \edef\tikzumlPackageFitOld{\csname tikzumlPackageFit\tikzumlPackage@parent @@\tikzumlPackage@fitname\endcsname}%
     \expandafter\xdef\csname tikzumlPackageFit\tikzumlPackage@parent @@\tikzumlPackage@fitname\endcsname{\tikzumlPackageFitOld (\tikzumlComponent@nodeName)}%
     \stepcounter{tikzumlPackageClassNum}%
