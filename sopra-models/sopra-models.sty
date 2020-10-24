@@ -4809,6 +4809,13 @@
     \else%
       \node[inner ysep=-2ex,minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root) at (0,0) {    \iftikzumldrawumlcomponentsymbolartefact@\else\hphantom{\tikzumlComponent@nodeName}\fi};%
     \fi%
+    \else
+    \iftikzumlcomponentWithoutCoords%
+      \node[inner ysep=0.2ex, minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root)  {    \iftikzumldrawumlcomponentsymbolartefact@\else\phantom{\tikzumlComponent@nodeName}\fi};%
+    \else%
+      \node[inner ysep=0.2ex,minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root) at (0,0) {    \iftikzumldrawumlcomponentsymbolartefact@\else\hphantom{\tikzumlComponent@nodeName}\fi};%
+    \fi%
+    \fi
     \expandafter\xdef\csname tikzumlComponentFit\tikzumlComponent@parent @@\tikzumlComponent@fitname\endcsname{(\tikzumlComponent@nodeName-root)}%
   \fi%
   %
@@ -4819,7 +4826,7 @@
   \fi%
   %
   \iftikzumldrawumlcomponentsymbolartefact@
-  \node[inner sep=0ex, font=\tikzumlDefaultFont] (\tikzumlComponent@nodeName-body) {};%
+  \node[inner ysep=0ex,inner xsep=2ex,outer sep=0ex] (\tikzumlComponent@nodeName-body) {};%
   \else
   \node[inner sep=2ex, font=\tikzumlDefaultFont, fit = \csname tikzumlComponentFit\tikzumlComponent@parent @@\tikzumlComponent@fitname\endcsname] (\tikzumlComponent@nodeName-body) {};%
   \fi
