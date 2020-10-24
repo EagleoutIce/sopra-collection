@@ -4830,14 +4830,14 @@
   \else
   \node[inner sep=2ex, font=\tikzumlDefaultFont, fit = \csname tikzumlComponentFit\tikzumlComponent@parent @@\tikzumlComponent@fitname\endcsname] (\tikzumlComponent@nodeName-body) {};%
   \fi
-  \node[above, font=\tikzumlDefaultFont,align=center] (\tikzumlComponent@nodeName-captiontmp) at (\tikzumlComponent@nodeName-body.north) {\tiny$\ll$\tikzumlStereotype$\gg$\\\tikzumlComponent@caption};%
+  \node[above, font=\tikzumlDefaultFont,align=center,inner xsep=1.75ex] (\tikzumlComponent@nodeName-captiontmp) at (\tikzumlComponent@nodeName-body.north) {\tiny~$\ll$\tikzumlStereotype$\gg$~\\\tikzumlComponent@caption};%
   % \node (\tikzumlComponent@nodeName-logotmp) at (\tikzumlComponent@nodeName-captiontmp.north -| \tikzumlComponent@nodeName-body.east) {\picturedcomponent{draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, font=\tikzumlDefaultFont} };%
   \iftikzumldrawumlcomponentsymbolartefact@
   \node[draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, name=\tikzumlComponent@nodeName, /tikzuml/component/style, fit=(\tikzumlComponent@nodeName-captiontmp)] {};%
   \else
   \node[draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, name=\tikzumlComponent@nodeName, /tikzuml/component/style, fit=(\tikzumlComponent@nodeName-body) (\tikzumlComponent@nodeName-captiontmp)] {};%
   \fi
-  \node[font=\tikzumlDefaultFont,align=center] (\tikzumlComponent@nodeName-caption) at (\tikzumlComponent@nodeName-captiontmp) {\tiny $\ll$\tikzumlStereotype$\gg$\\\iftikzumldrawumlcomponentsymbolartefact@\expandafter\underline\fi\tikzumlComponent@caption};%
+  \node[font=\tikzumlDefaultFont,align=center] (\tikzumlComponent@nodeName-caption) at (\tikzumlComponent@nodeName-captiontmp) {\tiny ~$\ll$\tikzumlStereotype$\gg$~\\\iftikzumldrawumlcomponentsymbolartefact@\expandafter\underline\fi\tikzumlComponent@caption};%
   %
   \iftikzumldrawumlcomponentsymbol@
     \iftikzumldrawumlcomponentsymbolartefact@
