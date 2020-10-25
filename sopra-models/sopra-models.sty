@@ -4810,23 +4810,23 @@
   % if contains nothing, one define a fictive node to enable the fit option
   \ifnum\c@tikzumlComponentSubComponentNum=0\relax%
     \iftikzumldrawumlcomponentsymbolartefact@
-    \iftikzumlcomponentWithoutCoords%
-      \node[inner ysep=-2ex, minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root)  {    \iftikzumldrawumlcomponentsymbolartefact@\else\phantom{\tikzumlComponent@nodeName}\fi};%
-    \else%
-      \node[inner ysep=-2ex,minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root) at (0,0) {    \iftikzumldrawumlcomponentsymbolartefact@\else\hphantom{\tikzumlComponent@nodeName}\fi};%
-    \fi%
+      \iftikzumlcomponentWithoutCoords%
+        \node[inner ysep=-2ex, minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root)  {\iftikzumldrawumlcomponentsymbolartefact@\else\phantom{\tikzumlComponent@nodeName}\fi};%
+      \else%
+        \node[inner ysep=-2ex, minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root) at (0,0) {\iftikzumldrawumlcomponentsymbolartefact@\else\hphantom{\tikzumlComponent@nodeName}\fi};%
+      \fi%
     \else
     \iftikzumlcomponentWithoutCoords%
       \iftikzumldrawumlcomponenthasbody@
         \node[inner ysep=0.2ex, minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root)  {\phantom{\tikzumlComponent@nodeName}};%
       \else
-        \coordinate[/tikzuml/component/style] (\tikzumlComponent@nodeName-root);%
+        \node[/tikzuml/component/style] (\tikzumlComponent@nodeName-root) {};%
       \fi
     \else%
       \iftikzumldrawumlcomponenthasbody@
         \node[inner ysep=0.2ex,minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root) at (0,0) {\iftikzumldrawumlcomponenthasbody@\hphantom{\tikzumlComponent@nodeName}\fi};%
       \else
-        \coordinate[/tikzuml/component/style] (\tikzumlComponent@nodeName-root) at (0,0);%
+        \node[/tikzuml/component/style] (\tikzumlComponent@nodeName-root) at (0,0) {};%
       \fi
     \fi%
     \fi
@@ -4840,18 +4840,18 @@
   \fi%
   %
   \iftikzumldrawumlcomponenthasbody@
-    \node[inner sep=3.25ex, font=\tikzumlDefaultFont, fit=\csname tikzumlComponentFit\tikzumlComponent@parent @@\tikzumlComponent@fitname\endcsname] (\tikzumlComponent@nodeName-body) {};%
+    \node[inner sep=3.25ex, minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, fit=\csname tikzumlComponentFit\tikzumlComponent@parent @@\tikzumlComponent@fitname\endcsname] (\tikzumlComponent@nodeName-body) {};%
   \else
     \coordinate (\tikzumlComponent@nodeName-body);%
   \fi
-  \node[above, font=\tikzumlDefaultFont,align=center,inner xsep=2.25ex] (\tikzumlComponent@nodeName-captiontmp) at (\tikzumlComponent@nodeName-body.north) {\tiny\strut$\ll$\tikzumlStereotype$\gg$\\\strut\iftikzumldrawumlcomponentsymbolartefact@\expandafter\underline\fi\tikzumlComponent@caption};%
+  \node[above, font=\tikzumlDefaultFont,align=center,inner xsep=2.25ex] (\tikzumlComponent@nodeName-captiontmp) at (\tikzumlComponent@nodeName-body.north) {\scriptsize\strut\null\quad$\ll$\tikzumlStereotype$\gg$\quad\null\\\strut\iftikzumldrawumlcomponentsymbolartefact@\expandafter\underline\fi\tikzumlComponent@caption};%
   % \node (\tikzumlComponent@nodeName-logotmp) at (\tikzumlComponent@nodeName-captiontmp.north -| \tikzumlComponent@nodeName-body.east) {\picturedcomponent{draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, font=\tikzumlDefaultFont} };%
   \iftikzumldrawumlcomponenthasbody@
     \node[draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, name=\tikzumlComponent@nodeName, /tikzuml/component/style, fit=(\tikzumlComponent@nodeName-body) (\tikzumlComponent@nodeName-captiontmp)] {};%
   \else
     \node[draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, name=\tikzumlComponent@nodeName, /tikzuml/component/style, fit=(\tikzumlComponent@nodeName-captiontmp)] {};%
   \fi
-  \node[font=\tikzumlDefaultFont,align=center,inner xsep=2.25ex] (\tikzumlComponent@nodeName-caption) at (\tikzumlComponent@nodeName-captiontmp) {\tiny\strut$\ll$\tikzumlStereotype$\gg$\\\strut\iftikzumldrawumlcomponentsymbolartefact@\expandafter\underline\fi\tikzumlComponent@caption};%
+  \node[font=\tikzumlDefaultFont,align=center,inner xsep=2.25ex] (\tikzumlComponent@nodeName-caption) at (\tikzumlComponent@nodeName-captiontmp) {\scriptsize\strut\null\quad$\ll$\tikzumlStereotype$\gg$\quad\null\\\strut\iftikzumldrawumlcomponentsymbolartefact@\expandafter\underline\fi\tikzumlComponent@caption};%
   %
   \iftikzumldrawumlcomponentsymbol@
     \iftikzumldrawumlcomponentsymbolartefact@
@@ -4886,6 +4886,7 @@
   \pgfkeys{/tikzuml/requiredinterfacerelation/.cd, interface/.initial={}, distance/.initial=\tikzumlRequiredInterfaceDefaultDistance,%
                                                    name/.initial=tikzumlEmpty, width/.initial=\tikzumlRequiredInterfaceDefaultWidth,%
                                                    padding/.initial=\tikzumlRequiredInterfaceDefaultPadding,%
+                                                   anchor/.initial=east,
                                                    draw/.initial=\tikzumlDefaultDrawColor, fill/.initial=\tikzumlComponentDefaultFillColor,%
                                                    .unknown/.code={%
                                                      \let\keyname=\pgfkeyscurrentname%
@@ -4902,7 +4903,8 @@
                                                    width/.get=\tikzumlRequiredInterfaceWidth,%
                                                    padding/.get=\tikzumlRequiredInterfacePadding,%
                                                    draw/.get=\tikzumlRequiredInterfaceDrawColor,%
-                                                   fill/.get=\tikzumlRequiredInterfaceFillColor%
+                                                   fill/.get=\tikzumlRequiredInterfaceFillColor,%
+                                                   anchor/.get=\tikzumlAnchor%
   }%
   %
   \ifthenelse{\equal{\tikzumlRequiredInterfaceName}{tikzumlEmpty}}{%
@@ -4936,16 +4938,13 @@
   \ifthenelse{\equal{\tikzumlInterfaceWithPort}{tikzumlTrue}}{%
     \node[inner sep=0.5*\tikzumlRequiredInterfaceWidth, rectangle, draw=\tikzumlRequiredInterfaceDrawColor, fill=\tikzumlRequiredInterfaceFillColor] (\tikzumlRequiredInterface@portnodeName) at (\tikzumlRequiredInterface@nodeName.east) {};%
   }{%
-    \node[inner sep=0] (\tikzumlRequiredInterface@nodeName-east-port) at (\tikzumlRequiredInterface@nodeName.east) {};%
+    \node[inner sep=0] (\tikzumlRequiredInterface@nodeName-east-port) at (\tikzumlRequiredInterface@nodeName.\tikzumlAnchor) {};%
   }%
   \begin{scope}%
-  \draw (\tikzumlRequiredInterface@nodeName)+(\tikzumlRequiredInterfaceDistance,0) node[inner sep=0, text width=\tikzumlRequiredInterfaceWidth, circle, name=\tikzumlRequiredInterface@interfacenodeName-tmp] {};%
-  \clip (\tikzumlRequiredInterface@interfacenodeName-tmp.north) rectangle (\tikzumlRequiredInterface@interfacenodeName-tmp.south -| \tikzumlRequiredInterface@interfacenodeName-tmp.west);%
-  \node[inner sep=0, text width=\tikzumlRequiredInterfaceWidth, circle, draw=\tikzumlRequiredInterfaceDrawColor] (\tikzumlRequiredInterface@interfacenodeName) at (\tikzumlRequiredInterface@interfacenodeName-tmp) {};%
+  \draw[-{Arc Barb[reversed,length=\tikzumlRequiredInterfaceWidth/2,width=\tikzumlRequiredInterfaceWidth]}] (\tikzumlRequiredInterface@nodeName)-- ++(\tikzumlRequiredInterfaceDistance,0) node[inner sep=0, text width=\tikzumlRequiredInterfaceWidth, circle, name=\tikzumlRequiredInterface@interfacenodeName-tmp] {};%
+  \node[inner sep=0, text width=\tikzumlRequiredInterfaceWidth, circle, ] (\tikzumlRequiredInterface@interfacenodeName) at (\tikzumlRequiredInterface@interfacenodeName-tmp) {};%
   \end{scope}%
   \node[above] at (\tikzumlRequiredInterface@interfacenodeName.north) {\tikzumlRequiredInterfaceLabel};%
-  %
-  \umlrelation[style={tikzuml connector style}, #1]{\tikzumlRequiredInterface@portnodeName}{\tikzumlRequiredInterface@interfacenodeName}%
   %
   \draw (\tikzumlRequiredInterface@interfacenodeName)+(\tikzumlRequiredInterfacePadding,0) node[name=\tikzumlRequiredInterface@paddingnodeName] {};%
   %
@@ -5015,7 +5014,7 @@
   }{%
     \node[inner sep=0] (\tikzumlProvidedInterface@portnodeName) at (\tikzumlProvidedInterface@nodeName.\tikzumlAnchor) {};%
   }%
-  \draw (\tikzumlProvidedInterface@nodeName)+(-\tikzumlProvidedInterfaceDistance,0) node[inner sep=0, text width=\tikzumlProvidedInterfaceWidth, circle, draw=\tikzumlProvidedInterfaceDrawColor, fill=\tikzumlProvidedInterfaceFillColor, name=\tikzumlProvidedInterface@interfacenodeName] {};%
+  \draw (\tikzumlProvidedInterface@nodeName.\tikzumlAnchor)+(-\tikzumlProvidedInterfaceDistance,0) node[inner sep=0, text width=\tikzumlProvidedInterfaceWidth, circle, draw=\tikzumlProvidedInterfaceDrawColor, fill=\tikzumlProvidedInterfaceFillColor, name=\tikzumlProvidedInterface@interfacenodeName] {};%
   \node[above] at (\tikzumlProvidedInterface@interfacenodeName.north)
  {\tikzumlProvidedInterfaceLabel};%
   %
