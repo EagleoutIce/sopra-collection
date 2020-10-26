@@ -302,13 +302,14 @@
     %\fi
     \endgroup
 }
-\ifsol@highlight@numbers@ %
-\let\sol@dgt\sol@@lst@hl@digit %
+\ifsol@highlight@numbers@%
+\let\sol@dgt\sol@@lst@hl@digit%
 \else
-\def\sol@dgt#1{#1} %
+\def\sol@dgt#1{#1}%
 \fi
 % ^--- shorter and better to read
-
+\def\soldisablenumhl{\def\sol@dgt##1{##1}}
+\def\solenablenumhl{\let\sol@dgt\sol@@lst@hl@digit}
 % overwrite processor routines to adapt to number
 \def\lst@ProcessLetter{%
   \lst@whitespacefalse\sol@lst@lastwas@character@true\lst@AppendLetter%
