@@ -54,6 +54,9 @@
 
 \newif\ifsol@lst@style@upshape@  % add upshape to basicstyle
     \sol@lst@style@upshape@false % explicitly false
+
+\newif\ifsol@lst@style@highlights@ % add upshape to basicstyle
+
 %% -----------------------------------------------------------------------------
 %% Package-Args
 %% -----------------------------------------------------------------------------
@@ -82,6 +85,10 @@
 % numinpar
 \DeclareOption{numinpar}{ \sol@numinpar@true }%
 \DeclareOption{nonuminpar}{ \sol@numinpar@false }%
+
+% highlights
+\DeclareOption{highlights}{ \sol@lst@style@highlights@true }%
+\DeclareOption{nohighlights}{ \sol@lst@style@highlights@false }%
 
 % if sob is loaded, the default for the printmode will be passed,
 % otherwise we will use defaultmode as the default :D
@@ -119,6 +126,11 @@
 \ifsol@guardspace@
 \RequirePackage{needspace}
 \fi
+
+\ifsol@lst@style@highlights@
+\RequirePackage{tikz}
+\fi
+
 
 %% -----------------------------------------------------------------------------
 %% Font Definitions
@@ -774,6 +786,7 @@
 %% -----------------------------------------------------------------------------
 %% Cp-Palette support
 %% -----------------------------------------------------------------------------
+
 \AtEndPreamble{%
 \ifsol@cpalette@
 \@ifundefined{cpl@registered@palettes}{%
@@ -799,4 +812,38 @@
 \fi
 }
 
+%% -----------------------------------------------------------------------------
+%% Highlightssupport
+%% -----------------------------------------------------------------------------
+
+\ifsol@lst@style@highlights@
+
+\newenvironment{sol@listings@highlight@env}[1][]
+{\begingroup\tikzset{sol@listings@highlight/.style={#1}}\begin{lrbox}{\@tempboxa}}
+{\end{lrbox}\sol@highlights@box[sol@listings@highlight]{\@tempboxa}\endgroup}
+
+\newcommand{\sol@highlights@box}[2][]{%
+    \hspace*{-0.35pt}\tikz[#1]{%
+    \pgfpathrectangle{\pgfpoint{1pt}{0pt}}{\pgfpoint{\wd #2}{\ht #2}}%
+    \pgfusepath{use as bounding box}%
+    \node[anchor=base west,outer sep=0pt,inner xsep=0pt,outer xsep=1pt, inner ysep=-1.105pt, rounded corners=1.65pt, minimum height=\ht\strutbox+1pt,#1]{\hspace*{0.35pt}\raisebox{1pt}{\strut}\strut\usebox{#2}\hspace*{-0.35pt}};
+  }\hspace*{0.35pt}%
+}
+
+
+\def\@solLstHL#1{%
+  \begin{sol@listings@highlight@env}[#1]\bgroup\aftergroup\sol@highlights@endenv%
+}
+\def\sol@highlights@endenv{%
+  \end{sol@listings@highlight@env}%
+  \egroup%
+}
+
+\def\solhlboxd#1{\edef\@tmp{\noexpand\@solLstHL{#1}}\@tmp}
+
+\def\solhlbox#1{\@solLstHL{fill=#1!30,draw=#1}}
+
+\colorlet{solwarning}{yellow!90!red}
+\def\solcustom{purple}
+\fi
 \endinput
