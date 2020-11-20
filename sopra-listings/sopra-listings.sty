@@ -223,7 +223,7 @@
         {keywordD:      \itshape},%
         {numbers:       \color{sol@colors@lst@numbers}\itshape},%
         {linenumbers:   \color{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
-        {literals:      \color{sol@colors@lst@literals}},%
+        {literals:      \color{sol@colors@lst@literals}\itshape},%
         {comments:      \color{sol@colors@lst@comments}},% \scshape
         {highlight:     \color{sol@colors@lst@highlight}\itshape},%
         {basic:         \sol@font@fs@normal\color{black}\sol@ttfamily},%
@@ -812,16 +812,29 @@
     \sol@old@cpl@hooks%
     \sol@cpalette@hook%
 }
+\ifsol@printmode@
+\def\sol@cpalette@hook{%
+\lstcolorlet{keywordA}{paletteA!90!black}%
+\lstcolorlet{keywordB}{paletteB!90!black}%
+\lstcolorlet{keywordC}{paletteC!45!black}%
+\lstcolorlet{numbers}{paletteB}%
+\lstcolorlet{literals}{black}%
+\lstcolorlet{comments}{lightgray!45!darkgray!90!black}%
+\lstcolorlet{highlight}{paletteD!90!black}%
+\lstcolorlet{command}{paletteB!90!black}%
+}
+\else
 \def\sol@cpalette@hook{%
 \lstcolorlet{keywordA}{paletteA!90!black}%
 \lstcolorlet{keywordB}{paletteB!90!black}%
 \lstcolorlet{keywordC}{paletteC!90!black}%
 \lstcolorlet{numbers}{paletteD!60!gray!90!black}%
-\lstcolorlet{literals}{paletteD!80!black}%
+\lstcolorlet{literals}{paletteD!60!black}%
 \lstcolorlet{comments}{lightgray!65!darkgray!90!black}%
 \lstcolorlet{highlight}{paletteD!90!black}%
 \lstcolorlet{command}{paletteB!90!black}%
 }
+\fi
 \fi
 }
 
