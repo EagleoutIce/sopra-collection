@@ -1,5 +1,5 @@
 \errorcontextlines 99999
-\documentclass{sopra-base} 
+\documentclass{sopra-base}
 
 \usepackage[dummy,nolistings]{sopra-documentation}
 \usepackage{sopra-attachments}
@@ -36,10 +36,10 @@
 
 \section{Allgemeines}
 \subsection{Warum, wieso, weshalb?}
-    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im 
+    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im
     Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
     Grundlage für die das Highlight von Codes
-    des \imptext{Teams 20}. Diese Dokumentation wurde zusammen mit der 
+    des \imptext{Teams 20}. Diese Dokumentation wurde zusammen mit der
     \T{sopra-base.cls} sowie dem Paket \T{sopra-documentation.sty} kreiert.\par
     Zum Visualisieren der einzelnen Code-Ausschnitte wird das Paket selbst verwendet, welches ebenfalls in hier eingebettet sein sollte: \attachTex{sopra-listings.sty}. \notetext{Dieses Paket benötigt weder \T{shell-escape} noch \T{minted} um zu funktionieren. Es baut auf \T{listings} auf!}
 \subsection{Abhängigkeiten}
@@ -65,7 +65,7 @@
 \end{center}
 
 \subsection{Die Installation}
-    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die 
+    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die
     folgenden Möglichkeiten ergeben:
     \begin{itemize}
         \item Das Paket kann in dasselbe Verzeichnis wie das Dokument
@@ -123,7 +123,7 @@ Sichert nun auch die letzte Zeile eines Listings im Falle von \argref{guardspace
 %
 
 \subsection{Akzeptierte Parameter}
-    Das Paket akzeptiert, so wie die meisten, Argumente. 
+    Das Paket akzeptiert, so wie die meisten, Argumente.
     Bei Argumenten mit einer \say{Counter}-Option wird das jeweils standardmäßig aktive zuerst und das andere in Klammern
     geschrieben. So wird implizit:
 \begin{plainlatex}[autogobble]
@@ -145,7 +145,7 @@ Sichert nun auch die letzte Zeile eines Listings im Falle von \argref{guardspace
 
     \begin{argument}{defaultmode}{print}
         Diese Funktionen arbeiten analog zu den gleichnamigen Vertretern in \T{sopra-base.cls}. Wird \T{print} gewählt, so wird versucht möglichst Tinte einzusparen (kein Hintegrund bei Codes, \ldots) und weiter werden gewisse
-        Schlüsselbegriffe fett/kursiv gedruckt um auch im einfarbigen Ausdruck eine 
+        Schlüsselbegriffe fett/kursiv gedruckt um auch im einfarbigen Ausdruck eine
         (möglichst gute) Unterscheidbarkeit zu erhalten.
     \end{argument}
 
@@ -156,7 +156,7 @@ Sichert nun auch die letzte Zeile eines Listings im Falle von \argref{guardspace
     \begin{argument}{nocpalette}{cpalette}
         Bietet Unterstützung für \href{color-palettes}{https://github.com/EagleoutIce/color-palettes}. In diesem Fall wird das code-highlighting automatisch an die aktuelle Palette angepasst und auch mit dem Ändern der Palette von da an aktualisiert.
     \end{argument}
-    
+
     \begin{argument}{noupshape}{upshape}
         Fügt \cmd{upshape} zum Stil hinzu. Dies sorgt dafür, dass sich Listings nichtmehr an kursiv gesetzte Schrift anpassen.
     \end{argument}
@@ -169,6 +169,11 @@ Sichert nun auch die letzte Zeile eines Listings im Falle von \argref{guardspace
         Kurzform für \cmdref{solSetLeftMargin} mit dem Wert \glqq{}{\makeatletter\@@sol@numinpar@length}\grqq{}, kann also dazu verwendet
         werden um die Listings automatisch einzurücken und die Nummern so nicht über den Dokumentenrand hinausragen zu lassen.
     \end{argument}
+
+    \begin{argument}{defaultfont}{nodefaultfont}
+        Wenn die Option gesetzt ist, wird die Typewriter-Schriftart auf \say{AnonymousPro} geändert, sonst nicht.
+    \end{argument}
+
 
 \subsection{Farben}
 
@@ -193,11 +198,11 @@ public static void main(...){ /* ... */ }
  Es ist möglich jede Farbe (nach \T{xcolor}) zu verwenden (siehe auch \cmdref{lstcolordef}).
 
 \subsection{Stile}
-    Zur Hervorhebung der einzelnen Segmente im Listing werden den Farben entlehnte Stile definiert, die ebenfalls frei verändert werden können. \notetext{Entwicklernotiz, die 
-    Stile sollten bei einer kompletten Neudefintion über \cmd{sol@list@define@styles} 
+    Zur Hervorhebung der einzelnen Segmente im Listing werden den Farben entlehnte Stile definiert, die ebenfalls frei verändert werden können. \notetext{Entwicklernotiz, die
+    Stile sollten bei einer kompletten Neudefintion über \cmd{sol@list@define@styles}
     definiert werden. Sonst ist das Präfix, das im Folgenden verwendet werden soll in
     \cmd{sol@lst@style@prefix} abgespeichert.}\par{}
-    Alle im folgenden aufgeführten Befehle tragen (sofern nicht modifiziert) das Präfix 
+    Alle im folgenden aufgeführten Befehle tragen (sofern nicht modifiziert) das Präfix
     \T{sol@styles@lst@} und können (ohne dieses Präfix) mittels \cmdref{solGet} beziehungsweise \cmdref{solGetStyle} abgefragt werden. Einzelne Sprachen können
     weitere Befehle und Stile fordern und hinzufügen, davon sollte aber nur im Notfall gebraucht gemacht werden (so fügt die Sprache \T{Latex} den Stil \T{command} hinzu. Für mehr Informationen, siehe: \jmark[Abschnitt \ref{sec:vordefinierteSprachen} (Vordefinierte Sprachen)]{sec:vordefinierteSprachen})\par{}
     Es gibt die folgenden Stile: \T{keywordA}, \T{keywordB}, \T{keywordC}, \T{keywordD}, \T{numbers}, \T{linenumbers}, \T{literals}, \T{comments}, \T{highlight}, \T{command} und \T{basic}, wobei letzterer jedem Stil vorangestellt wird. Die Neudefinition eines Stils sollte
@@ -251,11 +256,11 @@ Es gilt zu beachten, dass das Präfix \T{env@} nur auf die Natur einer Umgebung 
 
 \subsection{Die Umgebungen zum Setzen}
 
-\notetext{Diese Umgebungen werden für jede geladene Sprache erstellt. Jede in diesem Paket enthaltene Sprache folgt der Regel, dass sie mit einem \say{l} (für \textbf{l}anguage) beginnt und dann ein Großbuchstabe folgt. Möchte man also \T{java} aus irgendeinem Grunde 
+\notetext{Diese Umgebungen werden für jede geladene Sprache erstellt. Jede in diesem Paket enthaltene Sprache folgt der Regel, dass sie mit einem \say{l} (für \textbf{l}anguage) beginnt und dann ein Großbuchstabe folgt. Möchte man also \T{java} aus irgendeinem Grunde
 manuel in \env{lstlisting} oder so verwenden, so heißt die Sprache hier \T{lJava}.}
 
 \begin{environment}{<Sprache>}{\optArg{Stildefinitionen}}
-    Setzt den eingeschlossenen Code in einer durch \cmdref{solLoadLanguage} \T{<Sprache>}. \notetext{Also, wichtig: \env{<Sprache>} selbst, gibt es nicht.}. 
+    Setzt den eingeschlossenen Code in einer durch \cmdref{solLoadLanguage} \T{<Sprache>}. \notetext{Also, wichtig: \env{<Sprache>} selbst, gibt es nicht.}.
     Beispiel:\smallskip\\ % gosh i should have implemented the ltx preview
     \begin{latex}
 \begin{java}
@@ -286,7 +291,7 @@ public static void main(...){ /* ... */ }
     \begin{plainlatex}
 Dies ist ein Test für \cjava{public static void main} - hat er geklappt?
     \end{plainlatex}
-    Ergibt: \\ 
+    Ergibt: \\
 Dies ist ein Test für \cjava{public static void main} - hat er geklappt?
 \end{command}
 
@@ -297,7 +302,7 @@ Dies ist ein Test für \cjava{public static void main} - hat er geklappt?
 \begin{command}{i<Sprache>}{\optArg{Stildefinitionen}\manArg{Dateipfad}}
     Bindet die Datei in \T{Dateipfad} in das Dokument ein, wobei \envref{<Sprache>} zum Highlighting verwendet wird.
  \end{command}
- 
+
 \subsection{Sprachverwaltung}
 
 \begin{command}{solStyles}{}
@@ -448,7 +453,7 @@ public static int add(int a, int b){ return a + b; }
 \end{command}
 
 \begin{command}{lstcolorlet}{\manArg{lstcolor}\manArg{normalcolor}}
-    Weißt eine Farbe mittels \cmd{colorlet} zu. Hierbei darf \emph{lstcolor} nur einen der folgenden Werte annehmen: \emph{keywordA}, \emph{keywordB}, \emph{keywordC}, \emph{numbers}, \emph{literals}, \emph{comments}, \emph{highlight} oder \emph{command}. 
+    Weißt eine Farbe mittels \cmd{colorlet} zu. Hierbei darf \emph{lstcolor} nur einen der folgenden Werte annehmen: \emph{keywordA}, \emph{keywordB}, \emph{keywordC}, \emph{numbers}, \emph{literals}, \emph{comments}, \emph{highlight} oder \emph{command}.
 \end{command}
 
 \begin{command}{lstcolordef}{\optArg{mode=RGB}\manArg{lstcolor}\manArg{colorcode}}
@@ -526,7 +531,7 @@ public static void main(String[] args){
 
 \begin{java}
 import java.util.Scanner;
- 
+
 /**
  *  @file ean.java
  *  @author Florian Sihler, Raphael Straub
@@ -542,13 +547,13 @@ import java.util.Scanner;
 public class ean {
     ///@brief der Einsteigspunkt des Programms
     public static void main(String[] args){
-        Scanner scanner = new Scanner(System.in); //Initialisierung 
+        Scanner scanner = new Scanner(System.in); //Initialisierung
         int sum = 0; boolean toggle = false;
         for(int i = 0; i < 12; i++){ //Einlesen der 12 Zahlen
                                          /* abwechselnd *1 und *3 */
             sum += (scanner.nextInt() * ((toggle)?3:1)); //Summieren der Zahl
             toggle = !toggle; //Invertieren des Multiplikators
-        } 
+        }
         System.out.println( (10 - (sum % 10)) % 10 );
         // Gibt die Prüfsumme als den Abstand zum nächsten Vielfachen von 10
         scanner.close();

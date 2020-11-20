@@ -56,6 +56,8 @@
     \sol@lst@style@upshape@false % explicitly false
 
 \newif\ifsol@lst@style@highlights@ % add upshape to basicstyle
+\newif\ifsol@lst@style@defaultfont@ % don't change font?
+\sol@lst@style@defaultfont@true
 
 %% -----------------------------------------------------------------------------
 %% Package-Args
@@ -85,6 +87,9 @@
 % numinpar
 \DeclareOption{numinpar}{ \sol@numinpar@true }%
 \DeclareOption{nonuminpar}{ \sol@numinpar@false }%
+% numinpar
+\DeclareOption{defaultfont}{ \sol@lst@style@defaultfont@true }%
+\DeclareOption{nodefaultfont}{ \sol@lst@style@defaultfont@false }%
 
 % highlights
 \DeclareOption{highlights}{ \sol@lst@style@highlights@true }%
@@ -136,8 +141,13 @@
 %% Font Definitions
 %% -----------------------------------------------------------------------------
 
-\def\sol@ttfamily{\fontfamily{AnonymousPro}\selectfont}
-\let\ttfamily\sol@ttfamily
+\ifsol@lst@style@defaultfont@
+\def\sol@ttfamily{\fontfamily{AnonymousPro}\selectfont}%
+\let\ttfamily\sol@ttfamily%
+\else
+\let\sol@ttfamily\ttfamily%
+\fi
+
 \long\def\T#1{\bgroup\sol@ttfamily#1\egroup}
 \robustify{\T}
 
@@ -155,7 +165,7 @@
 %% -----------------------------------------------------------------------------
 
 \ifsol@printmode@
-\definecolor{sol@colors@border}{HTML}{EAECF0}     %
+\definecolor{sol@colors@border}{HTML}{DDDFE2}     %
 \definecolor{sol@colors@background}{HTML}{FFFFFF} % save ink :D
 \else
 \definecolor{sol@colors@border}{HTML}{EAECF0}     %
@@ -199,6 +209,8 @@
         \ifx\\#2\\\else\sol@lst@style@iter#2,\@nil\fi% recursion
     \fi%
 }
+
+\def\solSetStyle#1#2{\expandafter\gdef\csname\sol@lst@style@prefix#1\endcsname{#2}}
 
 \def\sol@list@define@styles#1{ \sol@lst@style@iter#1,\@nil }
 % we will write the colors anyway. This way it is easy visible on how to change the
@@ -290,6 +302,7 @@
 \def\solSetRightMargin#1{\setlength{\sol@length@lst@xrightmargin}{#1}}
 \def\solSetNumSep#1{\setlength{\sol@length@lst@numsep}{#1}}
 \def\solSetFrameRule#1{\setlength{\sol@length@lst@famerule}{#1}}
+\def\solPreBreak#1{\def\sol@lst@prebreak{#1}}
 
 \def\@@sol@numinpar@length{2em}
 \ifsol@numinpar@%
