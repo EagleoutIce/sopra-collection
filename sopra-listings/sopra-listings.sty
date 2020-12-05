@@ -325,7 +325,7 @@
       \fi\hbox{\relax{}}%
     \fi%
     %\fi
-    \endgroup
+    \endgroup%
 }
 \ifsol@highlight@numbers@%
 \let\sol@dgt\sol@@lst@hl@digit%
@@ -617,8 +617,8 @@
 % NOTE: currently no opt arg, as \@ifnextchar breaks scanning of lst@next
 \def\sol@NewLstEnvPresent#1#2#3#4#5{%
 %\lstnewenvironment{#1}[1][]{\lstset{##1}#3}{#4}
-\expandafter\xdef\csname#1\endcsname{\noexpand\leavevmode\noexpand\presentlst{#5}}
-\expandafter\xdef\csname end#1\endcsname{\noexpand\endpresentlst}
+\expandafter\xdef\csname#1\endcsname{\noexpand\leavevmode\noexpand\presentlst{#5}}%
+\expandafter\xdef\csname end#1\endcsname{\noexpand\endpresentlst}%
 }
 
 % #1 KeyName
@@ -627,7 +627,7 @@
 \def\sol@@NewLstEnv#1#2#3{%
 \bgroup%
   %\globaldefs=1%
-      \edef\sol@xcurlst{\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/\environName/constructor command}\endcsname{#3}{#1}{\noexpand\lstset{style=\pgfkeysvalueof{/sol@lst@family/\environName/listing style},language=#2}}{}{#2}}
+      \edef\sol@xcurlst{\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/\environName/constructor command}\endcsname{#3}{#1}{\noexpand\lstset{style=\pgfkeysvalueof{/sol@lst@family/\environName/listing style},language=#2}}{}{#2}}%
   \global\sol@xcurlst%
   \relax%No one (this means me) really knows why this helps, but it enforces the lst@next - search to interpret the first char of an cs-sequence correctly
   \globaldefs=0%
@@ -715,7 +715,7 @@
     escapeinside        = {!*}{*!},
     mathescape          = false,%
     % space control
-    keepspaces           = false%
+    keepspaces          = false%
 }
 
 %% -----------------------------------------------------------------------------
@@ -745,10 +745,10 @@
     \fi%
 }
 \def\sol@LoadLanguage@searchPath@resolve%
-        {% empty-case
-        \InputIfFileExists{language_\sol@curlanginputfile.cfg}{
-            \typeout{Loaded '\sol@curlanginputfile' from 'language_\sol@curlanginputfile.cfg'}
-        }{\expandafter\sol@LoadLanguage@searchPath@iter\solLanguageSearchPath,\@nil}}
+    {% empty-case
+    \InputIfFileExists{language_\sol@curlanginputfile.cfg}{
+        \typeout{Loaded '\sol@curlanginputfile' from 'language_\sol@curlanginputfile.cfg'}
+    }{\expandafter\sol@LoadLanguage@searchPath@iter\solLanguageSearchPath,\@nil}}
 
 \def\sol@LoadLanguage@single#1\@nil{\def\sol@curlanginputfile{#1}%
                 \sol@LoadLanguage@searchPath@resolve{}}
