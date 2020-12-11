@@ -112,7 +112,7 @@
 %% -----------------------------------------------------------------------------
 
 \def\sot@thesotversion#1#2#3#4\@nil{%
-    \bgroup{}v#1.#2.#3#4\egroup%
+    {v#1.#2.#3#4}%
 }
 \def\thesotversion{%
     \edef\@tmp{\noexpand\sot@thesotversion\arabic{sotversion}\noexpand\@nil}%
