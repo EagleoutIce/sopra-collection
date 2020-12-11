@@ -58,6 +58,8 @@
 \newif\ifsol@lst@style@defaultfont@ % don't change font?
 \sol@lst@style@defaultfont@true
 
+\newif\ifsol@debug@% typeout debug
+
 %% -----------------------------------------------------------------------------
 %% Package-Args
 %% -----------------------------------------------------------------------------
@@ -94,6 +96,10 @@
 \DeclareOption{highlights}{ \sol@lst@style@highlights@true }%
 \DeclareOption{nohighlights}{ \sol@lst@style@highlights@false }%
 
+% debug
+\DeclareOption{debug}{ \sol@debug@true }%
+\DeclareOption{nodebug}{ \sol@debug@false }%
+
 % if sob is loaded, the default for the printmode will be passed,
 % otherwise we will use defaultmode as the default :D
 \@ifundefined{ifsob@printmode@}{% not called from sopra-base-class, we use a
@@ -105,6 +111,8 @@
 
 \ExecuteOptions{noencoding,hlnumbers,loadlangs,guardspace}% set it explicitly
 \ProcessOptions\relax%
+
+\ifsol@debug@\let\sol@debug\typeout\else\let\sol@debug\@gobble\fi
 
 %% -----------------------------------------------------------------------------
 %% Basic Packages
@@ -134,7 +142,6 @@
 \ifsol@lst@style@highlights@
 \RequirePackage{tikz}
 \fi
-
 
 %% -----------------------------------------------------------------------------
 %% Font Definitions
@@ -639,11 +646,11 @@
 \def\RegisterLanguage#1#2{\bgroup\makeatletter%
   % Register the Environments
   %
-  \def\sol@foreach@basic@env@iter##1,##2\@nil{
+  \def\sol@foreach@basic@env@iter##1,##2\@nil{%
       \ifx!##1!\else
-        \def\environName{##1}
+        \def\environName{##1}%
         \edef\environCurName{\pgfkeysvalueof{/sol@lst@family/\environName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/\environName/command name suffix}}% assign
-        \typeout{> #1/#2 e '##1' (name: \environCurName, ctor: \pgfkeysvalueof{/sol@lst@family/\environName/constructor command})}%
+        \sol@debug{> #1/#2 e '##1' (name: \environCurName, ctor: \pgfkeysvalueof{/sol@lst@family/\environName/constructor command})}%
         \edef\sol@CreateAnLstEnviron{\noexpand\sol@@NewLstEnv{\environName}{#2}{\environCurName}}% fully expand the Name, otherwise it would be undefined when the environment gets used
         \sol@CreateAnLstEnviron%
         \ifx!##2!\else\sol@foreach@basic@env@iter##2,\@nil\fi%
@@ -658,7 +665,7 @@
     \ifx!##1!\else
         \def\inlineName{##1}
         \edef\inlineCurName{\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name suffix}}% assign
-        \typeout{> #1/#2 i '\inlineName' (cmd: \inlineCurName, style: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style}, draw: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command})}%
+        \sol@debug{> #1/#2 i '\inlineName' (cmd: \inlineCurName, sty: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style}, d: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command})}%
         %% We will construct those with optional arguments, to give the user a chance to pass optional Arguments :D
         % luckily we can construct the main Argument without any expansion problems :D
         \expandafter\xdef\csname\inlineCurName\endcsname{\noexpand\protect\noexpand\@ifnextchar[{\noexpand\protect\expandafter\noexpand\csname @@hasopt@@\inlineCurName\endcsname}{\noexpand\protect\expandafter\noexpand\csname @@noopt@@\inlineCurName\endcsname}}%
