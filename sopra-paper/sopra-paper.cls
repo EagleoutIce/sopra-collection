@@ -4,8 +4,8 @@
 %% Version: 1.0
 %% Author:  Florian Sihler, 13.12.2019
 %%
-%% This LaTeX2e Class should provide the paper-layout to be used for 
-%% all documents created by sopra-team-020. 
+%% This LaTeX2e Class should provide the paper-layout to be used for
+%% all documents created by sopra-team-020.
 %%                      ulm university, WiSe2019
 
 
@@ -96,7 +96,7 @@
 \newlength\sop@len@header \setlength\sop@len@header{2cm}% header padding
 
 \ifsop@dopar@ \setlength\parindent\sop@len@parindent%
-\else \setlength\parindent{0pt} \fi
+\else \parindent=\z@ \fi
 
 %% -----------------------------------------------------------------------------
 %% Basic Packages
@@ -398,7 +398,7 @@
 \begin{tikzpicture}[remember picture, overlay]
     \coordinate (tl@pf@lockpos) at ($(current page.north east)+(-5.5cm,-1.25cm)$);
     \node[cprimary,left=2pt] at (tl@pf@lockpos) {\Huge$\thepage$};
-    % Cur section rectangle 
+    % Cur section rectangle
     \fill[cakzent] (tl@pf@lockpos) rectangle ++(5.5cm,0.55pt);
     \node[above right,yshift=-1pt,font=\footnotesize,text width=5cm,align=left,minimum height=0.736cm] at (tl@pf@lockpos) {\strut\expandafter\ifx\expandafter\\\rightmark\\ \leftmark\else \rightmark\fi\strut{}};
     \def\@sop@cury{0}
@@ -451,7 +451,7 @@
 % \begin{tikzpicture}[remember picture, overlay]
 %     \coordinate (tl@pf@lockpos) at ($(current page.north west)+(5.5cm,-1.25cm)$);
 %     \node[cprimary,right=2pt] at (tl@pf@lockpos) {\Huge$\thepage$};
-%     % Cur section rectangle 
+%     % Cur section rectangle
 %     \fill[cakzent] (tl@pf@lockpos) rectangle ++(-5.5cm,0.55pt);
 %     \node[above left,yshift=-1pt,font=\footnotesize,text width=5cm,align=right] at (tl@pf@lockpos) {\strut\expandafter\ifx\expandafter\\\rightmark\\ \leftmark\else \rightmark\fi};
 %     % \node[below right,yshift=1pt,font=\footnotesize,text width=5cm,align=left] at (tl@pf@lockpos) {\strut\sop@chapterbubbles};
@@ -461,7 +461,7 @@
 %         \ifnum\i=0\thechapter  % in current chapter
 %             \sop@chapblob{\i}{clight}{chapnode\i}%
 %         \else \sop@chapblob{\i}{white}{chapnode\i}%
-%         \fi\hfill{} 
+%         \fi\hfill{}
 %     }
 % \end{tikzpicture}%0.75*\sop@len@header
 % }
@@ -489,11 +489,11 @@
 {\color{chdtext}{\Huge$\llap{$\diamond$}\hspace*{-1pt}$}\rule[0.22\baselineskip]{\linewidth}{0.55pt}{\Huge$\hspace*{-1pt}\rlap{$\diamond$}$}}%
     \begin{center}
         \vspace*{-\topsep}
-        \color{chdtext}#2#3%        
+        \color{chdtext}#2#3%
     \end{center}
     {\color{chdtext}{\Huge$\llap{$\diamond$}\hspace*{-1pt}$}\rule[0.22\baselineskip]{\linewidth}{0.55pt}{\Huge$\hspace*{-1pt}\rlap{$\diamond$}$}}%
 }%
-\fi 
+\fi
 
 \renewcommand\sectionlinesformat[4]{%
     \def\tmp@a{#1}\def\tmp@b{section}\ifx\tmp@a\tmp@b

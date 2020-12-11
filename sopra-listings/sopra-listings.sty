@@ -22,13 +22,12 @@
 \newcounter{solversion} \setcounter{solversion}{1018}
 
 % note this will be used with tcb:
-\newlength{\sol@length@lst@outer@spacing}%
-\setlength{\sol@length@lst@outer@spacing}{3pt}
+\newlength{\sol@length@lst@outer@spacing} \sol@length@lst@outer@spacing=3pt
 
-\newlength{\sol@length@lst@numsep} \setlength{\sol@length@lst@numsep}{9pt}
-\newlength{\sol@length@lst@famerule} \setlength{\sol@length@lst@famerule}{0.75pt}
-\newlength{\sol@length@lst@xleftmargin} \setlength{\sol@length@lst@xleftmargin}{3pt}
-\newlength{\sol@length@lst@xrightmargin} \setlength{\sol@length@lst@xrightmargin}{3pt}
+\newlength{\sol@length@lst@numsep} \sol@length@lst@numsep=9pt
+\newlength{\sol@length@lst@famerule} \sol@length@lst@famerule=0.75pt
+\newlength{\sol@length@lst@xleftmargin} \sol@length@lst@xleftmargin=3pt
+\newlength{\sol@length@lst@xrightmargin} \sol@length@lst@xrightmargin=3pt
 
 
 \def\sol@lst@style@prefix{sol@styles@lst@}
@@ -199,14 +198,14 @@
 % as we don't know, if 'foreach' is available, we will built our own iter:
 
 \def\sol@lst@style@iter@step#1: #2\@nil{%
-    \ifx\\#1\\\else
+    \ifx!#1!\else
         \expandafter\gdef\csname#1\endcsname{#2}%
     \fi
 }
 \def\sol@lst@style@iter#1,#2\@nil{
-    \ifx\\#1\\\else%
+    \ifx!#1!\else%
         \sol@lst@style@iter@step\sol@lst@style@prefix#1\@nil%
-        \ifx\\#2\\\else\sol@lst@style@iter#2,\@nil\fi% recursion
+        \ifx!#2!\else\sol@lst@style@iter#2,\@nil\fi% recursion
     \fi%
 }
 
@@ -259,7 +258,7 @@
 \def\sol@font@size{\dimexpr\f@size pt\relax}
 
 \def\sol@thesolversion#1#2#3#4\@nil{%
-    \bgroup{}v#1.#2.#3#4\egroup%
+    {v#1.#2.#3#4}%
 }
 \def\thesolversion{%
     \edef\@tmp{\noexpand\sol@thesolversion\arabic{solversion}\noexpand\@nil}%
@@ -283,9 +282,9 @@
 
 % Here we will make a small rainbow to present the selected color-theme :D
 \def\sol@lst@showstyles@iter#1,#2\@nil{
-    \ifx\\#1\\\else%
+    \ifx!#1!\else%
         {\sol@style@get{basic}\sol@style@get{#1}#1\space}%
-        \ifx\\#2\\\else\sol@lst@showstyles@iter#2,\@nil\fi% recursion
+        \ifx!#2!\else\sol@lst@showstyles@iter#2,\@nil\fi% recursion
     \fi%
 }
 
@@ -322,7 +321,7 @@
       {\sol@style@get{numbers}#1}%
       \else%
         #1%
-      \fi\hbox{\relax{}}%
+      \fi\hbox{\relax}%
     \fi%
     %\fi
     \endgroup%
@@ -396,7 +395,7 @@
   {(}{{(\@nc}}1 {)}{{)\@nc}}1 {:space:}{{{ }}}1 {:ws:}{{{ }}}1 {:cdots:}{{{$\cdots$}}}1 {:cdot:}{{{$\cdot$}}}1 {:ldots:}{{{\ldots}}}1 {:!:}{{{!}}}1
   {:c:}{{{}}}0 {:star:}{{{*}}}1 {:minus:}{{{-}}}1
   {:float:}{{{\sol@style@get{numbers}f\normalcolor}}}1 {:exp:}{{{\sol@style@get{numbers}e\normalcolor}}}1 {:yields:}{{{$\rightarrow$}}}1%
-  {:lan:}{{{$\langle\,$}}}1 {:ran:}{{{$\,\rangle$}}}1
+  {:lan:}{{{$\langle\mskip\thinmuskip$}}}1 {:ran:}{{{$\mskip\thinmuskip\rangle$}}}1
   {:bcmd:}{\color{sol@colors@lst@keywordA}\textbackslash\normalcolor}1 {:ecmd:}{\normalcolor}0
   {0}{{{\sol@dgt{0}}}}1
   {1}{{{\sol@dgt{1}}}}1 {2}{{{\sol@dgt{2}}}}1 {3}{{{\sol@dgt{3}}}}1
@@ -415,13 +414,13 @@
 
 % please note, that they will apply under every condition!
 \newcommand{\sol@dlst@default}[2][]{%
-    \begingroup\setlength{\fboxsep}{0pt}\fcolorbox{sol@colors@border}{sol@colors@background}{%
-        \,\strut\lstinline[#1,keepspaces=true]`#2`\,%
+    \begingroup\fboxsep=\z@\fcolorbox{sol@colors@border}{sol@colors@background}{%
+        \thinspace\strut\lstinline[#1,keepspaces=true]`#2`\thinspace%
     }\endgroup%
 }
 
 \newcommand{\sol@dlst@blank}[2][]{%
-    \begingroup\,\strut\lstinline[#1,keepspaces=true]`#2`\endgroup%
+    \begingroup\thinspace\strut\lstinline[#1,keepspaces=true]`#2`\endgroup%
 }
 
 \newcommand{\sol@dlst@input}[2][]{%
@@ -433,15 +432,11 @@
 %% -----------------------------------------------------------------------------
 
 \def\sol@penalties@lst@sloppy{\makeatletter%
-  \tolerance 9999%
-  \emergencystretch 3em%
-  \hfuzz .5cm%
+  \tolerance=9999 \emergencystretch=3em \hfuzz=.5cm%
   \vfuzz\hfuzz\makeatother}%
 
 \def\sol@penalties@lst@fussy{\makeatletter%
-  \emergencystretch 0em
-  \tolerance 200%
-  \hfuzz .1pt%
+  \emergencystretch=0em \tolerance=200 \hfuzz=.1pt%
   \vfuzz\hfuzz\makeatother}
 
 \sol@penalties@lst@sloppy
@@ -453,7 +448,7 @@
 
 \lstdefinestyle{nonum}{
     xleftmargin=3pt,xrightmargin=3pt,%will fix some overhead :D
-    numbers=none,numbersep=0pt,
+    numbers=none,numbersep=\z@,
 }
 
 %% -----------------------------------------------------------------------------
@@ -465,8 +460,8 @@
 
 % TODO: TODO: CHANGE THAT TO NEWENV
 \lstnewenvironment{lstplain}[1][]
-  {\def\sol@lst@backcol{white}\lstset{xleftmargin=0pt,xrightmargin=0pt,%
-  numbers=none,numbersep=0pt,frame=none,%
+  {\def\sol@lst@backcol{white}\lstset{xleftmargin=\z@,xrightmargin=\z@,%
+  numbers=none,numbersep=\z@,frame=none,%
   rulecolor={},backgroundcolor={} %
   ,#1}}
 {\def\sol@lst@backcol{MudWhite}}
@@ -503,8 +498,8 @@
       % % #1 language name (java, latex, ..-)
       % % #2 lst language name (lJava, lLatex,...)
       % command name/.code 2 args={#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ....
-      command name prefix/.initial = {},%
-      command name suffix/.initial = {},%
+      command name prefix/.initial={},%
+      command name suffix/.initial={},%
       %draw environment/.initial={defaultlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions
       constructor command/.initial={sol@NewLstEnvCore}
 }
@@ -515,8 +510,8 @@
       % % #1 language name (java, latex, ..-)
       % % #2 lst language name (lJava, lLatex,...)
       % command name/.code 2 args={#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ....
-      command name prefix/.initial = {},%
-      command name suffix/.initial = {*},%
+      command name prefix/.initial={},%
+      command name suffix/.initial={*},%
       %draw environment/.initial={defaultlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions
       constructor command/.initial={sol@NewLstEnvCoreStarred}
 }
@@ -573,7 +568,7 @@
 \def\sol@ensure#1{\needspace{#1\baselineskip}}
 \def\solguard#1{\gdef\@sol@guard@default{#1}}
 \solguard{.8}
-% {\setlength\parskip{0pt}\setlength\parindent{0pt}\par}
+% {\setlength\parskip{\z@}\setlength\parindent{\z@}\par}
 \def\sol@guardspace{\ifsol@guardspace@\sol@ensure{\@sol@guard@default}\fi}
 \def\sol@guardend{\ifsol@guardspace@\nobreak\fi}
 % on line:
@@ -604,8 +599,8 @@
 % #4 Out Extra
 % #5 Language
 \def\sol@NewLstEnvPlain#1#2#3#4#5{%
-  \lstnewenvironment{#1}[1][]{#3\lstset{xleftmargin=0pt,xrightmargin=0pt,%
-  numbers=none,numbersep=0pt,frame=none,%
+  \lstnewenvironment{#1}[1][]{#3\lstset{xleftmargin=\z@,xrightmargin=\z@,%
+  numbers=none,numbersep=\z@,frame=none,%
   rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 }
 
@@ -618,7 +613,7 @@
 \def\sol@NewLstEnvPresent#1#2#3#4#5{%
 %\lstnewenvironment{#1}[1][]{\lstset{##1}#3}{#4}
 \expandafter\xdef\csname#1\endcsname{\noexpand\leavevmode\noexpand\presentlst{#5}}%
-\expandafter\xdef\csname end#1\endcsname{\noexpand\endpresentlst}%
+\expandafter\gdef\csname end#1\endcsname{\endpresentlst}%
 }
 
 % #1 KeyName
@@ -645,13 +640,13 @@
   % Register the Environments
   %
   \def\sol@foreach@basic@env@iter##1,##2\@nil{
-      \ifx\\##1\\\else
+      \ifx!##1!\else
         \def\environName{##1}
         \edef\environCurName{\pgfkeysvalueof{/sol@lst@family/\environName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/\environName/command name suffix}}% assign
         \typeout{> #1/#2 e '##1' (name: \environCurName, ctor: \pgfkeysvalueof{/sol@lst@family/\environName/constructor command})}%
         \edef\sol@CreateAnLstEnviron{\noexpand\sol@@NewLstEnv{\environName}{#2}{\environCurName}}% fully expand the Name, otherwise it would be undefined when the environment gets used
         \sol@CreateAnLstEnviron%
-        \ifx\\##2\\\else\sol@foreach@basic@env@iter##2,\@nil\fi%
+        \ifx!##2!\else\sol@foreach@basic@env@iter##2,\@nil\fi%
       \fi
   }
   \def\sol@foreach@basic@env##1{\sol@foreach@basic@env@iter##1,\@nil}
@@ -660,7 +655,7 @@
   % This procedure can be used in persistence to iterate over the pgf-keys
   %% Register 'inline default'
   \def\sol@foreach@inline@env@iter##1,##2\@nil{
-    \ifx\\##1\\\else
+    \ifx!##1!\else
         \def\inlineName{##1}
         \edef\inlineCurName{\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name suffix}}% assign
         \typeout{> #1/#2 i '\inlineName' (cmd: \inlineCurName, style: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style}, draw: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command})}%
@@ -671,7 +666,7 @@
         \expandafter\xdef\csname @@noopt@@\inlineCurName\endcsname####1{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#2]{####1}}%
         \expandafter\xdef\csname @@hasopt@@\inlineCurName\endcsname[####1]####2{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#2,####1]{####2}}%
         \expandafter\robustify\csname\inlineCurName\endcsname% robustify
-        \ifx\\##2\\\else\sol@foreach@inline@env@iter##2,\@nil\fi%
+        \ifx!##2!\else\sol@foreach@inline@env@iter##2,\@nil\fi%
       \fi
   }%
   \def\sol@foreach@inline@env##1{\sol@foreach@inline@env@iter##1,\@nil}
@@ -734,11 +729,11 @@
 % the file has to have the signature: 'language_<Name>.cfg'
 
 \def\sol@LoadLanguage@searchPath@iter#1,#2\@nil{%
-    \ifx\\#1\\\else%
+    \ifx!#1!\else%
     \InputIfFileExists{#1language_\sol@curlanginputfile.cfg}{%
         \typeout{Loaded '\sol@curlanginputfile' from '#1language_\sol@curlanginputfile.cfg'}
     }{%
-        \ifx\\#2\\\else%
+        \ifx!#2!\else%
         \sol@LoadLanguage@iter#2,\@nil%
         \fi%
     }%
@@ -753,8 +748,8 @@
 \def\sol@LoadLanguage@single#1\@nil{\def\sol@curlanginputfile{#1}%
                 \sol@LoadLanguage@searchPath@resolve{}}
 \def\sol@LoadLanguage@iter#1,#2\@nil{%
-    \ifx\\#1\\\else\sol@LoadLanguage@single#1\@nil%
-        \ifx\\#2\\\else\sol@LoadLanguage@iter#2,\@nil%
+    \ifx!#1!\else\sol@LoadLanguage@single#1\@nil%
+        \ifx!#2!\else\sol@LoadLanguage@iter#2,\@nil%
     \fi\fi%
 }
 \def\sol@LoadLanguage#1{\sol@LoadLanguage@iter#1,\@nil}
@@ -852,7 +847,7 @@
     \hspace*{-0.35pt}\tikz[#1]{%
     \pgfpathrectangle{\pgfpoint{1pt}{0pt}}{\pgfpoint{\wd #2}{\ht #2}}%
     \pgfusepath{use as bounding box}%
-    \node[anchor=base west,outer sep=0pt,inner xsep=0pt,outer xsep=1pt, inner ysep=-1.105pt, rounded corners=1.65pt, minimum height=\ht\strutbox+1pt,#1]{\hspace*{0.35pt}\raisebox{1pt}{\strut}\strut\usebox{#2}\hspace*{-0.35pt}};
+    \node[anchor=base west,outer sep=\z@,inner xsep=\z@,outer xsep=1pt, inner ysep=-1.105pt, rounded corners=1.65pt, minimum height=\ht\strutbox+1pt,#1]{\hspace*{0.35pt}\raisebox{1pt}{\strut}\strut\usebox{#2}\hspace*{-0.35pt}};
   }\hspace*{0.35pt}%
 }
 

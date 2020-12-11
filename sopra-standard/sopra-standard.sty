@@ -31,7 +31,7 @@
 % make command to create new environment
 % till then we will fake a counter:
 \newcounter{ctrdef}
- 
+
 %% -----------------------------------------------------------------------------
 %% Basic Packages
 %% -----------------------------------------------------------------------------
@@ -56,7 +56,7 @@
 
 \newcommand\measurepage{\dimexpr\pagegoal-\pagetotal-\baselineskip\relax}
 \newcommand\@sosensure[1]{\ifdim\measurepage<#1\baselineskip\relax\null\newpage\relax\fi}%
-% the basic layout of an definition 
+% the basic layout of an definition
 % #1 opt args
 % #2 internal name
 % #3 titel
@@ -111,9 +111,9 @@
         % not unkown
         \PackageError{sopra-standard}{The Key '\farg' is unknown. No registered handler was found!}%
     }
-    {% 
+    {%
         % found a handler, call it:
-        \@nameuse{@sos@parser@keyhandler@\farg}{\farg}{#2}%   
+        \@nameuse{@sos@parser@keyhandler@\farg}{\farg}{#2}%
     }%
 }
 
@@ -147,11 +147,11 @@
 }
 
 \@namedef{@sos@parser@keyhandler@symbol}#1#2{% will set symbol to be set
-    \gdef\sos@reg@presentsymbol{#2}%     
+    \gdef\sos@reg@presentsymbol{#2}%
 }
 
 \@namedef{@sos@parser@keyhandler@title}#1#2{% will set symbol to be set
-    \gdef\sos@reg@prefixtitle{#2}%     
+    \gdef\sos@reg@prefixtitle{#2}%
 }
 
 \def\@sos@parser@keyhandler@flags#1#2{% will set special flags for the environment
@@ -326,7 +326,7 @@
 
 % \attachfilesetup{% sopra-paper support, somewhat hardcoded, but this is the original version
 %     author={\sop@register@authors},
-%     color=cimportant, % it is somewhat of a try to be honest :D 
+%     color=cimportant, % it is somewhat of a try to be honest :D
 %     icon=Tag,
 %     mimetype=text/plain % we assume
 % }

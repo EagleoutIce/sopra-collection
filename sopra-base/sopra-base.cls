@@ -4,8 +4,8 @@
 %% Version: 1.0
 %% Author:  Florian Sihler, 02.12.2019
 %%
-%% This LaTeX2e Class should provide the basic layout to be used for 
-%% all documents created by sopra-team-020. 
+%% This LaTeX2e Class should provide the basic layout to be used for
+%% all documents created by sopra-team-020.
 %%                      ulm university, WiSe2019
 
 
@@ -44,8 +44,8 @@
 \DeclareOption{draft}{ \sob@usedraft@true }%
 \DeclareOption{final}{ \sob@usedraft@false }%
 % parindent:
-\DeclareOption{nopar}{ \setlength\parindent{0pt} }%
-\DeclareOption{dopar}{ \setlength\parindent\sob@len@parindent }%
+\DeclareOption{nopar}{ \parindent=\z@ }%
+\DeclareOption{dopar}{ \parindent=\sob@len@parindent }%
 % font:
 \DeclareOption{sffont}{ \renewcommand*\familydefault{\sfdefault} }%
 \DeclareOption{rmfont}{ \renewcommand*\familydefault{\rmdefault} }%
@@ -261,20 +261,20 @@
         {\Huge\sob@register@group\quad\expandafter\tikz[baseline=-0.6ex]{%
          \node[regular polygon, regular polygon sides=6, draw,%
          sob@col@uulm@akzent, fill=sob@col@uulm@akzent!60,
-         inner sep=1.5/1.635,transform shape,minimum width=2em] at (0,0) 
+         inner sep=1.5/1.635,transform shape,minimum width=2em] at (0,0)
          {\color{sob@col@uulm@akzent!50!black}\sob@register@groupnum};}};
     \fi
     \node[left,scale=0.75] at($(current page.north east)+%
         (-\sob@len@header,-\sob@len@logoheight/2)$) {\uulmlogo{\ifsob@printmode@%
         black\else sob@col@uulm\fi}};
     \fill[sob@col@uulm@cs] %
-        ($(current page.north west)+(0,-\sob@len@logoheight)$) rectangle 
+        ($(current page.north west)+(0,-\sob@len@logoheight)$) rectangle
         ($(current page.north east)+(0,-\sob@len@logoheight-1.2cm)$);
     \node[font=\huge,white,left] at%
         ($(current page.north east)+(-\sob@len@header,-\sob@len@logoheight-0.6cm)$)
         {\strut\sob@register@title};
 
-    \fill[sob@col@uulm@akzent!60] 
+    \fill[sob@col@uulm@akzent!60]
          ($(current page.north west)+(0,-\sob@len@logoheight-1.2cm)$) rectangle%
          ($(current page.north east)+(0,-\sob@len@logoheight-2.8cm)$);
     % set subtitle:
@@ -301,12 +301,12 @@
 \renewcommand\headfont{\normalfont}
 \chead{%
 \begin{tikzpicture}[remember picture, overlay]
-    \fill[sob@col@uulm@cs]($(current page.north west)+(1.5cm,0)$) 
+    \fill[sob@col@uulm@cs]($(current page.north west)+(1.5cm,0)$)
         rectangle ($(current page.north west)+(0,-8mm)$) %
         node[midway,centered,text=sob@col@text@header] {\strut\pagemark};
-    \fill[sob@col@uulm@akzent!40] (current page.north east) rectangle 
+    \fill[sob@col@uulm@akzent!40] (current page.north east) rectangle
         ($(current page.north west)+(1.5cm,-8mm)$);
-    \node[right=0pt,text=sob@col@uulm@akzent!50!black,inner sep=0pt] at
+    \node[right=\z@,text=sob@col@uulm@akzent!50!black,inner sep=\z@] at
         ($(current page.north west)+(\sob@len@header,-4mm)$)%
         {\strut\sob@register@title\space$\mid$ \sob@register@short@subtitle};
 \end{tikzpicture}%0.75*\sob@len@header
