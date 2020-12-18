@@ -130,7 +130,7 @@
 
 % Listings-Base:
 \IfFileExists{listingsutf8.sty}{ \RequirePackage{listingsutf8} }%
-    { \RequirePackage{listings} }
+    {\RequirePackage{listings}}
 
 \IfFileExists{accsupp.sty}{ \RequirePackage{accsupp} %
      \global\sol@accuspp@available@true }%
@@ -224,31 +224,31 @@
 % styles. Will define e.g. \sol@styles@lst@keywo
 \ifsol@printmode@
 \sol@list@define@styles{%
-    {keywordA:    \color{sol@colors@lst@keywordA}\bfseries},%
-    {keywordB:    \color{sol@colors@lst@keywordB}},%
-    {keywordC:    \color{sol@colors@lst@keywordC}},%
-    {keywordD:    \itshape},%
-    {numbers:     \color{sol@colors@lst@numbers}\itshape},%
-    {linenumbers: \color{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
-    {literals:    \color{sol@colors@lst@literals}\itshape},%
-    {comments:    \color{sol@colors@lst@comments}},% \scshape
-    {highlight:   \color{sol@colors@lst@highlight}\itshape},%
-    {basic:       \sol@font@fs@normal\color{black}\sol@ttfamily},%
-    {command:     \color{sol@colors@lst@command}}%
+ {keywordA:    \color{sol@colors@lst@keywordA}\bfseries},%
+ {keywordB:    \color{sol@colors@lst@keywordB}},%
+ {keywordC:    \color{sol@colors@lst@keywordC}},%
+ {keywordD:    \itshape},%
+ {numbers:     \color{sol@colors@lst@numbers}\itshape},%
+ {linenumbers: \color{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
+ {literals:    \color{sol@colors@lst@literals}\itshape},%
+ {comments:    \color{sol@colors@lst@comments}},% \scshape
+ {highlight:   \color{sol@colors@lst@highlight}\itshape},%
+ {basic:       \sol@font@fs@normal\color{black}\sol@ttfamily},%
+ {command:     \color{sol@colors@lst@command}}%
 }
 \else
 \sol@list@define@styles{%
-    {keywordA:    \color{sol@colors@lst@keywordA}},%
-    {keywordB:    \color{sol@colors@lst@keywordB}},%
-    {keywordC:    \color{sol@colors@lst@keywordC}},%
-    {keywordD:    \itshape},%
-    {numbers:     \color{sol@colors@lst@numbers}},%
-    {linenumbers: \color{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
-    {literals:    \color{sol@colors@lst@literals}},%
-    {comments:    \color{sol@colors@lst@comments}},%
-    {highlight:   \color{sol@colors@lst@highlight}\itshape},%
-    {basic:       \sol@font@fs@normal\color{black}\sol@ttfamily},%
-    {command:     \color{sol@colors@lst@command}}%
+ {keywordA:    \color{sol@colors@lst@keywordA}},%
+ {keywordB:    \color{sol@colors@lst@keywordB}},%
+ {keywordC:    \color{sol@colors@lst@keywordC}},%
+ {keywordD:    \itshape},%
+ {numbers:     \color{sol@colors@lst@numbers}},%
+ {linenumbers: \color{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
+ {literals:    \color{sol@colors@lst@literals}},%
+ {comments:    \color{sol@colors@lst@comments}},%
+ {highlight:   \color{sol@colors@lst@highlight}\itshape},%
+ {basic:       \sol@font@fs@normal\color{black}\sol@ttfamily},%
+ {command:     \color{sol@colors@lst@command}}%
 }
 \fi
 
@@ -437,12 +437,10 @@
 %% Numbers and padding stuff
 %% -----------------------------------------------------------------------------
 
-\def\sol@penalties@lst@sloppy{%
-\tolerance=9999 \emergencystretch=3em \hfuzz=.5cm%
+\def\sol@penalties@lst@sloppy{\tolerance=9999 \emergencystretch=3em \hfuzz=.5cm%
 \vfuzz\hfuzz}%
 
-\def\sol@penalties@lst@fussy{%
-\emergencystretch=0em \tolerance=200 \hfuzz=.1pt%
+\def\sol@penalties@lst@fussy{\emergencystretch=0em \tolerance=200 \hfuzz=.1pt%
 \vfuzz\hfuzz}
 
 \sol@penalties@lst@sloppy
@@ -525,7 +523,6 @@ constructor command/.initial={sol@NewLstEnvPlain}
 
 
 %%% Inlines
-
 \pgfkeys{/sol@lst@family/inline default/.is family,%
 /sol@lst@family/inline default,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
