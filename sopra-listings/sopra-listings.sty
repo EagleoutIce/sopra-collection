@@ -31,7 +31,8 @@
 
 
 \def\sol@lst@style@prefix{sol@styles@lst@}
-\def\sol@lst@prebreak{\sol@font@fs@numbers\hbox{\hfill$\hookleftarrow$}} % allow definition of own symbol
+\def\sol@lst@prebreak{\sol@font@fs@numbers\hbox{\hfill\textcolor{sol@colors@lst@comments}{$\hookleftarrow$}}} % allow definition of own symbol
+\def\sol@lst@inline@prebreak{}
 
 % make switches for use of tcolorbox..
 \newif\ifsol@encoding@ %  automatically load encoding packages
@@ -309,6 +310,7 @@
 \def\solSetNumSep#1{\setlength{\sol@length@lst@numsep}{#1}}
 \def\solSetFrameRule#1{\setlength{\sol@length@lst@famerule}{#1}}
 \def\solPreBreak#1{\def\sol@lst@prebreak{#1}}
+\def\solInlinePreBreak#1{\def\sol@lst@inline@prebreak{#1}}
 
 \def\@@sol@numinpar@length{2em}
 \ifsol@numinpar@%
@@ -422,12 +424,12 @@
 % please note, that they will apply under every condition!
 \newcommand{\sol@dlst@default}[2][]{%
     \begingroup\fboxsep=\z@\fcolorbox{sol@colors@border}{sol@colors@background}{%
-        \thinspace\strut\lstinline[#1,keepspaces=true]`#2`\thinspace%
+        \thinspace\strut\lstinline[#1,keepspaces=true,prebreak=\sol@lst@inline@prebreak]`#2`\thinspace%
     }\endgroup%
 }
 
 \newcommand{\sol@dlst@blank}[2][]{%
-    \begingroup\thinspace\strut\lstinline[#1,keepspaces=true]`#2`\endgroup%
+    \begingroup\thinspace\strut\lstinline[#1,keepspaces=true,prebreak=\sol@lst@inline@prebreak]`#2`\endgroup%
 }
 
 \newcommand{\sol@dlst@input}[2][]{%
@@ -808,12 +810,12 @@
     \PackageError{sopra-listings}{cpalette requested, but package not loaded}
     {You have to load the 'color-palettes' package yourself if you use the 'cpalette'-Option.}%
 }{% Add to the hook..
-}
+}%
 \let\sol@old@cpl@hooks\cpl@hooks%
 \def\cpl@hooks{% Add to the hook
     \sol@old@cpl@hooks%
     \sol@cpalette@hook%
-}
+}%
 \ifsol@printmode@
 \def\sol@cpalette@hook{%
 \lstcolorlet{keywordA}{paletteA!90!black}%
@@ -824,7 +826,7 @@
 \lstcolorlet{comments}{lightgray!45!darkgray!90!black}%
 \lstcolorlet{highlight}{paletteD!90!black}%
 \lstcolorlet{command}{paletteB!90!black}%
-}
+}%
 \else
 \def\sol@cpalette@hook{%
 \lstcolorlet{keywordA}{paletteA!90!black}%
@@ -835,9 +837,7 @@
 \lstcolorlet{comments}{lightgray!65!darkgray!90!black}%
 \lstcolorlet{highlight}{paletteD!90!black}%
 \lstcolorlet{command}{paletteB!90!black}%
-}
-\fi
-\fi
+}\fi\fi
 }
 
 %% -----------------------------------------------------------------------------

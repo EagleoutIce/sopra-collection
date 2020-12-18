@@ -1,4 +1,4 @@
-\documentclass{sopra-base} 
+\documentclass{sopra-base}
 
 \usepackage{sopra-documentation}
 \usepackage{sopra-tables}
@@ -32,10 +32,10 @@
 
 \section{Allgemeines}
 \subsection{Warum, wieso, weshalb?}
-    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im 
+    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im
     Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
     Grundlage für die Erstellung von Tabellen
-    des \imptext{Teams 20}. Diese Dokumentation wurde zusammen mit der 
+    des \imptext{Teams 20}. Diese Dokumentation wurde zusammen mit der
     \T{sopra-base.cls} sowie dem Paket \T{sopra-documentation.sty} kreiert.\par
     Zum Visualisieren der einzelnen Code-Ausschnitte wird das
     \T{sopra-listings}-Paket verwendet.
@@ -55,7 +55,7 @@
     All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein.
 
 \subsection{Die Installation}
-    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die 
+    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die
     folgenden Möglichkeiten ergeben:
     \begin{itemize}
         \item Das Paket kann in dasselbe Verzeichnis wie das Dokument
@@ -98,7 +98,7 @@ Besonderheiten.
 %
 
 \subsection{Akzeptierte Parameter}
-    Das Paket akzeptiert, so wie die meisten, Argumente. 
+    Das Paket akzeptiert, so wie die meisten, Argumente.
     Bei Argumenten mit einer \say{Counter}-Option wird das jeweils standardmäßig aktive zuerst und das andere in Klammern
     geschrieben. So wird implizit:
 \begin{plainlatex}
@@ -145,11 +145,11 @@ Es gilt zu beachten, dass das Präfix \T{env@} nur auf die Natur einer Umgebung 
 \subsection{Die Tabellen}
 
 \begin{environment}{mtabular}{\manArg{Spaltendefinition}}
-    Setzt eine \T{tabu}/\T{tabular} Tabelle, wobei die erste Zeile automatisch zur Titelzeile wird und entsprechend farblich hervorgehoben. 
+    Setzt eine \T{tabu}/\T{tabular} Tabelle, wobei die erste Zeile automatisch zur Titelzeile wird und entsprechend farblich hervorgehoben.
 \end{environment}
 
 \begin{environment}{mltabular}{\optArg{Header}\manArg{Spaltendefinition}}
-    Setzt eine \T{longtabu}/\T{longtable} Tabelle, wobei man durch Angabe des \T{Header} die Kopfspalte definiert, die im Falle eines Seitenumbruchs immer angefügt wird. Sollte dies nicht gewünscht sein, so genügt es den \T{Header} nicht anzugeben und ganz normal die erste Zeile als Titelzeile zu schreiben, 
+    Setzt eine \T{longtabu}/\T{longtable} Tabelle, wobei man durch Angabe des \T{Header} die Kopfspalte definiert, die im Falle eines Seitenumbruchs immer angefügt wird. Sollte dies nicht gewünscht sein, so genügt es den \T{Header} nicht anzugeben und ganz normal die erste Zeile als Titelzeile zu schreiben,
     die nicht an jeden Seitenanfang gesetzt werden. Es gelten die von \T{longtable} bekannten und typischen Einschränkungen.
 \end{environment}
 
@@ -164,7 +164,7 @@ Wird auch das \T{sopra-requirements}-Paket eingebunden, können für zweispaltig
 Im Folgenden seien zwei Tabellen veranschaulicht, es gilt zu beachten, dass \envref{mltabular} seines Ursprungs wegen automatisch zentriert vorliegt.
 \begin{latex}
 \begin{mtabular}{lcr}
-    Hallo & Welt & \texttt{Wie} gehts? \\ 
+    Hallo & Welt & \texttt{Wie} gehts? \\
     Wie stehts & denn heute & so dir und so? \\
     Bi & Bu & bo \\
     Hi & Hi & Hi \\
@@ -172,7 +172,7 @@ Im Folgenden seien zwei Tabellen veranschaulicht, es gilt zu beachten, dass \env
 \end{latex}
 \textit{Ergibt:}\par{}
  \begin{mtabular}{lcr}
-    Hallo & Welt & \texttt{Wie} gehts? \\ 
+    Hallo & Welt & \texttt{Wie} gehts? \\
     Wie stehts & denn heute & so dir und so? \\
     Hi & Hi & Hi \\
     Bi & Bu & bo \\
@@ -181,7 +181,7 @@ Und analog:\par{}
 \begin{latex}
 \begin{mltabular}[Isch & bin & a Hädder! & Epic-Row]%
         {lcr>{\raggedleft!**!\arraybackslash}m{5cm}}
-    Hallo & Welt & \texttt{Wie} gehts? & HUHU ERDE \\ 
+    Hallo & Welt & \texttt{Wie} gehts? & HUHU ERDE \\
     Wie stehts & denn heute & so dir und so? &  Hi\\
     Bi & Bu & bo & Man merkt ich bin \\
     Suuper & Lange Tabelle & Weil Grund  & echt Kreativ\\
@@ -192,12 +192,12 @@ Und analog:\par{}
     A5 & B4 & C5 & D4 \\
     A6 & B3 & C6 & D3 \\
     A7 & B2 & C7 & D2 \\
-    A8 & B1 & C8 & D1 \\ 
+    A8 & B1 & C8 & D1 \\
 \end{mltabular}
 \end{latex}
 \textit{Ergibt \notetext{Hinweis: der extra Abstand hier ist künstlich und dient der Veranschualichung eines Seitenumbruchs}:}\vspace*{4cm}
 \begin{mltabular}[Isch & bin & a Hädder! & Epic-Row]{lcr>{\raggedleft\arraybackslash}m{5cm}}
-    Hallo & Welt & \texttt{Wie} gehts? & HUHU ERDE \\ 
+    Hallo & Welt & \texttt{Wie} gehts? & HUHU ERDE \\
     Wie stehts & denn heute & so dir und so? & Hi\\
     Bi & Bu & bo & Man merkt ich bin \\
     Suuper & Lange Tabelle & Weil Grund  & echt Kreativ\\
@@ -208,6 +208,6 @@ Und analog:\par{}
     A5 & B4 & C5 & D4 \\
     A6 & B3 & C6 & D3 \\
     A7 & B2 & C7 & D2 \\
-    A8 & B1 & C8 & D1 \\ 
+    A8 & B1 & C8 & D1 \\
 \end{mltabular}
 \end{document}
