@@ -31,7 +31,7 @@
 
 
 \def\sol@lst@style@prefix{sol@styles@lst@}
-\def\sol@lst@prebreak{\sol@font@fs@numbers\hbox{\hfill$\hookleftarrow$}} % allow definition of own symbol
+\def\sol@lst@prebreak{\sol@font@fs@numbers\hbox{$\hookleftarrow$}} % allow definition of own symbol
 \let\sol@lst@inline@prebreak\sol@lst@prebreak%
 
 % make switches for use of tcolorbox..
@@ -206,15 +206,15 @@
 % as we don't know, if 'foreach' is available, we will built our own iter:
 
 \def\sol@lst@style@iter@step#1: #2\@nil{%
-    \ifx!#1!\else
-        \expandafter\gdef\csname#1\endcsname{#2}%
-    \fi
+\ifx!#1!\else
+    \expandafter\gdef\csname#1\endcsname{#2}%
+\fi
 }
-\def\sol@lst@style@iter#1,#2\@nil{
-    \ifx!#1!\else%
-        \sol@lst@style@iter@step\sol@lst@style@prefix#1\@nil%
-        \ifx!#2!\else\sol@lst@style@iter#2,\@nil\fi% recursion
-    \fi%
+\def\sol@lst@style@iter#1,#2\@nil{%
+\ifx!#1!\else%
+    \sol@lst@style@iter@step\sol@lst@style@prefix#1\@nil%
+    \ifx!#2!\else\sol@lst@style@iter#2,\@nil\fi% recursion
+\fi%
 }
 
 \def\solSetStyle#1#2{\expandafter\gdef\csname\sol@lst@style@prefix#1\endcsname{#2}}
@@ -437,16 +437,15 @@
 %% Numbers and padding stuff
 %% -----------------------------------------------------------------------------
 
-\def\sol@penalties@lst@sloppy{\makeatletter%
+\def\sol@penalties@lst@sloppy{%
 \tolerance=9999 \emergencystretch=3em \hfuzz=.5cm%
-\vfuzz\hfuzz\makeatother}%
+\vfuzz\hfuzz}%
 
-\def\sol@penalties@lst@fussy{\makeatletter%
+\def\sol@penalties@lst@fussy{%
 \emergencystretch=0em \tolerance=200 \hfuzz=.1pt%
-\vfuzz\hfuzz\makeatother}
+\vfuzz\hfuzz}
 
 \sol@penalties@lst@sloppy
-\makeatletter
 
 %% -----------------------------------------------------------------------------
 %% Lst styles that will be shipped in each case
