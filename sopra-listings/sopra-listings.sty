@@ -106,8 +106,8 @@
 \@ifundefined{ifsob@printmode@}{% not called from sopra-base-class, we use a
     \sol@printmode@false%
 }{%
-    \ifsob@printmode@\global\sol@printmode@true%
-        \else\global\sol@printmode@false\fi%
+\ifsob@printmode@\global\sol@printmode@true%
+    \else\global\sol@printmode@false\fi%
 }
 
 \ExecuteOptions{noencoding,hlnumbers,loadlangs,guardspace}% set it explicitly
@@ -121,7 +121,7 @@
 
 % Encoding:
 \ifsol@encoding@ %
-\RequirePackage[T1]{fontenc}    %
+\RequirePackage[T1]{fontenc} %
 \RequirePackage[utf8]{inputenc} %
 \fi
 
@@ -172,34 +172,34 @@
 %% -----------------------------------------------------------------------------
 
 \ifsol@printmode@
-\definecolor{sol@colors@border}{HTML}{DDDFE2}     %
-\definecolor{sol@colors@background}{HTML}{FFFFFF} % save ink :D
+\definecolor{sol@colors@border}{HTML}{DDDFE2}%
+\definecolor{sol@colors@background}{HTML}{FFFFFF}% save ink :D
 \else
-\definecolor{sol@colors@border}{HTML}{EAECF0}     %
-\definecolor{sol@colors@background}{HTML}{FCFBFB} %
+\definecolor{sol@colors@border}{HTML}{EAECF0}%
+\definecolor{sol@colors@background}{HTML}{FCFBFB}%
 \fi
 % TODO: print switch
 
 \@ifundefined{thesobversion}{% not called from sopra-base-class, we use a
-                             % default palette
-    \colorlet{sol@colors@lst@keywordA}{purple} % e.g.: class, public, static...
-    \colorlet{sol@colors@lst@keywordB}{purple!75!white} % e.g.: int, double ...
-    \colorlet{sol@colors@lst@keywordC}{purple!90!black} % e.g.: class-names?
-    \colorlet{sol@colors@lst@numbers}{teal} % well, numbers
-    \colorlet{sol@colors@lst@literals}{orange!90!brown} % well, numbers
-    \colorlet{sol@colors@lst@comments}{lightgray!65!gray} % well, comments
-    \colorlet{sol@colors@lst@highlight}{lime} % sweetspots
-    \colorlet{sol@colors@lst@command}{sol@colors@lst@keywordB} % sweetspots
+% default palette
+\colorlet{sol@colors@lst@keywordA}{purple} % e.g.: class, public, static...
+\colorlet{sol@colors@lst@keywordB}{purple!75!white} % e.g.: int, double ...
+\colorlet{sol@colors@lst@keywordC}{purple!90!black} % e.g.: class-names?
+\colorlet{sol@colors@lst@numbers}{teal} % well, numbers
+\colorlet{sol@colors@lst@literals}{orange!90!brown} % well, numbers
+\colorlet{sol@colors@lst@comments}{lightgray!65!gray} % well, comments
+\colorlet{sol@colors@lst@highlight}{lime} % sweetspots
+\colorlet{sol@colors@lst@command}{sol@colors@lst@keywordB} % sweetspots
 }{% we will use the secondary/akzent color as default and choose matching colors
-    % TODO: create a pleasing colorprofile :D
-    \colorlet{sol@colors@lst@keywordA}{sob@col@uulm@cs} % Examples as above
-    \colorlet{sol@colors@lst@keywordB}{sob@col@uulm@cs!75!white} %
-    \colorlet{sol@colors@lst@keywordC}{sob@col@uulm@cs!20!gray} %
-    \colorlet{sol@colors@lst@numbers}{teal!60!gray} %
-    \colorlet{sol@colors@lst@literals}{sob@col@uulm!90!blue} %
-    \colorlet{sol@colors@lst@comments}{lightgray!65!darkgray} %
-    \colorlet{sol@colors@lst@highlight}{purple} %
-    \colorlet{sol@colors@lst@command}{sol@colors@lst@keywordB} %
+% TODO: create a pleasing colorprofile :D
+\colorlet{sol@colors@lst@keywordA}{sob@col@uulm@cs} % Examples as above
+\colorlet{sol@colors@lst@keywordB}{sob@col@uulm@cs!75!white} %
+\colorlet{sol@colors@lst@keywordC}{sob@col@uulm@cs!20!gray} %
+\colorlet{sol@colors@lst@numbers}{teal!60!gray} %
+\colorlet{sol@colors@lst@literals}{sob@col@uulm!90!blue} %
+\colorlet{sol@colors@lst@comments}{lightgray!65!darkgray} %
+\colorlet{sol@colors@lst@highlight}{purple} %
+\colorlet{sol@colors@lst@command}{sol@colors@lst@keywordB} %
 }
 
 % define the styling definitions
@@ -223,38 +223,38 @@
 % we will write the colors anyway. This way it is easy visible on how to change the
 % styles. Will define e.g. \sol@styles@lst@keywo
 \ifsol@printmode@
-    \sol@list@define@styles{%
-        {keywordA:      \color{sol@colors@lst@keywordA}\bfseries},%
-        {keywordB:      \color{sol@colors@lst@keywordB}},%
-        {keywordC:      \color{sol@colors@lst@keywordC}},%
-        {keywordD:      \itshape},%
-        {numbers:       \color{sol@colors@lst@numbers}\itshape},%
-        {linenumbers:   \color{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
-        {literals:      \color{sol@colors@lst@literals}\itshape},%
-        {comments:      \color{sol@colors@lst@comments}},% \scshape
-        {highlight:     \color{sol@colors@lst@highlight}\itshape},%
-        {basic:         \sol@font@fs@normal\color{black}\sol@ttfamily},%
-        {command:       \color{sol@colors@lst@command}}%
-    }
+\sol@list@define@styles{%
+    {keywordA:    \color{sol@colors@lst@keywordA}\bfseries},%
+    {keywordB:    \color{sol@colors@lst@keywordB}},%
+    {keywordC:    \color{sol@colors@lst@keywordC}},%
+    {keywordD:    \itshape},%
+    {numbers:     \color{sol@colors@lst@numbers}\itshape},%
+    {linenumbers: \color{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
+    {literals:    \color{sol@colors@lst@literals}\itshape},%
+    {comments:    \color{sol@colors@lst@comments}},% \scshape
+    {highlight:   \color{sol@colors@lst@highlight}\itshape},%
+    {basic:       \sol@font@fs@normal\color{black}\sol@ttfamily},%
+    {command:     \color{sol@colors@lst@command}}%
+}
 \else
-    \sol@list@define@styles{%
-        {keywordA:      \color{sol@colors@lst@keywordA}},%
-        {keywordB:      \color{sol@colors@lst@keywordB}},%
-        {keywordC:      \color{sol@colors@lst@keywordC}},%
-        {keywordD:      \itshape},%
-        {numbers:       \color{sol@colors@lst@numbers}},%
-        {linenumbers:   \color{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
-        {literals:      \color{sol@colors@lst@literals}},%
-        {comments:      \color{sol@colors@lst@comments}},%
-        {highlight:     \color{sol@colors@lst@highlight}\itshape},%
-        {basic:         \sol@font@fs@normal\color{black}\sol@ttfamily},%
-        {command:       \color{sol@colors@lst@command}}%
-    }
+\sol@list@define@styles{%
+    {keywordA:    \color{sol@colors@lst@keywordA}},%
+    {keywordB:    \color{sol@colors@lst@keywordB}},%
+    {keywordC:    \color{sol@colors@lst@keywordC}},%
+    {keywordD:    \itshape},%
+    {numbers:     \color{sol@colors@lst@numbers}},%
+    {linenumbers: \color{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
+    {literals:    \color{sol@colors@lst@literals}},%
+    {comments:    \color{sol@colors@lst@comments}},%
+    {highlight:   \color{sol@colors@lst@highlight}\itshape},%
+    {basic:       \sol@font@fs@normal\color{black}\sol@ttfamily},%
+    {command:     \color{sol@colors@lst@command}}%
+}
 \fi
 
 \ifsol@lst@style@upshape@
 \sol@list@define@styles{%
-    {basic:         \sol@font@fs@normal\color{black}\sol@ttfamily\upshape},%
+    {basic: \sol@font@fs@normal\color{black}\sol@ttfamily\upshape},%
 }
 \fi
 
@@ -289,11 +289,11 @@
 % So if possible we will eat the number and produce unmarkable text
 
 % Here we will make a small rainbow to present the selected color-theme :D
-\def\sol@lst@showstyles@iter#1,#2\@nil{
-    \ifx!#1!\else%
-        {\sol@style@get{basic}\sol@style@get{#1}#1\space}%
-        \ifx!#2!\else\sol@lst@showstyles@iter#2,\@nil\fi% recursion
-    \fi%
+\def\sol@lst@showstyles@iter#1,#2\@nil{%
+\ifx!#1!\else%
+    {\sol@style@get{basic}\sol@style@get{#1}#1\space}%
+    \ifx!#2!\else\sol@lst@showstyles@iter#2,\@nil\fi% recursion
+\fi%
 }
 
 \def\sol@lst@showstyles#1{\sol@lst@showstyles@iter#1,\@nil}
@@ -322,18 +322,18 @@
 %% -----------------------------------------------------------------------------
 
 \def\sol@@lst@hl@digit#1{\begingroup%
-    %\iflstnumnohlmode%
-    %#1\else
-    \ifsol@lst@lastwas@character@%\lstnumnohlmodetrue% was char => don't highlight, we won't    check for hex right now
-    \global\sol@lst@lastwas@charkeep@true#1\else\global\sol@lst@lastwas@charkeep@false%
-      \ifnum\lst@mode=\lst@Pmode\relax% PMode: Not in any special Mode
-      {\sol@style@get{numbers}#1}%
-      \else%
-        #1%
-      \fi\hbox{\relax}%
-    \fi%
-    %\fi
-    \endgroup%
+%\iflstnumnohlmode%
+%#1\else
+\ifsol@lst@lastwas@character@%\lstnumnohlmodetrue% was char => don't highlight, we won't    check for hex right now
+\global\sol@lst@lastwas@charkeep@true#1\else\global\sol@lst@lastwas@charkeep@false%
+    \ifnum\lst@mode=\lst@Pmode\relax% PMode: Not in any special Mode
+    {\sol@style@get{numbers}#1}%
+    \else%
+    #1%
+    \fi\hbox{\relax}%
+\fi%
+%\fi
+\endgroup%
 }
 \ifsol@highlight@numbers@%
 \let\sol@dgt\sol@@lst@hl@digit%
@@ -359,25 +359,25 @@
 
 \def\lst@Literate#1#2#3{%
 \ifx\relax#2\@empty\else%
-    \lst@CArgX #1\relax\lst@CDef%
-        {}%
-        {\let\lst@next\@empty%
-        \lst@ifxliterate%
-        \lst@ifmode \let\lst@next\lst@CArgEmpty \fi%
+\lst@CArgX #1\relax\lst@CDef%
+    {}%
+    {\let\lst@next\@empty%
+    \lst@ifxliterate%
+    \lst@ifmode \let\lst@next\lst@CArgEmpty \fi%
+    \fi
+    \ifx\lst@next\@empty%
+        \ifx\lst@OutputBox\@gobble\else%
+        \lst@XPrintToken \let\lst@scanmode\lst@scan@m%
+        \lst@token{#2}\lst@length#3\relax%
+        \lst@XPrintToken%
+        \lst@whitespacefalse\@nc%
         \fi
-        \ifx\lst@next\@empty%
-            \ifx\lst@OutputBox\@gobble\else%
-            \lst@XPrintToken \let\lst@scanmode\lst@scan@m%
-            \lst@token{#2}\lst@length#3\relax%
-            \lst@XPrintToken%
-            \lst@whitespacefalse\@nc%
-            \fi
-            % gobble the replaced text
-            \let\lst@next\lst@CArgEmptyGobble%
-        \fi
-        \lst@next}%
-        \@empty% splitter for constants
-    \expandafter\lst@Literate%
+        % gobble the replaced text
+        \let\lst@next\lst@CArgEmptyGobble%
+    \fi
+    \lst@next}%
+    \@empty% splitter for constants
+\expandafter\lst@Literate%
 \fi}
 
 %% -----------------------------------------------------------------------------
@@ -385,24 +385,21 @@
 %% -----------------------------------------------------------------------------
 
 \lstset{literate=%
-  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
-  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
-  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
-  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
-  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
-  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
-  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
-  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
-  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
-  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
-  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
-  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
-  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {Á}{{\'A}}1 {É}{{\'E}}1
+  {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1 {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1
+  {ù}{{\`u}}1 {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1 {ä}{{\"a}}1
+  {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1 {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1
+  {Ö}{{\"O}}1 {Ü}{{\"U}}1 {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1 {œ}{{\oe}}1 {Œ}{{\OE}}1
+  {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1 {ø}{{\o}}1 {€}{{\euro}}1 {£}{{\pounds}}1
+  %{ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  %{ç}{{\c c}}1 {Ç}{{\c C}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {«}{{\guillemotleft}}1 {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
   {:bs:}{{\color{sol@colors@lst@keywordA}\textbackslash\normalcolor}}1 {:bmath:}{{\sol@style@get{numbers}\$\normalcolor}}1 {:percent:}{{\%}}1
   {:emath:}{{{\sol@style@get{numbers}\$\normalcolor}}}1 {:dollar:}{{{\sol@style@get{numbers}\$\normalcolor}}}1 {:plaindollar:}{{\$}}1%spaces
   %% brace fix
   {(}{{(\@nc}}1 {)}{{)\@nc}}1 {:space:}{{{ }}}1 {:ws:}{{{ }}}1 {:cdots:}{{{$\cdots$}}}1 {:cdot:}{{{$\cdot$}}}1 {:ldots:}{{{\ldots}}}1 {:!:}{{{!}}}1
-  {:c:}{{{}}}0 {:star:}{{{*}}}1 {:minus:}{{{-}}}1
+  {:c:}{{{}}}0 {:star:}{{*}}1 {:minus:}{{-}}1
   {:float:}{{{\sol@style@get{numbers}f\normalcolor}}}1 {:exp:}{{{\sol@style@get{numbers}e\normalcolor}}}1 {:yields:}{{{$\rightarrow$}}}1%
   {:lan:}{{{$\langle\mskip\thinmuskip$}}}1 {:ran:}{{{$\mskip\thinmuskip\rangle$}}}1
   {:bcmd:}{\color{sol@colors@lst@keywordA}\textbackslash\normalcolor}1 {:ecmd:}{\normalcolor}0
@@ -423,17 +420,17 @@
 
 % please note, that they will apply under every condition!
 \newcommand{\sol@dlst@default}[2][]{%
-    \begingroup\fboxsep=\z@\fcolorbox{sol@colors@border}{sol@colors@background}{%
-        \thinspace\strut\lstinline[#1,keepspaces=true,prebreak=\sol@lst@inline@prebreak]`#2`\thinspace%
-    }\endgroup%
+\begingroup\fboxsep=\z@\fcolorbox{sol@colors@border}{sol@colors@background}{%
+    \thinspace\strut\lstinline[#1,keepspaces=true,prebreak=\sol@lst@inline@prebreak]`#2`\thinspace%
+}\endgroup%
 }
 
 \newcommand{\sol@dlst@blank}[2][]{%
-    \begingroup\thinspace\strut\lstinline[#1,keepspaces=true,prebreak=\sol@lst@inline@prebreak]`#2`\endgroup%
+\begingroup\thinspace\strut\lstinline[#1,keepspaces=true,prebreak=\sol@lst@inline@prebreak]`#2`\endgroup%
 }
 
 \newcommand{\sol@dlst@input}[2][]{%
-    \begingroup\lstinputlisting[#1]{#2}\endgroup%
+\begingroup\lstinputlisting[#1]{#2}\endgroup%
 }
 
 %% -----------------------------------------------------------------------------
@@ -441,12 +438,12 @@
 %% -----------------------------------------------------------------------------
 
 \def\sol@penalties@lst@sloppy{\makeatletter%
-  \tolerance=9999 \emergencystretch=3em \hfuzz=.5cm%
-  \vfuzz\hfuzz\makeatother}%
+\tolerance=9999 \emergencystretch=3em \hfuzz=.5cm%
+\vfuzz\hfuzz\makeatother}%
 
 \def\sol@penalties@lst@fussy{\makeatletter%
-  \emergencystretch=0em \tolerance=200 \hfuzz=.1pt%
-  \vfuzz\hfuzz\makeatother}
+\emergencystretch=0em \tolerance=200 \hfuzz=.1pt%
+\vfuzz\hfuzz\makeatother}
 
 \sol@penalties@lst@sloppy
 \makeatletter
@@ -455,10 +452,8 @@
 %% Lst styles that will be shipped in each case
 %% -----------------------------------------------------------------------------
 
-\lstdefinestyle{nonum}{
-    xleftmargin=3pt,xrightmargin=3pt,%will fix some overhead :D
-    numbers=none,numbersep=\z@,
-}
+\lstdefinestyle{nonum}{xleftmargin=3pt,xrightmargin=3pt,%will fix some overhead :D
+numbers=none,numbersep=\z@}
 
 %% -----------------------------------------------------------------------------
 %% Basic - we-work-in-the-back-hey-bud-environments
@@ -471,100 +466,93 @@
 \lstnewenvironment{lstplain}[1][]
   {\def\sol@lst@backcol{white}\lstset{xleftmargin=\z@,xrightmargin=\z@,%
   numbers=none,numbersep=\z@,frame=none,%
-  rulecolor={},backgroundcolor={} %
-  ,#1}}
+  rulecolor={},backgroundcolor={},#1}}
 {\def\sol@lst@backcol{MudWhite}}
 
 \lstnewenvironment{lstnonum}[1][]
-  {\lstset{style=nonum%
-  ,#1}}
-{}
-
+  {\lstset{style=nonum,#1}}{}
 
 %% -----------------------------------------------------------------------------
 %% Here we will handle the language-control - right now, tcb will not be used
 %% -----------------------------------------------------------------------------
 
 % for cleaner setup, we will use pgfkeys
-
-
 \gdef\solset#1{\pgfkeys{/sol@lst@family/.cd, #1}}
 
 %% Todo make commands like: 'on entry' which will define Actions at the beginning of the listing etc :D
-
 \pgfkeys{/sol@lst@family/.is family}
 %% Here we define globals, which are basically applied to every listing - like for example the initial style
 \pgfkeys{/sol@lst@family/globals/.is family,%
-         /sol@lst@family/globals,%
-        listing style/.initial = {sol@SOPRA}
+/sol@lst@family/globals,%
+listing style/.initial = {sol@SOPRA}
 }
 
 %% Just to provide a clearer structure the keys will be defined seperate for all different styles.
 
 \pgfkeys{/sol@lst@family/default/.is family,%
-    /sol@lst@family/default,
-      listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
-      % % #1 language name (java, latex, ..-)
-      % % #2 lst language name (lJava, lLatex,...)
-      % command name/.code 2 args={#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ....
-      command name prefix/.initial={},%
-      command name suffix/.initial={},%
-      %draw environment/.initial={defaultlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions
-      constructor command/.initial={sol@NewLstEnvCore}
+/sol@lst@family/default,
+listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
+% % #1 language name (java, latex, ..-)
+% % #2 lst language name (lJava, lLatex,...)
+% command name/.code 2 args={#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ....
+command name prefix/.initial={},%
+command name suffix/.initial={},%
+%draw environment/.initial={defaultlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions
+constructor command/.initial={sol@NewLstEnvCore}%
 }
 
 \pgfkeys{/sol@lst@family/nonumber/.is family,%
-    /sol@lst@family/nonumber,
-      listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
-      % % #1 language name (java, latex, ..-)
-      % % #2 lst language name (lJava, lLatex,...)
-      % command name/.code 2 args={#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ....
-      command name prefix/.initial={},%
-      command name suffix/.initial={*},%
-      %draw environment/.initial={defaultlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions
-      constructor command/.initial={sol@NewLstEnvCoreStarred}
+/sol@lst@family/nonumber,
+listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
+% % #1 language name (java, latex, ..-)
+% % #2 lst language name (lJava, lLatex,...)
+% command name/.code 2 args={#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ....
+command name prefix/.initial={},%
+command name suffix/.initial={*},%
+%draw environment/.initial={defaultlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions
+constructor command/.initial={sol@NewLstEnvCoreStarred}
 }
 
 \pgfkeys{/sol@lst@family/plain/.is family,%
-    /sol@lst@family/plain,
-      listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
-      % % #1 language name (java, latex, ..-)
-      % % #2 lst language name (lJava, lLatex,...)
-      % command name/.code 2 args={#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ...
-      command name prefix/.initial = {plain},%
-      command name suffix/.initial = {},%
-      %draw environment/.initial={plainlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions and one mandatory for the language
-      constructor command/.initial={sol@NewLstEnvPlain}
+/sol@lst@family/plain,
+listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
+% % #1 language name (java, latex, ..-)
+% % #2 lst language name (lJava, lLatex,...)
+% command name/.code 2 args={#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ...
+command name prefix/.initial = {plain},%
+command name suffix/.initial = {},%
+%draw environment/.initial={plainlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions and one mandatory for the language
+constructor command/.initial={sol@NewLstEnvPlain}
 }
 
 
 %%% Inlines
 
 \pgfkeys{/sol@lst@family/inline default/.is family,%
-    /sol@lst@family/inline default,
-      listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
-      % % #1 language name (java, latex, ..-)
-      % % #2 lst language name (lJava, lLatex,...)
-      % command name/.code 2 args={c#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ....
-      command name prefix/.initial = {c},
-      command name suffix/.initial = {},
-      draw command/.initial={sol@dlst@default} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
+/sol@lst@family/inline default,
+listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
+% % #1 language name (java, latex, ..-)
+% % #2 lst language name (lJava, lLatex,...)
+% command name/.code 2 args={c#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ....
+command name prefix/.initial = {c},
+command name suffix/.initial = {},
+draw command/.initial={sol@dlst@default} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
 }
 
 \pgfkeys{/sol@lst@family/inline blank/.is family,%
-    /sol@lst@family/inline blank,
-      listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
-      command name prefix/.initial = {b},
-      command name suffix/.initial = {},
-      draw command/.initial={sol@dlst@blank} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
+/sol@lst@family/inline blank,
+listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
+command name prefix/.initial = {b},
+command name suffix/.initial = {},
+draw command/.initial={sol@dlst@blank} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
 }
 
 \pgfkeys{/sol@lst@family/inline input/.is family,%
-    /sol@lst@family/inline input,
-      listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
-      command name prefix/.initial = {i},
-      command name suffix/.initial = {},
-      draw command/.initial={sol@dlst@input} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
+/sol@lst@family/inline input,
+listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
+command name prefix/.initial = {i},
+command name suffix/.initial = {},
+draw command/.initial={sol@dlst@input} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
 }
 
 %% -----------------------------------------------------------------------------
@@ -589,8 +577,8 @@
 % #4 Out Extra
 % #5 Language
 \def\sol@NewLstEnvCore#1#2#3#4#5{%
-    %This does already work, but has the drawback of not being able to provide the (wanted) different styles
-    \lstnewenvironment{#1}[1][]{#3\lstset{##1}\sol@guardspace}{#4}%
+%This does already work, but has the drawback of not being able to provide the (wanted) different styles
+\lstnewenvironment{#1}[1][]{#3\lstset{##1}\sol@guardspace}{#4}%
 }
 
 % #1 Name
@@ -599,7 +587,7 @@
 % #4 Out Extra
 % #5 Language
 \def\sol@NewLstEnvCoreStarred#1#2#3#4#5{%
-    \lstnewenvironment{#1}[1][]{#3\lstset{style=nonum,##1}\sol@guardspace}{#4}%
+\lstnewenvironment{#1}[1][]{#3\lstset{style=nonum,##1}\sol@guardspace}{#4}%
 }
 
 % #1 Name
@@ -608,9 +596,9 @@
 % #4 Out Extra
 % #5 Language
 \def\sol@NewLstEnvPlain#1#2#3#4#5{%
-  \lstnewenvironment{#1}[1][]{#3\lstset{xleftmargin=\z@,xrightmargin=\z@,%
-  numbers=none,numbersep=\z@,frame=none,%
-  rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
+\lstnewenvironment{#1}[1][]{#3\lstset{xleftmargin=\z@,xrightmargin=\z@,%
+numbers=none,numbersep=\z@,frame=none,%
+rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 }
 
 % #1 Name
@@ -630,10 +618,10 @@
 % #3 EnvironName
 \def\sol@@NewLstEnv#1#2#3{%
 \bgroup%
-  %\globaldefs=1%
-      \edef\sol@xcurlst{\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/\environName/constructor command}\endcsname{#3}{#1}{\noexpand\lstset{style=\pgfkeysvalueof{/sol@lst@family/\environName/listing style},language=#2}}{}{#2}}%
-  \global\sol@xcurlst%
-  \relax%No one (this means me) really knows why this helps, but it enforces the lst@next - search to interpret the first char of an cs-sequence correctly
+%\globaldefs=1%
+\edef\sol@xcurlst{\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/\environName/constructor command}\endcsname{#3}{#1}{\noexpand\lstset{style=\pgfkeysvalueof{/sol@lst@family/\environName/listing style},language=#2}}{}{#2}}%
+\global\sol@xcurlst%
+\relax%No one (this means me) really knows why this helps, but it enforces the lst@next - search to interpret the first char of an cs-sequence correctly
   \globaldefs=0%
 \egroup%
 }
@@ -646,80 +634,79 @@
 %% #1: Name of the Language [java,latex]
 %% #2: Name of the corresponding lst-Language [lJava, lLatex,...]
 \def\RegisterLanguage#1#2{\bgroup\makeatletter%
-  % Register the Environments
-  %
-  \def\sol@foreach@basic@env@iter##1,##2\@nil{%
-      \ifx!##1!\else
-        \def\environName{##1}%
-        \edef\environCurName{\pgfkeysvalueof{/sol@lst@family/\environName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/\environName/command name suffix}}% assign
-        \sol@debug{> #1/#2 e '##1' (name: \environCurName, ctor: \pgfkeysvalueof{/sol@lst@family/\environName/constructor command})}%
-        \edef\sol@CreateAnLstEnviron{\noexpand\sol@@NewLstEnv{\environName}{#2}{\environCurName}}% fully expand the Name, otherwise it would be undefined when the environment gets used
-        \sol@CreateAnLstEnviron%
-        \ifx!##2!\else\sol@foreach@basic@env@iter##2,\@nil\fi%
-      \fi
-  }
-  \def\sol@foreach@basic@env##1{\sol@foreach@basic@env@iter##1,\@nil}
-  \sol@foreach@basic@env{default,nonumber,plain}%,presentation}
-
-  % This procedure can be used in persistence to iterate over the pgf-keys
-  %% Register 'inline default'
-  \def\sol@foreach@inline@env@iter##1,##2\@nil{
+% Register the Environments
+%
+\def\sol@foreach@basic@env@iter##1,##2\@nil{%
     \ifx!##1!\else
-        \def\inlineName{##1}
-        \edef\inlineCurName{\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name suffix}}% assign
-        \sol@debug{> #1/#2 i '\inlineName' (cmd: \inlineCurName, sty: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style}, d: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command})}%
-        %% We will construct those with optional arguments, to give the user a chance to pass optional Arguments :D
-        % luckily we can construct the main Argument without any expansion problems :D
-        \expandafter\xdef\csname\inlineCurName\endcsname{\noexpand\protect\noexpand\@ifnextchar[{\noexpand\protect\expandafter\noexpand\csname @@hasopt@@\inlineCurName\endcsname}{\noexpand\protect\expandafter\noexpand\csname @@noopt@@\inlineCurName\endcsname}}%
-        %% Variant without optionals :D
-        \expandafter\xdef\csname @@noopt@@\inlineCurName\endcsname####1{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#2]{####1}}%
-        \expandafter\xdef\csname @@hasopt@@\inlineCurName\endcsname[####1]####2{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#2,####1]{####2}}%
-        \expandafter\robustify\csname\inlineCurName\endcsname% robustify
-        \ifx!##2!\else\sol@foreach@inline@env@iter##2,\@nil\fi%
-      \fi
-  }%
-  \def\sol@foreach@inline@env##1{\sol@foreach@inline@env@iter##1,\@nil}
-  \sol@foreach@inline@env{default,blank,input}%,present}
-  %
-  %% END: Register Language as present, by definig a command
-  \expandafter\def\csname sol@lst@registeres@name@#1\endcsname{present}
-  \expandafter\def\csname sol@lst@registeres@language@#1\endcsname{present}
-  \egroup
+    \def\environName{##1}%
+    \edef\environCurName{\pgfkeysvalueof{/sol@lst@family/\environName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/\environName/command name suffix}}% assign
+    \sol@debug{> #1/#2 e '##1' (name: \environCurName, ctor: \pgfkeysvalueof{/sol@lst@family/\environName/constructor command})}%
+    \edef\sol@CreateAnLstEnviron{\noexpand\sol@@NewLstEnv{\environName}{#2}{\environCurName}}% fully expand the Name, otherwise it would be undefined when the environment gets used
+    \sol@CreateAnLstEnviron%
+    \ifx!##2!\else\sol@foreach@basic@env@iter##2,\@nil\fi%
+    \fi
 }
+\def\sol@foreach@basic@env##1{\sol@foreach@basic@env@iter##1,\@nil}
+\sol@foreach@basic@env{default,nonumber,plain}%,presentation}
+
+% This procedure can be used in persistence to iterate over the pgf-keys
+%% Register 'inline default'
+\def\sol@foreach@inline@env@iter##1,##2\@nil{
+\ifx!##1!\else
+\def\inlineName{##1}%
+\edef\inlineCurName{\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name suffix}}% assign
+\sol@debug{> #1/#2 i '\inlineName' (cmd: \inlineCurName, sty: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style}, d: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command})}%
+%% We will construct those with optional arguments, to give the user a chance to pass optional Arguments :D
+% luckily we can construct the main Argument without any expansion problems :D
+\expandafter\xdef\csname\inlineCurName\endcsname{\noexpand\protect\noexpand\@ifnextchar[{\noexpand\protect\expandafter\noexpand\csname @@hasopt@@\inlineCurName\endcsname}{\noexpand\protect\expandafter\noexpand\csname @@noopt@@\inlineCurName\endcsname}}%
+%% Variant without optionals :D
+\expandafter\xdef\csname @@noopt@@\inlineCurName\endcsname####1{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#2]{####1}}%
+\expandafter\xdef\csname @@hasopt@@\inlineCurName\endcsname[####1]####2{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#2,####1]{####2}}%
+\expandafter\robustify\csname\inlineCurName\endcsname% robustify
+\ifx!##2!\else\sol@foreach@inline@env@iter##2,\@nil\fi%
+\fi
+}%
+\def\sol@foreach@inline@env##1{\sol@foreach@inline@env@iter##1,\@nil}
+\sol@foreach@inline@env{default,blank,input}%,present}
+%
+%% END: Register Language as present, by definig a command
+\expandafter\def\csname sol@lst@registeres@name@#1\endcsname{present}
+\expandafter\def\csname sol@lst@registeres@language@#1\endcsname{present}
+\egroup}
 
 %% -----------------------------------------------------------------------------
 %% The [hopefully] beautiful 'sopra-style'
 %% -----------------------------------------------------------------------------
 
-\lstdefinestyle{sol@SOPRA}{
-    % background and border, the frame
-    frame               = single,
-    framerule           = \sol@length@lst@famerule,
-    rulecolor           = \color{sol@colors@border},
-    backgroundcolor     = \color{sol@colors@background},
-    xleftmargin         = \sol@length@lst@xleftmargin,
-    xrightmargin        = \sol@length@lst@xrightmargin,
-    % the 'key'-styles:
-    stringstyle         = \sol@style@get{literals},
-    commentstyle        = \sol@style@get{comments},
-    keywordstyle        = \sol@style@get{keywordA},
-    keywordstyle        = [2]\sol@style@get{keywordB},
-    keywordstyle        = [3]\sol@style@get{keywordC},
-    keywordstyle        = [4]\sol@style@get{keywordD},
-    basicstyle          = \sol@style@get{basic},
-    % line numbers:
-    numbers             = left,
-    numbersep           = \sol@length@lst@numsep,
-    numberstyle         = \sol@style@get{linenumbers},
-    % line break:
-    breaklines          = true,
-    extendedchars       = true,
-    prebreak            = {\sol@lst@prebreak{}},
-    % escapes:
-    escapeinside        = {!*}{*!},
-    mathescape          = false,%
-    % space control
-    keepspaces          = false%
+\lstdefinestyle{sol@SOPRA}{%
+% background and border, the frame
+frame           = single,
+framerule       = \sol@length@lst@famerule,
+rulecolor       = \color{sol@colors@border},
+backgroundcolor = \color{sol@colors@background},
+xleftmargin     = \sol@length@lst@xleftmargin,
+xrightmargin    = \sol@length@lst@xrightmargin,
+% the 'key'-styles:
+stringstyle  = \sol@style@get{literals},
+commentstyle = \sol@style@get{comments},
+keywordstyle = \sol@style@get{keywordA},
+keywordstyle = [2]\sol@style@get{keywordB},
+keywordstyle = [3]\sol@style@get{keywordC},
+keywordstyle = [4]\sol@style@get{keywordD},
+basicstyle   = \sol@style@get{basic},
+% line numbers:
+numbers     = left,
+numbersep   = \sol@length@lst@numsep,
+numberstyle = \sol@style@get{linenumbers},
+% line break:
+breaklines    = true,
+extendedchars = true,
+prebreak      = {\sol@lst@prebreak{}},
+% escapes:
+escapeinside = {!*}{*!},
+mathescape   = false,
+% space control
+keepspaces = false%
 }
 
 %% -----------------------------------------------------------------------------
@@ -738,28 +725,25 @@
 % the file has to have the signature: 'language_<Name>.cfg'
 
 \def\sol@LoadLanguage@searchPath@iter#1,#2\@nil{%
-    \ifx!#1!\else%
-    \InputIfFileExists{#1language_\sol@curlanginputfile.cfg}{%
-        \typeout{Loaded '\sol@curlanginputfile' from '#1language_\sol@curlanginputfile.cfg'}
-    }{%
-        \ifx!#2!\else%
-        \sol@LoadLanguage@iter#2,\@nil%
-        \fi%
-    }%
-    \fi%
+\ifx!#1!\else%
+\InputIfFileExists{#1language_\sol@curlanginputfile.cfg}{%
+    \typeout{Loaded '\sol@curlanginputfile' from '#1language_\sol@curlanginputfile.cfg'}
+}{%
+\ifx!#2!\else\sol@LoadLanguage@iter#2,\@nil\fi%
+}%
+\fi%
 }
 \def\sol@LoadLanguage@searchPath@resolve%
-    {% empty-case
-    \InputIfFileExists{language_\sol@curlanginputfile.cfg}{
-        \typeout{Loaded '\sol@curlanginputfile' from 'language_\sol@curlanginputfile.cfg'}
-    }{\expandafter\sol@LoadLanguage@searchPath@iter\solLanguageSearchPath,\@nil}}
+{% empty-case
+\InputIfFileExists{language_\sol@curlanginputfile.cfg}{
+    \typeout{Loaded '\sol@curlanginputfile' from 'language_\sol@curlanginputfile.cfg'}
+}{\expandafter\sol@LoadLanguage@searchPath@iter\solLanguageSearchPath,\@nil}}
 
-\def\sol@LoadLanguage@single#1\@nil{\def\sol@curlanginputfile{#1}%
-                \sol@LoadLanguage@searchPath@resolve{}}
+\def\sol@LoadLanguage@single#1\@nil{\def\sol@curlanginputfile{#1}\sol@LoadLanguage@searchPath@resolve{}}
 \def\sol@LoadLanguage@iter#1,#2\@nil{%
-    \ifx!#1!\else\sol@LoadLanguage@single#1\@nil%
-        \ifx!#2!\else\sol@LoadLanguage@iter#2,\@nil%
-    \fi\fi%
+\ifx!#1!\else\sol@LoadLanguage@single#1\@nil%
+    \ifx!#2!\else\sol@LoadLanguage@iter#2,\@nil%
+\fi\fi%
 }
 \def\sol@LoadLanguage#1{\sol@LoadLanguage@iter#1,\@nil}
 \let\solLoadLanguage\sol@LoadLanguage
@@ -768,7 +752,7 @@
 
 % Maybe load defaults?
 \ifsol@defaultlang@
-    \solLoadLanguage{java,xml,json}
+\solLoadLanguage{java}
 \fi
 
 %% -----------------------------------------------------------------------------
@@ -786,18 +770,18 @@
 
 % #1 color name #2 color
 \newcommand*{\lstcolorlet}[2]{%
-    \@ifundefined{sol@registered@colors@#1}{%
-        \PackageError{sopra-listings}{The color '#1' is undefined.}%
-        {Choose one of 'keywordA,keywordB,keywordC,numbers,literals,comments,highlight,command'}%
-    }{\colorlet{sol@colors@lst@#1}{#2}}%
+\@ifundefined{sol@registered@colors@#1}{%
+\PackageError{sopra-listings}{The color '#1' is undefined.}%
+{Choose one of 'keywordA,keywordB,keywordC,numbers,literals,comments,highlight,command'}%
+}{\colorlet{sol@colors@lst@#1}{#2}}%
 }
 
 % #1 color mode #2 color name #3 color
 \newcommand*{\lstcolordef}[3][RGB]{%
-    \@ifundefined{sol@registered@colors@#2}{%
-        \PackageError{sopra-listings}{The color '#2' is undefined.}%
-        {Choose one of 'keywordA,keywordB,keywordC,numbers,literals,comments,highlight,command'}%
-    }{\definecolor{sol@colors@lst@#2}{#1}{#3}}%
+\@ifundefined{sol@registered@colors@#2}{%
+\PackageError{sopra-listings}{The color '#2' is undefined.}%
+{Choose one of 'keywordA,keywordB,keywordC,numbers,literals,comments,highlight,command'}%
+}{\definecolor{sol@colors@lst@#2}{#1}{#3}}%
 }
 
 %% -----------------------------------------------------------------------------
@@ -807,14 +791,13 @@
 \AtEndPreamble{%
 \ifsol@cpalette@
 \@ifundefined{cpl@registered@palettes}{%
-    \PackageError{sopra-listings}{cpalette requested, but package not loaded}
-    {You have to load the 'color-palettes' package yourself if you use the 'cpalette'-Option.}%
+\PackageError{sopra-listings}{cpalette requested, but package not loaded}
+{You have to load the 'color-palettes' package yourself if you use the 'cpalette'-Option.}%
 }{% Add to the hook..
 }%
 \let\sol@old@cpl@hooks\cpl@hooks%
 \def\cpl@hooks{% Add to the hook
-    \sol@old@cpl@hooks%
-    \sol@cpalette@hook%
+\sol@old@cpl@hooks\sol@cpalette@hook%
 }%
 \ifsol@printmode@
 \def\sol@cpalette@hook{%
@@ -868,7 +851,6 @@
 }
 
 \def\solhlboxd#1{\edef\@tmp{\noexpand\@solLstHL{#1}}\@tmp}
-
 \def\solhlbox#1{\@solLstHL{fill=#1!30,draw=#1}}
 
 \colorlet{solwarning}{yellow!90!red}
