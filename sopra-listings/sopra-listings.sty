@@ -31,7 +31,7 @@
 
 
 \def\sol@lst@style@prefix{sol@styles@lst@}
-\def\sol@lst@prebreak{\sol@font@fs@numbers\hbox{\hfill\textcolor{sol@colors@lst@comments}{$\hookleftarrow$}}} % allow definition of own symbol
+\def\sol@lst@prebreak{\sol@font@fs@numbers\hbox{\hfill$\hookleftarrow$}} % allow definition of own symbol
 \let\sol@lst@inline@prebreak\sol@lst@prebreak%
 
 % make switches for use of tcolorbox..
@@ -498,8 +498,7 @@ listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}
 command name prefix/.initial={},%
 command name suffix/.initial={},%
 %draw environment/.initial={defaultlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions
-constructor command/.initial={sol@NewLstEnvCore}%
-}
+constructor command/.initial={sol@NewLstEnvCore}}
 
 \pgfkeys{/sol@lst@family/nonumber/.is family,%
 /sol@lst@family/nonumber,
