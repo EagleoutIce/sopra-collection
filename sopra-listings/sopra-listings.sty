@@ -32,7 +32,7 @@
 
 \def\sol@lst@style@prefix{sol@styles@lst@}
 \def\sol@lst@prebreak{\sol@font@fs@numbers\hbox{\hfill\textcolor{sol@colors@lst@comments}{$\hookleftarrow$}}} % allow definition of own symbol
-\def\sol@lst@inline@prebreak{}
+\let\sol@lst@inline@prebreak\sol@lst@prebreak%
 
 % make switches for use of tcolorbox..
 \newif\ifsol@encoding@ %  automatically load encoding packages
