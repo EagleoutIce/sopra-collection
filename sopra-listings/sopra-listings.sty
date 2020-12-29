@@ -832,7 +832,7 @@ keepspaces = false%
     \hspace*{-0.35pt}\tikz[#1]{%
     \pgfpathrectangle{\pgfpoint{1pt}{0pt}}{\pgfpoint{\wd #2}{\ht #2}}%
     \pgfusepath{use as bounding box}%
-    \node[anchor=base west,outer sep=\z@,inner xsep=\z@,outer xsep=1pt, inner ysep=-1.105pt, rounded corners=1.65pt, minimum height=\ht\strutbox+1pt,#1]{\hspace*{0.35pt}\raisebox{1pt}{\strut}\strut\usebox{#2}\hspace*{-0.35pt}};
+    \node[anchor=base west,outer sep=\z@,inner xsep=\z@,outer xsep=1pt, inner ysep=\z@, rounded corners=1.65pt, minimum height=\ht\strutbox+1pt,#1]{\hspace*{0.35pt}\raisebox{1pt}{\strut}\strut\usebox{#2}\hspace*{-0.35pt}};
   }\hspace*{0.35pt}%
 }
 
