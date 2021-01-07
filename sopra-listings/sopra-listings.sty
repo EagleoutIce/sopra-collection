@@ -149,11 +149,9 @@
 %% -----------------------------------------------------------------------------
 
 \ifsol@lst@style@defaultfont@
-\def\sol@ttfamily{\fontfamily{AnonymousPro}\selectfont}%
-\let\ttfamily\sol@ttfamily%
-\else
-\let\sol@ttfamily\ttfamily%
+\def\ttdefault{AnonymousPro}%
 \fi
+\let\sol@ttfamily\ttfamily%
 
 \long\def\T#1{\bgroup\sol@ttfamily#1\egroup}
 \robustify{\T}
