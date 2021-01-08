@@ -1,34 +1,29 @@
 %% sopra-listings.sty
 %%
 %% -----------------------------------------------------------------------------
-%% Version: 1.0
-%% Author:  Florian Sihler, 08.12.2019
+%% Version: 1.1
+%% Author:  Florian Sihler, 08.01.2021
 %%
 %% Will contain all the definitions to highlight listings in a document. Note:
 %% I've reused huge parts of the code I've written for sol@lst@family but ported
 %% them to be standalone. Furthermore This Package contains 'other' mechanisms.
 %% This Package doesn't work with the 'minted'-Package
 %%
-
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{sopra-listings}[2019/12/03 EagleoutIce - listings for the sopra-team-020]
-
-% TODO: TCBox, runtimes,
+\ProvidesPackage{sopra-listings}[2021/01/08 EagleoutIce - listings for the sopra-team-020]
 
 %% -----------------------------------------------------------------------------
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
-
-\newcounter{solversion} \setcounter{solversion}{1018}
+\newcounter{solversion} \setcounter{solversion}{1019}
 
 % note this will be used with tcb:
-\newlength{\sol@length@lst@outer@spacing} \sol@length@lst@outer@spacing=3pt
+\newlength\sol@length@lst@outer@spacing \sol@length@lst@outer@spacing=3pt
 
-\newlength{\sol@length@lst@numsep} \sol@length@lst@numsep=9pt
-\newlength{\sol@length@lst@famerule} \sol@length@lst@famerule=0.75pt
-\newlength{\sol@length@lst@xleftmargin} \sol@length@lst@xleftmargin=3pt
-\newlength{\sol@length@lst@xrightmargin} \sol@length@lst@xrightmargin=3pt
-
+\newlength\sol@length@lst@numsep \sol@length@lst@numsep=9pt
+\newlength\sol@length@lst@famerule \sol@length@lst@famerule=0.75pt
+\newlength\sol@length@lst@xleftmargin \sol@length@lst@xleftmargin=3pt
+\newlength\sol@length@lst@xrightmargin \sol@length@lst@xrightmargin=3pt
 
 \def\sol@lst@style@prefix{sol@styles@lst@}
 \def\sol@lst@prebreak{\sol@font@fs@numbers\hbox{$\hookleftarrow$}} % allow definition of own symbol
@@ -48,12 +43,8 @@
 \newif\ifsol@highlight@numbers@ % should numbers be highlighted?
 % internals:
 \newif\ifsol@lst@lastwas@character@ % last segment was from char-class
-    \sol@lst@lastwas@character@false% explicitly false
 \newif\ifsol@lst@lastwas@charkeep@  % in char-mode (pass through)
-    \sol@lst@lastwas@charkeep@false % explicitly false
-
 \newif\ifsol@lst@style@upshape@  % add upshape to basicstyle
-    \sol@lst@style@upshape@false % explicitly false
 
 \newif\ifsol@lst@style@highlights@ % add upshape to basicstyle
 \newif\ifsol@lst@style@defaultfont@ % don't change font?
@@ -64,7 +55,6 @@
 %% -----------------------------------------------------------------------------
 %% Package-Args
 %% -----------------------------------------------------------------------------
-
 % Encoding:
 \DeclareOption{encoding}{ \sol@encoding@true }
 \DeclareOption{noencoding}{ \sol@encoding@false }
@@ -118,7 +108,6 @@
 %% -----------------------------------------------------------------------------
 %% Basic Packages
 %% -----------------------------------------------------------------------------
-
 % Encoding:
 \ifsol@encoding@ %
 \RequirePackage[T1]{fontenc} %
@@ -147,7 +136,6 @@
 %% -----------------------------------------------------------------------------
 %% Font Definitions
 %% -----------------------------------------------------------------------------
-
 \ifsol@lst@style@defaultfont@
 \def\ttdefault{AnonymousPro}%
 \fi
@@ -160,15 +148,14 @@
 \def\solNumFs#1{\gdef\sol@font@fs@numbers{#1}}
 \def\sol@font@fs@normal{}
 \newcommand{\lstfs}[2][1]{%
-    \def\sol@font@fs@normal{\fontsize{#2}{#2}\selectfont\linespread{#1}}%
-    \ifnum#2>7\def\sol@font@fs@numbers{\edef\@@subfs{\the\numexpr #2-4\relax}\fontsize{\@@subfs}{\@@subfs}\selectfont\linespread{#1}}%
-    \else\def\sol@font@fs@numbers{\tiny\linespread{#1}}\fi%
+  \def\sol@font@fs@normal{\fontsize{#2}{#2}\selectfont\linespread{#1}}%
+  \ifnum#2>7\def\sol@font@fs@numbers{\edef\@@subfs{\the\numexpr #2-4\relax}\fontsize{\@@subfs}{\@@subfs}\selectfont\linespread{#1}}%
+  \else\def\sol@font@fs@numbers{\tiny\linespread{#1}}\fi%
 }
 
 %% -----------------------------------------------------------------------------
 %% Color & Style Definitions
 %% -----------------------------------------------------------------------------
-
 \ifsol@printmode@
 \definecolor{sol@colors@border}{HTML}{DDDFE2}%
 \definecolor{sol@colors@background}{HTML}{FFFFFF}% save ink :D
@@ -202,16 +189,15 @@
 
 % define the styling definitions
 % as we don't know, if 'foreach' is available, we will built our own iter:
-
 \def\sol@lst@style@iter@step#1: #2\@nil{%
 \ifx!#1!\else
-    \expandafter\gdef\csname#1\endcsname{#2}%
+  \expandafter\gdef\csname#1\endcsname{#2}%
 \fi
 }
 \def\sol@lst@style@iter#1,#2\@nil{%
 \ifx!#1!\else%
-    \sol@lst@style@iter@step\sol@lst@style@prefix#1\@nil%
-    \ifx!#2!\else\sol@lst@style@iter#2,\@nil\fi% recursion
+  \sol@lst@style@iter@step\sol@lst@style@prefix#1\@nil%
+  \ifx!#2!\else\sol@lst@style@iter#2,\@nil\fi% recursion
 \fi%
 }
 
@@ -252,7 +238,7 @@
 
 \ifsol@lst@style@upshape@
 \sol@list@define@styles{%
-    {basic: \sol@font@fs@normal\color{black}\sol@ttfamily\upshape},%
+ {basic: \sol@font@fs@normal\color{black}\sol@ttfamily\upshape},%
 }
 \fi
 
@@ -260,15 +246,14 @@
 %% -----------------------------------------------------------------------------
 %% Helper Functions
 %% -----------------------------------------------------------------------------
-
 \def\sol@font@size{\dimexpr\f@size pt\relax}
 
 \def\sol@thesolversion#1#2#3#4\@nil{%
-    {v#1.#2.#3#4}%
+ {v#1.#2.#3#4}%
 }
 \def\thesolversion{%
-    \edef\@tmp{\noexpand\sol@thesolversion\arabic{solversion}\noexpand\@nil}%
-    \@tmp%
+ \edef\@tmp{\noexpand\sol@thesolversion\arabic{solversion}\noexpand\@nil}%
+ \@tmp%
 }
 \robustify\thesolversion
 
@@ -289,8 +274,8 @@
 % Here we will make a small rainbow to present the selected color-theme :D
 \def\sol@lst@showstyles@iter#1,#2\@nil{%
 \ifx!#1!\else%
-    {\sol@style@get{basic}\sol@style@get{#1}#1\space}%
-    \ifx!#2!\else\sol@lst@showstyles@iter#2,\@nil\fi% recursion
+ {\sol@style@get{basic}\sol@style@get{#1}#1\space}%
+ \ifx!#2!\else\sol@lst@showstyles@iter#2,\@nil\fi% recursion
 \fi%
 }
 
@@ -318,17 +303,14 @@
 %% -----------------------------------------------------------------------------
 %% Handling of automated number-highlighting in listings;
 %% -----------------------------------------------------------------------------
-
 \def\sol@@lst@hl@digit#1{\begingroup%
 %\iflstnumnohlmode%
 %#1\else
 \ifsol@lst@lastwas@character@%\lstnumnohlmodetrue% was char => don't highlight, we won't    check for hex right now
 \global\sol@lst@lastwas@charkeep@true#1\else\global\sol@lst@lastwas@charkeep@false%
-    \ifnum\lst@mode=\lst@Pmode\relax% PMode: Not in any special Mode
-    {\sol@style@get{numbers}#1}%
-    \else%
-    #1%
-    \fi\hbox{\relax}%
+  \ifnum\lst@mode=\lst@Pmode\relax% PMode: Not in any special Mode
+  {\sol@style@get{numbers}#1}%
+  \else#1\fi\hbox{\relax}%
 \fi%
 %\fi
 \endgroup%
@@ -354,34 +336,32 @@
 \def\@nc{\ifsol@lst@lastwas@charkeep@\else\sol@lst@lastwas@character@false\fi}
 
 % modify lst-literate routine to apply to the mechanism
-
 \def\lst@Literate#1#2#3{%
 \ifx\relax#2\@empty\else%
 \lst@CArgX #1\relax\lst@CDef%
-    {}%
-    {\let\lst@next\@empty%
-    \lst@ifxliterate%
-    \lst@ifmode \let\lst@next\lst@CArgEmpty \fi%
+  {}%
+  {\let\lst@next\@empty%
+  \lst@ifxliterate%
+  \lst@ifmode \let\lst@next\lst@CArgEmpty \fi%
+  \fi
+  \ifx\lst@next\@empty%
+    \ifx\lst@OutputBox\@gobble\else%
+    \lst@XPrintToken \let\lst@scanmode\lst@scan@m%
+    \lst@token{#2}\lst@length#3\relax%
+    \lst@XPrintToken%
+    \lst@whitespacefalse\@nc%
     \fi
-    \ifx\lst@next\@empty%
-        \ifx\lst@OutputBox\@gobble\else%
-        \lst@XPrintToken \let\lst@scanmode\lst@scan@m%
-        \lst@token{#2}\lst@length#3\relax%
-        \lst@XPrintToken%
-        \lst@whitespacefalse\@nc%
-        \fi
-        % gobble the replaced text
-        \let\lst@next\lst@CArgEmptyGobble%
-    \fi
-    \lst@next}%
-    \@empty% splitter for constants
+    % gobble the replaced text
+    \let\lst@next\lst@CArgEmptyGobble%
+  \fi
+  \lst@next}%
+  \@empty% splitter for constants
 \expandafter\lst@Literate%
 \fi}
 
 %% -----------------------------------------------------------------------------
 %% The basic literate table
 %% -----------------------------------------------------------------------------
-
 \lstset{literate=%
   {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {Á}{{\'A}}1 {É}{{\'E}}1
   {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1 {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1
@@ -415,11 +395,10 @@
 %% -----------------------------------------------------------------------------
 %% Basic and internal highlighting definitions
 %% -----------------------------------------------------------------------------
-
 % please note, that they will apply under every condition!
 \newcommand{\sol@dlst@default}[2][]{%
 \begingroup\fboxsep=\z@\fcolorbox{sol@colors@border}{sol@colors@background}{%
-    \thinspace\strut\lstinline[#1,keepspaces=true,prebreak=\sol@lst@inline@prebreak]`#2`\thinspace%
+  \thinspace\strut\lstinline[#1,keepspaces=true,prebreak=\sol@lst@inline@prebreak]`#2`\thinspace%
 }\endgroup%
 }
 
@@ -427,14 +406,11 @@
 \begingroup\thinspace\strut\lstinline[#1,keepspaces=true,prebreak=\sol@lst@inline@prebreak]`#2`\endgroup%
 }
 
-\newcommand{\sol@dlst@input}[2][]{%
-\begingroup\lstinputlisting[#1]{#2}\endgroup%
-}
+\newcommand{\sol@dlst@input}[2][]{\begingroup\lstinputlisting[#1]{#2}\endgroup}
 
 %% -----------------------------------------------------------------------------
 %% Numbers and padding stuff
 %% -----------------------------------------------------------------------------
-
 \def\sol@penalties@lst@sloppy{\tolerance=9999 \emergencystretch=3em \hfuzz=.5cm%
 \vfuzz\hfuzz}%
 
@@ -446,14 +422,12 @@
 %% -----------------------------------------------------------------------------
 %% Lst styles that will be shipped in each case
 %% -----------------------------------------------------------------------------
-
 \lstdefinestyle{nonum}{xleftmargin=3pt,xrightmargin=3pt,%will fix some overhead :D
 numbers=none,numbersep=\z@}
 
 %% -----------------------------------------------------------------------------
 %% Basic - we-work-in-the-back-hey-bud-environments
 %% -----------------------------------------------------------------------------
-
 % note that '\sol@lst@backcol' is optional and could be ignored by the
 % used style
 
@@ -470,7 +444,6 @@ numbers=none,numbersep=\z@}
 %% -----------------------------------------------------------------------------
 %% Here we will handle the language-control - right now, tcb will not be used
 %% -----------------------------------------------------------------------------
-
 % for cleaner setup, we will use pgfkeys
 \gdef\solset#1{\pgfkeys{/sol@lst@family/.cd, #1}}
 
@@ -551,7 +524,6 @@ draw command/.initial={sol@dlst@input} % will hold the name of the corresponding
 %% -----------------------------------------------------------------------------
 %% Language-Registration-Helper
 %% -----------------------------------------------------------------------------
-
 % spacing control
 %\def\sol@measurepage{\dimexpr\pagegoal-\pagetotal-\baselineskip\relax}
 %\def\sol@ensure#1{\ifdim\sol@measurepage<#1\baselineskip\relax\null\newpage\relax\fi}%
@@ -622,8 +594,6 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 %% -----------------------------------------------------------------------------
 %% The colossos: core registration handler
 %% -----------------------------------------------------------------------------
-
-
 %% #1: Name of the Language [java,latex]
 %% #2: Name of the corresponding lst-Language [lJava, lLatex,...]
 \def\RegisterLanguage#1#2{\bgroup\makeatletter%
@@ -670,7 +640,6 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 %% -----------------------------------------------------------------------------
 %% The [hopefully] beautiful 'sopra-style'
 %% -----------------------------------------------------------------------------
-
 \lstdefinestyle{sol@SOPRA}{%
 % background and border, the frame
 frame           = single,
@@ -705,14 +674,12 @@ keepspaces = false%
 %% -----------------------------------------------------------------------------
 %% Always present 'void'-Language
 %% -----------------------------------------------------------------------------
-
 \lstdefinelanguage{lVoid}{columns=fixed,moredelim=[is][{}]{|plain|}{|plain|}}
 \RegisterLanguage{void}{lVoid}
 
 %% -----------------------------------------------------------------------------
 %% Now we will define some languages
 %% -----------------------------------------------------------------------------
-
 \def\solLanguageSearchPath{{Languages/}}
 % a language will be loaded by the default latex-file mechanis
 % the file has to have the signature: 'language_<Name>.cfg'
@@ -751,7 +718,6 @@ keepspaces = false%
 %% -----------------------------------------------------------------------------
 %% Change colors
 %% -----------------------------------------------------------------------------
-
 \def\sol@registered@colors@keywordA{}
 \def\sol@registered@colors@keywordB{}
 \def\sol@registered@colors@keywordC{}
@@ -780,7 +746,6 @@ keepspaces = false%
 %% -----------------------------------------------------------------------------
 %% Cp-Palette support
 %% -----------------------------------------------------------------------------
-
 \AtEndPreamble{%
 \ifsol@cpalette@
 \@ifundefined{cpl@registered@palettes}{%
@@ -819,18 +784,17 @@ keepspaces = false%
 %% -----------------------------------------------------------------------------
 %% Highlightssupport
 %% -----------------------------------------------------------------------------
-
 \ifsol@lst@style@highlights@
 
 \newenvironment{sol@listings@highlight@env}[1][]
 {\begingroup\tikzset{sol@listings@highlight/.style={#1}}\begin{lrbox}{\@tempboxa}}
 {\end{lrbox}\sol@highlights@box[sol@listings@highlight]{\@tempboxa}\endgroup}
 
-\newcommand{\sol@highlights@box}[2][]{%
-    \hspace*{-0.35pt}\tikz[#1]{%
-    \pgfpathrectangle{\pgfpoint{1pt}{0pt}}{\pgfpoint{\wd #2}{\ht #2}}%
-    \pgfusepath{use as bounding box}%
-    \node[anchor=base west,outer sep=\z@,inner xsep=\z@,outer xsep=1pt, inner ysep=\z@, rounded corners=1.65pt, minimum height=\ht\strutbox+1pt,#1]{\hspace*{0.35pt}\raisebox{1pt}{\strut}\strut\usebox{#2}\hspace*{-0.35pt}};
+\newcommand*{\sol@highlights@box}[2][]{%
+  \hspace*{-0.35pt}\tikz[#1]{%
+  \pgfpathrectangle{\pgfpoint{1pt}{0pt}}{\pgfpoint{\wd #2}{\ht #2}}%
+  \pgfusepath{use as bounding box}%
+  \node[anchor=base west,outer sep=\z@,inner xsep=\z@,outer xsep=1pt, inner ysep=\z@, rounded corners=1.65pt, minimum height=\ht\strutbox+1pt,#1]{\hspace*{0.35pt}\raisebox{1pt}{\strut}\strut\usebox{#2}\hspace*{-0.35pt}};
   }\hspace*{0.35pt}%
 }
 
