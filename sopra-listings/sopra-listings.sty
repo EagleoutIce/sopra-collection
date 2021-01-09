@@ -24,8 +24,8 @@
 \newlength\sol@length@lst@famerule \sol@length@lst@famerule=0.75pt
 \newlength\sol@length@lst@xleftmargin \sol@length@lst@xleftmargin=3pt
 \newlength\sol@length@lst@xrightmargin \sol@length@lst@xrightmargin=3pt
-\newlength\sol@length@lst@aboveskip \sol@length@lst@aboveskip=2pt
-\newlength\sol@length@lst@belowskip \sol@length@lst@belowskip=2pt
+\newlength\sol@length@lst@aboveskip \sol@length@lst@aboveskip=2pt minus 2pt
+\newlength\sol@length@lst@belowskip \sol@length@lst@belowskip=2pt minus 2pt
 
 \def\sol@lst@style@prefix{sol@styles@lst@}
 \def\sol@lst@prebreak{\sol@font@fs@numbers\hbox{$\hookleftarrow$}} % allow definition of own symbol
@@ -651,8 +651,7 @@ escapeinside = {!*}{*!},
 keepspaces=false,%
 % skips:
 aboveskip=\sol@length@lst@aboveskip,
-belowskip=\sol@length@lst@belowskip
-}
+belowskip=\sol@length@lst@belowskip}
 
 %% -----------------------------------------------------------------------------
 %% Always present 'void'-Language
