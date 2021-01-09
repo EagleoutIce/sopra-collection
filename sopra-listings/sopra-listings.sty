@@ -15,7 +15,7 @@
 %% -----------------------------------------------------------------------------
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
-\newcounter{solversion} \setcounter{solversion}{1019}
+\newcounter{solversion} \setcounter{solversion}{1020}
 
 % note this will be used with tcb:
 \newlength\sol@length@lst@outer@spacing \sol@length@lst@outer@spacing=3pt
@@ -24,6 +24,8 @@
 \newlength\sol@length@lst@famerule \sol@length@lst@famerule=0.75pt
 \newlength\sol@length@lst@xleftmargin \sol@length@lst@xleftmargin=3pt
 \newlength\sol@length@lst@xrightmargin \sol@length@lst@xrightmargin=3pt
+\newlength\sol@length@lst@aboveskip \sol@length@lst@aboveskip=2pt
+\newlength\sol@length@lst@belowskip \sol@length@lst@belowskip=2pt
 
 \def\sol@lst@style@prefix{sol@styles@lst@}
 \def\sol@lst@prebreak{\sol@font@fs@numbers\hbox{$\hookleftarrow$}} % allow definition of own symbol
@@ -49,6 +51,10 @@
 \newif\ifsol@lst@style@highlights@ % add upshape to basicstyle
 \newif\ifsol@lst@style@defaultfont@ % don't change font?
 \sol@lst@style@defaultfont@true
+
+\sol@lst@lastwas@character@false% explicitly false
+\sol@lst@lastwas@charkeep@false % explicitly false
+\sol@lst@style@upshape@false % explicitly false
 
 \newif\ifsol@debug@% typeout debug
 
@@ -82,11 +88,9 @@
 % numinpar
 \DeclareOption{defaultfont}{ \sol@lst@style@defaultfont@true }%
 \DeclareOption{nodefaultfont}{ \sol@lst@style@defaultfont@false }%
-
 % highlights
 \DeclareOption{highlights}{ \sol@lst@style@highlights@true }%
 \DeclareOption{nohighlights}{ \sol@lst@style@highlights@false }%
-
 % debug
 \DeclareOption{debug}{ \sol@debug@true }%
 \DeclareOption{nodebug}{ \sol@debug@false }%
@@ -147,7 +151,7 @@
 \def\sol@font@fs@numbers{\footnotesize}
 \def\solNumFs#1{\gdef\sol@font@fs@numbers{#1}}
 \def\sol@font@fs@normal{}
-\newcommand{\lstfs}[2][1]{%
+\newcommand*{\lstfs}[2][1]{%
   \def\sol@font@fs@normal{\fontsize{#2}{#2}\selectfont\linespread{#1}}%
   \ifnum#2>7\def\sol@font@fs@numbers{\edef\@@subfs{\the\numexpr #2-4\relax}\fontsize{\@@subfs}{\@@subfs}\selectfont\linespread{#1}}%
   \else\def\sol@font@fs@numbers{\tiny\linespread{#1}}\fi%
@@ -190,20 +194,19 @@
 % define the styling definitions
 % as we don't know, if 'foreach' is available, we will built our own iter:
 \def\sol@lst@style@iter@step#1: #2\@nil{%
-\ifx!#1!\else
+\ifx!#1!\else%
   \expandafter\gdef\csname#1\endcsname{#2}%
-\fi
-}
+\fi}
+
 \def\sol@lst@style@iter#1,#2\@nil{%
 \ifx!#1!\else%
   \sol@lst@style@iter@step\sol@lst@style@prefix#1\@nil%
   \ifx!#2!\else\sol@lst@style@iter#2,\@nil\fi% recursion
-\fi%
-}
+\fi}
 
 \def\solSetStyle#1#2{\expandafter\gdef\csname\sol@lst@style@prefix#1\endcsname{#2}}
 
-\def\sol@list@define@styles#1{ \sol@lst@style@iter#1,\@nil }
+\def\sol@list@define@styles#1{\sol@lst@style@iter#1,\@nil}
 % we will write the colors anyway. This way it is easy visible on how to change the
 % styles. Will define e.g. \sol@styles@lst@keywo
 \ifsol@printmode@
@@ -217,7 +220,7 @@
  {literals:    \color{sol@colors@lst@literals}\itshape},%
  {comments:    \color{sol@colors@lst@comments}},% \scshape
  {highlight:   \color{sol@colors@lst@highlight}\itshape},%
- {basic:       \sol@font@fs@normal\color{black}\sol@ttfamily},%
+ {basic:       \sol@font@fs@normal\sol@ttfamily},%
  {command:     \color{sol@colors@lst@command}}%
 }
 \else
@@ -231,7 +234,7 @@
  {literals:    \color{sol@colors@lst@literals}},%
  {comments:    \color{sol@colors@lst@comments}},%
  {highlight:   \color{sol@colors@lst@highlight}\itshape},%
- {basic:       \sol@font@fs@normal\color{black}\sol@ttfamily},%
+ {basic:       \sol@font@fs@normal\sol@ttfamily},%
  {command:     \color{sol@colors@lst@command}}%
 }
 \fi
@@ -242,15 +245,11 @@
 }
 \fi
 
-
 %% -----------------------------------------------------------------------------
 %% Helper Functions
 %% -----------------------------------------------------------------------------
 \def\sol@font@size{\dimexpr\f@size pt\relax}
-
-\def\sol@thesolversion#1#2#3#4\@nil{%
- {v#1.#2.#3#4}%
-}
+\def\sol@thesolversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 \def\thesolversion{%
  \edef\@tmp{\noexpand\sol@thesolversion\arabic{solversion}\noexpand\@nil}%
  \@tmp%
@@ -296,9 +295,7 @@
 \def\solInlinePreBreak#1{\def\sol@lst@inline@prebreak{#1}}
 
 \def\@@sol@numinpar@length{2em}
-\ifsol@numinpar@%
-\solSetLeftMargin{\@@sol@numinpar@length}
-\fi
+\ifsol@numinpar@\solSetLeftMargin{\@@sol@numinpar@length}\fi
 
 %% -----------------------------------------------------------------------------
 %% Handling of automated number-highlighting in listings;
@@ -313,13 +310,10 @@
   \else#1\fi\hbox{}%
 \fi%
 %\fi
-\endgroup%
-}
+\endgroup}
 \ifsol@highlight@numbers@%
 \let\sol@dgt\sol@@lst@hl@digit%
-\else
-\def\sol@dgt#1{#1}%
-\fi
+\else\def\sol@dgt#1{#1}\fi
 % ^--- shorter and better to read
 \def\soldisablenumhl{\def\sol@dgt##1{##1}}
 \def\solenablenumhl{\let\sol@dgt\sol@@lst@hl@digit}
@@ -343,8 +337,7 @@
   {\let\lst@next\@empty%
   \lst@ifxliterate%
   \lst@ifmode \let\lst@next\lst@CArgEmpty \fi%
-  \fi
-  \ifx\lst@next\@empty%
+  \fi\ifx\lst@next\@empty%
     \ifx\lst@OutputBox\@gobble\else%
     \lst@XPrintToken \let\lst@scanmode\lst@scan@m%
     \lst@token{#2}\lst@length#3\relax%
@@ -389,8 +382,7 @@
   {.1}{{{\sol@dgt{.1}}}}2 {.2}{{{\sol@dgt{.2}}}}2 {.3}{{{\sol@dgt{.3}}}}2
   {.4}{{{\sol@dgt{.4}}}}2 {.5}{{{\sol@dgt{.5}}}}2 {.6}{{{\sol@dgt{.6}}}}2
   {.7}{{{\sol@dgt{.7}}}}2 {.8}{{{\sol@dgt{.8}}}}2 {.9}{{{\sol@dgt{.9}}}}2
-  {:lmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash(}}}2 {:rmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash)}}}2 {:ldmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash[}}}2 {:rdmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash]}}}2 {:ul:}{{\_}}1
-}
+  {:lmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash(}}}2 {:rmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash)}}}2 {:ldmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash[}}}2 {:rdmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash]}}}2 {:ul:}{{\_}}1}
 
 %% -----------------------------------------------------------------------------
 %% Basic and internal highlighting definitions
@@ -399,25 +391,21 @@
 \newcommand{\sol@dlst@default}[2][]{%
 \begingroup\fboxsep=\z@\fcolorbox{sol@colors@border}{sol@colors@background}{%
   \thinspace\strut\lstinline[#1,keepspaces=true,prebreak=\sol@lst@inline@prebreak]`#2`\thinspace%
-}\endgroup%
-}
+}\endgroup}
 
 \newcommand{\sol@dlst@blank}[2][]{%
-\begingroup\thinspace\strut\lstinline[#1,keepspaces=true,prebreak=\sol@lst@inline@prebreak]`#2`\endgroup%
-}
+\begingroup\thinspace\strut\lstinline[#1,keepspaces=true,prebreak=\sol@lst@inline@prebreak]`#2`\endgroup}
 
-\newcommand{\sol@dlst@input}[2][]{\begingroup\lstinputlisting[#1]{#2}\endgroup}
+\newcommand*{\sol@dlst@input}[2][]{\begingroup\lstinputlisting[#1]{#2}\endgroup}
 
 %% -----------------------------------------------------------------------------
 %% Numbers and padding stuff
 %% -----------------------------------------------------------------------------
-\def\sol@penalties@lst@sloppy{\tolerance=9999 \emergencystretch=3em \hfuzz=.5cm%
-\vfuzz\hfuzz}%
+\def\sol@penalties@lst@sloppy{\tolerance=9999 \emergencystretch=3em \hfuzz=.5cm \vfuzz\hfuzz}%
 
-\def\sol@penalties@lst@fussy{\emergencystretch=0em \tolerance=200 \hfuzz=.1pt%
-\vfuzz\hfuzz}
+\def\sol@penalties@lst@fussy{\emergencystretch=0em \tolerance=200 \hfuzz=.1pt \vfuzz\hfuzz}
 
-\sol@penalties@lst@sloppy
+% \sol@penalties@lst@sloppy
 
 %% -----------------------------------------------------------------------------
 %% Lst styles that will be shipped in each case
@@ -431,7 +419,6 @@ numbers=none,numbersep=\z@}
 % note that '\sol@lst@backcol' is optional and could be ignored by the
 % used style
 
-% TODO: TODO: CHANGE THAT TO NEWENV
 \lstnewenvironment{lstplain}[1][]
   {\def\sol@lst@backcol{white}\lstset{xleftmargin=\z@,xrightmargin=\z@,%
   numbers=none,numbersep=\z@,frame=none,%
@@ -445,18 +432,16 @@ numbers=none,numbersep=\z@}
 %% Here we will handle the language-control - right now, tcb will not be used
 %% -----------------------------------------------------------------------------
 % for cleaner setup, we will use pgfkeys
-\gdef\solset#1{\pgfkeys{/sol@lst@family/.cd, #1}}
+\gdef\solset#1{\pgfkeys{/sol@lst@family/.cd,#1}}
 
 %% Todo make commands like: 'on entry' which will define Actions at the beginning of the listing etc :D
 \pgfkeys{/sol@lst@family/.is family}
 %% Here we define globals, which are basically applied to every listing - like for example the initial style
 \pgfkeys{/sol@lst@family/globals/.is family,%
 /sol@lst@family/globals,%
-listing style/.initial = {sol@SOPRA}
-}
+listing style/.initial = {sol@SOPRA}}
 
 %% Just to provide a clearer structure the keys will be defined seperate for all different styles.
-
 \pgfkeys{/sol@lst@family/default/.is family,%
 /sol@lst@family/default,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
@@ -477,8 +462,7 @@ listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}
 command name prefix/.initial={},%
 command name suffix/.initial={*},%
 %draw environment/.initial={defaultlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions
-constructor command/.initial={sol@NewLstEnvCoreStarred}
-}
+constructor command/.initial={sol@NewLstEnvCoreStarred}}
 
 \pgfkeys{/sol@lst@family/plain/.is family,%
 /sol@lst@family/plain,
@@ -489,8 +473,7 @@ listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}
 command name prefix/.initial = {plain},%
 command name suffix/.initial = {},%
 %draw environment/.initial={plainlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions and one mandatory for the language
-constructor command/.initial={sol@NewLstEnvPlain}
-}
+constructor command/.initial={sol@NewLstEnvPlain}}
 
 
 %%% Inlines
@@ -583,7 +566,6 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 % #3 EnvironName
 \def\sol@@NewLstEnv#1#2#3{%
 \bgroup%
-%\globaldefs=1%
 \edef\sol@xcurlst{\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/\environName/constructor command}\endcsname{#3}{#1}{\noexpand\lstset{style=\pgfkeysvalueof{/sol@lst@family/\environName/listing style},language=#2}}{}{#2}}%
 \global\sol@xcurlst%
 \relax%No one (this means me) really knows why this helps, but it enforces the lst@next - search to interpret the first char of an cs-sequence correctly
@@ -600,15 +582,15 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 % Register the Environments
 %
 \def\sol@foreach@basic@env@iter##1,##2\@nil{%
-    \ifx!##1!\else
-    \def\environName{##1}%
-    \edef\environCurName{\pgfkeysvalueof{/sol@lst@family/\environName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/\environName/command name suffix}}% assign
-    \sol@debug{> #1/#2 e '##1' (name: \environCurName, ctor: \pgfkeysvalueof{/sol@lst@family/\environName/constructor command})}%
-    \edef\sol@CreateAnLstEnviron{\noexpand\sol@@NewLstEnv{\environName}{#2}{\environCurName}}% fully expand the Name, otherwise it would be undefined when the environment gets used
-    \sol@CreateAnLstEnviron%
-    \ifx!##2!\else\sol@foreach@basic@env@iter##2,\@nil\fi%
-    \fi
-}
+\ifx!##1!\else
+\def\environName{##1}%
+\edef\environCurName{\pgfkeysvalueof{/sol@lst@family/\environName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/\environName/command name suffix}}% assign
+\sol@debug{> #1/#2 e '##1' (name: \environCurName, ctor: \pgfkeysvalueof{/sol@lst@family/\environName/constructor command})}%
+\edef\sol@CreateAnLstEnviron{\noexpand\sol@@NewLstEnv{\environName}{#2}{\environCurName}}% fully expand the Name, otherwise it would be undefined when the environment gets used
+\sol@CreateAnLstEnviron%
+\ifx!##2!\else\sol@foreach@basic@env@iter##2,\@nil\fi%
+\fi}
+
 \def\sol@foreach@basic@env##1{\sol@foreach@basic@env@iter##1,\@nil}
 \sol@foreach@basic@env{default,nonumber,plain}%,presentation}
 
@@ -627,8 +609,7 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 \expandafter\xdef\csname @@hasopt@@\inlineCurName\endcsname[####1]####2{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#2,####1]{####2}}%
 \expandafter\robustify\csname\inlineCurName\endcsname% robustify
 \ifx!##2!\else\sol@foreach@inline@env@iter##2,\@nil\fi%
-\fi
-}%
+\fi}%
 \def\sol@foreach@inline@env##1{\sol@foreach@inline@env@iter##1,\@nil}
 \sol@foreach@inline@env{default,blank,input}%,present}
 %
@@ -649,13 +630,13 @@ backgroundcolor = \color{sol@colors@background},
 xleftmargin     = \sol@length@lst@xleftmargin,
 xrightmargin    = \sol@length@lst@xrightmargin,
 % the 'key'-styles:
-stringstyle  = \sol@style@get{literals},
-commentstyle = \sol@style@get{comments},
-keywordstyle = \sol@style@get{keywordA},
-keywordstyle = [2]\sol@style@get{keywordB},
-keywordstyle = [3]\sol@style@get{keywordC},
-keywordstyle = [4]\sol@style@get{keywordD},
-basicstyle   = \sol@style@get{basic},
+stringstyle  = {\sol@style@get{literals}},
+commentstyle = {\sol@style@get{comments}},
+keywordstyle = {\sol@style@get{keywordA}},
+keywordstyle = [2]{\sol@style@get{keywordB}},
+keywordstyle = [3]{\sol@style@get{keywordC}},
+keywordstyle = [4]{\sol@style@get{keywordD}},
+basicstyle   = {\sol@style@get{basic}},
 % line numbers:
 numbers     = left,
 numbersep   = \sol@length@lst@numsep,
@@ -663,12 +644,14 @@ numberstyle = \sol@style@get{linenumbers},
 % line break:
 breaklines    = true,
 extendedchars = true,
-prebreak      = {\sol@lst@prebreak{}},
+prebreak      = {\sol@lst@prebreak},
 % escapes:
 escapeinside = {!*}{*!},
-mathescape   = false,
 % space control
-keepspaces = false%
+keepspaces=false,%
+% skips:
+aboveskip=\sol@length@lst@aboveskip,
+belowskip=\sol@length@lst@belowskip
 }
 
 %% -----------------------------------------------------------------------------
@@ -687,7 +670,7 @@ keepspaces = false%
 \def\sol@LoadLanguage@searchPath@iter#1,#2\@nil{%
 \ifx!#1!\else%
 \InputIfFileExists{#1language_\sol@curlanginputfile.cfg}{%
-    \typeout{Loaded '\sol@curlanginputfile' from '#1language_\sol@curlanginputfile.cfg'}
+  \typeout{Loaded '\sol@curlanginputfile' from '#1language_\sol@curlanginputfile.cfg'}
 }{%
 \ifx!#2!\else\sol@LoadLanguage@iter#2,\@nil\fi%
 }%
@@ -696,13 +679,13 @@ keepspaces = false%
 \def\sol@LoadLanguage@searchPath@resolve%
 {% empty-case
 \InputIfFileExists{language_\sol@curlanginputfile.cfg}{
-    \typeout{Loaded '\sol@curlanginputfile' from 'language_\sol@curlanginputfile.cfg'}
+  \typeout{Loaded '\sol@curlanginputfile' from 'language_\sol@curlanginputfile.cfg'}
 }{\expandafter\sol@LoadLanguage@searchPath@iter\solLanguageSearchPath,\@nil}}
 
 \def\sol@LoadLanguage@single#1\@nil{\def\sol@curlanginputfile{#1}\sol@LoadLanguage@searchPath@resolve{}}
 \def\sol@LoadLanguage@iter#1,#2\@nil{%
 \ifx!#1!\else\sol@LoadLanguage@single#1\@nil%
-    \ifx!#2!\else\sol@LoadLanguage@iter#2,\@nil%
+  \ifx!#2!\else\sol@LoadLanguage@iter#2,\@nil%
 \fi\fi%
 }
 \def\sol@LoadLanguage#1{\sol@LoadLanguage@iter#1,\@nil}
@@ -798,10 +781,8 @@ keepspaces = false%
   }\hspace*{0.35pt}%
 }
 
+\def\@solLstHL#1{\begin{sol@listings@highlight@env}[#1]\bgroup\aftergroup\sol@highlights@endenv}
 
-\def\@solLstHL#1{%
-  \begin{sol@listings@highlight@env}[#1]\bgroup\aftergroup\sol@highlights@endenv%
-}
 \def\sol@highlights@endenv{%
   \end{sol@listings@highlight@env}%
   \egroup%
