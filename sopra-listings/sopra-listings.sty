@@ -24,11 +24,11 @@
 \newlength\sol@length@lst@famerule \sol@length@lst@famerule=0.75pt
 \newlength\sol@length@lst@xleftmargin \sol@length@lst@xleftmargin=3pt
 \newlength\sol@length@lst@xrightmargin \sol@length@lst@xrightmargin=3pt
-\newlength\sol@length@lst@aboveskip \sol@length@lst@aboveskip=2pt minus 2pt
-\newlength\sol@length@lst@belowskip \sol@length@lst@belowskip=2pt minus 2pt
+\newlength\sol@length@lst@aboveskip \sol@length@lst@aboveskip=2pt plus 0pt minus 2pt
+\newlength\sol@length@lst@belowskip \sol@length@lst@belowskip=2pt plus 0pt minus 2pt
 
 \def\sol@lst@style@prefix{sol@styles@lst@}
-\def\sol@lst@prebreak{\sol@font@fs@numbers\hbox{$\hookleftarrow$}} % allow definition of own symbol
+\def\sol@lst@prebreak{\hbox{\sol@font@fs@numbers$\hookleftarrow$}} % allow definition of own symbol
 \let\sol@lst@inline@prebreak\sol@lst@prebreak%
 
 % make switches for use of tcolorbox..
@@ -64,15 +64,18 @@
 % Encoding:
 \DeclareOption{encoding}{ \sol@encoding@true }
 \DeclareOption{noencoding}{ \sol@encoding@false }
+\sol@encoding@false
 % Numbers:
 \DeclareOption{hlnumbers}{ \sol@highlight@numbers@true } % will only disable
 \DeclareOption{nohlnumbers}{ \sol@highlight@numbers@false } % auto - highlight
+\sol@highlight@numbers@true
 % Printmodes
 \DeclareOption{defaultmode}{ \sol@printmode@false }% probably shouldn't be used
 \DeclareOption{print}{ \sol@printmode@true }%
 % Auto-Language
 \DeclareOption{loadlangs}{ \sol@defaultlang@true }%
 \DeclareOption{noloadlangs}{ \sol@defaultlang@false }%
+\sol@defaultlang@true
 % Color-Palettes
 \DeclareOption{cpalette}{ \sol@cpalette@true }%
 \DeclareOption{nocpalette}{ \sol@cpalette@false }%
@@ -82,6 +85,7 @@
 % guard
 \DeclareOption{guardspace}{ \sol@guardspace@true }%
 \DeclareOption{noguardspace}{ \sol@guardspace@false }%
+\sol@guardspace@true
 % numinpar
 \DeclareOption{numinpar}{ \sol@numinpar@true }%
 \DeclareOption{nonuminpar}{ \sol@numinpar@false }%
@@ -104,7 +108,6 @@
     \else\global\sol@printmode@false\fi%
 }
 
-\ExecuteOptions{noencoding,hlnumbers,loadlangs,guardspace}% set it explicitly
 \ProcessOptions\relax%
 
 \ifsol@debug@\let\sol@debug\typeout\else\let\sol@debug\@gobble\fi
@@ -153,7 +156,7 @@
 \def\sol@font@fs@normal{}
 \newcommand*{\lstfs}[2][1]{%
   \def\sol@font@fs@normal{\fontsize{#2}{#2}\selectfont\linespread{#1}}%
-  \ifnum#2>7\def\sol@font@fs@numbers{\edef\@@subfs{\the\numexpr #2-4\relax}\fontsize{\@@subfs}{\@@subfs}\selectfont\linespread{#1}}%
+  \ifnum#2>7\edef\sol@lst@@subfs{\the\numexpr #2-4\relax}\def\sol@font@fs@numbers{\fontsize{\sol@lst@@subfs}{\sol@lst@@subfs}\selectfont\linespread{#1}}%
   \else\def\sol@font@fs@numbers{\tiny\linespread{#1}}\fi%
 }
 
@@ -249,7 +252,7 @@
 %% Helper Functions
 %% -----------------------------------------------------------------------------
 \def\sol@font@size{\dimexpr\f@size pt\relax}
-\def\sol@thesolversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
+\def\sol@thesolversion#1#2#3#4\@nil{v#1.#2.#3#4}
 \def\thesolversion{%
  \edef\@tmp{\noexpand\sol@thesolversion\arabic{solversion}\noexpand\@nil}%
  \@tmp%
@@ -264,9 +267,7 @@
 % If possible we want to make the line numbers unmarkable, so you can copy
 % code without selecting them:
 \ifsol@accuspp@available@%
-\def\sol@lst@num@consume#1{%
-\BeginAccSupp{method=escape,ActualText={}}#1\EndAccSupp{}%
-}%
+\def\sol@lst@num@consume#1{\BeginAccSupp{method=escape,ActualText={}}#1\EndAccSupp{}}%
 \else\def\sol@lst@num@consume#1{#1}\fi
 % So if possible we will eat the number and produce unmarkable text
 
@@ -307,7 +308,7 @@
 \global\sol@lst@lastwas@charkeep@true#1\else\global\sol@lst@lastwas@charkeep@false%
   \ifnum\lst@mode=\lst@Pmode\relax% PMode: Not in any special Mode
   {\sol@style@get{numbers}#1}%
-  \else#1\fi\hbox{}%
+  \else#1\fi%
 \fi%
 %\fi
 \endgroup}
@@ -346,8 +347,7 @@
     \fi
     % gobble the replaced text
     \let\lst@next\lst@CArgEmptyGobble%
-  \fi
-  \lst@next}%
+  \fi \lst@next}%
   \@empty% splitter for constants
 \expandafter\lst@Literate%
 \fi}
@@ -519,41 +519,25 @@ draw command/.initial={sol@dlst@input} % will hold the name of the corresponding
 % on line:
 \lst@AddToHook{ExitVars}{\sol@guardend}
 
-% #1 Name
-% #2 Key
-% #3 In Extra
-% #4 Out Extra
-% #5 Language
+% #1 Name #2 Key #3 In Extra #4 Out Extra #5 Language
 \def\sol@NewLstEnvCore#1#2#3#4#5{%
 %This does already work, but has the drawback of not being able to provide the (wanted) different styles
 \lstnewenvironment{#1}[1][]{#3\lstset{##1}\sol@guardspace}{#4}%
 }
 
-% #1 Name
-% #2 Key
-% #3 In Extra
-% #4 Out Extra
-% #5 Language
+% #1 Name #2 Key #3 In Extra #4 Out Extra #5 Language
 \def\sol@NewLstEnvCoreStarred#1#2#3#4#5{%
 \lstnewenvironment{#1}[1][]{#3\lstset{style=nonum,##1}\sol@guardspace}{#4}%
 }
 
-% #1 Name
-% #2 Key
-% #3 In Extra
-% #4 Out Extra
-% #5 Language
+% #1 Name #2 Key #3 In Extra #4 Out Extra #5 Language
 \def\sol@NewLstEnvPlain#1#2#3#4#5{%
 \lstnewenvironment{#1}[1][]{#3\lstset{xleftmargin=\z@,xrightmargin=\z@,%
 numbers=none,numbersep=\z@,frame=none,%
 rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 }
 
-% #1 Name
-% #2 Key
-% #3 In Extra
-% #4 Out Extra
-% #5 Language
+% #1 Name #2 Key #3 In Extra #4 Out Extra #5 Language
 % NOTE: currently no opt arg, as \@ifnextchar breaks scanning of lst@next
 \def\sol@NewLstEnvPresent#1#2#3#4#5{%
 %\lstnewenvironment{#1}[1][]{\lstset{##1}#3}{#4}
