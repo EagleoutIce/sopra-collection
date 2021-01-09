@@ -61,7 +61,7 @@
     die Zeilennummern \say{unkopierbar} zu machen und so besser mit den Listings zu arbeiten
     und \T{listings} wird nur dann geladen, wenn \T{listingsutf8} nicht gefunden wird.}
 \begin{center}
-    Aktuell sind noch einige Dinge wie Optionen und weitere Umgebungen geplant. % TODO: autogobble?
+    Aktuell sind noch einige Dinge wie Optionen und weitere Umgebungen geplant.
 \end{center}
 
 \subsection{Die Installation}
@@ -109,7 +109,8 @@ Schriftgrößen von Listings anzupassen.
 Sichert nun auch die letzte Zeile eines Listings im Falle von \argref{guardspace}{noguardspace}.
 \paragraph{Version v1.0.19:}
 Kursive Schrift für Typewriter Schriftart wird nun sicherer angewendet. Ein paar ungenutzte Komfort-Funktionen wurden entfernt.
-
+\paragraph{Version v1.0.20:}
+Die Funktion \T{autogobble} wurde wieder entfernt, ebenso wurde die Paketstruktur intern überarbeite.
 % In Version \thesolversion{} (\cmdref{thesolversion}) gibt es (sonst) keine weiteren
 % Besonderheiten.
 
@@ -129,12 +130,12 @@ Kursive Schrift für Typewriter Schriftart wird nun sicherer angewendet. Ein paa
     Das Paket akzeptiert, so wie die meisten, Argumente.
     Bei Argumenten mit einer \say{Counter}-Option wird das jeweils standardmäßig aktive zuerst und das andere in Klammern
     geschrieben. So wird implizit:
-\begin{plainlatex}[autogobble]
-    \usepackage[noencoding,hlnumbers,loadlangs,guardspace]{sopra-listings}
+\begin{plainlatex}
+\usepackage[noencoding,hlnumbers,loadlangs,guardspace]{sopra-listings}
 \end{plainlatex}
     aufgerufen. Während mit:
-\begin{plainlatex}[autogobble]
-    \usepackage[noloadlangs]{sopra-listings}
+\begin{plainlatex}
+\usepackage[noloadlangs]{sopra-listings}
 \end{plainlatex}
     das automatische Laden gewisser Sprachen verhindert wird.
 
