@@ -146,7 +146,7 @@
 \fi
 \let\sol@ttfamily\ttfamily%
 
-\long\def\T#1{\bgroup\sol@ttfamily#1\egroup}
+\long\def\T#1{\ifmmode\mathtt{#1}\else\begingroup\sol@ttfamily#1\endgroup\fi}
 \robustify{\T}
 
 \def\sol@font@fs@numbers{\footnotesize}
