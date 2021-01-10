@@ -194,15 +194,14 @@
 % define the styling definitions
 % as we don't know, if 'foreach' is available, we will built our own iter:
 \def\sol@lst@style@iter@step#1: #2\@nil{%
-\ifx!#1!\else%
+\ifx!#1!\else
   \expandafter\gdef\csname#1\endcsname{#2}%
 \fi}
 
 \def\sol@lst@style@iter#1,#2\@nil{%
-\ifx!#1!\else%
+\ifx!#1!\else
   \sol@lst@style@iter@step\sol@lst@style@prefix#1\@nil%
-  \ifx!#2!\else\sol@lst@style@iter#2,\@nil\fi% recursion
-\fi}
+  \ifx!#2!\else\sol@lst@style@iter#2,\@nil\fi\fi}
 
 \def\solSetStyle#1#2{\expandafter\gdef\csname\sol@lst@style@prefix#1\endcsname{#2}}
 
@@ -241,7 +240,7 @@
 
 \ifsol@lst@style@upshape@
 \sol@list@define@styles{%
- {basic: \color{black}\sol@ttfamily\upshape},%
+ {basic: \sol@ttfamily\upshape},%
 }
 \fi
 
@@ -387,11 +386,11 @@
 % please note, that they will apply under every condition!
 \newcommand{\sol@dlst@default}[2][]{%
 \begingroup\fboxsep=\z@\fcolorbox{sol@colors@border}{sol@colors@background}{%
-  \thinspace\strut\lstinline[#1,keepspaces=true,prebreak=\sol@lst@inline@prebreak]`#2`\thinspace%
+  \thinspace\strut\lstinline[keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak,#1]`#2`\thinspace%
 }\endgroup}
 
 \newcommand{\sol@dlst@blank}[2][]{%
-\begingroup\thinspace\strut\lstinline[#1,keepspaces=true,prebreak=\sol@lst@inline@prebreak]`#2`\endgroup}
+\begingroup\thinspace\strut\lstinline[keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak,#1]`#2`\endgroup}
 
 \newcommand*{\sol@dlst@input}[2][]{\begingroup\lstinputlisting[#1]{#2}\endgroup}
 
