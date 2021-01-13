@@ -771,4 +771,13 @@ keepspaces=false}
 \colorlet{solwarning}{yellow!90!red}
 \def\solcustom{purple}
 \fi
+
+
+
+% only pmode
+%% -----------------------------------------------------------------------------
+%% Comfort guards
+%% -----------------------------------------------------------------------------
+\def\solIfPmode#1#2{\ifnum\lst@mode=\lst@Pmode #1\else#2\fi}
+
 \endinput
