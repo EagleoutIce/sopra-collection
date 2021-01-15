@@ -386,11 +386,11 @@
 % please note, that they will apply under every condition!
 \newcommand{\sol@dlst@default}[2][]{%
 \begingroup\fboxsep=\z@\fcolorbox{sol@colors@border}{sol@colors@background}{%
-  \thinspace\strut\lstinline[keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak,#1]`#2`\thinspace%
+  \thinspace\strut\lstinline[#1,keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak]`#2`\thinspace%
 }\endgroup}
 
 \newcommand{\sol@dlst@blank}[2][]{%
-\begingroup\thinspace\strut\lstinline[keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak,#1]`#2`\endgroup}
+\begingroup\thinspace\strut\lstinline[#1,keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak]`#2`\endgroup}
 
 \newcommand*{\sol@dlst@input}[2][]{\begingroup\lstinputlisting[#1]{#2}\endgroup}
 
@@ -627,7 +627,9 @@ breaklines    = true,
 extendedchars = true,
 prebreak      = {\sol@lst@prebreak},
 % escapes:
-escapeinside = {!*}{*!}}
+escapeinside = {!*}{*!},
+% space control
+keepspaces=false}
 
 %% -----------------------------------------------------------------------------
 %% Always present 'void'-Language
