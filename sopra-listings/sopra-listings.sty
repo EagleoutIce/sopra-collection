@@ -743,10 +743,9 @@ keepspaces=false}
 }
 
 %% -----------------------------------------------------------------------------
-%% Highlightssupport
+%% Highlights support
 %% -----------------------------------------------------------------------------
 \ifsol@lst@style@highlights@
-
 \newenvironment{sol@listings@highlight@env}[1][]
 {\begingroup\tikzset{sol@listings@highlight/.style={#1}}\begin{lrbox}{\@tempboxa}}
 {\end{lrbox}\sol@highlights@box[sol@listings@highlight]{\@tempboxa}\endgroup}
@@ -781,4 +780,7 @@ keepspaces=false}
 %% -----------------------------------------------------------------------------
 \def\solIfPmode#1#2{\ifnum\lst@mode=\lst@Pmode #1\else#2\fi}
 
+%% -----------------------------------------------------------------------------
+%% AddKEywords
+%% -----------------------------------------------------------------------------
 \endinput
