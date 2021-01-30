@@ -362,7 +362,7 @@
   {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1 {ø}{{\o}}1 {€}{{\euro}}1 {£}{{\pounds}}1
   %{ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
   %{ç}{{\c c}}1 {Ç}{{\c C}}1 {å}{{\r a}}1 {Å}{{\r A}}1
-  {«}{{\guillemotleft}}1 {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+  %{«}{{\guillemotleft}}1 {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
   {:bs:}{{\color{sol@colors@lst@keywordA}\textbackslash\normalcolor}}1 {:bmath:}{{\sol@style@get{numbers}\$\normalcolor}}1 {:percent:}{{\%}}1
   {:emath:}{{{\sol@style@get{numbers}\$\normalcolor}}}1 {:dollar:}{{{\sol@style@get{numbers}\$\normalcolor}}}1 {:plaindollar:}{{\$}}1%spaces
   %% brace fix
@@ -385,29 +385,20 @@
 %% Basic and internal highlighting definitions
 %% -----------------------------------------------------------------------------
 % please note, that they will apply under every condition!
-\newcommand{\sol@dlst@default}[2][]{%
+\newcommand*{\sol@dlst@default}[2][]{%
 \begingroup\fboxsep=\z@\fcolorbox{sol@colors@border}{sol@colors@background}{%
   \thinspace\strut\lstinline[#1,keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak]`#2`\thinspace%
 }\endgroup}
 
-\newcommand{\sol@dlst@blank}[2][]{%
+\newcommand*{\sol@dlst@blank}[2][]{%
 \begingroup\thinspace\strut\lstinline[#1,keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak]`#2`\endgroup}
 
 \newcommand*{\sol@dlst@input}[2][]{\begingroup\lstinputlisting[#1]{#2}\endgroup}
 
 %% -----------------------------------------------------------------------------
-%% Numbers and padding stuff
-%% -----------------------------------------------------------------------------
-\def\sol@penalties@lst@sloppy{\tolerance=9999 \emergencystretch=3em \hfuzz=.5cm \vfuzz\hfuzz}%
-
-\def\sol@penalties@lst@fussy{\emergencystretch=0em \tolerance=200 \hfuzz=.1pt \vfuzz\hfuzz}
-
-% \sol@penalties@lst@sloppy
-
-%% -----------------------------------------------------------------------------
 %% Lst styles that will be shipped in each case
 %% -----------------------------------------------------------------------------
-\lstdefinestyle{nonum}{xleftmargin=3pt,xrightmargin=3pt,%will fix some overhead :D
+\lstdefinestyle{sol@nonum}{xleftmargin=3pt,xrightmargin=3pt,%will fix some overhead :D
 numbers=none,numbersep=\z@}
 
 %% -----------------------------------------------------------------------------
@@ -423,7 +414,7 @@ numbers=none,numbersep=\z@}
 {\def\sol@lst@backcol{MudWhite}}
 
 \lstnewenvironment{lstnonum}[1][]
-  {\lstset{style=nonum,#1}}{}
+  {\lstset{style=sol@nonum,#1}}{}
 
 %% -----------------------------------------------------------------------------
 %% Here we will handle the language-control - right now, tcb will not be used
@@ -525,7 +516,7 @@ draw command/.initial={sol@dlst@input} % will hold the name of the corresponding
 
 % #1 Name #2 Key #3 In Extra #4 Out Extra #5 Language
 \def\sol@NewLstEnvCoreStarred#1#2#3#4#5{%
-\lstnewenvironment{#1}[1][]{#3\lstset{style=nonum,##1}\sol@guardspace}{#4}%
+\lstnewenvironment{#1}[1][]{#3\lstset{style=sol@nonum,##1}\sol@guardspace}{#4}%
 }
 
 % #1 Name #2 Key #3 In Extra #4 Out Extra #5 Language
@@ -657,7 +648,7 @@ keepspaces=false}
 \def\sol@LoadLanguage@searchPath@resolve%
 {% empty-case
 \InputIfFileExists{language_\sol@curlanginputfile.cfg}{
-  \typeout{Loaded '\sol@curlanginputfile' from 'language_\sol@curlanginputfile.cfg'}
+  \typeout{Loaded '\sol@curlanginputfile' (language_\sol@curlanginputfile.cfg)}
 }{\expandafter\sol@LoadLanguage@searchPath@iter\solLanguageSearchPath,\@nil}}
 
 \def\sol@LoadLanguage@single#1\@nil{\def\sol@curlanginputfile{#1}\sol@LoadLanguage@searchPath@resolve{}}
@@ -772,15 +763,10 @@ keepspaces=false}
 \def\solcustom{purple}
 \fi
 
-
-
 % only pmode
 %% -----------------------------------------------------------------------------
 %% Comfort guards
 %% -----------------------------------------------------------------------------
 \def\solIfPmode#1#2{\ifnum\lst@mode=\lst@Pmode #1\else#2\fi}
 
-%% -----------------------------------------------------------------------------
-%% AddKEywords
-%% -----------------------------------------------------------------------------
 \endinput
