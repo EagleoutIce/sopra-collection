@@ -523,7 +523,7 @@ draw command/.initial={sol@dlst@input} % will hold the name of the corresponding
 \def\sol@NewLstEnvPlain#1#2#3#4#5{%
 \lstnewenvironment{#1}[1][]{#3\lstset{xleftmargin=\z@,xrightmargin=\z@,%
 numbers=none,numbersep=\z@,frame=none,%
-rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
+rulecolor={},backgroundcolor={},##1}\sol@guardspace}{\vspace*{-\parskip}#4}%
 }
 
 % #1 Name #2 Key #3 In Extra #4 Out Extra #5 Language
@@ -774,4 +774,5 @@ keepspaces=false}
 %% -----------------------------------------------------------------------------
 \colorlet{sol@breakcolor}{gray}
 \preto\lst@@discretionary{\color{sol@breakcolor}}
+\appto\lst@@discretionary{\normalcolor}
 \endinput
