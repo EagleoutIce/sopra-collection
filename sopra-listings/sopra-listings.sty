@@ -145,8 +145,8 @@
 \AtEndPreamble{\RequirePackage{AnonymousPro}}%
 \def\ttdefault{AnonymousPro}%
 \fi
-\let\sol@ttfamily\ttfamily%
 
+\let\sol@ttfamily\ttfamily%
 \let\T\texttt
 
 \def\sol@font@fs@numbers{\footnotesize}
@@ -774,4 +774,5 @@ keepspaces=false}
 %% -----------------------------------------------------------------------------
 \colorlet{sol@breakcolor}{gray}
 \preto\lst@@discretionary{\color{sol@breakcolor}}
+\appto\lst@@discretionary{\normalcolor}
 \endinput
