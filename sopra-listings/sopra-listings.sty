@@ -15,7 +15,7 @@
 %% -----------------------------------------------------------------------------
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
-\newcounter{solversion} \setcounter{solversion}{1020}
+\newcounter{solversion} \setcounter{solversion}{1021}
 
 % note this will be used with tcb:
 \newlength\sol@length@lst@outer@spacing \sol@length@lst@outer@spacing=3pt
@@ -25,7 +25,6 @@
 \newlength\sol@length@lst@xleftmargin \sol@length@lst@xleftmargin=3pt
 \newlength\sol@length@lst@xrightmargin \sol@length@lst@xrightmargin=3pt
 
-\def\sol@lst@style@prefix{sol@styles@lst@}
 \def\sol@lst@prebreak{\hbox{\sol@font@fs@numbers$\hookleftarrow$}} % allow definition of own symbol
 \let\sol@lst@inline@prebreak\sol@lst@prebreak%
 
@@ -201,41 +200,41 @@
 
 \def\sol@lst@style@iter#1,#2\@nil{%
 \ifx!#1!\else
-  \sol@lst@style@iter@step\sol@lst@style@prefix#1\@nil%
+  \sol@lst@style@iter@step sol@styles@lst@#1\@nil%
   \ifx!#2!\else\sol@lst@style@iter#2,\@nil\fi\fi}
 
-\def\solSetStyle#1#2{\expandafter\gdef\csname\sol@lst@style@prefix#1\endcsname{#2}}
+\def\solSetStyle#1#2{\expandafter\gdef\csname sol@styles@lst@#1\endcsname{#2}}
 
 \def\sol@list@define@styles#1{\sol@lst@style@iter#1,\@nil}
 % we will write the colors anyway. This way it is easy visible on how to change the
 % styles. Will define e.g. \sol@styles@lst@keywo
 \ifsol@printmode@
 \sol@list@define@styles{%
- {keywordA:    \color{sol@colors@lst@keywordA}\bfseries},%
- {keywordB:    \color{sol@colors@lst@keywordB}},%
- {keywordC:    \color{sol@colors@lst@keywordC}},%
+ {keywordA:    \@declaredcolor{sol@colors@lst@keywordA}\bfseries},%
+ {keywordB:    \@declaredcolor{sol@colors@lst@keywordB}},%
+ {keywordC:    \@declaredcolor{sol@colors@lst@keywordC}},%
  {keywordD:    \itshape},%
- {numbers:     \color{sol@colors@lst@numbers}\itshape},%
- {linenumbers: \color{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
- {literals:    \color{sol@colors@lst@literals}\itshape},%
- {comments:    \color{sol@colors@lst@comments}},% \scshape
- {highlight:   \color{sol@colors@lst@highlight}\itshape},%
+ {numbers:     \@declaredcolor{sol@colors@lst@numbers}\itshape},%
+ {linenumbers: \@declaredcolor{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
+ {literals:    \@declaredcolor{sol@colors@lst@literals}\itshape},%
+ {comments:    \@declaredcolor{sol@colors@lst@comments}},% \scshape
+ {highlight:   \@declaredcolor{sol@colors@lst@highlight}\itshape},%
  {basic:       \sol@ttfamily},%
- {command:     \color{sol@colors@lst@command}}%
+ {command:     \@declaredcolor{sol@colors@lst@command}}%
 }
 \else
 \sol@list@define@styles{%
- {keywordA:    \color{sol@colors@lst@keywordA}},%
- {keywordB:    \color{sol@colors@lst@keywordB}},%
- {keywordC:    \color{sol@colors@lst@keywordC}},%
+ {keywordA:    \@declaredcolor{sol@colors@lst@keywordA}},%
+ {keywordB:    \@declaredcolor{sol@colors@lst@keywordB}},%
+ {keywordC:    \@declaredcolor{sol@colors@lst@keywordC}},%
  {keywordD:    \itshape},%
- {numbers:     \color{sol@colors@lst@numbers}},%
- {linenumbers: \color{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
- {literals:    \color{sol@colors@lst@literals}},%
- {comments:    \color{sol@colors@lst@comments}},%
- {highlight:   \color{sol@colors@lst@highlight}\itshape},%
+ {numbers:     \@declaredcolor{sol@colors@lst@numbers}},%
+ {linenumbers: \@declaredcolor{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
+ {literals:    \@declaredcolor{sol@colors@lst@literals}},%
+ {comments:    \@declaredcolor{sol@colors@lst@comments}},%
+ {highlight:   \@declaredcolor{sol@colors@lst@highlight}\itshape},%
  {basic:       \sol@ttfamily},%
- {command:     \color{sol@colors@lst@command}}%
+ {command:     \@declaredcolor{sol@colors@lst@command}}%
 }
 \fi
 
@@ -271,7 +270,7 @@
 % Here we will make a small rainbow to present the selected color-theme :D
 \def\sol@lst@showstyles@iter#1,#2\@nil{%
 \ifx!#1!\else%
- {\sol@style@get{basic}\sol@style@get{#1}#1\space}%
+ {\sol@style@get{#1}#1\space}%
  \ifx!#2!\else\sol@lst@showstyles@iter#2,\@nil\fi% recursion
 \fi%
 }
@@ -280,7 +279,7 @@
 \def\solStyles{\sol@lst@showstyles{basic,keywordA,keywordB,keywordC,keywordD,numbers,linenumbers,literals,comments,highlight}}
 
 \def\sol@style@get#1{%
-\csname\sol@lst@style@prefix basic\endcsname\csname\sol@lst@style@prefix#1\endcsname%
+\sol@styles@lst@basic\csname sol@styles@lst@#1\endcsname%
 }
 \long\def\solGet#1#2{\begingroup\solGetStyle{#1}#2\endgroup}
 \let\solGetStyle\sol@style@get
@@ -344,7 +343,7 @@
     \fi
     % gobble the replaced text
     \let\lst@next\lst@CArgEmptyGobble%
-  \fi \lst@next}%
+  \fi\lst@next}%
   \@empty% splitter for constants
 \expandafter\lst@Literate%
 \fi}
@@ -353,24 +352,24 @@
 %% The basic literate table
 %% -----------------------------------------------------------------------------
 \lstset{literate=%
-  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {Á}{{\'A}}1 {É}{{\'E}}1
+  % {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {Á}{{\'A}}1 {É}{{\'E}}1
   {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1 {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1
   {ù}{{\`u}}1 {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1 {ä}{{\"a}}1
   {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1 {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1
   {Ö}{{\"O}}1 {Ü}{{\"U}}1 {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
-  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1 {œ}{{\oe}}1 {Œ}{{\OE}}1
+  % {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1 {œ}{{\oe}}1 {Œ}{{\OE}}1
   {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1 {ø}{{\o}}1 {€}{{\euro}}1 {£}{{\pounds}}1
   %{ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
   %{ç}{{\c c}}1 {Ç}{{\c C}}1 {å}{{\r a}}1 {Å}{{\r A}}1
   %{«}{{\guillemotleft}}1 {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
-  {:bs:}{{\color{sol@colors@lst@keywordA}\textbackslash\normalcolor}}1 {:bmath:}{{\sol@style@get{numbers}\$\normalcolor}}1 {:percent:}{{\%}}1
+  {:bs:}{{\@declaredcolor{sol@colors@lst@keywordA}\textbackslash\normalcolor}}1 {:bmath:}{{\sol@style@get{numbers}\$\normalcolor}}1 {:percent:}{{\%}}1
   {:emath:}{{{\sol@style@get{numbers}\$\normalcolor}}}1 {:dollar:}{{{\sol@style@get{numbers}\$\normalcolor}}}1 {:plaindollar:}{{\$}}1%spaces
   %% brace fix
   {:space:}{{{ }}}1 {:ws:}{{{ }}}1 {:cdots:}{{{$\cdots$}}}1 {:cdot:}{{{$\cdot$}}}1 {:ldots:}{{{\ldots}}}1 {:!:}{{{!}}}1
   {:c:}{{{}}}0 {:star:}{{*}}1 {:minus:}{{-}}1
   {:float:}{{{\sol@style@get{numbers}f\normalcolor}}}1 {:exp:}{{{\sol@style@get{numbers}e\normalcolor}}}1 {:yields:}{{{$\rightarrow$}}}1%
-  {:lan:}{{{$\langle\mskip\thinmuskip$}}}1 {:ran:}{{{$\mskip\thinmuskip\rangle$}}}1 {:to:}{{{$\to$}}}1%
-  {:bcmd:}{\color{sol@colors@lst@keywordA}\textbackslash\normalcolor}1 {:ecmd:}{\normalcolor}0
+  {:lan:}{{{$\langle$\thinspace}}}1 {:ran:}{{{\thinspace$\rangle$}}}1 {:to:}{{{$\to$}}}1%
+  {:bcmd:}{\@declaredcolor{sol@colors@lst@keywordA}\textbackslash\normalcolor}1 {:ecmd:}{\normalcolor}0
   {0}{{{\sol@dgt{0}}}}1
   {1}{{{\sol@dgt{1}}}}1 {2}{{{\sol@dgt{2}}}}1 {3}{{{\sol@dgt{3}}}}1
   {4}{{{\sol@dgt{4}}}}1 {5}{{{\sol@dgt{5}}}}1 {6}{{{\sol@dgt{6}}}}1
@@ -598,26 +597,24 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 % background and border, the frame
 frame           = single,
 framerule       = \sol@length@lst@famerule,
-rulecolor       = \color{sol@colors@border},
-backgroundcolor = \color{sol@colors@background},
+rulecolor       = \@declaredcolor{sol@colors@border},
+backgroundcolor = \@declaredcolor{sol@colors@background},
 xleftmargin     = \sol@length@lst@xleftmargin,
 xrightmargin    = \sol@length@lst@xrightmargin,
 % the 'key'-styles:
-stringstyle  = {\sol@style@get{literals}},
-commentstyle = {\sol@style@get{comments}},
-keywordstyle = {\sol@style@get{keywordA}},
-keywordstyle = [2]{\sol@style@get{keywordB}},
-keywordstyle = [3]{\sol@style@get{keywordC}},
-keywordstyle = [4]{\sol@style@get{keywordD}},
-basicstyle   = {\sol@style@get{basic}},
+stringstyle  = \sol@styles@lst@basic\sol@styles@lst@literals,
+commentstyle = \sol@styles@lst@basic\sol@styles@lst@comments,
+keywordstyle = \sol@styles@lst@basic\sol@styles@lst@keywordA,
+keywordstyle = [2]{\sol@styles@lst@basic\sol@styles@lst@keywordB},
+keywordstyle = [3]{\sol@styles@lst@basic\sol@styles@lst@keywordC},
+keywordstyle = [4]{\sol@styles@lst@basic\sol@styles@lst@keywordD},
+basicstyle   = \sol@styles@lst@basic,
 % line numbers:
-numbers     = left,
-numbersep   = \sol@length@lst@numsep,
-numberstyle = \sol@style@get{linenumbers},
+numbers     = left, numbersep   = \sol@length@lst@numsep,
+numberstyle = \sol@styles@lst@basic\sol@styles@lst@linenumbers,
 % line break:
-breaklines    = true,
-extendedchars = true,
-prebreak      = {\sol@lst@prebreak},
+breaklines    = true, extendedchars = true,
+prebreak      = \sol@lst@prebreak,
 % escapes:
 escapeinside = {!*}{*!},
 % space control
@@ -773,6 +770,6 @@ keepspaces=false}
 %% Hook discretionary
 %% -----------------------------------------------------------------------------
 \colorlet{sol@breakcolor}{gray}
-\preto\lst@@discretionary{\color{sol@breakcolor}}
+\preto\lst@@discretionary{\@declaredcolor{sol@breakcolor}}
 \appto\lst@@discretionary{\normalcolor}
 \endinput
