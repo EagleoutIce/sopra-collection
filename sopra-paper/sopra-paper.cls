@@ -192,10 +192,10 @@
 \else \selectcolormodel{rgb}\fi %\maskcolors[cmy]{gray} \fi
 
 % some styling commands
-\long\def\sop@@imptext#1{\bgroup\slshape\color{cimportant}#1\egroup}
+\long\def\sop@@imptext#1{\begingroup\slshape\color{cimportant}#1\endgroup}
 \let\imptext\sop@@imptext
 
-\long\def\sop@@notetext#1{\bgroup\itshape\color{cprimary!70!white}#1\egroup}
+\long\def\sop@@notetext#1{\begingroup\itshape\color{cprimary!70!white}#1\endgroup}
 \let\notetext\sop@@notetext
 
 % lengthts:
@@ -213,7 +213,7 @@
 %% -----------------------------------------------------------------------------
 
 \def\sop@thesopversion#1#2#3#4\@nil{%
-    \bgroup{}v#1.#2.#3#4\egroup%
+    \begingroup{}v#1.#2.#3#4\endgroup%
 }
 \def\thesopversion{%
     \edef\@tmp{\noexpand\sop@thesopversion\arabic{sopversion}\noexpand\@nil}%
@@ -229,7 +229,7 @@
 }
 
 \def\sop@date@convert#1-#2-#3\@nil{%
-    \bgroup#3.\space{\sop@month@to@name{#2}}\space{} #1\egroup%
+    \begingroup#3.\space{\sop@month@to@name{#2}}\space{} #1\endgroup%
 }
 \def\DateConvert#1%
 {\expandafter\ifx\expandafter\\#1\\\else\expandafter\sop@date@convert#1\@nil\fi}
@@ -269,9 +269,9 @@
 \let\addAuthor\sop@@add@author
 
 \ifsop@showmail@
-\def\sop@@parse@author#1 (#2)\@nil{\bgroup#1 (\mail{#2})\egroup}
+\def\sop@@parse@author#1 (#2)\@nil{\begingroup#1 (\mail{#2})\endgroup}
 \else
-\def\sop@@parse@author#1 (#2)\@nil{\bgroup\href{mailto:#2}{#1}\egroup}
+\def\sop@@parse@author#1 (#2)\@nil{\begingroup\href{mailto:#2}{#1}\endgroup}
 \fi
 \def\sop@@typeset@author#1{%
     \setcounter{sop@counter@tmp@a}{0}% start with an offset
@@ -471,7 +471,7 @@
 %% -----------------------------------------------------------------------------
 
 % \input RoyalIn.fd
-% \def\sop@font@roya#1{\bgroup\usefont{U}{RoyalIn}{xl}{n}#1\egroup}
+% \def\sop@font@roya#1{\begingroup\usefont{U}{RoyalIn}{xl}{n}#1\endgroup}
 
 \def\sop@sepline{%
     {\color{cakzent}{\Huge$\llap{$\diamond$}\hspace*{-1pt}$}\rule[0.41\baselineskip]{\linewidth}{0.55pt}{\Huge$\hspace*{-1pt}\rlap{$\diamond$}$}}%
@@ -622,10 +622,10 @@
 }
 
 \def\sop@font@futura@letter@Y{
-    \bgroup\def\sop@scaler{*0.75}
+    \begingroup\def\sop@scaler{*0.75}
         \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) ++(65mm\sop@scaler,56mm) --++(0,-56mm) -| ++(43mm\sop@scaler,62mm) -- ++(-65mm\sop@scaler,132mm-62mm) -- ++(-43mm\sop@scaler,0) -- cycle; % TBlock
         \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) ++(65mm\sop@scaler,132mm) -- ++(45mm\sop@scaler,-50mm) --  ++(45mm\sop@scaler,50mm) --cycle; % upper right triangle
-    \egroup
+    \endgroup
     \addtocounter{sop@counter@font@carriage@posX}{12}
 }
 
@@ -706,7 +706,7 @@
         % Set The Author
         \begin{minipage}{0.6\linewidth}\footnotesize\color{ctpsymbol}
             \expandafter\ifx\expandafter\\\sop@register@duedate\\\else
-                \bgroup\hbox{}\quad\scriptsize\DateConvert{\sop@register@duedate}\sop@AfterDate\egroup\\[-0.2\baselineskip]%
+                \begingroup\hbox{}\quad\scriptsize\DateConvert{\sop@register@duedate}\sop@AfterDate\endgroup\\[-0.2\baselineskip]%
             \fi
             {\color{ctpsymbol}$\Large\llap{$\diamond$}\hspace*{-1pt}$\rule[0.275\baselineskip]{0.45\linewidth}{0.55pt}\\}%
             \ignorespaces{{\bfseries{}Bearbeitung:}}\\
@@ -728,14 +728,14 @@
             % \fill[cakzent,rotate around={45:(olive)},] (olive) ellipse (9mm and 8.15mm);
             % here we will plant the group-Tag at the 007 position, having a lot of fun :D
     \end{tikzpicture}
-    \hbox{}\vfill\bgroup\scriptsize
+    \hbox{}\vfill\begingroup\scriptsize
     \begin{flushright}
         \parbox{9cm}{
         \textbf{\(-\,\)\DateConvert{2019-12-15}\(\,-\)}\\
         \color{cprimary}Dieses Layout wurde für das Softwaregrundprojekt
         im Wintersemester 2019/2020 von Florian Sihler im Rahmen des
         Informatikstudiums an der Universität Ulm vollständig in \LaTeXe{} erstellt.}
-    \end{flushright}\egroup
+    \end{flushright}\endgroup
     %\ifsop@usebook@\else\clearpage\fi
     \clearpage
 }
@@ -752,7 +752,7 @@
     \section*{\contentsname}\relax%
     \markright{I, \xcontentname}
     \ifx\\#1\\\else\vspace*{-\topsep}#1\par\fi%
-    \bgroup\@starttoc{toc}\egroup%
+    \begingroup\@starttoc{toc}\endgroup%
 }\fi
 
 %% -----------------------------------------------------------------------------

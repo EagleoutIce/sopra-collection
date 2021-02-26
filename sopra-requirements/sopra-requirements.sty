@@ -3,7 +3,7 @@
 %% -----------------------------------------------------------------------------
 %% Version: 1.0
 %% Author:  Florian Sihler, 03.12.2019
-%% 
+%%
 %% Will contain all the definitions to easily typeset and reference
 %% Functional-, Qualitative- and other Requirements.
 
@@ -93,7 +93,7 @@
 %% Fixes for the tabu-package
 %% -----------------------------------------------------------------------------
 
-\ifsor@usetabu@ 
+\ifsor@usetabu@
 \def\tabu@classz{%
     %  \ifx\tabu@prepnext@tok\prepnext@tok% in tabu
         %    \expandafter\tabu@classz@oldarray
@@ -108,7 +108,7 @@
 %% Define the Header and next-header commands
 %% -----------------------------------------------------------------------------
 
-\ifsor@usetabu@ 
+\ifsor@usetabu@
     \def\sor@table@headerrow{%
         \rowfont{\normalfont\bfseries\leavevmode\sor@table@headerstyle}%
         \rowcolor{HeaderColor}\@ifstar{}{\Gape[0.5mm][0.25mm]{}}%
@@ -154,14 +154,14 @@
 }
 
 % #1: check for given if not forced
-% #2: 
+% #2:
 \long\def\sor@showifgivenorforced#1#2{%
     \ifsor@showall@#2\else\expandafter\ifx\expandafter\\#1\\\else#2\fi\fi%
 }
 
 % \ifcase#1 Unwichtig\or Niedrig\or Nett\or Neutral\or Wichtig\or Elementar\else Nicht angegeben\fi
 % \colorlet{sor@color@star}{HeaderColor}
-\def\sor@setpriority#1{\bgroup\ifnum#1<0\else\color{HeaderColor}\foreach \i in {5,...,1}{\ifnum\i<5\relax \,\fi\ifnum\i>#1\relax \faStarO\else\faStar\fi}\fi\egroup}
+\def\sor@setpriority#1{\begingroup\ifnum#1<0\else\color{HeaderColor}\foreach \i in {5,...,1}{\ifnum\i<5\relax \,\fi\ifnum\i>#1\relax \faStarO\else\faStar\fi}\fi\endgroup}
 \let\sorSetPriority\sor@setpriority
 
 %% -----------------------------------------------------------------------------
@@ -234,7 +234,7 @@
                 \preqref*{\@sor@dpc}%
             }}% \\}
         \end{longtabu}%
-        \else\bgroup\renewcommand{\arraystretch}{1.25}
+        \else\begingroup\renewcommand{\arraystretch}{1.25}
         \begin{longtable}{>{~}KV<{~}}
             % init the headerrow
             \toprule%
@@ -250,7 +250,7 @@
                 \preqref*{\@sor@dpc}%
             }\\}% \\}
             \bottomrule
-        \end{longtable}\egroup\fi\smallskip%
+        \end{longtable}\endgroup\fi\smallskip%
     }%\par%
 }%
 
@@ -262,7 +262,7 @@
 %       change that so he following commands will have some funny schduff
 
 \def\sor@thesorversion#1#2#3#4\@nil{%
-    \bgroup{}v#1.#2.#3#4\egroup%
+    \begingroup{}v#1.#2.#3#4\endgroup%
 }
 \def\thesorversion{%
     \edef\@tmp{\noexpand\sor@thesorversion\arabic{sorversion}\noexpand\@nil}%

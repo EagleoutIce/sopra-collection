@@ -4,7 +4,7 @@
 %% Version: 1.0
 %% Author:  Florian Sihler, 15.12.2019
 %%
-%% This LaTeX2e Class provides a beamer-based-class setting all necessary 
+%% This LaTeX2e Class provides a beamer-based-class setting all necessary
 %% stuff in a one-file solution. It is to be used in all Team020
 %% presentations
 %%                      ulm university, WiSe2019
@@ -88,7 +88,7 @@
 %% -----------------------------------------------------------------------------
 
 \def\sos@thesosversion#1#2#3#4\@nil{%
-    \bgroup{}v#1.#2.#3#4\egroup%
+    \begingroup{}v#1.#2.#3#4\endgroup%
 }
 \def\thesosversion{%
     \edef\@tmp{\noexpand\sos@thesosversion\arabic{sosversion}\noexpand\@nil}%
@@ -104,16 +104,16 @@
 }
 
 \def\sos@date@convert#1-#2-#3\@nil{%
-    \bgroup#3.\(\;\){\sos@month@to@name{#2}}\(\;\,\)#1\egroup%
+    \begingroup#3.\(\;\){\sos@month@to@name{#2}}\(\;\,\)#1\endgroup%
 }
 \def\DateConvert#1%
 {\expandafter\ifx\expandafter\\#1\\\else\expandafter\sos@date@convert#1\@nil\fi}
 
 % some styling commands
-\long\def\sos@@imptext#1{\bgroup\slshape\color{cimportant}#1\egroup}
+\long\def\sos@@imptext#1{\begingroup\slshape\color{cimportant}#1\endgroup}
 \let\imptext\sos@@imptext
 
-\long\def\sos@@notetext#1{\bgroup\itshape\color{cprimary!70!white}#1\egroup}
+\long\def\sos@@notetext#1{\begingroup\itshape\color{cprimary!70!white}#1\endgroup}
 \let\notetext\sos@@notetext
 
 %% -----------------------------------------------------------------------------
@@ -270,7 +270,7 @@
 }
 \let\addAuthor\sos@@add@author
 
-\def\sos@@parse@author#1 (#2)\@nil{\bgroup\href{mailto:#2}{#1}\egroup}
+\def\sos@@parse@author#1 (#2)\@nil{\begingroup\href{mailto:#2}{#1}\endgroup}
 
 \def\sos@@typeset@author#1{%
     \setcounter{sos@counter@tmp@a}{0}% start with an offset
@@ -416,10 +416,10 @@
 }
 
 \def\sos@font@futura@letter@Y{
-    \bgroup\def\sos@scaler{*0.75}
+    \begingroup\def\sos@scaler{*0.75}
         \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) ++(65mm\sos@scaler,56mm) --++(0,-56mm) -| ++(43mm\sos@scaler,62mm) -- ++(-65mm\sos@scaler,132mm-62mm) -- ++(-43mm\sos@scaler,0) -- cycle; % TBlock
         \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) ++(65mm\sos@scaler,132mm) -- ++(45mm\sos@scaler,-50mm) --  ++(45mm\sos@scaler,50mm) --cycle; % upper right triangle
-    \egroup
+    \endgroup
     \addtocounter{sos@counter@font@carriage@posX}{12}
 }
 
@@ -471,14 +471,14 @@
                 {\tiny\hbox{}\expandafter\ifx\expandafter\\\sos@register@groupnum\\\else\quad Team\(\;\)\sos@register@groupnum\fi\hfill\DateConvert{\sos@register@duedate}\hbox{}\quad\hbox{}}\\[-0.6\baselineskip]
             \sos@sepline
             \begin{center}
-                \strut\inserttitle\vspace*{-0.5\topsep}    
+                \strut\inserttitle\vspace*{-0.5\topsep}
             \end{center}
             \sos@sepline
             \begin{center}
                 \usebeamerfont{subtitle}
                 \vspace*{-\topsep}
                 {\strut\insertsubtitle}
-            \end{center}            
+            \end{center}
             \end{minipage}
         };
         % place the seplines
@@ -499,9 +499,9 @@
     \begin{frame}[noframenumbering,plain]
         \titlepage
     \end{frame}
-    
+
     \InformationPage
-    
+
     \begin{frame}[c]{Inhaltsübersicht}
         \begin{center}
             \begin{columns}
@@ -584,7 +584,7 @@
     \begin{tikzpicture}[remember picture,overlay]
         \expandafter\ifx\expandafter\\\insertsectionhead\\\else%
         \expandafter\ifx\expandafter\\\insertsubsectionhead\\\else%
-            \node[above right,yshift=0.1cm,scale=0.6,opacity=0.7] at (current page.south west) {\strut\bgroup\insertsectionhead\egroup\;--\;\bgroup\insertsubsectionhead\egroup};
+            \node[above right,yshift=0.1cm,scale=0.6,opacity=0.7] at (current page.south west) {\strut\begingroup\insertsectionhead\endgroup\;--\;\begingroup\insertsubsectionhead\endgroup};
         \fi\fi
         \fill[cprimary] (current page.south west) rectangle ($(current page.south east)+(0,1mm)$);
         \pgfmathsetmacro\curprocess{(\thepage-2)/(\insertdocumentendpage-2)*\paperwidth}
@@ -610,7 +610,7 @@
 %         \node[right=14pt,cakzent,font=\LARGE,align=left] at ($(current page.north west)+(0,-2.75em/2)$) {\strut~\insertframetitle\\[-0.65\baselineskip]\settowidth{\sos@len@tmp@a}{\strut~\insertframetitle}\pgfmathsetmacro\@sos@tmp@chk{\sos@len@tmp@a<(\linewidth-14pt)}
 %         \ifnum\@sos@tmp@chk=1\addtolength{\sos@len@tmp@a}{14pt}\else\setlength{\sos@len@tmp@a}{\linewidth}\fi
 %         {\normalsize\color{chdtext}{\large$\llap{$\diamond$}\hspace*{-0.75pt}$}\rule[0.186\baselineskip]{\sos@len@tmp@a}{0.55pt}}}; % \strut
-        
+
 %     \end{tikzpicture}
 %     \vskip2.25em
 % }

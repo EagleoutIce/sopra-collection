@@ -68,7 +68,7 @@
 %% -----------------------------------------------------------------------------
 
 \def\sod@thesodversion#1#2#3#4\@nil{%
-    \bgroup{}v#1.#2.#3#4\egroup%
+    \begingroup{}v#1.#2.#3#4\endgroup%
 }
 \def\thesodversion{%
     \edef\@tmp{\noexpand\sod@thesodversion\arabic{sodversion}\noexpand\@nil}%
@@ -97,8 +97,8 @@
 % #3: presenter style
 % #4: prefix of cs-name
 \newenvironment{present}[4]{\phantomsection\label{mrk:#1}%
-    \bgroup\leavevmode\newline\noindent\hspace*{-0.75cm}\parbox{0.75cm}{\(\triangleright\)\quad}{#3{#4#1}}{\T{#2}}\par\nopagebreak% done on purpose
-}{\egroup\bigskip}
+    \begingroup\leavevmode\newline\noindent\hspace*{-0.75cm}\parbox{0.75cm}{\(\triangleright\)\quad}{#3{#4#1}}{\T{#2}}\par\nopagebreak% done on purpose
+}{\endgroup\bigskip}
 \makeatother
 
 % #1: name of the command-sequence

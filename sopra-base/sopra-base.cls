@@ -104,9 +104,9 @@
 
 % some styling commands
 \long\def\sob@@imptext#1{\slshape\color{sob@col@uulm@cs}#1}
-\newcommand\imptext[1]{\bgroup\sob@@imptext{#1}\egroup}
+\newcommand\imptext[1]{\begingroup\sob@@imptext{#1}\endgroup}
 \long\def\sob@@notetext#1{\color{sob@col@uulm@akzent}#1}
-\newcommand\notetext[1]{\bgroup\sob@@notetext{#1}\egroup}
+\newcommand\notetext[1]{\begingroup\sob@@notetext{#1}\endgroup}
 
 % lengthts:
 \renewcommand{\baselinestretch}{1.1}
@@ -139,7 +139,7 @@
 %% -----------------------------------------------------------------------------
 
 \def\sob@thesobversion#1#2#3#4\@nil{%
-    \bgroup{}v#1.#2.#3#4\egroup%
+    \begingroup{}v#1.#2.#3#4\endgroup%
 }
 \def\thesobversion{%
     \edef\@tmp{\noexpand\sob@thesobversion\arabic{sobversion}\noexpand\@nil}%
@@ -157,7 +157,7 @@
 
 
 \def\sob@date@convert#1-#2-#3\@nil{%
-    \bgroup#3.\space{\sob@month@to@name{#2}}\space{}#1\egroup%
+    \begingroup#3.\space{\sob@month@to@name{#2}}\space{}#1\endgroup%
 }
 \def\DateConvert#1%
 {\expandafter\ifx\expandafter\\#1\\\else\expandafter\sob@date@convert#1\@nil\fi}
@@ -197,9 +197,9 @@
 \let\addAuthor\sob@@add@author
 
 \ifsob@showmail@
-\def\sob@@parse@author#1 (#2)\@nil{\bgroup#1 (\mail{#2})\egroup}
+\def\sob@@parse@author#1 (#2)\@nil{\begingroup#1 (\mail{#2})\endgroup}
 \else
-\def\sob@@parse@author#1 (#2)\@nil{\bgroup\href{mailto:#2}{#1}\egroup}
+\def\sob@@parse@author#1 (#2)\@nil{\begingroup\href{mailto:#2}{#1}\endgroup}
 \fi
 \def\sob@@typeset@author#1{%
     \setcounter{sob@counter@tmp@a}{0}% start with an offset

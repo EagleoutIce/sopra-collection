@@ -3,7 +3,7 @@
 %% -----------------------------------------------------------------------------
 %% Version: 1.0
 %% Author:  Florian Sihler, 05.01.2020
-%% 
+%%
 %% Will contain all the definitions to easily typeset and reference
 %% Changelogs in a document. Please note that using this package
 %% will introduce the version environment and a Version-Flag
@@ -151,7 +151,7 @@
     }%
     %Defining skimmer:
     \ifsoc@printthis@version@%
-        \newenvironment{version@read}{\bgroup\ignorespaces}{\egroup}% no consumption!
+        \newenvironment{version@read}{\begingroup\ignorespaces}{\endgroup}% no consumption!
         \else\NewEnviron{version@read}{}\fi%
     \version@read%
     }{\endversion@read}%
@@ -199,14 +199,14 @@
 }
 
 \def\soc@date@convert#1-#2-#3\@nil{%
-    \bgroup#3.\space{\protect\soc@month@to@name{#2}}\space{}#1\egroup%
+    \begingroup#3.\space{\protect\soc@month@to@name{#2}}\space{}#1\endgroup%
 }
 \def\soc@DateConvert#1%
 {\expandafter\ifx\expandafter\\#1\\\else\expandafter\soc@date@convert#1\@nil\fi}
 
 
 \def\soc@changelog@version@format#1:#2\@nil{%
-    #2% \textbf{\soc@DateConvert{#1}}: 
+    #2% \textbf{\soc@DateConvert{#1}}:
 }
 \let\soc@changelog@upper@subsection\subsection
 
@@ -223,7 +223,7 @@
             \edef\soc@tmpdate{\@nameuse{soc@versions@data@\tmp@counterval}}
             \soc@changelog@upper@subsection{Changelog für Version \tmp@counterval{} (\soc@changelog@getDate{\soc@tmpdate})}
         }\label{soc@changelog@version:\tmp@counterval}%
-        % now we have to iter through all registered environments and 
+        % now we have to iter through all registered environments and
         % check if there is a tag for this version :D
         % recursive call:
         % \edef\@tmp@soc@chlg@{}
@@ -235,7 +235,7 @@
             }{%
                 \item[\faInfoCircle] \edef\soc@tmp{\noexpand\soc@changelog@version@format\@nameuse{soc@versions@data@\tmp@counterval}\noexpand\@nil}\soc@tmp%
             }%
-            \expandafter\soc@@changelog@envs@iter\@soc@register@versionenvs,\@nil%\@tmp@soc@chlg@%  
+            \expandafter\soc@@changelog@envs@iter\@soc@register@versionenvs,\@nil%\@tmp@soc@chlg@%
         \end{itemize}
         % \fi
         \stepcounter{soc@counter@tmp@a}%
@@ -255,7 +255,7 @@
 %% -----------------------------------------------------------------------------
 
 \def\soc@thesocversion#1#2#3#4\@nil{%
-    \bgroup{}v#1.#2.#3#4\egroup%
+    \begingroup{}v#1.#2.#3#4\endgroup%
 }
 \def\thesocversion{%
     \edef\@tmp{\noexpand\soc@thesocversion\arabic{socversion}\noexpand\@nil}%

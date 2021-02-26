@@ -537,12 +537,12 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 % #2 LanguageName
 % #3 EnvironName
 \def\sol@@NewLstEnv#1#2#3{%
-\bgroup%
+\begingroup%
 \edef\sol@xcurlst{\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/\environName/constructor command}\endcsname{#3}{#1}{\noexpand\lstset{style=\pgfkeysvalueof{/sol@lst@family/\environName/listing style},language=#2}}{}{#2}}%
 \global\sol@xcurlst%
 \relax%No one (this means me) really knows why this helps, but it enforces the lst@next - search to interpret the first char of an cs-sequence correctly
   \globaldefs=0%
-\egroup%
+\endgroup%
 }
 
 %% -----------------------------------------------------------------------------
@@ -550,7 +550,7 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 %% -----------------------------------------------------------------------------
 %% #1: Name of the Language [java,latex]
 %% #2: Name of the corresponding lst-Language [lJava, lLatex,...]
-\def\RegisterLanguage#1#2{\bgroup\makeatletter%
+\def\RegisterLanguage#1#2{\begingroup\makeatletter%
 % Register the Environments
 %
 \def\sol@foreach@basic@env@iter##1,##2\@nil{%
@@ -588,7 +588,7 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 %% END: Register Language as present, by definig a command
 \expandafter\def\csname sol@lst@registeres@name@#1\endcsname{present}
 \expandafter\def\csname sol@lst@registeres@language@#1\endcsname{present}
-\egroup}
+\endgroup}
 
 %% -----------------------------------------------------------------------------
 %% The [hopefully] beautiful 'sopra-style'
@@ -746,11 +746,11 @@ keepspaces=false}
   }\hspace*{0.35pt}%
 }
 
-\def\@solLstHL#1{\begin{sol@listings@highlight@env}[#1]\bgroup\aftergroup\sol@highlights@endenv}
+\def\@solLstHL#1{\begin{sol@listings@highlight@env}[#1]\begingroup\aftergroup\sol@highlights@endenv}
 
 \def\sol@highlights@endenv{%
   \end{sol@listings@highlight@env}%
-  \egroup%
+  \endgroup%
 }
 
 \def\solhlboxd#1{\edef\@tmp{\noexpand\@solLstHL{#1}}\@tmp}

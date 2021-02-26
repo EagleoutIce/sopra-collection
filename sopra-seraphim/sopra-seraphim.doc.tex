@@ -8,8 +8,8 @@
 % #3: presenter style
 % #4: prefix of cs-name
 \renewenvironment{present}[4]{\phantomsection\label{mrk:#1}%
-    \bgroup\leavevmode\newline\noindent{\quad}{#3{#4#1}}{\T{#2}}\par\nopagebreak% done on purpose
-}{\egroup\bigskip}
+    \begingroup\leavevmode\newline\noindent{\quad}{#3{#4#1}}{\T{#2}}\par\nopagebreak% done on purpose
+}{\endgroup\bigskip}
 \makeatother
 
 \usepackage{sopra-attachments}
@@ -31,7 +31,7 @@
     \section{Die 'sopra-seraphim'-Klasse}
     \subsection{Warum, wieso, weshalb?}
     \begin{frame}{Warum 'sopra-seraphim'?}
-        Diese \LaTeXe-Dokumentlasse wurde im Rahmen des Sopras im 
+        Diese \LaTeXe-Dokumentlasse wurde im Rahmen des Sopras im
         Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
         Grundlage für die Optik aller Dokumente des \notetext{Teams 20}.
         Das Layout basiert auf \T{beamer}. Die Dokumentation wurde aus strukturellen Gründen in letzterem angefertigt, es werden also keine Titel platziert, analog passt sich die Kopfzeile an den Umstand an!\par
@@ -43,9 +43,9 @@
 
     \subsection{Abhängigkeiten}
     \begin{frame}[fragile]{Abhängigkeiten}
-    Dieses Paket basiert auf \T{beamer}, sowie den folgenden Paketen (alle übergebenen Argumente werden ebenfalls 
+    Dieses Paket basiert auf \T{beamer}, sowie den folgenden Paketen (alle übergebenen Argumente werden ebenfalls
     angegeben, wobei im Fall einer Werteübergabe ein Stern gesetzt wird. Ein Ausrufezeichen vor einem \say{Argument} deklariert, dass es sich hier um eine Option handelt die das Laden des Pakets kontrolliert):
-    \bgroup\footnotesize
+    \begingroup\footnotesize
     \begin{multicols}{3}
         \begin{itemize}
             \def\pkgparse#1:#2\@nil{%
@@ -57,7 +57,7 @@
             }
         \end{itemize}
     \end{multicols}
-    \egroup
+    \endgroup
     All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein (weiter
     wird noch die Ti\textit{k}Z-Bibliothek \T{calc} verwendet.
     \end{frame}
@@ -65,7 +65,7 @@
 
     \subsection{Die Installation}
     \begin{frame}[fragile]{Installation: Pfadangabe}
-        Die Klasse wird nicht als \T{.dtx} ausgeliefert, weswegen sich die 
+        Die Klasse wird nicht als \T{.dtx} ausgeliefert, weswegen sich die
     folgenden Möglichkeiten ergeben:
 \begin{itemize}
     \item Die Dokumentklasse kann in dasselbe Verzeichnis wie das Dokument
@@ -102,9 +102,9 @@
         In Version \thesosversion{} (\cmdref{thesosversion}) gibt es keine weiteren Besonderheiten.
     \end{frame}
 
-       
 
-    \section{Klassen-Konfiguration}    
+
+    \section{Klassen-Konfiguration}
     \subsection{Akzeptierte Parameter}
     \begin{frame}[fragile]{Allgemeines zu Parametern}
     Die Dokumentklasse akzeptiert, so wie die meisten, Argumente. So können
@@ -132,10 +132,10 @@
     \section{Befehlsübersicht}
     \begin{frame}{Befehlsübersicht}
         Die Klasse fügt als Basis-Klasse keinen großen Satz an Befehlen für
-        den Nutzer hinzu. Diese Aufgabe gebührt den erweiternden Paketen.        
+        den Nutzer hinzu. Diese Aufgabe gebührt den erweiternden Paketen.
     \end{frame}
-    
-    
+
+
     \subsection{Daten setzen}
     \label{sec:DatenSetzen}
     \begin{frame}[fragile,allowframebreaks]{Daten setzen}
@@ -145,39 +145,39 @@
         das Dokument beginnt). \notetext{Entwicklernotiz: Alle diese Felder stehen über
         \T{\textbackslash sos@register@$\langle$Name$\rangle$}, beziehungsweise ihre 'short'-Varianten
         über \T{\textbackslash sos@register@short@$\langle$Name$\rangle$} zur Verfügung.}
-        
+
         \begin{command}{brief}{\optArg{short}\manArg{Kurzbeschreibung}}
             Setzt die Kurzbeschreibung des Dokuments auf \T{Kurzbeschreibung}. Sie wird auf der Titelseite links unten angezeigt. \imptext{Wird aktuell nicht verwendet.}
         \end{command}
-        
+
         \begin{command}{authors}{\optArg{short}\manArg{Autorenliste}}
             Hierrüber kann die Liste der Autoren gesetzt werden. Es empfiehlt sich
             hierfür \cmdref{addAuthor} zu verwenden.
         \end{command}
-        
+
         \begin{command}{duedate}{\optArg{short}\manArg{YYYY-MM-DD}}
            Setzt das Datum des Dokuments. Zur Konvertierung wird \cmdref{DateConvert}
-           verwendet. 
+           verwendet.
         \end{command}
-        
+
         \begin{command}{supervisor}{\optArg{short}\manArg{Name}}
             Setzt den Betreuer auf \T{Name}. Dieses Datenfeld wird in der Basis-Klasse nicht verwendet. \imptext{Wird aktuell nicht verwendet.}
         \end{command}
-        
+
         \begin{command}{keywords}{\optArg{short}\manArg{Schlüsselwörter}}
-            Setzt die Keywords für die Metadaten auf \T{Schlüselwörter}. 
+            Setzt die Keywords für die Metadaten auf \T{Schlüselwörter}.
         \end{command}
-        
+
         \begin{command}{group}{\optArg{short}\manArg{Name}}
             Setzt die Gruppe des jeweiligen Erstellers auf \T{Name}.% Maybe show?
         \end{command}
-        
+
         \begin{command}{groupnum}{\optArg{short}\manArg{Nummer}}
             Setzt im Falle einer Nummerierung (oder Symbol, etc.) der Gruppe dieses
             auf \T{Nummer}.
-        \end{command}       
+        \end{command}
     \end{frame}
-    
+
 
     \subsection{Beim Datensetzen hilfreiches}
     \begin{frame}[fragile]{Beim Datensetzen hilfreiches}
@@ -193,7 +193,7 @@
     \end{command}
     \end{frame}
 
-    
+
 \subsection{Die Daten anzeigen}
 
 \begin{frame}[fragile,allowframebreaks]{Die Daten anzeigen}
@@ -215,7 +215,7 @@
     \end{plainlatex}
     \end{command}
 \end{frame}
-        
+
 \subsection{Generelle Formatierungsbefehle}
 \begin{frame}[fragile]{Generelle Formatierungsbefehle}
 \begin{command}{imptext}{\manArg{Text}}
@@ -230,7 +230,7 @@
 \subsection{Farben}
 \begin{frame}[fragile]{Farben}
     \def\colshow#1{\T{#1} \tikz[baseline=-0.6ex]{\draw[fill=#1] circle (4pt);}}
-    Die folgenden Farben stehen zur Verfügung: \foreach[count=\i] \col in {cprimary,cakzent,clight,cimportant,cwhite} {\ifnum\i>1,~\fi\colshow{\col}} und \colshow{chighlight}.    
+    Die folgenden Farben stehen zur Verfügung: \foreach[count=\i] \col in {cprimary,cakzent,clight,cimportant,cwhite} {\ifnum\i>1,~\fi\colshow{\col}} und \colshow{chighlight}.
 \end{frame}
 
 \section{Verbundene Klassen und Pakete}
@@ -241,7 +241,7 @@ Im Zuge dieser \LaTeXe-Dokumentklasse sind noch einige andere Pakete entstanden.
         \foreach \i/\u in {eagle-maps/{https://github.com/EagleoutIce/eagle-maps},LILLY-Framework/{https://github.com/EagleoutIce/LILLY},sopra-documentation/,sopra-models/,sopra-listings/,sopra-requirements/,sopra-attachments/} {
             \item \T{\i}\expandafter\ifx\expandafter\\\u\\\else\footnote{\url{\u}}\fi
         }
-    \end{itemize}    
+    \end{itemize}
 \end{multicols}
 \end{frame}
 

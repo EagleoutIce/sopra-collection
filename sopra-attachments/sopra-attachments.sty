@@ -77,7 +77,7 @@
 %% -----------------------------------------------------------------------------
 
 \def\soa@thesoaversion#1#2#3#4\@nil{%
-    \bgroup{}v#1.#2.#3#4\egroup%
+    \begingroup{}v#1.#2.#3#4\endgroup%
 }
 \def\thesoaversion{%
     \edef\@tmp{\noexpand\soa@thesoaversion\arabic{soaversion}\noexpand\@nil}%

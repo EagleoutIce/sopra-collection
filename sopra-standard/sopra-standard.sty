@@ -63,7 +63,7 @@
 % #4 Startersion
 % #5 Änderungen für die Version ein bettung
 \newenvironment{sos@definition}[5][]{%
-    \addvspace{1.25em plus 0.75em minus 0.275em}\phantomsection\bgroup%
+    \addvspace{1.25em plus 0.75em minus 0.275em}\phantomsection\begingroup%
     \resetRegisters{}% reset author, bookmark....
     % Start the Parser for the optargs:
     \expandafter\sos@@parser@optargs#1,\@nil%
@@ -96,7 +96,7 @@
     }%
     }{%
     \end{version}%
-    \egroup\par{}\ignorespacesafterend%
+    \endgroup\par{}\ignorespacesafterend%
 }
 
 %% -----------------------------------------------------------------------------
@@ -172,7 +172,7 @@
 %% -----------------------------------------------------------------------------
 
 \def\sos@thesosversion#1#2#3#4\@nil{%
-    \bgroup{}v#1.#2.#3#4\egroup%
+    \begingroup v#1.#2.#3#4\endgroup%
 }
 \def\thesosversion{%
     \edef\@tmp{\noexpand\sos@thesosversion\arabic{sosversion}\noexpand\@nil}%
@@ -184,9 +184,9 @@
 %% Formtters
 %% -----------------------------------------------------------------------------
 
-\def\sosFormatTitle#1#2{\bgroup\bfseries#1 #2:\space\egroup}
+\def\sosFormatTitle#1#2{\begingroup\bfseries#1 #2:\space\endgroup}
 
-\def\sosFormatFlags#1{\bgroup\scriptsize\itshape#1\egroup}
+\def\sosFormatFlags#1{\begingroup\scriptsize\itshape#1\endgroup}
 
 
 %% -----------------------------------------------------------------------------
@@ -197,14 +197,14 @@
 % #2 environment name
 % #3 counter name
 \def\CreateNewStandardType#1#2#3{
-    % \bgroup\globaldefs=1
+    % \begingroup\globaldefs=1
     \global\newcounter{#3}
     \newenvironment{#2}[5][]{%
         \sos@definition[#1,counter: #3,##1]{##2}{##3}{##4}{##5}%
     }{%
         \endsos@definition%
     }
-    %\egroup
+    %\endgroup
 }
 
 %% -----------------------------------------------------------------------------
@@ -264,14 +264,14 @@
 % acts basically as \chapter{#1}, but will be '\setComment' aware
 \def\Chapter#1{%
     \expandafter\ifx\expandafter\\\currentTocComment\\\chapter{#1}\else%
-        \bgroup
+        \begingroup
         % \newcommand\voidpdfbookmark[3][]{}%
         % \let\pdfbookmark\voidpdfbookmark%
         \pgfmathsetmacro\nextchap{int(\value{chapter}+1)}%
         \hypertarget{sopchapter.\nextchap}{}\nopagebreak%
         \chapter[{\parbox[t]{\linewidth-1.5cm}{#1\\[0.5\topsep]\strut\mdseries{\itshape\scriptsize{\currentTocComment}\strut}}}]{#1}% ~~~
-        \egroup
-        % \egroup
+        \endgroup
+        % \endgroup
     \fi\gdef\currentTocComment{}%
     \pdfbookmark[0]{#1}{ms@chp@@id@\thechapter}%
 }
@@ -331,6 +331,6 @@
 %     mimetype=text/plain % we assume
 % }
 
-\newcommand\info[1]{\bgroup\footnotesize\itshape#1\egroup}
+\newcommand\info[1]{\begingroup\footnotesize\itshape#1\endgroup}
 
 \endinput

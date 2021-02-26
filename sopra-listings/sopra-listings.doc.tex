@@ -188,7 +188,7 @@ Die Funktion \T{autogobble} wurde wieder entfernt, ebenso wurde die Paketstruktu
 \lstcolorlet{comments}{orange}
 \end{plainlatex}
     Wir erhalten(exemplarisch in Java, zuerst standard, danach mit geänderter Farbe):
-    \bgroup
+    \begingroup
 \begin{java}
 // Vor der Neuzuweisung der Farbe
 public static void main(...){ /* ... */ }
@@ -198,7 +198,7 @@ public static void main(...){ /* ... */ }
 // Nach Neuzuweisung der Farbe
 public static void main(...){ /* ... */ }
     \end{java}
-    \egroup
+    \endgroup
  Es ist möglich jede Farbe (nach \T{xcolor}) zu verwenden (siehe auch \cmdref{lstcolordef}).
 
 \subsection{Stile}
@@ -219,7 +219,7 @@ public static void main(...){ /* ... */ }
 }
 \end{plainlatex}
 Wir erhalten(exemplarisch in Java):
-    \bgroup
+    \begingroup
 \begin{java}
 // Vor der Neuzuweisung des Stils
 public static void main(...){ /* ... */ }
@@ -233,7 +233,7 @@ public static void main(...){ /* ... */ }
 // Nach Neuzuweisung des Stils
 public static void main(...){ /* ... */ }
     \end{java}
-    \egroup
+    \endgroup
     \notetext{Mehrere Stile können durch Kommas voneinander abgetrennt in einem Zug definiert werden und überleben Gruppen.}
 {\makeatletter
     \sol@list@define@styles{%

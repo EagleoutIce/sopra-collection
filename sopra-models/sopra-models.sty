@@ -62,7 +62,7 @@
 %% -----------------------------------------------------------------------------
 
 \def\som@thesomversion#1#2#3#4\@nil{%
-    \bgroup{}v#1.#2.#3#4\egroup%
+    \begingroup{}v#1.#2.#3#4\endgroup%
 }
 \def\thesomversion{%
     \edef\@tmp{\noexpand\som@thesomversion\arabic{somversion}\noexpand\@nil}%

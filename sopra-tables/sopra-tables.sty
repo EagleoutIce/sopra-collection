@@ -125,7 +125,7 @@
 
 \ifsot@usetabu@
     % Material styled table. Works similar to tabular
-    \newenvironment{mtabular}[1]{\bgroup
+    \newenvironment{mtabular}[1]{\begingroup
         \ifsot@invert@\else\taburowcolors[1] 2{lightgray!25 .. lightgray!5}\fi
         \everyrow{\tabucline[.4mm  white]{}}
         \tabulinesep = ^2mm_2mm
@@ -133,7 +133,7 @@
         \begin{tabu}{>{~}#1<{~}}
             \sot@table@headerrow*\ignorespaces% style the first row :D
     }{
-        \end{tabu}\egroup
+        \end{tabu}\endgroup
     }
 
     % Matieal styled long table.
