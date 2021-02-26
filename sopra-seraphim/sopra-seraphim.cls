@@ -104,10 +104,10 @@
 }
 
 \def\sos@date@convert#1-#2-#3\@nil{%
-    \begingroup#3.\(\;\){\sos@month@to@name{#2}}\(\;\,\)#1\endgroup%
+    \begingroup#3.~{\sos@month@to@name{#2}}~#1\endgroup%
 }
 \def\DateConvert#1%
-{\expandafter\ifx\expandafter\\#1\\\else\expandafter\sos@date@convert#1\@nil\fi}
+{\ifx!#1!\else\expandafter\sos@date@convert#1\@nil\fi}
 
 % some styling commands
 \long\def\sos@@imptext#1{\begingroup\slshape\color{cimportant}#1\endgroup}
@@ -457,32 +457,32 @@
     }
 
 \defbeamertemplate*{title page}{seraphim}[1][]{%
-    \begin{tikzpicture}[remember picture, overlay]
-        % as canvas color can fail:
-        \fill[ctpbackground] (current page.south west) rectangle (current page.north east);
-        \node[align=center,text width=\linewidth,ctpsymbol,font=\usebeamerfont{title}] at(current page.center) {%
-            \hbox{}\hfill\llap{\begin{tikzpicture}[scale=0.035]
-            \def\sos@font@futura@color@current{ctptext}
-            \sos@ntts
-            \node[\sos@font@futura@color@current,overlay] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\tiny\bfseries/};
-            \end{tikzpicture}
-            }\leavevmode\vspace*{0.5ex}\newline
-            \begin{minipage}{0.95\linewidth}
-                {\tiny\hbox{}\expandafter\ifx\expandafter\\\sos@register@groupnum\\\else\quad Team\(\;\)\sos@register@groupnum\fi\hfill\DateConvert{\sos@register@duedate}\hbox{}\quad\hbox{}}\\[-0.6\baselineskip]
-            \sos@sepline
-            \begin{center}
-                \strut\inserttitle\vspace*{-0.5\topsep}
-            \end{center}
-            \sos@sepline
-            \begin{center}
-                \usebeamerfont{subtitle}
-                \vspace*{-\topsep}
-                {\strut\insertsubtitle}
-            \end{center}
-            \end{minipage}
-        };
-        % place the seplines
-    \end{tikzpicture}
+\begin{tikzpicture}[remember picture, overlay]
+    % as canvas color can fail:
+    \fill[ctpbackground] (current page.south west) rectangle (current page.north east);
+    \node[align=center,text width=\linewidth,ctpsymbol,font=\usebeamerfont{title}] at(current page.center) {%
+        \hbox{}\hfill\llap{\begin{tikzpicture}[scale=0.035]
+        \def\sos@font@futura@color@current{ctptext}
+        \sos@ntts
+        \node[\sos@font@futura@color@current,overlay] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\tiny\bfseries/};
+        \end{tikzpicture}
+        }\leavevmode\vspace*{0.5ex}\newline
+        \begin{minipage}{0.95\linewidth}
+            {\tiny\hbox{}\ifx\sos@register@groupnum\@empty\else\quad Team~\sos@register@groupnum\fi\hfill\DateConvert{\sos@register@duedate}\hbox{}\quad\hbox{}}\\[-0.6\baselineskip]
+        \sos@sepline
+        \begin{center}
+            \strut\inserttitle\vspace*{-0.5\topsep}
+        \end{center}
+        \sos@sepline
+        \begin{center}
+            \usebeamerfont{subtitle}
+            \vspace*{-\topsep}
+            {\strut\insertsubtitle}
+        \end{center}
+        \end{minipage}
+    };
+    % place the seplines
+\end{tikzpicture}
 }
 
 
@@ -496,24 +496,24 @@
 %% -----------------------------------------------------------------------------
 
 \def\Intro{
-    \begin{frame}[noframenumbering,plain]
-        \titlepage
-    \end{frame}
+\begin{frame}[noframenumbering,plain]
+    \titlepage
+\end{frame}
 
-    \InformationPage
+\InformationPage
 
-    \begin{frame}[c]{Inhaltsübersicht}
-        \begin{center}
-            \begin{columns}
-                \begin{column}[c]{.45\textwidth}
-                    \tableofcontents[hideallsubsections,sections={1-3}]
-                \end{column}
-                \begin{column}[c]{.45\textwidth}
-                    \tableofcontents[hideallsubsections,sections={4-6}]
-                \end{column}
-            \end{columns}
-        \end{center}
-    \end{frame}
+\begin{frame}[c]{Inhaltsübersicht}
+    \begin{center}
+        \begin{columns}
+            \begin{column}[c]{.45\textwidth}
+                \tableofcontents[hideallsubsections,sections={1-3}]
+            \end{column}
+            \begin{column}[c]{.45\textwidth}
+                \tableofcontents[hideallsubsections,sections={4-6}]
+            \end{column}
+        \end{columns}
+    \end{center}
+\end{frame}
 }
 
 \AtEndDocument{\OutroPage}
@@ -566,7 +566,7 @@
             \sos@ntts
             \node[\sos@font@futura@color@current,overlay] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\small\bfseries/};
             \expandafter\ifx\expandafter\\\sos@register@groupnum\\\else
-            \node[right, font=\fontsize{14}{14}\selectfont,ctpsymbol,overlay] (ct@gnumt) at ($(ct@groupnum)+(-425mm,132mm/2)$){Team: \(\mathit{\sos@register@groupnum}\)};
+            \node[right, font=\fontsize{14}{14}\selectfont,ctpsymbol,overlay] (ct@gnumt) at ($(ct@groupnum)+(0,132mm/2)$){Team: \(\mathit{\sos@register@groupnum}\)};
             \fi
             \end{tikzpicture}
         };
