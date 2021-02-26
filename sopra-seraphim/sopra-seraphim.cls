@@ -264,7 +264,7 @@
 % iterators for handling and parsing author information.
 \def\sos@@add@author#1{%
     \let\sos@@tmp@old@authors\sos@register@authors%
-    \expandafter\ifx\expandafter\\\sos@@tmp@old@authors\\%
+    \ifx\sos@@tmp@old@authors\@empty%
     \xdef\sos@register@authors{#1}\else%
     \xdef\sos@register@authors{\sos@@tmp@old@authors,#1}\fi%
 }
@@ -275,12 +275,12 @@
 \def\sos@@typeset@author#1{%
     \setcounter{sos@counter@tmp@a}{0}% start with an offset
     \foreach \@tmp in {#1}%
-        {\expandafter\ifx\expandafter\\\@tmp\\\else%
+        {\ifx\@tmp\@empty\else%
             \stepcounter{sos@counter@tmp@a}\fi}%
     \edef\sos@authors@totallength{\arabic{sos@counter@tmp@a}}%
     \setcounter{sos@counter@tmp@a}{0} % stored the length of the list
     \foreach \sos@@tmp@curauthor in {#1} {%
-        \expandafter\ifx\expandafter\\\sos@@tmp@curauthor\\%empty => ignore
+        \ifx\sos@@tmp@curauthor\@empty%empty => ignore
         \else\stepcounter{sos@counter@tmp@a}%
             \ifnum\thesos@counter@tmp@a>1%
             \ifnum\thesos@counter@tmp@a=\sos@authors@totallength%
@@ -565,7 +565,7 @@
             \def\sos@font@futura@color@current{ctptext}
             \sos@ntts
             \node[\sos@font@futura@color@current,overlay] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\small\bfseries/};
-            \expandafter\ifx\expandafter\\\sos@register@groupnum\\\else
+            \ifx\sos@register@groupnum\@empty\else
             \node[right, font=\fontsize{14}{14}\selectfont,ctpsymbol,overlay] (ct@gnumt) at ($(ct@groupnum)+(0,132mm/2)$){Team: \(\mathit{\sos@register@groupnum}\)};
             \fi
             \end{tikzpicture}
@@ -582,8 +582,8 @@
 
 \defbeamertemplate*{footline}{seraphim}[1][] {
     \begin{tikzpicture}[remember picture,overlay]
-        \expandafter\ifx\expandafter\\\insertsectionhead\\\else%
-        \expandafter\ifx\expandafter\\\insertsubsectionhead\\\else%
+        \ifx\insertsectionhead\@empty\else%
+        \ifx\insertsubsectionhead\@empty\else%
             \node[above right,yshift=0.1cm,scale=0.6,opacity=0.7] at (current page.south west) {\strut\begingroup\insertsectionhead\endgroup\;--\;\begingroup\insertsubsectionhead\endgroup};
         \fi\fi
         \fill[cprimary] (current page.south west) rectangle ($(current page.south east)+(0,1mm)$);
