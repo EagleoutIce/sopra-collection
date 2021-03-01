@@ -188,7 +188,7 @@
 % iterators for handling and parsing author information.
 \def\sob@@add@author#1{%
     \let\sob@@tmp@old@authors\sob@register@authors%
-    \expandafter\ifx\expandafter!\sob@@tmp@old@authors!%
+    \ifx\sob@@tmp@old@authors\@empty%
     \xdef\sob@register@authors{#1}\else
     \xdef\sob@register@authors{\sob@@tmp@old@authors,#1}\fi
 }
