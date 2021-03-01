@@ -86,9 +86,9 @@
 % #2 File Name
 % #3 search-path-addition
 \def\sol@@attachfile@symbol#1#2#3{%
-    \ifsol@symbols@%
-        \edef\@sol@tmp{\noexpand\scalebox{0.65}{\noexpand\attachfile[#1,subject={#2}]{#3#2}}}%
-    \else\edef\@sol@tmp{\noexpand\textattachfile[#1,subject={#2}]{#3#2}{#2}}\fi%
+    \ifsol@symbols@
+        \protected@edef\@sol@tmp{\noexpand\scalebox{0.65}{\noexpand\attachfile[#1,subject={#2}]{#3#2}}}%
+    \else\protected@edef\@sol@tmp{\noexpand\textattachfile[#1,subject={#2}]{#3#2}{#2}}\fi%
     \@sol@tmp{}%
 }
 
@@ -114,7 +114,7 @@
 % #3 search-path-addition
 % #4 text
 \long\def\sol@@attachfile@text#1#2#3#4{%
-    \edef\@sol@tmp{\noexpand\textattachfile[#1,subject={#2}]{#3#2}{\sol@textprefix#4}}&
+    \edef\@sol@tmp{\noexpand\textattachfile[#1,subject={#2}]{#3#2}{\sol@textprefix#4}}%
     \@sol@tmp
 }
 
@@ -124,7 +124,7 @@
     \else% check
         \IfFileExists{#3#2}{\sol@@attachfile@text{#1}{#2}{#3}{#4}}%
         {<Attachment not found!>}%
-    \fi%
+    \fi
 }
 
 %% -----------------------------------------------------------------------------
