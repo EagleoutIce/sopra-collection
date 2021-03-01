@@ -28,7 +28,6 @@
 \def\sol@lst@prebreak{\hbox{\sol@font@fs@numbers$\hookleftarrow$}} % allow definition of own symbol
 \let\sol@lst@inline@prebreak\sol@lst@prebreak%
 
-% make switches for use of tcolorbox..
 \newif\ifsol@encoding@ %  automatically load encoding packages
 \newif\ifsol@accuspp@available@ % remove line numbers from selection if possible
 
@@ -99,13 +98,13 @@
 % if sob is loaded, the default for the printmode will be passed,
 % otherwise we will use defaultmode as the default :D
 \@ifundefined{ifsob@printmode@}{% not called from sopra-base-class, we use a
-    \sol@printmode@false%
+    \sol@printmode@false
 }{%
-\ifsob@printmode@\global\sol@printmode@true%
-    \else\global\sol@printmode@false\fi%
+\ifsob@printmode@\global\sol@printmode@true
+    \else\global\sol@printmode@false\fi
 }
 
-\ProcessOptions\relax%
+\ProcessOptions\relax
 
 \ifsol@debug@\let\sol@debug\typeout\else\let\sol@debug\@gobble\fi
 
@@ -113,9 +112,9 @@
 %% Basic Packages
 %% -----------------------------------------------------------------------------
 % Encoding:
-\ifsol@encoding@ %
-\RequirePackage[T1]{fontenc} %
-\RequirePackage[utf8]{inputenc} %
+\ifsol@encoding@
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
 \fi
 
 \RequirePackage{etoolbox,xcolor}% color definitions and making stuff robust
@@ -145,7 +144,7 @@
 \def\ttdefault{AnonymousPro}%
 \fi
 
-\let\sol@ttfamily\ttfamily%
+\let\sol@ttfamily\ttfamily
 \let\T\texttt
 
 \def\sol@font@fs@numbers{\footnotesize}
@@ -154,7 +153,7 @@
 \newcommand*{\lstfs}[2][1]{%
   \def\sol@font@fs@normal{\fontsize{#2}{#2}\selectfont\linespread{#1}}%
   \ifnum#2>7\edef\sol@lst@@subfs{\the\numexpr #2-4\relax}\def\sol@font@fs@numbers{\fontsize{\sol@lst@@subfs}{\sol@lst@@subfs}\selectfont\linespread{#1}}%
-  \else\def\sol@font@fs@numbers{\tiny\linespread{#1}}\fi%
+  \else\def\sol@font@fs@numbers{\tiny\linespread{#1}}\fi
 }
 
 %% -----------------------------------------------------------------------------
@@ -200,7 +199,7 @@
 
 \def\sol@lst@style@iter#1,#2\@nil{%
 \ifx!#1!\else
-  \sol@lst@style@iter@step sol@styles@lst@#1\@nil%
+  \sol@lst@style@iter@step sol@styles@lst@#1\@nil
   \ifx!#2!\else\sol@lst@style@iter#2,\@nil\fi\fi}
 
 \def\solSetStyle#1#2{\expandafter\gdef\csname sol@styles@lst@#1\endcsname{#2}}
@@ -269,10 +268,10 @@
 
 % Here we will make a small rainbow to present the selected color-theme :D
 \def\sol@lst@showstyles@iter#1,#2\@nil{%
-\ifx!#1!\else%
+\ifx!#1!\else
  {\sol@style@get{#1}#1\space}%
  \ifx!#2!\else\sol@lst@showstyles@iter#2,\@nil\fi% recursion
-\fi%
+\fi
 }
 
 \def\sol@lst@showstyles#1{\sol@lst@showstyles@iter#1,\@nil}
@@ -304,12 +303,12 @@
 \global\sol@lst@lastwas@charkeep@true#1\else\global\sol@lst@lastwas@charkeep@false%
   \ifnum\lst@mode=\lst@Pmode\relax% PMode: Not in any special Mode
   {\sol@style@get{numbers}#1}%
-  \else#1\fi%
-\fi%
+  \else#1\fi
+\fi
 %\fi
 \endgroup}
-\ifsol@highlight@numbers@%
-\let\sol@dgt\sol@@lst@hl@digit%
+\ifsol@highlight@numbers@
+\let\sol@dgt\sol@@lst@hl@digit
 \else\def\sol@dgt#1{#1}\fi
 % ^--- shorter and better to read
 \def\soldisablenumhl{\def\sol@dgt##1{##1}}
@@ -328,24 +327,24 @@
 
 % modify lst-literate routine to apply to the mechanism
 \def\lst@Literate#1#2#3{%
-\ifx\relax#2\@empty\else%
-\lst@CArgX #1\relax\lst@CDef%
+\ifx\relax#2\@empty\else
+\lst@CArgX #1\relax\lst@CDef
   {}%
-  {\let\lst@next\@empty%
-  \lst@ifxliterate%
-  \lst@ifmode \let\lst@next\lst@CArgEmpty \fi%
-  \fi\ifx\lst@next\@empty%
-    \ifx\lst@OutputBox\@gobble\else%
-    \lst@XPrintToken \let\lst@scanmode\lst@scan@m%
-    \lst@token{#2}\lst@length#3\relax%
-    \lst@XPrintToken%
-    \lst@whitespacefalse\@nc%
+  {\let\lst@next\@empty
+  \lst@ifxliterate
+  \lst@ifmode \let\lst@next\lst@CArgEmpty \fi
+  \fi\ifx\lst@next\@empty
+    \ifx\lst@OutputBox\@gobble\else
+    \lst@XPrintToken \let\lst@scanmode\lst@scan@m
+    \lst@token{#2}\lst@length#3\relax
+    \lst@XPrintToken
+    \lst@whitespacefalse\@nc
     \fi
     % gobble the replaced text
-    \let\lst@next\lst@CArgEmptyGobble%
+    \let\lst@next\lst@CArgEmptyGobble
   \fi\lst@next}%
   \@empty% splitter for constants
-\expandafter\lst@Literate%
+\expandafter\lst@Literate
 \fi}
 
 %% -----------------------------------------------------------------------------
@@ -386,7 +385,7 @@
 % please note, that they will apply under every condition!
 \newcommand*{\sol@dlst@default}[2][]{%
 \begingroup\fboxsep=\z@\fcolorbox{sol@colors@border}{sol@colors@background}{%
-  \thinspace\strut\lstinline[#1,keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak]`#2`\thinspace%
+  \thinspace\strut\lstinline[#1,keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak]`#2`\thinspace
 }\endgroup}
 
 \newcommand*{\sol@dlst@blank}[2][]{%
@@ -533,16 +532,14 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 \expandafter\gdef\csname end#1\endcsname{\endpresentlst}%
 }
 
-% #1 KeyName
-% #2 LanguageName
-% #3 EnvironName
+% #1 KeyName, #2 LanguageName, #3 EnvironName
 \def\sol@@NewLstEnv#1#2#3{%
-\begingroup%
+\begingroup
 \edef\sol@xcurlst{\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/\environName/constructor command}\endcsname{#3}{#1}{\noexpand\lstset{style=\pgfkeysvalueof{/sol@lst@family/\environName/listing style},language=#2}}{}{#2}}%
-\global\sol@xcurlst%
+\global\sol@xcurlst
 \relax%No one (this means me) really knows why this helps, but it enforces the lst@next - search to interpret the first char of an cs-sequence correctly
   \globaldefs=0%
-\endgroup%
+\endgroup
 }
 
 %% -----------------------------------------------------------------------------
@@ -559,8 +556,8 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 \edef\environCurName{\pgfkeysvalueof{/sol@lst@family/\environName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/\environName/command name suffix}}% assign
 \sol@debug{> #1/#2 e '##1' (name: \environCurName, ctor: \pgfkeysvalueof{/sol@lst@family/\environName/constructor command})}%
 \edef\sol@CreateAnLstEnviron{\noexpand\sol@@NewLstEnv{\environName}{#2}{\environCurName}}% fully expand the Name, otherwise it would be undefined when the environment gets used
-\sol@CreateAnLstEnviron%
-\ifx!##2!\else\sol@foreach@basic@env@iter##2,\@nil\fi%
+\sol@CreateAnLstEnviron
+\ifx!##2!\else\sol@foreach@basic@env@iter##2,\@nil\fi
 \fi}
 
 \def\sol@foreach@basic@env##1{\sol@foreach@basic@env@iter##1,\@nil}
@@ -580,7 +577,7 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 \expandafter\xdef\csname @@noopt@@\inlineCurName\endcsname####1{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#2]{####1}}%
 \expandafter\xdef\csname @@hasopt@@\inlineCurName\endcsname[####1]####2{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#2,####1]{####2}}%
 \expandafter\robustify\csname\inlineCurName\endcsname% robustify
-\ifx!##2!\else\sol@foreach@inline@env@iter##2,\@nil\fi%
+\ifx!##2!\else\sol@foreach@inline@env@iter##2,\@nil\fi
 \fi}%
 \def\sol@foreach@inline@env##1{\sol@foreach@inline@env@iter##1,\@nil}
 \sol@foreach@inline@env{default,blank,input}%,present}
@@ -634,13 +631,12 @@ keepspaces=false}
 % the file has to have the signature: 'language_<Name>.cfg'
 
 \def\sol@LoadLanguage@searchPath@iter#1,#2\@nil{%
-\ifx!#1!\else%
+\ifx!#1!\else
 \InputIfFileExists{#1language_\sol@curlanginputfile.cfg}{%
   \typeout{Loaded '\sol@curlanginputfile' from '#1language_\sol@curlanginputfile.cfg'}
 }{%
-\ifx!#2!\else\sol@LoadLanguage@iter#2,\@nil\fi%
-}%
-\fi%
+\ifx!#2!\else\sol@LoadLanguage@iter#2,\@nil\fi
+}\fi
 }
 \def\sol@LoadLanguage@searchPath@resolve%
 {% empty-case
@@ -650,9 +646,9 @@ keepspaces=false}
 
 \def\sol@LoadLanguage@single#1\@nil{\def\sol@curlanginputfile{#1}\sol@LoadLanguage@searchPath@resolve{}}
 \def\sol@LoadLanguage@iter#1,#2\@nil{%
-\ifx!#1!\else\sol@LoadLanguage@single#1\@nil%
-  \ifx!#2!\else\sol@LoadLanguage@iter#2,\@nil%
-\fi\fi%
+\ifx!#1!\else\sol@LoadLanguage@single#1\@nil
+  \ifx!#2!\else\sol@LoadLanguage@iter#2,\@nil
+\fi\fi
 }
 \def\sol@LoadLanguage#1{\sol@LoadLanguage@iter#1,\@nil}
 \let\solLoadLanguage\sol@LoadLanguage
@@ -660,9 +656,7 @@ keepspaces=false}
 % we also want to make it possible to add a folder to the lang-path:
 
 % Maybe load defaults?
-\ifsol@defaultlang@
-\solLoadLanguage{java}
-\fi
+\ifsol@defaultlang@ \solLoadLanguage{java}\fi
 
 %% -----------------------------------------------------------------------------
 %% Change colors
@@ -702,9 +696,9 @@ keepspaces=false}
 {You have to load the 'color-palettes' package yourself if you use the 'cpalette'-Option.}%
 }{% Add to the hook..
 }%
-\let\sol@old@cpl@hooks\cpl@hooks%
+\let\sol@old@cpl@hooks\cpl@hooks
 \def\cpl@hooks{% Add to the hook
-\sol@old@cpl@hooks\sol@cpalette@hook%
+\sol@old@cpl@hooks\sol@cpalette@hook
 }%
 \ifsol@printmode@
 \def\sol@cpalette@hook{%
@@ -750,7 +744,7 @@ keepspaces=false}
 
 \def\sol@highlights@endenv{%
   \end{sol@listings@highlight@env}%
-  \endgroup%
+  \endgroup
 }
 
 \def\solhlboxd#1{\edef\@tmp{\noexpand\@solLstHL{#1}}\@tmp}
