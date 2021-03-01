@@ -13,9 +13,7 @@
 %% -----------------------------------------------------------------------------
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
-
 \newcounter{sodversion} \setcounter{sodversion}{1102}
-
 
 \newif\ifsod@usedummy@
 \newif\ifsod@uselistings@
@@ -25,17 +23,17 @@
 %% -----------------------------------------------------------------------------
 
 % allow debug-options :D
-\DeclareOption{debug}{ \errorcontextlines 99999 }%
-\DeclareOption{nodebug}{ \errorcontextlines 4 }%
+\DeclareOption{debug}{ \errorcontextlines 99999 }
+\DeclareOption{nodebug}{ \errorcontextlines 4 }
 
-\DeclareOption{dummy}{ \sod@usedummy@true }%
-\DeclareOption{nodummy}{ \sod@usedummy@false }%
+\DeclareOption{dummy}{ \sod@usedummy@true }
+\DeclareOption{nodummy}{ \sod@usedummy@false }
 
-\DeclareOption{listings}{ \sod@uselistings@true }%
-\DeclareOption{nolistings}{ \sod@uselistings@false }%
+\DeclareOption{listings}{ \sod@uselistings@true }
+\DeclareOption{nolistings}{ \sod@uselistings@false }
 
 \ExecuteOptions{nodebug,dummy,listings}% set it explicitly
-\ProcessOptions\relax%
+\ProcessOptions\relax
 
 %% -----------------------------------------------------------------------------
 %% Basic Packages
@@ -67,12 +65,10 @@
 %% Helper Methods
 %% -----------------------------------------------------------------------------
 
-\def\sod@thesodversion#1#2#3#4\@nil{%
-    \begingroup{}v#1.#2.#3#4\endgroup%
-}
+\def\sod@thesodversion#1#2#3#4\@nil{\begingroup v#1.#2.#3#4\endgroup}
 \def\thesodversion{%
     \edef\@tmp{\noexpand\sod@thesodversion\arabic{sodversion}\noexpand\@nil}%
-    \@tmp%
+    \@tmp
 }
 
 %% -----------------------------------------------------------------------------
@@ -117,8 +113,6 @@
 %% -----------------------------------------------------------------------------
 %% Comfort-Methods and linkers
 %% -----------------------------------------------------------------------------
-
 \long\def\say#1{\glqq{#1}\grqq{}}
 \newcommand\jmark[2][Linkname]{\hyperref[#2]{#1}}
-
 \endinput

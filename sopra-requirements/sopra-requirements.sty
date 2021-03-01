@@ -21,7 +21,7 @@
 \newcounter{sor@counter@quality@requirement}%
 
 \newlength{\sor@length@list@compensation}%
-\setlength\sor@length@list@compensation{-0.5\baselineskip}
+\setlength\sor@length@list@compensation{-.5\baselineskip}
 
 \def\sor@table@headerstyle{\color{white}}
 
@@ -37,7 +37,6 @@
 \newif\ifsor@intoc@ % it is posible to place the reqs in the toc
 \newif\ifsor@showtag@ % should the nametag be shown?
 \newif\ifsor@showall@ % should all fields be shown?
-
 
 % TODO: highlight first, option to disable highlihgting of headerrow
 
@@ -156,12 +155,12 @@
 % #1: check for given if not forced
 % #2:
 \long\def\sor@showifgivenorforced#1#2{%
-    \ifsor@showall@#2\else\expandafter\ifx\expandafter\\#1\\\else#2\fi\fi%
+    \ifsor@showall@#2\else\expandafter\ifx\expandafter!#1!\else#2\fi\fi
 }
 
 % \ifcase#1 Unwichtig\or Niedrig\or Nett\or Neutral\or Wichtig\or Elementar\else Nicht angegeben\fi
 % \colorlet{sor@color@star}{HeaderColor}
-\def\sor@setpriority#1{\begingroup\ifnum#1<0\else\color{HeaderColor}\foreach \i in {5,...,1}{\ifnum\i<5\relax \,\fi\ifnum\i>#1\relax \faStarO\else\faStar\fi}\fi\endgroup}
+\def\sor@setpriority#1{\begingroup\ifnum#1<0\else\color{HeaderColor}\foreach \i in {5,...,1}{\ifnum\i<5\relax \thinspace\fi\ifnum\i>#1\relax \faStarO\else\faStar\fi}\fi\endgroup}
 \let\sorSetPriority\sor@setpriority
 
 %% -----------------------------------------------------------------------------
@@ -250,7 +249,7 @@
                 \preqref*{\@sor@dpc}%
             }\\}% \\}
             \bottomrule
-        \end{longtable}\endgroup\fi\smallskip%
+        \end{longtable}\endgroup\fi\smallskip
     }%\par%
 }%
 
@@ -261,20 +260,18 @@
 % Note: I've written them before, sloppy, for own use - there is no need to
 %       change that so he following commands will have some funny schduff
 
-\def\sor@thesorversion#1#2#3#4\@nil{%
-    \begingroup{}v#1.#2.#3#4\endgroup%
-}
+\def\sor@thesorversion#1#2#3#4\@nil{\begingroup v#1.#2.#3#4\endgroup}
 \def\thesorversion{%
     \edef\@tmp{\noexpand\sor@thesorversion\arabic{sorversion}\noexpand\@nil}%
-    \@tmp%
+    \@tmp
 }
 
 %% we want to automate the requirement structure,
 %% Please not that, preqref can be used by number AND by ID whereas the ID shouldl never be a number
 \def\preqref{\@ifstar{\@sor@starred@preqref}{\@sor@unstarred@preqref}}
 % This one will set the Name too :D
-\newcommand\@sor@unstarred@preqref[2][]{\ifx\\#1\\\pref{tbl:requirement:#2}{\@nameuse{@sor@r@titles@#2}}\else\sor@cstpreqref{#2}{#1}\fi}
-\newcommand\@sor@starred@preqref[2][]{\ifx\\#1\\\pref{tbl:requirement:#2}{#2}\else\sor@cstpreqref{#2}{#1}\fi}
+\newcommand\@sor@unstarred@preqref[2][]{\ifx!#1!\pref{tbl:requirement:#2}{\@nameuse{@sor@r@titles@#2}}\else\sor@cstpreqref{#2}{#1}\fi}
+\newcommand\@sor@starred@preqref[2][]{\ifx!#1!\pref{tbl:requirement:#2}{#2}\else\sor@cstpreqref{#2}{#1}\fi}
 
 \robustify{\preqref}
 
@@ -292,5 +289,4 @@
 \def\sor@splittag#1:#2\@nil{#1}
 \def\sor@getreqnum#1{\edef\@tmp{\noexpand\sor@splittag\@nameuse{@sor@r@titles@#1}: \noexpand\@nil}\@tmp}
 \def\sor@cstpreqref#1#2{\pref{tbl:requirement:#1}{#2 (\sor@getreqnum{#1})}}
-
 \endinput

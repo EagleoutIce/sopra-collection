@@ -122,15 +122,15 @@
 {1ex \@plus.2ex }
 {\normalfont\Large\bfseries}}
 \renewcommand{\subsection}{\@startsection {subsection}{2}{\z@}
-{-3ex \@plus 0.1ex \@minus -.4ex}
-{0.5ex \@plus.2ex }
+{-3ex \@plus .1ex \@minus -.4ex}
+{.5ex \@plus.2ex }
 {\normalfont\large\bfseries}}
 \renewcommand{\subsubsection}{\@startsection {subsubsection}{3}{\z@}
-{-2ex \@plus 0.1ex \@minus -.2ex}
+{-2ex \@plus .1ex \@minus -.2ex}
 {.2ex \@plus.2ex }
 {\normalfont\normalsize\sffamily\itshape}}
 \renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}
-{-2ex \@plus.2ex \@minus .2ex}
+{-2ex \@plus .2ex \@minus .2ex}
 {.1ex}
 {\normalfont\small\itshape}}
 
@@ -138,12 +138,10 @@
 %% Helper Methods
 %% -----------------------------------------------------------------------------
 
-\def\sob@thesobversion#1#2#3#4\@nil{%
-    \begingroup{}v#1.#2.#3#4\endgroup%
-}
+\def\sob@thesobversion#1#2#3#4\@nil{\begingroup v#1.#2.#3#4\endgroup}
 \def\thesobversion{%
     \edef\@tmp{\noexpand\sob@thesobversion\arabic{sobversion}\noexpand\@nil}%
-    \@tmp%
+    \@tmp
 }
 
 \def\sob@mail#1{\href{mailto:#1}{#1}}
@@ -151,7 +149,7 @@
 \def\sob@month@to@name#1{%
     \ifcase#1\or{Januar}\or{Februar}\or{M\"{a}rz}\or{April}\or{Mai}\or{Juni}%
     \or{Juli}\or{August}\or{September}\or{Oktober}\or{November}\or{Dezember}%
-    \else\@ctrerr\fi%
+    \else\@ctrerr\fi
 }
 
 
@@ -160,7 +158,7 @@
     \begingroup#3.\space{\sob@month@to@name{#2}}\space{}#1\endgroup%
 }
 \def\DateConvert#1%
-{\expandafter\ifx\expandafter\\#1\\\else\expandafter\sob@date@convert#1\@nil\fi}
+{\expandafter\ifx\expandafter!#1!\else\expandafter\sob@date@convert#1\@nil\fi}
 
 %% -----------------------------------------------------------------------------
 %% Set the Document-Metadata
@@ -190,9 +188,9 @@
 % iterators for handling and parsing author information.
 \def\sob@@add@author#1{%
     \let\sob@@tmp@old@authors\sob@register@authors%
-    \expandafter\ifx\expandafter\\\sob@@tmp@old@authors\\%
-    \xdef\sob@register@authors{#1}\else%
-    \xdef\sob@register@authors{\sob@@tmp@old@authors,#1}\fi%
+    \expandafter\ifx\expandafter!\sob@@tmp@old@authors!%
+    \xdef\sob@register@authors{#1}\else
+    \xdef\sob@register@authors{\sob@@tmp@old@authors,#1}\fi
 }
 \let\addAuthor\sob@@add@author
 
@@ -204,17 +202,17 @@
 \def\sob@@typeset@author#1{%
     \setcounter{sob@counter@tmp@a}{0}% start with an offset
     \foreach \@tmp in {#1}%
-        {\expandafter\ifx\expandafter\\\@tmp\\\else%
+        {\ifx\@tmp\@empty\else
             \stepcounter{sob@counter@tmp@a}\fi}%
     \edef\sob@authors@totallength{\arabic{sob@counter@tmp@a}}%
     \setcounter{sob@counter@tmp@a}{0} % stored the length of the list
     \foreach \sob@@tmp@curauthor in {#1} {%
-        \expandafter\ifx\expandafter\\\sob@@tmp@curauthor\\%empty => ignore
+        \ifx\sob@@tmp@curauthor\@empty%empty => ignore
         \else\stepcounter{sob@counter@tmp@a}%
             \ifnum\thesob@counter@tmp@a>1%
-            \ifnum\thesob@counter@tmp@a=\sob@authors@totallength%
+            \ifnum\thesob@counter@tmp@a=\sob@authors@totallength
                 ~und \else,\space\fi\fi
-            \expandafter\sob@@parse@author\sob@@tmp@curauthor\@nil%
+            \expandafter\sob@@parse@author\sob@@tmp@curauthor\@nil
         \fi%
     }%
 }
@@ -248,7 +246,7 @@
 \thispagestyle{empty}
 \begin{tikzpicture}[remember picture,overlay,
         tnode/.style={font=\large,sob@col@uulm@akzent!50!black,left}]
-    \expandafter\ifx\expandafter\\\sob@register@groupnum\\
+    \ifx\sob@register@groupnum\@empty
     \node[above right,sob@col@uulm@akzent,font=\small] at%
     ($(current page.north west)+(\sob@len@header,-\sob@len@logoheight/2+0.1cm)$)
     {\sob@team@name}; \node[right,sob@col@uulm@akzent] at%

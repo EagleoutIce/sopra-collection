@@ -36,7 +36,7 @@
 \DeclareOption{nousefa}{ \sol@fontawesome@use@false }
 
 \ExecuteOptions{attsymbols,nodocheck,usefa}% set it explicitly
-\ProcessOptions\relax%
+\ProcessOptions\relax
 
 %% -----------------------------------------------------------------------------
 %% Basic Packages
@@ -76,12 +76,10 @@
 %% Helper Functions
 %% -----------------------------------------------------------------------------
 
-\def\soa@thesoaversion#1#2#3#4\@nil{%
-    \begingroup{}v#1.#2.#3#4\endgroup%
-}
+\def\soa@thesoaversion#1#2#3#4\@nil{\begingroup v#1.#2.#3#4\endgroup}
 \def\thesoaversion{%
     \edef\@tmp{\noexpand\soa@thesoaversion\arabic{soaversion}\noexpand\@nil}%
-    \@tmp%
+    \@tmp
 }
 
 % #1 config
@@ -95,20 +93,20 @@
 }
 
 \def\sol@attachfile@symbol#1#2#3{%
-    \ifsol@notfound@isfail@%
+    \ifsol@notfound@isfail@
         \sol@@attachfile@symbol{#1}{#2}{#3}%
     \else% check
         \IfFileExists{#3#2}{\sol@@attachfile@symbol{#1}{#2}{#3}}%
         {<Attachment not found!>}%
-    \fi%
+    \fi
 }
 
 
 \def\sol@textprefix{}
 
-\ifsol@fontawesome@use@%
+\ifsol@fontawesome@use@
 \def\sol@textprefix{%
-\noexpand\expandafter\noexpand\smash\noexpand\rotatebox[origin=c]{282}{\noexpand\small\noexpand\faPaperclip{}}\noexpand\,%
+\noexpand\expandafter\noexpand\smash\noexpand\rotatebox[origin=c]{282}{\noexpand\small\noexpand\faPaperclip{}}\noexpand\thinspace
 }\fi
 
 % #1 config
@@ -116,8 +114,8 @@
 % #3 search-path-addition
 % #4 text
 \long\def\sol@@attachfile@text#1#2#3#4{%
-    \edef\@sol@tmp{\noexpand\textattachfile[#1,subject={#2}]{#3#2}{\sol@textprefix#4}}%
-    \@sol@tmp{}%
+    \edef\@sol@tmp{\noexpand\textattachfile[#1,subject={#2}]{#3#2}{\sol@textprefix#4}}&
+    \@sol@tmp
 }
 
 \def\sol@attachfile@text#1#2#3#4{%
