@@ -15,7 +15,6 @@
 %% -----------------------------------------------------------------------------
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
-
 \newcounter{sotversion} \setcounter{sotversion}{1004}
 
 \newif\ifsot@usetabu@ % we can use regular tabular - if tabu won't work.
@@ -54,8 +53,8 @@
 
 \def\sot@table@headerstyle@inv{\color{MaterialHeaderColor}}
 \def\sot@table@headerstyle@norm{\color{white}}
-\ifsot@invert@\let\sot@table@headerstyle\sot@table@headerstyle@inv%
-\else\let\sot@table@headerstyle\sot@table@headerstyle@norm\fi%
+\ifsot@invert@\let\sot@table@headerstyle\sot@table@headerstyle@inv
+\else\let\sot@table@headerstyle\sot@table@headerstyle@norm\fi
 
 
 
@@ -111,18 +110,15 @@
 %% Helper Functions
 %% -----------------------------------------------------------------------------
 
-\def\sot@thesotversion#1#2#3#4\@nil{%
-    {v#1.#2.#3#4}%
-}
+\def\sot@thesotversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 \def\thesotversion{%
     \edef\@tmp{\noexpand\sot@thesotversion\arabic{sotversion}\noexpand\@nil}%
-    \@tmp%
+    \@tmp
 }
 
 %% -----------------------------------------------------------------------------
 %% Create the basic environments
 %% -----------------------------------------------------------------------------
-
 \ifsot@usetabu@
     % Material styled table. Works similar to tabular
     \newenvironment{mtabular}[1]{\begingroup
@@ -142,7 +138,7 @@
         \everyrow{\tabucline[.4mm  white]{}}
         \tabulinesep = ^2mm_2mm
         \begin{longtabu}{>{~}#2<{~}}
-            \ifx\\#1\\\sot@table@headerrow*\else% style the first row :D
+            \ifx!#1!\sot@table@headerrow*\else% style the first row :D
             \sot@table@headerrow*#1\vspace*{-0.1\baselineskip}\\\endfirsthead
             \sot@table@headerrow@next#1\vspace*{-0.1\baselineskip}\\\endhead\fi
     }{
@@ -152,24 +148,18 @@
     % Material styled table. Works similar to tabular
     \newenvironment{mtabular}[1]{%
         \begin{tabular}{>{~}#1<{~}}
-            \toprule%
+            \toprule
             \sot@table@headerrow*% style the first row :D
-    }{
-        \bottomrule
-        \end{tabu}
-    }
+    }{\bottomrule\end{tabu}}
 
     % Matieal styled long table.
     \newenvironment{mltabular}[2][]{%
         \begin{longtable}{>{~}#2<{~}}
             \toprule
-            \ifx\\#1\\\sot@table@headerrow*\else% style the first row :D
+            \ifx!#1!\sot@table@headerrow*\else% style the first row :D
             \sot@table@headerrow*#1\vspace*{-0.1\baselineskip}\\\midrule\endfirsthead
             \sot@table@headerrow@next#1\vspace*{-0.1\baselineskip}\\\midrule\endhead\fi
-    }{
-        \bottomrule
-        \end{longtabu}
-    }
+    }{\bottomrule\end{longtabu}}
 \fi
 
 %% -----------------------------------------------------------------------------
@@ -182,10 +172,10 @@
     {You have to load the 'color-palettes' package yourself if you use the 'cpalette'-Option.}%
 }{% Add to the hook..
 }
-\let\sot@old@cpl@hooks\cpl@hooks%
+\let\sot@old@cpl@hooks\cpl@hooks
 \def\cpl@hooks{% Add to the hook
-    \sot@old@cpl@hooks%
-    \sot@cpalette@hook%
+    \sot@old@cpl@hooks
+    \sot@cpalette@hook
 }
 % TODO: maybe change later?
 \def\sot@cpalette@hook{%
@@ -194,5 +184,4 @@
 }
 \fi
 }
-
 \endinput
