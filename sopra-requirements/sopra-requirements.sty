@@ -72,9 +72,9 @@
 %% -----------------------------------------------------------------------------
 
 % 'Key'-column
-\newcolumntype{K}{p{0.175\linewidth}}%>{\small}
+\newcolumntype{K}{p{.175\linewidth}}%>{\small}
 % 'Value'-column
-\newcolumntype{V}{p{0.725\linewidth}}
+\newcolumntype{V}{p{.725\linewidth}}
 
 %% -----------------------------------------------------------------------------
 %% Color Definitions
@@ -110,11 +110,11 @@
 \ifsor@usetabu@
     \def\sor@table@headerrow{%
         \rowfont{\normalfont\bfseries\leavevmode\sor@table@headerstyle}%
-        \rowcolor{HeaderColor}\@ifstar{}{\Gape[0.5mm][0.25mm]{}}%
+        \rowcolor{HeaderColor}\@ifstar{}{\Gape[.5mm][.25mm]{}}%
     }
     \def\sor@table@headerrow@next{% maybe use llap for the symbol?
         \rowfont{\normalfont\bfseries\leavevmode\sor@table@headerstyle}%
-        \rowcolor{NextHeaderColor}\@ifstar{}{\Gape[0.5mm][0.25mm]{}}{%
+        \rowcolor{NextHeaderColor}\@ifstar{}{\Gape[.5mm][.25mm]{}}{%
             \hspace*{-6mm}%
             \llap{\textcolor{NextHeaderColor!40!white}{$\blacktriangledown$}}%
         }\hspace*{6mm}$\;$%
@@ -282,7 +282,7 @@
 \settoheight\sor@ctheight@{\fontsize\f@size\z@ A}%
 {\m@th\ensuremath{\raise.275\sor@ctheight@\hbox{\fontsize\sf@size\z@#1}}}}
 
-\def\pref#1#2{\hyperref[#1]{#2\sor@textsuperscript{$\,\to p.\,$\pageref{#1}}}}
+\def\pref#1#2{\hyperref[#1]{#2\sor@textsuperscript{$\,\to p.$\thinspace\pageref{#1}}}}
 
 \def\iskip{\vspace*{\sor@length@list@compensation}}
 

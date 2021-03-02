@@ -140,11 +140,11 @@
 
 \ifsop@usebook@
 \addto\captionsngerman{
-    \renewcommand{\contentsname}{\leavevmode\\[-0.75\baselineskip]\strut{}\xcontentname}
+    \renewcommand{\contentsname}{\leavevmode\\[-0.75\baselineskip]\strut\xcontentname}
 }
 \else
 \addto\captionsngerman{
-    \renewcommand{\contentsname}{\strut{}\xcontentname}
+    \renewcommand{\contentsname}{\strut\xcontentname}
 }
 \fi
 %% -----------------------------------------------------------------------------
@@ -225,14 +225,13 @@
 \def\sop@month@to@name#1{%
     \ifcase#1\or{Januar}\or{Februar}\or{M\"{a}rz}\or{April}\or{Mai}\or{Juni}%
     \or{Juli}\or{August}\or{September}\or{Oktober}\or{November}\or{Dezember}%
-    \else\@ctrerr\fi%
-}
+    \else\@ctrerr\fi}
 
 \def\sop@date@convert#1-#2-#3\@nil{%
-    \begingroup#3.\space{\sop@month@to@name{#2}}\space{} #1\endgroup%
+    \begingroup#3.\space{\sop@month@to@name{#2}}\space#1\endgroup%
 }
 \def\DateConvert#1%
-{\expandafter\ifx\expandafter\\#1\\\else\expandafter\sop@date@convert#1\@nil\fi}
+{\expandafter\ifx\expandafter!#1!\else\expandafter\sop@date@convert#1\@nil\fi}
 
 %% -----------------------------------------------------------------------------
 %% Set the Document-Metadata
@@ -261,10 +260,10 @@
 
 % iterators for handling and parsing author information.
 \def\sop@@add@author#1{%
-    \let\sop@@tmp@old@authors\sop@register@authors%
-    \expandafter\ifx\expandafter\\\sop@@tmp@old@authors\\%
-    \xdef\sop@register@authors{#1}\else%
-    \xdef\sop@register@authors{\sop@@tmp@old@authors,#1}\fi%
+    \let\sop@@tmp@old@authors\sop@register@authors
+    \ifx\sop@@tmp@old@authors\@empty
+    \xdef\sop@register@authors{#1}\else
+    \xdef\sop@register@authors{\sop@@tmp@old@authors,#1}\fi
 }
 \let\addAuthor\sop@@add@author
 
@@ -276,12 +275,12 @@
 \def\sop@@typeset@author#1{%
     \setcounter{sop@counter@tmp@a}{0}% start with an offset
     \foreach \@tmp in {#1}%
-        {\expandafter\ifx\expandafter\\\@tmp\\\else%
+        {\ifx\@tmp\@empty\else%
             \stepcounter{sop@counter@tmp@a}\fi}%
     \edef\sop@authors@totallength{\arabic{sop@counter@tmp@a}}%
     \setcounter{sop@counter@tmp@a}{0} % stored the length of the list
     \foreach \sop@@tmp@curauthor in {#1} {%
-        \expandafter\ifx\expandafter\\\sop@@tmp@curauthor\\%empty => ignore
+        \ifx\sop@@tmp@curauthor\@empty%empty => ignore
         \else\stepcounter{sop@counter@tmp@a}%
             \ifnum\thesop@counter@tmp@a>1%
             \ifnum\thesop@counter@tmp@a=\sop@authors@totallength%
@@ -343,12 +342,12 @@
 
 \let\sop@appendix\appendix
 \def\appendix{%
-    \clearpage%
-    \global\sop@inappendix@true%
+    \clearpage
+    \global\sop@inappendix@true
     \ifsop@usebook@\else
     \global\renewcommand{\sectionmark}[1]{\markright{\@Alph\c@section,~##1}}
     \fi
-    \global\let\@sop@store@chpcount\sop@store@chapter@appendix\sop@appendix%
+    \global\let\@sop@store@chpcount\sop@store@chapter@appendix\sop@appendix
 }
 
 % Total chapter number now in '\thesop@counter@chapter@counter'
@@ -400,7 +399,7 @@
     \node[cprimary,left=2pt] at (tl@pf@lockpos) {\Huge$\thepage$};
     % Cur section rectangle
     \fill[cakzent] (tl@pf@lockpos) rectangle ++(5.5cm,0.55pt);
-    \node[above right,yshift=-1pt,font=\footnotesize,text width=5cm,align=left,minimum height=0.736cm] at (tl@pf@lockpos) {\strut\expandafter\ifx\expandafter\\\rightmark\\ \leftmark\else \rightmark\fi\strut{}};
+    \node[above right,yshift=-1pt,font=\footnotesize,text width=5cm,align=left,minimum height=0.736cm] at (tl@pf@lockpos) {\strut\ifx\rightmark\@empty \leftmark\else \rightmark\fi\strut};
     \def\@sop@cury{0}
     \def\@sop@curxoff{0} % allow a second line
     \ifsop@notoc@ % normal mode
@@ -633,13 +632,14 @@
 %% Titlepage
 %% -----------------------------------------------------------------------------
 
+\def\sop@tp@plussymb{+}
 \def\sop@titlepage@groupnum@iter#1#2\@nil{%
-    \def\tmp@a{#1}\def\tmp@b{+}%
-    \ifx\tmp@a\tmp@b\else
+    \def\tmp@a{#1}%
+    \ifx\tmp@a\sop@tp@plussymb\else
     %\rotatebox{-4}{$\mathbf{#1}\hspace*{-1pt}$}%
     $\mathbf{#1}$%
-        \def\tmp@a{#2}\def\tmp@b{+}%
-        \ifx\tmp@a\tmp@b\else
+        \def\tmp@a{#2}%
+        \ifx\tmp@a\sop@tp@plussymb\else
              \sop@titlepage@groupnum@iter#2+\@nil
         \fi
     \fi
@@ -686,9 +686,9 @@
             % \coordinate (olive) at($(ct@ystraw)+(-34mm,105mm)$);
             % \fill[ctpsymbol,rotate around={45:(olive)},] (olive) ellipse (9mm and 8.15mm);
             % here we will plant the group-Tag at the 007 position, having a lot of fun :D
-            \expandafter\ifx\expandafter\\\sop@register@groupnum\\\else
+            \ifx\sop@register@groupnum\@empty\else
             \node[right=0.1cm,yshift=0.4cm,font=\fontsize{17}{17}\selectfont\sffamily,ctpsymbol] (ct@gnumt) at (ct@groupnum) {\sop@titlepage@groupnum{\sop@register@groupnum}};
-            \node[right,yshift=0.10cm,xshift=0.4cm,font=\fontsize{8}{8}\selectfont\sffamily,ctpsymbol] at (ct@gnumt){\expandafter\ifx\expandafter\\\sop@register@group\\Team\else\rlap{\sop@register@group}\fi};
+            \node[right,yshift=0.10cm,xshift=0.4cm,font=\fontsize{8}{8}\selectfont\sffamily,ctpsymbol] at (ct@gnumt){\ifx\sop@register@group\@empty Team\else\rlap{\sop@register@group}\fi};
             \fi
         \end{tikzpicture}}\\[5em]
         \sop@sepline
@@ -705,13 +705,13 @@
         \vfill
         % Set The Author
         \begin{minipage}{0.6\linewidth}\footnotesize\color{ctpsymbol}
-            \expandafter\ifx\expandafter\\\sop@register@duedate\\\else
+            \ifx\sop@register@duedate\@empty\else
                 \begingroup\hbox{}\quad\scriptsize\DateConvert{\sop@register@duedate}\sop@AfterDate\endgroup\\[-0.2\baselineskip]%
             \fi
             {\color{ctpsymbol}$\Large\llap{$\diamond$}\hspace*{-1pt}$\rule[0.275\baselineskip]{0.45\linewidth}{0.55pt}\\}%
             \ignorespaces{{\bfseries{}Bearbeitung:}}\\
             \ignorespaces\hbox{}\quad\parbox{\linewidth}{\typesetAuthors}\bigskip\par
-            \expandafter\ifx\expandafter\\\sop@register@brief\\\else
+            \ifx\sop@register@brief\@empty\else
             \ignorespaces{\bfseries{}Beschreibung:}\smallskip\\
             \hbox{}\quad\parbox{\linewidth}{\sop@register@brief}\fi
         \end{minipage}\vspace*{2em}
@@ -731,7 +731,7 @@
     \hbox{}\vfill\begingroup\scriptsize
     \begin{flushright}
         \parbox{9cm}{
-        \textbf{\(-\,\)\DateConvert{2019-12-15}\(\,-\)}\\
+        \textbf{$-\,$\DateConvert{2019-12-15}$\,-$}\\
         \color{cprimary}Dieses Layout wurde für das Softwaregrundprojekt
         im Wintersemester 2019/2020 von Florian Sihler im Rahmen des
         Informatikstudiums an der Universität Ulm vollständig in \LaTeXe{} erstellt.}
@@ -751,7 +751,7 @@
 \newcommand\TableOfContents[1][]{\hypertarget{toc.I}\relax%
     \section*{\contentsname}\relax%
     \markright{I, \xcontentname}
-    \ifx\\#1\\\else\vspace*{-\topsep}#1\par\fi%
+    \ifx!#1!\else\vspace*{-\topsep}#1\par\fi%
     \begingroup\@starttoc{toc}\endgroup%
 }\fi
 

@@ -133,7 +133,7 @@
         % check if already created :D
         % \typeout{Not removed: #3}
         \ifnum\value{soc@compile@target@version}<#2\relax% nope
-        \soc@printthis@version@false\else%
+        \soc@printthis@version@false\else
         \marginpar{\tiny\faPlusCircle{} V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}}%
         \fi% jepp
     }{% Got removed, are we pre-removed?
@@ -146,8 +146,8 @@
     %Defining skimmer:
     \ifsoc@printthis@version@%
         \newenvironment{version@read}{\begingroup\ignorespaces}{\endgroup}% no consumption!
-        \else\NewEnviron{version@read}{}\fi%
-    \version@read%
+        \else\NewEnviron{version@read}{}\fi
+    \version@read
     }{\endversion@read}%
 
 \newcommand\simpleversion[4][]{%
@@ -189,8 +189,7 @@
 \def\soc@month@to@name#1{%
     \def\tmp@a{#1}\ifx\soc@month@unknown\tmp@a??\else\ifcase#1\or{Januar}\or{Februar}\or{M\"{a}rz}\or{April}\or{Mai}\or{Juni}%
     \or{Juli}\or{August}\or{September}\or{Oktober}\or{November}\or{Dezember}%
-    \else\@ctrerr\fi\fi%
-}
+    \else\@ctrerr\fi\fi}
 
 \def\soc@date@convert#1-#2-#3\@nil{%
     \begingroup#3.\space{\protect\soc@month@to@name{#2}}\space#1\endgroup%
@@ -248,9 +247,8 @@
 %% Helper Functions
 %% -----------------------------------------------------------------------------
 
-\def\soc@thesocversion#1#2#3#4\@nil{%
-    \begingroup v#1.#2.#3#4\endgroup
-}
+\def\soc@thesocversion#1#2#3#4\@nil{\begingroup v#1.#2.#3#4\endgroup}
+
 \def\thesocversion{%
 \edef\@tmp{\noexpand\soc@thesocversion\arabic{socversion}\noexpand\@nil}%
 \@tmp}

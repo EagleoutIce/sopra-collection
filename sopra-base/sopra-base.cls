@@ -30,9 +30,9 @@
 \newif\ifsob@showmail@% with show mail, the mail adresses of the authors will
                       % be used
 
-\newlength\sob@len@parindent \setlength\sob@len@parindent\parindent
-\newlength\sob@len@logoheight \setlength\sob@len@logoheight{2.6cm}
-\newlength\sob@len@header \setlength\sob@len@header{2cm}% header padding
+\newlength\sob@len@parindent \sob@len@parindent=\parindent
+\newlength\sob@len@logoheight \sob@len@logoheight=2.6cm
+\newlength\sob@len@header \sob@len@header=2cm % header padding
 
 \newcounter{sob@counter@tmp@a}
 
@@ -155,7 +155,7 @@
 
 
 \def\sob@date@convert#1-#2-#3\@nil{%
-    \begingroup#3.\space{\sob@month@to@name{#2}}\space{}#1\endgroup%
+    \begingroup#3.\space{\sob@month@to@name{#2}}\space{}#1\endgroup
 }
 \def\DateConvert#1%
 {\expandafter\ifx\expandafter!#1!\else\expandafter\sob@date@convert#1\@nil\fi}
@@ -187,8 +187,8 @@
 
 % iterators for handling and parsing author information.
 \def\sob@@add@author#1{%
-    \let\sob@@tmp@old@authors\sob@register@authors%
-    \ifx\sob@@tmp@old@authors\@empty%
+    \let\sob@@tmp@old@authors\sob@register@authors
+    \ifx\sob@@tmp@old@authors\@empty
     \xdef\sob@register@authors{#1}\else
     \xdef\sob@register@authors{\sob@@tmp@old@authors,#1}\fi
 }

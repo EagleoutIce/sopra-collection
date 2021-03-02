@@ -6,14 +6,12 @@
 %%
 %% Provides a useful wrapper to attach files to an PDF
 %%
-
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-attachments}[2019/12/03 EagleoutIce - attach documents for the sopra-team-020]
 
 %% -----------------------------------------------------------------------------
 %% Lengths and Registers
 %% -----------------------------------------------------------------------------
-
 \newcounter{soaversion} \setcounter{soaversion}{1100}
 
 % make switches for use of tcolorbox..
@@ -25,7 +23,6 @@
 %% -----------------------------------------------------------------------------
 %% Package-Args
 %% -----------------------------------------------------------------------------
-
 \DeclareOption{attsymbols}{ \sol@symbols@true }
 \DeclareOption{noattsymbols}{ \sol@symbols@false }
 
@@ -88,8 +85,7 @@
 \def\sol@@attachfile@symbol#1#2#3{%
     \ifsol@symbols@
         \protected@edef\@sol@tmp{\noexpand\scalebox{0.65}{\noexpand\attachfile[#1,subject={#2}]{#3#2}}}%
-    \else\protected@edef\@sol@tmp{\noexpand\textattachfile[#1,subject={#2}]{#3#2}{#2}}\fi%
-    \@sol@tmp{}%
+    \else\protected@edef\@sol@tmp{\noexpand\textattachfile[#1,subject={#2}]{#3#2}{#2}}\fi\@sol@tmp
 }
 
 \def\sol@attachfile@symbol#1#2#3{%
@@ -119,7 +115,7 @@
 }
 
 \def\sol@attachfile@text#1#2#3#4{%
-    \ifsol@notfound@isfail@%
+    \ifsol@notfound@isfail@
         \sol@@attachfile@text{#1}{#2}{#3}{#4}%
     \else% check
         \IfFileExists{#3#2}{\sol@@attachfile@text{#1}{#2}{#3}{#4}}%

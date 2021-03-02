@@ -87,7 +87,7 @@
         \hbox{}\hfill\sosFormatFlags{\sos@reg@flags}\\*%
     % now we will deploy the changelog and author section referencing all important metadata for the definiton.
     \nopagebreak[4]\hbox{}\hfill{}\begin{minipage}{0.975\textwidth}%
-        \scriptsize\expandafter\ifx\expandafter\\\sos@reg@authors@multiple\\Autor:\else Autoren:\fi%z
+        \scriptsize\ifx\sos@reg@authors@multiple\@empty Autor:\else Autoren:\fi%z
         \space\sos@reg@authors.\hfill{}(\sos@reg@status)\relax\\*%
     \end{minipage}\end{minipage}\hfill\hbox{}\smallskip\\*%
     \@ifundefined{@sop@registers@#2@removed}{}{% already-removed?
@@ -117,15 +117,14 @@
     }%
 }
 
-\def\sos@@parser@optargs#1,#2\@nil{\ignorespaces%
-    % \typeout{got: '#1','#2'}
-    \ifx\\#1\\\else%
-        % now do single parse
-        \expandafter\sos@@parser@optargs@parse#1\@nil%
-        \ifx\\#2\\\else% recursive call
-            \expandafter\sos@@parser@optargs#2,\@nil%
-        \fi%
-    \fi%
+\def\sos@@parser@optargs#1,#2\@nil{\ignorespaces
+\ifx!#1!\else
+    % now do single parse
+    \expandafter\sos@@parser@optargs@parse#1\@nil
+    \ifx!#2!\else% recursive call
+        \expandafter\sos@@parser@optargs#2,\@nil
+    \fi
+\fi
 }
 
 
@@ -133,7 +132,7 @@
 % the anme will be appeded to the list
 % will be called with: '#1 = author' and '#2 = <supplied name>'
 \def\@sos@parser@keyhandler@author#1#2{% will append the author
-    \expandafter\ifx\expandafter\\\sos@reg@authors\\% was empty:
+    \ifx\sos@reg@authors\@empty% was empty:
         \gdef\sos@reg@authors{#2}%
     \else% append:
     \let\tmp@cur@a\sos@reg@authors%
@@ -171,13 +170,10 @@
 %% The additional User-Functions :D
 %% -----------------------------------------------------------------------------
 
-\def\sos@thesosversion#1#2#3#4\@nil{%
-    \begingroup v#1.#2.#3#4\endgroup%
-}
+\def\sos@thesosversion#1#2#3#4\@nil{\begingroup v#1.#2.#3#4\endgroup}
 \def\thesosversion{%
     \edef\@tmp{\noexpand\sos@thesosversion\arabic{sosversion}\noexpand\@nil}%
-    \@tmp%
-}
+    \@tmp}
 
 
 %% -----------------------------------------------------------------------------
@@ -201,9 +197,7 @@
     \global\newcounter{#3}
     \newenvironment{#2}[5][]{%
         \sos@definition[#1,counter: #3,##1]{##2}{##3}{##4}{##5}%
-    }{%
-        \endsos@definition%
-    }
+    }{\endsos@definition}
     %\endgroup
 }
 
@@ -263,13 +257,13 @@
 
 % acts basically as \chapter{#1}, but will be '\setComment' aware
 \def\Chapter#1{%
-    \expandafter\ifx\expandafter\\\currentTocComment\\\chapter{#1}\else%
+    \ifx\currentTocComment\@empty\chapter{#1}\else%
         \begingroup
         % \newcommand\voidpdfbookmark[3][]{}%
         % \let\pdfbookmark\voidpdfbookmark%
         \pgfmathsetmacro\nextchap{int(\value{chapter}+1)}%
         \hypertarget{sopchapter.\nextchap}{}\nopagebreak%
-        \chapter[{\parbox[t]{\linewidth-1.5cm}{#1\\[0.5\topsep]\strut\mdseries{\itshape\scriptsize{\currentTocComment}\strut}}}]{#1}% ~~~
+        \chapter[{\parbox[t]{\linewidth-1.5cm}{#1\\[.5\topsep]\strut\mdseries{\itshape\scriptsize{\currentTocComment}\strut}}}]{#1}% ~~~
         \endgroup
         % \endgroup
     \fi\gdef\currentTocComment{}%
@@ -316,7 +310,7 @@
 %\addcontentsline{toc}{subsubsection}{Begriff \thecounterDefinitions: #1}
 \pdfbookmark[3]{Begriff \thecounterDefinitions: #1}{ms@shead@@bg@#1}
 }
-\newcommand\begriffref[2][]{\pref{BEGRIFF:#2}{\ifx\\#1\\#2\else#1\fi}} % => sopra-tables
+\newcommand\begriffref[2][]{\pref{BEGRIFF:#2}{\ifx!#1!#2\else#1\fi}} % => sopra-tables
 \newcolumntype{B}{>{\bfseries}K}
 \long\def\say#1{\glqq#1\grqq{}}
 % Change the behaviour - sadly, this will enable be to keep hyperlinks inside of the Grahics, which i consider to be more effective

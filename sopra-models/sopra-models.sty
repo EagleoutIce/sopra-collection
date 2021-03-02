@@ -48,25 +48,23 @@
 
 \newcounter{somversion} \setcounter{somversion}{1000}
 
-\newlength\tikzuml@AC@xa     \newlength\tikzuml@AC@ya     \newlength\tikzuml@AC@xb%
-\newlength\tikzuml@AC@yb     \newlength\tikzuml@AC@xi     \newlength\tikzuml@AC@yi%
-\newlength\tikzuml@AC@xic    \newlength\tikzuml@AC@yic    \newlength\tikzuml@AC@xio%
-\newlength\tikzuml@AC@yio    \newlength\tikzuml@AC@AB     \newlength\tikzuml@AC@lambda%
-\newlength\tikzuml@AC@xtrc   \newlength\tikzuml@AC@ytrc   \newlength\tikzuml@AC@xtlc%
-\newlength\tikzuml@AC@ytlc   \newlength\tikzuml@AC@xblc   \newlength\tikzuml@AC@yblc%
-\newlength\tikzuml@AC@xbrc   \newlength\tikzuml@AC@ybrc   \newlength\tikzuml@AC@middleArm%
-\newlength\tikzumlCall@xa    \newlength\tikzumlCall@xb%
+\newlength\tikzuml@AC@xa     \newlength\tikzuml@AC@ya     \newlength\tikzuml@AC@xb
+\newlength\tikzuml@AC@yb     \newlength\tikzuml@AC@xi     \newlength\tikzuml@AC@yi
+\newlength\tikzuml@AC@xic    \newlength\tikzuml@AC@yic    \newlength\tikzuml@AC@xio
+\newlength\tikzuml@AC@yio    \newlength\tikzuml@AC@AB     \newlength\tikzuml@AC@lambda
+\newlength\tikzuml@AC@xtrc   \newlength\tikzuml@AC@ytrc   \newlength\tikzuml@AC@xtlc
+\newlength\tikzuml@AC@ytlc   \newlength\tikzuml@AC@xblc   \newlength\tikzuml@AC@yblc
+\newlength\tikzuml@AC@xbrc   \newlength\tikzuml@AC@ybrc   \newlength\tikzuml@AC@middleArm
+\newlength\tikzumlCall@xa    \newlength\tikzumlCall@xb
 
 %% -----------------------------------------------------------------------------
 %% Helper Methods
 %% -----------------------------------------------------------------------------
 
-\def\som@thesomversion#1#2#3#4\@nil{%
-    \begingroup{}v#1.#2.#3#4\endgroup%
-}
+\def\som@thesomversion#1#2#3#4\@nil{\begingroup v#1.#2.#3#4\endgroup}
 \def\thesomversion{%
     \edef\@tmp{\noexpand\som@thesomversion\arabic{somversion}\noexpand\@nil}%
-    \@tmp%
+    \@tmp
 }
 
 %% -----------------------------------------------------------------------------

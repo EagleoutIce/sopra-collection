@@ -123,7 +123,7 @@
 \beamertemplatenavigationsymbolsempty
 
 \setbeamertemplate{itemize items}{\tiny\raisebox{1.45pt}{$\blacksquare$}}
-\setbeamertemplate{itemize subitem}{\tiny\tikz[baseline=-0.85ex]{\fill (0,0) circle (1.65pt);}}
+\setbeamertemplate{itemize subitem}{\tiny\tikz[baseline=-.85ex]{\fill (0,0) circle (1.65pt);}}
 
 \setbeamersize{text margin left=5mm,text margin right=5mm}
 
@@ -233,7 +233,7 @@
 
 \setbeamertemplate{section in toc}{\medskip\vfill\inserttocsection\par}
 
-\setbeamertemplate{subsection in toc}{\qquad{\scalebox{0.65}{\raisebox{0.75pt}{$\blacksquare$}}} \inserttocsubsection\par}
+\setbeamertemplate{subsection in toc}{\qquad{\scalebox{.65}{\raisebox{.75pt}{$\blacksquare$}}} \inserttocsubsection\par}
 
 
 %% -----------------------------------------------------------------------------
@@ -416,7 +416,7 @@
 }
 
 \def\sos@font@futura@letter@Y{
-    \begingroup\def\sos@scaler{*0.75}
+    \begingroup\def\sos@scaler{*.75}
         \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) ++(65mm\sos@scaler,56mm) --++(0,-56mm) -| ++(43mm\sos@scaler,62mm) -- ++(-65mm\sos@scaler,132mm-62mm) -- ++(-43mm\sos@scaler,0) -- cycle; % TBlock
         \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) ++(65mm\sos@scaler,132mm) -- ++(45mm\sos@scaler,-50mm) --  ++(45mm\sos@scaler,50mm) --cycle; % upper right triangle
     \endgroup
@@ -453,7 +453,7 @@
 %% Title Style
 %% -----------------------------------------------------------------------------
 \def\sos@sepline{%
-        {\normalsize\color{ctpsymbol}{\huge$\llap{$\diamond$}\hspace*{-1pt}$}\rule[0.346\baselineskip]{\linewidth}{0.55pt}{\huge$\hspace*{-1pt}\rlap{$\diamond$}$}}%
+        {\normalsize\color{ctpsymbol}{\huge$\llap{$\diamond$}\hspace*{-1pt}$}\rule[.346\baselineskip]{\linewidth}{.55pt}{\huge$\hspace*{-1pt}\rlap{$\diamond$}$}}%
     }
 
 \defbeamertemplate*{title page}{seraphim}[1][]{%
@@ -461,17 +461,17 @@
     % as canvas color can fail:
     \fill[ctpbackground] (current page.south west) rectangle (current page.north east);
     \node[align=center,text width=\linewidth,ctpsymbol,font=\usebeamerfont{title}] at(current page.center) {%
-        \hbox{}\hfill\llap{\begin{tikzpicture}[scale=0.035]
+        \hbox{}\hfill\llap{\begin{tikzpicture}[scale=.035]
         \def\sos@font@futura@color@current{ctptext}
         \sos@ntts
         \node[\sos@font@futura@color@current,overlay] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\tiny\bfseries/};
         \end{tikzpicture}
-        }\leavevmode\vspace*{0.5ex}\newline
-        \begin{minipage}{0.95\linewidth}
-            {\tiny\hbox{}\ifx\sos@register@groupnum\@empty\else\quad Team~\sos@register@groupnum\fi\hfill\DateConvert{\sos@register@duedate}\hbox{}\quad\hbox{}}\\[-0.6\baselineskip]
+        }\leavevmode\vspace*{.5ex}\newline
+        \begin{minipage}{.95\linewidth}
+            {\tiny\hbox{}\ifx\sos@register@groupnum\@empty\else\quad Team~\sos@register@groupnum\fi\hfill\DateConvert{\sos@register@duedate}\hbox{}\quad\hbox{}}\\[-.6\baselineskip]
         \sos@sepline
         \begin{center}
-            \strut\inserttitle\vspace*{-0.5\topsep}
+            \strut\inserttitle\vspace*{-.5\topsep}
         \end{center}
         \sos@sepline
         \begin{center}
@@ -489,7 +489,7 @@
 %% -----------------------------------------------------------------------------
 %% Sizing Stuff
 %% -----------------------------------------------------------------------------
-\setbeamersize{text margin left=0.05\linewidth,text margin right=0.05\linewidth}
+\setbeamersize{text margin left=.05\linewidth,text margin right=.05\linewidth}
 
 %% -----------------------------------------------------------------------------
 %% Intro & Outro
@@ -535,7 +535,7 @@
         Bearbeitung:\\
         {\scriptsize\typesetAuthors\authorOutro}
         \\[1cm]
-    }\hbox{}\hfill\llap{\begin{tikzpicture}[scale=0.035]
+    }\hbox{}\hfill\llap{\begin{tikzpicture}[scale=.035]
         \def\sos@font@futura@color@current{cprimary}
         \sos@ntts
         \node[\sos@font@futura@color@current,overlay] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\tiny\bfseries/};
@@ -561,7 +561,7 @@
         % as canvas color can fail:
         \fill[ctpbackground] (current page.south west) rectangle (current page.north east);
         \node[align=center,text width=\linewidth,ctpsymbol,font=\usebeamerfont{title}] at(current page.center) {%
-            \begin{tikzpicture}[scale=0.125]
+            \begin{tikzpicture}[scale=.125]
             \def\sos@font@futura@color@current{ctptext}
             \sos@ntts
             \node[\sos@font@futura@color@current,overlay] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\small\bfseries/};
@@ -584,14 +584,14 @@
     \begin{tikzpicture}[remember picture,overlay]
         \ifx\insertsectionhead\@empty\else%
         \ifx\insertsubsectionhead\@empty\else%
-            \node[above right,yshift=0.1cm,scale=0.6,opacity=0.7] at (current page.south west) {\strut\begingroup\insertsectionhead\endgroup\;--\;\begingroup\insertsubsectionhead\endgroup};
+            \node[above right,yshift=.1cm,scale=.6,opacity=.7] at (current page.south west) {\strut\begingroup\insertsectionhead\endgroup\;--\;\begingroup\insertsubsectionhead\endgroup};
         \fi\fi
         \fill[cprimary] (current page.south west) rectangle ($(current page.south east)+(0,1mm)$);
         \pgfmathsetmacro\curprocess{(\thepage-2)/(\insertdocumentendpage-2)*\paperwidth}
         \fill[cakzent] (current page.south west) rectangle ++(\curprocess pt,1mm);
-        % \node[above left,scale=0.9] at($(current page.south east)+(-0.5em,0.25em)$){\scriptsize\insertframenumber/\inserttotalframenumber};
-        % \node[above right,scale=0.9] at($(current page.south west)+(0.5em,0.25em)$){\scriptsize\insertshorttitle};
-    \end{tikzpicture}\vspace{0.5cm}
+        % \node[above left,scale=.9] at($(current page.south east)+(-.5em,.25em)$){\scriptsize\insertframenumber/\inserttotalframenumber};
+        % \node[above right,scale=.9] at($(current page.south west)+(.5em,.25em)$){\scriptsize\insertshorttitle};
+    \end{tikzpicture}\vspace{.5cm}
 }
 
 \defbeamertemplate*{frametitle}{lucy}[1][]{
@@ -599,17 +599,17 @@
         \fill[cprimary] (current page.north west) rectangle ($(current page.north east)+(0,-1cm)$);
         \node[right=14pt,cwhite,font=\usebeamerfont{frametitle}] at ($(current page.north west)+(0,-1cm/2-1mm)$) {{}\strut\insertframetitle\strut}; % \strut
         \fill[cakzent] (current page.north west) -| ($(current page.north east)+(0,-1mm)$) -| ($(current page.north east)+(-1mm,-9mm)$) -| ++(-14mm,8mm) -| cycle;
-        \node[scale=0.9] at($(current page.north east)+(-1mm-7mm,-5.5mm)$){\insertframenumber};
+        \node[scale=.9] at($(current page.north east)+(-1mm-7mm,-5.5mm)$){\insertframenumber};
     \end{tikzpicture}%
-    \vskip0.7cm
+    \vskip.7cm
 }
 
 % \defbeamertemplate*{frametitle}{lucy}[1][]{
 %     \begin{tikzpicture}[remember picture,overlay]
 %         % \fill[cprimary] (current page.north west) rectangle ($(current page.north east)+(0,-2.75em)$);
-%         \node[right=14pt,cakzent,font=\LARGE,align=left] at ($(current page.north west)+(0,-2.75em/2)$) {\strut~\insertframetitle\\[-0.65\baselineskip]\settowidth{\sos@len@tmp@a}{\strut~\insertframetitle}\pgfmathsetmacro\@sos@tmp@chk{\sos@len@tmp@a<(\linewidth-14pt)}
+%         \node[right=14pt,cakzent,font=\LARGE,align=left] at ($(current page.north west)+(0,-2.75em/2)$) {\strut~\insertframetitle\\[-.65\baselineskip]\settowidth{\sos@len@tmp@a}{\strut~\insertframetitle}\pgfmathsetmacro\@sos@tmp@chk{\sos@len@tmp@a<(\linewidth-14pt)}
 %         \ifnum\@sos@tmp@chk=1\addtolength{\sos@len@tmp@a}{14pt}\else\setlength{\sos@len@tmp@a}{\linewidth}\fi
-%         {\normalsize\color{chdtext}{\large$\llap{$\diamond$}\hspace*{-0.75pt}$}\rule[0.186\baselineskip]{\sos@len@tmp@a}{0.55pt}}}; % \strut
+%         {\normalsize\color{chdtext}{\large$\llap{$\diamond$}\hspace*{-.75pt}$}\rule[.186\baselineskip]{\sos@len@tmp@a}{.55pt}}}; % \strut
 
 %     \end{tikzpicture}
 %     \vskip2.25em
@@ -623,14 +623,14 @@
   {$\inserttocsectionnumber$}.~~\inserttocsection}
 \setbeamercolor{subsection in toc}{bg=white,fg=structure}
 \setbeamertemplate{subsection in toc}{%
-  \hspace{1.2em}{\color{cprimary!50!white}\rule[0.3ex]{3pt}{3pt}}~~\small\inserttocsubsection\par}
+  \hspace{1.2em}{\color{cprimary!50!white}\rule[.3ex]{3pt}{3pt}}~~\small\inserttocsubsection\par}
 
 
 \AtBeginSection[]
   {
      \begin{frame}[c]%<beamer>
      \frametitle{\secname}
-     \vspace*{-0.75\baselineskip}\begin{center}
+     \vspace*{-.75\baselineskip}\begin{center}
         \begin{columns}
             \begin{column}[c]{.45\textwidth}
                 \tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/show/hide,sections={1-3}]
