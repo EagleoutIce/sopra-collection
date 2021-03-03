@@ -543,7 +543,7 @@
         }\hbox{}
     \leavevmode\vspace*{2cm}\\
     \parbox{9cm}{\scriptsize
-        \textbf{\(-\,\)\DateConvert{2019-12-15}\(\,-\)}\\
+        \textbf{\(-\)\thinspace\DateConvert{2019-12-15}\thinspace\(-\)}\\
         \color{cprimary}Dieses Layout wurde für das Softwaregrundprojekt
         im Wintersemester 2019/2020 von Florian Sihler im Rahmen des
         Informatikstudiums an der Universität Ulm vollständig in \LaTeXe{} erstellt.
@@ -604,17 +604,6 @@
     \vskip.7cm
 }
 
-% \defbeamertemplate*{frametitle}{lucy}[1][]{
-%     \begin{tikzpicture}[remember picture,overlay]
-%         % \fill[cprimary] (current page.north west) rectangle ($(current page.north east)+(0,-2.75em)$);
-%         \node[right=14pt,cakzent,font=\LARGE,align=left] at ($(current page.north west)+(0,-2.75em/2)$) {\strut~\insertframetitle\\[-.65\baselineskip]\settowidth{\sos@len@tmp@a}{\strut~\insertframetitle}\pgfmathsetmacro\@sos@tmp@chk{\sos@len@tmp@a<(\linewidth-14pt)}
-%         \ifnum\@sos@tmp@chk=1\addtolength{\sos@len@tmp@a}{14pt}\else\setlength{\sos@len@tmp@a}{\linewidth}\fi
-%         {\normalsize\color{chdtext}{\large$\llap{$\diamond$}\hspace*{-.75pt}$}\rule[.186\baselineskip]{\sos@len@tmp@a}{.55pt}}}; % \strut
-
-%     \end{tikzpicture}
-%     \vskip2.25em
-% }
-
 %% -----------------------------------------------------------------------------
 %% Table of Contents
 %% -----------------------------------------------------------------------------
@@ -628,19 +617,19 @@
 
 \AtBeginSection[]
   {
-     \begin{frame}[c]%<beamer>
-     \frametitle{\secname}
-     \vspace*{-.75\baselineskip}\begin{center}
-        \begin{columns}
-            \begin{column}[c]{.45\textwidth}
-                \tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/show/hide,sections={1-3}]
-            \end{column}
-            \begin{column}[c]{.45\textwidth}
-                \tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/show/hide,sections={4-6}]
-            \end{column}
-        \end{columns}
-     \end{center}
-     \end{frame}
+\begin{frame}[c]%<beamer>
+\frametitle{\secname}
+\vspace*{-.75\baselineskip}\begin{center}
+\begin{columns}
+    \begin{column}[c]{.45\textwidth}
+        \tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/show/hide,sections={1-3}]
+    \end{column}
+    \begin{column}[c]{.45\textwidth}
+        \tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/show/hide,sections={4-6}]
+    \end{column}
+\end{columns}
+\end{center}
+\end{frame}
   }
 
 

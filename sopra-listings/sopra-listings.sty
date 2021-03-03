@@ -21,7 +21,7 @@
 \newlength\sol@length@lst@outer@spacing \sol@length@lst@outer@spacing=3pt
 
 \newlength\sol@length@lst@numsep \sol@length@lst@numsep=9pt
-\newlength\sol@length@lst@famerule \sol@length@lst@famerule=0.75pt
+\newlength\sol@length@lst@famerule \sol@length@lst@famerule=.75pt
 \newlength\sol@length@lst@xleftmargin \sol@length@lst@xleftmargin=3pt
 \newlength\sol@length@lst@xrightmargin \sol@length@lst@xrightmargin=3pt
 
@@ -250,8 +250,7 @@
 \def\sol@thesolversion#1#2#3#4\@nil{v#1.#2.#3#4}
 \def\thesolversion{%
  \edef\@tmp{\noexpand\sol@thesolversion\arabic{solversion}\noexpand\@nil}%
- \@tmp%
-}
+ \@tmp}
 \robustify\thesolversion
 
 % We want language specific literate additions:
@@ -277,9 +276,7 @@
 \def\sol@lst@showstyles#1{\sol@lst@showstyles@iter#1,\@nil}
 \def\solStyles{\sol@lst@showstyles{basic,keywordA,keywordB,keywordC,keywordD,numbers,linenumbers,literals,comments,highlight}}
 
-\def\sol@style@get#1{%
-\sol@styles@lst@basic\csname sol@styles@lst@#1\endcsname%
-}
+\def\sol@style@get#1{\sol@styles@lst@basic\csname sol@styles@lst@#1\endcsname}
 \long\def\solGet#1#2{\begingroup\solGetStyle{#1}#2\endgroup}
 \let\solGetStyle\sol@style@get
 
@@ -315,13 +312,11 @@
 \def\solenablenumhl{\let\sol@dgt\sol@@lst@hl@digit}
 % overwrite processor routines to adapt to number
 \def\lst@ProcessLetter{%
-  \lst@whitespacefalse\sol@lst@lastwas@character@true\lst@AppendLetter%
-}%
+  \lst@whitespacefalse\sol@lst@lastwas@character@true\lst@AppendLetter}
 \def\lst@ProcessOther{%
-  \lst@whitespacefalse\sol@lst@lastwas@charkeep@false\sol@lst@lastwas@character@false\lst@AppendOther%
-}%
-\def\lst@whitespacetrue{\ifsol@lst@lastwas@charkeep@\sol@lst@lastwas@charkeep@false\sol@lst@lastwas@character@false\else\sol@lst@lastwas@character@false\fi\global\let\lst@ifwhitespace\iftrue}%
-\def\lst@whitespacefalse{\global\let\lst@ifwhitespace\iffalse}%
+  \lst@whitespacefalse\sol@lst@lastwas@charkeep@false\sol@lst@lastwas@character@false\lst@AppendOther}
+\def\lst@whitespacetrue{\ifsol@lst@lastwas@charkeep@\sol@lst@lastwas@charkeep@false\sol@lst@lastwas@character@false\else\sol@lst@lastwas@character@false\fi\global\let\lst@ifwhitespace\iftrue}
+\def\lst@whitespacefalse{\global\let\lst@ifwhitespace\iffalse}
 
 \def\@nc{\ifsol@lst@lastwas@charkeep@\else\sol@lst@lastwas@character@false\fi}
 
@@ -433,7 +428,6 @@ listing style/.initial = {sol@SOPRA}}
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
 % % #1 language name (java, latex, ..-)
 % % #2 lst language name (lJava, lLatex,...)
-% command name/.code 2 args={#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ....
 command name prefix/.initial={},%
 command name suffix/.initial={},%
 %draw environment/.initial={defaultlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions
@@ -444,7 +438,6 @@ constructor command/.initial={sol@NewLstEnvCore}}
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
 % % #1 language name (java, latex, ..-)
 % % #2 lst language name (lJava, lLatex,...)
-% command name/.code 2 args={#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ....
 command name prefix/.initial={},%
 command name suffix/.initial={*},%
 %draw environment/.initial={defaultlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions
@@ -455,9 +448,8 @@ constructor command/.initial={sol@NewLstEnvCoreStarred}}
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
 % % #1 language name (java, latex, ..-)
 % % #2 lst language name (lJava, lLatex,...)
-% command name/.code 2 args={#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ...
-command name prefix/.initial = {plain},%
-command name suffix/.initial = {},%
+command name prefix/.initial={plain},%
+command name suffix/.initial={},%
 %draw environment/.initial={plainlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions and one mandatory for the language
 constructor command/.initial={sol@NewLstEnvPlain}}
 
@@ -468,25 +460,24 @@ constructor command/.initial={sol@NewLstEnvPlain}}
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
 % % #1 language name (java, latex, ..-)
 % % #2 lst language name (lJava, lLatex,...)
-% command name/.code 2 args={c#1}, % default will by constructed for '\begin{java}', '\begin{latex}' ....
-command name prefix/.initial = {c},
-command name suffix/.initial = {},
+command name prefix/.initial={c},
+command name suffix/.initial={},
 draw command/.initial={sol@dlst@default} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
 }
 
 \pgfkeys{/sol@lst@family/inline blank/.is family,%
 /sol@lst@family/inline blank,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
-command name prefix/.initial = {b},
-command name suffix/.initial = {},
+command name prefix/.initial={b},
+command name suffix/.initial={},
 draw command/.initial={sol@dlst@blank} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
 }
 
 \pgfkeys{/sol@lst@family/inline input/.is family,%
 /sol@lst@family/inline input,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
-command name prefix/.initial = {i},
-command name suffix/.initial = {},
+command name prefix/.initial={i},
+command name suffix/.initial={},
 draw command/.initial={sol@dlst@input} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
 }
 
@@ -607,11 +598,11 @@ keywordstyle = [3]{\sol@styles@lst@basic\sol@styles@lst@keywordC},
 keywordstyle = [4]{\sol@styles@lst@basic\sol@styles@lst@keywordD},
 basicstyle   = \sol@styles@lst@basic,
 % line numbers:
-numbers     = left, numbersep   = \sol@length@lst@numsep,
+numbers     = left, numbersep = \sol@length@lst@numsep,
 numberstyle = \sol@styles@lst@basic\sol@styles@lst@linenumbers,
 % line break:
-breaklines    = true, extendedchars = true,
-prebreak      = \sol@lst@prebreak,
+breaklines  = true, extendedchars = true,
+prebreak    = \sol@lst@prebreak,
 % escapes:
 escapeinside = {!*}{*!},
 % space control

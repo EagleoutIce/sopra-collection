@@ -134,13 +134,13 @@
         % \typeout{Not removed: #3}
         \ifnum\value{soc@compile@target@version}<#2\relax% nope
         \soc@printthis@version@false\else
-        \marginpar{\tiny\faPlusCircle{} V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}}%
+        \marginpar{\tiny\faPlusCircle\ V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}}%
         \fi% jepp
     }{% Got removed, are we pre-removed?
         \ifnum\value{soc@compile@target@version}<\@nameuse{@sop@registers@#3@removed}% nope
-        \marginpar{\tiny\faPlusCircle{} V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}}%
+        \marginpar{\tiny\faPlusCircle\ V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}}%
         \else%
-        \marginpar{\tiny\faTimesCircle{} V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}\thinspace-\thinspace\@socmp{\@nameuse{@sop@registers@#3@removed}}}%\fi% jepp
+        \marginpar{\tiny\faTimesCircle\ V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}\thinspace-\thinspace\@socmp{\@nameuse{@sop@registers@#3@removed}}}%\fi% jepp
         \fi%
     }%
     %Defining skimmer:
