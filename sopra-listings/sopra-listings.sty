@@ -293,16 +293,13 @@
 %% -----------------------------------------------------------------------------
 %% Handling of automated number-highlighting in listings;
 %% -----------------------------------------------------------------------------
-\def\sol@@lst@hl@digit#1{\begingroup%
-%\iflstnumnohlmode%
-%#1\else
-\ifsol@lst@lastwas@character@%\lstnumnohlmodetrue% was char => don't highlight, we won't    check for hex right now
-\global\sol@lst@lastwas@charkeep@true#1\else\global\sol@lst@lastwas@charkeep@false%
-  \ifnum\lst@mode=\lst@Pmode\relax% PMode: Not in any special Mode
+\def\sol@@lst@hl@digit#1{\begingroup
+\ifsol@lst@lastwas@character@
+\global\sol@lst@lastwas@charkeep@true#1\else\global\sol@lst@lastwas@charkeep@false
+  \ifnum\lst@mode=\lst@Pmode% PMode: Not in any special Mode
   {\sol@style@get{numbers}#1}%
   \else#1\fi
 \fi
-%\fi
 \endgroup}
 \ifsol@highlight@numbers@
 \let\sol@dgt\sol@@lst@hl@digit
@@ -359,19 +356,19 @@
   {:bs:}{{\@declaredcolor{sol@colors@lst@keywordA}\textbackslash\normalcolor}}1 {:bmath:}{{\sol@style@get{numbers}\$\normalcolor}}1 {:percent:}{{\%}}1
   {:emath:}{{{\sol@style@get{numbers}\$\normalcolor}}}1 {:dollar:}{{{\sol@style@get{numbers}\$\normalcolor}}}1 {:plaindollar:}{{\$}}1%spaces
   %% brace fix
-  {:space:}{{{ }}}1 {:ws:}{{{ }}}1 {:cdots:}{{{$\cdots$}}}1 {:cdot:}{{{$\cdot$}}}1 {:ldots:}{{{\ldots}}}1 {:!:}{{{!}}}1
+  {:space:}{{{ }}}1 {:ws:}{{{ }}}1 {:cdots:}{{{$\cdots$}}}1 {:cdot:}{{{$\cdot$}}}1 {:ldots:}{{{\ldots}}}1 {:!:}{{!}}1
   {:c:}{{{}}}0 {:star:}{{*}}1 {:minus:}{{-}}1
   {:float:}{{{\sol@style@get{numbers}f\normalcolor}}}1 {:exp:}{{{\sol@style@get{numbers}e\normalcolor}}}1 {:yields:}{{{$\rightarrow$}}}1%
   {:lan:}{{{$\langle$\thinspace}}}1 {:ran:}{{{\thinspace$\rangle$}}}1 {:to:}{{{$\to$}}}1%
   {:bcmd:}{\@declaredcolor{sol@colors@lst@keywordA}\textbackslash\normalcolor}1 {:ecmd:}{\normalcolor}0
-  {0}{{{\sol@dgt{0}}}}1
-  {1}{{{\sol@dgt{1}}}}1 {2}{{{\sol@dgt{2}}}}1 {3}{{{\sol@dgt{3}}}}1
-  {4}{{{\sol@dgt{4}}}}1 {5}{{{\sol@dgt{5}}}}1 {6}{{{\sol@dgt{6}}}}1
-  {7}{{{\sol@dgt{7}}}}1 {8}{{{\sol@dgt{8}}}}1 {9}{{{\sol@dgt{9}}}}1
-  {.0}{{{\sol@dgt{.0}}}}2
-  {.1}{{{\sol@dgt{.1}}}}2 {.2}{{{\sol@dgt{.2}}}}2 {.3}{{{\sol@dgt{.3}}}}2
-  {.4}{{{\sol@dgt{.4}}}}2 {.5}{{{\sol@dgt{.5}}}}2 {.6}{{{\sol@dgt{.6}}}}2
-  {.7}{{{\sol@dgt{.7}}}}2 {.8}{{{\sol@dgt{.8}}}}2 {.9}{{{\sol@dgt{.9}}}}2
+  {0}{{\sol@dgt{0}}}1
+  {1}{{\sol@dgt{1}}}1 {2}{{\sol@dgt{2}}}1 {3}{{\sol@dgt{3}}}1
+  {4}{{\sol@dgt{4}}}1 {5}{{\sol@dgt{5}}}1 {6}{{\sol@dgt{6}}}1
+  {7}{{\sol@dgt{7}}}1 {8}{{\sol@dgt{8}}}1 {9}{{\sol@dgt{9}}}1
+  {.0}{{\sol@dgt{.0}}}2
+  {.1}{{\sol@dgt{.1}}}2 {.2}{{\sol@dgt{.2}}}2 {.3}{{\sol@dgt{.3}}}2
+  {.4}{{\sol@dgt{.4}}}2 {.5}{{\sol@dgt{.5}}}2 {.6}{{\sol@dgt{.6}}}2
+  {.7}{{\sol@dgt{.7}}}2 {.8}{{\sol@dgt{.8}}}2 {.9}{{\sol@dgt{.9}}}2
   {:lmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash(}}}2 {:rmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash)}}}2 {:ldmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash[}}}2 {:rdmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash]}}}2 {:ul:}{{\_}}1}
 
 %% -----------------------------------------------------------------------------
@@ -430,7 +427,6 @@ listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}
 % % #2 lst language name (lJava, lLatex,...)
 command name prefix/.initial={},%
 command name suffix/.initial={},%
-%draw environment/.initial={defaultlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions
 constructor command/.initial={sol@NewLstEnvCore}}
 
 \pgfkeys{/sol@lst@family/nonumber/.is family,%
@@ -440,7 +436,6 @@ listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}
 % % #2 lst language name (lJava, lLatex,...)
 command name prefix/.initial={},%
 command name suffix/.initial={*},%
-%draw environment/.initial={defaultlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions
 constructor command/.initial={sol@NewLstEnvCoreStarred}}
 
 \pgfkeys{/sol@lst@family/plain/.is family,%
@@ -450,7 +445,6 @@ listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}
 % % #2 lst language name (lJava, lLatex,...)
 command name prefix/.initial={plain},%
 command name suffix/.initial={},%
-%draw environment/.initial={plainlst}, % will hold the name of the corresponding environment. It must hold one optional Argument to accept listings-definitions and one mandatory for the language
 constructor command/.initial={sol@NewLstEnvPlain}}
 
 
