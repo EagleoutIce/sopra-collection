@@ -1,9 +1,9 @@
-\documentclass{sopra-base} 
+\documentclass{sopra-base}
 
 \usepackage{sopra-documentation}
 
 \title{Die 'sopra-base'-Klasse}
-\subtitle[Dokumentation für die 'sopra-base'-Klasse]{Dokumentation für die 'sopra-base'-Klasse~$\mid$~Version \thesobversion}
+\subtitle[Dokumentation für die 'sopra-base'-Klasse]{Dokumentation für die 'sopra-base'-Klasse~|~Version \thesobversion}
 
 \duedate{2019-12-2}
 
@@ -31,22 +31,22 @@
 
 \section{Allgemeines}
 \subsection{Warum, wieso, weshalb?}
-    Diese \LaTeXe-Dokumentlasse wurde im Rahmen des Sopras im 
+    Diese \LaTeXe-Dokumentlasse wurde im Rahmen des Sopras im
     Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
     Grundlage für die Optik aller Dokumente des \imptext{Teams 20} und kann
     binnen seiner Entwicklung noch grundlegend verändert werden. Das
     bisherige Design ist an das Aufgabentemplate der Universität Ulm, wobei
     eine Schnittstelle geschaffen wurde, die auch bei varrierenden optischen
-    Eigenschaftendes Dokuments keine Änderungen im \LaTeX-Codes erfordern 
+    Eigenschaftendes Dokuments keine Änderungen im \LaTeX-Codes erfordern
     sollten.\par
     Zum Visualisieren der einzelnen Code-Ausschnitte wird das
     \T{sopra-listings}-Paket verwendet. Es ist für die Verwendung der Dokumentklasse
     nicht relevant.\par
     Die zugehörige Klasse sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile[subject={sopra-base.cls}]{sopra-base.cls}}.
 \subsection{Abhängigkeiten}
-    Dieses Paket basiert auf der, jeder \LaTeX-Distribution beigelegten, 
+    Dieses Paket basiert auf der, jeder \LaTeX-Distribution beigelegten,
     \T{article}-Klasse\footnote{\url{https://ctan.org/pkg/article}},
-    sowie den folgenden Paketen (alle übergebenen Argumente werden ebenfalls 
+    sowie den folgenden Paketen (alle übergebenen Argumente werden ebenfalls
     angegeben, wobei im Fall einer Werteübergabe ein Stern gesetzt wird.):
     \begin{multicols}{3}
         \begin{itemize}
@@ -66,7 +66,7 @@
     wenn eine Grupennummer mittels \cmdref{groupnum} oder \cmdref{setTeam}
     angegeben wird.)
 \subsection{Die Installation}
-    Die Klasse wird nicht als \T{.dtx} ausgeliefert, weswegen sich die 
+    Die Klasse wird nicht als \T{.dtx} ausgeliefert, weswegen sich die
     folgenden Möglichkeiten ergeben:
     \begin{itemize}
         \item Die Dokumentklasse kann in dasselbe Verzeichnis wie das Dokument
@@ -107,7 +107,7 @@
 %
 %
 
-\section{Klassen-Konfiguration}    
+\section{Klassen-Konfiguration}
     \subsection{Akzeptierte Parameter}
     Die Dokumentklasse akzeptiert, so wie die meisten, Argumente. So können
     nebst den für \T{article} akzeptierten Argumente die im folgenden
@@ -125,7 +125,7 @@
 
     \begin{argument}{final}{draft}
         Im \T{draft}-Modus können einige Elemente so wie Grafiken nicht
-        gesetzt werden um so den Kompilierprozess zu beschleunigen. 
+        gesetzt werden um so den Kompilierprozess zu beschleunigen.
         Diese Option wird analog auch von vielen weiteren Paketen akzeptiert.
     \end{argument}
 
@@ -191,7 +191,7 @@ das Dokument beginnt). \notetext{Entwicklernotiz: Alle diese Felder stehen über
 
 \begin{command}{brief}{\optArg{short}\manArg{Kurzbeschreibung}}
     Setzt die Kurzbeschreibung des Dokuments auf \T{Kurzbeschreibung}.
-    Dieses Datenfeld wird in der Basis-Klasse nicht verwendet. 
+    Dieses Datenfeld wird in der Basis-Klasse nicht verwendet.
 \end{command}
 
 \begin{command}{authors}{\optArg{short}\manArg{Autorenliste}}
@@ -201,15 +201,15 @@ das Dokument beginnt). \notetext{Entwicklernotiz: Alle diese Felder stehen über
 
 \begin{command}{duedate}{\optArg{short}\manArg{YYYY-MM-DD}}
    Setzt das Datum des Dokuments. Zur Konvertierung wird \cmdref{DateConvert}
-   verwendet. 
+   verwendet.
 \end{command}
 
 \begin{command}{supervisor}{\optArg{short}\manArg{Name}}
-    Setzt den Betreuer auf \T{Name}. Dieses Datenfeld wird in der Basis-Klasse nicht verwendet. 
+    Setzt den Betreuer auf \T{Name}. Dieses Datenfeld wird in der Basis-Klasse nicht verwendet.
 \end{command}
 
 \begin{command}{keywords}{\optArg{short}\manArg{Schlüsselwörter}}
-    Setzt die Keywords für die Metadaten auf \T{Schlüselwörter}. 
+    Setzt die Keywords für die Metadaten auf \T{Schlüselwörter}.
 \end{command}
 
 \begin{command}{group}{\optArg{short}\manArg{Name}}
@@ -288,7 +288,7 @@ Im Zuge dieser \LaTeXe-Dokumentklasse sind noch einige andere Pakete entstanden.
         \foreach \i/\u in {eagle-maps/{https://github.com/EagleoutIce/eagle-maps},LILLY-Framework/{https://github.com/EagleoutIce/LILLY},sopra-documentation/,sopra-models/,sopra-listings/,sopra-requirements/,sopra-attachments/} {
             \item \T{\i}\expandafter\ifx\expandafter\\\u\\\else\footnote{\url{\u}}\fi
         }
-    \end{itemize}    
+    \end{itemize}
 \end{multicols}
 
 \end{document}

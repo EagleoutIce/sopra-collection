@@ -90,14 +90,14 @@
 \ifsot@usetabu@
     \def\sot@table@headerrow{%
         \rowfont{\normalfont\bfseries\leavevmode\sot@table@headerstyle}%
-        \ifsot@invert@\rowcolor{white}\else\rowcolor{MaterialHeaderColor}\fi\@ifstar{}{\Gape[0.5mm][0.25mm]{}}%
+        \ifsot@invert@\rowcolor{white}\else\rowcolor{MaterialHeaderColor}\fi\@ifstar{}{\Gape[.5mm][.25mm]{}}%
     }
     \def\sot@table@headerrow@next{% maybe use llap for the symbol?
         \rowfont{\normalfont\bfseries\leavevmode\sot@table@headerstyle}%
-        \ifsot@invert@\rowcolor{white}\else\rowcolor{NextMaterialHeaderColor}\fi\@ifstar{}{\Gape[0.5mm][0.25mm]{}}{%
+        \ifsot@invert@\rowcolor{white}\else\rowcolor{NextMaterialHeaderColor}\fi\@ifstar{}{\Gape[.5mm][.25mm]{}}{%
             \hspace*{-6mm}%
             \llap{\textcolor{NextMaterialHeaderColor!40!white}{$\blacktriangledown$}}%
-        }\hspace*{6mm}%$\;$%
+        }\hspace*{6mm}%
     }
 \else
     \def\sot@table@headerrow{\bfseries\@ifstar{}{}}
@@ -111,7 +111,7 @@
 %% -----------------------------------------------------------------------------
 
 \def\sot@thesotversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
-\edef\sot@version@str{\noexpand\sot@thesodversion\arabic{sotversion}\noexpand\@nil}
+\edef\sot@version@str{\noexpand\sot@thesotversion\arabic{sotversion}\noexpand\@nil}
 \edef\thesotversion{\sot@version@str}
 
 %% -----------------------------------------------------------------------------
@@ -137,8 +137,8 @@
         \tabulinesep = ^2mm_2mm
         \begin{longtabu}{>{~}#2<{~}}
             \ifx!#1!\sot@table@headerrow*\else% style the first row :D
-            \sot@table@headerrow*#1\vspace*{-0.1\baselineskip}\\\endfirsthead
-            \sot@table@headerrow@next#1\vspace*{-0.1\baselineskip}\\\endhead\fi
+            \sot@table@headerrow*#1\vspace*{-.1\baselineskip}\\\endfirsthead
+            \sot@table@headerrow@next#1\vspace*{-.1\baselineskip}\\\endhead\fi
     }{
         \end{longtabu}
     }
@@ -155,8 +155,8 @@
         \begin{longtable}{>{~}#2<{~}}
             \toprule
             \ifx!#1!\sot@table@headerrow*\else% style the first row :D
-            \sot@table@headerrow*#1\vspace*{-0.1\baselineskip}\\\midrule\endfirsthead
-            \sot@table@headerrow@next#1\vspace*{-0.1\baselineskip}\\\midrule\endhead\fi
+            \sot@table@headerrow*#1\vspace*{-.1\baselineskip}\\\midrule\endfirsthead
+            \sot@table@headerrow@next#1\vspace*{-.1\baselineskip}\\\midrule\endhead\fi
     }{\bottomrule\end{longtabu}}
 \fi
 
