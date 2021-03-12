@@ -1,10 +1,10 @@
-\documentclass{sopra-base} 
+\documentclass{sopra-base}
 
 \usepackage{sopra-documentation}
 \usepackage{sopra-models}
 
 \title{Das 'sopra-models'-Paket}
-\subtitle[Dokumentation für das 'sopra-models'-Paket]{Dokumentation für das 'sopra-models'-Paket~$\mid$~Version \thesomversion}
+\subtitle[Dokumentation für das 'sopra-models'-Paket]{Dokumentation für das 'sopra-models'-Paket~|~Version \thesomversion}
 
 \duedate{2019-12-2}
 
@@ -32,12 +32,12 @@
 
 \section{Allgemeines}
 \subsection{Warum, wieso, weshalb?}
-    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im 
+    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im
     Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
     Grundlage für die Präsentation von (UML)-Diagrammen und Modellen
-    des \imptext{Teams 20}. Diese Dokumentation wurde zusammen mit der 
+    des \imptext{Teams 20}. Diese Dokumentation wurde zusammen mit der
     \T{sopra-base.cls} sowie dem Paket \T{sopra-documentation.sty} kreiert.\par
-    \imptext{Wichtig: Ein großteil dieses Pakets basiert auf \T{tikz-uml} und 
+    \imptext{Wichtig: Ein großteil dieses Pakets basiert auf \T{tikz-uml} und
     wird hier dokumentiert: \url{https://perso.ensta-paris.fr/~kielbasi/tikzuml/}}.\newline
     Zum Visualisieren der einzelnen Code-Ausschnitte wird das
     \T{sopra-listings}-Paket verwendet. Es ist für die Verwendung des Pakets nicht relevant.\par
@@ -58,7 +58,7 @@
     Bibliotheken benutzt: \T{backgrounds}, \T{arrows}, \T{shapes}, \T{fit}, \T{shadows} und \T{decorations.markings}.
 
 \subsection{Die Installation}
-    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die 
+    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die
     folgenden Möglichkeiten ergeben:
     \begin{itemize}
         \item Das Paket kann in dasselbe Verzeichnis wie das Dokument
@@ -101,7 +101,7 @@ Besonderheiten.
 %
 
 
-\section{Paket-Konfiguration}    
+\section{Paket-Konfiguration}
     \subsection{Akzeptierte Parameter}
     Dieses Paket akzeptiert selbst keine weiteren Pakete!
 
@@ -137,11 +137,11 @@ Es gilt zu beachten, dass das Präfix \T{env@} nur auf die Natur einer Umgebung 
 
 Beispiel:
 \begin{plainlatex}[morekeywords={[3]{model}}]
-    \begin{model}
-        \centering
-        Isch bin ein Modell.
-        \caption[Und ich eigentlich kürzer.]{Ich bin der Titel.}
-    \end{model}
+\begin{model}
+    \centering
+    Isch bin ein Modell.
+    \caption[Und ich eigentlich kürzer.]{Ich bin der Titel.}
+\end{model}
 \end{plainlatex}
 Ergibt:
 \begin{model}

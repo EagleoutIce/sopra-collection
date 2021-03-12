@@ -62,10 +62,8 @@
 %% -----------------------------------------------------------------------------
 
 \def\som@thesomversion#1#2#3#4\@nil{\begingroup v#1.#2.#3#4\endgroup}
-\def\thesomversion{%
-    \edef\@tmp{\noexpand\som@thesomversion\arabic{somversion}\noexpand\@nil}%
-    \@tmp
-}
+\edef\som@version@str{\noexpand\som@thesodversion\arabic{somversion}\noexpand\@nil}
+\edef\thesomversion{\som@version@str}
 
 %% -----------------------------------------------------------------------------
 %% tikz-uml.sty; modified and restructered by EagleoutIce for: LILLY
@@ -129,11 +127,11 @@
     package type/.initial=tikzumlEmpty, fill package/.initial=blue!20,%
     class width/.initial=10ex, simple interface width/.initial=4ex, class type/.initial=class, fill class/.initial=yellow!20, fill template/.initial=yellow!2,%
     narynode width/.initial=6ex,%
-    relation geometry/.initial=--, relation angle1/.initial=-30, relation angle2/.initial=30, relation loopsize/.initial=3em, relation weight/.initial=0.5, relation pos1/.initial=0.2, relation pos2/.initial=0.8, relation pos stereo/.initial=0.5,%
+    relation geometry/.initial=--, relation angle1/.initial=-30, relation angle2/.initial=30, relation loopsize/.initial=3em, relation weight/.initial=.5, relation pos1/.initial=.2, relation pos2/.initial=.8, relation pos stereo/.initial=.5,%
     note width/.initial=3cm, fill note/.initial=green!20,%
     fill system/.initial=white,%
     fill usecase/.initial=blue!20,%
-    actor below/.initial=0.5cm,%
+    actor below/.initial=.5cm,%
     state join width/.initial=3ex,%
     state decision width/.initial=3ex,%
     state initial width/.initial=5ex,%
@@ -235,9 +233,9 @@
 }%
 %
 \newcommand{\tikzumlskipescape}[3][_]{%
-\begingroup%
-  \def\_{#1}\edef\x{\endgroup%
-    \def\noexpand\csname #3\endcsname{#2}}\x%
+\begingroup
+  \def\_{#1}\edef\x{\endgroup
+    \def\noexpand\csname #3\endcsname{#2}}\x
 }%
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -258,7 +256,7 @@
 \tikzstyle{tikzuml simpleinterface style}=[circle, minimum height=1em, node distance=1em]%
 \tikzstyle{tikzuml class style}=[rectangle split, rectangle split parts=3, rectangle split part align={center, left, left}, minimum height=2em, node distance=2em]%
 \tikzstyle{tikzuml narynode style}=[diamond]%
-\tikzstyle{tikzuml template style}=[dashed, inner ysep=0.5em, inner xsep=1ex]%
+\tikzstyle{tikzuml template style}=[dashed, inner ysep=.5em, inner xsep=1ex]%
 \tikzstyle{tikzuml control nodes style}=[fill=black, inner sep=1.5pt, circle]%
 %
 \tikzstyle{tikzuml association style}=[color=\tikzumlDefaultDrawColor, -]%
@@ -330,9 +328,9 @@
         }{}%
         \ifx\keyvalue\pgfkeysnovalue%
             \pgfkeys{/tikzuml/package/.cd, style/.append style/.expand once={\keyname}}%
-        \else%
+        \else
             \pgfkeys{/tikzuml/package/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-        \fi%
+        \fi
         %\errmessage{TIKZUML ERROR : in umlpackage, invalid option \keyname}%
         }%
   }%
@@ -353,24 +351,24 @@
   \ifnum\thetikzumlPackageLevel>0%
     \let\tikzumlPackage@nameold\tikzumlPackage@fitname%
     \def\tikzumlPackage@name{#2}%
-    \begingroup%
-      \def\_{@}\edef\x{\endgroup%
-        \def\noexpand\tikzumlPackage@fitname{\tikzumlPackage@name}}\x%
+    \begingroup
+      \def\_{@}\edef\x{\endgroup
+        \def\noexpand\tikzumlPackage@fitname{\tikzumlPackage@name}}\x
     \let\tikzumlPackage@parentold\tikzumlPackage@parent%
     \edef\tikzumlPackage@parent{\tikzumlPackage@parentold @@\tikzumlPackage@nameold}%
-  \else%
+  \else
     \def\tikzumlPackage@parent{}%
     \def\tikzumlPackage@name{#2}%
-    \begingroup%
-      \def\_{@}\edef\x{\endgroup%
-        \def\noexpand\tikzumlPackage@fitname{\tikzumlPackage@name}}\x%
-  \fi%
+    \begingroup
+      \def\_{@}\edef\x{\endgroup
+        \def\noexpand\tikzumlPackage@fitname{\tikzumlPackage@name}}\x
+  \fi
   %
   \let\tikzumlPackage@nodeNameold\tikzumlPackage@nodeName%
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlPackage@nodeName{\tikzumlPackage@name}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlPackage@nodeName{\tikzumlPackage@name}}\x
   %
   \ifthenelse{\equal{\tikzumlPackageName}{tikzumlEmpty}}{}{%
     \def\tikzumlPackage@nodeName{\tikzumlPackageName}%
@@ -394,21 +392,21 @@
     \ifnum\c@tikzumlPackageSubPackageNum=0%
       \iftikzumlpackageWithoutCoords%
         \node[inner sep=1.5ex, /tikzuml/package/style] (\tikzumlPackage@nodeName-root) {\phantom{\tikzumlPackage@nodeName}};%
-      \else%
+      \else
         \node[inner sep=1.5ex, /tikzuml/package/style] (\tikzumlPackage@nodeName-root) at (0,0) {\phantom{\tikzumlPackage@nodeName}};%
-      \fi%
+      \fi
       \expandafter\xdef\csname tikzumlPackageFit\tikzumlPackage@parent @@\tikzumlPackage@fitname\endcsname{(\tikzumlPackage@nodeName-root)}%
-    \fi%
-  \fi%
+    \fi
+  \fi
   %
   \ifnum\c@tikzumlPackageLevel>0%
     \def\tikzumlPackageFitTmp{\csname tikzumlPackageFit\tikzumlPackage@parent\endcsname}%
     \expandafter\xdef\csname tikzumlPackageFit\tikzumlPackage@parent\endcsname{\tikzumlPackageFitTmp (\tikzumlPackage@nodeName) (\tikzumlPackage@nodeName-caption)}%
     \stepcounter{tikzumlPackageSubPackageNum}%
-  \fi%
+  \fi
   %
   \node[draw=\tikzumlPackageDrawColor, fill=\tikzumlPackageFillColor, text=\tikzumlPackageTextColor, font=\tikzumlDefaultFont, inner sep=1.5ex, /tikzuml/package/style, fit = \csname tikzumlPackageFit\tikzumlPackage@parent @@\tikzumlPackage@fitname\endcsname] (\tikzumlPackage@nodeName) {};%
-  \node[draw=\tikzumlPackageDrawColor, fill=\tikzumlPackageFillColor, text=\tikzumlPackageTextColor, font=\tikzumlDefaultFont, minimum height=1.5em, outer ysep=-0.3, anchor=south west] (\tikzumlPackage@nodeName-caption) at (\tikzumlPackage@nodeName.north west) {\begin{tabular}{c} \tikzumlPackageType \textbf{\tikzumlPackage@name}\end{tabular}};%
+  \node[draw=\tikzumlPackageDrawColor, fill=\tikzumlPackageFillColor, text=\tikzumlPackageTextColor, font=\tikzumlDefaultFont, minimum height=1.5em, outer ysep=-.3, anchor=south west] (\tikzumlPackage@nodeName-caption) at (\tikzumlPackage@nodeName.north west) {\begin{tabular}{c} \tikzumlPackageType \textbf{\tikzumlPackage@name}\end{tabular}};%
   \end{pgfonlayer}%
   \end{scope}%
 }%
@@ -458,9 +456,9 @@
             }{}%
             \ifx\keyvalue\pgfkeysnovalue%
             \pgfkeys{/tikzuml/class/.cd, style/.append style/.expand once={\keyname}}%
-            \else%
+            \else
             \pgfkeys{/tikzuml/class/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-            \fi%
+            \fi
             %\errmessage{TIKZUML ERROR : in umlclass, invalid option \keyname}%
         }%
   }%
@@ -469,8 +467,8 @@
   \iftikzumlclassSimpleStyle%
     \iftikzumlclassCircleShape%
       \pgfkeys{/tikzuml/class/.cd, width/.initial=\tikzumlSimpleInterfaceDefaultWidth}%
-    \fi%
-  \fi%
+    \fi
+  \fi
   %
   \pgfkeys{/tikzuml/class/.cd, x/.get=\tikzumlClassX, y/.get=\tikzumlClassY, width/.get=\tikzumlClassMinimumWidth,%
         type/.get=\tikzumlClassTypeTmp, tags/.get=\tikzumlClassTagsTmp, template/.get=\tikzumlClassTemplateFillColorParam,%
@@ -495,15 +493,15 @@
     \def\tikzumlClassVPadding{}%
     \def\tikzumlClassHPadding{}%
   }{%
-    \def\tikzumlClassVPadding{\vspace{0.1em} \\}%
-    \def\tikzumlClassHPadding{\hspace{0.5ex} $ $}%
+    \def\tikzumlClassVPadding{\vspace{.1em} \\}%
+    \def\tikzumlClassHPadding{\hspace{.5ex} $ $}%
   }%
   %
   \def\tikzumlClassName{#2}%
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlClassNodeName{\tikzumlClassName}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlClassNodeName{\tikzumlClassName}}\x
   %
   \ifthenelse{\equal{\tikzumlClassName}{tikzumlEmpty}}{}{%
     \def\tikzumlClassNodeName{\tikzumlClassName}%
@@ -522,21 +520,21 @@
         \node[tikzuml simpleinterface style, draw=\tikzumlClassDrawColor, fill=\tikzumlClassFillColor, text=\tikzumlClassTextColor, font=\tikzumlDefaultFont, minimum width=\tikzumlClassMinimumWidth, /tikzuml/class/style] (\tikzumlClassNodeName) {};%
         \node[anchor=south] (\tikzumlClassNodeName-label) at (\tikzumlClassNodeName.north) {\begin{tabular}{c}\tikzumlClassVPadding \tikzumlClassType \tikzumlClassHPadding \textbf{\tikzumlClassName} \tikzumlClassHPadding \tikzumlClassTags \end{tabular}%
         };%
-      \else%
+      \else
         \node[tikzuml simpleclass style, draw=\tikzumlClassDrawColor, fill=\tikzumlClassFillColor, text=\tikzumlClassTextColor, font=\tikzumlDefaultFont, minimum width=\tikzumlClassMinimumWidth, /tikzuml/class/style] (\tikzumlClassNodeName) {\begin{tabular}{c}\tikzumlClassVPadding \tikzumlClassType \tikzumlClassHPadding \textbf{\tikzumlClassName} \tikzumlClassHPadding \tikzumlClassTags \end{tabular}%
         };%
-      \fi%
-    \else%
+      \fi
+    \else
       \iftikzumlclassCircleShape%
         \node[tikzuml simpleinterface style, draw=\tikzumlClassDrawColor, fill=\tikzumlClassFillColor, text=\tikzumlClassTextColor, font=\tikzumlDefaultFont, minimum width=\tikzumlClassMinimumWidth, /tikzuml/class/style] (\tikzumlClassNodeName) at (\tikzumlClassPos) {};
         \node[anchor=south] (\tikzumlClassNodeName-label) at (\tikzumlClassNodeName.north){\begin{tabular}{c}\tikzumlClassVPadding \tikzumlClassType \tikzumlClassHPadding \textbf{\tikzumlClassName} \tikzumlClassHPadding \tikzumlClassTags \end{tabular}%
         };%
-      \else%
+      \else
         \node[tikzuml simpleclass style, draw=\tikzumlClassDrawColor, fill=\tikzumlClassFillColor, text=\tikzumlClassTextColor, font=\tikzumlDefaultFont, minimum width=\tikzumlClassMinimumWidth, /tikzuml/class/style] (\tikzumlClassNodeName) at (\tikzumlClassPos) {\begin{tabular}{c}\tikzumlClassVPadding \tikzumlClassType \tikzumlClassHPadding \textbf{\tikzumlClassName} \tikzumlClassHPadding \tikzumlClassTags \end{tabular}%
         };%
-      \fi%
-    \fi%
-  \else%
+      \fi
+    \fi
+  \else
     \iftikzumlclassWithoutCoords%
       \node[tikzuml class style, draw=\tikzumlClassDrawColor, fill=\tikzumlClassFillColor, text=\tikzumlClassTextColor, font=\tikzumlDefaultFont, minimum width=\tikzumlClassMinimumWidth, /tikzuml/class/style] (\tikzumlClassNodeName) {\begin{tabular}{c}\tikzumlClassVPadding \tikzumlClassType \tikzumlClassHPadding \textbf{\tikzumlClassName} \tikzumlClassHPadding \tikzumlClassTags \end{tabular}%
       \nodepart{second}%
@@ -548,7 +546,7 @@
       \tikzumlClassOperations%
       \end{tabular}%
       };%
-    \else%
+    \else
       \node[tikzuml class style, draw=\tikzumlClassDrawColor, fill=\tikzumlClassFillColor, text=\tikzumlClassTextColor, font=\tikzumlDefaultFont, minimum width=\tikzumlClassMinimumWidth, /tikzuml/class/style] (\tikzumlClassNodeName) at (\tikzumlClassPos) {\begin{tabular}{c}\tikzumlClassVPadding \tikzumlClassType \tikzumlClassHPadding \textbf{\tikzumlClassName} \tikzumlClassHPadding \tikzumlClassTags \end{tabular}%
       \nodepart{second}%
       \begin{tabular}{l}%
@@ -559,8 +557,8 @@
       \tikzumlClassOperations%
       \end{tabular}%
       };%
-    \fi%
-  \fi%
+    \fi
+  \fi
   %
   \ifthenelse{\equal{\tikzumlClassTemplateFillColorParam}{}}{}{%
     \draw (\tikzumlClassNodeName.north east) node[tikzuml template style, name=\tikzumlClassNodeName-template, draw=\tikzumlClassDrawColor, fill=\tikzumlClassTemplateFillColor, text=\tikzumlClassTextColor, font=\tikzumlDefaultFont] {\tikzumlClassTemplateFillColorParam};%
@@ -575,7 +573,7 @@
       \expandafter\xdef\csname tikzumlPackageFit\tikzumlPackage@parent @@\tikzumlPackage@fitname\endcsname{\tikzumlPackageFitOld (\tikzumlClassNodeName) (\tikzumlClassNodeName-template)}%
     }%
     \stepcounter{tikzumlPackageClassNum}%
-  \fi%
+  \fi
   \ifnum\c@tikzumlComponentLevel>0%
     \def\tikzumlComponentFitTmp{\csname tikzumlComponentFit\tikzumlComponent@parent @@\tikzumlComponent@fitname\endcsname}%
     \ifthenelse{\equal{\tikzumlClassTemplateFillColorParam}{}}{%
@@ -584,7 +582,7 @@
       \expandafter\xdef\csname tikzumlComponentFit\tikzumlComponent@parent @@\tikzumlComponent@fitname\endcsname{\tikzumlComponentFitTmp (\tikzumlClassNodeName) (\tikzumlClassNodeName-template)}%
     }%
     \stepcounter{tikzumlComponentSubComponentNum}%
-  \fi%
+  \fi
 }%
 %
 % shortcuts for interface, enum and typedef environments
@@ -716,9 +714,9 @@
                     }{%
                     \ifx\keyvalue\pgfkeysnovalue%
                         \pgfkeys{/tikzuml/narynode/.cd, style/.append style/.expand once={\keyname}}%
-                    \else%
+                    \else
                         \pgfkeys{/tikzuml/narynode/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-                    \fi%
+                    \fi
                     %\errmessage{TIKZUML ERROR : in umlNarynode, invalid option \keyname}%
                     }%
                 }%
@@ -745,9 +743,9 @@
     \edef\tikzumlNaryNodeName{\tikzumlNaryNodeName}%
   }%
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlNaryNode@nodeName{\tikzumlNaryNodeName}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlNaryNode@nodeName{\tikzumlNaryNodeName}}\x
   %
   \StrSubstitute{\tikzumlNaryNode@nodeName}{:}{@COLON@}[\tikzumlNaryNode@nodeName]%
   \StrSubstitute{\tikzumlNaryNode@nodeName}{\_}{@UNDERSCORE@}[\tikzumlNaryNode@nodeName]%
@@ -762,7 +760,7 @@
     \edef\tikzumlPackageFitOld{\csname tikzumlPackageFit\tikzumlPackage@parent @@\tikzumlPackage@fitname\endcsname}%
     \expandafter\xdef\csname tikzumlPackageFit\tikzumlPackage@parent @@\tikzumlPackage@fitname\endcsname{\tikzumlPackageFitOld (\tikzumlNaryNode@nodeName)}%
     \stepcounter{tikzumlPackageClassNum}%
-  \fi%
+  \fi
 }%
 %
 \newdimen\tikzumlNestingSymbolSize%
@@ -812,9 +810,9 @@
             \OR\equal{\keyname}{distance}}{}{%
             \ifx\keyvalue\pgfkeysnovalue%
                 \pgfkeys{/tikzuml/relation/.cd, style2/.append style/.expand once={\keyname}}%
-            \else%
+            \else
                 \pgfkeys{/tikzuml/relation/.cd, style2/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-            \fi%
+            \fi
             %\errmessage{TIKZUML ERROR : in umlrelation, invalid option \keyname}%
         }%
         }%
@@ -838,17 +836,17 @@
   \def\tikzumlSrcClassName{#2}%
   %
   % managing \_ in class names for node names
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlSrcClassNodeName{\tikzumlSrcClassName}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlSrcClassNodeName{\tikzumlSrcClassName}}\x
   %
   \StrSubstitute{\tikzumlSrcClassNodeName}{:}{@COLON@}[\tikzumlSrcClassNodeName]%
   \StrSubstitute{\tikzumlSrcClassNodeName}{\_}{@UNDERSCORE@}[\tikzumlSrcClassNodeName]%
   %
   \def\tikzumlDestClassName{#3}%
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlDestClassNodeName{\tikzumlDestClassName}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlDestClassNodeName{\tikzumlDestClassName}}\x
   %
   \StrSubstitute{\tikzumlDestClassNodeName}{:}{@COLON@}[\tikzumlDestClassNodeName]%
   \StrSubstitute{\tikzumlDestClassNodeName}{\_}{@UNDERSCORE@}[\tikzumlDestClassNodeName]%
@@ -924,7 +922,7 @@
   %\newcounter{tikzumlControlNodesNum}%
   %\setcounter{tikzumlControlNodesNum}{0}%
   %
-  \node[inner sep=0] (\tikzumlRelationName-middle) at (barycentric cs:\tikzumlSrcClassNodeName=\tikzumlRelationWeightT,\tikzumlDestClassNodeName=\tikzumlRelationWeight) {};%
+  \node[inner sep=\z@] (\tikzumlRelationName-middle) at (barycentric cs:\tikzumlSrcClassNodeName=\tikzumlRelationWeightT,\tikzumlDestClassNodeName=\tikzumlRelationWeight) {};%
   %
   % straight line
   \ifthenelse{\equal{\tikzumlRelationGeometry}{--}}%
@@ -940,41 +938,41 @@
                              node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT}%
                              node[pos=\tikzumlRelationPositionStereotype, anchor=center] {\stereotype} }%
         \xdef\tikzumlPath{(\tikzumlSrcClassNodeName) edge[in=\tikzumlRelationEndAngle, out=\tikzumlRelationStartAngle, distance=\tikzumlRelationLoopSize] \tikzumlLastArc%
-                                                          node[midway, inner sep=0, name=\tikzumlRelationName-1, anchor=center] {} (\tikzumlDestClassNodeName) }%
+                                                          node[midway, inner sep=\z@, name=\tikzumlRelationName-1, anchor=center] {} (\tikzumlDestClassNodeName) }%
       }{%
         \ifthenelse{\equal{\tikzumlRelationRecursiveMode}{transition}}{%
-          \xdef\tikzumlFirstArc{node[midway, inner sep=0, name=\tikzumlRelationName-1, anchor=center] {}}%
-          \xdef\tikzumlMidOneArc{node[midway, inner sep=0, name=\tikzumlRelationName-3, anchor=center] {}}%
+          \xdef\tikzumlFirstArc{node[midway, inner sep=\z@, name=\tikzumlRelationName-1, anchor=center] {}}%
+          \xdef\tikzumlMidOneArc{node[midway, inner sep=\z@, name=\tikzumlRelationName-3, anchor=center] {}}%
           %
           \ifthenelse{\equal{\tikzumlRelationRecursiveDirectionStart}{\tikzumlRelationRecursiveDirectionEnd}}{%
             \def\numArcs{3}%
-            \xdef\tikzumlLastArc{node[midway, inner sep=0, name=\tikzumlRelationName-5, anchor=center] {}}%
+            \xdef\tikzumlLastArc{node[midway, inner sep=\z@, name=\tikzumlRelationName-5, anchor=center] {}}%
             %
             \begin{pgfonlayer}{connections}%
             \draw (\tikzumlSrcClassNodeName) edge[in=\tikzumlRelationEndAngle, out=\tikzumlRelationStartAngle, distance=\tikzumlRelationLoopSize, draw=none] %
-                                                  node[midway, inner sep=0, name=\tikzumlRelationName-tmp, anchor=center] {} (\tikzumlDestClassNodeName);%
+                                                  node[midway, inner sep=\z@, name=\tikzumlRelationName-tmp, anchor=center] {} (\tikzumlDestClassNodeName);%
             \ifthenelse{\equal{\tikzumlRelationRecursiveDirectionStart}{right}\OR\equal{\tikzumlRelationRecursiveDirectionStart}{left}}{%
-              \node[inner sep=0, name=\tikzumlRelationName-2] at (\tikzumlSrcClassNodeName.\tikzumlRelationStartAngle -| \tikzumlRelationName-tmp) {};%
-              \node[inner sep=0, name=\tikzumlRelationName-4] at (\tikzumlDestClassNodeName.\tikzumlRelationEndAngle -| \tikzumlRelationName-tmp) {};%
+              \node[inner sep=\z@, name=\tikzumlRelationName-2] at (\tikzumlSrcClassNodeName.\tikzumlRelationStartAngle -| \tikzumlRelationName-tmp) {};%
+              \node[inner sep=\z@, name=\tikzumlRelationName-4] at (\tikzumlDestClassNodeName.\tikzumlRelationEndAngle -| \tikzumlRelationName-tmp) {};%
             }{%
-              \node[inner sep=0, name=\tikzumlRelationName-2] at (\tikzumlSrcClassNodeName.\tikzumlRelationStartAngle |- \tikzumlRelationName-tmp) {};%
-              \node[inner sep=0, name=\tikzumlRelationName-4] at (\tikzumlDestClassNodeName.\tikzumlRelationEndAngle |- \tikzumlRelationName-tmp) {};%
+              \node[inner sep=\z@, name=\tikzumlRelationName-2] at (\tikzumlSrcClassNodeName.\tikzumlRelationStartAngle |- \tikzumlRelationName-tmp) {};%
+              \node[inner sep=\z@, name=\tikzumlRelationName-4] at (\tikzumlDestClassNodeName.\tikzumlRelationEndAngle |- \tikzumlRelationName-tmp) {};%
             }%
             \end{pgfonlayer}%
           }{%
             \def\numArcs{4}%
-            \xdef\tikzumlMidTwoArc{node[midway, inner sep=0, name=\tikzumlRelationName-5, anchor=center] {}}%
-            \xdef\tikzumlLastArc{node[midway, inner sep=0, name=\tikzumlRelationName-7, anchor=center] {}}%
+            \xdef\tikzumlMidTwoArc{node[midway, inner sep=\z@, name=\tikzumlRelationName-5, anchor=center] {}}%
+            \xdef\tikzumlLastArc{node[midway, inner sep=\z@, name=\tikzumlRelationName-7, anchor=center] {}}%
             %
             \begin{pgfonlayer}{connections}%
             \draw (\tikzumlSrcClassNodeName) edge[in=\tikzumlRelationEndAngle, out=\tikzumlRelationStartAngle, distance=\tikzumlRelationLoopSize, draw=none] %
                                                   node[midway, name=\tikzumlRelationName-4, anchor=center] {} (\tikzumlDestClassNodeName);%
             \ifthenelse{\equal{\tikzumlRelationRecursiveDirectionStart}{right}\OR\equal{\tikzumlRelationRecursiveDirectionStart}{left}}{%
-              \node[inner sep=0, name=\tikzumlRelationName-2] at (\tikzumlSrcClassNodeName.\tikzumlRelationStartAngle -| \tikzumlRelationName-4) {};%
-              \node[inner sep=0, name=\tikzumlRelationName-6] at (\tikzumlDestClassNodeName.\tikzumlRelationEndAngle |- \tikzumlRelationName-4) {};%
+              \node[inner sep=\z@, name=\tikzumlRelationName-2] at (\tikzumlSrcClassNodeName.\tikzumlRelationStartAngle -| \tikzumlRelationName-4) {};%
+              \node[inner sep=\z@, name=\tikzumlRelationName-6] at (\tikzumlDestClassNodeName.\tikzumlRelationEndAngle |- \tikzumlRelationName-4) {};%
             }{%
-              \node[inner sep=0, name=\tikzumlRelationName-2] at (\tikzumlSrcClassNodeName.\tikzumlRelationStartAngle |- \tikzumlRelationName-4) {};%
-              \node[inner sep=0, name=\tikzumlRelationName-6] at (\tikzumlDestClassNodeName.\tikzumlRelationEndAngle -| \tikzumlRelationName-4) {};%
+              \node[inner sep=\z@, name=\tikzumlRelationName-2] at (\tikzumlSrcClassNodeName.\tikzumlRelationStartAngle |- \tikzumlRelationName-4) {};%
+              \node[inner sep=\z@, name=\tikzumlRelationName-6] at (\tikzumlDestClassNodeName.\tikzumlRelationEndAngle -| \tikzumlRelationName-4) {};%
             }%
             \end{pgfonlayer}%
           }%
@@ -983,19 +981,19 @@
             \ifnum\theposStereo>300%
               \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-300)/100}%
               \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype}}%
-            \else%
+            \else
               \ifnum\theposStereo<100%
                 \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype}}%
-              \else%
+              \else
                 \ifnum\theposStereo>200%
                   \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-200)/100}%
                   \xdef\tikzumlMidTwoArc{\tikzumlMidTwoArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype}}%
-                \else%
+                \else
                   \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-100)/100}%
                   \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype}}%
-                \fi%
-              \fi%
-            \fi%
+                \fi
+              \fi
+            \fi
             %
             \ifthenelse{\thepos=300\OR\thepos=100}{%
               \ifthenelse{\equal{\tikzumlRelationRecursiveDirectionStart}{right}}{%
@@ -1082,25 +1080,25 @@
               \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                                    node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity}%
                                    }%
-            \else%
+            \else
               \ifnum\thepos<100%
                 \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                                      node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity}%
                                      }%
-              \else%
+              \else
                 \ifnum\thepos>200%
                   \pgfmathsetmacro{\tikzumlRelationPosition}{(\thepos-200)/100}%
                   \xdef\tikzumlMidTwoArc{\tikzumlMidTwoArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                                          node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity}%
                                         }%
-                \else%
+                \else
                   \pgfmathsetmacro{\tikzumlRelationPosition}{(\thepos-100)/100}%
                   \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                                          node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity}%
                                         }%
-                \fi%
-              \fi%
-            \fi%
+                \fi
+              \fi
+            \fi
             %
             \ifthenelse{\theposT=300\OR\theposT=100}{%
               \ifthenelse{\equal{\tikzumlRelationRecursiveDirectionStart}{right}}{%
@@ -1186,37 +1184,37 @@
               \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
                                    node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT}%
                                    }%
-            \else%
+            \else
               \ifnum\theposT<100%
                 \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
                                      node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT}%
                                      }%
-              \else%
+              \else
                 \ifnum\theposT>200%
                   \pgfmathsetmacro{\tikzumlRelationPositionT}{(\theposT-200)/100}%
                   \xdef\tikzumlMidTwoArc{\tikzumlMidTwoArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
                                          node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT}%
                                         }%
-                \else%
+                \else
                   \pgfmathsetmacro{\tikzumlRelationPositionT}{(\theposT-100)/100}%
                   \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
                                          node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT}%
                                         }%
-                \fi%
-              \fi%
-            \fi%
-          \else%
+                \fi
+              \fi
+            \fi
+          \else
             \ifnum\theposStereo>200%
               \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-200)/100}%
               \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
-            \else%
+            \else
               \ifnum\theposStereo<100%
                 \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
-              \else%
+              \else
                 \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-100)/100}%
                 \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
-              \fi%
-            \fi%
+              \fi
+            \fi
             %
             \ifthenelse{\thepos=100}{%
               \ifthenelse{\equal{\tikzumlRelationRecursiveDirectionStart}{right}}{%
@@ -1303,18 +1301,18 @@
               \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                                    node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity}%
                                    }%
-            \else%
+            \else
               \ifnum\thepos<100%
                 \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                                      node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity}%
                                      }%
-              \else%
+              \else
                 \pgfmathsetmacro{\tikzumlRelationPosition}{(\thepos-100)/100}%
                 \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                                        node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity}%
                                       }%
-              \fi%
-            \fi%
+              \fi
+            \fi
             %
             \ifthenelse{\theposT=100}{%
               \ifthenelse{\equal{\tikzumlRelationRecursiveDirectionStart}{right}}{%
@@ -1401,32 +1399,32 @@
               \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
                                    node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT}%
                                    }%
-            \else%
+            \else
               \ifnum\theposT<100%
                 \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
                                      node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT}%
                                      }%
-              \else%
+              \else
                 \pgfmathsetmacro{\tikzumlRelationPositionT}{(\theposT-100)/100}%
                 \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
                                        node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT}%
                                       }%
-              \fi%
-            \fi%
-          \fi%
+              \fi
+            \fi
+          \fi
           %
           \ifthenelse{\equal{\tikzumlRelationRecursiveDirectionStart}{\tikzumlRelationRecursiveDirectionEnd}}{%
             \xdef\tikzumlPath{(\tikzumlSrcClassNodeName.\tikzumlRelationStartAngle) -- \tikzumlFirstArc (\tikzumlRelationName-2.center) -- \tikzumlMidOneArc (\tikzumlRelationName-4.center) -- \tikzumlLastArc (\tikzumlDestClassNodeName.\tikzumlRelationEndAngle) }%
             \ifnum\thetikzumlStateLevel>0%
               \def\tikzumlStateFitTmp{\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname}%
               \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{\tikzumlStateFitTmp (\tikzumlRelationName-1) (\tikzumlRelationName-2) (\tikzumlRelationName-3) (\tikzumlRelationName-4) (\tikzumlRelationName-5)}%
-            \fi%
+            \fi
           }{%
             \xdef\tikzumlPath{(\tikzumlSrcClassNodeName.\tikzumlRelationStartAngle) -- \tikzumlFirstArc (\tikzumlRelationName-2.center) -- \tikzumlMidOneArc (\tikzumlRelationName-4.center) -- \tikzumlMidTwoArc (\tikzumlRelationName-6.center) -- \tikzumlLastArc (\tikzumlDestClassNodeName.\tikzumlRelationEndAngle) }%
             \ifnum\thetikzumlStateLevel>0%
               \def\tikzumlStateFitTmp{\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname}%
               \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{\tikzumlStateFitTmp (\tikzumlRelationName-1) (\tikzumlRelationName-2) (\tikzumlRelationName-3) (\tikzumlRelationName-4) (\tikzumlRelationName-5) (\tikzumlRelationName-6) (\tikzumlRelationName-7)}%
-            \fi%
+            \fi
           }%
         }{}%
       }%
@@ -1434,7 +1432,7 @@
       \def\arcNum{1}%
       \def\arcNumT{1}%
       %
-      \node[inner sep=0] (\tikzumlRelationName-1) at (\tikzumlRelationName-middle) {};%
+      \node[inner sep=\z@] (\tikzumlRelationName-1) at (\tikzumlRelationName-middle) {};%
       \xdef\tikzumlLastArc{node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                            node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity}%
                            node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
@@ -1444,7 +1442,7 @@
       \ifnum\thetikzumlStateLevel>0%
         \def\tikzumlStateFitTmp{\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname}%
         \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{\tikzumlStateFitTmp (\tikzumlRelationName-1) }%
-      \fi%
+      \fi
     }%
   }{%
     % first vertical then horizontal line
@@ -1452,170 +1450,170 @@
     {%
       %\setcounter{tikzumlControlNodesNum}{1}%
       %
-      \def\tikzumlFirstArc{node[midway, inner sep=0, name=\tikzumlRelationName-1, anchor=center] {} }%
-      \def\tikzumlLastArc{node[midway, inner sep=0, name=\tikzumlRelationName-3, anchor=center]{} }%
+      \def\tikzumlFirstArc{node[midway, inner sep=\z@, name=\tikzumlRelationName-1, anchor=center] {} }%
+      \def\tikzumlLastArc{node[midway, inner sep=\z@, name=\tikzumlRelationName-3, anchor=center]{} }%
       %
       \begin{pgfonlayer}{connections}%
-      \node[inner sep=0] (\tikzumlRelationName-2) at (\tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor |- \tikzumlDestClassNodeName\tikzumlRelationDestAnchor) {};%
+      \node[inner sep=\z@] (\tikzumlRelationName-2) at (\tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor |- \tikzumlDestClassNodeName\tikzumlRelationDestAnchor) {};%
       \end{pgfonlayer}%
       %
       \ifnum\theposStereo>100%
         \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-100)/100}%
         \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
-      \else%
+      \else
         \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
-      \fi%
+      \fi
       %
       \ifnum\thepos>100%
         \pgfmathsetmacro{\tikzumlRelationPosition}{(\thepos-100)/100}%
         \def\arcNum{2}%
-      \else%
+      \else
         \def\arcNum{1}%
         \ifnum\thepos=100%
           \def\posAttrName{above left}%
           \def\posMultiplicity{below right}%
-        \fi%
-      \fi%
+        \fi
+      \fi
       %
       \ifnum\arcNum=1%
         \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                                                node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity} }%
-      \fi%
+      \fi
       \ifnum\arcNum=2%
         \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                                              node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity} }%
-      \fi%
+      \fi
       %
       \ifnum\theposT>100%
         \pgfmathsetmacro{\tikzumlRelationPositionT}{(\theposT-100)/100}%
         \def\arcNumT{2}%
-      \else%
+      \else
         \def\arcNumT{1}%
         \ifnum\theposT=100%
           \def\posAttrNameT{above left}%
           \def\posMultiplicityT{below right}%
-        \fi%
-      \fi%
+        \fi
+      \fi
       %
       \ifnum\arcNumT=1%
         \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
                                                node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT} }%
-      \fi%
+      \fi
       \ifnum\arcNumT=2%
         \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
                                              node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT} }%
-      \fi%
+      \fi
       %
       \xdef\tikzumlPath{(\tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor) -- \tikzumlFirstArc (\tikzumlRelationName-2.base) -- \tikzumlLastArc (\tikzumlDestClassNodeName\tikzumlRelationDestAnchor) }%
       \ifnum\thetikzumlStateLevel>0%
         \def\tikzumlStateFitTmp{\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname}%
         \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{\tikzumlStateFitTmp (\tikzumlRelationName-1) (\tikzumlRelationName-2) (\tikzumlRelationName-3) }%
-      \fi%
+      \fi
     }{%
       % first horizontal then vertical line
       \ifthenelse{\equal{\tikzumlRelationGeometry}{-|}}%
       {%
         %\setcounter{tikzumlControlNodesNum}{1}%
         %
-        \def\tikzumlFirstArc{node[midway, inner sep=0, name=\tikzumlRelationName-1, anchor=center]{} }%
-        \def\tikzumlLastArc{node[midway, inner sep=0, name=\tikzumlRelationName-3, anchor=center] {} }%
+        \def\tikzumlFirstArc{node[midway, inner sep=\z@, name=\tikzumlRelationName-1, anchor=center]{} }%
+        \def\tikzumlLastArc{node[midway, inner sep=\z@, name=\tikzumlRelationName-3, anchor=center] {} }%
         %
         \begin{pgfonlayer}{connections}%
-        \node[inner sep=0] (\tikzumlRelationName-2) at (\tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor -| \tikzumlDestClassNodeName\tikzumlRelationDestAnchor) {};%
+        \node[inner sep=\z@] (\tikzumlRelationName-2) at (\tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor -| \tikzumlDestClassNodeName\tikzumlRelationDestAnchor) {};%
         \end{pgfonlayer}%
         %
         \ifnum\theposStereo>100%
           \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-100)/100}%
           \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
-        \else%
+        \else
           \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
-        \fi%
+        \fi
         %
         \ifnum\thepos>100%
           \pgfmathsetmacro{\tikzumlRelationPosition}{(\thepos-100)/100}%
           \def\arcNum{2}%
-        \else%
+        \else
           \def\arcNum{1}%
           \ifnum\thepos=100%
             \def\posAttrName{above left}%
             \def\posMultiplicity{below right}%
-          \fi%
-        \fi%
+          \fi
+        \fi
         %
         \ifnum\arcNum=1%
           \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                                                  node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity} }%
-        \fi%
+        \fi
         \ifnum\arcNum=2%
           \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                                                node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity} }%
-        \fi%
+        \fi
         %
         \ifnum\theposT>100%
           \pgfmathsetmacro{\tikzumlRelationPositionT}{(\theposT-100)/100}%
           \def\arcNumT{2}%
-        \else%
+        \else
           \def\arcNumT{1}%
           \ifnum\theposT=100%
             \def\posAttrNameT{above left}%
             \def\posMultiplicityT{below right}%
-          \fi%
-        \fi%
+          \fi
+        \fi
         %
         \ifnum\arcNumT=1%
           \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
                                                  node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT} }%
-        \fi%
+        \fi
         \ifnum\arcNumT=2%
           \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
                                                node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT} }%
-        \fi%
+        \fi
         %
         \xdef\tikzumlPath{(\tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor) -- \tikzumlFirstArc (\tikzumlRelationName-2.base) -- \tikzumlLastArc (\tikzumlDestClassNodeName\tikzumlRelationDestAnchor) }%
         \ifnum\thetikzumlStateLevel>0%
           \def\tikzumlStateFitTmp{\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname}%
           \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{\tikzumlStateFitTmp (\tikzumlRelationName-1) (\tikzumlRelationName-2) (\tikzumlRelationName-3) }%
-        \fi%
+        \fi
       }{%
         % first vertical, then horizontal, finally vertical line
         \ifthenelse{\equal{\tikzumlRelationGeometry}{|-|}}%
         {%
           %\setcounter{tikzumlControlNodesNum}{2}%
           %
-          \def\tikzumlFirstArc{node[midway, inner sep=0, name=\tikzumlRelationName-1, anchor=center] {} }%
-          \def\tikzumlLastArc{node[midway, inner sep=0, name=\tikzumlRelationName-5, anchor=center] {} }%
+          \def\tikzumlFirstArc{node[midway, inner sep=\z@, name=\tikzumlRelationName-1, anchor=center] {} }%
+          \def\tikzumlLastArc{node[midway, inner sep=\z@, name=\tikzumlRelationName-5, anchor=center] {} }%
           \def\tikzumlMidOneArc{ }%
           %
           \begin{pgfonlayer}{connections}%
           %
           \ifthenelse{\equal{\tikzumlRelationArmO}{auto}}{%
             \ifthenelse{\equal{\tikzumlRelationArmT}{auto}}{%
-              \node[inner sep=0] (\tikzumlRelationName-3) at (\tikzumlRelationName-middle) {};%
-              \node[inner sep=0] (\tikzumlRelationName-2) at (\tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor |- \tikzumlRelationName-3) {};%
-              \node[inner sep=0] (\tikzumlRelationName-4) at (\tikzumlRelationName-3 -| \tikzumlDestClassNodeName\tikzumlRelationDestAnchor) {};%
+              \node[inner sep=\z@] (\tikzumlRelationName-3) at (\tikzumlRelationName-middle) {};%
+              \node[inner sep=\z@] (\tikzumlRelationName-2) at (\tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor |- \tikzumlRelationName-3) {};%
+              \node[inner sep=\z@] (\tikzumlRelationName-4) at (\tikzumlRelationName-3 -| \tikzumlDestClassNodeName\tikzumlRelationDestAnchor) {};%
             }{%
-              \draw (\tikzumlDestClassNodeName\tikzumlRelationDestAnchor)+(0,\tikzumlRelationArmT) node[inner sep=0, name=\tikzumlRelationName-4] {};%
-              \node[inner sep=0] (\tikzumlRelationName-2) at (\tikzumlRelationName-4 -| \tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor) {};%
-              \node[inner sep=0] (\tikzumlRelationName-3) at (barycentric cs:\tikzumlRelationName-2=0.5,\tikzumlRelationName-4=0.5) {};%
+              \draw (\tikzumlDestClassNodeName\tikzumlRelationDestAnchor)+(0,\tikzumlRelationArmT) node[inner sep=\z@, name=\tikzumlRelationName-4] {};%
+              \node[inner sep=\z@] (\tikzumlRelationName-2) at (\tikzumlRelationName-4 -| \tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor) {};%
+              \node[inner sep=\z@] (\tikzumlRelationName-3) at (barycentric cs:\tikzumlRelationName-2=.5,\tikzumlRelationName-4=.5) {};%
             }%
           }{%
-            \draw (\tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor)+(0,\tikzumlRelationArmO) node[inner sep=0, name=\tikzumlRelationName-2] {};%
-            \node[inner sep=0] (\tikzumlRelationName-4) at (\tikzumlRelationName-2 -| \tikzumlDestClassNodeName\tikzumlRelationDestAnchor) {};%
-            \node[inner sep=0] (\tikzumlRelationName-3) at (barycentric cs:\tikzumlRelationName-2=0.5,\tikzumlRelationName-4=0.5) {};%
+            \draw (\tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor)+(0,\tikzumlRelationArmO) node[inner sep=\z@, name=\tikzumlRelationName-2] {};%
+            \node[inner sep=\z@] (\tikzumlRelationName-4) at (\tikzumlRelationName-2 -| \tikzumlDestClassNodeName\tikzumlRelationDestAnchor) {};%
+            \node[inner sep=\z@] (\tikzumlRelationName-3) at (barycentric cs:\tikzumlRelationName-2=.5,\tikzumlRelationName-4=.5) {};%
           }%
           \end{pgfonlayer}%
           %
           \ifnum\theposStereo>200%
             \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-200)/100}%
             \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
-          \else%
+          \else
             \ifnum\theposStereo<100%
               \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
-            \else%
+            \else
               \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-100)/100}%
               \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
-            \fi%
-          \fi%
+            \fi
+          \fi
           %
           \ifthenelse{\thepos=200\OR\thepos=100}{%
             \def\posAttrName{above left}%
@@ -1637,15 +1635,15 @@
           \ifnum\arcNum=1%
             \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                                                    node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity} }%
-          \fi%
+          \fi
           \ifnum\arcNum=2%
             \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                                                      node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity} }%
-          \fi%
+          \fi
           \ifnum\arcNum=3%
             \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                                                  node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity} }%
-          \fi%
+          \fi
           %
           \ifthenelse{\theposT=200\OR\theposT=100}{%
             \def\posAttrNameT{above left}%
@@ -1667,61 +1665,61 @@
           \ifnum\arcNumT=1%
             \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
                                                    node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT} }%
-          \fi%
+          \fi
           \ifnum\arcNumT=2%
             \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
                                                      node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT} }%
-          \fi%
+          \fi
           \ifnum\arcNumT=3%
             \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
                                                  node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT} }%
-          \fi%
+          \fi
           %
           \xdef\tikzumlPath{(\tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor) -- \tikzumlFirstArc (\tikzumlRelationName-2.base) -- \tikzumlMidOneArc (\tikzumlRelationName-4.base) -- \tikzumlLastArc (\tikzumlDestClassNodeName\tikzumlRelationDestAnchor) }%
           \ifnum\thetikzumlStateLevel>0%
             \def\tikzumlStateFitTmp{\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname}%
             \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{\tikzumlStateFitTmp (\tikzumlRelationName-1) (\tikzumlRelationName-2) (\tikzumlRelationName-3) (\tikzumlRelationName-4) (\tikzumlRelationName-5) }%
-          \fi%
+          \fi
         }{%
           % first horizontal, then vertical, finally horizontal line
           \ifthenelse{\equal{\tikzumlRelationGeometry}{-|-}}%
           {%
             %\setcounter{tikzumlControlNodesNum}{2}%
             %
-            \def\tikzumlFirstArc{node[midway, inner sep=0, name=\tikzumlRelationName-1, anchor=center] {} }%
-            \def\tikzumlLastArc{node[midway, inner sep=0, name=\tikzumlRelationName-5, anchor=center] {} }%
+            \def\tikzumlFirstArc{node[midway, inner sep=\z@, name=\tikzumlRelationName-1, anchor=center] {} }%
+            \def\tikzumlLastArc{node[midway, inner sep=\z@, name=\tikzumlRelationName-5, anchor=center] {} }%
             \def\tikzumlMidOneArc{}%
             %
             \begin{pgfonlayer}{connections}%
             %
             \ifthenelse{\equal{\tikzumlRelationArmO}{auto}}{%
               \ifthenelse{\equal{\tikzumlRelationArmT}{auto}}{%
-                \node[inner sep=0] (\tikzumlRelationName-3) at (\tikzumlRelationName-middle) {};%
-                \node[inner sep=0] (\tikzumlRelationName-2) at (\tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor -| \tikzumlRelationName-3) {};%
-                \node[inner sep=0] (\tikzumlRelationName-4) at (\tikzumlRelationName-3 |- \tikzumlDestClassNodeName\tikzumlRelationDestAnchor) {};%
+                \node[inner sep=\z@] (\tikzumlRelationName-3) at (\tikzumlRelationName-middle) {};%
+                \node[inner sep=\z@] (\tikzumlRelationName-2) at (\tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor -| \tikzumlRelationName-3) {};%
+                \node[inner sep=\z@] (\tikzumlRelationName-4) at (\tikzumlRelationName-3 |- \tikzumlDestClassNodeName\tikzumlRelationDestAnchor) {};%
               }{%
-                \draw (\tikzumlDestClassNodeName\tikzumlRelationDestAnchor)+(\tikzumlRelationArmT,0) node[inner sep=0, name=\tikzumlRelationName-4] {};%
-                \node[inner sep=0] (\tikzumlRelationName-2) at (\tikzumlRelationName-4 |- \tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor) {};%
-                \node[inner sep=0] (\tikzumlRelationName-3) at (barycentric cs:\tikzumlRelationName-2=0.5,\tikzumlRelationName-4=0.5) {};%
+                \draw (\tikzumlDestClassNodeName\tikzumlRelationDestAnchor)+(\tikzumlRelationArmT,0) node[inner sep=\z@, name=\tikzumlRelationName-4] {};%
+                \node[inner sep=\z@] (\tikzumlRelationName-2) at (\tikzumlRelationName-4 |- \tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor) {};%
+                \node[inner sep=\z@] (\tikzumlRelationName-3) at (barycentric cs:\tikzumlRelationName-2=.5,\tikzumlRelationName-4=.5) {};%
               }%
             }{%
-              \draw (\tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor)+(\tikzumlRelationArmO,0) node[inner sep=0, name=\tikzumlRelationName-2] {};%
-              \node[inner sep=0] (\tikzumlRelationName-4) at (\tikzumlRelationName-2 |- \tikzumlDestClassNodeName\tikzumlRelationDestAnchor) {};%
-              \node[inner sep=0] (\tikzumlRelationName-3) at (barycentric cs:\tikzumlRelationName-2=0.5,\tikzumlRelationName-4=0.5) {};%
+              \draw (\tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor)+(\tikzumlRelationArmO,0) node[inner sep=\z@, name=\tikzumlRelationName-2] {};%
+              \node[inner sep=\z@] (\tikzumlRelationName-4) at (\tikzumlRelationName-2 |- \tikzumlDestClassNodeName\tikzumlRelationDestAnchor) {};%
+              \node[inner sep=\z@] (\tikzumlRelationName-3) at (barycentric cs:\tikzumlRelationName-2=.5,\tikzumlRelationName-4=.5) {};%
             }%
             \end{pgfonlayer}%
             %
             \ifnum\theposStereo>200%
               \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-200)/100}%
               \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
-            \else%
+            \else
               \ifnum\theposStereo<100%
                 \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
-              \else%
+              \else
                 \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-100)/100}%
                 \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
-              \fi%
-            \fi%
+              \fi
+            \fi
             %
             \ifthenelse{\thepos=200\OR\thepos=100}{%
               \def\posAttrName{above left}%
@@ -1743,15 +1741,15 @@
             \ifnum\arcNum=1%
               \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                                                      node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity} }%
-            \fi%
+            \fi
             \ifnum\arcNum=2%
               \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                                                        node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity} }%
-            \fi%
+            \fi
             \ifnum\arcNum=3%
               \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
                                                    node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity} }%
-            \fi%
+            \fi
             %
             \ifthenelse{\theposT=200\OR\theposT=100}{%
               \def\posAttrNameT{above left}%
@@ -1773,21 +1771,21 @@
             \ifnum\arcNumT=1%
               \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
                                                      node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT} }%
-            \fi%
+            \fi
             \ifnum\arcNumT=2%
               \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
                                                        node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT} }%
-            \fi%
+            \fi
             \ifnum\arcNumT=3%
               \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
                                                    node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT} }%
-            \fi%
+            \fi
             %
             \xdef\tikzumlPath{(\tikzumlSrcClassNodeName\tikzumlRelationSrcAnchor) -- \tikzumlFirstArc (\tikzumlRelationName-2.base) -- \tikzumlMidOneArc (\tikzumlRelationName-4.base) -- \tikzumlLastArc (\tikzumlDestClassNodeName\tikzumlRelationDestAnchor) }%
             \ifnum\thetikzumlStateLevel>0%
               \def\tikzumlStateFitTmp{\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname}%
               \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{\tikzumlStateFitTmp (\tikzumlRelationName-1) (\tikzumlRelationName-2) (\tikzumlRelationName-3) (\tikzumlRelationName-4) (\tikzumlRelationName-5) }%
-            \fi%
+            \fi
           }{%
             \errmessage{TIKZUML ERROR : Unknown geometry value !!! It should be in the following list : --, |-, -|, |-|, -|-}%
           }%
@@ -1800,8 +1798,8 @@
   \ifthenelse{\equal{\tikzumlRelationStyle}{tikzuml nesting style}}{%
     \pgfarrowsdeclare{nested}{nested}{...}
     {
-      \tikzumlNestingSymbolSize=0.2pt%
-      \advance\tikzumlNestingSymbolSize by .5\pgflinewidth%
+      \tikzumlNestingSymbolSize=.2pt%
+      \advance\tikzumlNestingSymbolSize by .5\pgflinewidth
       \pgfsetdash{}{0pt} %  do not dash
       \pgfsetroundjoin   %  fix join
       \pgfsetroundcap    %  fix cap
@@ -2041,7 +2039,7 @@
 \newcommand{\umlCNrelation}[4][]{%
   \pgfkeys{/tikzuml/relation/.cd, arg1/.initial={}, arg2/.initial={}, arg/.initial={},%
         mult1/.initial={}, mult2/.initial={}, mult/.initial={},%
-        pos1/.initial=0.2, pos2/.initial=0.8, pos/.initial=tikzumlEmpty,%
+        pos1/.initial=.2, pos2/.initial=.8, pos/.initial=tikzumlEmpty,%
         align1/.initial={}, align2/.initial={}, align/.initial={},%
         anchor1/.initial=tikzumlEmpty, anchor2/.initial=tikzumlEmpty,%
         stereo/.initial={}, pos stereo/.initial=1,%
@@ -2064,17 +2062,17 @@
   %
   % managing \_ in class names for node names
   \def\tikzumlSrcClassName{#2}%
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlSrcClassNodeName{\tikzumlSrcClassName}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlSrcClassNodeName{\tikzumlSrcClassName}}\x
   %
   \StrSubstitute{\tikzumlSrcClassNodeName}{:}{@COLON@}[\tikzumlSrcClassNodeName]%
   \StrSubstitute{\tikzumlSrcClassNodeName}{\_}{@UNDERSCORE@}[\tikzumlSrcClassNodeName]%
   %
   \def\tikzumlDestClassName{#4}%
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlDestClassNodeName{\tikzumlDestClassName}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlDestClassNodeName{\tikzumlDestClassName}}\x
   %
   \StrSubstitute{\tikzumlDestClassNodeName}{:}{@COLON@}[\tikzumlDestClassNodeName]%
   \StrSubstitute{\tikzumlDestClassNodeName}{\_}{@UNDERSCORE@}[\tikzumlDestClassNodeName]%
@@ -2159,49 +2157,49 @@
   \ifnum\theposStereo>100%
     \pgfmathsetmacro{\tikzumlCNRelationPositionStereotype}{(\theposStereo-100)/100}%
     \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlCNRelationPositionStereotype, anchor=center] {\stereotype} }%
-  \else%
+  \else
     \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlCNRelationPositionStereotype, anchor=center] {\stereotype} }%
-  \fi%
+  \fi
   %
   \ifnum\thepos>100%
     \pgfmathsetmacro{\tikzumlCNRelationPosition}{(\thepos-100)/100}%
     \def\arcNum{2}%
-  \else%
+  \else
     \def\arcNum{1}%
     \ifnum\thepos=100%
       \def\posAttrName{above left}%
       \def\posMultiplicity{below right}%
-    \fi%
-  \fi%
+    \fi
+  \fi
   %
   \ifnum\arcNum=1%
     \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlCNRelationPosition, \posAttrName, \attrAlign] {\tikzumlCNRelationAttrName}%
                                            node[pos=\tikzumlCNRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlCNRelationMultiplicity} }%
-  \fi%
+  \fi
   \ifnum\arcNum=2%
     \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlCNRelationPosition, \posAttrName, \attrAlign] {\tikzumlCNRelationAttrName}%
                                          node[pos=\tikzumlCNRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlCNRelationMultiplicity} }%
-  \fi%
+  \fi
   %
   \ifnum\theposT>100%
     \pgfmathsetmacro{\tikzumlCNRelationPositionT}{(\theposT-100)/100}%
     \def\arcNumT{2}%
-  \else%
+  \else
     \def\arcNumT{1}%
     \ifnum\theposT=100%
       \def\posAttrNameT{above left}%
       \def\posMultiplicityT{below right}%
-    \fi%
-  \fi%
+    \fi
+  \fi
   %
   \ifnum\arcNumT=1%
     \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlCNRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlCNRelationAttrNameT}%
                                            node[pos=\tikzumlCNRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlCNRelationMultiplicityT} }%
-  \fi%
+  \fi
   \ifnum\arcNumT=2%
     \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlCNRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlCNRelationAttrNameT}%
                                          node[pos=\tikzumlCNRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlCNRelationMultiplicityT} }%
-  \fi%
+  \fi
   %
   \xdef\tikzumlPath{(\tikzumlSrcClassNodeName\tikzumlCNRelationSrcAnchor) -- \tikzumlFirstArc (\tikzumlCNRelationName-2.base) -- \tikzumlLastArc (\tikzumlDestClassNodeName\tikzumlCNRelationDestAnchor) }%
 
@@ -2209,8 +2207,8 @@
   \ifthenelse{\equal{\tikzumlCNRelationStyle}{tikzuml nesting style}}{%
     \pgfarrowsdeclare{nested}{nested}{...}
     {
-      \tikzumlNestingSymbolSize=0.2pt%
-      \advance\tikzumlNestingSymbolSize by .5\pgflinewidth%
+      \tikzumlNestingSymbolSize=.2pt%
+      \advance\tikzumlNestingSymbolSize by .5\pgflinewidth
       \pgfsetdash{}{0pt} %  do not dash
       \pgfsetroundjoin   %  fix join
       \pgfsetroundcap    %  fix cap
@@ -2297,9 +2295,9 @@
     }{}%
     \ifx\keyvalue\pgfkeysnovalue%
         \pgfkeys{/tikzuml/note/.cd, style/.append style/.expand once={\keyname}}%
-    \else%
+    \else
         \pgfkeys{/tikzuml/note/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-    \fi%
+    \fi
     %\errmessage{TIKZUML ERROR : in umlnote, invalid option \keyname}%
     }%
   }%
@@ -2313,9 +2311,9 @@
   }%
   %
   \def\tikzumlClassName{#2}%
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlClassNodeName{\tikzumlClassName}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlClassNodeName{\tikzumlClassName}}\x
   %
   % def anchors macros
   \ifthenelse{\equal{\tikzumlNoteSrcAnchor}{tikzumlEmpty}}{%
@@ -2334,9 +2332,9 @@
   %
   \iftikzumlnoteWithoutCoords%
     \node[text=\tikzumlNoteTextColor, text width=\tikzumlNoteTextWidth, font=\tikzumlDefaultFont, outer sep=0, inner xsep=1ex, inner ysep=3ex, /tikzuml/note/style] (note-\thetikzumlNoteNum-coord) {#3};%
-  \else%
+  \else
     \node[text=\tikzumlNoteTextColor, text width=\tikzumlNoteTextWidth, font=\tikzumlDefaultFont, outer sep=0, inner xsep=1ex, inner ysep=3ex, /tikzuml/note/style] (note-\thetikzumlNoteNum-coord) at (\tikzumlNoteX, \tikzumlNoteY) {#3};%
-  \fi%
+  \fi
   \draw (note-\thetikzumlNoteNum-coord.north east) node[name=note-\thetikzumlNoteNum-right-top, below=2ex, coordinate] {};%
   \draw (note-\thetikzumlNoteNum-coord.north east) node[name=note-\thetikzumlNoteNum-top-right, left=2ex, coordinate] {};%
   \draw[draw=\tikzumlNoteDrawColor, fill=\tikzumlNoteFillColor] (note-\thetikzumlNoteNum-coord.south west) -- (note-\thetikzumlNoteNum-coord.south east) -- (note-\thetikzumlNoteNum-right-top.base) -- (note-\thetikzumlNoteNum-top-right.base) -- (note-\thetikzumlNoteNum-coord.north west) -- cycle;%
@@ -2477,9 +2475,9 @@
         }{}%
         \ifx\keyvalue\pgfkeysnovalue%
         \pgfkeys{/tikzuml/assocclass/.cd, style/.append style/.expand once={\keyname}}%
-        \else%
+        \else
         \pgfkeys{/tikzuml/assocclass/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-        \fi%
+        \fi
         %\errmessage{TIKZUML ERROR : in umlassocclass, invalid option \keyname}%
     }%
   }%
@@ -2506,20 +2504,20 @@
     \def\tikzumlAssocClassVPadding{}%
     \def\tikzumlAssocClassHPadding{}%
   }{%
-    \def\tikzumlAssocClassVPadding{\vspace{0.1em} \\}%
-    \def\tikzumlAssocClassHPadding{\hspace{0.5ex} $ $}%
+    \def\tikzumlAssocClassVPadding{\vspace{.1em} \\}%
+    \def\tikzumlAssocClassHPadding{\hspace{.5ex} $ $}%
   }%
   %
   \def\tikzumlAssocClassName{#2}%
   \def\tikzumlAssocClassRelationName{#3}%
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlAssocClassNodeName{\tikzumlAssocClassName}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlAssocClassNodeName{\tikzumlAssocClassName}}\x
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlAssocClassRelationNodeName{\tikzumlAssocClassRelationName}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlAssocClassRelationNodeName{\tikzumlAssocClassRelationName}}\x
   %
   \ifthenelse{\equal{\tikzumlAssocClassName}{tikzumlEmpty}}{}{%
     \def\tikzumlAssocClassNodeName{\tikzumlAssocClassName}%
@@ -2558,7 +2556,7 @@
     \tikzumlAssocClassOperations%
     \end{tabular}%
     };%
-  \else%
+  \else
     \node[tikzuml class style, draw=\tikzumlAssocClassDrawColor, fill=\tikzumlAssocClassFillColor, text=\tikzumlAssocClassTextColor, font=\tikzumlDefaultFont, minimum width=\tikzumlAssocClassMinimumWidth, /tikzuml/assocclass/style] (\tikzumlAssocClassNodeName) at (\tikzumlAssocClassPos) {\begin{tabular}{c}\tikzumlAssocClassVPadding \tikzumlAssocClassType \tikzumlAssocClassHPadding \textbf{\tikzumlAssocClassName} \tikzumlAssocClassHPadding \end{tabular}%
     \nodepart{second}%
     \begin{tabular}{l}%
@@ -2569,7 +2567,7 @@
     \tikzumlAssocClassOperations%
     \end{tabular}%
     };%
-  \fi%
+  \fi
   %
   \ifthenelse{\equal{\tikzumlAssocClassTemplateParam}{}}{}{%
     \draw (\tikzumlAssocClassNodeName.north east) node[tikzuml template style, name=\tikzumlAssocClassNodeName-template, draw=\tikzumlAssocClassDrawColor, fill=\tikzumlAssocClassTemplateFillColor, text=\tikzumlAssocClassTextColor, font=\tikzumlDefaultFont] {\tikzumlAssocClassTemplateParam};%
@@ -2616,7 +2614,7 @@
       \expandafter\xdef\csname tikzumlPackageFit\tikzumlPackage@parent @@\tikzumlPackage@fitname\endcsname{\tikzumlPackageFitOld (\tikzumlAssocClassNodeName) (\tikzumlAssocClassNodeName-template)(\tikzumlAssocClassNodeName-middle)}%
     }%
     \stepcounter{tikzumlPackageClassNum}%
-  \fi%
+  \fi
 }%
 %
 %
@@ -2625,7 +2623,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \tikzstyle{tikzuml usecase style}=[ellipse, text centered]%
-\tikzstyle{tikzuml actor style}=[ellipse, inner sep=0, outer sep=0]%
+\tikzstyle{tikzuml actor style}=[ellipse, inner sep=\z@, outer sep=0]%
 %
 \newcounter{tikzumlSystemUseCaseNum}%
 \newcounter{tikzumlSystemLevel}%
@@ -2668,7 +2666,7 @@
   \ifnum\c@tikzumlSystemUseCaseNum=0%
     \node[inner xsep=10ex, inner ysep=1em] (\tikzumlSystemName-root) at (0,0) {};%
     \xdef\tikzumlSystemFit{(\tikzumlSystemName-root)}%
-  \fi%
+  \fi
   %
   \begin{pgfonlayer}{background}%
   \node[inner ysep=1em, inner xsep=2ex, fit = \tikzumlSystemFit] (\tikzumlSystemName-tmp) {};%
@@ -2714,9 +2712,9 @@
                                    }{}%
                                    \ifx\keyvalue\pgfkeysnovalue%
                                      \pgfkeys{/tikzuml/usecase/.cd, style/.append style/.expand once={\keyname}}%
-                                   \else%
+                                   \else
                                      \pgfkeys{/tikzuml/usecase/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-                                   \fi%
+                                   \fi
                                    %\errmessage{TIKZUML ERROR : in umlusecase, invalid option \keyname}%
                                  }%
   }%
@@ -2734,15 +2732,15 @@
   \ifthenelse{\equal{\tikzumlUseCaseTextWidth}{auto}}{%
     \iftikzumlusecaseWithoutCoords%
       \node[tikzuml usecase style, draw=\tikzumlUseCaseDrawColor, fill=\tikzumlUseCaseFillColor, text=\tikzumlUseCaseTextColor, font=\tikzumlDefaultFont, /tikzuml/usecase/style] (\tikzumlUseCaseName) {\tikzumlUseCaseText};%
-    \else%
+    \else
       \node[tikzuml usecase style, draw=\tikzumlUseCaseDrawColor, fill=\tikzumlUseCaseFillColor, text=\tikzumlUseCaseTextColor, font=\tikzumlDefaultFont, /tikzuml/usecase/style] (\tikzumlUseCaseName) at (\tikzumlUseCasePos) {\tikzumlUseCaseText};%
-    \fi%
+    \fi
   }{%
     \iftikzumlusecaseWithoutCoords%
       \node[tikzuml usecase style, draw=\tikzumlUseCaseDrawColor, fill=\tikzumlUseCaseFillColor, text=\tikzumlUseCaseTextColor, font=\tikzumlDefaultFont, text width=\tikzumlUseCaseTextWidth, /tikzuml/usecase/style] (\tikzumlUseCaseName) {\tikzumlUseCaseText};%
-    \else%
+    \else
       \node[tikzuml usecase style, draw=\tikzumlUseCaseDrawColor, fill=\tikzumlUseCaseFillColor, text=\tikzumlUseCaseTextColor, font=\tikzumlDefaultFont, text width=\tikzumlUseCaseTextWidth, /tikzuml/usecase/style] (\tikzumlUseCaseName) at (\tikzumlUseCasePos) {\tikzumlUseCaseText};%
-    \fi%
+    \fi
   }%
   %
   % add to fit
@@ -2750,7 +2748,7 @@
     \let\tikzumlSystemFitOld\tikzumlSystemFit%
     \xdef\tikzumlSystemFit{\tikzumlSystemFitOld (\tikzumlUseCaseName)}%
     \stepcounter{tikzumlSystemUseCaseNum}%
-  \fi%
+  \fi
 }%
 %
 % define the actor symbol
@@ -2770,7 +2768,7 @@
   \draw (empty) (0,0) -- (head);%
   \draw (left-hand) -- (right-hand);%
   \draw (0,0) -- (left-foot) (0,0) -- (right-foot);%
-  \node[fill, draw, circle, inner sep=\tikzumlPicturedActorScale*0.3333ex, minimum size=\tikzumlPicturedActorScale*2ex, anchor=base] at (head) {};%
+  \node[fill, draw, circle, inner sep=\tikzumlPicturedActorScale*.3333ex, minimum size=\tikzumlPicturedActorScale*2ex, anchor=base] at (head) {};%
   \end{tikzpicture}%
 }%
 %
@@ -2807,9 +2805,9 @@
                                  }{}%
                                  \ifx\keyvalue\pgfkeysnovalue%
                                    \pgfkeys{/tikzuml/actor/.cd, style/.append style/.expand once={\keyname}}%
-                                 \else%
+                                 \else
                                    \pgfkeys{/tikzuml/actor/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-                                 \fi%
+                                 \fi
                                  %\errmessage{TIKZUML ERROR : in umlactor, invalid option \keyname}%
                                }%
   }%
@@ -2820,17 +2818,17 @@
            draw/.get=\tikzumlActorDrawColor, text/.get=\tikzumlActorTextColor}%
   %
   \def\tikzumlActorName{#2}%
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlActorNodeName{\tikzumlActorName}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlActorNodeName{\tikzumlActorName}}\x
   %
   \def\tikzumlActorPos{\tikzumlActorX,\tikzumlActorY}%
   %
   \iftikzumlactorWithoutCoords%
     \node[tikzuml actor style, text=\tikzumlActorTextColor, font=\tikzumlDefaultFont, /tikzuml/actor/style] (\tikzumlActorNodeName) {\picturedactor{scale=\tikzumlActorScale, fill=white, draw=\tikzumlActorDrawColor, thick}};%
-  \else%
+  \else
     \node[tikzuml actor style, text=\tikzumlActorTextColor, font=\tikzumlDefaultFont, /tikzuml/actor/style] (\tikzumlActorNodeName) at (\tikzumlActorPos) {\picturedactor{scale=\tikzumlActorScale, fill=white, draw=\tikzumlActorDrawColor, thick}};%
-  \fi%
+  \fi
   \node[text=\tikzumlActorTextColor, font=\tikzumlDefaultFont, below=\tikzumlActorScale*\tikzumlActorBelow] at (\tikzumlActorNodeName) {\tikzumlActorName};%
   %
 }%
@@ -3089,9 +3087,9 @@
                                      }{}%
                                      \ifx\keyvalue\pgfkeysnovalue%
                                        \pgfkeys{/tikzuml/statejoin/.cd, style/.append style/.expand once={\keyname}}%
-                                     \else%
+                                     \else
                                        \pgfkeys{/tikzuml/statejoin/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-                                     \fi%
+                                     \fi
                                      %\errmessage{TIKZUML ERROR : in umlstatejoin, invalid option \keyname}%
                                    }%
   }%
@@ -3104,16 +3102,16 @@
   %
   \iftikzumlstatejoinWithoutCoords%
     \node[circle, minimum size=\tikzumlStateJoinMinimumWidth, draw=\tikzumlStateJoinColor, fill=\tikzumlStateJoinColor, /tikzuml/statejoin/style] (\tikzumlStateJoinName) {};%
-  \else%
+  \else
     \node[circle, minimum size=\tikzumlStateJoinMinimumWidth, draw=\tikzumlStateJoinColor, fill=\tikzumlStateJoinColor, /tikzuml/statejoin/style] (\tikzumlStateJoinName) at (\tikzumlStateJoinPos) {};%
-  \fi%
+  \fi
   %
   % add to fit
   \ifnum\c@tikzumlStateLevel>0%
     \edef\tikzumlStateFitOld{\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname}%
     \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{\tikzumlStateFitOld (\tikzumlStateJoinName)}%
     \stepcounter{tikzumlStateSubStateNum}%
-  \fi%
+  \fi
   \stepcounter{tikzumlStateJoinNum}%
 }%
 %
@@ -3149,9 +3147,9 @@
         }{}%
         \ifx\keyvalue\pgfkeysnovalue%
         \pgfkeys{/tikzuml/statedecision/.cd, style/.append style/.expand once={\keyname}}%
-        \else%
+        \else
         \pgfkeys{/tikzuml/statedecision/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-        \fi%
+        \fi
         %\errmessage{TIKZUML ERROR : in umlstatedecision, invalid option \keyname}%
     }%
   }%
@@ -3164,16 +3162,16 @@
   %
   \iftikzumlstatedecisionWithoutCoords%
     \node[rectangle, rotate=45, minimum size=\tikzumlStateDecisionMinimumWidth, draw=\tikzumlStateDecisionColor, /tikzuml/statedecision/style] (\tikzumlStateDecisionName) {};%
-  \else%
+  \else
     \node[rectangle, rotate=45, minimum size=\tikzumlStateDecisionMinimumWidth, draw=\tikzumlStateDecisionColor, /tikzuml/statedecision/style] (\tikzumlStateDecisionName) at (\tikzumlStateDecisionPos) {};%
-  \fi%
+  \fi
   %
   % add to fit
   \ifnum\c@tikzumlStateLevel>0%
     \edef\tikzumlStateFitOld{\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname}%
     \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{\tikzumlStateFitOld (\tikzumlStateDecisionName)}%
     \stepcounter{tikzumlStateSubStateNum}%
-  \fi%
+  \fi
   \stepcounter{tikzumlStateDecisionNum}%
 }%
 %
@@ -3210,9 +3208,9 @@
         }{}%
         \ifx\keyvalue\pgfkeysnovalue%
             \pgfkeys{/tikzuml/stateinitial/.cd, style/.append style/.expand once={\keyname}}%
-        \else%
+        \else
             \pgfkeys{/tikzuml/stateinitial/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-        \fi%
+        \fi
         %\errmessage{TIKZUML ERROR : in umlstateinitial, invalid option \keyname}%
         }%
   }%
@@ -3225,16 +3223,16 @@
   %
   \iftikzumlstateinitialWithoutCoords%
     \node[circle, minimum size=\tikzumlStateInitialMinimumWidth, fill=\tikzumlStateInitialColor, /tikzuml/stateinitial/style] (\tikzumlStateInitialName) {};%
-  \else%
+  \else
     \node[circle, minimum size=\tikzumlStateInitialMinimumWidth, fill=\tikzumlStateInitialColor, /tikzuml/stateinitial/style] (\tikzumlStateInitialName) at (\tikzumlStateInitialPos) {};%
-  \fi%
+  \fi
   %
   % add to fit
   \ifnum\c@tikzumlStateLevel>0%
     \edef\tikzumlStateFitOld{\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname}%
     \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{\tikzumlStateFitOld (\tikzumlStateInitialName)}%
     \stepcounter{tikzumlStateSubStateNum}%
-  \fi%
+  \fi
   \stepcounter{tikzumlStateInitialNum}%
 }%
 %
@@ -3270,9 +3268,9 @@
             }{}%
             \ifx\keyvalue\pgfkeysnovalue%
             \pgfkeys{/tikzuml/statefinal/.cd, style/.append style/.expand once={\keyname}}%
-            \else%
+            \else
             \pgfkeys{/tikzuml/statefinal/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-            \fi%
+            \fi
             %\errmessage{TIKZUML ERROR : in umlstatefinal, invalid option \keyname}%
         }%
   }%
@@ -3284,17 +3282,17 @@
   \def\tikzumlStateFinalPos{\tikzumlStateFinalX,\tikzumlStateFinalY}%
   %
   \iftikzumlstatefinalWithoutCoords%
-    \node[circle, minimum size=\tikzumlStateFinalMinimumWidth, draw=\tikzumlStateFinalColor, fill=\tikzumlStateFinalColor, double, double distance=0.1cm, /tikzuml/statefinal/style] (\tikzumlStateFinalName) {};%
-  \else%
-    \node[circle, minimum size=\tikzumlStateFinalMinimumWidth, draw=\tikzumlStateFinalColor, fill=\tikzumlStateFinalColor, double, double distance=0.1cm, /tikzuml/statefinal/style] (\tikzumlStateFinalName) at (\tikzumlStateFinalPos) {};%
-  \fi%
+    \node[circle, minimum size=\tikzumlStateFinalMinimumWidth, draw=\tikzumlStateFinalColor, fill=\tikzumlStateFinalColor, double, double distance=.1cm, /tikzuml/statefinal/style] (\tikzumlStateFinalName) {};%
+  \else
+    \node[circle, minimum size=\tikzumlStateFinalMinimumWidth, draw=\tikzumlStateFinalColor, fill=\tikzumlStateFinalColor, double, double distance=.1cm, /tikzuml/statefinal/style] (\tikzumlStateFinalName) at (\tikzumlStateFinalPos) {};%
+  \fi
   %
   % add to fit
   \ifnum\c@tikzumlStateLevel>0%
     \edef\tikzumlStateFitOld{\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname}%
     \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{\tikzumlStateFitOld (\tikzumlStateFinalName)}%
     \stepcounter{tikzumlStateSubStateNum}%
-  \fi%
+  \fi
   \stepcounter{tikzumlStateFinalNum}%
 }%
 %
@@ -3330,9 +3328,9 @@
         }{}%
         \ifx\keyvalue\pgfkeysnovalue%
         \pgfkeys{/tikzuml/stateenter/.cd, style/.append style/.expand once={\keyname}}%
-        \else%
+        \else
         \pgfkeys{/tikzuml/stateenter/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-        \fi%
+        \fi
         %\errmessage{TIKZUML ERROR : in umlstateenter, invalid option \keyname}%
     }%
   }%
@@ -3345,16 +3343,16 @@
   %
   \iftikzumlstateenterWithoutCoords%
     \node[circle, minimum size=\tikzumlStateEnterMinimumWidth, draw=\tikzumlStateEnterColor, /tikzuml/stateenter/style] (\tikzumlStateEnterName) {};%
-  \else%
+  \else
     \node[circle, minimum size=\tikzumlStateEnterMinimumWidth, draw=\tikzumlStateEnterColor, /tikzuml/stateenter/style] (\tikzumlStateEnterName) at (\tikzumlStateEnterPos) {};%
-  \fi%
+  \fi
   %
   % add to fit
   \ifnum\c@tikzumlStateLevel>0%
     \edef\tikzumlStateFitOld{\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname}%
     \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{\tikzumlStateFitOld (\tikzumlStateEnterName)}%
     \stepcounter{tikzumlStateSubStateNum}%
-  \fi%
+  \fi
   \stepcounter{tikzumlStateEnterNum}%
 }%
 %
@@ -3390,9 +3388,9 @@
         }{}%
         \ifx\keyvalue\pgfkeysnovalue%
         \pgfkeys{/tikzuml/stateexit/.cd, style/.append style/.expand once={\keyname}}%
-        \else%
+        \else
         \pgfkeys{/tikzuml/stateexit/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-        \fi%
+        \fi
         %\errmessage{TIKZUML ERROR : in umlstateexit, invalid option \keyname}%
     }%
   }%
@@ -3405,9 +3403,9 @@
   %
   \iftikzumlstateexitWithoutCoords%
     \node[circle, minimum size=\tikzumlStateExitMinimumWidth, draw=\tikzumlStateExitColor, /tikzuml/stateexit/style] (\tikzumlStateExitName) {};%
-  \else%
+  \else
     \node[circle, minimum size=\tikzumlStateExitMinimumWidth, draw=\tikzumlStateExitColor, /tikzuml/stateexit/style] (\tikzumlStateExitName) at (\tikzumlStateExitPos) {};%
-  \fi%
+  \fi
   \draw[draw=\tikzumlStateExitColor] (\tikzumlStateExitName.north east) -- (\tikzumlStateExitName.south west) (\tikzumlStateExitName.north west) -- (\tikzumlStateExitName.south east);
   %
   % add to fit
@@ -3415,7 +3413,7 @@
     \edef\tikzumlStateFitOld{\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname}%
     \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{\tikzumlStateFitOld (\tikzumlStateExitName)}%
     \stepcounter{tikzumlStateSubStateNum}%
-  \fi%
+  \fi
   \stepcounter{tikzumlStateExitNum}%
 }%
 %
@@ -3451,9 +3449,9 @@
     }{}%
     \ifx\keyvalue\pgfkeysnovalue%
         \pgfkeys{/tikzuml/stateend/.cd, style/.append style/.expand once={\keyname}}%
-    \else%
+    \else
         \pgfkeys{/tikzuml/stateend/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-    \fi%
+    \fi
     %\errmessage{TIKZUML ERROR : in umlstateend, invalid option \keyname}%
     }%
   }%
@@ -3466,9 +3464,9 @@
   %
   \iftikzumlstateendWithoutCoords%
     \node[circle, minimum size=\tikzumlStateEndMinimumWidth, /tikzuml/stateend/style] (\tikzumlStateEndName) {};%
-  \else%
+  \else
     \node[circle, minimum size=\tikzumlStateEndMinimumWidth, /tikzuml/stateend/style] (\tikzumlStateEndName) at (\tikzumlStateEndPos) {};%
-  \fi%
+  \fi
   \draw[draw=\tikzumlStateEndColor] (\tikzumlStateEndName.north east) -- (\tikzumlStateEndName.south west) (\tikzumlStateEndName.north west) -- (\tikzumlStateEndName.south east);
   %
   % add to fit
@@ -3476,15 +3474,15 @@
     \edef\tikzumlStateFitOld{\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname}%
     \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{\tikzumlStateFitOld (\tikzumlStateEndName)}%
     \stepcounter{tikzumlStateSubStateNum}%
-  \fi%
+  \fi
   \stepcounter{tikzumlStateEndNum}%
 }%
 %
 \newcommand{\picturedhistory}[1]{%
   \begin{tikzpicture}[#1]%
-  \draw[thick] (-0.1cm,-0.15cm) -- (-0.1cm,0.15cm)
-               (-0.1cm,0) -- (0.1cm,0)
-               (0.1cm,-0.15cm) -- (0.1cm,0.15cm);%
+  \draw[thick] (-.1cm,-.15cm) -- (-.1cm,.15cm)
+               (-.1cm,0) -- (.1cm,0)
+               (.1cm,-.15cm) -- (.1cm,.15cm);%
   \end{tikzpicture}%
 }%
 %
@@ -3520,9 +3518,9 @@
                                         }{}%
                                         \ifx\keyvalue\pgfkeysnovalue%
                                           \pgfkeys{/tikzuml/statehistory/.cd, style/.append style/.expand once={\keyname}}%
-                                        \else%
+                                        \else
                                           \pgfkeys{/tikzuml/statehistory/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-                                        \fi%
+                                        \fi
                                         %\errmessage{TIKZUML ERROR : in umlstatehistory, invalid option \keyname}%
                                       }%
   }%
@@ -3535,27 +3533,27 @@
   %
   \iftikzumlstatehistoryWithoutCoords%
     \node[circle, minimum size=\tikzumlStateHistoryMinimumWidth, draw=\tikzumlStateHistoryColor, /tikzuml/statehistory/style] (\tikzumlStateHistoryName) {\picturedhistory{draw=\tikzumlStateHistoryColor}};%
-  \else%
+  \else
     \node[circle, minimum size=\tikzumlStateHistoryMinimumWidth, draw=\tikzumlStateHistoryColor, /tikzuml/statehistory/style] (\tikzumlStateHistoryName) at (\tikzumlStateHistoryPos) {\picturedhistory{draw=\tikzumlStateHistoryColor}};%
-  \fi%
+  \fi
   %
   % add to fit
   \ifnum\c@tikzumlStateLevel>0%
     \edef\tikzumlStateFitOld{\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname}%
     \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{\tikzumlStateFitOld (\tikzumlStateHistoryName)}%
     \stepcounter{tikzumlStateSubStateNum}%
-  \fi%
+  \fi
   \stepcounter{tikzumlStateHistoryNum}%
 }%
 %
 \newcommand{\pictureddeephistory}[1]{%
   \begin{tikzpicture}[#1]%
-  \draw[thick] (-0.1cm,-0.15cm) -- (-0.1cm,0.15cm)
-               (-0.1cm,0) -- (0.1cm,0)
-               (0.1cm,-0.15cm) -- (0.1cm,0.15cm)
-               (0.23cm,0.19cm) -- (0.23cm,0.11cm)
-               (0.20cm,0.17cm) -- (0.26cm,0.13cm)
-               (0.20cm,0.13cm) -- (0.26cm,0.17cm);%
+  \draw[thick] (-.1cm,-.15cm) -- (-.1cm,.15cm)
+               (-.1cm,0) -- (.1cm,0)
+               (.1cm,-.15cm) -- (.1cm,.15cm)
+               (.23cm,.19cm) -- (.23cm,.11cm)
+               (.20cm,.17cm) -- (.26cm,.13cm)
+               (.20cm,.13cm) -- (.26cm,.17cm);%
   \end{tikzpicture}%
 }%
 %
@@ -3591,9 +3589,9 @@
         }{}%
         \ifx\keyvalue\pgfkeysnovalue%
             \pgfkeys{/tikzuml/statedeephistory/.cd, style/.append style/.expand once={\keyname}}%
-        \else%
+        \else
             \pgfkeys{/tikzuml/statedeephistory/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-        \fi%
+        \fi
         %\errmessage{TIKZUML ERROR : in umlstatedeephistory, invalid option \keyname}%
         }%
   }%
@@ -3606,16 +3604,16 @@
   %
   \iftikzumlstatedeephistoryWithoutCoords%
     \node[circle, minimum size=\tikzumlStateDeepHistoryMinimumWidth, draw=\tikzumlStateDeepHistoryColor, /tikzuml/statedeephistory/style] (\tikzumlStateDeepHistoryName) {\pictureddeephistory{draw=\tikzumlStateDeepHistoryColor}};%
-  \else%
+  \else
     \node[circle, minimum size=\tikzumlStateDeepHistoryMinimumWidth, draw=\tikzumlStateDeepHistoryColor, /tikzuml/statedeephistory/style] (\tikzumlStateDeepHistoryName) at (\tikzumlStateDeepHistoryPos) {\pictureddeephistory{draw=\tikzumlStateDeepHistoryColor}};%
-  \fi%
+  \fi
   %
   % add to fit
   \ifnum\c@tikzumlStateLevel>0%
     \edef\tikzumlStateFitOld{\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname}%
     \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{\tikzumlStateFitOld (\tikzumlStateDeepHistoryName)}%
     \stepcounter{tikzumlStateSubStateNum}%
-  \fi%
+  \fi
   \stepcounter{tikzumlStateDeepHistoryNum}%
 }%
 %
@@ -3635,9 +3633,9 @@
     \let\tikzumlState@nameold\tikzumlState@fitname%
     \let\tikzumlState@parentold\tikzumlState@parent%
     \edef\tikzumlState@parent{\tikzumlState@parentold @@\tikzumlState@nameold}%
-  \else%
+  \else
     \def\tikzumlState@parent{}%
-  \fi%
+  \fi
   %
   \stepcounter{tikzumlStateLevel}%
   %
@@ -3665,9 +3663,9 @@
                                  }{}%
                                  \ifx\keyvalue\pgfkeysnovalue%
                                    \pgfkeys{/tikzuml/state/.cd, style/.append style/.expand once={\keyname}}%
-                                 \else%
+                                 \else
                                    \pgfkeys{/tikzuml/state/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-                                 \fi%
+                                 \fi
                     %             \errmessage{TIKZUML ERROR : in umlstate, invalid option \keyname}%
                                }%
   }%
@@ -3684,16 +3682,16 @@
     \edef\tikzumlState@name{\tikzumlStateName}%
   }%
   %
-  \begingroup%
-    \def\_{@}\edef\x{\endgroup%
-      \def\noexpand\tikzumlState@fitname{\tikzumlState@name}}\x%
+  \begingroup
+    \def\_{@}\edef\x{\endgroup
+      \def\noexpand\tikzumlState@fitname{\tikzumlState@name}}\x
   %
   \let\tikzumlState@nodeNameold\tikzumlState@nodeName%
   \def\tikzumlState@caption{#2}%
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlState@nodeName{\tikzumlState@name}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlState@nodeName{\tikzumlState@name}}\x
   %
   \expandafter\gdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{}%
   %
@@ -3706,59 +3704,59 @@
   %
   \def\tikzumlstaterootlabel{\phantom{\tikzumlState@nodeName}}%
   %
-  \def\tikzumlstaterootinnerysep{0.5ex}%
+  \def\tikzumlstaterootinnerysep{.5ex}%
   \def\tikzumlstatebodyinnerysep{2ex}%
   %
   \ifthenelse{\equal{\tikzumlStateEntry}{}}{}{%
     \ifnum\c@tikzumlStateText=0%
       \def\tikzumlStateText{entry/\tikzumlStateEntry}%
-    \else%
+    \else
       \let\tikzumlStateTextOld\tikzumlStateText%
       \ifthenelse{\equal{\tikzumlStateText}{tikzumlEmpty}}{%
         \def\tikzumlStateText{entry/\tikzumlStateEntry}%
       }{%
         \expandafter\def\expandafter\tikzumlStateText\expandafter{\tikzumlStateTextOld \\ entry/\tikzumlStateEntry}%
       }%
-    \fi%
+    \fi
     \setcounter{tikzumlStateText}{1}%
     \ifnum\c@tikzumlStateSubStateNum=0%
       \def\tikzumlstatebodyinnerysep{0}%
       \def\tikzumlstaterootinnerysep{0}%
-    \fi%
+    \fi
   }%
   \ifthenelse{\equal{\tikzumlStateDo}{}}{}{%
     \ifnum\c@tikzumlStateText=0%
       \def\tikzumlStateText{do/\tikzumlStateDo}%
-    \else%
+    \else
       \let\tikzumlStateTextOld\tikzumlStateText%
       \ifthenelse{\equal{\tikzumlStateText}{tikzumlEmpty}}{%
         \def\tikzumlStateText{do/\tikzumlStateDo}%
       }{%
         \expandafter\def\expandafter\tikzumlStateText\expandafter{\tikzumlStateTextOld \\ do/\tikzumlStateDo}%
       }%
-    \fi%
+    \fi
     \setcounter{tikzumlStateText}{1}%
     \ifnum\c@tikzumlStateSubStateNum=0%
       \def\tikzumlstatebodyinnerysep{0}%
       \def\tikzumlstaterootinnerysep{0}%
-    \fi%
+    \fi
   }%
   \ifthenelse{\equal{\tikzumlStateExit}{}}{}{%
     \ifnum\c@tikzumlStateText=0%
       \def\tikzumlStateText{exit/\tikzumlStateExit}%
-    \else%
+    \else
       \let\tikzumlStateTextOld\tikzumlStateText%
       \ifthenelse{\equal{\tikzumlStateText}{tikzumlEmpty}}{%
         \def\tikzumlStateText{exit/\tikzumlStateExit}%
       }{%
         \expandafter\def\expandafter\tikzumlStateText\expandafter{\tikzumlStateTextOld \\ exit/\tikzumlStateExit}%
       }%
-    \fi%
+    \fi
     \setcounter{tikzumlStateText}{1}%
     \ifnum\c@tikzumlStateSubStateNum=0%
       \def\tikzumlstatebodyinnerysep{0}%
       \def\tikzumlstaterootinnerysep{0}%
-    \fi%
+    \fi
   }%
   %
   \addtocounter{tikzumlStateLevel}{-1}%
@@ -3768,33 +3766,33 @@
   \ifnum\c@tikzumlStateSubStateNum=0%
     \iftikzumlstateWithoutCoords%
       \node[inner ysep=\tikzumlstaterootinnerysep, minimum width=\tikzumlStateMinimumWidth, /tikzuml/state/style] (\tikzumlState@nodeName-root) {\tikzumlstaterootlabel};%
-    \else%
+    \else
       \node[inner ysep=\tikzumlstaterootinnerysep, minimum width=\tikzumlStateMinimumWidth, /tikzuml/state/style] (\tikzumlState@nodeName-root) at (0,0) {\tikzumlstaterootlabel};%
-    \fi%
+    \fi
     \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{(\tikzumlState@nodeName-root)}%
-  \fi%
+  \fi
   %
   \ifnum\c@tikzumlStateLevel>0%
     \def\tikzumlStateFitTmp{\csname tikzumlStateFit\tikzumlState@parent\endcsname}%
     \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent\endcsname{\tikzumlStateFitTmp (\tikzumlState@nodeName-body) (\tikzumlState@nodeName-caption)}%
     \stepcounter{tikzumlStateSubStateNum}%
-  \fi%
+  \fi
   %
   \node[inner xsep=2ex, inner ysep=\tikzumlstatebodyinnerysep, fit = \csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname, /tikzuml/state/style ] (\tikzumlState@nodeName-body) {};%
   \def\tikzumlState@orig{body}%
   \ifnum\c@tikzumlStateText=1%
     \node[above=0] (\tikzumlState@nodeName-texttmp) at (\tikzumlState@nodeName-\tikzumlState@orig.north) {\begin{tabular}{l}\tikzumlStateText \end{tabular}};%
     \def\tikzumlState@orig{texttmp}%
-  \fi%
+  \fi
   \node[above] (\tikzumlState@nodeName-captiontmp) at (\tikzumlState@nodeName-\tikzumlState@orig.north) {\tikzumlState@caption};%
   \ifnum\c@tikzumlStateText=1%
     \node[rounded corners, draw=\tikzumlStateDrawColor, fill=\tikzumlStateFillColor, name=\tikzumlState@nodeName, fit=(\tikzumlState@nodeName-body) (\tikzumlState@nodeName-texttmp) (\tikzumlState@nodeName-captiontmp)] {};%
-  \else%
+  \else
     \node[rounded corners, draw=\tikzumlStateDrawColor, fill=\tikzumlStateFillColor, name=\tikzumlState@nodeName, fit=(\tikzumlState@nodeName-body) (\tikzumlState@nodeName-captiontmp)] {};%
-  \fi%
+  \fi
   \ifnum\c@tikzumlStateText=1%
     \node (\tikzumlState@nodeName-text) at (\tikzumlState@nodeName-texttmp) {\begin{tabular}{l}\tikzumlStateText \end{tabular}};%
-  \fi%
+  \fi
   \node (\tikzumlState@nodeName-caption) at (\tikzumlState@nodeName-captiontmp) {\tikzumlState@caption};%
   \draw (\tikzumlState@nodeName-caption.south -| \tikzumlState@nodeName.north west) -- (\tikzumlState@nodeName-caption.south -| \tikzumlState@nodeName.north east);%
   \end{pgfonlayer}%
@@ -3875,7 +3873,7 @@
       \pgfkeys{/tikzuml/actorobj/.cd, ##1}%
       \umlobject[stereo=actor, ##1]{##2}%
     }%
-  \else%
+  \else
     \renewcommand{\umlactor}[2][]{%
       \pgfkeys{/tikzuml/actorobj/.cd, .unknown/.code={%
                                         \let\keyname=\pgfkeyscurrentname%
@@ -3889,13 +3887,13 @@
       \pgfkeys{/tikzuml/actorobj/.cd, ##1}%
       \umlobject[stereo=actor, ##1]{##2}%
     }%
-  \fi%
+  \fi
   \begin{scope}[font=\tikzumlDefaultFont]%
 }{%
   % draw lifelines of each object
   \begin{pgfonlayer}{lifelines}%
   \foreach \id in \tikzumlIdList {%
-    \draw (\csname tikzumlLastChild@\id \endcsname)+(0,-2.5ex) node[inner sep=0, name=end-\id] {};%
+    \draw (\csname tikzumlLastChild@\id \endcsname)+(0,-2.5ex) node[inner sep=\z@, name=end-\id] {};%
     \draw[dotted] (\id) -- (end-\id);%
   }%
   \end{pgfonlayer}%
@@ -3910,14 +3908,14 @@
   \pgfkeys{/tikzuml/database/.cd, scale/.get=\tikzumlDatabaseScale}%
   %
   \begin{tikzpicture}[#1]%
-  \node[fill, draw, ellipse, minimum width=\tikzumlDatabaseScale*4ex, minimum height=\tikzumlDatabaseScale*2ex, inner sep=0] (bottom) at (0,-2ex) {};%
-  \node[fill, draw, ellipse, minimum width=\tikzumlDatabaseScale*4ex, minimum height=\tikzumlDatabaseScale*2ex, inner sep=0] (top) at (0,4ex) {};%
+  \node[fill, draw, ellipse, minimum width=\tikzumlDatabaseScale*4ex, minimum height=\tikzumlDatabaseScale*2ex, inner sep=\z@] (bottom) at (0,-2ex) {};%
+  \node[fill, draw, ellipse, minimum width=\tikzumlDatabaseScale*4ex, minimum height=\tikzumlDatabaseScale*2ex, inner sep=\z@] (top) at (0,4ex) {};%
   \fill (bottom.west) rectangle (top.east);%
   \begin{scope}%
-  \clip (-3.5ex,-0.5ex) rectangle (3.5ex,2.5ex);%
-  \node[draw, dashed, ellipse, minimum width=\tikzumlDatabaseScale*4ex, minimum height=\tikzumlDatabaseScale*2ex, inner sep=0] (bottom2) at (0,-2ex) {};%
+  \clip (-3.5ex,-.5ex) rectangle (3.5ex,2.5ex);%
+  \node[draw, dashed, ellipse, minimum width=\tikzumlDatabaseScale*4ex, minimum height=\tikzumlDatabaseScale*2ex, inner sep=\z@] (bottom2) at (0,-2ex) {};%
   \end{scope}%
-  \node[draw, ellipse, minimum width=\tikzumlDatabaseScale*4ex, minimum height=\tikzumlDatabaseScale*2ex, inner sep=0] (top2) at (0,4ex) {};%
+  \node[draw, ellipse, minimum width=\tikzumlDatabaseScale*4ex, minimum height=\tikzumlDatabaseScale*2ex, inner sep=\z@] (top2) at (0,4ex) {};%
   \draw (bottom.west) -- (top.west) (bottom.east) -- (top.east);%
   \end{tikzpicture}%
 }%
@@ -3930,7 +3928,7 @@
   \pgfkeys{/tikzuml/entity/.cd, scale/.get=\tikzumlEntityScale}%
   %
   \begin{tikzpicture}[#1]%
-  \node[fill, draw, circle, inner sep=0, minimum size=\tikzumlEntityScale*5ex] (center) at (0,0) {};%
+  \node[fill, draw, circle, inner sep=\z@, minimum size=\tikzumlEntityScale*5ex] (center) at (0,0) {};%
   \draw (center.south) node[coordinate, name=bottom] {};%
   \draw (bottom)+(-2ex,0) node[coordinate, name=bottom-left] {};%
   \draw (bottom)+(2ex,0) node[coordinate, name=bottom-right] {};%
@@ -3947,10 +3945,10 @@
   \pgfkeys{/tikzuml/boundary/.cd, scale/.get=\tikzumlBoundaryScale}%
   %
   \begin{tikzpicture}[#1]
-  \node[fill, draw, circle, inner sep=0, minimum size=\tikzumlBoundaryScale*5ex] (center) at (0,0) {};
-  \draw (center.west)+(-0.8ex,0) node[coordinate, name=left] {};
-  \draw (left)+(0,0.2ex) node[coordinate, name=left-top] {};
-  \draw (left)+(0,-0.2ex) node[coordinate, name=left-bottom] {};
+  \node[fill, draw, circle, inner sep=\z@, minimum size=\tikzumlBoundaryScale*5ex] (center) at (0,0) {};
+  \draw (center.west)+(-.8ex,0) node[coordinate, name=left] {};
+  \draw (left)+(0,.2ex) node[coordinate, name=left-top] {};
+  \draw (left)+(0,-.2ex) node[coordinate, name=left-bottom] {};
   \draw (center) -- (left);
   \draw (left-top) -- (left-bottom);
   \end{tikzpicture}
@@ -3963,8 +3961,8 @@
   \pgfkeys{/tikzuml/control/.cd,#1}%
   \pgfkeys{/tikzuml/control/.cd, scale/.get=\tikzumlControlScale}%
   %
-  \begin{tikzpicture}[#1, decoration={markings, mark=at position 0.25 with {\arrow{>}}}]
-  \node[fill, draw, circle, inner sep=0, minimum size=\tikzumlControlScale*5ex, postaction={decorate}] (center) at (0,0) {};
+  \begin{tikzpicture}[#1, decoration={markings, mark=at position .25 with {\arrow{>}}}]
+  \node[fill, draw, circle, inner sep=\z@, minimum size=\tikzumlControlScale*5ex, postaction={decorate}] (center) at (0,0) {};
   \end{tikzpicture}
 }%
 \def\tikzumlPreObjectName{}
@@ -4003,7 +4001,7 @@
   %
   \iftikzumlobjectNoDDots%
     \edef\tikzumlobject@ddot{}%
-  \fi%
+  \fi
   %
   \ifthenelse{\equal{\tikzumlObjectX}{tikzumlEmpty}}{%
     \pgfmathsetmacro{\tikzumlObjectX}{4*(\thetikzumlObjectNum-1)}%
@@ -4014,10 +4012,10 @@
   %
   \ifnum\thetikzumlObjectNum=1%
     \xdef\tikzumlIdList{\tikzumlObjectName}%
-  \else%
+  \else
     \let\tikzumlIdListOld\tikzumlIdList%
     \expandafter\xdef\expandafter\tikzumlIdList\expandafter{\tikzumlIdListOld,\tikzumlObjectName}%
-  \fi%
+  \fi
   %
   \tikzstyle{tikzuml object box style}=[rectangle, text=\tikzumlObjectTextColor, font=\tikzumlDefaultFont]%
   %
@@ -4031,17 +4029,17 @@
   %
   \ifnum\tikzumlInCreateCall=1%
     \draw (\tikzumlCreateCallObjectSrc -| \tikzumlObjectX,0) node[tikzuml object box style] (\tikzumlObjectName) {\tikzumlPreObjectName\tikzumlObjectName\tikzumlobject@ddot\tikzumlObjectClass};%
-  \else%
+  \else
     \node[tikzuml object box style] (\tikzumlObjectName) at (\tikzumlObjectX,\tikzumlObjectY) {\tikzumlPreObjectName\tikzumlObjectName\tikzumlobject@ddot\tikzumlObjectClass};%
-  \fi%
+  \fi
   %
   \ifthenelse{\equal{\tikzumlObjectStereo}{multi}}{%
-    \draw (\tikzumlObjectName.north east)+(0.4ex,0.4ex) node[name=\tikzumlObjectName-tr, coordinate] {};
-    \draw (\tikzumlObjectName.north west)+(0.4ex,0.4ex) node[name=\tikzumlObjectName-tl, coordinate] {};
-    \draw (\tikzumlObjectName.south east)+(0.4ex,0.4ex) node[name=\tikzumlObjectName-br, coordinate] {};
-    \draw (\tikzumlObjectName-tr)+(0.4ex,0.4ex) node[name=\tikzumlObjectName-ttr, coordinate] {};
-    \draw (\tikzumlObjectName-tl)+(0.4ex,0.4ex) node[name=\tikzumlObjectName-ttl, coordinate] {};
-    \draw (\tikzumlObjectName-br)+(0.4ex,0.4ex) node[name=\tikzumlObjectName-tbr, coordinate] {};
+    \draw (\tikzumlObjectName.north east)+(.4ex,.4ex) node[name=\tikzumlObjectName-tr, coordinate] {};
+    \draw (\tikzumlObjectName.north west)+(.4ex,.4ex) node[name=\tikzumlObjectName-tl, coordinate] {};
+    \draw (\tikzumlObjectName.south east)+(.4ex,.4ex) node[name=\tikzumlObjectName-br, coordinate] {};
+    \draw (\tikzumlObjectName-tr)+(.4ex,.4ex) node[name=\tikzumlObjectName-ttr, coordinate] {};
+    \draw (\tikzumlObjectName-tl)+(.4ex,.4ex) node[name=\tikzumlObjectName-ttl, coordinate] {};
+    \draw (\tikzumlObjectName-br)+(.4ex,.4ex) node[name=\tikzumlObjectName-tbr, coordinate] {};
     \fill[fill=\tikzumlObjectFillColor] (\tikzumlObjectName-ttl |- \tikzumlObjectName.north) -- (\tikzumlObjectName-ttl) -- (\tikzumlObjectName-ttr) -- (\tikzumlObjectName-tbr) -- (\tikzumlObjectName-tbr -| \tikzumlObjectName.east) -- (\tikzumlObjectName.north east) -- (\tikzumlObjectName-ttl |- \tikzumlObjectName.north);
     \draw[draw=\tikzumlObjectDrawColor] (\tikzumlObjectName-ttl |- \tikzumlObjectName.north) -- (\tikzumlObjectName-ttl) -- (\tikzumlObjectName-ttr) -- (\tikzumlObjectName-tbr) -- (\tikzumlObjectName-tbr -| \tikzumlObjectName.east);
     \fill[fill=\tikzumlObjectFillColor] (\tikzumlObjectName-tl |- \tikzumlObjectName.north) -- (\tikzumlObjectName-tl) -- (\tikzumlObjectName-tr) -- (\tikzumlObjectName-br) -- (\tikzumlObjectName-br -| \tikzumlObjectName.east) -- (\tikzumlObjectName.north east) -- (\tikzumlObjectName-tl |- \tikzumlObjectName.north);
@@ -4148,9 +4146,9 @@
   %
   \stepcounter{tikzumlSDNodeNum}%
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlSDNode@objnodeName{#2}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlSDNode@objnodeName{#2}}\x
   %
   \draw (\expandafter\csname tikzumlLastChild@\tikzumlSDNode@objnodeName \endcsname)+(0,-\tikzumlSDNodeDT ex) node[name=\tikzumlSDNode@nodeName,coordinate] {};%
   %
@@ -4176,7 +4174,7 @@
   \gdef\tikzumlCallBottom{0}%
   %
   \pgfkeys{/tikzuml/call/.cd, dt/.initial=\tikzumlCallDefaultDT, name/.initial={call-\thetikzumlCallNum},%
-                              op/.initial={}, op-style/.initial={above=-0.4ex}, return/.initial={}, type/.initial=\tikzumlCallDefaultType,%
+                              op/.initial={}, op-style/.initial={above=-.4ex}, return/.initial={}, type/.initial=\tikzumlCallDefaultType,%
                               draw/.initial=\tikzumlDefaultDrawColor, fill/.initial=\tikzumlCallDefaultFillColor,%
                               text/.initial=\tikzumlDefaultTextColor,%
                               padding/.initial=\tikzumlCallDefaultPadding,%
@@ -4208,10 +4206,10 @@
     \ifnum\thetikzumlCallNum=1%
       \def\tikzumlCallDT{2}%
       \def\tikzumlcallSrc{2}%
-    \else%
+    \else
       \def\tikzumlCallDT{2}%
       \def\tikzumlcallSrc{1}%
-    \fi%
+    \fi
   }{%
     \def\tikzumlcallSrc{0}%
   }%
@@ -4225,21 +4223,21 @@
   % managing time delays from previous/parent fragments
   \ifnum\thetikzumlCallStartFragmentNum>0%
     \let\tikzumlCallDTold\tikzumlCallDT%
-    \pgfmathparse{0.5*\tikzumlFragment@paddingy+\tikzumlCallDTold}%
+    \pgfmathparse{.5*\tikzumlFragment@paddingy+\tikzumlCallDTold}%
     \edef\tikzumlCallDT{\pgfmathresult}%
     \addtocounter{tikzumlCallStartFragmentNum}{-1}
-  \fi%
+  \fi
   \ifnum\thetikzumlCallEndFragmentNum>0%
     \let\tikzumlCallDTold\tikzumlCallDT%
-    \pgfmathparse{0.5*\tikzumlFragment@paddingy+\tikzumlCallDTold}%
+    \pgfmathparse{.5*\tikzumlFragment@paddingy+\tikzumlCallDTold}%
     \edef\tikzumlCallDT{\pgfmathresult}%
     \addtocounter{tikzumlCallEndFragmentNum}{-1}
-  \fi%
+  \fi
   \ifnum\thetikzumlFragmentPartNum>0%
     \let\tikzumlCallDTold\tikzumlCallDT%
-    \pgfmathparse{0.5*\tikzumlFragment@paddingy+\tikzumlCallDTold}%
+    \pgfmathparse{.5*\tikzumlFragment@paddingy+\tikzumlCallDTold}%
     \edef\tikzumlCallDT{\pgfmathresult}%
-  \fi%
+  \fi
   %
   % managing parent-child structure
   \ifnum\thetikzumlCallLevel>0%
@@ -4247,16 +4245,16 @@
     \edef\tikzumlCall@name{\tikzumlCallName}%
     \let\tikzumlCall@parentold\tikzumlCall@parent%
     \edef\tikzumlCall@parent{\tikzumlCall@parentold @@\tikzumlCall@nameold}%
-  \else%
+  \else
     \edef\tikzumlCall@parent{}%
     \edef\tikzumlCall@parentold{}%
     \edef\tikzumlCall@nameold{}
     \edef\tikzumlCall@name{\tikzumlCallName}%
-  \fi%
+  \fi
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlCall@nodeName{\tikzumlCall@name}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlCall@nodeName{\tikzumlCall@name}}\x
   %
   \let\tikzumlCall@nodeNameold\tikzumlCall@nodeName%
   %
@@ -4273,7 +4271,7 @@
   %
   % top node of activity period of call receiver
   \ifthenelse{\equal{\tikzumlCallStartNodeName}{\tikzumlCallEndNodeName}}{%
-    \draw (st-\tikzumlCall@nodeName)+(0,-0.75*\tikzumlCallPadding ex) node[coordinate, name=tikzumlTmpNode] {};%
+    \draw (st-\tikzumlCall@nodeName)+(0,-.75*\tikzumlCallPadding ex) node[coordinate, name=tikzumlTmpNode] {};%
     \node[tikzuml activity style] (et-\tikzumlCall@nodeName) at (\tikzumlCallStartNodeName |- tikzumlTmpNode) {};%
   }{%
     \node[tikzuml activity style] (et-\tikzumlCall@nodeName) at (\tikzumlCallEndNodeName |- st-\tikzumlCall@nodeName) {};%
@@ -4296,11 +4294,11 @@
     \ifthenelse{\equal{\tikzumlCallStartNodeName}{\tikzumlCallEndNodeName}}{%
       \draw (\tikzumlCallBottomSrc)+(0,-\tikzumlCallPadding ex) node[coordinate, name=tikzumlTmpNode] {};%
       \node[tikzuml activity style] (eb-\tikzumlCall@nodeName) at (\tikzumlCallEndNodeName |- tikzumlTmpNode) {};%
-      \draw (eb-\tikzumlCall@nodeName)+(0,-0.75*\tikzumlCallPadding ex) node[coordinate, name=tikzumlTmpNode] {};%
+      \draw (eb-\tikzumlCall@nodeName)+(0,-.75*\tikzumlCallPadding ex) node[coordinate, name=tikzumlTmpNode] {};%
       \node[tikzuml activity style] (sb-\tikzumlCall@nodeName) at (\tikzumlCallStartNodeName |- tikzumlTmpNode) {};%
     }{%
       \ifthenelse{\equal{\tikzumlCallReturn}{tikzumlEmpty}}{%
-        \pgfmathsetmacro{\tikzumlCallPaddingd}{0.5*\tikzumlCallPadding}%
+        \pgfmathsetmacro{\tikzumlCallPaddingd}{.5*\tikzumlCallPadding}%
       }{%
         \pgfmathsetmacro{\tikzumlCallPaddingd}{1.2*\tikzumlCallPadding}%
       }%
@@ -4309,26 +4307,26 @@
       \node[tikzuml activity style] (sb-\tikzumlCall@nodeName) at (\tikzumlCallStartNodeName |- eb-\tikzumlCall@nodeName) {};%
     }%
     \xdef\tikzumlCallBottomSrc{sb-\tikzumlCall@nodeName}%
-  \else%
+  \else
     %
     % managing time delays from previous/parent fragments
     \ifnum\thetikzumlCallStartFragmentNum>0%
       \let\tikzumlcallheightold\tikzumlCallPadding%
-      \pgfmathparse{\tikzumlcallheightold+0.5*\tikzumlFragment@paddingy}%
+      \pgfmathparse{\tikzumlcallheightold+.5*\tikzumlFragment@paddingy}%
       \edef\tikzumlcallheight{\pgfmathresult}%
       \addtocounter{tikzumlCallStartFragmentNum}{-1}%
-    \fi%
+    \fi
     \ifnum\thetikzumlCallEndFragmentNum>0%
       \let\tikzumlcallheightold\tikzumlCallPadding%
-      \pgfmathparse{\tikzumlcallheightold+0.5*\tikzumlFragment@paddingy}%
+      \pgfmathparse{\tikzumlcallheightold+.5*\tikzumlFragment@paddingy}%
       \edef\tikzumlcallheight{\pgfmathresult}%
       \addtocounter{tikzumlCallEndFragmentNum}{-1}%
-    \fi%
+    \fi
     %
     \ifthenelse{\equal{\tikzumlCallStartNodeName}{\tikzumlCallEndNodeName}}{%
       \draw (\tikzumlCallBottomSrc)+(0,-\tikzumlcallheight ex) node[coordinate, name=tikzumlTmpNode] {};%
       \node[tikzuml activity style] (eb-\tikzumlCall@nodeName) at (\tikzumlCallEndNodeName |- tikzumlTmpNode) {};%
-      \draw (eb-\tikzumlCall@nodeName)+(0,-0.75*\tikzumlCallPadding ex) node[coordinate, name=tikzumlTmpNode] {};%
+      \draw (eb-\tikzumlCall@nodeName)+(0,-.75*\tikzumlCallPadding ex) node[coordinate, name=tikzumlTmpNode] {};%
       \node[tikzuml activity style] (sb-\tikzumlCall@nodeName) at (\tikzumlCallStartNodeName |- tikzumlTmpNode) {};%
     }{%
       \draw (\tikzumlCallBottomSrc)+(0,-\tikzumlcallheight ex) node[coordinate, name=tikzumlTmpNode] {};%
@@ -4337,7 +4335,7 @@
     }%
     %
     \xdef\tikzumlCallBottomSrc{sb-\tikzumlCall@nodeName}%
-  \fi%
+  \fi
   \end{pgfonlayer}%
   %
   % draw activity periods
@@ -4346,22 +4344,22 @@
     % draw root activity period only
     \ifnum\thetikzumlCallLevel=0%
       \draw[draw=\tikzumldrawcall, fill=\tikzumlfillcall] (st-\tikzumlCall@nodeName.north west) rectangle (sb-\tikzumlCall@nodeName.south east);%
-    \else%
+    \else
       % draw root activity from inner call
       \ifthenelse{\equal{\tikzumlCallStartNodeName}{\tikzumlCallEndNodeNameold}}{}{%
         \draw[draw=\tikzumldrawcall, fill=\tikzumlfillcall] (st-\tikzumlCall@nodeName.north west) rectangle (sb-\tikzumlCall@nodeName.south east);%
       }%
-    \fi%
+    \fi
   }{%
     % draw root activity period
     \ifnum\thetikzumlCallLevel=0%
       \draw[draw=\tikzumldrawcall, fill=\tikzumlfillcall] (st-\tikzumlCall@nodeName.north west) rectangle (sb-\tikzumlCall@nodeName.south east);%
-    \else%
+    \else
       % draw root activity from inner call
       \ifthenelse{\equal{\tikzumlCallStartNodeName}{\tikzumlCallEndNodeNameold}}{}{%
         \draw[draw=\tikzumldrawcall, fill=\tikzumlfillcall] (st-\tikzumlCall@nodeName.north west) rectangle (sb-\tikzumlCall@nodeName.south east);%
       }%
-    \fi%
+    \fi
     % draw receiver activity period
     \draw[draw=\tikzumldrawcall, fill=\tikzumlfillcall] (et-\tikzumlCall@nodeName.north west) rectangle (eb-\tikzumlCall@nodeName.south east);%
   }%
@@ -4379,7 +4377,7 @@
   \begin{pgfonlayer}{connections}%
   \ifthenelse{\equal{\tikzumlCallStartNodeName}{\tikzumlCallEndNodeName}}{%
     \edef\@tmp{\noexpand\draw[\tikzumlcallstyle, \tikzumldrawcall] (st-\tikzumlCall@nodeName.east) -- ++(2.5*\tikzumlCallPadding ex,0) %
-                                               -- ++(0,-0.75*\tikzumlCallPadding ex) %
+                                               -- ++(0,-.75*\tikzumlCallPadding ex) %
                                                node[font=\noexpand\tikzumlDefaultFont, text=\tikzumltextcall, midway, right, name=\tikzumlCall@nodeName-op,align=center,\tikzumlCallOpStyle] {\noexpand\tikzumlCallOp} %
                                                -- (et-\tikzumlCall@nodeName.east);}\@tmp%
     %
@@ -4389,23 +4387,23 @@
         \ifnum\c@tikzumlFragmentLevel>0%
           \edef\tikzumlFragmentFitOld{\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname}%
           \expandafter\xdef\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname{\tikzumlFragmentFitOld (st-\tikzumlCall@nodeName) (et-\tikzumlCall@nodeName) (eb-\tikzumlCall@nodeName) (sb-\tikzumlCall@nodeName) (\tikzumlCall@nodeName-op) (\tikzumlCall@nodeName-return)}%
-        \fi%
+        \fi
         %
         \draw[tikzuml call return style, \tikzumldrawcall] (eb-\tikzumlCall@nodeName.east) -- ++(2.5*\tikzumlCallPadding ex,0)
-                                                           -- ++(0,-0.75*\tikzumlCallPadding ex) %
+                                                           -- ++(0,-.75*\tikzumlCallPadding ex) %
                                          node[font=\tikzumlDefaultFont, text=\tikzumltextcall, midway, right, name=\tikzumlCall@nodeName-return] {\tikzumlCallReturn} %
                                          -- (sb-\tikzumlCall@nodeName.east);%
       }{%
         \ifnum\c@tikzumlFragmentLevel>0%
           \edef\tikzumlFragmentFitOld{\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname}%
           \expandafter\xdef\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname{\tikzumlFragmentFitOld (st-\tikzumlCall@nodeName) (et-\tikzumlCall@nodeName) (eb-\tikzumlCall@nodeName) (sb-\tikzumlCall@nodeName) (\tikzumlCall@nodeName-op)}%
-        \fi%
+        \fi
       }%
     }{%
       \ifnum\c@tikzumlFragmentLevel>0%
         \edef\tikzumlFragmentFitOld{\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname}%
         \expandafter\xdef\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname{\tikzumlFragmentFitOld (st-\tikzumlCall@nodeName) (et-\tikzumlCall@nodeName) (eb-\tikzumlCall@nodeName) (sb-\tikzumlCall@nodeName) (\tikzumlCall@nodeName-op)}%
-      \fi%
+      \fi
     }%
   }{%
     % draw call arrows
@@ -4426,26 +4424,26 @@
         \ifnum\c@tikzumlFragmentLevel>0%
           \edef\tikzumlFragmentFitOld{\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname}%
           \expandafter\xdef\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname{\tikzumlFragmentFitOld (st-\tikzumlCall@nodeName) (et-\tikzumlCall@nodeName) (eb-\tikzumlCall@nodeName) (sb-\tikzumlCall@nodeName) (\tikzumlCall@nodeName-op) (\tikzumlCall@nodeName-return)}%
-        \fi%
+        \fi
         %
         \ifthenelse{\tikzumlCall@xb>\tikzumlCall@xa}{%
           \draw[tikzuml call return style, \tikzumldrawcall] (eb-\tikzumlCall@nodeName.west) -- (sb-\tikzumlCall@nodeName.east) %
-                                     node[font=\tikzumlDefaultFont, text=\tikzumltextcall, midway, above=-0.4ex, name=\tikzumlCall@nodeName-return] {\tikzumlCallReturn};%
+                                     node[font=\tikzumlDefaultFont, text=\tikzumltextcall, midway, above=-.4ex, name=\tikzumlCall@nodeName-return] {\tikzumlCallReturn};%
         }{%
           \draw[tikzuml call return style, \tikzumldrawcall] (eb-\tikzumlCall@nodeName.east) -- (sb-\tikzumlCall@nodeName.west) %
-                                     node[font=\tikzumlDefaultFont, text=\tikzumltextcall, midway, above=-0.4ex, name=\tikzumlCall@nodeName-return] {\tikzumlCallReturn};%
+                                     node[font=\tikzumlDefaultFont, text=\tikzumltextcall, midway, above=-.4ex, name=\tikzumlCall@nodeName-return] {\tikzumlCallReturn};%
         }%
       }{%
         \ifnum\c@tikzumlFragmentLevel>0%
           \edef\tikzumlFragmentFitOld{\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname}%
           \expandafter\xdef\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname{\tikzumlFragmentFitOld (st-\tikzumlCall@nodeName) (et-\tikzumlCall@nodeName) (eb-\tikzumlCall@nodeName) (sb-\tikzumlCall@nodeName) (\tikzumlCall@nodeName-op)}%
-        \fi%
+        \fi
       }%
     }{%
       \ifnum\c@tikzumlFragmentLevel>0%
         \edef\tikzumlFragmentFitOld{\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname}%
         \expandafter\xdef\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname{\tikzumlFragmentFitOld (st-\tikzumlCall@nodeName) (et-\tikzumlCall@nodeName) (eb-\tikzumlCall@nodeName) (sb-\tikzumlCall@nodeName) (\tikzumlCall@nodeName-op)}%
-      \fi%
+      \fi
     }%
   }%
   \end{pgfonlayer}%
@@ -4468,10 +4466,10 @@
     %
     \node[outer sep=0, inner xsep=\tikzumlFragmentXSep ex, inner ysep=\tikzumlFragmentYSep ex, fit=\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname, name=\tikzumlFragment@name-Part-tmp] {};%
     \node[anchor=east, name=\tikzumlFragment@name-PartType-\thetikzumlFragmentPartNum] at (\tikzumlFragment@name-Part-tmp.north west |- \tikzumlCallBottomSrc) {\phantom{\tikzumlFragmentType}};%
-    \draw (\tikzumlFragment@name-PartType-\thetikzumlFragmentPartNum.north west |- \tikzumlCallBottomSrc)+(0,-0.4*\tikzumlFragment@paddingy ex) node[name=\tikzumlFragment@name-PartWest-\thetikzumlFragmentPartNum] {};%
-    \draw (\tikzumlFragment@name-Part-tmp.north east |- \tikzumlCallBottomSrc)+(0,-0.4*\tikzumlFragment@paddingy ex) node[name=\tikzumlFragment@name-PartEast-\thetikzumlFragmentPartNum] {};%
+    \draw (\tikzumlFragment@name-PartType-\thetikzumlFragmentPartNum.north west |- \tikzumlCallBottomSrc)+(0,-.4*\tikzumlFragment@paddingy ex) node[name=\tikzumlFragment@name-PartWest-\thetikzumlFragmentPartNum] {};%
+    \draw (\tikzumlFragment@name-Part-tmp.north east |- \tikzumlCallBottomSrc)+(0,-.4*\tikzumlFragment@paddingy ex) node[name=\tikzumlFragment@name-PartEast-\thetikzumlFragmentPartNum] {};%
     \draw[dashed] (\tikzumlFragment@name-PartWest-\thetikzumlFragmentPartNum) -- (\tikzumlFragment@name-PartEast-\thetikzumlFragmentPartNum);
-    \draw (\tikzumlFragment@name-PartType-\thetikzumlFragmentPartNum)+(0,-0.4*\tikzumlFragment@paddingy ex) node[name=tikzumlTmpNode] {\phantom{\tikzumlFragmentType}};%
+    \draw (\tikzumlFragment@name-PartType-\thetikzumlFragmentPartNum)+(0,-.4*\tikzumlFragment@paddingy ex) node[name=tikzumlTmpNode] {\phantom{\tikzumlFragmentType}};%
     \ifx\\##1\\\else \node[anchor=north west] at (tikzumlTmpNode.south west) {[##1]}; \fi %
   }%
   %
@@ -4507,12 +4505,12 @@
     \let\tikzumlFragment@parentold\tikzumlFragment@parent%
     \let\tikzumlFragment@nameold\tikzumlFragment@name%
     \edef\tikzumlFragment@parent{\tikzumlFragment@nameold}%
-  \else%
+  \else
     \setcounter{tikzumlFragmentPartNum}{0}%
     \edef\tikzumlFragment@parent{}%
     \edef\tikzumlFragment@parentold{}%
     \edef\tikzumlFragment@nameold{}%
-  \fi%
+  \fi
   %
   \edef\tikzumlFragment@name{\tikzumlFragmentName}%
   \expandafter\gdef\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname{}%
@@ -4521,18 +4519,18 @@
   %
   \ifnum\thetikzumlCallLevel>0%
     \stepcounter{tikzumlCallStartFragmentNum}%
-  \fi%
+  \fi
   %
   \pgfmathparse{6*\tikzumlFragmentYSep}%
   \xdef\tikzumlFragment@paddingy{\pgfmathresult}%
   \if\c@tikzumlFragmentLevelNum=0%
     \setcounter{tikzumlFragmentLevelNum}{\thetikzumlFragmentLevel}%
-  \fi%
+  \fi
   %
   % time delay adjustment for two consecutive fragments
   \ifnum\thetikzumlCallEndFragmentNum>0%
     \addtocounter{tikzumlCallEndFragmentNum}{-1}
-  \fi%
+  \fi
 }{%
   %
   \addtocounter{tikzumlFragmentLevel}{-1}%
@@ -4540,7 +4538,7 @@
   \ifnum\thetikzumlFragmentLevel>0%
     \edef\tikzumlFragmentFitOld{\csname tikzumlFragmentFit\tikzumlFragment@parent \endcsname}%
     \expandafter\xdef\csname tikzumlFragmentFit\tikzumlFragment@parent \endcsname{\tikzumlFragmentFitOld (\tikzumlFragment@name)}%
-  \fi%
+  \fi
   %
   % draw working fragment box
   \begin{pgfonlayer}{fragment\thetikzumlFragmentLevel}%
@@ -4555,17 +4553,17 @@
   %
   % draw final fragment box
   \begin{pgfonlayer}{fragment\thetikzumlFragmentLevel}%
-  \node[draw=\tikzumlFragmentDrawColor, fill=\tikzumlFragmentFillColor, outer sep=0, inner sep=0, font=\tikzumlDefaultFont, fit=(\tikzumlFragment@name-back) (\tikzumlFragment@name-type) (\tikzumlFragment@name-label), name=\tikzumlFragment@name] {};%
+  \node[draw=\tikzumlFragmentDrawColor, fill=\tikzumlFragmentFillColor, outer sep=0, inner sep=\z@, font=\tikzumlDefaultFont, fit=(\tikzumlFragment@name-back) (\tikzumlFragment@name-type) (\tikzumlFragment@name-label), name=\tikzumlFragment@name] {};%
   \end{pgfonlayer}%
   %
   \draw[draw=\tikzumlFragmentDrawColor] (\tikzumlFragment@name.north west) rectangle (\tikzumlFragment@name.south east);%
-  \draw (\tikzumlFragment@name-type.south east)+(0,1ex) node[name=\tikzumlFragment@name-typetop, inner sep=0] {};%
-  \draw (\tikzumlFragment@name-type.south east)+(-1ex,0) node[name=\tikzumlFragment@name-typeleft, inner sep=0] {};%
+  \draw (\tikzumlFragment@name-type.south east)+(0,1ex) node[name=\tikzumlFragment@name-typetop, inner sep=\z@] {};%
+  \draw (\tikzumlFragment@name-type.south east)+(-1ex,0) node[name=\tikzumlFragment@name-typeleft, inner sep=\z@] {};%
   \draw (\tikzumlFragment@name.north west) -| (\tikzumlFragment@name-typetop.center) -- (\tikzumlFragment@name-typeleft.center) -| (\tikzumlFragment@name.north west);%
   %
   \ifnum\thetikzumlCallLevel>0%
     \stepcounter{tikzumlCallEndFragmentNum}%
-  \fi%
+  \fi
 }%
 \def\tikzumlCreatePlainText{create}
 %
@@ -4609,28 +4607,28 @@
   %
   \def\tikzumlCreateCallSrc@name{#2}%
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlCreateCallSrc@nodeName{\tikzumlCreateCallSrc@name}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlCreateCallSrc@nodeName{\tikzumlCreateCallSrc@name}}\x
   %
   % managing time delays from previous/parent fragments
   \ifnum\thetikzumlCallStartFragmentNum>0%
     \let\tikzumlCreateCallDTold\tikzumlCreateCallDT%
-    \pgfmathparse{0.5*\tikzumlFragment@paddingy+\tikzumlCreateCallDTold}%
+    \pgfmathparse{.5*\tikzumlFragment@paddingy+\tikzumlCreateCallDTold}%
     \edef\tikzumlCreateCallDT{\pgfmathresult}%
     \addtocounter{tikzumlCallStartFragmentNum}{-1}
-  \fi%
+  \fi
   \ifnum\thetikzumlCallEndFragmentNum>0%
     \let\tikzumlCreateCallDTold\tikzumlCreateCallDT%
-    \pgfmathparse{0.5*\tikzumlFragment@paddingy+\tikzumlCreateCallDTold}%
+    \pgfmathparse{.5*\tikzumlFragment@paddingy+\tikzumlCreateCallDTold}%
     \edef\tikzumlCreateCallDT{\pgfmathresult}%
     \addtocounter{tikzumlCallEndFragmentNum}{-1}
-  \fi%
+  \fi
   \ifnum\thetikzumlFragmentPartNum>0%
     \let\tikzumlCreateCallDTold\tikzumlCreateCallDT%
-    \pgfmathparse{0.5*\tikzumlFragment@paddingy+\tikzumlCreateCallDTold}%
+    \pgfmathparse{.5*\tikzumlFragment@paddingy+\tikzumlCreateCallDTold}%
     \edef\tikzumlCreateCallDT{\pgfmathresult}%
-  \fi%
+  \fi
   %
   % managing parent-child structure
   \ifnum\thetikzumlCallLevel>0%
@@ -4638,16 +4636,16 @@
     \def\tikzumlCall@name{\tikzumlCreateCallName}%
     \let\tikzumlCall@parentold\tikzumlCall@parent%
     \edef\tikzumlCall@parent{\tikzumlCall@parentold @@\tikzumlCall@nameold}%
-  \else%
+  \else
     \edef\tikzumlCall@parent{}%
     \edef\tikzumlCall@parentold{}%
     \edef\tikzumlCall@nameold{}
     \edef\tikzumlCall@name{\tikzumlCreateCallName}%
-  \fi%
+  \fi
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlCreateCall@nodeName{\tikzumlCall@name}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlCreateCall@nodeName{\tikzumlCall@name}}\x
   %
   \draw (\csname tikzumlLastChild@\tikzumlCreateCallSrc@nodeName \endcsname)+(0,-\tikzumlCreateCallDT ex) node[name=st-\tikzumlCreateCall@nodeName, tikzuml activity style] {};%
   %
@@ -4659,7 +4657,7 @@
     \umlobject[x=\tikzumlCreateCallX, stereo=\tikzumlCreateCallStereo, class=\tikzumlCreateCallClass, draw=\tikzumlCreateCallObjectDrawColor, fill=\tikzumlCreateCallObjectFillColor, text=\tikzumlCreateCallObjectTextColor]{#3}%
   \fi
   %
-  \draw (\csname tikzumlLastChild@\tikzumlCreateCallSrc@nodeName \endcsname |- #3)+(0,-0.5*\tikzumlCreateCallDT ex) node[name=sb-\tikzumlCreateCall@nodeName, tikzuml activity style] {};%
+  \draw (\csname tikzumlLastChild@\tikzumlCreateCallSrc@nodeName \endcsname |- #3)+(0,-.5*\tikzumlCreateCallDT ex) node[name=sb-\tikzumlCreateCall@nodeName, tikzuml activity style] {};%
   %
   \expandafter\xdef\csname tikzumlLastChild@\tikzumlCreateCallSrc@nodeName \endcsname{sb-\tikzumlCreateCall@nodeName}%
   \xdef\tikzumlCallBottomSrc{sb-\tikzumlCreateCall@nodeName}%
@@ -4672,12 +4670,12 @@
     \begin{pgfonlayer}{activity}%
     \draw[draw=\tikzumlCreateCallDrawColor, fill=\tikzumlCreateCallFillColor] (st-\tikzumlCreateCall@nodeName.north west) rectangle (sb-\tikzumlCreateCall@nodeName.south east);%
     \end{pgfonlayer}%
-  \fi%
+  \fi
   % add to fit fragment
   \ifnum\c@tikzumlFragmentLevel>0%
     \edef\tikzumlFragmentFitOld{\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname}%
     \expandafter\xdef\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname{\tikzumlFragmentFitOld (st-\tikzumlCreateCall@nodeName) (sb-\tikzumlCreateCall@nodeName) (\tikzumlCreateCall@nodeName-op) (#3) }%
-  \fi%
+  \fi
 }
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4698,9 +4696,9 @@
   \pgfkeys{/tikzuml/component/picture/.cd,#1}%
   \pgfkeys{/tikzuml/component/picture/.cd, scale/.get=\tikzumlComponentScale}%
   \begin{tikzpicture}[#1]%
-  \filldraw (-0.4ex,0) rectangle ++(1.2ex,1.7ex);%
-  \filldraw (-0.65ex,0.4ex) rectangle ++(0.5ex,0.25ex);%
-  \filldraw (-0.65ex,1.05ex) rectangle ++(0.5ex,0.25ex);%
+  \filldraw (-.4ex,0) rectangle ++(1.2ex,1.7ex);%
+  \filldraw (-.65ex,.4ex) rectangle ++(.5ex,.25ex);%
+  \filldraw (-.65ex,1.05ex) rectangle ++(.5ex,.25ex);%
   \node at(1.2ex,0ex) {};% padding node
   \end{tikzpicture}%
 }%
@@ -4709,8 +4707,8 @@
   \pgfkeys{/tikzuml/component/picture/.cd,#1}%
   \pgfkeys{/tikzuml/component/picture/.cd, scale/.get=\tikzumlComponentScale}%
   \begin{tikzpicture}[#1]%
-  \filldraw (-0.4ex,0) -| ++(1.2ex,1.4ex) -- ++(-0.3ex,0.3ex) -| cycle;%
-  \filldraw[line join=bevel] (0.8ex,1.4ex) -| ++(-0.3ex,0.3ex) -- cycle;
+  \filldraw (-.4ex,0) -| ++(1.2ex,1.4ex) -- ++(-.3ex,.3ex) -| cycle;%
+  \filldraw[line join=bevel] (.8ex,1.4ex) -| ++(-.3ex,.3ex) -- cycle;
   \end{tikzpicture}%
 }%
 \newif\iftikzumldrawumlcomponentsymbol@
@@ -4727,9 +4725,9 @@
     \let\tikzumlComponent@nameold\tikzumlComponent@fitname%
     \let\tikzumlComponent@parentold\tikzumlComponent@parent%
     \edef\tikzumlComponent@parent{\tikzumlComponent@parentold @@\tikzumlComponent@nameold}%
-  \else%
+  \else
     \def\tikzumlComponent@parent{}%
-  \fi%
+  \fi
   %
   \stepcounter{tikzumlComponentLevel}%
   %
@@ -4762,9 +4760,9 @@
         }{}%
         \ifx\keyvalue\pgfkeysnovalue%
         \pgfkeys{/tikzuml/component/.cd, style/.append style/.expand once={\keyname}}%
-        \else%
+        \else
         \pgfkeys{/tikzuml/component/.cd, style/.append style/.expand twice={\expandafter\keyname\expandafter=\keyvalue}}%
-        \fi%
+        \fi
         %\errmessage{TIKZUML ERROR : in umlcomponent, invalid option \keyname}%
     }%
   }%
@@ -4785,16 +4783,16 @@
     \edef\tikzumlComponent@name{\tikzumlComponentName}%
   }%
   %
-  \begingroup%
-    \def\_{@}\edef\x{\endgroup%
-      \def\noexpand\tikzumlComponent@fitname{\tikzumlComponent@name}}\x%
+  \begingroup
+    \def\_{@}\edef\x{\endgroup
+      \def\noexpand\tikzumlComponent@fitname{\tikzumlComponent@name}}\x
   %
   \let\tikzumlComponent@nodeNameold\tikzumlComponent@nodeName%
   \def\tikzumlComponent@caption{#2}%
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlComponent@nodeName{\tikzumlComponent@name}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlComponent@nodeName{\tikzumlComponent@name}}\x
   %
   \expandafter\gdef\csname tikzumlComponentFit\tikzumlComponent@parent @@\tikzumlComponent@fitname\endcsname{}%
   %
@@ -4810,32 +4808,32 @@
     \iftikzumldrawumlcomponentsymbolartefact@
       \iftikzumlcomponentWithoutCoords%
         \node[inner ysep=-2ex, minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root)  {\iftikzumldrawumlcomponentsymbolartefact@\else\phantom{\tikzumlComponent@nodeName}\fi};%
-      \else%
+      \else
         \node[inner ysep=-2ex, minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root) at (0,0) {\iftikzumldrawumlcomponentsymbolartefact@\else\hphantom{\tikzumlComponent@nodeName}\fi};%
-      \fi%
+      \fi
     \else
     \iftikzumlcomponentWithoutCoords%
       \iftikzumldrawumlcomponenthasbody@
-        \node[inner ysep=0.2ex, minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root)  {\phantom{\tikzumlComponent@nodeName}};%
+        \node[inner ysep=.2ex, minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root)  {\phantom{\tikzumlComponent@nodeName}};%
       \else
         \node[/tikzuml/component/style] (\tikzumlComponent@nodeName-root) {};%
       \fi
-    \else%
+    \else
       \iftikzumldrawumlcomponenthasbody@
-        \node[inner ysep=0.2ex,minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root) at (0,0) {\iftikzumldrawumlcomponenthasbody@\hphantom{\tikzumlComponent@nodeName}\fi};%
+        \node[inner ysep=.2ex,minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, /tikzuml/component/style] (\tikzumlComponent@nodeName-root) at (0,0) {\iftikzumldrawumlcomponenthasbody@\hphantom{\tikzumlComponent@nodeName}\fi};%
       \else
         \node[/tikzuml/component/style] (\tikzumlComponent@nodeName-root) at (0,0) {};%
       \fi
-    \fi%
+    \fi
     \fi
     \expandafter\xdef\csname tikzumlComponentFit\tikzumlComponent@parent @@\tikzumlComponent@fitname\endcsname{(\tikzumlComponent@nodeName-root)}%
-  \fi%
+  \fi
   %
-  \ifnum\c@tikzumlComponentLevel>0\relax%
+  \ifnum\c@tikzumlComponentLevel>0\relax
     \def\tikzumlComponentFitTmp{\csname tikzumlComponentFit\tikzumlComponent@parent\endcsname}%
     \expandafter\xdef\csname tikzumlComponentFit\tikzumlComponent@parent\endcsname{\tikzumlComponentFitTmp (\tikzumlComponent@nodeName-body) (\tikzumlComponent@nodeName-caption)}%
     \stepcounter{tikzumlComponentSubComponentNum}%
-  \fi%
+  \fi
   %
   \iftikzumldrawumlcomponenthasbody@
     \node[inner sep=3.25ex, minimum width=\tikzumlComponentMinimumWidth, font=\tikzumlDefaultFont, fit=\csname tikzumlComponentFit\tikzumlComponent@parent @@\tikzumlComponent@fitname\endcsname] (\tikzumlComponent@nodeName-body) {};%
@@ -4853,9 +4851,9 @@
   %
   \iftikzumldrawumlcomponentsymbol@
     \iftikzumldrawumlcomponentsymbolartefact@
-      \draw (\tikzumlComponent@nodeName-caption.north -| \tikzumlComponent@nodeName.east) node[font=\tikzumlDefaultFont, xshift=-2ex, below=0.25ex, name=\tikzumlComponent@nodeName-logo] {\pictureartefact{draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, font=\tikzumlDefaultFont} };%
+      \draw (\tikzumlComponent@nodeName-caption.north -| \tikzumlComponent@nodeName.east) node[font=\tikzumlDefaultFont, xshift=-2ex, below=.25ex, name=\tikzumlComponent@nodeName-logo] {\pictureartefact{draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, font=\tikzumlDefaultFont} };%
     \else
-      \draw (\tikzumlComponent@nodeName-caption.north -| \tikzumlComponent@nodeName.east) node[font=\tikzumlDefaultFont, xshift=-2ex, below=0.25ex, name=\tikzumlComponent@nodeName-logo] {\picturedcomponent{draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, font=\tikzumlDefaultFont} };%
+      \draw (\tikzumlComponent@nodeName-caption.north -| \tikzumlComponent@nodeName.east) node[font=\tikzumlDefaultFont, xshift=-2ex, below=.25ex, name=\tikzumlComponent@nodeName-logo] {\picturedcomponent{draw=\tikzumlComponentDrawColor, fill=\tikzumlComponentFillColor, font=\tikzumlDefaultFont} };%
     \fi
   \fi
   \iftikzumldrawumlcomponenthasbody@% cheat
@@ -4873,7 +4871,7 @@
     \edef\tikzumlPackageFitOld{\csname tikzumlPackageFit\tikzumlPackage@parent @@\tikzumlPackage@fitname\endcsname}%
     \expandafter\xdef\csname tikzumlPackageFit\tikzumlPackage@parent @@\tikzumlPackage@fitname\endcsname{\tikzumlPackageFitOld (\tikzumlComponent@nodeName)}%
     \stepcounter{tikzumlPackageClassNum}%
-  \fi%
+  \fi
 }%
 %
 % shortcut for empty component
@@ -4917,30 +4915,30 @@
   %
   \edef\tikzumlRequiredInterface@name{#2}%
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlRequiredInterface@nodeName{\tikzumlRequiredInterface@name}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlRequiredInterface@nodeName{\tikzumlRequiredInterface@name}}\x
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlRequiredInterface@interfacenodeName{\tikzumlRequiredInterface@interfacename}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlRequiredInterface@interfacenodeName{\tikzumlRequiredInterface@interfacename}}\x
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlRequiredInterface@portnodeName{\tikzumlRequiredInterface@portname}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlRequiredInterface@portnodeName{\tikzumlRequiredInterface@portname}}\x
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlRequiredInterface@paddingnodeName{\tikzumlRequiredInterface@paddingname}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlRequiredInterface@paddingnodeName{\tikzumlRequiredInterface@paddingname}}\x
   %
   \ifthenelse{\equal{\tikzumlInterfaceWithPort}{tikzumlTrue}}{%
-    \node[inner sep=0.5*\tikzumlRequiredInterfaceWidth, rectangle, draw=\tikzumlRequiredInterfaceDrawColor, fill=\tikzumlRequiredInterfaceFillColor] (\tikzumlRequiredInterface@portnodeName) at (\tikzumlRequiredInterface@nodeName.east) {};%
+    \node[inner sep=\z@.5*\tikzumlRequiredInterfaceWidth, rectangle, draw=\tikzumlRequiredInterfaceDrawColor, fill=\tikzumlRequiredInterfaceFillColor] (\tikzumlRequiredInterface@portnodeName) at (\tikzumlRequiredInterface@nodeName.east) {};%
   }{%
-    \node[inner sep=0] (\tikzumlRequiredInterface@nodeName-east-port) at (\tikzumlRequiredInterface@nodeName.\tikzumlAnchor) {};%
+    \node[inner sep=\z@] (\tikzumlRequiredInterface@nodeName-east-port) at (\tikzumlRequiredInterface@nodeName.\tikzumlAnchor) {};%
   }%
   \begin{scope}%
-  \draw[-{Arc Barb[reversed,length=\tikzumlRequiredInterfaceWidth/2,width=\tikzumlRequiredInterfaceWidth]}] (\tikzumlRequiredInterface@nodeName)-- ++(\tikzumlRequiredInterfaceDistance,0) node[inner sep=0, text width=\tikzumlRequiredInterfaceWidth, circle, name=\tikzumlRequiredInterface@interfacenodeName-tmp] {};%
-  \node[inner sep=0, text width=\tikzumlRequiredInterfaceWidth, circle, ] (\tikzumlRequiredInterface@interfacenodeName) at (\tikzumlRequiredInterface@interfacenodeName-tmp) {};%
+  \draw[-{Arc Barb[reversed,length=\tikzumlRequiredInterfaceWidth/2,width=\tikzumlRequiredInterfaceWidth]}] (\tikzumlRequiredInterface@nodeName)-- ++(\tikzumlRequiredInterfaceDistance,0) node[inner sep=\z@, text width=\tikzumlRequiredInterfaceWidth, circle, name=\tikzumlRequiredInterface@interfacenodeName-tmp] {};%
+  \node[inner sep=\z@, text width=\tikzumlRequiredInterfaceWidth, circle, ] (\tikzumlRequiredInterface@interfacenodeName) at (\tikzumlRequiredInterface@interfacenodeName-tmp) {};%
   \end{scope}%
   \node[above] at (\tikzumlRequiredInterface@interfacenodeName.north) {\tikzumlRequiredInterfaceLabel};%
   %
@@ -4950,7 +4948,7 @@
   \ifnum\c@tikzumlComponentLevel>0%
         \def\tikzumlComponentFitTmp{\csname tikzumlComponentFit\tikzumlComponent@parent @@\tikzumlComponent@fitname\endcsname}%
         \expandafter\xdef\csname tikzumlComponentFit\tikzumlComponent@parent @@\tikzumlComponent@fitname\endcsname{\tikzumlComponentFitTmp (\tikzumlRequiredInterface@paddingnodeName) (\tikzumlRequiredInterface@portnodeName) }%
-  \fi%
+  \fi
 }%
 %
 \newcommand{\umlprovidedinterface}[2][]{%
@@ -4991,28 +4989,28 @@
   %
   \edef\tikzumlProvidedInterface@name{#2}%
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlProvidedInterface@nodeName{\tikzumlProvidedInterface@name}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlProvidedInterface@nodeName{\tikzumlProvidedInterface@name}}\x
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlProvidedInterface@interfacenodeName{\tikzumlProvidedInterface@interfacename}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlProvidedInterface@interfacenodeName{\tikzumlProvidedInterface@interfacename}}\x
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlProvidedInterface@portnodeName{\tikzumlProvidedInterface@portname}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlProvidedInterface@portnodeName{\tikzumlProvidedInterface@portname}}\x
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlProvidedInterface@paddingnodeName{\tikzumlProvidedInterface@paddingname}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlProvidedInterface@paddingnodeName{\tikzumlProvidedInterface@paddingname}}\x
   %
   \ifthenelse{\equal{\tikzumlInterfaceWithPort}{tikzumlTrue}}{%
-    \node[inner sep=0.5*\tikzumlProvidedInterfaceWidth, rectangle, draw=\tikzumlProvidedInterfaceDrawColor, fill=\tikzumlProvidedInterfaceFillColor] (\tikzumlProvidedInterface@portnodeName) at (\tikzumlProvidedInterface@nodeName.\tikzumlAnchor) {};%
+    \node[inner sep=\z@.5*\tikzumlProvidedInterfaceWidth, rectangle, draw=\tikzumlProvidedInterfaceDrawColor, fill=\tikzumlProvidedInterfaceFillColor] (\tikzumlProvidedInterface@portnodeName) at (\tikzumlProvidedInterface@nodeName.\tikzumlAnchor) {};%
   }{%
-    \node[inner sep=0] (\tikzumlProvidedInterface@portnodeName) at (\tikzumlProvidedInterface@nodeName.\tikzumlAnchor) {};%
+    \node[inner sep=\z@] (\tikzumlProvidedInterface@portnodeName) at (\tikzumlProvidedInterface@nodeName.\tikzumlAnchor) {};%
   }%
-  \draw (\tikzumlProvidedInterface@nodeName.\tikzumlAnchor)+(-\tikzumlProvidedInterfaceDistance,0) node[inner sep=0, text width=\tikzumlProvidedInterfaceWidth, circle, draw=\tikzumlProvidedInterfaceDrawColor, fill=\tikzumlProvidedInterfaceFillColor, name=\tikzumlProvidedInterface@interfacenodeName] {};%
+  \draw (\tikzumlProvidedInterface@nodeName.\tikzumlAnchor)+(-\tikzumlProvidedInterfaceDistance,0) node[inner sep=\z@, text width=\tikzumlProvidedInterfaceWidth, circle, draw=\tikzumlProvidedInterfaceDrawColor, fill=\tikzumlProvidedInterfaceFillColor, name=\tikzumlProvidedInterface@interfacenodeName] {};%
   \node[above] at (\tikzumlProvidedInterface@interfacenodeName.north)
  {\tikzumlProvidedInterfaceLabel};%
   %
@@ -5024,7 +5022,7 @@
   \ifnum\thetikzumlComponentLevel>0%
         \def\tikzumlComponentFitTmp{\csname tikzumlComponentFit\tikzumlComponent@parent @@\tikzumlComponent@fitname\endcsname}%
         \expandafter\xdef\csname tikzumlComponentFit\tikzumlComponent@parent @@\tikzumlComponent@fitname\endcsname{\tikzumlComponentFitTmp (\tikzumlProvidedInterface@paddingnodeName) (\tikzumlProvidedInterface@portnodeName) }%
-      \fi%
+      \fi
 }%
 %
 \def\tikzumlAssemblyConnectorLabelPosition{above}
@@ -5034,32 +5032,32 @@
   \edef\tikzuml@ACEnd@name{#2}%
   \edef\tikzuml@AC@width{\tikzumlAssemblyConnectorWidth}%
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzuml@ACStart@nodeName{\tikzuml@ACStart@name}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzuml@ACStart@nodeName{\tikzuml@ACStart@name}}\x
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzuml@ACEnd@nodeName{\tikzuml@ACEnd@name}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzuml@ACEnd@nodeName{\tikzuml@ACEnd@name}}\x
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzuml@ACInterface@nodeName{\tikzumlAssemblyConnectorSymbolName}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzuml@ACInterface@nodeName{\tikzumlAssemblyConnectorSymbolName}}\x
   %
   \pgfextractx{\tikzuml@AC@xa}{\pgfpointanchor{\tikzuml@ACStart@nodeName}{\tikzumlAssemblyConnectorStartAnchor}}%
   \pgfextracty{\tikzuml@AC@ya}{\pgfpointanchor{\tikzuml@ACStart@nodeName}{\tikzumlAssemblyConnectorStartAnchor}}%
   \pgfextractx{\tikzuml@AC@xb}{\pgfpointanchor{\tikzuml@ACEnd@nodeName}{\tikzumlAssemblyConnectorEndAnchor}}%
   \pgfextracty{\tikzuml@AC@yb}{\pgfpointanchor{\tikzuml@ACEnd@nodeName}{\tikzumlAssemblyConnectorEndAnchor}}%
-  \pgfmathsetlength{\tikzuml@AC@xi}{0.5*\tikzuml@AC@xa+0.5*\tikzuml@AC@xb}%
-  \pgfmathsetlength{\tikzuml@AC@yi}{0.5*\tikzuml@AC@ya+0.5*\tikzuml@AC@yb}%
+  \pgfmathsetlength{\tikzuml@AC@xi}{.5*\tikzuml@AC@xa+.5*\tikzuml@AC@xb}%
+  \pgfmathsetlength{\tikzuml@AC@yi}{.5*\tikzuml@AC@ya+.5*\tikzuml@AC@yb}%
   \pgfmathsetlength{\tikzuml@AC@AB}{veclen(\tikzuml@AC@xa-\tikzuml@AC@xb,\tikzuml@AC@ya-\tikzuml@AC@yb)}%
-  \pgfmathsetlength{\tikzuml@AC@lambda}{0.25*\tikzuml@AC@width/\tikzuml@AC@AB}%
+  \pgfmathsetlength{\tikzuml@AC@lambda}{.25*\tikzuml@AC@width/\tikzuml@AC@AB}%
   \pgfmathsetlength{\tikzuml@AC@xic}{\tikzuml@AC@xi-\tikzuml@AC@lambda*(\tikzuml@AC@xb-\tikzuml@AC@xa)}%
   \pgfmathsetlength{\tikzuml@AC@yic}{\tikzuml@AC@yi-\tikzuml@AC@lambda*(\tikzuml@AC@yb-\tikzuml@AC@ya)}%
   \pgfmathsetlength{\tikzuml@AC@xio}{\tikzuml@AC@xi+\tikzuml@AC@lambda*(\tikzuml@AC@xb-\tikzuml@AC@xa)}%
   \pgfmathsetlength{\tikzuml@AC@yio}{\tikzuml@AC@yi+\tikzuml@AC@lambda*(\tikzuml@AC@yb-\tikzuml@AC@ya)}%
-  \node[inner sep=0.5*\tikzuml@AC@width] (\tikzuml@ACInterface@nodeName-interface) at (\tikzuml@AC@xi,\tikzuml@AC@yi) {};%
-  \node[inner sep=0, text width=\tikzuml@AC@width, circle, draw=\tikzumlAssemblyConnectorDrawColor, fill=\tikzumlAssemblyConnectorFillColor] (\tikzuml@ACInterface@nodeName-io) at (\tikzuml@AC@xio,\tikzuml@AC@yio) {};%
+  \node[inner sep=\z@.5*\tikzuml@AC@width] (\tikzuml@ACInterface@nodeName-interface) at (\tikzuml@AC@xi,\tikzuml@AC@yi) {};%
+  \node[inner sep=\z@, text width=\tikzuml@AC@width, circle, draw=\tikzumlAssemblyConnectorDrawColor, fill=\tikzumlAssemblyConnectorFillColor] (\tikzuml@ACInterface@nodeName-io) at (\tikzuml@AC@xio,\tikzuml@AC@yio) {};%
   \begin{scope}%
   \pgfmathsetlength{\tikzuml@AC@xtrc}{\tikzuml@AC@xic-2*\tikzuml@AC@lambda*(\tikzuml@AC@yb-\tikzuml@AC@ya)}%
   \pgfmathsetlength{\tikzuml@AC@ytrc}{\tikzuml@AC@yic+2*\tikzuml@AC@lambda*(\tikzuml@AC@xb-\tikzuml@AC@xa)}%
@@ -5074,7 +5072,7 @@
   \coordinate (\tikzuml@ACInterface@nodeName-tlc) at (\tikzuml@AC@xtlc,\tikzuml@AC@ytlc);%
   \coordinate (\tikzuml@ACInterface@nodeName-blc) at (\tikzuml@AC@xblc,\tikzuml@AC@yblc);%
   \clip (\tikzuml@ACInterface@nodeName-trc) --  (\tikzuml@ACInterface@nodeName-tlc) -- (\tikzuml@ACInterface@nodeName-blc) -- (\tikzuml@ACInterface@nodeName-brc) -- cycle;%
-  \node[inner sep=0, text width=\tikzuml@AC@width, circle, draw=\tikzumlAssemblyConnectorDrawColor, fill=\tikzumlAssemblyConnectorFillColor] (\tikzuml@ACInterface@nodeName-ic) at (\tikzuml@AC@xic,\tikzuml@AC@yic) {};%
+  \node[inner sep=\z@, text width=\tikzuml@AC@width, circle, draw=\tikzumlAssemblyConnectorDrawColor, fill=\tikzumlAssemblyConnectorFillColor] (\tikzuml@ACInterface@nodeName-ic) at (\tikzuml@AC@xic,\tikzuml@AC@yic) {};%
   \end{scope}%
   \edef\tmp{\noexpand\node[\tikzumlAssemblyConnectorLabelPosition, font=\noexpand\tikzumlDefaultFont] at (\noexpand\tikzuml@ACInterface@nodeName-interface.north)
  {\noexpand\tikzumlAssemblyConnectorLabel};}\tmp%
@@ -5136,17 +5134,17 @@
   \edef\tikzumlAssemblyConnectorStart@name{#2}%
   \edef\tikzumlAssemblyConnectorEnd@name{#3}%
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlAssemblyConnectorStart@nodeName{\tikzumlAssemblyConnectorStart@name}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlAssemblyConnectorStart@nodeName{\tikzumlAssemblyConnectorStart@name}}\x
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlAssemblyConnectorEnd@nodeName{\tikzumlAssemblyConnectorEnd@name}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlAssemblyConnectorEnd@nodeName{\tikzumlAssemblyConnectorEnd@name}}\x
   %
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlAssemblyConnectorLabel@nodeName{\tikzumlAssemblyConnectorLabel}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlAssemblyConnectorLabel@nodeName{\tikzumlAssemblyConnectorLabel}}\x
   %
   \pgfextractx{\tikzuml@AC@xa}{\pgfpointanchor{\tikzumlAssemblyConnectorStart@nodeName}{center}}%
   \pgfextracty{\tikzuml@AC@ya}{\pgfpointanchor{\tikzumlAssemblyConnectorStart@nodeName}{center}}%
@@ -5192,7 +5190,7 @@
   \ifthenelse{\equal{\tikzumlAssemblyConnectorGeometry}{-|-}}{%
     \ifthenelse{\equal{\tikzumlAssemblyConnectorStartArm}{auto}}{%
       \ifthenelse{\equal{\tikzumlAssemblyConnectorEndArm}{auto}}{%
-	\pgfmathsetlength{\tikzuml@AC@middleArm}{0.5 * \tikzuml@AC@xa + 0.5 * \tikzuml@AC@xb}%
+	\pgfmathsetlength{\tikzuml@AC@middleArm}{.5 * \tikzuml@AC@xa + .5 * \tikzuml@AC@xb}%
       }{%
         \pgfmathsetlength{\tikzuml@AC@middleArm}{\tikzuml@AC@xb+\tikzumlAssemblyConnectorEndArm}%
       }%
@@ -5216,7 +5214,7 @@
   \ifthenelse{\equal{\tikzumlAssemblyConnectorGeometry}{|-|}}{%
     \ifthenelse{\equal{\tikzumlAssemblyConnectorStartArm}{auto}}{%
       \ifthenelse{\equal{\tikzumlAssemblyConnectorEndArm}{auto}}{%
-	\pgfmathsetlength{\tikzuml@AC@middleArm}{0.5 * \tikzuml@AC@ya + 0.5 * \tikzuml@AC@yb}%
+	\pgfmathsetlength{\tikzuml@AC@middleArm}{.5 * \tikzuml@AC@ya + .5 * \tikzuml@AC@yb}%
       }{%
         \pgfmathsetlength{\tikzuml@AC@middleArm}{\tikzuml@AC@yb+\tikzumlAssemblyConnectorEndArm}%
       }%
@@ -5244,17 +5242,17 @@
     \def\tikzumlAssemblyConnectorEndAnchor{\tikzumlAssemblyConnectorEndAnchorTmp}%
   }%
   %
-  \node[inner sep=0] (\tikzumlAssemblyConnectorStart@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port-tmp) at (\tikzumlAssemblyConnectorStart@nodeName.\tikzumlAssemblyConnectorStartAnchor) {};%
-  \node[inner sep=0] (\tikzumlAssemblyConnectorEnd@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port-tmp) at (\tikzumlAssemblyConnectorEnd@nodeName.\tikzumlAssemblyConnectorEndAnchor) {};%
+  \node[inner sep=\z@] (\tikzumlAssemblyConnectorStart@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port-tmp) at (\tikzumlAssemblyConnectorStart@nodeName.\tikzumlAssemblyConnectorStartAnchor) {};%
+  \node[inner sep=\z@] (\tikzumlAssemblyConnectorEnd@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port-tmp) at (\tikzumlAssemblyConnectorEnd@nodeName.\tikzumlAssemblyConnectorEndAnchor) {};%
   %
   \umlrelation[style={tikzuml connector style}, #1]{\tikzumlAssemblyConnectorStart@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port-tmp}{\tikzumlAssemblyConnectorEnd@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port-tmp}%
   %
   \ifthenelse{\equal{\tikzumlAssemblyConnectorWithPort}{tikzumlTrue}}{%
-    \node[inner sep=0.5*\tikzumlAssemblyConnectorWidth, rectangle, draw=\tikzumlAssemblyConnectorDrawColor, fill=\tikzumlAssemblyConnectorPortFillColor] (\tikzumlAssemblyConnectorStart@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port) at (\tikzumlAssemblyConnectorStart@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port-tmp) {};%
-    \node[inner sep=0.5*\tikzumlAssemblyConnectorWidth, rectangle, draw=\tikzumlAssemblyConnectorDrawColor, fill=\tikzumlAssemblyConnectorPortFillColor] (\tikzumlAssemblyConnectorEnd@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port) at (\tikzumlAssemblyConnectorEnd@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port-tmp) {};%
+    \node[inner sep=\z@.5*\tikzumlAssemblyConnectorWidth, rectangle, draw=\tikzumlAssemblyConnectorDrawColor, fill=\tikzumlAssemblyConnectorPortFillColor] (\tikzumlAssemblyConnectorStart@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port) at (\tikzumlAssemblyConnectorStart@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port-tmp) {};%
+    \node[inner sep=\z@.5*\tikzumlAssemblyConnectorWidth, rectangle, draw=\tikzumlAssemblyConnectorDrawColor, fill=\tikzumlAssemblyConnectorPortFillColor] (\tikzumlAssemblyConnectorEnd@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port) at (\tikzumlAssemblyConnectorEnd@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port-tmp) {};%
   }{%
-    \node[inner sep=0] (\tikzumlAssemblyConnectorStart@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port) at (\tikzumlAssemblyConnectorStart@nodeName.\tikzumlAssemblyConnectorStartAnchor) {};%
-    \node[inner sep=0] (\tikzumlAssemblyConnectorEnd@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port) at (\tikzumlAssemblyConnectorEnd@nodeName.\tikzumlAssemblyConnectorEndAnchor) {};%
+    \node[inner sep=\z@] (\tikzumlAssemblyConnectorStart@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port) at (\tikzumlAssemblyConnectorStart@nodeName.\tikzumlAssemblyConnectorStartAnchor) {};%
+    \node[inner sep=\z@] (\tikzumlAssemblyConnectorEnd@nodeName-\tikzumlAssemblyConnectorLabel@nodeName-port) at (\tikzumlAssemblyConnectorEnd@nodeName.\tikzumlAssemblyConnectorEndAnchor) {};%
   }%
   %
   \addtocounter{tikzumlRelationNum}{-1}%
@@ -5381,11 +5379,11 @@
                               draw/.get=\tikzumlPortDrawColor, fill/.get=\tikzumlPortFillColor}%
   \edef\tikzumlPort@name{#2}%
   \edef\tikzumlPort@anchor{#3}%
-  \begingroup%
-    \def\_{_}\edef\x{\endgroup%
-      \def\noexpand\tikzumlPort@nodeName{\tikzumlPort@name}}\x%
+  \begingroup
+    \def\_{_}\edef\x{\endgroup
+      \def\noexpand\tikzumlPort@nodeName{\tikzumlPort@name}}\x
   %
-  \node[inner sep=0.5*\tikzumlPortWidth, rectangle, draw=\tikzumlPortDrawColor, fill=\tikzumlPortFillColor] (\tikzumlPort@nodeName-\tikzumlPort@anchor-port) at (\tikzumlPort@nodeName.\tikzumlPort@anchor) {};%
+  \node[inner sep=\z@.5*\tikzumlPortWidth, rectangle, draw=\tikzumlPortDrawColor, fill=\tikzumlPortFillColor] (\tikzumlPort@nodeName-\tikzumlPort@anchor-port) at (\tikzumlPort@nodeName.\tikzumlPort@anchor) {};%
 }%
 %
 \newcommand{\umldelegateconnector}[3][]{%

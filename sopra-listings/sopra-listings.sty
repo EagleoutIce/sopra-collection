@@ -260,7 +260,7 @@
 
 % If possible we want to make the line numbers unmarkable, so you can copy
 % code without selecting them:
-\ifsol@accuspp@available@%
+\ifsol@accuspp@available@
 \def\sol@lst@num@consume#1{\BeginAccSupp{method=escape,ActualText={}}#1\EndAccSupp{}}%
 \else\def\sol@lst@num@consume#1{#1}\fi
 % So if possible we will eat the number and produce unmarkable text
@@ -718,11 +718,11 @@ keepspaces=false}
 {\end{lrbox}\sol@highlights@box[sol@listings@highlight]{\@tempboxa}\endgroup}
 
 \newcommand*{\sol@highlights@box}[2][]{%
-  \hspace*{-0.35pt}\tikz[#1]{%
+  \hspace*{-.35pt}\tikz[#1]{%
   \pgfpathrectangle{\pgfpoint{1pt}{0pt}}{\pgfpoint{\wd #2}{\ht #2}}%
   \pgfusepath{use as bounding box}%
-  \node[anchor=base west,outer sep=\z@,inner xsep=\z@,outer xsep=1pt, inner ysep=\z@, rounded corners=1.65pt, minimum height=\ht\strutbox+1pt,#1]{\hspace*{0.35pt}\raisebox{1pt}{\strut}\strut\usebox{#2}\hspace*{-0.35pt}};
-  }\hspace*{0.35pt}%
+  \node[anchor=base west,outer sep=\z@,inner xsep=\z@,outer xsep=1pt, inner ysep=\z@, rounded corners=1.65pt, minimum height=\ht\strutbox+1pt,#1]{\hspace*{.35pt}\raisebox{1pt}{\strut}\strut\usebox{#2}\hspace*{-.35pt}};
+  }\hspace*{.35pt}%
 }
 
 \def\@solLstHL#1{\begin{sol@listings@highlight@env}[#1]\begingroup\aftergroup\sol@highlights@endenv}

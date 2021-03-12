@@ -86,7 +86,6 @@
 %% -----------------------------------------------------------------------------
 %% Color Definitions
 %% -----------------------------------------------------------------------------
-
 \definecolor{sob@col@uulm}{RGB}{130,161,180}            % RGB(130,161,180)
 \definecolor{sob@col@uulm@akzent}{RGB}{169,162,141}     % RGB(169,162,141)
 \definecolor{sob@col@uulm@cs}{RGB}{163,038,059}         % RGB(163,038,59)
@@ -109,12 +108,12 @@
 \newcommand\notetext[1]{\begingroup\sob@@notetext{#1}\endgroup}
 
 % lengthts:
-\renewcommand{\baselinestretch}{1.1}
-\setlength{\parskip}{0.75em}
+\def\baselinestretch{1.1}
+\parskip=0.75em
 
 % beautify the footnotes:
-\renewcommand*{\thefootnote}{$\langle$\textbf{\arabic{footnote}}$\rangle$}
-\renewcommand*{\thempfootnote}{$\langle$\textbf{\roman{mpfootnote}}$\rangle$}
+\renewcommand*\thefootnote{$\langle$\textbf{\arabic{footnote}}$\rangle$}
+\renewcommand*\thempfootnote{$\langle$\textbf{\roman{mpfootnote}}$\rangle$}
 
 % differenz section styles
 \renewcommand{\section}{\@startsection{section}{1}{\z@}
@@ -139,10 +138,8 @@
 %% -----------------------------------------------------------------------------
 
 \def\sob@thesobversion#1#2#3#4\@nil{\begingroup v#1.#2.#3#4\endgroup}
-\def\thesobversion{%
-    \edef\@tmp{\noexpand\sob@thesobversion\arabic{sobversion}\noexpand\@nil}%
-    \@tmp
-}
+\edef\sob@version@str{\noexpand\sob@thesobversion\arabic{sobversion}\noexpand\@nil}
+\edef\thesobversion{\sob@version@str}
 
 \def\sob@mail#1{\href{mailto:#1}{#1}}
 \let\mail\sob@mail%
@@ -220,9 +217,8 @@
 \def\sob@@setteam#1 #2\@nil{%
     \gdef\sob@register@group{#1}\gdef\sob@register@groupnum{#2}%
 }
-\newcommand\setTeam[1]{
-    \expandafter\sob@@setteam#1\@nil
-}
+\newcommand\setTeam[1]{\expandafter\sob@@setteam#1\@nil}
+
 \newcommand\typesetAuthors{%
     \edef\@tmp{\noexpand\sob@@typeset@author{\sob@register@authors}}\@tmp}
 
