@@ -247,7 +247,7 @@
 %% Helper Functions
 %% -----------------------------------------------------------------------------
 
-\def\soc@thesocversion#1#2#3#4\@nil{\begingroup v#1.#2.#3#4\endgroup}
+\def\soc@thesocversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 
 \def\thesocversion{%
 \edef\@tmp{\noexpand\soc@thesocversion\arabic{socversion}\noexpand\@nil}%

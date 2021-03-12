@@ -61,7 +61,7 @@
 %% Helper Methods
 %% -----------------------------------------------------------------------------
 
-\def\som@thesomversion#1#2#3#4\@nil{\begingroup v#1.#2.#3#4\endgroup}
+\def\som@thesomversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 \edef\som@version@str{\noexpand\som@thesomversion\arabic{somversion}\noexpand\@nil}
 \edef\thesomversion{\som@version@str}
 
@@ -69,19 +69,19 @@
 %% tikz-uml.sty; modified and restructered by EagleoutIce for: LILLY
 %% -----------------------------------------------------------------------------
 
-\def\tikzumlPackageLayersNum{3}%
-\pgfkeys{/tikzuml/options/.cd, packageLayers/.initial=3}%
-\pgfkeys{/tikzuml/options/.cd, packageLayers/.store in=\tikzumlPackageLayersNum}%
-\def\tikzumlStateLayersNum{3}%
-\pgfkeys{/tikzuml/options/.cd, stateLayers/.initial=3}%
-\pgfkeys{/tikzuml/options/.cd, stateLayers/.store in=\tikzumlStateLayersNum}%
-\def\tikzumlFragmentLayersNum{3}%
-\pgfkeys{/tikzuml/options/.cd, fragmentLayers/.initial=3}%
-\pgfkeys{/tikzuml/options/.cd, fragmentLayers/.store in=\tikzumlFragmentLayersNum}%
-\def\tikzumlComponentLayersNum{3}%
-\pgfkeys{/tikzuml/options/.cd, componentLayers/.initial=3}%
-\pgfkeys{/tikzuml/options/.cd, componentLayers/.store in=\tikzumlComponentLayersNum}%
-%
+\def\tikzumlPackageLayersNum{3}
+\pgfkeys{/tikzuml/options/.cd, packageLayers/.initial=3}
+\pgfkeys{/tikzuml/options/.cd, packageLayers/.store in=\tikzumlPackageLayersNum}
+\def\tikzumlStateLayersNum{3}
+\pgfkeys{/tikzuml/options/.cd, stateLayers/.initial=3}
+\pgfkeys{/tikzuml/options/.cd, stateLayers/.store in=\tikzumlStateLayersNum}
+\def\tikzumlFragmentLayersNum{3}
+\pgfkeys{/tikzuml/options/.cd, fragmentLayers/.initial=3}
+\pgfkeys{/tikzuml/options/.cd, fragmentLayers/.store in=\tikzumlFragmentLayersNum}
+\def\tikzumlComponentLayersNum{3}
+\pgfkeys{/tikzuml/options/.cd, componentLayers/.initial=3}
+\pgfkeys{/tikzuml/options/.cd, componentLayers/.store in=\tikzumlComponentLayersNum}
+
 \ProcessPgfOptions{/tikzuml/options}%
 %
 \def\tikzumlRelationStereoTypeStyle{}%

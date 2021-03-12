@@ -373,7 +373,7 @@
 
 \renewcommand{\sectionmark}[1]{\markright{\@arabic\c@section,~#1}}
 
-\clearscrheadfoot
+\clearpairofpagestyles
 \renewcommand\headfont{\normalfont}
 
 \ifsop@usebook@

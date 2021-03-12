@@ -260,7 +260,7 @@
 % Note: I've written them before, sloppy, for own use - there is no need to
 %       change that so he following commands will have some funny schduff
 
-\def\sor@thesorversion#1#2#3#4\@nil{\begingroup v#1.#2.#3#4\endgroup}
+\def\sor@thesorversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 \edef\sor@version@str{\noexpand\sor@thesorversion\arabic{sorversion}\noexpand\@nil}
 \edef\thesorversion{\sor@version@str}
 

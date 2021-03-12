@@ -137,7 +137,7 @@
 %% Helper Methods
 %% -----------------------------------------------------------------------------
 
-\def\sob@thesobversion#1#2#3#4\@nil{\begingroup v#1.#2.#3#4\endgroup}
+\def\sob@thesobversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 \edef\sob@version@str{\noexpand\sob@thesobversion\arabic{sobversion}\noexpand\@nil}
 \edef\thesobversion{\sob@version@str}
 
@@ -291,7 +291,7 @@
 %% Footer
 %% -----------------------------------------------------------------------------
 
-\clearscrheadfoot
+\clearpairofpagestyles
 \renewcommand\headfont{\normalfont}
 \chead{%
 \begin{tikzpicture}[remember picture, overlay]

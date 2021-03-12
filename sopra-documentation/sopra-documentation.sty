@@ -65,7 +65,7 @@
 %% Helper Methods
 %% -----------------------------------------------------------------------------
 
-\def\sod@thesodversion#1#2#3#4\@nil{\begingroup v#1.#2.#3#4\endgroup}
+\def\sod@thesodversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 
 \edef\sod@version@str{\noexpand\sod@thesodversion\arabic{sodversion}\noexpand\@nil}
 \edef\thesodversion{\sod@version@str}
