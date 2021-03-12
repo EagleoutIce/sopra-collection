@@ -221,7 +221,6 @@
     % recursive call:
     % \edef\@tmp@soc@chlg@{}
     % \typeout{Expand revealed: '\@tmp@soc@chlg@'}
-    % \expandafter\ifx\expandafter\\\@tmp@soc@chlg@\\\else
     \begin{itemize}
         \@ifundefined{soc@versions@data@\tmp@counterval}{% Dummy Tag:
             \item[\faInfoCircle] Für diese Version liegen keine Informationen vor.
@@ -249,9 +248,8 @@
 
 \def\soc@thesocversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 
-\def\thesocversion{%
-\edef\@tmp{\noexpand\soc@thesocversion\arabic{socversion}\noexpand\@nil}%
-\@tmp}
+\edef\soc@version@str{\noexpand\soc@thesocversion\arabic{socversion}\noexpand\@nil}
+\edef\thesocversion{\soc@version@str}
 
 %% -----------------------------------------------------------------------------
 %% User Commands

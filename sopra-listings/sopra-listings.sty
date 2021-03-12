@@ -248,10 +248,9 @@
 %% -----------------------------------------------------------------------------
 \def\sol@font@size{\dimexpr\f@size pt\relax}
 \def\sol@thesolversion#1#2#3#4\@nil{v#1.#2.#3#4}
-\def\thesolversion{%
- \edef\@tmp{\noexpand\sol@thesolversion\arabic{solversion}\noexpand\@nil}%
- \@tmp}
-\robustify\thesolversion
+
+\edef\sol@version@str{\noexpand\sol@thesolversion\arabic{solversion}\noexpand\@nil}
+\edef\thesolversion{\sol@version@str}
 
 % We want language specific literate additions:
 \def\sol@lst@addToLiterate#1{\protected@edef\lst@literate{\unexpanded\expandafter{\lst@literate}\unexpanded{#1}}}

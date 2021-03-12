@@ -21,7 +21,7 @@
     \gdef\sos@reg@authors{}
     \gdef\sos@reg@authors@multiple{}%
     \gdef\sos@reg@bookmarklvl{3}
-    \gdef\sos@reg@presentsymbol{\(\circ\)}
+    \gdef\sos@reg@presentsymbol{$\circ$}
     \gdef\sos@reg@prefixtitle{Definition}
     \gdef\sos@reg@counter{ctrdef}
     \gdef\sos@reg@flags{}
@@ -63,15 +63,11 @@
 % #4 Startersion
 % #5 Änderungen für die Version ein bettung
 \newenvironment{sos@definition}[5][]{%
-    \addvspace{1.25em plus 0.75em minus 0.275em}\phantomsection\begingroup%
+    \addvspace{1.25em plus .75em minus .275em}\phantomsection\begingroup
     \resetRegisters{}% reset author, bookmark....
     % Start the Parser for the optargs:
-    \expandafter\sos@@parser@optargs#1,\@nil%
-    % \typeout{Sos-Definition erkannt! Counter: \sos@reg@counter (\@nameuse{the\sos@reg@counter}), Prefix-Titel:\sos@reg@prefixtitle, Bookmark-Level:  \sos@reg@bookmarklvl}%
-    \relax\leavevmode\noindent%
-    % \@zsosensure{2.5}{#2}%
-    % \@sosensure{0.5}
-    %\textbf{\zposy{zposmarker:#2}}%
+    \expandafter\sos@@parser@optargs#1,\@nil
+    \relax\leavevmode\noindent
     % Step counter:
     \refstepcounter{\sos@reg@counter}%
     %
@@ -86,17 +82,17 @@
         \sosFormatTitle{\sos@reg@prefixtitle}{\@nameuse{the\sos@reg@counter}}#3% leftside maybe ensure with parbox?
         \hbox{}\hfill\sosFormatFlags{\sos@reg@flags}\\*%
     % now we will deploy the changelog and author section referencing all important metadata for the definiton.
-    \nopagebreak[4]\hbox{}\hfill{}\begin{minipage}{0.975\textwidth}%
+    \nopagebreak[4]\hbox{}\hfill\begin{minipage}{.975\textwidth}%
         \scriptsize\ifx\sos@reg@authors@multiple\@empty Autor:\else Autoren:\fi%z
-        \space\sos@reg@authors.\hfill{}(\sos@reg@status)\relax\\*%
+        \space\sos@reg@authors.\hfill(\sos@reg@status)\relax\\*%
     \end{minipage}\end{minipage}\hfill\hbox{}\smallskip\\*%
     \@ifundefined{@sop@registers@#2@removed}{}{% already-removed?
     \ifnum\value{soc@compile@target@version}<\@nameuse{@sop@registers@#2@removed}% nope
-    \else\noindent\imptext{Hinweis: Diese Definition wurde in Version \@socmp{\@nameuse{@sop@registers@#2@removed}} des Dokuments entfernt!}\quad\fi%
+    \else\noindent\imptext{Hinweis: Diese Definition wurde in Version \@socmp{\@nameuse{@sop@registers@#2@removed}} des Dokuments entfernt!}\quad\fi
     }%
     }{%
     \end{version}%
-    \endgroup\par{}\ignorespacesafterend%
+    \endgroup\par\ignorespacesafterend
 }
 
 %% -----------------------------------------------------------------------------
@@ -136,7 +132,7 @@
         \gdef\sos@reg@authors{#2}%
     \else% append:
     \let\tmp@cur@a\sos@reg@authors%
-    \xdef\sos@reg@authors{\tmp@cur@a, #2}%
+    \protected@xdef\sos@reg@authors{\tmp@cur@a, #2}%
     \gdef\sos@reg@authors@multiple{XXX}% Set append flag!
     \fi
 }
@@ -171,19 +167,15 @@
 %% -----------------------------------------------------------------------------
 
 \def\sos@thesosversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
-\def\thesosversion{%
-    \edef\@tmp{\noexpand\sos@thesosversion\arabic{sosversion}\noexpand\@nil}%
-    \@tmp}
-
+\edef\sos@version@str{\noexpand\sos@thesosversion\arabic{sosversion}\noexpand\@nil}
+\edef\thesosversion{\sos@version@str}
 
 %% -----------------------------------------------------------------------------
 %% Formtters
 %% -----------------------------------------------------------------------------
 
 \def\sosFormatTitle#1#2{\begingroup\bfseries#1 #2:\space\endgroup}
-
 \def\sosFormatFlags#1{\begingroup\scriptsize\itshape#1\endgroup}
-
 
 %% -----------------------------------------------------------------------------
 %% Create new Environment type
@@ -235,7 +227,7 @@
     \IfStrEq{#1}{}{%
         \@for\@elem:=#2\do{%
             \StrLen{\@elem}[\@cclen]%
-            \edef\@tmp{\noexpand\@CreateCodeHyperLink{\@cclen}{\@elem}{std:\@elem}}\@tmp%
+            \protected@edef\@tmp{\noexpand\@CreateCodeHyperLink{\@cclen}{\@elem}{std:\@elem}}\@tmp
         }
     }{
         \StrLen{#1}[\@cclen]%
@@ -257,7 +249,7 @@
 
 % acts basically as \chapter{#1}, but will be '\setComment' aware
 \def\Chapter#1{%
-    \ifx\currentTocComment\@empty\chapter{#1}\else%
+    \ifx\currentTocComment\@empty\chapter{#1}\else
         \begingroup
         % \newcommand\voidpdfbookmark[3][]{}%
         % \let\pdfbookmark\voidpdfbookmark%
@@ -278,20 +270,18 @@
 
 \let\oldsubsection\subsection
     \def\subsection#1{%
-        %\@sosensure{2.25}%
         \oldsubsection{#1}%
         \pdfbookmark[2]{#1}{ms@sec@@id@\thesection @\thesubsection}%
     }
     \let\oldsubsubsection\subsubsection
     \def\subsubsubsection#1{%
-        %\@sosensure{2.25}%
         \oldsubsubsection{#1}%
         \pdfbookmark[3]{#1}{ms@sec@@id@\thesection @\thesubsection @\thesubsubsection}%
     }
 
     \def\longspread{\setstretch{1.007}\scriptsize}% hihi
 
-    \long\def\setComment#1{\gdef\currentTocComment{\color{cprimary!75!cwhite}\faAngleDoubleRight~\parbox[t]{\linewidth-0.75em}{\protect\longspread#1}}}
+    \long\def\setComment#1{\gdef\currentTocComment{\color{cprimary!75!cwhite}\faAngleDoubleRight~\parbox[t]{\linewidth-.75em}{\protect\longspread#1}}}
 
 %% -----------------------------------------------------------------------------
 %% Generic Stuff
@@ -318,13 +308,5 @@
 \newcommand*\GetSopra[2][1]{\centering\resizebox{#1\linewidth}{!}{\input{figures/sopra_#2.tex}}}% -compressed
 \newcommand*{\figref}[1]{\hyperref[{#1}]{\autoref*{#1} (\nameref*{#1})}} % One single link
 
-% \attachfilesetup{% sopra-paper support, somewhat hardcoded, but this is the original version
-%     author={\sop@register@authors},
-%     color=cimportant, % it is somewhat of a try to be honest :D
-%     icon=Tag,
-%     mimetype=text/plain % we assume
-% }
-
 \newcommand\info[1]{\begingroup\footnotesize\itshape#1\endgroup}
-
 \endinput

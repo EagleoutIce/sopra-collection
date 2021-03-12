@@ -212,16 +212,13 @@
 %% Helper Methods
 %% -----------------------------------------------------------------------------
 
-\def\sop@thesopversion#1#2#3#4\@nil{%
-    \begingroup{}v#1.#2.#3#4\endgroup%
-}
-\def\thesopversion{%
-    \edef\@tmp{\noexpand\sop@thesopversion\arabic{sopversion}\noexpand\@nil}%
-    \@tmp%
-}
+\def\sop@thesopversion#1#2#3#4\@nil{{#1.#2.#3#4}}
+
+\edef\sop@version@str{\noexpand\sop@thesopversion\arabic{sopversion}\noexpand\@nil}
+\edef\thesopversion{\sop@version@str}
 
 \def\sop@mail#1{\href{mailto:#1}{#1}}
-\let\mail\sop@mail%
+\let\mail\sop@mail
 \def\sop@month@to@name#1{%
     \ifcase#1\or{Januar}\or{Februar}\or{M\"{a}rz}\or{April}\or{Mai}\or{Juni}%
     \or{Juli}\or{August}\or{September}\or{Oktober}\or{November}\or{Dezember}%

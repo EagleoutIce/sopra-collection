@@ -24,7 +24,6 @@
 %% -----------------------------------------------------------------------------
 
 \newcounter{sosversion} \setcounter{sosversion}{1007}
-
 \newcounter{sos@counter@tmp@a}
 
 \newlength\sos@len@tmp@a
@@ -36,18 +35,15 @@
 %% Class-Args
 %% -----------------------------------------------------------------------------
 
-
 % apply style
 \DeclareOption{setstyle}{ \sos@applystyle@true }
 \DeclareOption{nosetstyle}{ \sos@applystyle@false }
 
-
 \DeclareOption{handout}{ \sos@handout@true }
 \DeclareOption{nohandout}{ \sos@handout@false }
 
-
 \ExecuteOptions{setstyle}% set it explicitly
-\ProcessOptions\relax%
+\ProcessOptions\relax
 
 
 %% -----------------------------------------------------------------------------
@@ -74,12 +70,10 @@
 \RequirePackage[defaultfam,light,tabular,lining]{montserrat}
 \RequirePackage{sfmath}
 
-
 \RequirePackage{tikz} % we need it anyways - will load xcolor
 \usetikzlibrary{calc}
 
 \RequirePackage[english,main=ngerman]{babel}
-
 \RequirePackage{microtype}
 
 
@@ -87,24 +81,20 @@
 %% Helper Methods
 %% -----------------------------------------------------------------------------
 
-\def\sos@thesosversion#1#2#3#4\@nil{%
-    \begingroup{}v#1.#2.#3#4\endgroup%
-}
-\def\thesosversion{%
-    \edef\@tmp{\noexpand\sos@thesosversion\arabic{sosversion}\noexpand\@nil}%
-    \@tmp%
-}
+\def\sos@thesosversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
+\edef\sos@version@str{\noexpand\sos@thesosversion\arabic{sosversion}\noexpand\@nil}
+\edef\thesosversion{\sos@version@str}
 
 \def\sos@mail#1{\href{mailto:#1}{#1}}
 \let\mail\sos@mail%
 \def\sos@month@to@name#1{%
     \ifcase#1\or{Januar}\or{Februar}\or{M\"{a}rz}\or{April}\or{Mai}\or{Juni}%
     \or{Juli}\or{August}\or{September}\or{Oktober}\or{November}\or{Dezember}%
-    \else\@ctrerr\fi%
+    \else\@ctrerr\fi
 }
 
 \def\sos@date@convert#1-#2-#3\@nil{%
-    \begingroup#3.~{\sos@month@to@name{#2}}~#1\endgroup%
+    \begingroup#3.~{\sos@month@to@name{#2}}~#1\endgroup
 }
 \def\DateConvert#1%
 {\ifx!#1!\else\expandafter\sos@date@convert#1\@nil\fi}
@@ -297,7 +287,7 @@
     \expandafter\sos@@setteam#1\@nil
 }
 \newcommand\typesetAuthors{%
-    \edef\@tmp{\noexpand\sos@@typeset@author{\sos@register@authors}}\@tmp}
+    \protected@edef\@tmp{\noexpand\sos@@typeset@author{\sos@register@authors}}\@tmp}
 
 \AtEndPreamble{%
 \hypersetup{

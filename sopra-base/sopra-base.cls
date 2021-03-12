@@ -220,7 +220,7 @@
 \newcommand\setTeam[1]{\expandafter\sob@@setteam#1\@nil}
 
 \newcommand\typesetAuthors{%
-    \edef\@tmp{\noexpand\sob@@typeset@author{\sob@register@authors}}\@tmp}
+    \protected@edef\@tmp{\noexpand\sob@@typeset@author{\sob@register@authors}}\@tmp}
 
 % the title field can be set by '\title{<Your title here>}'
 \AtBeginDocument{\hypersetup{
