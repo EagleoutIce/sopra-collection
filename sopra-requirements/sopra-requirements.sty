@@ -45,20 +45,20 @@
 %% -----------------------------------------------------------------------------
 
 % allow debug-options :D
-\DeclareOption{usetabu}{ \sor@usetabu@true }%
-\DeclareOption{notabu}{ \sor@usetabu@false }%
+\DeclareOption{usetabu}{ \sor@usetabu@true }
+\DeclareOption{notabu}{ \sor@usetabu@false }
 
-\DeclareOption{intoc}{ \sor@intoc@true }%
-\DeclareOption{notoc}{ \sor@intoc@false }%
+\DeclareOption{intoc}{ \sor@intoc@true }
+\DeclareOption{notoc}{ \sor@intoc@false }
 
-\DeclareOption{showtag}{ \sor@showtag@true }%
-\DeclareOption{noshowtag}{ \sor@showtag@false }%
+\DeclareOption{showtag}{ \sor@showtag@true }
+\DeclareOption{noshowtag}{ \sor@showtag@false }
 
 \DeclareOption{showallfields}{ \sor@showall@true }
 \DeclareOption{noshowallfields}{ \sor@showall@false }
 
 \ExecuteOptions{usetabu,intoc,showtag,noshowallfields}% set it explicitly
-\ProcessOptions\relax%
+\ProcessOptions\relax
 
 %% -----------------------------------------------------------------------------
 %% Basic Packages
@@ -93,14 +93,8 @@
 %% -----------------------------------------------------------------------------
 
 \ifsor@usetabu@
-\def\tabu@classz{%
-    %  \ifx\tabu@prepnext@tok\prepnext@tok% in tabu
-        %    \expandafter\tabu@classz@oldarray
-        %  \else
-        \tabu@classzORI
-        %  \fi
-    }%
-    \def\tabu@ignorehfil{\tabu@nohfil}
+\def\tabu@classz{\tabu@classzORI}
+\def\tabu@ignorehfil{\tabu@nohfil}
 \fi
 
 %% -----------------------------------------------------------------------------
@@ -229,14 +223,14 @@
             \sor@showifgivenorforced{\@sor@r@description}{\sor@requirement@leftcolstyle{Beschreibung:} & \@sor@r@description \\}
             \sor@showifgivenorforced{\@sor@r@justification}{\sor@requirement@leftcolstyle{Begründung:} & \@sor@r@justification \\}
             \sor@showifgivenorforced{\@sor@r@dependencies}{\sor@requirement@leftcolstyle{Abhängigkeiten:} & \foreach[count=\i] \@sor@dpc in \@sor@r@dependencies{%
-                \ifnum\i>1\relax{},\space{}\fi% correct comma
+                \ifnum\i>1\relax, \fi% correct comma
                 \preqref*{\@sor@dpc}%
             }}% \\}
         \end{longtabu}%
         \else\begingroup\renewcommand{\arraystretch}{1.25}
         \begin{longtable}{>{~}KV<{~}}
             % init the headerrow
-            \toprule%
+            \toprule
             \sor@table@headerrow* ID & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\ifsor@showtag@\hfill\T{##2}\fi\\\midrule\endfirsthead
             \sor@table@headerrow@next ID & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\\\midrule\endhead
             % i do not want to make a token iter, i'm sorry
@@ -245,7 +239,7 @@
             \sor@showifgivenorforced{\@sor@r@description}{\sor@requirement@leftcolstyle{Beschreibung:} & \@sor@r@description \\}
             \sor@showifgivenorforced{\@sor@r@justification}{\sor@requirement@leftcolstyle{Begründung:} & \@sor@r@justification \\}
             \sor@showifgivenorforced{\@sor@r@dependencies}{\sor@requirement@leftcolstyle{Abhängigkeiten:} & \foreach[count=\i] \@sor@dpc in \@sor@r@dependencies{%
-                \ifnum\i>1\relax{},\space{}\fi% correct comma
+                \ifnum\i>1\relax, \fi% correct comma
                 \preqref*{\@sor@dpc}%
             }\\}% \\}
             \bottomrule
@@ -283,6 +277,6 @@
 \def\iskip{\vspace*{\sor@length@list@compensation}}
 
 \def\sor@splittag#1:#2\@nil{#1}
-\def\sor@getreqnum#1{\edef\@tmp{\noexpand\sor@splittag\@nameuse{@sor@r@titles@#1}: \noexpand\@nil}\@tmp}
+\def\sor@getreqnum#1{\protected@edef\@tmp{\noexpand\sor@splittag\@nameuse{@sor@r@titles@#1}: \noexpand\@nil}\@tmp}
 \def\sor@cstpreqref#1#2{\pref{tbl:requirement:#1}{#2 (\sor@getreqnum{#1})}}
 \endinput
