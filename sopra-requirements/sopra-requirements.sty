@@ -266,12 +266,10 @@
 
 %% we want to automate the requirement structure,
 %% Please not that, preqref can be used by number AND by ID whereas the ID shouldl never be a number
-\def\preqref{\@ifstar{\@sor@starred@preqref}{\@sor@unstarred@preqref}}
+\DeclareRobustCommand*\preqref{\@ifstar{\@sor@starred@preqref}{\@sor@unstarred@preqref}}
 % This one will set the Name too :D
 \newcommand\@sor@unstarred@preqref[2][]{\ifx!#1!\pref{tbl:requirement:#2}{\@nameuse{@sor@r@titles@#2}}\else\sor@cstpreqref{#2}{#1}\fi}
 \newcommand\@sor@starred@preqref[2][]{\ifx!#1!\pref{tbl:requirement:#2}{#2}\else\sor@cstpreqref{#2}{#1}\fi}
-
-\robustify{\preqref}
 
 \newlength\sor@ctheight@
 \DeclareRobustCommand*\sor@textsuperscript[1]{%
