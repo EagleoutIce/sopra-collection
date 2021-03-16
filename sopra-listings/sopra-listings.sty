@@ -26,7 +26,7 @@
 \newlength\sol@length@lst@xrightmargin \sol@length@lst@xrightmargin=3pt
 
 \def\sol@lst@prebreak{\hbox{\sol@font@fs@numbers$\hookleftarrow$}} % allow definition of own symbol
-\let\sol@lst@inline@prebreak\sol@lst@prebreak%
+\let\sol@lst@inline@prebreak\sol@lst@prebreak
 
 \newif\ifsol@encoding@ %  automatically load encoding packages
 \newif\ifsol@accuspp@available@ % remove line numbers from selection if possible
@@ -48,7 +48,7 @@
 \newif\ifsol@lst@style@defaultfont@ % don't change font?
 \sol@lst@style@defaultfont@true
 
-\sol@lst@lastwas@character@false% explicitly false
+\sol@lst@lastwas@character@false % explicitly false
 \sol@lst@lastwas@charkeep@false % explicitly false
 \sol@lst@style@upshape@false % explicitly false
 
@@ -67,33 +67,33 @@
 \sol@highlight@numbers@true
 % Printmodes
 \DeclareOption{defaultmode}{ \sol@printmode@false }% probably shouldn't be used
-\DeclareOption{print}{ \sol@printmode@true }%
+\DeclareOption{print}{ \sol@printmode@true }
 % Auto-Language
-\DeclareOption{loadlangs}{ \sol@defaultlang@true }%
-\DeclareOption{noloadlangs}{ \sol@defaultlang@false }%
+\DeclareOption{loadlangs}{ \sol@defaultlang@true }
+\DeclareOption{noloadlangs}{ \sol@defaultlang@false }
 \sol@defaultlang@true
 % Color-Palettes
-\DeclareOption{cpalette}{ \sol@cpalette@true }%
-\DeclareOption{nocpalette}{ \sol@cpalette@false }%
+\DeclareOption{cpalette}{ \sol@cpalette@true }
+\DeclareOption{nocpalette}{ \sol@cpalette@false }
 % upshape
-\DeclareOption{upshape}{ \sol@lst@style@upshape@true }%
-\DeclareOption{noupshape}{ \sol@lst@style@upshape@false }%
+\DeclareOption{upshape}{ \sol@lst@style@upshape@true }
+\DeclareOption{noupshape}{ \sol@lst@style@upshape@false }
 % guard
-\DeclareOption{guardspace}{ \sol@guardspace@true }%
-\DeclareOption{noguardspace}{ \sol@guardspace@false }%
+\DeclareOption{guardspace}{ \sol@guardspace@true }
+\DeclareOption{noguardspace}{ \sol@guardspace@false }
 \sol@guardspace@true
 % numinpar
-\DeclareOption{numinpar}{ \sol@numinpar@true }%
-\DeclareOption{nonuminpar}{ \sol@numinpar@false }%
+\DeclareOption{numinpar}{ \sol@numinpar@true }
+\DeclareOption{nonuminpar}{ \sol@numinpar@false }
 % numinpar
-\DeclareOption{defaultfont}{ \sol@lst@style@defaultfont@true }%
-\DeclareOption{nodefaultfont}{ \sol@lst@style@defaultfont@false }%
+\DeclareOption{defaultfont}{ \sol@lst@style@defaultfont@true }
+\DeclareOption{nodefaultfont}{ \sol@lst@style@defaultfont@false }
 % highlights
-\DeclareOption{highlights}{ \sol@lst@style@highlights@true }%
-\DeclareOption{nohighlights}{ \sol@lst@style@highlights@false }%
+\DeclareOption{highlights}{ \sol@lst@style@highlights@true }
+\DeclareOption{nohighlights}{ \sol@lst@style@highlights@false }
 % debug
-\DeclareOption{debug}{ \sol@debug@true }%
-\DeclareOption{nodebug}{ \sol@debug@false }%
+\DeclareOption{debug}{ \sol@debug@true }
+\DeclareOption{nodebug}{ \sol@debug@false }
 
 % if sob is loaded, the default for the printmode will be passed,
 % otherwise we will use defaultmode as the default :D
@@ -295,7 +295,7 @@
 \def\sol@@lst@hl@digit#1{\begingroup
 \ifsol@lst@lastwas@character@
 \global\sol@lst@lastwas@charkeep@true#1\else\global\sol@lst@lastwas@charkeep@false
-  \ifnum\lst@mode=\lst@Pmode% PMode: Not in any special Mode
+  \ifnum\lst@mode=\lst@Pmode\relax% PMode: Not in any special Mode
   {\sol@style@get{numbers}#1}%
   \else#1\fi
 \fi
@@ -531,9 +531,8 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 %% -----------------------------------------------------------------------------
 %% #1: Name of the Language [java,latex]
 %% #2: Name of the corresponding lst-Language [lJava, lLatex,...]
-\def\RegisterLanguage#1#2{\begingroup\makeatletter%
+\def\RegisterLanguage#1#2{\begingroup\makeatletter
 % Register the Environments
-%
 \def\sol@foreach@basic@env@iter##1,##2\@nil{%
 \ifx!##1!\else
 \def\environName{##1}%
@@ -549,7 +548,7 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 
 % This procedure can be used in persistence to iterate over the pgf-keys
 %% Register 'inline default'
-\def\sol@foreach@inline@env@iter##1,##2\@nil{
+\def\sol@foreach@inline@env@iter##1,##2\@nil{%
 \ifx!##1!\else
 \def\inlineName{##1}%
 \edef\inlineCurName{\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name suffix}}% assign
@@ -742,7 +741,7 @@ keepspaces=false}
 %% -----------------------------------------------------------------------------
 %% Comfort guards
 %% -----------------------------------------------------------------------------
-\def\solIfPmode#1#2{\ifnum\lst@mode=\lst@Pmode #1\else#2\fi}
+\def\solIfPmode#1#2{\ifnum\lst@mode=\lst@Pmode\relax#1\else#2\fi}
 
 %% -----------------------------------------------------------------------------
 %% Hook discretionary

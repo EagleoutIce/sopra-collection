@@ -1,6 +1,6 @@
 %% sopra-changelog.sty
 %%
-%% -----------------------------------------------------------------------------
+%% ----------
 %% Version: 1.0
 %% Author:  Florian Sihler, 05.01.2020
 %%
@@ -12,26 +12,24 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-changelog}[2019/12/23 EagleoutIce - changelogs for the sopra-team-020]
 
-%% -----------------------------------------------------------------------------
+%% ----------
 %% Lengths and Registers
-%% -----------------------------------------------------------------------------
+%% ----------
 \newcounter{socversion} \setcounter{socversion}{1002}
-\newcounter{soc@compile@target@version}%
-\newcounter{soc@counter@tmp@a}%
+\newcounter{soc@compile@target@version}
+\newcounter{soc@counter@tmp@a}
 
 \newif\ifsoc@printthis@version@
 \def\soc@compile@target@version@date{}
 
-%% -----------------------------------------------------------------------------
+%% ----------
 %% Basic Packages
-%% -----------------------------------------------------------------------------
-
+%% ----------
 \RequirePackage{environ,fontawesome,marginfix,hyperref}
 
-%% -----------------------------------------------------------------------------
+%% ----------
 %% Versioning
-%% -----------------------------------------------------------------------------
-
+%% ----------
 \def\@soc@@parse@versionenvs@all{}
 
 % ensure empty if not overwritten
@@ -49,16 +47,13 @@
 % Register in the end:
 \AtEndDocument{%
 % \typeout{AtEND, writing '\@soc@@parse@versionenvs@all'}%
-\immediate\write\@auxout{\noexpand\soc@defcommand{@soc@register@versionenvs}{\@soc@@parse@versionenvs@all}}
-}
+\immediate\write\@auxout{\noexpand\soc@defcommand{@soc@register@versionenvs}{\@soc@@parse@versionenvs@all}}}
 
 \def\@soc@@parse@change@pattern{changed in}
 \def\@soc@@parse@remove@pattern{removed in}
 \def\@soc@@parse@current@envtag{}
 
-\def\soc@defcommand#1#2{%
-    \expandafter\gdef\csname#1\endcsname{#2}%
-}
+\def\soc@defcommand#1#2{\expandafter\gdef\csname#1\endcsname{#2}}
 
 % #1 envtag
 % #2 version
@@ -85,7 +80,6 @@
 }
 
 \def\soc@@parse@version@optargs#1,#2\@nil{\ignorespaces
-    % \typeout{got: '#1,#2'}
     \ifx!#1!\else
         % now do single parse
         \expandafter\soc@@parse@@version@optargs#1 \@nil
@@ -111,7 +105,7 @@
 % just a casual init runner for marked boxes
 \def\@soc@version@init{\phantomsection\ignorespaces}
 
-\def\soc@format@versionnumber@marginpar#1{\hyperref[soc@changelog@version:#1]{#1}}
+\def\soc@format@versionnumber@marginpar#1{\hyperref[soc@changelog@version:#1]{#1}}%
 % so much shorter
 \let\@socmp\soc@format@versionnumber@marginpar
 % \long\def\soc@version@skimmer#1{%\end
@@ -131,7 +125,6 @@
     % check: should it be typeset?
     \@ifundefined{@sop@registers@#3@removed}{% not removed!
         % check if already created :D
-        % \typeout{Not removed: #3}
         \ifnum\value{soc@compile@target@version}<#2\relax% nope
         \soc@printthis@version@false\else
         \marginpar{\tiny\faPlusCircle\ V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}}%
@@ -144,7 +137,7 @@
         \fi%
     }%
     %Defining skimmer:
-    \ifsoc@printthis@version@%
+    \ifsoc@printthis@version@
         \newenvironment{version@read}{\begingroup\ignorespaces}{\endgroup}% no consumption!
         \else\NewEnviron{version@read}{}\fi
     \version@read
@@ -165,9 +158,9 @@
         %\typeout{AT: \tmp@counterval{} in '#1' is: '\@nameuse{@sop@registers@#1@introduced}'}%
         \def\soc@curtag{\hyperref[soc@version:#1]{\emph{#1}}:\space}%
         % \typeout{Checking: \tmp@counterval{} for: \@nameuse{@sop@registers@#1@introduced}}%
-        \ifnum\@nameuse{@sop@registers@#1@introduced}>\tmp@counterval\relax%
+        \ifnum\@nameuse{@sop@registers@#1@introduced}>\tmp@counterval\relax
         \else% only set if in range:
-            \ifnum\@nameuse{@sop@registers@#1@introduced}=\tmp@counterval\relax%
+            \ifnum\@nameuse{@sop@registers@#1@introduced}=\tmp@counterval\relax
                 \@ifundefined{@sop@registers@#1@changes@\tmp@counterval}{%
                     \item[\faPlusCircle] \soc@curtag Neues Element! %
                 }{\item[\faPlusCircle] \soc@curtag\@nameuse{@sop@registers@#1@changes@\tmp@counterval} }%
@@ -197,10 +190,7 @@
 \def\soc@DateConvert#1%
 {\expandafter\ifx\expandafter!#1!\else\expandafter\soc@date@convert#1\@nil\fi}
 
-
-\def\soc@changelog@version@format#1:#2\@nil{%
-    #2% \textbf{\soc@DateConvert{#1}}:
-}
+\def\soc@changelog@version@format#1:#2\@nil{#2}
 \let\soc@changelog@upper@subsection\subsection
 
 \def\soc@@changelog@getDate#1:#2\@nil{\soc@DateConvert{#1}}
@@ -209,7 +199,7 @@
 \ifnum\value{soc@counter@tmp@a}>\value{soc@compile@target@version}% we've finished
 \else% typeset this version:
     % do we have date for this version?
-    \edef\tmp@counterval{\arabic{soc@counter@tmp@a}}
+    \edef\tmp@counterval{\arabic{soc@counter@tmp@a}}%
     \@ifundefined{soc@versions@data@\tmp@counterval}{% Dummy Tag:
         \soc@changelog@upper@subsection{Changelog für Version \tmp@counterval}
     }{%
@@ -223,38 +213,35 @@
     % \typeout{Expand revealed: '\@tmp@soc@chlg@'}
     \begin{itemize}
         \@ifundefined{soc@versions@data@\tmp@counterval}{% Dummy Tag:
-            \item[\faInfoCircle] Für diese Version liegen keine Informationen vor.
+            \item[\faInfoCircle] Für diese Version liegen keine Informationen vor.%
         }{%
             \item[\faInfoCircle] \edef\soc@tmp{\noexpand\soc@changelog@version@format\@nameuse{soc@versions@data@\tmp@counterval}\noexpand\@nil}\soc@tmp
         }%
-        \expandafter\soc@@changelog@envs@iter\@soc@register@versionenvs,\@nil%\@tmp@soc@chlg@%
-    \end{itemize}
-    % \fi
+        \expandafter\soc@@changelog@envs@iter\@soc@register@versionenvs,\@nil
+    \end{itemize}%
     \stepcounter{soc@counter@tmp@a}%
     \soc@changelog@typeset@iter\relax
-\fi
-}
+\fi}
+
 \let\soc@changelog@upper@section\section
 \def\soc@changelog@typeset{%
     % iterate over all registered envs in \@soc@register@versionenvs
     \setcounter{soc@counter@tmp@a}{1}%
-    \soc@changelog@upper@section{Changelog}
-    {\soc@changelog@typeset@iter}
+    \soc@changelog@upper@section{Changelog}%
+    {\soc@changelog@typeset@iter}%
 }
 
-%% -----------------------------------------------------------------------------
+%% ----------
 %% Helper Functions
-%% -----------------------------------------------------------------------------
-
+%% ----------
 \def\soc@thesocversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 
 \edef\soc@version@str{\noexpand\soc@thesocversion\arabic{socversion}\noexpand\@nil}
 \edef\thesocversion{\soc@version@str}
 
-%% -----------------------------------------------------------------------------
+%% ----------
 %% User Commands
-%% -----------------------------------------------------------------------------
-
+%% ----------
 % sets the to-compile target versionnumber
 \def\setTargetVersion#1{\setcounter{soc@compile@target@version}{#1}}
 \def\setTargetVersionDate#1{\gdef{\soc@compile@target@version@date}{#1}}
