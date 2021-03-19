@@ -12,10 +12,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-requirements}[2019/12/03 EagleoutIce - requirements for the sopra-team-020]
 
-%% -----------------------------------------------------------------------------
-%% Lengths and Registers
-%% -----------------------------------------------------------------------------
-
+% Lengths and Registers
 \newcounter{sorversion} \setcounter{sorversion}{1009}
 \newcounter{sor@counter@functional@requirement}%
 \newcounter{sor@counter@quality@requirement}%
@@ -40,9 +37,7 @@
 
 % TODO: highlight first, option to disable highlihgting of headerrow
 
-%% -----------------------------------------------------------------------------
-%% Package-Args
-%% -----------------------------------------------------------------------------
+% Package-Args
 
 % allow debug-options :D
 \DeclareOption{usetabu}{ \sor@usetabu@true }
@@ -60,25 +55,19 @@
 \ExecuteOptions{usetabu,intoc,showtag,noshowallfields}% set it explicitly
 \ProcessOptions\relax
 
-%% -----------------------------------------------------------------------------
-%% Basic Packages
-%% -----------------------------------------------------------------------------
+% Basic Packages
 
 \ifsor@usetabu@ \RequirePackage{tabu} \RequirePackage{colortbl} \else \RequirePackage{booktabs} \fi
 \RequirePackage{makecell,longtable,xcolor,environ,amssymb,etoolbox,fontawesome,hyperref}
 
-%% -----------------------------------------------------------------------------
-%% New Columns
-%% -----------------------------------------------------------------------------
+% New Columns
 
 % 'Key'-column
 \newcolumntype{K}{p{.175\linewidth}}%>{\small}
 % 'Value'-column
 \newcolumntype{V}{p{.725\linewidth}}
 
-%% -----------------------------------------------------------------------------
-%% Color Definitions
-%% -----------------------------------------------------------------------------
+% Color Definitions
 
 \@ifundefined{thesobversion}{% not called from sopra-base-class
     \colorlet{HeaderColor}{purple}
@@ -88,18 +77,14 @@
     \colorlet{NextHeaderColor}{sob@col@uulm@akzent!75!white}
 }
 
-%% -----------------------------------------------------------------------------
-%% Fixes for the tabu-package
-%% -----------------------------------------------------------------------------
+% Fixes for the tabu-package
 
 \ifsor@usetabu@
 \def\tabu@classz{\tabu@classzORI}
 \def\tabu@ignorehfil{\tabu@nohfil}
 \fi
 
-%% -----------------------------------------------------------------------------
-%% Define the Header and next-header commands
-%% -----------------------------------------------------------------------------
+% Define the Header and next-header commands
 
 \ifsor@usetabu@
     \def\sor@table@headerrow{%
@@ -123,22 +108,14 @@
 % further: allow them to be ordered
 % think about the tokens
 
-%% -----------------------------------------------------------------------------
-%% Helper Functions
-%% -----------------------------------------------------------------------------
+% Helper Functions
 
 % i don't want to use collectcell for that, so:
 \def\sor@requirement@leftcolstyle#1{\footnotesize\MakeUppercase{#1}}
 
-\def\sor@deflinker#1#2{%
-    \expandafter\gdef\csname#1\endcsname{#2}%
-}
+\def\sor@deflinker#1#2{\expandafter\gdef\csname#1\endcsname{#2}}
 
-% #1: \@sor@currequirementprefix
-% #2: \@sor@r@id
-% #3: \@sor@r@title
-% #4: nmsc pref
-% #5: cont nmsc
+% #1: \@sor@currequirementprefix #2: \@sor@r@id #3: \@sor@r@title #4: nmsc pref #5: cont nmsc
 \def\sor@write@@linkpos#1#2#3#4#5{
     \@ifundefined{@sor@r@titles@#4#5}{%
         \expandafter\xdef\csname @sor@r@titles@#4#5\endcsname{#1#2: '#3'}
@@ -157,9 +134,7 @@
 \def\sor@setpriority#1{\begingroup\ifnum#1<0\else\color{HeaderColor}\foreach \i in {5,...,1}{\ifnum\i<5\relax \thinspace\fi\ifnum\i>#1\relax \faStarO\else\faStar\fi}\fi\endgroup}
 \let\sorSetPriority\sor@setpriority
 
-%% -----------------------------------------------------------------------------
-%% Create the basic environments to filter for requirementstype :D
-%% -----------------------------------------------------------------------------
+% Create the basic environments to filter for requirementstype :D
 
 % #1 will initialize the functional@requirement:counter
 % #2 should be 'functional' or 'quality' to determine type
@@ -181,9 +156,6 @@
         \ifnum##1<0\def\@sor@r@id{\@nameuse{thesor@counter@#2@requirement}}%
         \else\def\@sor@r@id{##1}\fi%
         \def\@sor@r@title{##2}%
-        % \@ifundefined{@sor@r@titles@\@sor@currequirementprefix\@sor@r@id}{%
-        %     \expandafter\gdef\csname @sor@r@titles@\@sor@currequirementprefix\@sor@r@id\endcsname{##2}
-        % }{}
         \gdef\@sor@r@title{##2}
         \long\def\@sor@r@description{}%
         \long\def\@sor@r@priority{-1}%
@@ -219,13 +191,12 @@
             % i do not want to make a token iter, i'm sorry
             \sor@requirement@leftcolstyle{Titel:} & \@sor@r@title \hfill\sor@setpriority{\@sor@r@priority}\\
             % only typeset them if they are not empty :D
-            % \sor@showifgivenorforced{\@sor@r@priority}{\sor@requirement@leftcolstyle{Priorität:} & \sor@setpriority{\@sor@r@priority} \\}
             \sor@showifgivenorforced{\@sor@r@description}{\sor@requirement@leftcolstyle{Beschreibung:} & \@sor@r@description \\}
             \sor@showifgivenorforced{\@sor@r@justification}{\sor@requirement@leftcolstyle{Begründung:} & \@sor@r@justification \\}
             \sor@showifgivenorforced{\@sor@r@dependencies}{\sor@requirement@leftcolstyle{Abhängigkeiten:} & \foreach[count=\i] \@sor@dpc in \@sor@r@dependencies{%
                 \ifnum\i>1\relax, \fi% correct comma
                 \preqref*{\@sor@dpc}%
-            }}% \\}
+            }}%
         \end{longtabu}%
         \else\begingroup\renewcommand{\arraystretch}{1.25}
         \begin{longtable}{>{~}KV<{~}}
@@ -241,19 +212,16 @@
             \sor@showifgivenorforced{\@sor@r@dependencies}{\sor@requirement@leftcolstyle{Abhängigkeiten:} & \foreach[count=\i] \@sor@dpc in \@sor@r@dependencies{%
                 \ifnum\i>1\relax, \fi% correct comma
                 \preqref*{\@sor@dpc}%
-            }\\}% \\}
+            }\\}%
             \bottomrule
         \end{longtable}\endgroup\fi\smallskip
-    }%\par%
+    }%
 }%
 
-%% -----------------------------------------------------------------------------
-%% The additional User-Functions :D
-%% -----------------------------------------------------------------------------
+% The additional User-Functions :D
 
 % Note: I've written them before, sloppy, for own use - there is no need to
 %       change that so he following commands will have some funny schduff
-
 \def\sor@thesorversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 \edef\sor@version@str{\noexpand\sor@thesorversion\arabic{sorversion}\noexpand\@nil}
 \edef\thesorversion{\sor@version@str}
@@ -273,7 +241,6 @@
 {\m@th\ensuremath{\raise.275\sor@ctheight@\hbox{\fontsize\sf@size\z@#1}}}}
 
 \def\pref#1#2{\hyperref[#1]{#2\sor@textsuperscript{$\,\to p.$\thinspace\pageref{#1}}}}
-
 \def\iskip{\vspace*{\sor@length@list@compensation}}
 
 \def\sor@splittag#1:#2\@nil{#1}

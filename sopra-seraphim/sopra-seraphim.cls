@@ -19,9 +19,7 @@
 \ProvidesClass{sopra-seraphim}[2019/15/02 EagleoutIce - Beamer Documentclass for the sopra-team-020]
 
 
-%% -----------------------------------------------------------------------------
-%% Lengths and Registers
-%% -----------------------------------------------------------------------------
+% Lengths and Registers
 
 \newcounter{sosversion} \setcounter{sosversion}{1007}
 \newcounter{sos@counter@tmp@a}
@@ -31,9 +29,7 @@
 \newif\ifsos@applystyle@% if set, style to sopra-* will be automatically set!
 \newif\ifsos@handout@
 
-%% -----------------------------------------------------------------------------
-%% Class-Args
-%% -----------------------------------------------------------------------------
+% Class-Args
 
 % apply style
 \DeclareOption{setstyle}{ \sos@applystyle@true }
@@ -46,9 +42,7 @@
 \ProcessOptions\relax
 
 
-%% -----------------------------------------------------------------------------
-%% Documentclass
-%% -----------------------------------------------------------------------------
+% Documentclass
 
 % \PassOptionsToPackage{}{beamer}
 
@@ -59,9 +53,7 @@
 \LoadClass[aspectratio=169,usepdftitle=false,hidelinks,t]{beamer}
 \fi
 
-%% -----------------------------------------------------------------------------
-%% Basic Packages
-%% -----------------------------------------------------------------------------
+% Basic Packages
 
 % encoding:
 \RequirePackage[T1]{fontenc}
@@ -77,9 +69,7 @@
 \RequirePackage{microtype}
 
 
-%% -----------------------------------------------------------------------------
-%% Helper Methods
-%% -----------------------------------------------------------------------------
+% Helper Methods
 
 \def\sos@thesosversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 \edef\sos@version@str{\noexpand\sos@thesosversion\arabic{sosversion}\noexpand\@nil}
@@ -106,9 +96,7 @@
 \long\def\sos@@notetext#1{\begingroup\itshape\color{cprimary!70!white}#1\endgroup}
 \let\notetext\sos@@notetext
 
-%% -----------------------------------------------------------------------------
-%% Basic Layout Stuff
-%% -----------------------------------------------------------------------------
+% Basic Layout Stuff
 
 \beamertemplatenavigationsymbolsempty
 
@@ -120,9 +108,7 @@
 \setcounter{tocdepth}{4} % subsubsections in toc
 
 
-%% -----------------------------------------------------------------------------
-%% Fonts and align
-%% -----------------------------------------------------------------------------
+% Fonts and align
 
 \renewcommand{\baselinestretch}{1.05}
 
@@ -138,9 +124,7 @@
 
 \def\supertiny{\fontsize{4.5pt}{4.5pt}\selectfont}
 
-%% -----------------------------------------------------------------------------
-%% Color Definitions
-%% -----------------------------------------------------------------------------
+% Color Definitions
 
 % We will define a main/primary color, a secondary/akzent color and a tertiary
 % /light color to be used everywhere throughout the document.
@@ -180,9 +164,7 @@
 \colorlet{chdtext}{cakzent}
 
 
-%% -----------------------------------------------------------------------------
-%% Colors & templates
-%% -----------------------------------------------------------------------------
+% Colors & templates
 
 \setbeamercolor{headline}{fg=cprimary}
 
@@ -226,9 +208,7 @@
 \setbeamertemplate{subsection in toc}{\qquad{\scalebox{.65}{\raisebox{.75pt}{$\blacksquare$}}} \inserttocsubsection\par}
 
 
-%% -----------------------------------------------------------------------------
-%% Set the Document-Metadata
-%% -----------------------------------------------------------------------------
+% Set the Document-Metadata
 
 % we will populate the following fields:
 % dates have to be given in YYYY-MM-DD!
@@ -303,9 +283,7 @@
 }
 }
 
-%% -----------------------------------------------------------------------------
-%% "Futura" Font
-%% -----------------------------------------------------------------------------
+% "Futura" Font
 
 % I've invested round about 2 hours trying to set up a portable way to use the
 % Futura-Font. As it worked, but wasn't portable, i've desided to recreate the
@@ -439,9 +417,7 @@
 }
 
 
-%% -----------------------------------------------------------------------------
-%% Title Style
-%% -----------------------------------------------------------------------------
+% Title Style
 \def\sos@sepline{%
         {\normalsize\color{ctpsymbol}{\huge$\llap{$\diamond$}\hspace*{-1pt}$}\rule[.346\baselineskip]{\linewidth}{.55pt}{\huge$\hspace*{-1pt}\rlap{$\diamond$}$}}%
     }
@@ -476,14 +452,10 @@
 }
 
 
-%% -----------------------------------------------------------------------------
-%% Sizing Stuff
-%% -----------------------------------------------------------------------------
+% Sizing Stuff
 \setbeamersize{text margin left=.05\linewidth,text margin right=.05\linewidth}
 
-%% -----------------------------------------------------------------------------
-%% Intro & Outro
-%% -----------------------------------------------------------------------------
+% Intro & Outro
 
 \def\Intro{
 \begin{frame}[noframenumbering,plain]
@@ -508,9 +480,7 @@
 
 \AtEndDocument{\OutroPage}
 
-%% -----------------------------------------------------------------------------
-%% Information Page
-%% -----------------------------------------------------------------------------
+% Information Page
 
 \providecommand{\authorOutro}{}
 
@@ -566,9 +536,7 @@
     \end{frame}
 }
 
-%% -----------------------------------------------------------------------------
-%% Header & Footer
-%% -----------------------------------------------------------------------------
+% Header & Footer
 
 \defbeamertemplate*{footline}{seraphim}[1][] {
     \begin{tikzpicture}[remember picture,overlay]
@@ -594,9 +562,7 @@
     \vskip.7cm
 }
 
-%% -----------------------------------------------------------------------------
-%% Table of Contents
-%% -----------------------------------------------------------------------------
+% Table of Contents
 
 \setbeamertemplate{section in toc}{%
   {$\inserttocsectionnumber$}.~~\inserttocsection}
@@ -624,9 +590,7 @@
 
 
 
-%% -----------------------------------------------------------------------------
-%% Listings (sopra-listings), Attachments (sopra-attachments,...)
-%% -----------------------------------------------------------------------------
+% Listings (sopra-listings), Attachments (sopra-attachments,...)
 
 \def\sos@SetListing{
     \makeatletter

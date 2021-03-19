@@ -9,9 +9,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-attachments}[2019/12/03 EagleoutIce - attach documents for the sopra-team-020]
 
-%% -----------------------------------------------------------------------------
-%% Lengths and Registers
-%% -----------------------------------------------------------------------------
+% Lengths and Registers
 \newcounter{soaversion} \setcounter{soaversion}{1100}
 
 % make switches for use of tcolorbox..
@@ -20,9 +18,7 @@
 
 \newif\ifsol@fontawesome@use@ % Should fontawesome be used?
 
-%% -----------------------------------------------------------------------------
-%% Package-Args
-%% -----------------------------------------------------------------------------
+% Package-Args
 \DeclareOption{attsymbols}{ \sol@symbols@true }
 \DeclareOption{noattsymbols}{ \sol@symbols@false }
 
@@ -35,18 +31,14 @@
 \ExecuteOptions{attsymbols,nodocheck,usefa}% set it explicitly
 \ProcessOptions\relax
 
-%% -----------------------------------------------------------------------------
-%% Basic Packages
-%% -----------------------------------------------------------------------------
+% Basic Packages
 
 \ifsol@symbols@ \RequirePackage{graphicx} \fi % \scalebox
 \ifsol@fontawesome@use@ \RequirePackage{graphicx,fontawesome} \fi %\faPaperclip
 
 \RequirePackage{xcolor,attachfile2} % embedfile
 
-%% -----------------------------------------------------------------------------
-%% Configure
-%% -----------------------------------------------------------------------------
+% Configure
 
 \def\soa@setAuthor#1{\gdef\@author{#1}} % not used currently
 
@@ -69,9 +61,7 @@
 }
 % it should be noted in docs on how to change
 
-%% -----------------------------------------------------------------------------
-%% Helper Functions
-%% -----------------------------------------------------------------------------
+% Helper Functions
 
 \def\soa@thesoaversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 \edef\soa@version@str{\noexpand\soa@thesoaversion\arabic{soaversion}\noexpand\@nil}
@@ -121,9 +111,7 @@
     \fi
 }
 
-%% -----------------------------------------------------------------------------
-%% User Functions
-%% -----------------------------------------------------------------------------
+% User Functions
 
 % #1 additional options
 % #2 Name of the PDF

@@ -12,9 +12,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-tables}[2019/12/03 EagleoutIce - tables for the sopra-team-020]
 
-%% -----------------------------------------------------------------------------
-%% Lengths and Registers
-%% -----------------------------------------------------------------------------
+% Lengths and Registers
 \newcounter{sotversion} \setcounter{sotversion}{1004}
 
 \newif\ifsot@usetabu@ % we can use regular tabular - if tabu won't work.
@@ -22,9 +20,7 @@
 \newif\ifsot@cpalette@ % if enabled, tables will adapt to color-palettes
 \newif\ifsot@invert@ % if enabled invert color definitions
 
-%% -----------------------------------------------------------------------------
-%% Package-Args
-%% -----------------------------------------------------------------------------
+% Package-Args
 
 % allow debug-options :D
 \DeclareOption{usetabu}{ \sot@usetabu@true }%
@@ -40,16 +36,12 @@
 \ExecuteOptions{usetabu}% set it explicitly
 \ProcessOptions\relax%
 
-%% -----------------------------------------------------------------------------
-%% Basic Packages
-%% -----------------------------------------------------------------------------
+% Basic Packages
 
 \ifsot@usetabu@ \RequirePackage{tabu} \RequirePackage{colortbl} \else \RequirePackage{booktabs} \fi
 \RequirePackage{makecell,longtable,amssymb,xcolor,etoolbox}
 
-%% -----------------------------------------------------------------------------
-%% Color Definitions
-%% -----------------------------------------------------------------------------
+% Color Definitions
 
 \def\sot@table@headerstyle@inv{\color{MaterialHeaderColor}}
 \def\sot@table@headerstyle@norm{\color{white}}
@@ -67,9 +59,7 @@
 }
 
 
-%% -----------------------------------------------------------------------------
-%% Fixes for the tabu-package
-%% -----------------------------------------------------------------------------
+% Fixes for the tabu-package
 
 \ifsot@usetabu@
 \def\tabu@classz{%
@@ -82,9 +72,7 @@
     \def\tabu@ignorehfil{\tabu@nohfil}
 \fi
 
-%% -----------------------------------------------------------------------------
-%% Define the Header and next-header commands
-%% -----------------------------------------------------------------------------
+% Define the Header and next-header commands
 
 \def\sot@init{%
 \ifsot@usetabu@
@@ -106,17 +94,13 @@
 }
 \sot@init
 
-%% -----------------------------------------------------------------------------
-%% Helper Functions
-%% -----------------------------------------------------------------------------
+% Helper Functions
 
 \def\sot@thesotversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 \edef\sot@version@str{\noexpand\sot@thesotversion\arabic{sotversion}\noexpand\@nil}
 \edef\thesotversion{\sot@version@str}
 
-%% -----------------------------------------------------------------------------
-%% Create the basic environments
-%% -----------------------------------------------------------------------------
+% Create the basic environments
 \ifsot@usetabu@
     % Material styled table. Works similar to tabular
     \newenvironment{mtabular}[1]{\begingroup
@@ -160,9 +144,7 @@
     }{\bottomrule\end{longtabu}}
 \fi
 
-%% -----------------------------------------------------------------------------
-%% Cp-Palette support
-%% -----------------------------------------------------------------------------
+% Cp-Palette support
 \AtEndPreamble{%
 \ifsot@cpalette@
 \@ifundefined{cpl@registered@palettes}{%

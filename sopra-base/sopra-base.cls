@@ -18,9 +18,7 @@
 % this class won't base on KOMA or other nice Documentclass :/
 \LoadClass{article}
 
-%% -----------------------------------------------------------------------------
-%% Lengths and Registers
-%% -----------------------------------------------------------------------------
+% Lengths and Registers
 
 \newcounter{sobversion} \setcounter{sobversion}{1001}
 
@@ -36,9 +34,7 @@
 
 \newcounter{sob@counter@tmp@a}
 
-%% -----------------------------------------------------------------------------
-%% Class-Args
-%% -----------------------------------------------------------------------------
+% Class-Args
 
 % draftmode:
 \DeclareOption{draft}{ \sob@usedraft@true }%
@@ -59,9 +55,7 @@
 \ExecuteOptions{final,nopar,sffont,defaultmode,showmail}% set it explicitly
 \ProcessOptions\relax%
 
-%% -----------------------------------------------------------------------------
-%% Basic Packages
-%% -----------------------------------------------------------------------------
+% Basic Packages
 
 \RequirePackage{tikz} % we need it anyways - will load xcolor
 \usetikzlibrary{calc}
@@ -83,9 +77,7 @@
 \RequirePackage[hidelinks]{hyperref}
 
 
-%% -----------------------------------------------------------------------------
-%% Color Definitions
-%% -----------------------------------------------------------------------------
+% Color Definitions
 \definecolor{sob@col@uulm}{RGB}{130,161,180}            % RGB(130,161,180)
 \definecolor{sob@col@uulm@akzent}{RGB}{169,162,141}     % RGB(169,162,141)
 \definecolor{sob@col@uulm@cs}{RGB}{163,038,059}         % RGB(163,038,59)
@@ -94,9 +86,7 @@
 \definecolor{sob@col@text@sub}{RGB}{000,000,000}        % RGB(000,000,000)
 
 
-%% -----------------------------------------------------------------------------
-%% Color Palette & color styling
-%% -----------------------------------------------------------------------------
+% Color Palette & color styling
 
 \ifsob@printmode@ \selectcolormodel{gray}%
 \else \selectcolormodel{rgb}\fi %\maskcolors[cmy]{gray} \fi
@@ -133,9 +123,7 @@
 {.1ex}
 {\normalfont\small\itshape}}
 
-%% -----------------------------------------------------------------------------
-%% Helper Methods
-%% -----------------------------------------------------------------------------
+% Helper Methods
 
 \def\sob@thesobversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 \edef\sob@version@str{\noexpand\sob@thesobversion\arabic{sobversion}\noexpand\@nil}
@@ -157,9 +145,7 @@
 \def\DateConvert#1%
 {\expandafter\ifx\expandafter!#1!\else\expandafter\sob@date@convert#1\@nil\fi}
 
-%% -----------------------------------------------------------------------------
-%% Set the Document-Metadata
-%% -----------------------------------------------------------------------------
+% Set the Document-Metadata
 
 % we will populate the following fields:
 % dates have to be given in YYYY-MM-DD!
@@ -232,9 +218,7 @@
 }}
 
 
-%% -----------------------------------------------------------------------------
-%% Set the Title for the maketitle command
-%% -----------------------------------------------------------------------------
+% Set the Title for the maketitle command
 
 \def\sob@team@name{Gruppe}
 
@@ -287,9 +271,7 @@
 	\vspace*{\sob@headheight pt}\par
 }
 
-%% -----------------------------------------------------------------------------
-%% Footer
-%% -----------------------------------------------------------------------------
+% Footer
 
 \clearpairofpagestyles
 \renewcommand\headfont{\normalfont}

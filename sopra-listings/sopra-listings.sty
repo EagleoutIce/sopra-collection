@@ -12,9 +12,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-listings}[2021/01/08 EagleoutIce - listings for the sopra-team-020]
 
-%% -----------------------------------------------------------------------------
-%% Lengths and Registers
-%% -----------------------------------------------------------------------------
+% Lengths and Registers
 \newcounter{solversion} \setcounter{solversion}{1021}
 
 % note this will be used with tcb:
@@ -54,9 +52,7 @@
 
 \newif\ifsol@debug@% typeout debug
 
-%% -----------------------------------------------------------------------------
-%% Package-Args
-%% -----------------------------------------------------------------------------
+% Package-Args
 % Encoding:
 \DeclareOption{encoding}{ \sol@encoding@true }
 \DeclareOption{noencoding}{ \sol@encoding@false }
@@ -108,9 +104,7 @@
 
 \ifsol@debug@\let\sol@debug\typeout\else\let\sol@debug\@gobble\fi
 
-%% -----------------------------------------------------------------------------
-%% Basic Packages
-%% -----------------------------------------------------------------------------
+% Basic Packages
 % Encoding:
 \ifsol@encoding@
 \RequirePackage[T1]{fontenc}
@@ -136,9 +130,7 @@
 \RequirePackage{tikz}
 \fi
 
-%% -----------------------------------------------------------------------------
-%% Font Definitions
-%% -----------------------------------------------------------------------------
+% Font Definitions
 \ifsol@lst@style@defaultfont@
 \AtEndPreamble{\RequirePackage{AnonymousPro}}%
 \def\ttdefault{AnonymousPro}%
@@ -156,9 +148,7 @@
   \else\def\sol@font@fs@numbers{\tiny\linespread{#1}}\fi
 }
 
-%% -----------------------------------------------------------------------------
-%% Color & Style Definitions
-%% -----------------------------------------------------------------------------
+% Color & Style Definitions
 \ifsol@printmode@
 \definecolor{sol@colors@border}{HTML}{DDDFE2}%
 \definecolor{sol@colors@background}{HTML}{FFFFFF}% save ink :D
@@ -243,9 +233,7 @@
 }
 \fi
 
-%% -----------------------------------------------------------------------------
-%% Helper Functions
-%% -----------------------------------------------------------------------------
+% Helper Functions
 \def\sol@font@size{\dimexpr\f@size pt\relax}
 \def\sol@thesolversion#1#2#3#4\@nil{v#1.#2.#3#4}
 
@@ -289,9 +277,7 @@
 \def\@@sol@numinpar@length{2em}
 \ifsol@numinpar@\solSetLeftMargin{\@@sol@numinpar@length}\fi
 
-%% -----------------------------------------------------------------------------
-%% Handling of automated number-highlighting in listings;
-%% -----------------------------------------------------------------------------
+% Handling of automated number-highlighting in listings;
 \def\sol@@lst@hl@digit#1{\begingroup
 \ifsol@lst@lastwas@character@
 \global\sol@lst@lastwas@charkeep@true#1\else\global\sol@lst@lastwas@charkeep@false
@@ -338,9 +324,7 @@
 \expandafter\lst@Literate
 \fi}
 
-%% -----------------------------------------------------------------------------
-%% The basic literate table
-%% -----------------------------------------------------------------------------
+% The basic literate table
 \lstset{literate=%
   % {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {Á}{{\'A}}1 {É}{{\'E}}1
   {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1 {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1
@@ -370,9 +354,7 @@
   {.7}{{\sol@dgt{.7}}}2 {.8}{{\sol@dgt{.8}}}2 {.9}{{\sol@dgt{.9}}}2
   {:lmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash(}}}2 {:rmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash)}}}2 {:ldmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash[}}}2 {:rdmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash]}}}2 {:ul:}{{\_}}1}
 
-%% -----------------------------------------------------------------------------
-%% Basic and internal highlighting definitions
-%% -----------------------------------------------------------------------------
+% Basic and internal highlighting definitions
 % please note, that they will apply under every condition!
 \newcommand*{\sol@dlst@default}[2][]{%
 \begingroup\fboxsep=\z@\fcolorbox{sol@colors@border}{sol@colors@background}{%
@@ -384,15 +366,11 @@
 
 \newcommand*{\sol@dlst@input}[2][]{\begingroup\lstinputlisting[#1]{#2}\endgroup}
 
-%% -----------------------------------------------------------------------------
-%% Lst styles that will be shipped in each case
-%% -----------------------------------------------------------------------------
+% Lst styles that will be shipped in each case
 \lstdefinestyle{sol@nonum}{xleftmargin=3pt,xrightmargin=3pt,%will fix some overhead :D
 numbers=none,numbersep=\z@}
 
-%% -----------------------------------------------------------------------------
-%% Basic - we-work-in-the-back-hey-bud-environments
-%% -----------------------------------------------------------------------------
+% Basic - we-work-in-the-back-hey-bud-environments
 % note that '\sol@lst@backcol' is optional and could be ignored by the
 % used style
 
@@ -405,9 +383,7 @@ numbers=none,numbersep=\z@}
 \lstnewenvironment{lstnonum}[1][]
   {\lstset{style=sol@nonum,#1}}{}
 
-%% -----------------------------------------------------------------------------
-%% Here we will handle the language-control - right now, tcb will not be used
-%% -----------------------------------------------------------------------------
+% Here we will handle the language-control - right now, tcb will not be used
 % for cleaner setup, we will use pgfkeys
 \gdef\solset#1{\pgfkeys{/sol@lst@family/.cd,#1}}
 
@@ -474,9 +450,7 @@ command name suffix/.initial={},
 draw command/.initial={sol@dlst@input} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
 }
 
-%% -----------------------------------------------------------------------------
-%% Language-Registration-Helper
-%% -----------------------------------------------------------------------------
+% Language-Registration-Helper
 % spacing control
 %\def\sol@measurepage{\dimexpr\pagegoal-\pagetotal-\baselineskip\relax}
 %\def\sol@ensure#1{\ifdim\sol@measurepage<#1\baselineskip\relax\null\newpage\relax\fi}%
@@ -526,9 +500,7 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 \endgroup
 }
 
-%% -----------------------------------------------------------------------------
-%% The colossos: core registration handler
-%% -----------------------------------------------------------------------------
+% The colossos: core registration handler
 %% #1: Name of the Language [java,latex]
 %% #2: Name of the corresponding lst-Language [lJava, lLatex,...]
 \def\RegisterLanguage#1#2{\begingroup\makeatletter
@@ -570,9 +542,7 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 \expandafter\def\csname sol@lst@registeres@language@#1\endcsname{present}
 \endgroup}
 
-%% -----------------------------------------------------------------------------
-%% The [hopefully] beautiful 'sopra-style'
-%% -----------------------------------------------------------------------------
+% The [hopefully] beautiful 'sopra-style'
 \lstdefinestyle{sol@SOPRA}{%
 % background and border, the frame
 frame           = single,
@@ -600,15 +570,11 @@ escapeinside = {!*}{*!},
 % space control
 keepspaces=false}
 
-%% -----------------------------------------------------------------------------
-%% Always present 'void'-Language
-%% -----------------------------------------------------------------------------
+% Always present 'void'-Language
 \lstdefinelanguage{lVoid}{columns=fixed,moredelim=[is][{}]{|plain|}{|plain|},moredelim=[is][\solGet{highlight}]{|ihl|}{|ihl|}}
 \RegisterLanguage{void}{lVoid}
 
-%% -----------------------------------------------------------------------------
-%% Now we will define some languages
-%% -----------------------------------------------------------------------------
+% Now we will define some languages
 \def\solLanguageSearchPath{{Languages/}}
 % a language will be loaded by the default latex-file mechanis
 % the file has to have the signature: 'language_<Name>.cfg'
@@ -641,9 +607,7 @@ keepspaces=false}
 % Maybe load defaults?
 \ifsol@defaultlang@ \solLoadLanguage{java}\fi
 
-%% -----------------------------------------------------------------------------
-%% Change colors
-%% -----------------------------------------------------------------------------
+% Change colors
 \def\sol@registered@colors@keywordA{}
 \def\sol@registered@colors@keywordB{}
 \def\sol@registered@colors@keywordC{}
@@ -669,9 +633,7 @@ keepspaces=false}
 }{\definecolor{sol@colors@lst@#2}{#1}{#3}}%
 }
 
-%% -----------------------------------------------------------------------------
-%% Cp-Palette support
-%% -----------------------------------------------------------------------------
+% Cp-Palette support
 \AtEndPreamble{%
 \ifsol@cpalette@
 \@ifundefined{cpl@registered@palettes}{%
@@ -707,9 +669,7 @@ keepspaces=false}
 }\fi\fi
 }
 
-%% -----------------------------------------------------------------------------
-%% Highlights support
-%% -----------------------------------------------------------------------------
+% Highlights support
 \ifsol@lst@style@highlights@
 \newenvironment{sol@listings@highlight@env}[1][]
 {\begingroup\tikzset{sol@listings@highlight/.style={#1}}\begin{lrbox}{\@tempboxa}}
@@ -738,14 +698,10 @@ keepspaces=false}
 \fi
 
 % only pmode
-%% -----------------------------------------------------------------------------
-%% Comfort guards
-%% -----------------------------------------------------------------------------
+% Comfort guards
 \def\solIfPmode#1#2{\ifnum\lst@mode=\lst@Pmode\relax#1\else#2\fi}
 
-%% -----------------------------------------------------------------------------
-%% Hook discretionary
-%% -----------------------------------------------------------------------------
+% Hook discretionary
 \colorlet{sol@breakcolor}{gray}
 \preto\lst@@discretionary{\@declaredcolor{sol@breakcolor}}
 \appto\lst@@discretionary{\normalcolor}

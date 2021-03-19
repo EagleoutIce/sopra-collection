@@ -19,9 +19,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sopra-paper}[2019/13/02 EagleoutIce - Paper Documentclass for the sopra-team-020]
 
-%% -----------------------------------------------------------------------------
-%% Lengths and Registers
-%% -----------------------------------------------------------------------------
+% Lengths and Registers
 
 \newcounter{sopversion} \setcounter{sopversion}{1007}
 
@@ -47,9 +45,7 @@
 \newlength\sop@len@tmp@a
 
 
-%% -----------------------------------------------------------------------------
-%% Class-Args
-%% -----------------------------------------------------------------------------
+% Class-Args
 
 % draftmode:
 \DeclareOption{draft}{ \sop@usedraft@true }%
@@ -80,9 +76,7 @@
 \ExecuteOptions{final,nopar,sffont,defaultmode,showmail,dotoc,usebook,setstyle}% set it explicitly
 \ProcessOptions\relax%
 
-%% -----------------------------------------------------------------------------
-%% Documentclass
-%% -----------------------------------------------------------------------------
+% Documentclass
 
 % wie will use the KOMA-Book as a starting-point
 \ifsop@usebook@
@@ -98,9 +92,7 @@
 \ifsop@dopar@ \setlength\parindent\sop@len@parindent%
 \else \parindent=\z@ \fi
 
-%% -----------------------------------------------------------------------------
-%% Basic Packages
-%% -----------------------------------------------------------------------------
+% Basic Packages
 
 \ifsop@sffmaily@
 \RequirePackage[defaultfam,tabular,lining]{montserrat}
@@ -132,9 +124,7 @@
 \RequirePackage[all]{nowidow}
 \RequirePackage[hidelinks]{hyperref}
 
-%% -----------------------------------------------------------------------------
-%% Language
-%% -----------------------------------------------------------------------------
+% Language
 
 \def\xcontentname{Inhalts\"{u}bersicht}
 
@@ -147,9 +137,7 @@
     \renewcommand{\contentsname}{\strut\xcontentname}
 }
 \fi
-%% -----------------------------------------------------------------------------
-%% Color Definitions
-%% -----------------------------------------------------------------------------
+% Color Definitions
 
 % We will define a main/primary color, a secondary/akzent color and a tertiary
 % /light color to be used everywhere throughout the document.
@@ -184,9 +172,7 @@
 
 \colorlet{chdtext}{cakzent}
 
-%% -----------------------------------------------------------------------------
-%% Color Palette & color styling
-%% -----------------------------------------------------------------------------
+% Color Palette & color styling
 
 \ifsop@printmode@ \selectcolormodel{gray}%
 \else \selectcolormodel{rgb}\fi %\maskcolors[cmy]{gray} \fi
@@ -208,9 +194,7 @@
 
 % TODO: restyle chapters, sections, \ldots
 
-%% -----------------------------------------------------------------------------
-%% Helper Methods
-%% -----------------------------------------------------------------------------
+% Helper Methods
 
 \def\sop@thesopversion#1#2#3#4\@nil{{#1.#2.#3#4}}
 
@@ -230,9 +214,7 @@
 \def\DateConvert#1%
 {\expandafter\ifx\expandafter!#1!\else\expandafter\sop@date@convert#1\@nil\fi}
 
-%% -----------------------------------------------------------------------------
-%% Set the Document-Metadata
-%% -----------------------------------------------------------------------------
+% Set the Document-Metadata
 
 % we will populate the following fields:
 % dates have to be given in YYYY-MM-DD!
@@ -305,9 +287,7 @@
     pdfcreator={LaTeX with hyperref and the sopra-paper class}
 }}
 
-%% -----------------------------------------------------------------------------
-%% Header Metadata
-%% -----------------------------------------------------------------------------
+% Header Metadata
 
 % We modify chapter to increase the total counter to get the total number of
 % chapters in the end
@@ -364,9 +344,7 @@
 \def\sop@mchapsq#1#2#3#4{%
     \draw[fill=cprimary,thin] (#3)++(-5.5pt,-5.5pt) rectangle ++(11pt,11pt) node[midway,centered,font=\scriptsize\bfseries,align=center,#2] {\hyperlink{#4.#1}{#1}};%
 }
-%% -----------------------------------------------------------------------------
-%% Header
-%% -----------------------------------------------------------------------------
+% Header
 
 \renewcommand{\sectionmark}[1]{\markright{\@arabic\c@section,~#1}}
 
@@ -462,9 +440,7 @@
 % \end{tikzpicture}%0.75*\sop@len@header
 % }
 
-%% -----------------------------------------------------------------------------
-%% Structure Styles
-%% -----------------------------------------------------------------------------
+% Structure Styles
 
 % \input RoyalIn.fd
 % \def\sop@font@roya#1{\begingroup\usefont{U}{RoyalIn}{xl}{n}#1\endgroup}
@@ -515,9 +491,7 @@
 \setkomafont{subsubsection}{\normalsize}
 \setkomafont{paragraph}{\mdseries\itshape}
 
-%% -----------------------------------------------------------------------------
-%% "Futura" Font
-%% -----------------------------------------------------------------------------
+% "Futura" Font
 
 % I've invested round about 2 hours trying to set up a portable way to use the
 % Futura-Font. As it worked, but wasn't portable, i've desided to recreate the
@@ -625,9 +599,7 @@
     \addtocounter{sop@counter@font@carriage@posX}{12}
 }
 
-%% -----------------------------------------------------------------------------
-%% Titlepage
-%% -----------------------------------------------------------------------------
+% Titlepage
 
 \def\sop@tp@plussymb{+}
 \def\sop@titlepage@groupnum@iter#1#2\@nil{%
@@ -752,9 +724,7 @@
     \begingroup\@starttoc{toc}\endgroup%
 }\fi
 
-%% -----------------------------------------------------------------------------
-%% Listings (sopra-listings), Attachments (sopra-attachments,...)
-%% -----------------------------------------------------------------------------
+% Listings (sopra-listings), Attachments (sopra-attachments,...)
 
 \def\sop@SetListing{
     \makeatletter

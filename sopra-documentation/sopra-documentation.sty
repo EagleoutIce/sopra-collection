@@ -10,17 +10,13 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-documentation}[2019/12/02 EagleoutIce - documentation for the sopra-team-020]
 
-%% -----------------------------------------------------------------------------
-%% Lengths and Registers
-%% -----------------------------------------------------------------------------
+% Lengths and Registers
 \newcounter{sodversion} \setcounter{sodversion}{1102}
 
 \newif\ifsod@usedummy@
 \newif\ifsod@uselistings@
 
-%% -----------------------------------------------------------------------------
-%% Package-Args
-%% -----------------------------------------------------------------------------
+% Package-Args
 
 % allow debug-options :D
 \DeclareOption{debug}{ \errorcontextlines 99999 }
@@ -35,9 +31,7 @@
 \ExecuteOptions{nodebug,dummy,listings}% set it explicitly
 \ProcessOptions\relax
 
-%% -----------------------------------------------------------------------------
-%% Basic Packages
-%% -----------------------------------------------------------------------------
+% Basic Packages
 
 \ifsod@usedummy@ \RequirePackage{blindtext} \fi % only for testing and stuff :D
 
@@ -61,18 +55,14 @@
     \solLoadLanguage{latex,bash}
 \fi
 
-%% -----------------------------------------------------------------------------
-%% Helper Methods
-%% -----------------------------------------------------------------------------
+% Helper Methods
 
 \def\sod@thesodversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 
 \edef\sod@version@str{\noexpand\sod@thesodversion\arabic{sodversion}\noexpand\@nil}
 \edef\thesodversion{\sod@version@str}
 
-%% -----------------------------------------------------------------------------
-%% Commands and Environments
-%% -----------------------------------------------------------------------------
+% Commands and Environments
 
 \def\manArg#1{\T{\{#1\}}}
 \def\optArg#1{\T{\itshape[#1]}}
@@ -108,9 +98,7 @@
 % #2: name of the counter-Arg
 \newenvironment{argument}[2]{\present{#1}{\qquad(\T{#2})}{\T}{}}{\endpresent}
 
-%% -----------------------------------------------------------------------------
-%% Comfort-Methods and linkers
-%% -----------------------------------------------------------------------------
+% Comfort-Methods and linkers
 \let\say\enquote
 \newcommand*\jmark[2][Linkname]{\hyperref[#2]{#1}}
 \endinput

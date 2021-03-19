@@ -11,44 +11,36 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-standard}[2020/01/23 EagleoutIce - Definition-Environments]
 
-%% -----------------------------------------------------------------------------
-%% Lengths and Registers
-%% -----------------------------------------------------------------------------
+% Lengths and Registers
 
 \newcounter{sosversion} \setcounter{sosversion}{1000}
 
-\def\resetRegisters{
-    \gdef\sos@reg@authors{}
-    \gdef\sos@reg@authors@multiple{}%
-    \gdef\sos@reg@bookmarklvl{3}
-    \gdef\sos@reg@presentsymbol{$\circ$}
-    \gdef\sos@reg@prefixtitle{Definition}
-    \gdef\sos@reg@counter{ctrdef}
-    \gdef\sos@reg@flags{}
-    \gdef\sos@reg@status{OK}
+\def\resetRegisters{%
+\gdef\sos@reg@authors{}%
+\gdef\sos@reg@authors@multiple{}%
+\gdef\sos@reg@bookmarklvl{3}%
+\gdef\sos@reg@presentsymbol{$\circ$}
+\gdef\sos@reg@prefixtitle{Definition}%
+\gdef\sos@reg@counter{ctrdef}%
+\gdef\sos@reg@flags{}%
+\gdef\sos@reg@status{OK}%
 }
 
 % make command to create new environment
 % till then we will fake a counter:
 \newcounter{ctrdef}
 
-%% -----------------------------------------------------------------------------
-%% Basic Packages
-%% -----------------------------------------------------------------------------
+% Basic Packages
 
 % nicer symbols for definitions
 \RequirePackage{fontawesome}
 
 % easy my way - baibai
 \RequirePackage{xstring,array}
-% \RequirePackage{zref-savepos}
-% \RequirePackage{needspace}
 % We will integrate the changelog-mechanism
 \RequirePackage{sopra-changelog}
 
-%% -----------------------------------------------------------------------------
-%% The Basic Environment
-%% -----------------------------------------------------------------------------
+% The Basic Environment
 
 % Calculate left Space:
 % \newcommand*\@zmeasurepage[1]{\dimexpr\pagegoal-\zposy{#1}sp\relax}
@@ -95,12 +87,8 @@
     \endgroup\par\ignorespacesafterend
 }
 
-%% -----------------------------------------------------------------------------
-%% The (custom) KV-Parser
-%% -----------------------------------------------------------------------------
-
+% The (custom) KV-Parser
 \def\sos@trimspace#1{#1}
-
 \def\sos@@parser@optargs@parse#1: #2\@nil{%
     \edef\farg{\expandafter\sos@trimspace #1}%
     \@ifundefined{@sos@parser@keyhandler@\farg}{%
@@ -162,24 +150,18 @@
     \gdef\sos@reg@counter{#2}%
 }
 
-%% -----------------------------------------------------------------------------
-%% The additional User-Functions :D
-%% -----------------------------------------------------------------------------
+% The additional User-Functions :D
 
 \def\sos@thesosversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 \edef\sos@version@str{\noexpand\sos@thesosversion\arabic{sosversion}\noexpand\@nil}
 \edef\thesosversion{\sos@version@str}
 
-%% -----------------------------------------------------------------------------
-%% Formtters
-%% -----------------------------------------------------------------------------
+% Formtters
 
 \def\sosFormatTitle#1#2{\begingroup\bfseries#1 #2:\space\endgroup}
 \def\sosFormatFlags#1{\begingroup\scriptsize\itshape#1\endgroup}
 
-%% -----------------------------------------------------------------------------
-%% Create new Environment type
-%% -----------------------------------------------------------------------------
+% Create new Environment type
 
 % #1 optional Args to be passed every Time
 % #2 environment name
@@ -193,9 +175,7 @@
     %\endgroup
 }
 
-%% -----------------------------------------------------------------------------
-%% Basic Environments
-%% -----------------------------------------------------------------------------
+% Basic Environments
 
 \CreateNewStandardType{symbol: \raisebox{1pt}{\footnotesize\faFileTextO},title: Datei Definition}{filedef}{ctrfiledefs}
 \CreateNewStandardType{symbol: \footnotesize\faCommentsO,title: Kommentar}{comment}{ctrcomment}
@@ -204,10 +184,7 @@
 \CreateNewStandardType{symbol: \footnotesize\faTerminal,title: Kommandozeilenparameter}{cmdlinedef}{ctrcommandline}
 \CreateNewStandardType{title: Begriffsdefinition}{begdef}{ctrbegref}
 
-%% -----------------------------------------------------------------------------
-%% Extra Handler for sopra-listings
-%% -----------------------------------------------------------------------------
-
+% Extra Handler for sopra-listings
 % Note: this code should only be used if sopra-listings is in effect
 % it will add hyperlinks for datatypes inside of the code
 
@@ -224,22 +201,20 @@
 % #1 Codefragment
 % #2 hltarget
 \newcommand\CreateCodeHyperLink[2][]{%
-    \IfStrEq{#1}{}{%
-        \@for\@elem:=#2\do{%
-            \StrLen{\@elem}[\@cclen]%
-            \protected@edef\@tmp{\noexpand\@CreateCodeHyperLink{\@cclen}{\@elem}{std:\@elem}}\@tmp
-        }
-    }{
-        \StrLen{#1}[\@cclen]%
-        \@CreateCodeHyperLink{\@cclen}{#1}{#2}%
+\IfStrEq{#1}{}{%
+    \@for\@elem:=#2\do{%
+        \StrLen{\@elem}[\@cclen]%
+        \protected@edef\@tmp{\noexpand\@CreateCodeHyperLink{\@cclen}{\@elem}{std:\@elem}}\@tmp
     }
+}{
+    \StrLen{#1}[\@cclen]%
+    \@CreateCodeHyperLink{\@cclen}{#1}{#2}%
+}
 }
 
 \solSetLeftMargin{21pt} % find ich übersichtlicher mit den ganzen Defs...
 
-%% -----------------------------------------------------------------------------
-%% Toc - Annotations
-%% -----------------------------------------------------------------------------
+% Toc - Annotations
 
 % get little setion summaries in the toc - this will hopefully look nice - even
 % if the LaTeX-Code isn't :D
@@ -283,9 +258,7 @@
 
     \long\def\setComment#1{\gdef\currentTocComment{\color{cprimary!75!cwhite}\faAngleDoubleRight~\parbox[t]{\linewidth-.75em}{\protect\longspread#1}}}
 
-%% -----------------------------------------------------------------------------
-%% Generic Stuff
-%% -----------------------------------------------------------------------------
+% Generic Stuff
 % optional Arguments
 \def\opt{\mdseries\itshape}
 
@@ -304,9 +277,8 @@
 \newcolumntype{B}{>{\bfseries}K}
 \long\def\say#1{\glqq#1\grqq{}}
 % Change the behaviour - sadly, this will enable be to keep hyperlinks inside of the Grahics, which i consider to be more effective
-% \newcommand*\GetSopra[2][1]{\centering\includegraphics[width=#1\linewidth]{figures/sopra_#2-compressed}}% -compressed
 \newcommand*\GetSopra[2][1]{\centering\resizebox{#1\linewidth}{!}{\input{figures/sopra_#2.tex}}}% -compressed
-\newcommand*{\figref}[1]{\hyperref[{#1}]{\autoref*{#1} (\nameref*{#1})}} % One single link
+\newcommand*\figref[1]{\hyperref[{#1}]{\autoref*{#1} (\nameref*{#1})}} % One single link
 
 \newcommand\info[1]{\begingroup\footnotesize\itshape#1\endgroup}
 \endinput
