@@ -142,9 +142,9 @@
 \def\sol@font@fs@numbers{\footnotesize}
 \def\solNumFs#1{\gdef\sol@font@fs@numbers{#1}}
 \def\sol@font@fs@normal{}
-\newcommand*{\lstfs}[2][1]{%
-  \def\sol@font@fs@normal{\fontsize{#2}{#2}\selectfont\linespread{#1}}%
-  \ifnum#2>7\edef\sol@lst@@subfs{\the\numexpr #2-4\relax}\def\sol@font@fs@numbers{\fontsize{\sol@lst@@subfs}{\sol@lst@@subfs}\selectfont\linespread{#1}}%
+\newcommand*\lstfs[2][1]{%
+  \def\sol@font@fs@normal{\fontsize{#2}{#2}\linespread{#1}\selectfont}%
+  \ifnum#2>7\edef\sol@lst@@subfs{\the\numexpr #2-4\relax}\def\sol@font@fs@numbers{\fontsize{\sol@lst@@subfs}{\sol@lst@@subfs}\linespread{#1}\selectfont}%
   \else\def\sol@font@fs@numbers{\tiny\linespread{#1}}\fi
 }
 
@@ -156,7 +156,6 @@
 \definecolor{sol@colors@border}{HTML}{EAECF0}%
 \definecolor{sol@colors@background}{HTML}{FCFBFB}%
 \fi
-% TODO: print switch
 
 \@ifundefined{thesobversion}{% not called from sopra-base-class, we use a
 % default palette
@@ -317,7 +316,6 @@
     \lst@XPrintToken
     \lst@whitespacefalse\@nc
     \fi
-    % gobble the replaced text
     \let\lst@next\lst@CArgEmptyGobble
   \fi\lst@next}%
   \@empty% splitter for constants
@@ -326,16 +324,11 @@
 
 % The basic literate table
 \lstset{literate=%
-  % {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {Á}{{\'A}}1 {É}{{\'E}}1
   {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1 {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1
   {ù}{{\`u}}1 {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1 {ä}{{\"a}}1
   {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1 {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1
   {Ö}{{\"O}}1 {Ü}{{\"U}}1 {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
-  % {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1 {œ}{{\oe}}1 {Œ}{{\OE}}1
   {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1 {ø}{{\o}}1 {€}{{\euro}}1 {£}{{\pounds}}1
-  %{ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
-  %{ç}{{\c c}}1 {Ç}{{\c C}}1 {å}{{\r a}}1 {Å}{{\r A}}1
-  %{«}{{\guillemotleft}}1 {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
   {:bs:}{{\@declaredcolor{sol@colors@lst@keywordA}\textbackslash\normalcolor}}1 {:bmath:}{{\sol@style@get{numbers}\$\normalcolor}}1 {:percent:}{{\%}}1
   {:emath:}{{{\sol@style@get{numbers}\$\normalcolor}}}1 {:dollar:}{{{\sol@style@get{numbers}\$\normalcolor}}}1 {:plaindollar:}{{\$}}1%spaces
   %% brace fix
@@ -397,27 +390,21 @@ listing style/.initial = {sol@SOPRA}}
 %% Just to provide a clearer structure the keys will be defined seperate for all different styles.
 \pgfkeys{/sol@lst@family/default/.is family,%
 /sol@lst@family/default,
-listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
-% % #1 language name (java, latex, ..-)
-% % #2 lst language name (lJava, lLatex,...)
+listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
 command name prefix/.initial={},%
 command name suffix/.initial={},%
 constructor command/.initial={sol@NewLstEnvCore}}
 
 \pgfkeys{/sol@lst@family/nonumber/.is family,%
 /sol@lst@family/nonumber,
-listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
-% % #1 language name (java, latex, ..-)
-% % #2 lst language name (lJava, lLatex,...)
+listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
 command name prefix/.initial={},%
 command name suffix/.initial={*},%
 constructor command/.initial={sol@NewLstEnvCoreStarred}}
 
 \pgfkeys{/sol@lst@family/plain/.is family,%
 /sol@lst@family/plain,
-listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
-% % #1 language name (java, latex, ..-)
-% % #2 lst language name (lJava, lLatex,...)
+listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
 command name prefix/.initial={plain},%
 command name suffix/.initial={},%
 constructor command/.initial={sol@NewLstEnvPlain}}
@@ -426,9 +413,7 @@ constructor command/.initial={sol@NewLstEnvPlain}}
 %%% Inlines
 \pgfkeys{/sol@lst@family/inline default/.is family,%
 /sol@lst@family/inline default,
-listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
-% % #1 language name (java, latex, ..-)
-% % #2 lst language name (lJava, lLatex,...)
+listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
 command name prefix/.initial={c},
 command name suffix/.initial={},
 draw command/.initial={sol@dlst@default} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
@@ -436,7 +421,7 @@ draw command/.initial={sol@dlst@default} % will hold the name of the correspondi
 
 \pgfkeys{/sol@lst@family/inline blank/.is family,%
 /sol@lst@family/inline blank,
-listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
+listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
 command name prefix/.initial={b},
 command name suffix/.initial={},
 draw command/.initial={sol@dlst@blank} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
@@ -444,7 +429,7 @@ draw command/.initial={sol@dlst@blank} % will hold the name of the corresponding
 
 \pgfkeys{/sol@lst@family/inline input/.is family,%
 /sol@lst@family/inline input,
-listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},% Ensure sol@SOPRA is loaded, maybe make flexible in future versions?
+listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
 command name prefix/.initial={i},
 command name suffix/.initial={},
 draw command/.initial={sol@dlst@input} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
@@ -452,12 +437,9 @@ draw command/.initial={sol@dlst@input} % will hold the name of the corresponding
 
 % Language-Registration-Helper
 % spacing control
-%\def\sol@measurepage{\dimexpr\pagegoal-\pagetotal-\baselineskip\relax}
-%\def\sol@ensure#1{\ifdim\sol@measurepage<#1\baselineskip\relax\null\newpage\relax\fi}%
 \def\sol@ensure#1{\needspace{#1\baselineskip}}
 \def\solguard#1{\gdef\@sol@guard@default{#1}}
 \solguard{.8}
-% {\setlength\parskip{\z@}\setlength\parindent{\z@}\par}
 \def\sol@guardspace{\ifsol@guardspace@\sol@ensure{\@sol@guard@default}\fi}
 \def\sol@guardend{\ifsol@guardspace@\nobreak\fi}
 % on line:
@@ -485,7 +467,6 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 % #1 Name #2 Key #3 In Extra #4 Out Extra #5 Language
 % NOTE: currently no opt arg, as \@ifnextchar breaks scanning of lst@next
 \def\sol@NewLstEnvPresent#1#2#3#4#5{%
-%\lstnewenvironment{#1}[1][]{\lstset{##1}#3}{#4}
 \expandafter\xdef\csname#1\endcsname{\noexpand\leavevmode\noexpand\presentlst{#5}}%
 \expandafter\gdef\csname end#1\endcsname{\endpresentlst}%
 }
@@ -687,16 +668,13 @@ keepspaces=false}
 
 \def\sol@highlights@endenv{%
   \end{sol@listings@highlight@env}%
-  \endgroup
-}
+  \endgroup}
 
 \def\solhlboxd#1{\edef\@tmp{\noexpand\@solLstHL{#1}}\@tmp}
 \def\solhlbox#1{\@solLstHL{fill=#1!30,draw=#1}}
-
 \colorlet{solwarning}{yellow!90!red}
 \def\solcustom{purple}
 \fi
-
 % only pmode
 % Comfort guards
 \def\solIfPmode#1#2{\ifnum\lst@mode=\lst@Pmode\relax#1\else#2\fi}
