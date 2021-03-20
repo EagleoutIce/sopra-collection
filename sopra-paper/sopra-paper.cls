@@ -208,11 +208,8 @@
     \or{Juli}\or{August}\or{September}\or{Oktober}\or{November}\or{Dezember}%
     \else\@ctrerr\fi}
 
-\def\sop@date@convert#1-#2-#3\@nil{%
-    \begingroup#3.\space{\sop@month@to@name{#2}}\space#1\endgroup%
-}
-\def\DateConvert#1%
-{\expandafter\ifx\expandafter!#1!\else\expandafter\sop@date@convert#1\@nil\fi}
+\def\sop@date@convert#1-#2-#3\@nil{\begingroup#3.\space{\sop@month@to@name{#2}}\space#1\endgroup}
+\def\DateConvert#1{\expandafter\ifx\expandafter!#1!\else\expandafter\sop@date@convert#1\@nil\fi}
 
 % Set the Document-Metadata
 
@@ -261,22 +258,17 @@
     \foreach \sop@@tmp@curauthor in {#1} {%
         \ifx\sop@@tmp@curauthor\@empty%empty => ignore
         \else\stepcounter{sop@counter@tmp@a}%
-            \ifnum\thesop@counter@tmp@a>1%
-            \ifnum\thesop@counter@tmp@a=\sop@authors@totallength%
+            \ifnum\thesop@counter@tmp@a>1\relax
+            \ifnum\thesop@counter@tmp@a=\sop@authors@totallength\relax
                 ~und \else,\space\fi\fi
-            \expandafter\sop@@parse@author\sop@@tmp@curauthor\@nil%
-        \fi%
+            \expandafter\sop@@parse@author\sop@@tmp@curauthor\@nil
+        \fi
     }%
 }
 
-\def\sop@@setteam#1 #2\@nil{%
-    \gdef\sop@register@group{#1}\gdef\sop@register@groupnum{#2}%
-}
-\newcommand\setTeam[1]{%
-    \expandafter\sop@@setteam#1\@nil
-}
-\newcommand\typesetAuthors{%
-    \edef\@tmp{\noexpand\sop@@typeset@author{\sop@register@authors}}\@tmp}
+\def\sop@@setteam#1 #2\@nil{\gdef\sop@register@group{#1}\gdef\sop@register@groupnum{#2}}
+\newcommand\setTeam[1]{\expandafter\sop@@setteam#1\@nil}
+\newcommand\typesetAuthors{\protected@edef\@tmp{\noexpand\sop@@typeset@author{\sop@register@authors}}\@tmp}
 
 % the title field can be set by '\title{<Your title here>}'
 \AtBeginDocument{\hypersetup{
@@ -303,28 +295,24 @@
 
 \ifsop@usebook@
 \let\sop@chapter\chapter
-\def\chapter{%
-    \@ifstar\sop@chapter@starred\sop@chapter@unstarred%
-}
+\def\chapter{\@ifstar\sop@chapter@starred\sop@chapter@unstarred}
 \def\sop@chapter@starred{\sop@chapter*}
 \def\sop@chapter@unstarred{\@sop@store@chpcount\sop@chapter}
 \else
 \let\sop@section\section
-\def\section{%
-    \@ifstar\sop@section@starred\sop@section@unstarred%
-}
+\def\section{\@ifstar\sop@section@starred\sop@section@unstarred}
 \def\sop@section@starred{\sop@section*}
 \def\sop@section@unstarred{\@sop@store@chpcount\sop@section}
 \fi
 
 \let\sop@appendix\appendix
 \def\appendix{%
-    \clearpage
-    \global\sop@inappendix@true
-    \ifsop@usebook@\else
-    \global\renewcommand{\sectionmark}[1]{\markright{\@Alph\c@section,~##1}}
-    \fi
-    \global\let\@sop@store@chpcount\sop@store@chapter@appendix\sop@appendix
+\clearpage
+\global\sop@inappendix@true
+\ifsop@usebook@\else
+\global\renewcommand{\sectionmark}[1]{\markright{\@Alph\c@section,~##1}}
+\fi
+\global\let\@sop@store@chpcount\sop@store@chapter@appendix\sop@appendix
 }
 
 % Total chapter number now in '\thesop@counter@chapter@counter'
@@ -345,18 +333,17 @@
     \draw[fill=cprimary,thin] (#3)++(-5.5pt,-5.5pt) rectangle ++(11pt,11pt) node[midway,centered,font=\scriptsize\bfseries,align=center,#2] {\hyperlink{#4.#1}{#1}};%
 }
 % Header
-
-\renewcommand{\sectionmark}[1]{\markright{\@arabic\c@section,~#1}}
+\renewcommand\sectionmark[1]{\markright{\@arabic\c@section,~#1}}
 
 \clearpairofpagestyles
 \renewcommand\headfont{\normalfont}
 
 \ifsop@usebook@
-    \renewcommand{\chaptermark}[1]{\markboth{#1}{Kapitel:~#1}}
+    \renewcommand\chaptermark[1]{\markboth{#1}{Kapitel:~#1}}
     \def\@sop@tlheadmarker{chapter}
 \else
     \def\@sop@tlheadmarker{section}
-    \renewcommand{\subsectionmark}[1]{\markright{\@arabic\c@subsection,~#1}}
+    \renewcommand\subsectionmark[1]{\markright{\@arabic\c@subsection,~#1}}
 \fi
 
 \ifsop@usedraft@
@@ -364,8 +351,7 @@
 \else
 \chead{%
 \def\@doheader{0}
-\ifnum\value{\@sop@tlheadmarker}>0
-    \def\@doheader{1}\fi
+\ifnum\value{\@sop@tlheadmarker}>0\relax \def\@doheader{1}\fi
 \ifsop@notoc@\else\def\@doheader{1}\fi
 %
 \ifnum\@doheader>0
@@ -386,7 +372,6 @@
         \sop@mchapsq{I}{cwhite}{chapnode0}{toc}%
         \else\sop@chapsq{I}{white}{chapnode0}{toc}\fi%
     \fi
-    % \node[below right,yshift=1pt,font=\footnotesize,text width=5cm,align=left] at (tl@pf@lockpos) {\strut\sop@chapterbubbles};
     \ifnum\value{sop@counter@chapter@counter}>0
     \foreach \i in {1,...,\thesop@counter@chapter@counter}{%
         \pgfmathsetmacro\ix{int(\i+\ioffset)}
@@ -416,34 +401,12 @@
     }
     \fi
     % Typeset Appendix
-\end{tikzpicture}%0.75*\sop@len@header
+\end{tikzpicture}%
 \fi
 }
 \fi
 
-% \cehead{%
-% \begin{tikzpicture}[remember picture, overlay]
-%     \coordinate (tl@pf@lockpos) at ($(current page.north west)+(5.5cm,-1.25cm)$);
-%     \node[cprimary,right=2pt] at (tl@pf@lockpos) {\Huge$\thepage$};
-%     % Cur section rectangle
-%     \fill[cakzent] (tl@pf@lockpos) rectangle ++(-5.5cm,0.55pt);
-%     \node[above left,yshift=-1pt,font=\footnotesize,text width=5cm,align=right] at (tl@pf@lockpos) {\strut\expandafter\ifx\expandafter\\\rightmark\\ \leftmark\else \rightmark\fi};
-%     % \node[below right,yshift=1pt,font=\footnotesize,text width=5cm,align=left] at (tl@pf@lockpos) {\strut\sop@chapterbubbles};
-%     \foreach \i in {1,...,\thesop@counter@chapter@counter}{%
-%         % \typeout{\i:\thesop@counter@chapter@counter:\thechapter x}
-%         \coordinate (chapnode\i) at ($(tl@pf@lockpos)-(\i/1.5-1/1.5+0.33,0.35)$);
-%         \ifnum\i=0\thechapter  % in current chapter
-%             \sop@chapblob{\i}{clight}{chapnode\i}%
-%         \else \sop@chapblob{\i}{white}{chapnode\i}%
-%         \fi\hfill{}
-%     }
-% \end{tikzpicture}%0.75*\sop@len@header
-% }
-
 % Structure Styles
-
-% \input RoyalIn.fd
-% \def\sop@font@roya#1{\begingroup\usefont{U}{RoyalIn}{xl}{n}#1\endgroup}
 
 \def\sop@sepline{%
     {\color{cakzent}{\Huge$\llap{$\diamond$}\hspace*{-1pt}$}\rule[0.41\baselineskip]{\linewidth}{0.55pt}{\Huge$\hspace*{-1pt}\rlap{$\diamond$}$}}%
@@ -492,11 +455,9 @@
 \setkomafont{paragraph}{\mdseries\itshape}
 
 % "Futura" Font
-
 % I've invested round about 2 hours trying to set up a portable way to use the
 % Futura-Font. As it worked, but wasn't portable, i've desided to recreate the
 % letters in tikz and use them instead
-
 \def\sop@font@futura@color@current{cwhite}
 
 \newcounter{sop@counter@font@carriage@posX}
@@ -631,11 +592,6 @@
     \sop@font@futura@letter@O\coordinate (ct@groupnum) at(\@sop@font@futura@carriage);
     \@sop@font@futura@carriage@nl
     \@sop@font@futura@carriage@indent{27}
-    % \sop@font@futura@letter@D
-    % \sop@font@futura@letter@I
-    % \sop@font@futura@letter@E
-    % \@sop@font@futura@carriage@nl
-    % \@sop@font@futura@carriage@indent{27}
     \sop@font@futura@letter@S
     \sop@font@futura@letter@P
     \sop@font@futura@letter@Y\coordinate (ct@ystraw) at(\@sop@font@futura@carriage);
@@ -646,14 +602,11 @@
     \begin{titlepage}
         \pagecolor{ctpbackground}
         % Here we will place the Tag (Sopra....)
-        % \scalebox{2}{\fontsize{30}{30}\selectfont\color{ctpsymbol}\sop@font@head{\sop@register@tag}}
         \hbox{}\hfill\llap{\begin{tikzpicture}[scale=0.079]
             \def\sop@font@futura@color@current{ctptext}
             \sop@ntts
             % lets draw a strw for 'Y'
             \node[\sop@font@futura@color@current] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\scriptsize\bfseries/};
-            % \coordinate (olive) at($(ct@ystraw)+(-34mm,105mm)$);
-            % \fill[ctpsymbol,rotate around={45:(olive)},] (olive) ellipse (9mm and 8.15mm);
             % here we will plant the group-Tag at the 007 position, having a lot of fun :D
             \ifx\sop@register@groupnum\@empty\else
             \node[right=0.1cm,yshift=0.4cm,font=\fontsize{17}{17}\selectfont\sffamily,ctpsymbol] (ct@gnumt) at (ct@groupnum) {\sop@titlepage@groupnum{\sop@register@groupnum}};
@@ -693,9 +646,6 @@
             \sop@ntts
             % lets draw a strw for 'Y'
             \node[\sop@font@futura@color@current] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\bfseries/};
-            % \coordinate (olive) at($(ct@ystraw)+(-34mm,105mm)$);
-            % \fill[cakzent,rotate around={45:(olive)},] (olive) ellipse (9mm and 8.15mm);
-            % here we will plant the group-Tag at the 007 position, having a lot of fun :D
     \end{tikzpicture}
     \hbox{}\vfill\begingroup\scriptsize
     \begin{flushright}
@@ -705,7 +655,6 @@
         im Wintersemester 2019/2020 von Florian Sihler im Rahmen des
         Informatikstudiums an der Universität Ulm vollständig in \LaTeXe{} erstellt.}
     \end{flushright}\endgroup
-    %\ifsop@usebook@\else\clearpage\fi
     \clearpage
 }
 
@@ -714,8 +663,7 @@
     \sop@layout@titlepage
 }
 
-\ifsop@notoc@\else%
-% \addtocontents{toc}{\protect\renewcommand{\protect\baselinestretch}{0.9}}
+\ifsop@notoc@\else
 \makeatletter
 \newcommand\TableOfContents[1][]{\hypertarget{toc.I}\relax%
     \section*{\contentsname}\relax%
@@ -740,7 +688,6 @@
     }
     \makeatother
 }
-
 
 \def\sop@SetAttachment{
     \makeatletter
@@ -768,11 +715,11 @@
 
 \ifsop@applystyle@
 \AtBeginDocument{
-    \@ifundefined{thesolversion}{}{\sop@SetListing} % listings
-    \@ifundefined{thesoaversion}{}{\sop@SetAttachment} % attachments
-    \@ifundefined{thesorversion}{}{\sop@SetTables} % requirements
-    \@ifundefined{thesotversion}{}{\sop@SetTables} % tables
-    \@ifundefined{thesomversion}{}{\sop@SetModels} % Models
+\ifcsname thesolversion\endcsname \sop@SetListing\fi % listings
+\ifcsname thesoaversion\endcsname \sop@SetAttachment\fi % attachments
+\ifcsname thesorversion\endcsname \sop@SetTables\fi % requirements
+\ifcsname thesotversion\endcsname \sop@SetTables\fi % tables
+\ifcsname thesomversion\endcsname \sop@SetModels\fi % Models
 }
 \fi
 \endinput

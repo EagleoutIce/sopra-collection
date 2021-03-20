@@ -1,9 +1,6 @@
 %% sopra-changelog.sty
-%%
-%% ----------
-%% Version: 1.0
 %% Author:  Florian Sihler, 05.01.2020
-%%
+
 %% Will contain all the definitions to easily typeset and reference
 %% Changelogs in a document. Please note that using this package
 %% will introduce the version environment and a Version-Flag
@@ -46,7 +43,6 @@
 
 % Register in the end:
 \AtEndDocument{%
-% \typeout{AtEND, writing '\@soc@@parse@versionenvs@all'}%
 \immediate\write\@auxout{\noexpand\soc@defcommand{@soc@register@versionenvs}{\@soc@@parse@versionenvs@all}}}
 
 \def\@soc@@parse@change@pattern{changed in}
@@ -55,10 +51,7 @@
 
 \def\soc@defcommand#1#2{\expandafter\gdef\csname#1\endcsname{#2}}
 
-% #1 envtag
-% #2 version
-% #3 removed/changed
-% #4 brief
+% #1 envtag #2 version #3 removed/changed #4 brief
 \def\soc@write@@changeloc#1#2#3#4{%
     \protected@write\@auxout{\let\defcommand\relax}{\protect\soc@defcommand{@sop@registers@#1@#3@#2}{#4}}%
 }
@@ -69,10 +62,8 @@
     \ifx\tmp@a\@soc@@parse@change@pattern% is change:
         % we will create a changes-register:
         \soc@write@@changeloc{\@soc@@parse@current@envtag}{#2}{changes}{#3}%
-        % \expandafter\gdef\csname @sop@registers@\@soc@@parse@current@envtag @changes@#2{#3}%
     \else\ifx\tmp@a\@soc@@parse@remove@pattern% set removed!
         \soc@write@@changeloc{\@soc@@parse@current@envtag}{#2}{removed}{#3}%
-        % \expandafter\gdef\csname @sop@registers@@soc@@parse@current@envtag @removed@#2\endcsname{#3}%
         \expandafter\gdef\csname @sop@registers@\@soc@@parse@current@envtag @removed\endcsname{#2}%
     \else% unknown
         \PackageError{sopra-changelog}{The Key '#2' is unkown. Use either: '\@soc@@parse@change@pattern' or '\@soc@@parse@remove@pattern' as key for '\@soc@@parse@current@envtag' please.}%
@@ -96,8 +87,6 @@
         \protected@edef\@soc@@parse@current@envtag{#2}%
         % setup registers:
         \expandafter\gdef\csname @sop@registers@#2@introduced\endcsname{}% TODO: set
-        % \expandafter\gdef\csname @sop@registers@#2@changes\endcsname{}%
-        % \expandafter\gdef\csname @sop@registers@#2@removed\endcsname{}% used to check for typeset
         \expandafter\soc@@parse@version@optargs#1,\@nil
     \fi
 }
@@ -108,10 +97,7 @@
 \def\soc@format@versionnumber@marginpar#1{\hyperref[soc@changelog@version:#1]{#1}}%
 % so much shorter
 \let\@socmp\soc@format@versionnumber@marginpar
-% \long\def\soc@version@skimmer#1{%\end
-%     \ifsoc@printthis@version@\unskip#1\fi%
-%     %\end%keep end-consumer alive to end environment
-% }
+
 % #1: determines further version information
 %     can be: 'changed in: XXXXX (description)' or 'removed in: XXXXX (description)'
 % #2: Introduced in Version-Number

@@ -32,21 +32,18 @@
 \ProcessOptions\relax
 
 % Basic Packages
-
 \ifsol@symbols@ \RequirePackage{graphicx} \fi % \scalebox
 \ifsol@fontawesome@use@ \RequirePackage{graphicx,fontawesome} \fi %\faPaperclip
 
 \RequirePackage{xcolor,attachfile2} % embedfile
 
 % Configure
-
 \def\soa@setAuthor#1{\gdef\@author{#1}} % not used currently
 
 \AtBeginDocument{
 \@ifundefined{thesobversion}{
     \attachfilesetup{%
         author={\@author},
-        % color=0.5 0 0.5,
         icon=Tag,
         mimetype=text/plain % we assume
     }
@@ -57,19 +54,15 @@
         icon=Tag,
         mimetype=text/plain % we assume
     }
-}
-}
+}}
 % it should be noted in docs on how to change
 
 % Helper Functions
-
 \def\soa@thesoaversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 \edef\soa@version@str{\noexpand\soa@thesoaversion\arabic{soaversion}\noexpand\@nil}
 \edef\thesoaversion{\soa@version@str}
 
-% #1 config
-% #2 File Name
-% #3 search-path-addition
+% #1 config #2 File Name #3 search-path-addition
 \def\sol@@attachfile@symbol#1#2#3{%
     \ifsol@symbols@
         \protected@edef\@sol@tmp{\noexpand\scalebox{0.65}{\noexpand\attachfile[#1,subject={#2}]{#3#2}}}%
