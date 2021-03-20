@@ -360,7 +360,7 @@
     \node[cprimary,left=2pt] at (tl@pf@lockpos) {\Huge$\thepage$};
     % Cur section rectangle
     \fill[cakzent] (tl@pf@lockpos) rectangle ++(5.5cm,0.55pt);
-    \node[above right,yshift=-1pt,font=\footnotesize,text width=5cm,align=left,minimum height=0.736cm] at (tl@pf@lockpos) {\strut\ifx\rightmark\@empty \leftmark\else \rightmark\fi\strut};
+    \node[above right,yshift=-\p@,font=\footnotesize,text width=5cm,align=left,minimum height=0.736cm] at (tl@pf@lockpos) {\strut\ifx\rightmark\@empty \leftmark\else \rightmark\fi\strut};
     \def\@sop@cury{0}
     \def\@sop@curxoff{0} % allow a second line
     \ifsop@notoc@ % normal mode
@@ -409,7 +409,7 @@
 % Structure Styles
 
 \def\sop@sepline{%
-    {\color{cakzent}{\Huge$\llap{$\diamond$}\hspace*{-1pt}$}\rule[0.41\baselineskip]{\linewidth}{0.55pt}{\Huge$\hspace*{-1pt}\rlap{$\diamond$}$}}%
+    {\color{cakzent}{\Huge$\llap{$\diamond$}\hspace*{-\p@}$}\rule[0.41\baselineskip]{\linewidth}{0.55pt}{\Huge$\hspace*{-\p@}\rlap{$\diamond$}$}}%
 }
 
 \ifsop@usebook@ \renewcommand\chapterformat{} %
@@ -421,12 +421,12 @@
     \thechapter
 \end{center}
 \fi
-{\color{chdtext}{\Huge$\llap{$\diamond$}\hspace*{-1pt}$}\rule[0.22\baselineskip]{\linewidth}{0.55pt}{\Huge$\hspace*{-1pt}\rlap{$\diamond$}$}}%
+{\color{chdtext}{\Huge$\llap{$\diamond$}\hspace*{-\p@}$}\rule[0.22\baselineskip]{\linewidth}{0.55pt}{\Huge$\hspace*{-\p@}\rlap{$\diamond$}$}}%
     \begin{center}
         \vspace*{-\topsep}
         \color{chdtext}#2#3%
     \end{center}
-    {\color{chdtext}{\Huge$\llap{$\diamond$}\hspace*{-1pt}$}\rule[0.22\baselineskip]{\linewidth}{0.55pt}{\Huge$\hspace*{-1pt}\rlap{$\diamond$}$}}%
+    {\color{chdtext}{\Huge$\llap{$\diamond$}\hspace*{-\p@}$}\rule[0.22\baselineskip]{\linewidth}{0.55pt}{\Huge$\hspace*{-\p@}\rlap{$\diamond$}$}}%
 }%
 \fi
 
@@ -566,7 +566,7 @@
 \def\sop@titlepage@groupnum@iter#1#2\@nil{%
     \def\tmp@a{#1}%
     \ifx\tmp@a\sop@tp@plussymb\else
-    %\rotatebox{-4}{$\mathbf{#1}\hspace*{-1pt}$}%
+    %\rotatebox{-4}{$\mathbf{#1}\hspace*{-\p@}$}%
     $\mathbf{#1}$%
         \def\tmp@a{#2}%
         \ifx\tmp@a\sop@tp@plussymb\else
@@ -630,7 +630,7 @@
             \ifx\sop@register@duedate\@empty\else
                 \begingroup\hbox{}\quad\scriptsize\DateConvert{\sop@register@duedate}\sop@AfterDate\endgroup\\[-0.2\baselineskip]%
             \fi
-            {\color{ctpsymbol}$\Large\llap{$\diamond$}\hspace*{-1pt}$\rule[0.275\baselineskip]{0.45\linewidth}{0.55pt}\\}%
+            {\color{ctpsymbol}$\Large\llap{$\diamond$}\hspace*{-\p@}$\rule[0.275\baselineskip]{0.45\linewidth}{0.55pt}\\}%
             \ignorespaces{{\bfseries{}Bearbeitung:}}\\
             \ignorespaces\hbox{}\quad\parbox{\linewidth}{\typesetAuthors}\bigskip\par
             \ifx\sop@register@brief\@empty\else

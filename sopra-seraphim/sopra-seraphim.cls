@@ -419,7 +419,7 @@
 
 % Title Style
 \def\sos@sepline{%
-        {\normalsize\color{ctpsymbol}{\huge$\llap{$\diamond$}\hspace*{-1pt}$}\rule[.346\baselineskip]{\linewidth}{.55pt}{\huge$\hspace*{-1pt}\rlap{$\diamond$}$}}%
+        {\normalsize\color{ctpsymbol}{\huge$\llap{$\diamond$}\hspace*{-\p@}$}\rule[.346\baselineskip]{\linewidth}{.55pt}{\huge$\hspace*{-\p@}\rlap{$\diamond$}$}}%
     }
 
 \defbeamertemplate*{title page}{seraphim}[1][]{%
