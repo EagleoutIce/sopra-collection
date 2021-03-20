@@ -475,8 +475,7 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 \def\sol@@NewLstEnv#1#2#3{%
 \begingroup
 \edef\sol@xcurlst{\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/\environName/constructor command}\endcsname{#3}{#1}{\noexpand\lstset{style=\pgfkeysvalueof{/sol@lst@family/\environName/listing style},language=#2}}{}{#2}}%
-\global\sol@xcurlst
-\relax%No one (this means me) really knows why this helps, but it enforces the lst@next - search to interpret the first char of an cs-sequence correctly
+\global\sol@xcurlst\relax
   \globaldefs=0%
 \endgroup
 }
