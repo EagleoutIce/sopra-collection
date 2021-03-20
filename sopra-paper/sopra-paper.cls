@@ -1,20 +1,20 @@
-%% sopra-paper.cls
-%%
-%% -----------------------------------------------------------------------------
-%% Version: 1.0
-%% Author:  Florian Sihler, 13.12.2019
-%%
-%% This LaTeX2e Class should provide the paper-layout to be used for
-%% all documents created by sopra-team-020.
-%%                      ulm university, WiSe2019
+% sopra-paper.cls
+%
+% ----------
+% Version: 1.0
+% Author:  Florian Sihler, 13.12.2019
+%
+% This LaTeX2e Class should provide the paper-layout to be used for
+% all documents created by sopra-team-020.
+%                      ulm university, WiSe2019
 
 
-%% Development notes:
-%%    All internal commands and registers will be prefixed with 'sop@
-%%
+% Development notes:
+%    All internal commands and registers will be prefixed with 'sop@
+%
 
-%% The general layout is inspired by the 'sopra-base' class but reimplemented
-%% to offer a titlepage and other styling options
+% The general layout is inspired by the 'sopra-base' class but reimplemented
+% to offer a titlepage and other styling options
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sopra-paper}[2019/13/02 EagleoutIce - Paper Documentclass for the sopra-team-020]

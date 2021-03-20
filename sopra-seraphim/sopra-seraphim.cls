@@ -1,18 +1,18 @@
-%% sopra-seraphim.cls
-%%
-%% -----------------------------------------------------------------------------
-%% Version: 1.0
-%% Author:  Florian Sihler, 15.12.2019
-%%
-%% This LaTeX2e Class provides a beamer-based-class setting all necessary
-%% stuff in a one-file solution. It is to be used in all Team020
-%% presentations
-%%                      ulm university, WiSe2019
+% sopra-seraphim.cls
+%
+% ----------
+% Version: 1.0
+% Author:  Florian Sihler, 15.12.2019
+%
+% This LaTeX2e Class provides a beamer-based-class setting all necessary
+% stuff in a one-file solution. It is to be used in all Team020
+% presentations
+%                      ulm university, WiSe2019
 
 
-%% Development notes:
-%%    All internal commands and registers will be prefixed with 'sos@
-%%
+% Development notes:
+%    All internal commands and registers will be prefixed with 'sos@
+%
 
 
 \NeedsTeXFormat{LaTeX2e}

@@ -1,17 +1,17 @@
-%% sopra-changelog.sty
-%% Author:  Florian Sihler, 05.01.2020
+% sopra-changelog.sty
+% Author:  Florian Sihler, 05.01.2020
 
-%% Will contain all the definitions to easily typeset and reference
-%% Changelogs in a document. Please note that using this package
-%% will introduce the version environment and a Version-Flag
-%% to automatically register any changes
+% Will contain all the definitions to easily typeset and reference
+% Changelogs in a document. Please note that using this package
+% will introduce the version environment and a Version-Flag
+% to automatically register any changes
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-changelog}[2019/12/23 EagleoutIce - changelogs for the sopra-team-020]
 
-%% ----------
-%% Lengths and Registers
-%% ----------
+% ----------
+% Lengths and Registers
+% ----------
 \newcounter{socversion} \setcounter{socversion}{1002}
 \newcounter{soc@compile@target@version}
 \newcounter{soc@counter@tmp@a}
@@ -19,14 +19,14 @@
 \newif\ifsoc@printthis@version@
 \def\soc@compile@target@version@date{}
 
-%% ----------
-%% Basic Packages
-%% ----------
+% ----------
+% Basic Packages
+% ----------
 \RequirePackage{environ,fontawesome,marginfix,hyperref}
 
-%% ----------
-%% Versioning
-%% ----------
+% ----------
+% Versioning
+% ----------
 \def\@soc@@parse@versionenvs@all{}
 
 % ensure empty if not overwritten
@@ -217,17 +217,17 @@
     {\soc@changelog@typeset@iter}%
 }
 
-%% ----------
-%% Helper Functions
-%% ----------
+% ----------
+% Helper Functions
+% ----------
 \def\soc@thesocversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 
 \edef\soc@version@str{\noexpand\soc@thesocversion\arabic{socversion}\noexpand\@nil}
 \edef\thesocversion{\soc@version@str}
 
-%% ----------
-%% User Commands
-%% ----------
+% ----------
+% User Commands
+% ----------
 % sets the to-compile target versionnumber
 \def\setTargetVersion#1{\setcounter{soc@compile@target@version}{#1}}
 \def\setTargetVersionDate#1{\gdef{\soc@compile@target@version@date}{#1}}

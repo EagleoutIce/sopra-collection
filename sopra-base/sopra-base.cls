@@ -1,17 +1,17 @@
-%% sopra-base.cls
-%%
-%% -----------------------------------------------------------------------------
-%% Version: 1.0
-%% Author:  Florian Sihler, 02.12.2019
-%%
-%% This LaTeX2e Class should provide the basic layout to be used for
-%% all documents created by sopra-team-020.
-%%                      ulm university, WiSe2019
+% sopra-base.cls
+%
+% ----------
+% Version: 1.0
+% Author:  Florian Sihler, 02.12.2019
+%
+% This LaTeX2e Class should provide the basic layout to be used for
+% all documents created by sopra-team-020.
+%                      ulm university, WiSe2019
 
 
-%% Development notes:
-%%    All internal commands and registers will be prefixed with 'sob@
-%%    as 'sob' fits the creation-Process of this Package perfectly :P
+% Development notes:
+%    All internal commands and registers will be prefixed with 'sob@
+%    as 'sob' fits the creation-Process of this Package perfectly :P
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sopra-base}[2019/12/02 EagleoutIce - Basic Documentclass for the sopra-team-020]
@@ -289,9 +289,9 @@
 }
 
 % Logo stuff
-% ---------------------------------------------------------------------------
+% ----------
 % PGF commands, generated using http://sourceforge.net/projects/eps2pgf/
-% ---------------------------------------------------------------------------
+% ----------
 
 \newcommand\uulmlogo[1]{
 \ifsob@usedraft@\else

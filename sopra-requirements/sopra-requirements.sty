@@ -1,11 +1,11 @@
-%% sopra-requirements.sty
-%%
-%% -----------------------------------------------------------------------------
-%% Version: 1.0
-%% Author:  Florian Sihler, 03.12.2019
-%%
-%% Will contain all the definitions to easily typeset and reference
-%% Functional-, Qualitative- and other Requirements.
+% sopra-requirements.sty
+%
+% ----------
+% Version: 1.0
+% Author:  Florian Sihler, 03.12.2019
+%
+% Will contain all the definitions to easily typeset and reference
+% Functional-, Qualitative- and other Requirements.
 
 % TODO: allow to customize fields and make new commands for them
 
@@ -226,8 +226,8 @@
 \edef\sor@version@str{\noexpand\sor@thesorversion\arabic{sorversion}\noexpand\@nil}
 \edef\thesorversion{\sor@version@str}
 
-%% we want to automate the requirement structure,
-%% Please not that, preqref can be used by number AND by ID whereas the ID shouldl never be a number
+% we want to automate the requirement structure,
+% Please not that, preqref can be used by number AND by ID whereas the ID shouldl never be a number
 \DeclareRobustCommand*\preqref{\@ifstar{\@sor@starred@preqref}{\@sor@unstarred@preqref}}
 % This one will set the Name too :D
 \newcommand\@sor@unstarred@preqref[2][]{\ifx!#1!\pref{tbl:requirement:#2}{\@nameuse{@sor@r@titles@#2}}\else\sor@cstpreqref{#2}{#1}\fi}

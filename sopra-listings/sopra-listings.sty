@@ -1,14 +1,14 @@
-%% sopra-listings.sty
-%%
-%% -----------------------------------------------------------------------------
-%% Version: 1.1
-%% Author:  Florian Sihler, 08.01.2021
-%%
-%% Will contain all the definitions to highlight listings in a document. Note:
-%% I've reused huge parts of the code I've written for sol@lst@family but ported
-%% them to be standalone. Furthermore This Package contains 'other' mechanisms.
-%% This Package doesn't work with the 'minted'-Package
-%%
+% sopra-listings.sty
+%
+% ----------
+% Version: 1.1
+% Author:  Florian Sihler, 08.01.2021
+%
+% Will contain all the definitions to highlight listings in a document. Note:
+% I've reused huge parts of the code I've written for sol@lst@family but ported
+% them to be standalone. Furthermore This Package contains 'other' mechanisms.
+% This Package doesn't work with the 'minted'-Package
+%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-listings}[2021/01/08 EagleoutIce - listings for the sopra-team-020]
 
@@ -331,7 +331,7 @@
   {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1 {ø}{{\o}}1 {€}{{\euro}}1 {£}{{\pounds}}1
   {:bs:}{{\@declaredcolor{sol@colors@lst@keywordA}\textbackslash\normalcolor}}1 {:bmath:}{{\sol@style@get{numbers}\$\normalcolor}}1 {:percent:}{{\%}}1
   {:emath:}{{{\sol@style@get{numbers}\$\normalcolor}}}1 {:dollar:}{{{\sol@style@get{numbers}\$\normalcolor}}}1 {:plaindollar:}{{\$}}1%spaces
-  %% brace fix
+  % brace fix
   {:space:}{{{ }}}1 {:ws:}{{{ }}}1 {:cdots:}{{{$\cdots$}}}1 {:cdot:}{{{$\cdot$}}}1 {:ldots:}{{{\ldots}}}1 {:!:}{{!}}1
   {:c:}{{{}}}0 {:star:}{{*}}1 {:minus:}{{-}}1
   {:float:}{{{\sol@style@get{numbers}f\normalcolor}}}1 {:exp:}{{{\sol@style@get{numbers}e\normalcolor}}}1 {:yields:}{{{$\rightarrow$}}}1%
@@ -380,14 +380,14 @@ numbers=none,numbersep=\z@}
 % for cleaner setup, we will use pgfkeys
 \gdef\solset#1{\pgfkeys{/sol@lst@family/.cd,#1}}
 
-%% Todo make commands like: 'on entry' which will define Actions at the beginning of the listing etc :D
+% Todo make commands like: 'on entry' which will define Actions at the beginning of the listing etc :D
 \pgfkeys{/sol@lst@family/.is family}
-%% Here we define globals, which are basically applied to every listing - like for example the initial style
+% Here we define globals, which are basically applied to every listing - like for example the initial style
 \pgfkeys{/sol@lst@family/globals/.is family,%
 /sol@lst@family/globals,%
 listing style/.initial = {sol@SOPRA}}
 
-%% Just to provide a clearer structure the keys will be defined seperate for all different styles.
+% Just to provide a clearer structure the keys will be defined seperate for all different styles.
 \pgfkeys{/sol@lst@family/default/.is family,%
 /sol@lst@family/default,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
@@ -410,7 +410,7 @@ command name suffix/.initial={},%
 constructor command/.initial={sol@NewLstEnvPlain}}
 
 
-%%% Inlines
+% Inlines
 \pgfkeys{/sol@lst@family/inline default/.is family,%
 /sol@lst@family/inline default,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
@@ -481,8 +481,8 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 }
 
 % The colossos: core registration handler
-%% #1: Name of the Language [java,latex]
-%% #2: Name of the corresponding lst-Language [lJava, lLatex,...]
+% #1: Name of the Language [java,latex]
+% #2: Name of the corresponding lst-Language [lJava, lLatex,...]
 \def\RegisterLanguage#1#2{\begingroup\makeatletter
 % Register the Environments
 \def\sol@foreach@basic@env@iter##1,##2\@nil{%
@@ -499,16 +499,16 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 \sol@foreach@basic@env{default,nonumber,plain}%,presentation}
 
 % This procedure can be used in persistence to iterate over the pgf-keys
-%% Register 'inline default'
+% Register 'inline default'
 \def\sol@foreach@inline@env@iter##1,##2\@nil{%
 \ifx!##1!\else
 \def\inlineName{##1}%
 \edef\inlineCurName{\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name suffix}}% assign
 \sol@debug{> #1/#2 i '\inlineName' (cmd: \inlineCurName, sty: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style}, d: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command})}%
-%% We will construct those with optional arguments, to give the user a chance to pass optional Arguments :D
+% We will construct those with optional arguments, to give the user a chance to pass optional Arguments :D
 % luckily we can construct the main Argument without any expansion problems :D
 \expandafter\xdef\csname\inlineCurName\endcsname{\noexpand\protect\noexpand\@ifnextchar[{\noexpand\protect\expandafter\noexpand\csname @@hasopt@@\inlineCurName\endcsname}{\noexpand\protect\expandafter\noexpand\csname @@noopt@@\inlineCurName\endcsname}}%
-%% Variant without optionals :D
+% Variant without optionals :D
 \expandafter\xdef\csname @@noopt@@\inlineCurName\endcsname####1{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#2]{####1}}%
 \expandafter\xdef\csname @@hasopt@@\inlineCurName\endcsname[####1]####2{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#2,####1]{####2}}%
 \expandafter\robustify\csname\inlineCurName\endcsname% robustify
@@ -517,7 +517,7 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 \def\sol@foreach@inline@env##1{\sol@foreach@inline@env@iter##1,\@nil}
 \sol@foreach@inline@env{default,blank,input}%,present}
 %
-%% END: Register Language as present, by definig a command
+% END: Register Language as present, by definig a command
 \expandafter\def\csname sol@lst@registeres@name@#1\endcsname{present}
 \expandafter\def\csname sol@lst@registeres@language@#1\endcsname{present}
 \endgroup}
