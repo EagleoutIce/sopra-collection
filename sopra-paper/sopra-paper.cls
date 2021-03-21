@@ -407,7 +407,6 @@
 \fi
 
 % Structure Styles
-
 \def\sop@sepline{%
     {\color{cakzent}{\Huge$\llap{$\diamond$}\hspace*{-\p@}$}\rule[0.41\baselineskip]{\linewidth}{0.55pt}{\Huge$\hspace*{-\p@}\rlap{$\diamond$}$}}%
 }
