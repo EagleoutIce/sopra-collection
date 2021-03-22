@@ -285,8 +285,7 @@
   \else#1\fi
 \fi
 \endgroup}
-\ifsol@highlight@numbers@
-\let\sol@dgt\sol@@lst@hl@digit
+\ifsol@highlight@numbers@\let\sol@dgt\sol@@lst@hl@digit
 \else\def\sol@dgt#1{#1}\fi
 % ^--- shorter and better to read
 \def\soldisablenumhl{\def\sol@dgt##1{##1}}
@@ -299,7 +298,7 @@
 \def\lst@whitespacetrue{\ifsol@lst@lastwas@charkeep@\sol@lst@lastwas@charkeep@false\sol@lst@lastwas@character@false\else\sol@lst@lastwas@character@false\fi\global\let\lst@ifwhitespace\iftrue}
 \def\lst@whitespacefalse{\global\let\lst@ifwhitespace\iffalse}
 
-\def\@nc{\ifsol@lst@lastwas@charkeep@\else\sol@lst@lastwas@character@false\fi}
+\def\sol@nc{\ifsol@lst@lastwas@charkeep@\else\sol@lst@lastwas@character@false\fi}
 
 % modify lst-literate routine to apply to the mechanism
 \def\lst@Literate#1#2#3{%
@@ -314,7 +313,7 @@
     \lst@XPrintToken \let\lst@scanmode\lst@scan@m
     \lst@token{#2}\lst@length#3\relax
     \lst@XPrintToken
-    \lst@whitespacefalse\@nc
+    \lst@whitespacefalse\sol@nc
     \fi
     \let\lst@next\lst@CArgEmptyGobble
   \fi\lst@next}%
@@ -349,15 +348,15 @@
 
 % Basic and internal highlighting definitions
 % please note, that they will apply under every condition!
-\newcommand*{\sol@dlst@default}[2][]{%
+\newcommand*\sol@dlst@default[2][]{%
 \begingroup\fboxsep=\z@\fcolorbox{sol@colors@border}{sol@colors@background}{%
   \thinspace\strut\lstinline[#1,keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak]`#2`\thinspace
 }\endgroup}
 
-\newcommand*{\sol@dlst@blank}[2][]{%
+\newcommand*\sol@dlst@blank[2][]{%
 \begingroup\thinspace\strut\lstinline[#1,keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak]`#2`\endgroup}
 
-\newcommand*{\sol@dlst@input}[2][]{\begingroup\lstinputlisting[#1]{#2}\endgroup}
+\newcommand*\sol@dlst@input[2][]{\begingroup\lstinputlisting[#1]{#2}\endgroup}
 
 % Lst styles that will be shipped in each case
 \lstdefinestyle{sol@nonum}{xleftmargin=3pt,xrightmargin=3pt,%will fix some overhead :D
@@ -380,7 +379,6 @@ numbers=none,numbersep=\z@}
 % for cleaner setup, we will use pgfkeys
 \gdef\solset#1{\pgfkeys{/sol@lst@family/.cd,#1}}
 
-% Todo make commands like: 'on entry' which will define Actions at the beginning of the listing etc :D
 \pgfkeys{/sol@lst@family/.is family}
 % Here we define globals, which are basically applied to every listing - like for example the initial style
 \pgfkeys{/sol@lst@family/globals/.is family,%
@@ -391,47 +389,40 @@ listing style/.initial = {sol@SOPRA}}
 \pgfkeys{/sol@lst@family/default/.is family,%
 /sol@lst@family/default,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
-command name prefix/.initial={},%
-command name suffix/.initial={},%
+command name prefix/.initial={},command name suffix/.initial={},%
 constructor command/.initial={sol@NewLstEnvCore}}
 
 \pgfkeys{/sol@lst@family/nonumber/.is family,%
 /sol@lst@family/nonumber,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
-command name prefix/.initial={},%
-command name suffix/.initial={*},%
+command name prefix/.initial={},command name suffix/.initial={*},%
 constructor command/.initial={sol@NewLstEnvCoreStarred}}
 
 \pgfkeys{/sol@lst@family/plain/.is family,%
 /sol@lst@family/plain,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
-command name prefix/.initial={plain},%
-command name suffix/.initial={},%
+command name prefix/.initial={plain},command name suffix/.initial={},%
 constructor command/.initial={sol@NewLstEnvPlain}}
-
 
 % Inlines
 \pgfkeys{/sol@lst@family/inline default/.is family,%
 /sol@lst@family/inline default,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
-command name prefix/.initial={c},
-command name suffix/.initial={},
+command name prefix/.initial={c},command name suffix/.initial={},
 draw command/.initial={sol@dlst@default} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
 }
 
 \pgfkeys{/sol@lst@family/inline blank/.is family,%
 /sol@lst@family/inline blank,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
-command name prefix/.initial={b},
-command name suffix/.initial={},
+command name prefix/.initial={b},command name suffix/.initial={},
 draw command/.initial={sol@dlst@blank} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
 }
 
 \pgfkeys{/sol@lst@family/inline input/.is family,%
 /sol@lst@family/inline input,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
-command name prefix/.initial={i},
-command name suffix/.initial={},
+command name prefix/.initial={i},command name suffix/.initial={},
 draw command/.initial={sol@dlst@input} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
 }
 
