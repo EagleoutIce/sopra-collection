@@ -102,6 +102,14 @@ jobs:
           # Ensure that all packages are present:
           pre_compile: "find \"../\" \\( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \\) -type f -not -path \"../sopra-seraphim/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages"
 
+      - name: Compile sopra-ntts
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: sopra-ntts
+          root_file: sopra-ntts.doc.tex
+          # Ensure that all packages are present:
+          pre_compile: "find \"../\" \\( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \\) -type f -not -path \"../sopra-ntts/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages"
+
       - name: Compile sopra-standard
         uses: xu-cheng/latex-action@v2
         with:
@@ -130,7 +138,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git add -f ./**/*.doc.pdf ./**/*.example.pdf
           git commit -m "Updated documentations and examples PDFs by workflow"
-          
+
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
