@@ -1,0 +1,96 @@
+\documentclass{sopra-base}
+
+\usepackage{sopra-documentation}
+\usepackage{sopra-ntts}
+
+\title{Das 'sopra-ntts'-Paket}
+\subtitle[Dokumentation für das 'sopra-ntts'-Paket]{Dokumentation für das 'sopra-ntts'-Paket | Version \thesonversion}
+
+\duedate{2019-12-2}
+
+\keywords{Dokumentation,sopra-ntts,sopra,uni ulm,uulm,Paket}
+\authors{Florian Sihler (florian.sihler@uni-ulm.de)}
+
+\group{Die Affenbande}
+\begin{document}
+
+    \maketitle
+
+\section{Allgemeines}
+\subsection{Warum, wieso, weshalb?}
+    Dieses \LaTeXe-Paket lagert die Futura-ähnliche Ti\textit{k}Z Font aus dem Sopra des
+    Wintersemester 2019 und Sommersemester 2020 aus.
+    Diese Dokumentation wurde zusammen mit der
+    \T{sopra-base.cls}, sowie dem Paket \T{sopra-documentation.sty} kreiert.\par
+    Zum Visualisieren der einzelnen Code-Ausschnitte wird das
+    \T{sopra-listings}-Paket verwendet.
+    Das zugehörige Paket sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{.65}{\attachfile[subject={sopra-ntts.sty}]{sopra-ntts.sty}}.
+\subsection{Abhängigkeiten}
+    Dieses Paket bindet die folgenden Paketen mit ein:
+    \begin{multicols}{3}
+        \begin{itemize}
+            \def\pkgparse#1:#2\@nil{%
+                \T{#1}\ifx!#2!\else\textsuperscript{(#2)}\fi%
+            }
+            \foreach \pkg in {tikz:} {
+                \item \expandafter\pkgparse\pkg\@nil
+            }
+        \end{itemize}
+    \end{multicols}
+    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein.
+
+\subsection{Die Installation}
+    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die
+    folgenden Möglichkeiten ergeben:
+    \begin{itemize}
+        \item Das Paket kann in dasselbe Verzeichnis wie das Dokument
+                gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+\begin{plainlatex}
+\usepackage{sopra-ntts}
+\end{plainlatex}
+        \item Das Paket kann in ein Unterverzeichnis/in ein mit
+                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
+                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+\begin{plainlatex}
+\usepackage{./Mein/Pfad/zu/sopra-ntts}
+\end{plainlatex}
+        \item Man kann das Paket (mittels eines Symlinks oder ähnlichem)
+              in einen eigenen \emph{texmf}-Baum ablegen.
+              So kann zum Beispiel auf Linux unter der Verwendung von texlive
+              das Paket hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
+              Das Verzeichnis kann erstellt und anschließend mittels
+              \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
+              das Paket wie jede andere installierte Paket verwendet werden:
+\begin{plainlatex}
+\usepackage{sopra-ntts}
+\end{plainlatex}
+    \end{itemize}
+
+\subsection{Weitere Besonderheiten}
+In Version \thesonversion{} (\cmdref{thesonversion}) gibt es keine weiteren
+Besonderheiten.
+
+\section{Befehle- und Umgebungen}
+
+Es gilt zu beachten, dass das Präfix \T{env@} nur auf die Natur einer Umgebung hinweist und nicht zum eigentlichen Bezeichner zuzuordnen ist!\par{}
+Weiter gilt: Damit alle Titel und Längen richtig aufgelöst werden können, muss das Dokument
+in der Regel zwei mal kompiliert werden um eine korrekte Anzeige zu erzeugen.
+
+\begin{command}{sonNtts}{\optArg{scale=0.06}\manArg{color}}
+    Muss in eine \say{tikzpicture}-Umgebung gesetzt werden und schreibt den Schriftzug (hier mit schwarzer Farbe):
+    \begin{center}
+        \begin{tikzpicture}
+            \sonNtts{black}
+        \end{tikzpicture}
+    \end{center}
+    Der Befehl wurde nie grundlegend für die allgemeine Nutzung konzipiert. Die Verwendung der Koordinaten findet sich in der Definition der Titelseiten der Dokumentklassen.
+\end{command}
+
+\subsection{Allgemeine Befehle}
+\begin{command}{thesonversion}{}
+    Liefert die aktuelle Version des Pakets. So ergibt: \cmd{thesonversion}: \thesonversion\\
+    \notetext{Hinweis: über \blatex{\\value\{sonversion\}} lässt sich
+    die Version als $4$-stellige Nummer erhalten: \arabic{sonversion}.}
+\end{command}
+
+\end{document}

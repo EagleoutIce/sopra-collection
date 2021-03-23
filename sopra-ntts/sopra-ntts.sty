@@ -1,0 +1,152 @@
+\ProvidesPackage{sopra-ntts}[2021/03/23 EagleoutIce - The sopra ntts tikz font]
+\RequirePackage{tikz}
+\newcounter{sonversion} \setcounter{sonversion}{1000}
+\def\son@thesonversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
+\edef\son@version@str{\noexpand\son@thesonversion\arabic{sonversion}\noexpand\@nil}
+\edef\thesonversion{\son@version@str}
+
+\definecolor{cwhite}{RGB}{252,252,252}           % RGB(252,252,252)
+
+% "Futura" Font
+% I've invested round about 2 hours trying to set up a portable way to use the
+% Futura-Font. As it worked, but wasn't portable, i've desided to recreate the
+% letters in tikz and use them instead
+\def\son@font@futura@color@current{cwhite}
+\newcounter{son@counter@font@carriage@posX}
+\newcounter{son@counter@font@carriage@posY}
+
+\def\@son@font@futura@carriage{%
+\theson@counter@font@carriage@posX cm,-\theson@counter@font@carriage@posY cm%
+}
+\def\@son@font@futura@carriage@nl{
+\setcounter{son@counter@font@carriage@posX}{0}
+\addtocounter{son@counter@font@carriage@posY}{15}
+}
+\def\@son@font@futura@carriage@reset{
+\setcounter{son@counter@font@carriage@posX}{0}
+\addtocounter{son@counter@font@carriage@posY}{0}
+}
+\def\@son@font@futura@carriage@indent#1{\setcounter{son@counter@font@carriage@posX}{#1}}
+% 40x99 [off: 13] ; middle: 47-|17 -- -53,115 -| 47 17
+\def\son@font@futura@letter@N{
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage) -- ++(32mm,0) -- ++(0,25mm) -- ++(-32mm,99mm-25mm) -- cycle; % lower left triangle
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage) ++(40mm+13mm,0) -| ++(47mm,17mm) -- ++(-53mm,++115mm) -| ++(-47mm,-15mm) -- cycle ; % middle block
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage) ++(101mm,34mm) -- ++(-32mm,99mm-25mm) |- ++(32mm,25mm) -- cycle; % upper right triangle
+\addtocounter{son@counter@font@carriage@posX}{12}
+}
+
+\def\son@font@futura@letter@O{
+\begin{scope}
+    \clip (\@son@font@futura@carriage) rectangle ++ (53mm,132mm);
+    \fill[\son@font@futura@color@current] (\@son@font@futura@carriage)++(53mm,66mm) ellipse (53mm and 68mm);
+\end{scope}
+\begin{scope}[xshift=007mm]
+    \clip (\@son@font@futura@carriage)++ (53mm,0mm) rectangle ++(53mm,132mm);
+    \fill[\son@font@futura@color@current] (\@son@font@futura@carriage)++(53mm,66mm) ellipse (53mm and 68mm);
+\end{scope}
+\addtocounter{son@counter@font@carriage@posX}{13}
+}
+
+\def\son@font@futura@letter@T{
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage)++(0,75mm) |- ++(29mm,57mm) -- cycle; % leftT
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage)++(34mm,0) rectangle ++(43mm,132mm); % TBlock
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage)++(82mm,132mm) -| ++(29mm,-57mm) -- cycle; % right
+\addtocounter{son@counter@font@carriage@posX}{13}
+}
+
+\def\son@font@futura@letter@I{
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage) rectangle ++(43mm,132mm); % TBlock
+\addtocounter{son@counter@font@carriage@posX}{6}
+}
+
+\def\son@font@futura@letter@M{
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage) -- ++(44mm,0) -- ++(-22mm,89mm) -- cycle; % lower left triangle
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage) ++(44mm+9mm,0) -- ++(46mm,0) -- ++(-32mm,132mm) -- ++(-34mm,0) -- ++(-7mm,-27mm) -- cycle ; % middle block
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage) ++(109mm,0) -- ++(46mm,0) -- ++(-32mm,132mm) -- ++(-34mm,0) -- ++(-7mm,-27mm) -- cycle ; % outer block
+\addtocounter{son@counter@font@carriage@posX}{17}
+}
+
+\def\son@font@futura@letter@E{
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage) rectangle ++(43mm,132mm); % TBlock
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage) ++(46mm,0) -| ++(47mm,57mm) -- cycle; % lower right triangle
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage) ++(46mm,132mm) -| ++(47mm,-57mm) -- cycle; % upper right triangle
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage) ++(46mm,66mm) -- ++(29mm,24mm) -- ++(0,-48mm) -- cycle; % upper right triangle
+\addtocounter{son@counter@font@carriage@posX}{11}
+}
+
+\def\son@font@futura@letter@D{
+    \fill[\son@font@futura@color@current] (\@son@font@futura@carriage) rectangle ++(43mm,132mm); % TBlock
+\begin{scope}[xshift=-2mm]
+    \clip (\@son@font@futura@carriage)++ (53mm,0mm) rectangle ++(53mm,132mm);
+    \fill[\son@font@futura@color@current] (\@son@font@futura@carriage)++(53mm,66mm) ellipse (53mm and 68mm);
+\end{scope}
+\addtocounter{son@counter@font@carriage@posX}{12}
+}
+
+% 16x21
+\def\son@font@futura@letter@S{
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage) -- ++(42mm/1.25,0) -- ++(-42mm/1.25,60.125mm/1.25) -- cycle; % lower left triangle
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage) ++(40mm+25mm,5mm) arc[start angle=282,end angle=360+35,radius=23.5mm] -- ++(90+35:72mm) arc[start angle=180+35,end angle=180+35-90,radius=23.5mm] -- ++(180+5:7mm) arc[start angle=95, end angle=180+35,radius=23.5mm+15mm] -- ++(-55:55mm) arc[start angle=90-55,end angle=55-90,radius=23.5mm] -- cycle; % middle block
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage) ++(82mm,34mm+43.875mm*1.25) -- ++(-42mm/1.25,55.125mm/1.25) -- ++(42mm/1.25,0) -- cycle; % upper right triangle
+\addtocounter{son@counter@font@carriage@posX}{12}
+}
+
+\def\son@font@futura@letter@P{
+\fill[\son@font@futura@color@current] (\@son@font@futura@carriage) rectangle ++(43mm,132mm); % TBlock
+\begin{scope}[xshift=-2mm]
+    \clip (\@son@font@futura@carriage)++ (53mm,46mm) rectangle ++(53mm,132mm);
+    \fill[\son@font@futura@color@current] (\@son@font@futura@carriage)++(53mm,64mm+68mm/2.35) ellipse (43mm and 68mm/1.75);
+\end{scope}
+\addtocounter{son@counter@font@carriage@posX}{11}
+}
+
+\def\son@font@futura@letter@Y{
+\begingroup\def\son@scaler{*.75}
+    \fill[\son@font@futura@color@current] (\@son@font@futura@carriage) ++(65mm\son@scaler,56mm) --++(0,-56mm) -| ++(43mm\son@scaler,62mm) -- ++(-65mm\son@scaler,132mm-62mm) -- ++(-43mm\son@scaler,0) -- cycle; % TBlock
+    \fill[\son@font@futura@color@current] (\@son@font@futura@carriage) ++(65mm\son@scaler,132mm) -- ++(45mm\son@scaler,-50mm) --  ++(45mm\son@scaler,50mm) --cycle; % upper right triangle
+\endgroup
+\addtocounter{son@counter@font@carriage@posX}{12}
+}
+
+% Titlepage
+\def\son@tp@plussymb{+}
+\def\son@titlepage@groupnum@iter#1#2\@nil{%
+    \def\tmp@a{#1}%
+    \ifx\tmp@a\son@tp@plussymb\else$\mathbf{#1}$%
+        \def\tmp@a{#2}%
+        \ifx\tmp@a\son@tp@plussymb\else
+             \son@titlepage@groupnum@iter#2+\@nil
+        \fi
+    \fi
+}
+
+\def\son@titlepage@groupnum#1{\edef\@tmp{\noexpand\son@titlepage@groupnum@iter#1+\noexpand\@nil}\@tmp}
+
+\def\son@ntts{
+\@son@font@futura@carriage@reset
+\son@font@futura@letter@N
+\son@font@futura@letter@O
+\@son@font@futura@carriage@nl
+\son@font@futura@letter@T
+\son@font@futura@letter@I
+\son@font@futura@letter@M
+\son@font@futura@letter@E
+\@son@font@futura@carriage@nl
+\@son@font@futura@carriage@indent{13}
+\son@font@futura@letter@T
+\son@font@futura@letter@O\coordinate (ct@groupnum) at(\@son@font@futura@carriage);
+\@son@font@futura@carriage@nl
+\@son@font@futura@carriage@indent{27}
+\son@font@futura@letter@S
+\son@font@futura@letter@P
+\son@font@futura@letter@Y\coordinate (ct@ystraw) at(\@son@font@futura@carriage);
+}
+
+\newcommand*\sonNtts[2][.06]{%
+\begin{scope}[scale=#1]
+    \def\son@font@futura@color@current{#2}%
+    \son@ntts
+\end{scope}
+}
+
+\endinput
