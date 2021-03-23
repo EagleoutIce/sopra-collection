@@ -1377,11 +1377,11 @@
 \hfill
 \begin{pgfpicture}
 \pgftransformscale{20mm/40mm}
-\pgfpathmoveto{\pgfqpoint{0cm}{4cm}}
+\pgfpathmoveto{\pgfqpoint{2.66cm}{4cm}}
 \pgfpathlineto{\pgfqpoint{20cm}{4cm}}
 \pgfpathlineto{\pgfqpoint{20cm}{0cm}}
-\pgfpathlineto{\pgfqpoint{0cm}{0cm}}
-\pgfpathlineto{\pgfqpoint{0cm}{4cm}}
+\pgfpathlineto{\pgfqpoint{2.66cm}{0cm}}
+\pgfpathlineto{\pgfqpoint{2.66cm}{4cm}}
 \pgfpathclose
 \pgfusepath{clip}
 \begin{pgfscope}

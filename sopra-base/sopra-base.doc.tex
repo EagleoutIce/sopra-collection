@@ -51,7 +51,7 @@
     \begin{multicols}{3}
         \begin{itemize}
             \def\pkgparse#1:#2\@nil{%
-                \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
+                \T{#1}\ifx!#2!\else\textsuperscript{(#2)}\fi%
             }
             \foreach \pkg in {tikz:,fontenc:T1, inputenc:utf8,
                 babel:{english,main=ngerman},geometry:{margin*,
