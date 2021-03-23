@@ -148,7 +148,7 @@ Präsentationen mit: [sopra-seraphim](sopra-seraphim):
 
 ### sopra-ntts ([Dokumentation](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-ntts/sopra-ntts.doc.pdf))
 
-Präsentationen mit: [sopra-ntts](sopra-ntts):
+Schriftzüge mit: [sopra-ntts](sopra-ntts):
   Dieses Paket enthält den ntts-Schriftzug.
 
 - [sopra-ntts.cls](sopra-changelog/sopra-ntts.cls): Dies ist das versprochene Dokumentklasse.
