@@ -283,144 +283,12 @@
 }
 }
 
-% "Futura" Font
-
-% I've invested round about 2 hours trying to set up a portable way to use the
-% Futura-Font. As it worked, but wasn't portable, i've desided to recreate the
-% letters in tikz and use them instead
-
-\def\sos@font@futura@color@current{cwhite}
-
-\newcounter{sos@counter@font@carriage@posX}
-\newcounter{sos@counter@font@carriage@posY}
-
-\def\@sos@font@futura@carriage{%
-\thesos@counter@font@carriage@posX cm,-\thesos@counter@font@carriage@posY cm%
-}
-\def\@sos@font@futura@carriage@nl{
-    \setcounter{sos@counter@font@carriage@posX}{0}
-    \addtocounter{sos@counter@font@carriage@posY}{15}
-}
-\def\@sos@font@futura@carriage@reset{
-    \setcounter{sos@counter@font@carriage@posX}{0}
-    \addtocounter{sos@counter@font@carriage@posY}{0}
-}
-\def\@sos@font@futura@carriage@indent#1{\setcounter{sos@counter@font@carriage@posX}{#1}}
-% 40x99 [off: 13] ; middle: 47-|17 -- -53,115 -| 47 17
-\def\sos@font@futura@letter@N{
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) -- ++(32mm,0) -- ++(0,25mm) -- ++(-32mm,99mm-25mm) -- cycle; % lower left triangle
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) ++(40mm+13mm,0) -| ++(47mm,17mm) -- ++(-53mm,++115mm) -| ++(-47mm,-15mm) -- cycle ; % middle block
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) ++(101mm,34mm) -- ++(-32mm,99mm-25mm) |- ++(32mm,25mm) -- cycle; % upper right triangle
-    \addtocounter{sos@counter@font@carriage@posX}{12}
-}
-
-\def\sos@font@futura@letter@O{
-    \begin{scope}
-        \clip (\@sos@font@futura@carriage) rectangle ++ (53mm,132mm);
-        \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage)++(53mm,66mm) ellipse (53mm and 68mm);
-    \end{scope}
-    \begin{scope}[xshift=007mm]
-        \clip (\@sos@font@futura@carriage)++ (53mm,0mm) rectangle ++(53mm,132mm);
-        \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage)++(53mm,66mm) ellipse (53mm and 68mm);
-    \end{scope}
-    \addtocounter{sos@counter@font@carriage@posX}{13}
-}
-
-\def\sos@font@futura@letter@T{
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage)++(0,75mm) |- ++(29mm,57mm) -- cycle; % leftT
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage)++(34mm,0) rectangle ++(43mm,132mm); % TBlock
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage)++(82mm,132mm) -| ++(29mm,-57mm) -- cycle; % right
-    \addtocounter{sos@counter@font@carriage@posX}{13}
-}
-
-\def\sos@font@futura@letter@I{
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) rectangle ++(43mm,132mm); % TBlock
-    \addtocounter{sos@counter@font@carriage@posX}{6}
-}
-
-\def\sos@font@futura@letter@M{
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) -- ++(44mm,0) -- ++(-22mm,89mm) -- cycle; % lower left triangle
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) ++(44mm+9mm,0) -- ++(46mm,0) -- ++(-32mm,132mm) -- ++(-34mm,0) -- ++(-7mm,-27mm) -- cycle ; % middle block
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) ++(109mm,0) -- ++(46mm,0) -- ++(-32mm,132mm) -- ++(-34mm,0) -- ++(-7mm,-27mm) -- cycle ; % outer block
-
-    \addtocounter{sos@counter@font@carriage@posX}{17}
-}
-
-\def\sos@font@futura@letter@E{
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) rectangle ++(43mm,132mm); % TBlock
-
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) ++(46mm,0) -| ++(47mm,57mm) -- cycle; % lower right triangle
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) ++(46mm,132mm) -| ++(47mm,-57mm) -- cycle; % upper right triangle
-
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) ++(46mm,66mm) -- ++(29mm,24mm) -- ++(0,-48mm) -- cycle; % upper right triangle
-
-    \addtocounter{sos@counter@font@carriage@posX}{11}
-}
-
-\def\sos@font@futura@letter@D{
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) rectangle ++(43mm,132mm); % TBlock
-    \begin{scope}[xshift=-2mm]
-        \clip (\@sos@font@futura@carriage)++ (53mm,0mm) rectangle ++(53mm,132mm);
-        \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage)++(53mm,66mm) ellipse (53mm and 68mm);
-    \end{scope}
-    \addtocounter{sos@counter@font@carriage@posX}{12}
-}
-
-% 16x21
-\def\sos@font@futura@letter@S{
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) -- ++(42mm/1.25,0) -- ++(-42mm/1.25,60.125mm/1.25) -- cycle; % lower left triangle
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) ++(40mm+25mm,5mm) arc[start angle=282,end angle=360+35,radius=23.5mm] -- ++(90+35:72mm) arc[start angle=180+35,end angle=180+35-90,radius=23.5mm] -- ++(180+5:7mm) arc[start angle=95, end angle=180+35,radius=23.5mm+15mm] -- ++(-55:55mm) arc[start angle=90-55,end angle=55-90,radius=23.5mm] -- cycle; % middle block
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) ++(82mm,34mm+43.875mm*1.25) -- ++(-42mm/1.25,55.125mm/1.25) -- ++(42mm/1.25,0) -- cycle; % upper right triangle
-    \addtocounter{sos@counter@font@carriage@posX}{12}
-}
-
-\def\sos@font@futura@letter@P{
-    \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) rectangle ++(43mm,132mm); % TBlock
-    \begin{scope}[xshift=-2mm]
-        \clip (\@sos@font@futura@carriage)++ (53mm,46mm) rectangle ++(53mm,132mm);
-        \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage)++(53mm,64mm+68mm/2.35) ellipse (43mm and 68mm/1.75);
-    \end{scope}
-    \addtocounter{sos@counter@font@carriage@posX}{11}
-}
-
-\def\sos@font@futura@letter@Y{
-    \begingroup\def\sos@scaler{*.75}
-        \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) ++(65mm\sos@scaler,56mm) --++(0,-56mm) -| ++(43mm\sos@scaler,62mm) -- ++(-65mm\sos@scaler,132mm-62mm) -- ++(-43mm\sos@scaler,0) -- cycle; % TBlock
-        \fill[\sos@font@futura@color@current] (\@sos@font@futura@carriage) ++(65mm\sos@scaler,132mm) -- ++(45mm\sos@scaler,-50mm) --  ++(45mm\sos@scaler,50mm) --cycle; % upper right triangle
-    \endgroup
-    \addtocounter{sos@counter@font@carriage@posX}{12}
-}
-
-\def\sos@ntts{
-    \@sos@font@futura@carriage@reset
-    \sos@font@futura@letter@N
-    \sos@font@futura@letter@O
-    \@sos@font@futura@carriage@nl
-    \sos@font@futura@letter@T
-    \sos@font@futura@letter@I
-    \sos@font@futura@letter@M
-    \sos@font@futura@letter@E
-    \@sos@font@futura@carriage@nl
-    \@sos@font@futura@carriage@indent{13}
-    \sos@font@futura@letter@T
-    \sos@font@futura@letter@O\coordinate (ct@groupnum) at(\@sos@font@futura@carriage);
-    \@sos@font@futura@carriage@nl
-    \@sos@font@futura@carriage@indent{27}
-    % \sos@font@futura@letter@D
-    % \sos@font@futura@letter@I
-    % \sos@font@futura@letter@E
-    % \@sos@font@futura@carriage@nl
-    % \@sos@font@futura@carriage@indent{27}
-    \sos@font@futura@letter@S
-    \sos@font@futura@letter@P
-    \sos@font@futura@letter@Y\coordinate (ct@ystraw) at(\@sos@font@futura@carriage);
-}
-
+\RequirePackage{sopra-ntts}
 
 % Title Style
 \def\sos@sepline{%
-        {\normalsize\color{ctpsymbol}{\huge$\llap{$\diamond$}\hspace*{-\p@}$}\rule[.346\baselineskip]{\linewidth}{.55pt}{\huge$\hspace*{-\p@}\rlap{$\diamond$}$}}%
-    }
+    {\normalsize\color{ctpsymbol}{\huge$\llap{$\diamond$}\hspace*{-\p@}$}\rule[.346\baselineskip]{\linewidth}{.55pt}{\huge$\hspace*{-\p@}\rlap{$\diamond$}$}}%
+}
 
 \defbeamertemplate*{title page}{seraphim}[1][]{%
 \begin{tikzpicture}[remember picture, overlay]
@@ -428,9 +296,9 @@
     \fill[ctpbackground] (current page.south west) rectangle (current page.north east);
     \node[align=center,text width=\linewidth,ctpsymbol,font=\usebeamerfont{title}] at(current page.center) {%
         \hbox{}\hfill\llap{\begin{tikzpicture}[scale=.035]
-        \def\sos@font@futura@color@current{ctptext}
-        \sos@ntts
-        \node[\sos@font@futura@color@current,overlay] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\tiny\bfseries/};
+        \def\son@font@futura@color@current{ctptext}
+        \son@ntts
+        \node[\son@font@futura@color@current,overlay] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\tiny\bfseries/};
         \end{tikzpicture}
         }\leavevmode\vspace*{.5ex}\newline
         \begin{minipage}{.95\linewidth}
@@ -481,8 +349,7 @@
 \AtEndDocument{\OutroPage}
 
 % Information Page
-
-\providecommand{\authorOutro}{}
+\providecommand\authorOutro{}
 
 \def\InformationPage{
 \begin{frame}[plain,noframenumbering]
@@ -496,9 +363,9 @@
         {\scriptsize\typesetAuthors\authorOutro}
         \\[1cm]
     }\hbox{}\hfill\llap{\begin{tikzpicture}[scale=.035]
-        \def\sos@font@futura@color@current{cprimary}
-        \sos@ntts
-        \node[\sos@font@futura@color@current,overlay] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\tiny\bfseries/};
+        \def\son@font@futura@color@current{cprimary}
+        \son@ntts
+        \node[\son@font@futura@color@current,overlay] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\tiny\bfseries/};
         \end{tikzpicture}
         }\hbox{}
     \leavevmode\vspace*{2cm}\\
@@ -516,24 +383,24 @@
 }
 
 \def\OutroPage{
-    \begin{frame}[plain,noframenumbering]
-    \begin{tikzpicture}[remember picture, overlay]
-        % as canvas color can fail:
-        \fill[ctpbackground] (current page.south west) rectangle (current page.north east);
-        \node[align=center,text width=\linewidth,ctpsymbol,font=\usebeamerfont{title}] at(current page.center) {%
-            \begin{tikzpicture}[scale=.125]
-            \def\sos@font@futura@color@current{ctptext}
-            \sos@ntts
-            \node[\sos@font@futura@color@current,overlay] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\small\bfseries/};
-            \ifx\sos@register@groupnum\@empty\else
-            \node[right, font=\fontsize{14}{14}\selectfont,ctpsymbol,overlay] (ct@gnumt) at ($(ct@groupnum)+(0,132mm/2)$){Team: \(\mathit{\sos@register@groupnum}\)};
-            \fi
-            \end{tikzpicture}
-        };
-        \fill[cakzent] (current page.south west) rectangle ($(current page.south east)+(0,1mm)$);
-        \fill[cakzent] (current page.north west) rectangle ($(current page.north east)+(0,-1mm)$);
-    \end{tikzpicture}
-    \end{frame}
+\begin{frame}[plain,noframenumbering]
+\begin{tikzpicture}[remember picture, overlay]
+    % as canvas color can fail:
+    \fill[ctpbackground] (current page.south west) rectangle (current page.north east);
+    \node[align=center,text width=\linewidth,ctpsymbol,font=\usebeamerfont{title}] at(current page.center) {%
+        \begin{tikzpicture}[scale=.125]
+        \def\son@font@futura@color@current{ctptext}
+        \son@ntts
+        \node[\son@font@futura@color@current,overlay] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\small\bfseries/};
+        \ifx\sos@register@groupnum\@empty\else
+        \node[right, font=\fontsize{14}{14}\selectfont,ctpsymbol,overlay] (ct@gnumt) at ($(ct@groupnum)+(0,132mm/2)$){Team: \(\mathit{\sos@register@groupnum}\)};
+        \fi
+        \end{tikzpicture}
+    };
+    \fill[cakzent] (current page.south west) rectangle ($(current page.south east)+(0,1mm)$);
+    \fill[cakzent] (current page.north west) rectangle ($(current page.north east)+(0,-1mm)$);
+\end{tikzpicture}
+\end{frame}
 }
 
 % Header & Footer

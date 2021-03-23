@@ -43,7 +43,7 @@
     \begin{multicols}{4}
         \begin{itemize}
             \def\pkgparse#1:#2\@nil{%
-                \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
+                \T{#1}\ifx!#2!\else\textsuperscript{(#2)}\fi%
             }
             \foreach \pkg in {environ:,fontawesome:,marginfix:,hyperref:} {
                 \item \expandafter\pkgparse\pkg\@nil

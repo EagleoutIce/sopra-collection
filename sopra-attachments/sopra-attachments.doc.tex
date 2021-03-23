@@ -41,7 +41,7 @@
     \begin{multicols}{3}
         \begin{itemize}
             \def\pkgparse#1:#2\@nil{%
-                \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
+                \T{#1}\ifx!#2!\else\textsuperscript{(#2)}\fi%
             }
             \foreach \pkg in {xcolor:,attachfile2:,graphicx:{\jmark[\T{attsymbols}]{mrk:attsymbols}, \jmark[\T{usefa}]{mrk:usefa}},fontawesome:{\jmark[\T{usefa}]{mrk:usefa}}} {
                 \item \expandafter\pkgparse\pkg\@nil

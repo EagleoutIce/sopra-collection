@@ -1,5 +1,5 @@
 \errorcontextlines 99999
-\documentclass[useartcl,notoc]{sopra-paper} 
+\documentclass[useartcl,notoc]{sopra-paper}
 
 \usepackage[dummy]{sopra-documentation}
 \usepackage{sopra-attachments}
@@ -33,7 +33,7 @@
 
 \section{Allgemeines}
 \subsection{Warum, wieso, weshalb?}
-    Diese \LaTeXe-Dokumentlasse wurde im Rahmen des Sopras im 
+    Diese \LaTeXe-Dokumentlasse wurde im Rahmen des Sopras im
     Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
     Grundlage für die Optik aller Dokumente des \notetext{Teams 20}.
     Das Layout kann sowohl als klassisches \T{book} als auch als \T{article} agieren (siehe: \argref{usebook}{useartcl}). Die Dokumentation wurde aus strukturellen Gründen in letzterem angefertigt, es werden also keine Titel platziert, analog passt sich die Kopfzeile an den Umstand an!\par
@@ -42,13 +42,13 @@
     nicht relevant.\par
     Die zugehörige Klasse sollte ebenfalls in dieses Dokument eingebettet sein: \textattachfile[subject={sopra-paper.cls}]{sopra-paper.cls}{sopra-paper.cls}.
 \subsection{Abhängigkeiten}
-    Dieses Paket basiert auf den, KOMA-Skript Klassen \T{scrbook}\footnote{\url{https://www.ctan.org/pkg/scrbook}} oder \T{scrartcl}\footnote{\url{https://www.ctan.org/pkg/scrartcl}} (siehe:  \argref{usebook}{useartcl}) 
-    sowie den folgenden Paketen (alle übergebenen Argumente werden ebenfalls 
+    Dieses Paket basiert auf den, KOMA-Skript Klassen \T{scrbook}\footnote{\url{https://www.ctan.org/pkg/scrbook}} oder \T{scrartcl}\footnote{\url{https://www.ctan.org/pkg/scrartcl}} (siehe:  \argref{usebook}{useartcl})
+    sowie den folgenden Paketen (alle übergebenen Argumente werden ebenfalls
     angegeben, wobei im Fall einer Werteübergabe ein Stern gesetzt wird. Ein Ausrufezeichen vor einem \say{Argument} deklariert, dass es sich hier um eine Option handelt die das Laden des Pakets kontrolliert):
     \begin{multicols}{3}
         \begin{itemize}
             \def\pkgparse#1:#2\@nil{%
-                \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
+                \T{#1}\ifx!#2!\else\textsuperscript{(#2)}\fi%
             }
             \foreach \pkg in {tikz:,fontenc:T1, inputenc:utf8,
                 babel:{english,main=ngerman},geometry:{margin*,
@@ -62,7 +62,7 @@
     wird noch die Ti\textit{k}Z-Bibliothek \T{calc} verwendet.
 
 \subsection{Die Installation}
-    Die Klasse wird nicht als \T{.dtx} ausgeliefert, weswegen sich die 
+    Die Klasse wird nicht als \T{.dtx} ausgeliefert, weswegen sich die
     folgenden Möglichkeiten ergeben:
     \begin{itemize}
         \item Die Dokumentklasse kann in dasselbe Verzeichnis wie das Dokument
@@ -104,7 +104,7 @@
 %
 %
 
-\section{Klassen-Konfiguration}    
+\section{Klassen-Konfiguration}
     \subsection{Akzeptierte Parameter}
     Die Dokumentklasse akzeptiert, so wie die meisten, Argumente. So können
     nebst den für \T{article} akzeptierten Argumente die im folgenden
@@ -123,7 +123,7 @@
 
     \begin{argument}{final}{draft}
         Im \T{draft}-Modus können einige Elemente so wie Grafiken nicht
-        gesetzt werden um so den Kompilierprozess zu beschleunigen. 
+        gesetzt werden um so den Kompilierprozess zu beschleunigen.
         Diese Option wird analog auch von vielen weiteren Paketen akzeptiert.
     \end{argument}
 
@@ -161,7 +161,7 @@
     \end{argument}
 
     \subsection{Weitere Informationen}
-    An einem adäquaten Layout für Präsentationen wird aktuell gearbeitet.    
+    An einem adäquaten Layout für Präsentationen wird aktuell gearbeitet.
 
 %
 %
@@ -208,15 +208,15 @@ das Dokument beginnt). \notetext{Entwicklernotiz: Alle diese Felder stehen über
 
 \begin{command}{duedate}{\optArg{short}\manArg{YYYY-MM-DD}}
    Setzt das Datum des Dokuments. Zur Konvertierung wird \cmdref{DateConvert}
-   verwendet. 
+   verwendet.
 \end{command}
 
 \begin{command}{supervisor}{\optArg{short}\manArg{Name}}
-    Setzt den Betreuer auf \T{Name}. Dieses Datenfeld wird in der Basis-Klasse nicht verwendet. 
+    Setzt den Betreuer auf \T{Name}. Dieses Datenfeld wird in der Basis-Klasse nicht verwendet.
 \end{command}
 
 \begin{command}{keywords}{\optArg{short}\manArg{Schlüsselwörter}}
-    Setzt die Keywords für die Metadaten auf \T{Schlüselwörter}. 
+    Setzt die Keywords für die Metadaten auf \T{Schlüselwörter}.
 \end{command}
 
 \begin{command}{group}{\optArg{short}\manArg{Name}}
@@ -303,7 +303,7 @@ Im Zuge dieser \LaTeXe-Dokumentklasse sind noch einige andere Pakete entstanden.
         \foreach \i/\u in {eagle-maps/{https://github.com/EagleoutIce/eagle-maps},LILLY-Framework/{https://github.com/EagleoutIce/LILLY},sopra-documentation/,sopra-models/,sopra-listings/,sopra-requirements/,sopra-attachments/} {
             \item \T{\i}\expandafter\ifx\expandafter\\\u\\\else\footnote{\url{\u}}\fi
         }
-    \end{itemize}    
+    \end{itemize}
 \end{multicols}
 
 \end{document}

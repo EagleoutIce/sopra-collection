@@ -47,7 +47,7 @@
     \begin{multicols}{3}
         \begin{itemize}
             \def\pkgparse#1:#2\@nil{%
-                \T{#1}\ifx\\#2\\\else\textsuperscript{(#2)}\fi%
+                \T{#1}\ifx!#2!\else\textsuperscript{(#2)}\fi%
             }
             \foreach \pkg in {fontenc:{\T{T1}, \jmark[\T{encoding}]{mrk:encoding}},%
                 inputenc:{\T{utf8}, \jmark[\T{encoding}]{mrk:encoding}},%

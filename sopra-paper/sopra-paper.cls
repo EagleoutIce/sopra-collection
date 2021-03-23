@@ -316,25 +316,20 @@
 }
 
 % Total chapter number now in '\thesop@counter@chapter@counter'
-
 \def\sop@chapblob#1#2#3#4{%
     \draw[fill=#2] (#3) circle (6pt) node[font=\scriptsize,align=center] {\hyperlink{#4.#1}{#1}};%
 }
-
 \def\sop@mchapblob#1#2#3#4{%
     \draw[fill=cprimary] (#3) circle (6pt) node[font=\scriptsize\bfseries,align=center,#2] {\hyperlink{#4.#1}{#1}};%
 }
-
 \def\sop@chapsq#1#2#3#4{%
     \draw[fill=#2,thin] (#3)++(-5.5pt,-5.5pt) rectangle ++(11pt,11pt) node[midway,centered,font=\scriptsize,align=center] {\hyperlink{#4.#1}{#1}};%
 }
-
 \def\sop@mchapsq#1#2#3#4{%
     \draw[fill=cprimary,thin] (#3)++(-5.5pt,-5.5pt) rectangle ++(11pt,11pt) node[midway,centered,font=\scriptsize\bfseries,align=center,#2] {\hyperlink{#4.#1}{#1}};%
 }
 % Header
 \renewcommand\sectionmark[1]{\markright{\@arabic\c@section,~#1}}
-
 \clearpairofpagestyles
 \renewcommand\headfont{\normalfont}
 
@@ -354,7 +349,7 @@
 \ifnum\value{\@sop@tlheadmarker}>0\relax \def\@doheader{1}\fi
 \ifsop@notoc@\else\def\@doheader{1}\fi
 %
-\ifnum\@doheader>0
+\ifnum\@doheader>0\relax
 \begin{tikzpicture}[remember picture, overlay]
     \coordinate (tl@pf@lockpos) at ($(current page.north east)+(-5.5cm,-1.25cm)$);
     \node[cprimary,left=2pt] at (tl@pf@lockpos) {\Huge$\thepage$};
@@ -453,148 +448,7 @@
 \setkomafont{subsubsection}{\normalsize}
 \setkomafont{paragraph}{\mdseries\itshape}
 
-% "Futura" Font
-% I've invested round about 2 hours trying to set up a portable way to use the
-% Futura-Font. As it worked, but wasn't portable, i've desided to recreate the
-% letters in tikz and use them instead
-\def\sop@font@futura@color@current{cwhite}
-
-\newcounter{sop@counter@font@carriage@posX}
-\newcounter{sop@counter@font@carriage@posY}
-
-\def\@sop@font@futura@carriage{%
-\thesop@counter@font@carriage@posX cm,-\thesop@counter@font@carriage@posY cm%
-}
-\def\@sop@font@futura@carriage@nl{
-    \setcounter{sop@counter@font@carriage@posX}{0}
-    \addtocounter{sop@counter@font@carriage@posY}{15}
-}
-\def\@sop@font@futura@carriage@reset{
-    \setcounter{sop@counter@font@carriage@posX}{0}
-    \addtocounter{sop@counter@font@carriage@posY}{0}
-}
-\def\@sop@font@futura@carriage@indent#1{\setcounter{sop@counter@font@carriage@posX}{#1}}
-% 40x99 [off: 13] ; middle: 47-|17 -- -53,115 -| 47 17
-\def\sop@font@futura@letter@N{
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) -- ++(32mm,0) -- ++(0,25mm) -- ++(-32mm,99mm-25mm) -- cycle; % lower left triangle
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) ++(40mm+13mm,0) -| ++(47mm,17mm) -- ++(-53mm,++115mm) -| ++(-47mm,-15mm) -- cycle ; % middle block
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) ++(101mm,34mm) -- ++(-32mm,99mm-25mm) |- ++(32mm,25mm) -- cycle; % upper right triangle
-    \addtocounter{sop@counter@font@carriage@posX}{12}
-}
-
-\def\sop@font@futura@letter@O{
-    \begin{scope}
-        \clip (\@sop@font@futura@carriage) rectangle ++ (53mm,132mm);
-        \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage)++(53mm,66mm) ellipse (53mm and 68mm);
-    \end{scope}
-    \begin{scope}[xshift=007mm]
-        \clip (\@sop@font@futura@carriage)++ (53mm,0mm) rectangle ++(53mm,132mm);
-        \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage)++(53mm,66mm) ellipse (53mm and 68mm);
-    \end{scope}
-    \addtocounter{sop@counter@font@carriage@posX}{13}
-}
-
-\def\sop@font@futura@letter@T{
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage)++(0,75mm) |- ++(29mm,57mm) -- cycle; % leftT
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage)++(34mm,0) rectangle ++(43mm,132mm); % TBlock
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage)++(82mm,132mm) -| ++(29mm,-57mm) -- cycle; % right
-    \addtocounter{sop@counter@font@carriage@posX}{13}
-}
-
-\def\sop@font@futura@letter@I{
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) rectangle ++(43mm,132mm); % TBlock
-    \addtocounter{sop@counter@font@carriage@posX}{6}
-}
-
-\def\sop@font@futura@letter@M{
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) -- ++(44mm,0) -- ++(-22mm,89mm) -- cycle; % lower left triangle
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) ++(44mm+9mm,0) -- ++(46mm,0) -- ++(-32mm,132mm) -- ++(-34mm,0) -- ++(-7mm,-27mm) -- cycle ; % middle block
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) ++(109mm,0) -- ++(46mm,0) -- ++(-32mm,132mm) -- ++(-34mm,0) -- ++(-7mm,-27mm) -- cycle ; % outer block
-
-    \addtocounter{sop@counter@font@carriage@posX}{17}
-}
-
-\def\sop@font@futura@letter@E{
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) rectangle ++(43mm,132mm); % TBlock
-
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) ++(46mm,0) -| ++(47mm,57mm) -- cycle; % lower right triangle
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) ++(46mm,132mm) -| ++(47mm,-57mm) -- cycle; % upper right triangle
-
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) ++(46mm,66mm) -- ++(29mm,24mm) -- ++(0,-48mm) -- cycle; % upper right triangle
-
-    \addtocounter{sop@counter@font@carriage@posX}{11}
-}
-
-\def\sop@font@futura@letter@D{
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) rectangle ++(43mm,132mm); % TBlock
-    \begin{scope}[xshift=-2mm]
-        \clip (\@sop@font@futura@carriage)++ (53mm,0mm) rectangle ++(53mm,132mm);
-        \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage)++(53mm,66mm) ellipse (53mm and 68mm);
-    \end{scope}
-    \addtocounter{sop@counter@font@carriage@posX}{12}
-}
-
-% 16x21
-\def\sop@font@futura@letter@S{
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) -- ++(42mm/1.25,0) -- ++(-42mm/1.25,60.125mm/1.25) -- cycle; % lower left triangle
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) ++(40mm+25mm,5mm) arc[start angle=282,end angle=360+35,radius=23.5mm] -- ++(90+35:72mm) arc[start angle=180+35,end angle=180+35-90,radius=23.5mm] -- ++(180+5:7mm) arc[start angle=95, end angle=180+35,radius=23.5mm+15mm] -- ++(-55:55mm) arc[start angle=90-55,end angle=55-90,radius=23.5mm] -- cycle; % middle block
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) ++(82mm,34mm+43.875mm*1.25) -- ++(-42mm/1.25,55.125mm/1.25) -- ++(42mm/1.25,0) -- cycle; % upper right triangle
-    \addtocounter{sop@counter@font@carriage@posX}{12}
-}
-
-\def\sop@font@futura@letter@P{
-    \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) rectangle ++(43mm,132mm); % TBlock
-    \begin{scope}[xshift=-2mm]
-        \clip (\@sop@font@futura@carriage)++ (53mm,46mm) rectangle ++(53mm,132mm);
-        \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage)++(53mm,64mm+68mm/2.35) ellipse (43mm and 68mm/1.75);
-    \end{scope}
-    \addtocounter{sop@counter@font@carriage@posX}{11}
-}
-
-\def\sop@font@futura@letter@Y{
-    \begingroup\def\sop@scaler{*0.75}
-        \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) ++(65mm\sop@scaler,56mm) --++(0,-56mm) -| ++(43mm\sop@scaler,62mm) -- ++(-65mm\sop@scaler,132mm-62mm) -- ++(-43mm\sop@scaler,0) -- cycle; % TBlock
-        \fill[\sop@font@futura@color@current] (\@sop@font@futura@carriage) ++(65mm\sop@scaler,132mm) -- ++(45mm\sop@scaler,-50mm) --  ++(45mm\sop@scaler,50mm) --cycle; % upper right triangle
-    \endgroup
-    \addtocounter{sop@counter@font@carriage@posX}{12}
-}
-
-% Titlepage
-
-\def\sop@tp@plussymb{+}
-\def\sop@titlepage@groupnum@iter#1#2\@nil{%
-    \def\tmp@a{#1}%
-    \ifx\tmp@a\sop@tp@plussymb\else
-    %\rotatebox{-4}{$\mathbf{#1}\hspace*{-\p@}$}%
-    $\mathbf{#1}$%
-        \def\tmp@a{#2}%
-        \ifx\tmp@a\sop@tp@plussymb\else
-             \sop@titlepage@groupnum@iter#2+\@nil
-        \fi
-    \fi
-}
-
-\def\sop@titlepage@groupnum#1{\edef\@tmp{\noexpand\sop@titlepage@groupnum@iter#1+\noexpand\@nil}\@tmp}
-
-\def\sop@ntts{
-    \@sop@font@futura@carriage@reset
-    \sop@font@futura@letter@N
-    \sop@font@futura@letter@O
-    \@sop@font@futura@carriage@nl
-    \sop@font@futura@letter@T
-    \sop@font@futura@letter@I
-    \sop@font@futura@letter@M
-    \sop@font@futura@letter@E
-    \@sop@font@futura@carriage@nl
-    \@sop@font@futura@carriage@indent{13}
-    \sop@font@futura@letter@T
-    \sop@font@futura@letter@O\coordinate (ct@groupnum) at(\@sop@font@futura@carriage);
-    \@sop@font@futura@carriage@nl
-    \@sop@font@futura@carriage@indent{27}
-    \sop@font@futura@letter@S
-    \sop@font@futura@letter@P
-    \sop@font@futura@letter@Y\coordinate (ct@ystraw) at(\@sop@font@futura@carriage);
-}
+\RequirePackage{sopra-ntts}
 
 % set the titlepage
 \def\sop@layout@titlepage{
@@ -602,13 +456,13 @@
         \pagecolor{ctpbackground}
         % Here we will place the Tag (Sopra....)
         \hbox{}\hfill\llap{\begin{tikzpicture}[scale=0.079]
-            \def\sop@font@futura@color@current{ctptext}
-            \sop@ntts
+            \def\son@font@futura@color@current{ctptext}
+            \son@ntts
             % lets draw a strw for 'Y'
-            \node[\sop@font@futura@color@current] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\scriptsize\bfseries/};
+            \node[\son@font@futura@color@current] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\scriptsize\bfseries/};
             % here we will plant the group-Tag at the 007 position, having a lot of fun :D
             \ifx\sop@register@groupnum\@empty\else
-            \node[right=0.1cm,yshift=0.4cm,font=\fontsize{17}{17}\selectfont\sffamily,ctpsymbol] (ct@gnumt) at (ct@groupnum) {\sop@titlepage@groupnum{\sop@register@groupnum}};
+            \node[right=0.1cm,yshift=0.4cm,font=\fontsize{17}{17}\selectfont\sffamily,ctpsymbol] (ct@gnumt) at (ct@groupnum) {\son@titlepage@groupnum{\sop@register@groupnum}};
             \node[right,yshift=0.10cm,xshift=0.4cm,font=\fontsize{8}{8}\selectfont\sffamily,ctpsymbol] at (ct@gnumt){\ifx\sop@register@group\@empty Team\else\rlap{\sop@register@group}\fi};
             \fi
         \end{tikzpicture}}\\[5em]
@@ -640,16 +494,14 @@
     \clearpage\nopagecolor
     \thispagestyle{empty}%
     \hbox{}\qquad\begin{tikzpicture}[scale=0.12]
-        \def\sop@font@futura@color@current{cprimary}
-            \@sop@font@futura@carriage@reset
-            \sop@ntts
-            % lets draw a strw for 'Y'
-            \node[\sop@font@futura@color@current] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\bfseries/};
+        \def\son@font@futura@color@current{cprimary}
+        \son@ntts
+        % lets draw a strw for 'Y'
+        \node[\son@font@futura@color@current] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\bfseries/};
     \end{tikzpicture}
     \hbox{}\vfill\begingroup\scriptsize
     \begin{flushright}
-        \parbox{9cm}{
-        \textbf{$-\,$\DateConvert{2019-12-15}$\,-$}\\
+        \parbox{9cm}{\textbf{$-\,$\DateConvert{2019-12-15}$\,-$}\\
         \color{cprimary}Dieses Layout wurde für das Softwaregrundprojekt
         im Wintersemester 2019/2020 von Florian Sihler im Rahmen des
         Informatikstudiums an der Universität Ulm vollständig in \LaTeXe{} erstellt.}
@@ -664,15 +516,14 @@
 
 \ifsop@notoc@\else
 \makeatletter
-\newcommand\TableOfContents[1][]{\hypertarget{toc.I}\relax%
-    \section*{\contentsname}\relax%
+\newcommand\TableOfContents[1][]{\hypertarget{toc.I}\relax
+    \section*{\contentsname}
     \markright{I, \xcontentname}
-    \ifx!#1!\else\vspace*{-\topsep}#1\par\fi%
-    \begingroup\@starttoc{toc}\endgroup%
+    \ifx!#1!\else\vspace*{-\topsep}#1\par\fi
+    \begingroup\@starttoc{toc}\endgroup
 }\fi
 
 % Listings (sopra-listings), Attachments (sopra-attachments,...)
-
 \def\sop@SetListing{
     \makeatletter
     \colorlet{sol@colors@lst@keywordA}{cprimary} % e.g.: class, public, static...
@@ -689,14 +540,12 @@
 }
 
 \def\sop@SetAttachment{
-    \makeatletter
-    \attachfilesetup{%
-        author={\sop@register@authors},
-        color=cakzent,
-        icon=Tag,
-        mimetype=text/plain % we assume
-    }
-    \makeatother
+\makeatletter
+\attachfilesetup{%
+    author={\sop@register@authors},
+    color=cakzent,icon=Tag,
+    mimetype=text/plain % we assume
+}\makeatother
 }
 
 \def\sop@SetTables{
