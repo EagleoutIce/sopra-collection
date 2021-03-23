@@ -13,23 +13,25 @@ Es grüßt: Florian (`team-020`).
 
 ## Inhaltsübersicht
 
-1. [Motivation](#motivation)
-2. [Inhaltsübersicht](#inhaltsübersicht)
-3. [Installation](#installation)
-   1. [Eigenständige Installtion](#eigenständige-installtion)
-   2. [Installation mit sltx](#installation-mit-sltx)
-4. [Paketübersicht](#paketübersicht)
-   1. [sopra-base (Dokumentation)](#sopra-base-dokumentation)
-   2. [sopra-documentation (Dokumentation)](#sopra-documentation-dokumentation)
-   3. [sopra-models (Dokumentation)](#sopra-models-dokumentation)
-   4. [sopra-requirements (Dokumentation)](#sopra-requirements-dokumentation)
-   5. [sopra-tables (Dokumentation)](#sopra-tables-dokumentation)
-   6. [sopra-attachments (Dokumentation)](#sopra-attachments-dokumentation)
-   7. [sopra-listings (Dokumentation)](#sopra-listings-dokumentation)
-   8. [sopra-changelog (Dokumentation)](#sopra-changelog-dokumentation)
-   9. [sopra-standard (Dokumentation)](#sopra-standard-dokumentation)
-   10. [sopra-paper (Dokumentation)](#sopra-paper-dokumentation)
-   11. [sopra-seraphim (Dokumentation)](#sopra-seraphim-dokumentation)
+- [sopra-collection](#sopra-collection)
+  - [Motivation](#motivation)
+  - [Inhaltsübersicht](#inhaltsübersicht)
+  - [Installation](#installation)
+    - [Eigenständige Installtion](#eigenständige-installtion)
+    - [Installation mit sltx](#installation-mit-sltx)
+  - [Paketübersicht](#paketübersicht)
+    - [sopra-base (Dokumentation)](#sopra-base-dokumentation)
+    - [sopra-documentation (Dokumentation)](#sopra-documentation-dokumentation)
+    - [sopra-models (Dokumentation)](#sopra-models-dokumentation)
+    - [sopra-requirements (Dokumentation)](#sopra-requirements-dokumentation)
+    - [sopra-tables (Dokumentation)](#sopra-tables-dokumentation)
+    - [sopra-attachments (Dokumentation)](#sopra-attachments-dokumentation)
+    - [sopra-listings (Dokumentation)](#sopra-listings-dokumentation)
+    - [sopra-changelog (Dokumentation)](#sopra-changelog-dokumentation)
+    - [sopra-standard (Dokumentation)](#sopra-standard-dokumentation)
+    - [sopra-paper (Dokumentation)](#sopra-paper-dokumentation)
+    - [sopra-seraphim (Dokumentation)](#sopra-seraphim-dokumentation)
+    - [sopra-ntts (Dokumentation)](#sopra-ntts-dokumentation)
 
 ## Installation
 
@@ -143,3 +145,11 @@ Präsentationen mit: [sopra-seraphim](sopra-seraphim):
 
 - [sopra-seraphim.cls](sopra-changelog/sopra-seraphim.cls): Dies ist das versprochene Dokumentklasse.
 - [sopra-seraphim.doc.tex](sopra-changelog/sopra-seraphim.doc.tex): Für sie wird das `sopra-listings`-Paket, sofern es installiert ist, reicht: `pdflatex sopra-seraphim.doc.tex`.
+
+### sopra-ntts ([Dokumentation](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-ntts/sopra-ntts.doc.pdf))
+
+Präsentationen mit: [sopra-ntts](sopra-ntts):
+  Dieses Paket enthält den ntts-Schriftzug.
+
+- [sopra-ntts.cls](sopra-changelog/sopra-ntts.cls): Dies ist das versprochene Dokumentklasse.
+- [sopra-ntts.doc.tex](sopra-changelog/sopra-ntts.doc.tex): Für sie wird das `sopra-listings`-Paket, sofern es installiert ist, reicht: `pdflatex sopra-ntts.doc.tex`.
