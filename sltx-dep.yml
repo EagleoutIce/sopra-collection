@@ -1,4 +1,10 @@
 target: The sopra-collection
+
+profiles:
+  default:
+    grab-files: ["**/*.sty=>./","**/*.cls=>./"]
+    grab-dirs: ["sopra-listings/Languages=>Languages/"]
+
 dependencies:
     color-palettes:
       url: https://github.com/EagleoutIce/color-palettes
