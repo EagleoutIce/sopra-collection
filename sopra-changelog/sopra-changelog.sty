@@ -1,17 +1,13 @@
 % sopra-changelog.sty
 % Author:  Florian Sihler, 05.01.2020
-
 % Will contain all the definitions to easily typeset and reference
 % Changelogs in a document. Please note that using this package
 % will introduce the version environment and a Version-Flag
 % to automatically register any changes
-
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-changelog}[2019/12/23 EagleoutIce - changelogs for the sopra-team-020]
 
-% ----------
 % Lengths and Registers
-% ----------
 \newcounter{socversion} \setcounter{socversion}{1002}
 \newcounter{soc@compile@target@version}
 \newcounter{soc@counter@tmp@a}
@@ -19,16 +15,10 @@
 \newif\ifsoc@printthis@version@
 \def\soc@compile@target@version@date{}
 
-% ----------
 % Basic Packages
-% ----------
 \RequirePackage{environ,fontawesome,marginfix,hyperref}
-
-% ----------
 % Versioning
-% ----------
 \def\@soc@@parse@versionenvs@all{}
-
 % ensure empty if not overwritten
 \providecommand\@soc@register@versionenvs{}
 
@@ -67,21 +57,17 @@
         \expandafter\gdef\csname @sop@registers@\@soc@@parse@current@envtag @removed\endcsname{#2}%
     \else% unknown
         \PackageError{sopra-changelog}{The Key '#2' is unkown. Use either: '\@soc@@parse@change@pattern' or '\@soc@@parse@remove@pattern' as key for '\@soc@@parse@current@envtag' please.}%
-    \fi\fi
-}
+\fi\fi}
 
 \def\soc@@parse@version@optargs#1,#2\@nil{\ignorespaces
-    \ifx!#1!\else
-        % now do single parse
-        \expandafter\soc@@parse@@version@optargs#1 \@nil
-        \ifx!#2!\else% recursive call
-            \expandafter\soc@@parse@version@optargs#2,\@nil
-        \fi
-    \fi
-}
+\ifx!#1!\else
+    % now do single parse
+    \expandafter\soc@@parse@@version@optargs#1 \@nil
+    \ifx!#2!\else% recursive call
+        \expandafter\soc@@parse@version@optargs#2,\@nil
+\fi\fi}
 
-% #1 opt args
-% #2 name for registers
+% #1 opt args #2 name for registers
 \def\soc@parse@version@optargs#1#2{%
     \ifx!#1!\else
         \protected@edef\@soc@@parse@current@envtag{#2}%
@@ -93,7 +79,6 @@
 
 % just a casual init runner for marked boxes
 \def\@soc@version@init{\phantomsection\ignorespaces}
-
 \def\soc@format@versionnumber@marginpar#1{\hyperref[soc@changelog@version:#1]{#1}}%
 % so much shorter
 \let\@socmp\soc@format@versionnumber@marginpar
@@ -103,65 +88,61 @@
 % #2: Introduced in Version-Number
 % #3: Title
 \newenvironment{version}[3][]{\@soc@version@init
-    \soc@parse@version@optargs{#1}{#3}%
-    \@soc@register@new@versionenv{#3}%
-    \expandafter\gdef\csname @sop@registers@#3@introduced\endcsname{#2}%
-    \label{soc@version:#3}%
-    \soc@printthis@version@true% should be printed by default
-    % check: should it be typeset?
-    \@ifundefined{@sop@registers@#3@removed}{% not removed!
-        % check if already created :D
-        \ifnum\value{soc@compile@target@version}<#2\relax% nope
-        \soc@printthis@version@false\else
-        \marginpar{\tiny\faPlusCircle\ V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}}%
-        \fi% jepp
-    }{% Got removed, are we pre-removed?
-        \ifnum\value{soc@compile@target@version}<\@nameuse{@sop@registers@#3@removed}% nope
-        \marginpar{\tiny\faPlusCircle\ V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}}%
-        \else%
-        \marginpar{\tiny\faTimesCircle\ V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}\thinspace-\thinspace\@socmp{\@nameuse{@sop@registers@#3@removed}}}%\fi% jepp
-        \fi%
-    }%
-    %Defining skimmer:
-    \ifsoc@printthis@version@
-        \newenvironment{version@read}{\begingroup\ignorespaces}{\endgroup}% no consumption!
-        \else\NewEnviron{version@read}{}\fi
-    \version@read
-    }{\endversion@read}%
+\soc@parse@version@optargs{#1}{#3}%
+\@soc@register@new@versionenv{#3}%
+\expandafter\gdef\csname @sop@registers@#3@introduced\endcsname{#2}%
+\label{soc@version:#3}%
+\soc@printthis@version@true% should be printed by default
+% check: should it be typeset?
+\@ifundefined{@sop@registers@#3@removed}{% not removed!
+    % check if already created :D
+    \ifnum\value{soc@compile@target@version}<#2\relax% nope
+    \soc@printthis@version@false\else
+    \marginpar{\tiny\faPlusCircle\ V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}}%
+    \fi% jepp
+}{% Got removed, are we pre-removed?
+    \ifnum\value{soc@compile@target@version}<\@nameuse{@sop@registers@#3@removed}% nope
+    \marginpar{\tiny\faPlusCircle\ V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}}%
+    \else%
+    \marginpar{\tiny\faTimesCircle\ V. \@socmp{\@nameuse{@sop@registers@#3@introduced}}\thinspace-\thinspace\@socmp{\@nameuse{@sop@registers@#3@removed}}}%\fi% jepp
+    \fi%
+}%
+%Defining skimmer:
+\ifsoc@printthis@version@
+    \newenvironment{version@read}{\begingroup\ignorespaces}{\endgroup}% no consumption!
+    \else\NewEnviron{version@read}{}\fi
+\version@read
+}{\endversion@read}%
 
 \newcommand\simpleversion[4][]{%
-    \begin{version}[#1]{#2}{#3}%
-        #4%
-    \end{version}%
-}
+\begin{version}[#1]{#2}{#3}%
+#4%
+\end{version}}
 
 
 \def\soc@@changelog@envs@iter#1,#2\@nil{%
-    % \typeout{got: '#1','#2'}%
-    \ifx!#1!\else
-        % now do single parse
-        % Check for Changes
-        %\typeout{AT: \tmp@counterval{} in '#1' is: '\@nameuse{@sop@registers@#1@introduced}'}%
-        \def\soc@curtag{\hyperref[soc@version:#1]{\emph{#1}}:\space}%
-        % \typeout{Checking: \tmp@counterval{} for: \@nameuse{@sop@registers@#1@introduced}}%
-        \ifnum\@nameuse{@sop@registers@#1@introduced}>\tmp@counterval\relax
-        \else% only set if in range:
-            \ifnum\@nameuse{@sop@registers@#1@introduced}=\tmp@counterval\relax
-                \@ifundefined{@sop@registers@#1@changes@\tmp@counterval}{%
-                    \item[\faPlusCircle] \soc@curtag Neues Element! %
-                }{\item[\faPlusCircle] \soc@curtag\@nameuse{@sop@registers@#1@changes@\tmp@counterval} }%
-            \else%check if there is a edit in this version:
-                \@ifundefined{@sop@registers@#1@changes@\tmp@counterval}{%
-                    \@ifundefined{@sop@registers@#1@removed@\tmp@counterval}{}%nosching
-                {\item[\faTimesCircle] \soc@curtag\@nameuse{@sop@registers@#1@removed@\tmp@counterval} }%
-                }%nosching
-                {\item \soc@curtag\@nameuse{@sop@registers@#1@changes@\tmp@counterval} }%
-        \fi\fi
-        % Delte: Fatimescircle
-        \ifx!#2!\else% recursive call
-            \expandafter\soc@@changelog@envs@iter#2,\@nil
-        \fi
-    \fi
+\ifx!#1!\else
+% now do single parse
+% Check for Changes
+\def\soc@curtag{\hyperref[soc@version:#1]{\emph{#1}}:\space}%
+\ifnum\@nameuse{@sop@registers@#1@introduced}>\tmp@counterval\relax
+\else% only set if in range:
+    \ifnum\@nameuse{@sop@registers@#1@introduced}=\tmp@counterval\relax
+        \@ifundefined{@sop@registers@#1@changes@\tmp@counterval}{%
+            \item[\faPlusCircle] \soc@curtag Neues Element! %
+        }{\item[\faPlusCircle] \soc@curtag\@nameuse{@sop@registers@#1@changes@\tmp@counterval} }%
+    \else%check if there is a edit in this version:
+        \@ifundefined{@sop@registers@#1@changes@\tmp@counterval}{%
+            \@ifundefined{@sop@registers@#1@removed@\tmp@counterval}{}%nosching
+        {\item[\faTimesCircle] \soc@curtag\@nameuse{@sop@registers@#1@removed@\tmp@counterval} }%
+        }%nosching
+        {\item \soc@curtag\@nameuse{@sop@registers@#1@changes@\tmp@counterval} }%
+\fi\fi
+% Delete: Fatimescircle
+\ifx!#2!\else% recursive call
+    \expandafter\soc@@changelog@envs@iter#2,\@nil
+\fi
+\fi
 }
 
 \def\soc@month@unknown{??}
@@ -195,8 +176,6 @@
     % now we have to iter through all registered environments and
     % check if there is a tag for this version :D
     % recursive call:
-    % \edef\@tmp@soc@chlg@{}
-    % \typeout{Expand revealed: '\@tmp@soc@chlg@'}
     \begin{itemize}
         \@ifundefined{soc@versions@data@\tmp@counterval}{% Dummy Tag:
             \item[\faInfoCircle] Für diese Version liegen keine Informationen vor.%
@@ -217,17 +196,13 @@
     {\soc@changelog@typeset@iter}%
 }
 
-% ----------
 % Helper Functions
-% ----------
 \def\soc@thesocversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 
 \edef\soc@version@str{\noexpand\soc@thesocversion\arabic{socversion}\noexpand\@nil}
 \edef\thesocversion{\soc@version@str}
 
-% ----------
 % User Commands
-% ----------
 % sets the to-compile target versionnumber
 \def\setTargetVersion#1{\setcounter{soc@compile@target@version}{#1}}
 \def\setTargetVersionDate#1{\gdef{\soc@compile@target@version@date}{#1}}

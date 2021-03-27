@@ -1,69 +1,49 @@
 % sopra-documentation.sty
-%
-% ----------
 % Version: 1.0
 % Author:  Florian Sihler, 02.12.2019
-%
 % Will contain all the definitions and packages to be used in the documentation
 % of all the other sopra-* packages
-
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-documentation}[2019/12/02 EagleoutIce - documentation for the sopra-team-020]
-
 % Lengths and Registers
 \newcounter{sodversion} \setcounter{sodversion}{1102}
-
 \newif\ifsod@usedummy@
 \newif\ifsod@uselistings@
-
 % Package-Args
-
 % allow debug-options :D
 \DeclareOption{debug}{ \errorcontextlines 99999 }
 \DeclareOption{nodebug}{ \errorcontextlines 4 }
-
 \DeclareOption{dummy}{ \sod@usedummy@true }
 \DeclareOption{nodummy}{ \sod@usedummy@false }
-
 \DeclareOption{listings}{ \sod@uselistings@true }
 \DeclareOption{nolistings}{ \sod@uselistings@false }
-
 \ExecuteOptions{nodebug,dummy,listings}% set it explicitly
 \ProcessOptions\relax
-
 % Basic Packages
-
 \ifsod@usedummy@ \RequirePackage{blindtext} \fi % only for testing and stuff :D
-
-\RequirePackage{attachfile2}% including files :D
-\RequirePackage{multicol,xcolor,csquotes}
+\RequirePackage{attachfile2,multicol,xcolor,csquotes}% including files :D
 
 \@ifundefined{thesobversion}{% not called from sopra-base-class
-    \RequirePackage{hyperref}
-}{}
+\RequirePackage{hyperref}}{}
 \attachfilesetup{%
-    author={Florian Sihler},
-    color=0.6392 0.149 0.2314,
-    icon=Tag,
-    mimetype=text/plain
-}
+author={Florian Sihler},
+color=0.6392 0.149 0.2314,
+icon=Tag,
+mimetype=text/plain}
 
 \def\email#1{\href{mailto:#1}{#1}}
 
 \ifsod@uselistings@
-    \RequirePackage{sopra-listings}
-    \solLoadLanguage{latex,bash}
+\RequirePackage{sopra-listings}
+\solLoadLanguage{latex,bash}
 \fi
 
 % Helper Methods
-
 \def\sod@thesodversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
-
 \edef\sod@version@str{\noexpand\sod@thesodversion\arabic{sodversion}\noexpand\@nil}
 \edef\thesodversion{\sod@version@str}
 
 % Commands and Environments
-
 \def\manArg#1{\T{\{#1\}}}
 \def\optArg#1{\T{\itshape[#1]}}
 \def\cmd#1{\solGet{command}{\textbackslash#1}}
@@ -75,29 +55,17 @@
 % #2 counter
 \def\argref#1#2{\hyperref[mrk:#1]{\T{#1 (#2)}}\textsuperscript{$\rightarrow\,$p. \pageref{mrk:#1}}}
 
-
-\makeatletter
-% #1: name of the present-sequence
-% #2: Args of the present-sequence
-% #3: presenter style
-% #4: prefix of cs-name
+% #1: name of the present-sequence #2: Args of the present-sequence #3: presenter style #4: prefix of cs-name
 \newenvironment{present}[4]{\phantomsection\label{mrk:#1}%
     \begingroup\leavevmode\newline\noindent\hspace*{-.75cm}\parbox{.75cm}{$\triangleright$\quad}{#3{#4#1}}{\T{#2}}\par\nopagebreak% done on purpose
 }{\endgroup\bigskip}
-\makeatother
 
-% #1: name of the command-sequence
-% #2: Args of the command-sequence
+% #1: name of the command-sequence #2: Args of the command-sequence
 \newenvironment{command}[2]{\present{#1}{#2}{\solGet{command}}{\textbackslash}}{\endpresent}
-
-% #1: name of the environment
-% #2: Args of the environment
+% #1: name of the environment #2: Args of the environment
 \newenvironment{environment}[2]{\present{#1}{#2}{\solGet{keywordC}}{env@}}{\endpresent}
-
-% #1: name of the arg
-% #2: name of the counter-Arg
+% #1: name of the arg #2: name of the counter-Arg
 \newenvironment{argument}[2]{\present{#1}{\qquad(\T{#2})}{\T}{}}{\endpresent}
-
 % Comfort-Methods and linkers
 \let\say\enquote
 \newcommand*\jmark[2][Linkname]{\hyperref[#2]{#1}}

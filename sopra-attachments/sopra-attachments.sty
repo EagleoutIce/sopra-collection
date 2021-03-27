@@ -21,10 +21,8 @@
 % Package-Args
 \DeclareOption{attsymbols}{ \sol@symbols@true }
 \DeclareOption{noattsymbols}{ \sol@symbols@false }
-
 \DeclareOption{docheck}{ \sol@notfound@isfail@false }
 \DeclareOption{nodocheck}{ \sol@notfound@isfail@true }
-
 \DeclareOption{usefa}{ \sol@fontawesome@use@true }
 \DeclareOption{nousefa}{ \sol@fontawesome@use@false }
 
@@ -39,7 +37,6 @@
 
 % Configure
 \def\soa@setAuthor#1{\gdef\@author{#1}} % not used currently
-
 \AtBeginDocument{
 \@ifundefined{thesobversion}{
     \attachfilesetup{%
@@ -64,50 +61,42 @@
 
 % #1 config #2 File Name #3 search-path-addition
 \def\sol@@attachfile@symbol#1#2#3{%
-    \ifsol@symbols@
-        \protected@edef\@sol@tmp{\noexpand\scalebox{0.65}{\noexpand\attachfile[#1,subject={#2}]{#3#2}}}%
-    \else\protected@edef\@sol@tmp{\noexpand\textattachfile[#1,subject={#2}]{#3#2}{#2}}\fi\@sol@tmp
+\ifsol@symbols@
+    \protected@edef\@sol@tmp{\noexpand\scalebox{0.65}{\noexpand\attachfile[#1,subject={#2}]{#3#2}}}%
+\else\protected@edef\@sol@tmp{\noexpand\textattachfile[#1,subject={#2}]{#3#2}{#2}}\fi\@sol@tmp
 }
 
 \def\sol@attachfile@symbol#1#2#3{%
-    \ifsol@notfound@isfail@
-        \sol@@attachfile@symbol{#1}{#2}{#3}%
-    \else% check
-        \IfFileExists{#3#2}{\sol@@attachfile@symbol{#1}{#2}{#3}}%
-        {<Attachment not found!>}%
-    \fi
+\ifsol@notfound@isfail@
+    \sol@@attachfile@symbol{#1}{#2}{#3}%
+\else% check
+    \IfFileExists{#3#2}{\sol@@attachfile@symbol{#1}{#2}{#3}}%
+    {<Attachment not found!>}%
+\fi
 }
 
-
 \def\sol@textprefix{}
-
 \ifsol@fontawesome@use@
 \def\sol@textprefix{%
 \noexpand\expandafter\noexpand\smash\noexpand\rotatebox[origin=c]{282}{\noexpand\small\noexpand\faPaperclip{}}\noexpand\thinspace
 }\fi
 
-% #1 config
-% #2 File Name
-% #3 search-path-addition
-% #4 text
+% #1 config #2 File Name #3 search-path-addition #4 text
 \long\def\sol@@attachfile@text#1#2#3#4{%
-    \edef\@sol@tmp{\noexpand\textattachfile[#1,subject={#2}]{#3#2}{\sol@textprefix#4}}%
-    \@sol@tmp
-}
+\edef\@sol@tmp{\noexpand\textattachfile[#1,subject={#2}]{#3#2}{\sol@textprefix#4}}%
+\@sol@tmp}
 
 \def\sol@attachfile@text#1#2#3#4{%
-    \ifsol@notfound@isfail@
-        \sol@@attachfile@text{#1}{#2}{#3}{#4}%
-    \else% check
-        \IfFileExists{#3#2}{\sol@@attachfile@text{#1}{#2}{#3}{#4}}%
-        {<Attachment not found!>}%
-    \fi
-}
+\ifsol@notfound@isfail@
+    \sol@@attachfile@text{#1}{#2}{#3}{#4}%
+\else% check
+    \IfFileExists{#3#2}{\sol@@attachfile@text{#1}{#2}{#3}{#4}}%
+    {<Attachment not found!>}%
+\fi}
 
 % User Functions
 
-% #1 additional options
-% #2 Name of the PDF
+% #1 additional options #2 Name of the PDF
 \newcommand*\attachPdf[2][]{\sol@attachfile@symbol{mimetype=application/pdf,#1}{#2}{}}
 % #3 text
 \newcommand\attachPdfText[3][]{\sol@attachfile@text{mimetype=application/pdf,#1}{#2}{}{#3}}
@@ -121,5 +110,4 @@
 
 \let\attachTex\attachDocument
 \let\attachTexText\attachDocumentText
-
 \endinput

@@ -565,9 +565,9 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
 \newcommand\umlemptyclass[2][]{\umlclass[#1]{#2}{}{}}%
 \newcommand\umlsimpleclass[2][]{%
   \pgfkeys{/tikzuml/class/.cd, .unknown/.code={%
-          \let\keyname=\pgfkeyscurrentname
-          \let\keyvalue=\pgfkeyscurrentvalue
-          \ifthenelse{\equal{\keyname}{simple}}{%
+  \let\keyname=\pgfkeyscurrentname
+  \let\keyvalue=\pgfkeyscurrentvalue
+  \ifthenelse{\equal{\keyname}{simple}}{%
     \errmessage{TIKZUML ERROR : in umlsimpleclass, forbidden option simple}%
 }{}}}%
   \pgfkeys{/tikzuml/class/.cd, #1}%
@@ -738,10 +738,8 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
   \begingroup
     \def\_{_}\edef\x{\endgroup
       \def\noexpand\tikzumlSrcClassNodeName{\tikzumlSrcClassName}}\x
-  %
   \StrSubstitute{\tikzumlSrcClassNodeName}{:}{@COLON@}[\tikzumlSrcClassNodeName]%
   \StrSubstitute{\tikzumlSrcClassNodeName}{\_}{@UNDERSCORE@}[\tikzumlSrcClassNodeName]%
-  %
   \def\tikzumlDestClassName{#3}%
   \begingroup
     \def\_{_}\edef\x{\endgroup
@@ -1022,8 +1020,7 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
 }{%
       \def\posAttrNameT{above right}%
       \def\posMultiplicityT{below left}%
-}%
-}{%
+}}{%
     \ifthenelse{\equal{\tikzumlRelationRecursiveDirectionEnd}{left}}{%
       \def\posAttrNameT{above right}%
       \def\posMultiplicityT{below left}%
