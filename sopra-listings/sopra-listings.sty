@@ -101,7 +101,6 @@
 }
 
 \ProcessOptions\relax
-
 \ifsol@debug@\let\sol@debug\typeout\else\let\sol@debug\@gobble\fi
 
 % Basic Packages
@@ -110,9 +109,7 @@
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
 \fi
-
-\RequirePackage{etoolbox,xcolor}% color definitions and making stuff robust
-\RequirePackage{pgfkeys} % for cleaner access
+\RequirePackage{etoolbox,xcolor,pgfkeys}
 
 % Listings-Base:
 \IfFileExists{listingsutf8.sty}{ \RequirePackage{listingsutf8} }%
@@ -168,7 +165,6 @@
 \colorlet{sol@colors@lst@highlight}{lime} % sweetspots
 \colorlet{sol@colors@lst@command}{sol@colors@lst@keywordB} % sweetspots
 }{% we will use the secondary/akzent color as default and choose matching colors
-% TODO: create a pleasing colorprofile :D
 \colorlet{sol@colors@lst@keywordA}{sob@col@uulm@cs} % Examples as above
 \colorlet{sol@colors@lst@keywordB}{sob@col@uulm@cs!75!white} %
 \colorlet{sol@colors@lst@keywordC}{sob@col@uulm@cs!20!gray} %
@@ -409,21 +405,21 @@ constructor command/.initial={sol@NewLstEnvPlain}}
 /sol@lst@family/inline default,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
 command name prefix/.initial={c},command name suffix/.initial={},
-draw command/.initial={sol@dlst@default} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
+draw command/.initial={sol@dlst@default} %
 }
 
 \pgfkeys{/sol@lst@family/inline blank/.is family,%
 /sol@lst@family/inline blank,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
 command name prefix/.initial={b},command name suffix/.initial={},
-draw command/.initial={sol@dlst@blank} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
+draw command/.initial={sol@dlst@blank} %
 }
 
 \pgfkeys{/sol@lst@family/inline input/.is family,%
 /sol@lst@family/inline input,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
 command name prefix/.initial={i},command name suffix/.initial={},
-draw command/.initial={sol@dlst@input} % will hold the name of the corresponding command (2 args, #1 language sequence, #2 content - will be forwarded in construction)
+draw command/.initial={sol@dlst@input} %
 }
 
 % Language-Registration-Helper
