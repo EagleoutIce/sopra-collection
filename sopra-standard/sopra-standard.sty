@@ -7,14 +7,10 @@
 % This LaTeX2e Package offers environments and further commands
 % to allow the management of file-, type-, message-, ... definitions
 %                      ulm university, WiSe2019
-
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-standard}[2020/01/23 EagleoutIce - Definition-Environments]
-
 % Lengths and Registers
-
 \newcounter{sosversion} \setcounter{sosversion}{1000}
-
 \def\resetRegisters{%
 \gdef\sos@reg@authors{}%
 \gdef\sos@reg@authors@multiple{}%
@@ -23,37 +19,23 @@
 \gdef\sos@reg@prefixtitle{Definition}%
 \gdef\sos@reg@counter{ctrdef}%
 \gdef\sos@reg@flags{}%
-\gdef\sos@reg@status{OK}%
-}
+\gdef\sos@reg@status{OK}}
 
 % make command to create new environment
 % till then we will fake a counter:
 \newcounter{ctrdef}
 
 % Basic Packages
-
 % nicer symbols for definitions
-\RequirePackage{fontawesome}
-
-% easy my way - baibai
-\RequirePackage{xstring,array}
+\RequirePackage{fontawesome,xstring,array}
 % We will integrate the changelog-mechanism
 \RequirePackage{sopra-changelog}
 
 % The Basic Environment
-
-% Calculate left Space:
-% \newcommand*\@zmeasurepage[1]{\dimexpr\pagegoal-\zposy{#1}sp\relax}
-% \newcommand\@zsosensure[2]{\zsavepos{zposmarker:#2}\pgfmathsetmacro\@cgoal{\@zmeasurepage{zposmarker:#2}}Goal: \@cgoal; Target: \pgfmathsetmacro\@TT{#1\baselineskip}\@TT; pagetotal: \the\pagetotal, pagegoal: \the\pagegoal\ifdim\@cgoal pt>650pt\relax\null\newpage\relax\fi}%
-
 \newcommand\measurepage{\dimexpr\pagegoal-\pagetotal-\baselineskip\relax}
 \newcommand\@sosensure[1]{\ifdim\measurepage<#1\baselineskip\relax\null\newpage\relax\fi}%
 % the basic layout of an definition
-% #1 opt args
-% #2 internal name
-% #3 titel
-% #4 Startersion
-% #5 Änderungen für die Version ein bettung
+% #1 opt args | internal name | titel | Startersion | Änderungen für die Version ein bettung
 \newenvironment{sos@definition}[5][]{%
     \addvspace{1.25em plus .75em minus .275em}\phantomsection\begingroup
     \resetRegisters{}% reset author, bookmark....
@@ -198,8 +180,7 @@
     \lstset{add to literate={|#2|}{{\@nameuse{#2}}}{#1}}% Sicher gehen und so :/
 }
 
-% #1 Codefragment
-% #2 hltarget
+% Codefragment | hltarget
 \newcommand\CreateCodeHyperLink[2][]{%
 \IfStrEq{#1}{}{%
     \@for\@elem:=#2\do{%
@@ -215,7 +196,6 @@
 \solSetLeftMargin{21pt} % find ich übersichtlicher mit den ganzen Defs...
 
 % Toc - Annotations
-
 % get little setion summaries in the toc - this will hopefully look nice - even
 % if the LaTeX-Code isn't :D
 
@@ -244,19 +224,19 @@
 \pdfbookmark[1]{#1}{ms@sec@@id@\thesection}}
 
 \let\oldsubsection\subsection
-    \def\subsection#1{%
-        \oldsubsection{#1}%
-        \pdfbookmark[2]{#1}{ms@sec@@id@\thesection @\thesubsection}%
-    }
-    \let\oldsubsubsection\subsubsection
-    \def\subsubsubsection#1{%
-        \oldsubsubsection{#1}%
-        \pdfbookmark[3]{#1}{ms@sec@@id@\thesection @\thesubsection @\thesubsubsection}%
-    }
+\def\subsection#1{%
+    \oldsubsection{#1}%
+    \pdfbookmark[2]{#1}{ms@sec@@id@\thesection @\thesubsection}%
+}
+\let\oldsubsubsection\subsubsection
+\def\subsubsubsection#1{%
+    \oldsubsubsection{#1}%
+    \pdfbookmark[3]{#1}{ms@sec@@id@\thesection @\thesubsection @\thesubsubsection}%
+}
 
-    \def\longspread{\setstretch{1.007}\scriptsize}% hihi
+\def\longspread{\setstretch{1.007}\scriptsize}% hihi
 
-    \long\def\setComment#1{\gdef\currentTocComment{\color{cprimary!75!cwhite}\faAngleDoubleRight~\parbox[t]{\linewidth-.75em}{\protect\longspread#1}}}
+\long\def\setComment#1{\gdef\currentTocComment{\color{cprimary!75!cwhite}\faAngleDoubleRight~\parbox[t]{\linewidth-.75em}{\protect\longspread#1}}}
 
 % Generic Stuff
 % optional Arguments
@@ -279,6 +259,5 @@
 % Change the behaviour - sadly, this will enable be to keep hyperlinks inside of the Grahics, which i consider to be more effective
 \newcommand*\GetSopra[2][1]{\centering\resizebox{#1\linewidth}{!}{\input{figures/sopra_#2.tex}}}% -compressed
 \newcommand*\figref[1]{\hyperref[{#1}]{\autoref*{#1} (\nameref*{#1})}} % One single link
-
 \newcommand\info[1]{\begingroup\footnotesize\itshape#1\endgroup}
 \endinput

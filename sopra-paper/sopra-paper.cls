@@ -114,9 +114,9 @@
 \RequirePackage[english,main=ngerman]{babel}
 % layout
 \pgfmathsetmacro\sop@headheight{2.6cm + \sop@len@logoheight/2}
-\pgfmathsetmacro\sop@footheight{\sop@len@header-8mm}
+\edef\sop@footheight{\the\dimexpr\sop@len@header-8mm\relax}
 \RequirePackage[margin=\sop@len@header,a4paper,%
-    bottom=\sop@footheight pt,top=2.7cm]{geometry}
+    bottom=\sop@footheight,top=2.7cm]{geometry}
 % beautify:
 \RequirePackage{lmodern,microtype,scrlayer-scrpage}
 \RequirePackage{enumitem}
@@ -369,7 +369,7 @@
     \fi
     \ifnum\value{sop@counter@chapter@counter}>0
     \foreach \i in {1,...,\thesop@counter@chapter@counter}{%
-        \pgfmathsetmacro\ix{int(\i+\ioffset)}
+        \edef\ix{\the\numexpr\i+\ioffset\relax}
         % \typeout{\i:\thesop@counter@chapter@counter:\thechapter x}
         \coordinate (chapnode\i) at ($(tl@pf@lockpos)+(\ix/1.6-1/1.6+0.33+\@sop@curxoff,-0.35+\@sop@cury)$);
         \ifsop@inappendix@\sop@chapblob{\i}{white}{chapnode\i}{\@sop@tlheadmarker}\else

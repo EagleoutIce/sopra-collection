@@ -66,9 +66,9 @@
 \RequirePackage[english,main=ngerman]{babel}
 % layout
 \pgfmathsetmacro\sob@headheight{2.6cm + \sob@len@logoheight/2}
-\pgfmathsetmacro\sob@footheight{\sob@len@header-8mm}
+\edef\sob@footheight{\the\dimexpr\sob@len@header-8mm\relax}
 \RequirePackage[margin=\sob@len@header,a4paper,%
-    bottom=\sob@footheight pt,headheight=13.3pt]{geometry}
+    bottom=\sob@footheight,headheight=13.3pt]{geometry}
 % beautify:
 \RequirePackage{sfmath,lmodern,microtype,scrlayer-scrpage,titlesec}
 \RequirePackage{enumitem}
