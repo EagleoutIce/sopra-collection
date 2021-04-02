@@ -1,8 +1,6 @@
 % sopra-models.sty
-%
 % Version: 1.0
 % Author:  Florian Sihler, 02.12.2019
-%
 % This LaTeX2e Package presents the user with a nice model-float
 % furthermore it will style and configure captions.
 % please note, that this package is based on the (somewhat) amazing
@@ -10,11 +8,8 @@
 %  ulm university, WiSe2019
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-models}[2019/12/02 EagleoutIce - Model-Floats for the sopra-team-020]
-
 % Basic Packages
-\RequirePackage{tikz} % we need it anyways - will load xcolor
-\RequirePackage{newfloat,caption,float}
-\RequirePackage{ifthen,xstring,calc,pgfopts}%
+\RequirePackage{tikz,newfloat,caption,float,ifthen,xstring,calc,pgfopts}%
 \usetikzlibrary{backgrounds,arrows,arrows.meta,shapes,fit,shadows,decorations.markings}%
 
 % Create the Model-Environment
@@ -118,8 +113,8 @@ provided interface distance/.initial=3cm, provided interface width/.initial=1em,
 port width/.initial=1ex, fill port/.initial= yellow!20,%
 fill assembly connector/.initial= white,%
 .unknown/.code={%
-    \let\keyname=\pgfkeyscurrentname
-    \let\keyvalue=\pgfkeyscurrentvalue
+    \let\keyname\pgfkeyscurrentname
+    \let\keyvalue\pgfkeyscurrentvalue
     \errmessage{TIKZUML ERROR : in tikzuml global, invalid option \keyname}%
 }}%
 %
@@ -128,7 +123,7 @@ x/.get=\tikzumlDefaultX, y/.get=\tikzumlDefaultY,%
 package type/.get=\tikzumlPackageDefaultType, fill package/.get=\tikzumlPackageDefaultFillColor,%
 class width/.get=\tikzumlClassDefaultWidth, simple interface width/.get=\tikzumlSimpleInterfaceDefaultWidth, class type/.get=\tikzumlClassDefaultType, fill class/.get=\tikzumlClassDefaultFillColor, fill template/.get=\tikzumlClassTemplateFillColorDefaultFillColor,%
 narynode width/.get=\tikzumlNaryNodeDefaultWidth,%
-relation geometry/.get=\tikzumlRelationDefaultGeometry, relation angle1/.get=\tikzumlRelationDefaultAngleO, relation angle2/.get=\tikzumlRelationDefaultAngleT, relation loopsize/.get=\tikzumlRelationDefaultLoopSize, relation weight/.get=\tikzumlRelationDefaultWeight, relation pos1/.get=\tikzumlRelationDefaultPosO, relation pos2/.get=\tikzumlRelationDefaultPosT, relation pos stereo/.get=\tikzumlRelationDefaultPosStereo,%
+relation geometry/.get=\tikzumlRelationDefaultGeometry, relation angle1/.get=\tikzumlRelationDefaultAngleO, relation angle2/.get=\tikzumlRelationDefaultAnglet, relation loopsize/.get=\tikzumlRelationDefaultLoopSize, relation weight/.get=\tikzumlRelationDefaultWeight, relation pos1/.get=\tikzumlRelationDefaultPosO, relation pos2/.get=\tikzumlRelationDefaultPosT, relation pos stereo/.get=\tikzumlRelationDefaultPosStereo,%
 note width/.get=\tikzumlNoteDefaultWidth, fill note/.get=\tikzumlNoteDefaultFillColor,%
 fill system/.get=\tikzumlSystemDefaultFillColor,%
 fill usecase/.get=\tikzumlUseCaseDefaultFillColor,%
@@ -151,8 +146,7 @@ component width/.get=\tikzumlComponentDefaultWidth, fill component/.get=\tikzuml
 required interface distance/.get=\tikzumlRequiredInterfaceDefaultDistance, required interface width/.get=\tikzumlRequiredInterfaceDefaultWidth, required interface padding/.get=\tikzumlRequiredInterfaceDefaultPadding,%
 provided interface distance/.get=\tikzumlProvidedInterfaceDefaultDistance, provided interface width/.get=\tikzumlProvidedInterfaceDefaultWidth, provided interface padding/.get=\tikzumlProvidedInterfaceDefaultPadding,%
 port width/.get=\tikzumlPortDefaultWidth, fill port/.get=\tikzumlPortDefaultFillColor,%
-fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
-}%
+fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor}%
 % utility : change default colors
 \newcommand\tikzumlset[1]{%
   \pgfkeys{/tikzuml/.cd,#1}%
@@ -161,7 +155,7 @@ x/.get=\tikzumlDefaultX, y/.get=\tikzumlDefaultY,%
 package type/.get=\tikzumlPackageDefaultType, fill package/.get=\tikzumlPackageDefaultFillColor,%
 class width/.get=\tikzumlClassDefaultWidth, simple interface width/.get=\tikzumlSimpleInterfaceDefaultWidth, class type/.get=\tikzumlClassDefaultType, fill class/.get=\tikzumlClassDefaultFillColor, fill template/.get=\tikzumlClassTemplateFillColorDefaultFillColor,%
 narynode width/.get=\tikzumlNaryNodeWidth,%
-relation geometry/.get=\tikzumlRelationDefaultGeometry, relation angle1/.get=\tikzumlRelationDefaultAngleO, relation angle2/.get=\tikzumlRelationDefaultAngleT, relation loopsize/.get=\tikzumlRelationDefaultLoopSize, relation weight/.get=\tikzumlRelationDefaultWeight, relation pos1/.get=\tikzumlRelationDefaultPosO, relation pos2/.get=\tikzumlRelationDefaultPosT, relation pos stereo/.get=\tikzumlRelationDefaultPosStereo,%
+relation geometry/.get=\tikzumlRelationDefaultGeometry, relation angle1/.get=\tikzumlRelationDefaultAngleO, relation angle2/.get=\tikzumlRelationDefaultAnglet, relation loopsize/.get=\tikzumlRelationDefaultLoopSize, relation weight/.get=\tikzumlRelationDefaultWeight, relation pos1/.get=\tikzumlRelationDefaultPosO, relation pos2/.get=\tikzumlRelationDefaultPosT, relation pos stereo/.get=\tikzumlRelationDefaultPosStereo,%
 note width/.get=\tikzumlNoteDefaultWidth, fill note/.get=\tikzumlNoteDefaultFillColor,%
 fill system/.get=\tikzumlSystemDefaultFillColor,%
 fill usecase/.get=\tikzumlUseCaseDefaultFillColor,%
@@ -235,14 +229,11 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
 \setcounter{tikzumlRelationNum}{1}%
 \newcounter{tikzumlNoteNum}%
 \setcounter{tikzumlNoteNum}{1}%
-%
 \newcounter{pos}%
 \newcounter{posT}%
 \newcounter{posStereo}%
-%
 \newcounter{tikzumlPackageLevel}%
 \setcounter{tikzumlPackageLevel}{0}%
-%
 \newif\iftikzumlpackageSimpleStyle
 \newif\iftikzumlclassSimpleStyle
 \newif\iftikzumlclassCircleShape
@@ -266,8 +257,8 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
   no coords/.is if=tikzumlpackageWithoutCoords,%
   no coords=false,%
   .unknown/.code={%
-  \let\keyname=\pgfkeyscurrentname
-  \let\keyvalue=\pgfkeyscurrentvalue
+  \let\keyname\pgfkeyscurrentname
+  \let\keyvalue\pgfkeyscurrentvalue
   \ifthenelse{\equal{\keyname}{above}\OR
   \equal{\keyname}{left}\OR
   \equal{\keyname}{below}\OR
@@ -342,13 +333,11 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
       \expandafter\xdef\csname tikzumlPackageFit\tikzumlPackage@parent @@\tikzumlPackage@fitname\endcsname{(\tikzumlPackage@nodeName-root)}%
     \fi
   \fi
-  %
   \ifnum\c@tikzumlPackageLevel>0%
     \def\tikzumlPackageFitTmp{\csname tikzumlPackageFit\tikzumlPackage@parent\endcsname}%
     \expandafter\xdef\csname tikzumlPackageFit\tikzumlPackage@parent\endcsname{\tikzumlPackageFitTmp (\tikzumlPackage@nodeName) (\tikzumlPackage@nodeName-caption)}%
     \stepcounter{tikzumlPackageSubPackageNum}%
   \fi
-  %
   \node[draw=\tikzumlPackageDrawColor, fill=\tikzumlPackageFillColor, text=\tikzumlPackageTextColor, font=\tikzumlDefaultFont, inner sep=1.5ex, /tikzuml/package/style, fit = \csname tikzumlPackageFit\tikzumlPackage@parent @@\tikzumlPackage@fitname\endcsname] (\tikzumlPackage@nodeName) {};%
   \node[draw=\tikzumlPackageDrawColor, fill=\tikzumlPackageFillColor, text=\tikzumlPackageTextColor, font=\tikzumlDefaultFont, minimum height=1.5em, outer ysep=-.3, anchor=south west] (\tikzumlPackage@nodeName-caption) at (\tikzumlPackage@nodeName.north west) {\begin{tabular}{c} \tikzumlPackageType \textbf{\tikzumlPackage@name}\end{tabular}};%
   \end{pgfonlayer}%
@@ -384,8 +373,8 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
   simple/.is if=tikzumlclassSimpleStyle, circle/.is if=tikzumlclassCircleShape, no coords/.is if=tikzumlclassWithoutCoords,%
   simple=false, circle=false, no coords=false,%
   .unknown/.code={%
-    \let\keyname=\pgfkeyscurrentname
-    \let\keyvalue=\pgfkeyscurrentvalue
+    \let\keyname\pgfkeyscurrentname
+    \let\keyvalue\pgfkeyscurrentvalue
     \ifthenelse{\equal{\keyname}{above}\OR
      \equal{\keyname}{left}\OR
      \equal{\keyname}{below}\OR
@@ -416,7 +405,6 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
         draw/.get=\tikzumlClassDrawColor, fill/.get=\tikzumlClassFillColor,%
         text/.get=\tikzumlClassTextColor, fill template/.get=\tikzumlClassTemplateFillColor
 }%
-  %
   \ifthenelse{\equal{\tikzumlClassTypeTmp}{class}}{%
     \def\tikzumlClassType{}%
 }{%
@@ -444,7 +432,6 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
   \ifthenelse{\equal{\tikzumlClassName}{tikzumlEmpty}}{}{%
     \def\tikzumlClassNodeName{\tikzumlClassName}%
 }%
-  %
   \StrSubstitute{\tikzumlClassNodeName}{:}{@COLON@}[\tikzumlClassNodeName]%
   \StrSubstitute{\tikzumlClassNodeName}{\_}{@UNDERSCORE@}[\tikzumlClassNodeName]%
   %
@@ -523,8 +510,8 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
 % shortcuts for interface, enum and typedef environments
 \newcommand\umlabstract[4][]{%
   \pgfkeys{/tikzuml/class/.cd, .unknown/.code={%
-          \let\keyname=\pgfkeyscurrentname
-          \let\keyvalue=\pgfkeyscurrentvalue
+          \let\keyname\pgfkeyscurrentname
+          \let\keyvalue\pgfkeyscurrentvalue
           \ifthenelse{\equal{\keyname}{type}}{%
     \errmessage{TIKZUML ERROR : in umlabstract, forbidden option type}%
 }{}}}%
@@ -533,8 +520,8 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
 }%
 \newcommand\umlinterface[4][]{%
   \pgfkeys{/tikzuml/class/.cd, .unknown/.code={%
-          \let\keyname=\pgfkeyscurrentname
-          \let\keyvalue=\pgfkeyscurrentvalue
+          \let\keyname\pgfkeyscurrentname
+          \let\keyvalue\pgfkeyscurrentvalue
           \ifthenelse{\equal{\keyname}{type}}{%
     \errmessage{TIKZUML ERROR : in umlinterface, forbidden option type}%
 }{}}}%
@@ -543,8 +530,8 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
 }%
 \newcommand\umltypedef[4][]{%
   \pgfkeys{/tikzuml/class/.cd, .unknown/.code={%
-          \let\keyname=\pgfkeyscurrentname
-          \let\keyvalue=\pgfkeyscurrentvalue
+          \let\keyname\pgfkeyscurrentname
+          \let\keyvalue\pgfkeyscurrentvalue
           \ifthenelse{\equal{\keyname}{type}}{%
     \errmessage{TIKZUML ERROR : in umltypedef, forbidden option type}%
 }{}}}%
@@ -553,8 +540,8 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
 }%
 \newcommand\umlenum[4][]{%
   \pgfkeys{/tikzuml/class/.cd, .unknown/.code={%
-          \let\keyname=\pgfkeyscurrentname
-          \let\keyvalue=\pgfkeyscurrentvalue
+          \let\keyname\pgfkeyscurrentname
+          \let\keyvalue\pgfkeyscurrentvalue
           \ifthenelse{\equal{\keyname}{type}}{%
     \errmessage{TIKZUML ERROR : in umlenum, forbidden option type}%
 }{}}}%
@@ -565,8 +552,8 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
 \newcommand\umlemptyclass[2][]{\umlclass[#1]{#2}{}{}}%
 \newcommand\umlsimpleclass[2][]{%
   \pgfkeys{/tikzuml/class/.cd, .unknown/.code={%
-  \let\keyname=\pgfkeyscurrentname
-  \let\keyvalue=\pgfkeyscurrentvalue
+  \let\keyname\pgfkeyscurrentname
+  \let\keyvalue\pgfkeyscurrentvalue
   \ifthenelse{\equal{\keyname}{simple}}{%
     \errmessage{TIKZUML ERROR : in umlsimpleclass, forbidden option simple}%
 }{}}}%
@@ -575,8 +562,8 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
 }%
 \newcommand\umlsimpleinterface[2][]{%
   \pgfkeys{/tikzuml/class/.cd, .unknown/.code={%
-         \let\keyname=\pgfkeyscurrentname
-         \let\keyvalue=\pgfkeyscurrentvalue
+         \let\keyname\pgfkeyscurrentname
+         \let\keyvalue\pgfkeyscurrentvalue
          \ifthenelse{\equal{\keyname}{simple}}{%
     \errmessage{TIKZUML ERROR : in umlsimpleinterface, forbidden option simple}%
 }{%
@@ -597,8 +584,8 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
     draw/.initial=\tikzumlDefaultDrawColor, fill/.initial=\tikzumlClassDefaultFillColor,%
     text/.initial=\tikzumlDefaultTextColor, style/.style={},%
     .unknown/.code={%
-    \let\keyname=\pgfkeyscurrentname
-    \let\keyvalue=\pgfkeyscurrentvalue
+    \let\keyname\pgfkeyscurrentname
+    \let\keyvalue\pgfkeyscurrentvalue
     \ifthenelse{\equal{\keyname}{above}}{%
         \def\tikzumlNaryNodeAnchor{.north}%
         \def\tikzumlNaryNodeLabelPos{above}%
@@ -695,14 +682,14 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
   pos1/.initial=\tikzumlRelationDefaultPosO, pos2/.initial=\tikzumlRelationDefaultPosT, pos/.initial=tikzumlEmpty,%
   align1/.initial={}, align2/.initial={}, align/.initial={},%
   anchor1/.initial=tikzumlEmpty, anchor2/.initial=tikzumlEmpty,%
-  angle1/.initial=\tikzumlRelationDefaultAngleO, angle2/.initial=\tikzumlRelationDefaultAngleT, loopsize/.initial=\tikzumlRelationDefaultLoopSize,%
+  angle1/.initial=\tikzumlRelationDefaultAngleO, angle2/.initial=\tikzumlRelationDefaultAnglet, loopsize/.initial=\tikzumlRelationDefaultLoopSize,%
   stereo/.initial={}, pos stereo/.initial=\tikzumlRelationDefaultPosStereo,%
   style/.initial=->, style2/.style={}, name/.initial=relation-\thetikzumlRelationNum,%
   recursive mode/.initial=default, recursive direction start/.initial=right,%
   recursive direction end/.initial=bottom,%
   .unknown/.code={%
-        \let\keyname=\pgfkeyscurrentname
-        \let\keyvalue=\pgfkeyscurrentvalue
+        \let\keyname\pgfkeyscurrentname
+        \let\keyvalue\pgfkeyscurrentvalue
         \ifthenelse{\equal{\keyname}{with port}%
     \OR\equal{\keyname}{interface}%
     \OR\equal{\keyname}{padding}%
@@ -804,7 +791,7 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
   \setcounter{posT}{100*\real{\tikzumlRelationPositionT}}%
   \setcounter{posStereo}{100*\real{\tikzumlRelationPositionStereotype}}%
   %
-  \pgfmathsetmacro{\tikzumlRelationWeightT}{1.0-\tikzumlRelationWeight}%
+  \pgfmathsetmacro\tikzumlRelationWeightT{1-\tikzumlRelationWeight}%
   %
   \node[inner sep=\z@] (\tikzumlRelationName-middle) at (barycentric cs:\tikzumlSrcClassNodeName=\tikzumlRelationWeightT,\tikzumlDestClassNodeName=\tikzumlRelationWeight) {};%
   % straight line
@@ -859,17 +846,17 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
 }%
   \ifnum\numArcs=4%
     \ifnum\theposStereo>300%
-      \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-300)/100}%
+      \pgfmathsetmacro\tikzumlRelationPositionStereotype{(\theposStereo-300)/100}%
       \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype}}%
     \else
       \ifnum\theposStereo<100%
         \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype}}%
       \else
         \ifnum\theposStereo>200%
-          \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-200)/100}%
+          \pgfmathsetmacro\tikzumlRelationPositionStereotype{(\theposStereo-200)/100}%
           \xdef\tikzumlMidTwoArc{\tikzumlMidTwoArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype}}%
         \else
-          \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-100)/100}%
+          \pgfmathsetmacro\tikzumlRelationPositionStereotype{(\theposStereo-100)/100}%
           \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype}}%
         \fi
       \fi
@@ -941,7 +928,7 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
 }}}}}{}%
     %
     \ifnum\thepos>300%
-      \pgfmathsetmacro{\tikzumlRelationPosition}{(\thepos-300)/100}%
+      \pgfmathsetmacro\tikzumlRelationPosition{(\thepos-300)/100}%
       \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
     node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity}%
 }%
@@ -952,12 +939,12 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
 }%
       \else
         \ifnum\thepos>200%
-          \pgfmathsetmacro{\tikzumlRelationPosition}{(\thepos-200)/100}%
+          \pgfmathsetmacro\tikzumlRelationPosition{(\thepos-200)/100}%
           \xdef\tikzumlMidTwoArc{\tikzumlMidTwoArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
          node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity}%
 }%
         \else
-          \pgfmathsetmacro{\tikzumlRelationPosition}{(\thepos-100)/100}%
+          \pgfmathsetmacro\tikzumlRelationPosition{(\thepos-100)/100}%
           \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
          node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity}%
 }%
@@ -1029,7 +1016,7 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
       \def\posMultiplicityT{below right}%
 }}}}}{}%
     \ifnum\theposT>300%
-      \pgfmathsetmacro{\tikzumlRelationPositionT}{(\theposT-300)/100}%
+      \pgfmathsetmacro\tikzumlRelationPositionT{(\theposT-300)/100}%
       \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
     node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT}%
 }%
@@ -1040,12 +1027,12 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
 }%
       \else
         \ifnum\theposT>200%
-          \pgfmathsetmacro{\tikzumlRelationPositionT}{(\theposT-200)/100}%
+          \pgfmathsetmacro\tikzumlRelationPositionT{(\theposT-200)/100}%
           \xdef\tikzumlMidTwoArc{\tikzumlMidTwoArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
          node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT}%
 }%
         \else
-          \pgfmathsetmacro{\tikzumlRelationPositionT}{(\theposT-100)/100}%
+          \pgfmathsetmacro\tikzumlRelationPositionT{(\theposT-100)/100}%
           \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
          node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT}%
 }%
@@ -1054,13 +1041,13 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
     \fi
           \else
     \ifnum\theposStereo>200%
-      \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-200)/100}%
+      \pgfmathsetmacro\tikzumlRelationPositionStereotype{(\theposStereo-200)/100}%
       \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
     \else
       \ifnum\theposStereo<100%
         \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
       \else
-        \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-100)/100}%
+        \pgfmathsetmacro\tikzumlRelationPositionStereotype{(\theposStereo-100)/100}%
         \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
       \fi
     \fi
@@ -1133,7 +1120,7 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
       \def\posMultiplicity{below right}%
 }}}}}{}%
     \ifnum\thepos>200%
-      \pgfmathsetmacro{\tikzumlRelationPosition}{(\thepos-200)/100}%
+      \pgfmathsetmacro\tikzumlRelationPosition{(\thepos-200)/100}%
       \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
     node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity}%
 }%
@@ -1143,7 +1130,7 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
      node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity}%
 }%
       \else
-        \pgfmathsetmacro{\tikzumlRelationPosition}{(\thepos-100)/100}%
+        \pgfmathsetmacro\tikzumlRelationPosition{(\thepos-100)/100}%
         \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPosition, \posAttrName, \attrAlign] {\tikzumlRelationAttrName}%
        node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzumlRelationMultiplicity}%
 }%
@@ -1214,7 +1201,7 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
       \def\posMultiplicityT{below right}%
 }}}}}{}%
     \ifnum\theposT>200%
-      \pgfmathsetmacro{\tikzumlRelationPositionT}{(\theposT-200)/100}%
+      \pgfmathsetmacro\tikzumlRelationPositionT{(\theposT-200)/100}%
       \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
     node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT}%
 }%
@@ -1224,7 +1211,7 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
      node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT}%
 }%
       \else
-        \pgfmathsetmacro{\tikzumlRelationPositionT}{(\theposT-100)/100}%
+        \pgfmathsetmacro\tikzumlRelationPositionT{(\theposT-100)/100}%
         \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPositionT, \posAttrNameT, \attrAlignT] {\tikzumlRelationAttrNameT}%
        node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikzumlRelationMultiplicityT}%
 }%
@@ -1269,14 +1256,14 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
       \end{pgfonlayer}%
       %
       \ifnum\theposStereo>100%
-        \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-100)/100}%
+        \pgfmathsetmacro\tikzumlRelationPositionStereotype{(\theposStereo-100)/100}%
         \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
       \else
         \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
       \fi
       %
       \ifnum\thepos>100%
-        \pgfmathsetmacro{\tikzumlRelationPosition}{(\thepos-100)/100}%
+        \pgfmathsetmacro\tikzumlRelationPosition{(\thepos-100)/100}%
         \def\arcNum{2}%
       \else
         \def\arcNum{1}%
@@ -1295,7 +1282,7 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
       \fi
       %
       \ifnum\theposT>100%
-        \pgfmathsetmacro{\tikzumlRelationPositionT}{(\theposT-100)/100}%
+        \pgfmathsetmacro\tikzumlRelationPositionT{(\theposT-100)/100}%
         \def\arcNumT{2}%
       \else
         \def\arcNumT{1}%
@@ -1331,14 +1318,14 @@ fill assembly connector/.get=\tikzumlAssemblyConnectorDefaultFillColor
     \end{pgfonlayer}%
     %
     \ifnum\theposStereo>100%
-      \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-100)/100}%
+      \pgfmathsetmacro\tikzumlRelationPositionStereotype{(\theposStereo-100)/100}%
       \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
     \else
       \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
     \fi
     %
     \ifnum\thepos>100%
-      \pgfmathsetmacro{\tikzumlRelationPosition}{(\thepos-100)/100}%
+      \pgfmathsetmacro\tikzumlRelationPosition{(\thepos-100)/100}%
       \def\arcNum{2}%
     \else
       \def\arcNum{1}%
@@ -1358,7 +1345,7 @@ node[pos=\tikzumlRelationPosition, swap, \posMultiplicity, \multAlign] {\tikzuml
     \fi
     %
     \ifnum\theposT>100%
-      \pgfmathsetmacro{\tikzumlRelationPositionT}{(\theposT-100)/100}%
+      \pgfmathsetmacro\tikzumlRelationPositionT{(\theposT-100)/100}%
       \def\arcNumT{2}%
     \else
       \def\arcNumT{1}%
@@ -1408,13 +1395,13 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 }%
     \end{pgfonlayer}%
     \ifnum\theposStereo>200%
-    \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-200)/100}%
+    \pgfmathsetmacro\tikzumlRelationPositionStereotype{(\theposStereo-200)/100}%
     \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
           \else
     \ifnum\theposStereo<100%
       \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
     \else
-      \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-100)/100}%
+      \pgfmathsetmacro\tikzumlRelationPositionStereotype{(\theposStereo-100)/100}%
       \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
     \fi\fi
     \ifthenelse{\thepos=200\OR\thepos=100}{%
@@ -1422,13 +1409,13 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
     \def\posMultiplicity{below right}%
 }{}%
     \ifthenelse{\thepos>200}{%
-    \pgfmathsetmacro{\tikzumlRelationPosition}{(\thepos-200)/100}%
+    \pgfmathsetmacro\tikzumlRelationPosition{(\thepos-200)/100}%
     \def\arcNum{3}%
 }{%
     \ifthenelse{\thepos<100}{%
       \def\arcNum{1}%
 }{%
-      \pgfmathsetmacro{\tikzumlRelationPosition}{(\thepos-100)/100}%
+      \pgfmathsetmacro\tikzumlRelationPosition{(\thepos-100)/100}%
       \def\arcNum{2}%
 }}%
     \ifnum\arcNum=1%
@@ -1446,13 +1433,13 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
     \def\posMultiplicityT{below right}%
 }{}%
     \ifthenelse{\theposT>200}{%
-    \pgfmathsetmacro{\tikzumlRelationPositionT}{(\theposT-200)/100}%
+    \pgfmathsetmacro\tikzumlRelationPositionT{(\theposT-200)/100}%
     \def\arcNumT{3}%
 }{%
     \ifthenelse{\theposT<100}{%
       \def\arcNumT{1}%
 }{%
-      \pgfmathsetmacro{\tikzumlRelationPositionT}{(\theposT-100)/100}%
+      \pgfmathsetmacro\tikzumlRelationPositionT{(\theposT-100)/100}%
       \def\arcNumT{2}%
 }}%
           \ifnum\arcNumT=1%
@@ -1502,13 +1489,13 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
     \end{pgfonlayer}%
     %
     \ifnum\theposStereo>200%
-      \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-200)/100}%
+      \pgfmathsetmacro\tikzumlRelationPositionStereotype{(\theposStereo-200)/100}%
       \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
     \else
       \ifnum\theposStereo<100%
         \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
       \else
-        \pgfmathsetmacro{\tikzumlRelationPositionStereotype}{(\theposStereo-100)/100}%
+        \pgfmathsetmacro\tikzumlRelationPositionStereotype{(\theposStereo-100)/100}%
         \xdef\tikzumlMidOneArc{\tikzumlMidOneArc node[pos=\tikzumlRelationPositionStereotype, anchor=center,\tikzumlRelationStereoTypeStyle] {\stereotype} }%
       \fi
     \fi
@@ -1518,13 +1505,13 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
       \def\posMultiplicity{below right}%
 }{}%
     \ifthenelse{\thepos>200}{%
-      \pgfmathsetmacro{\tikzumlRelationPosition}{(\thepos-200)/100}%
+      \pgfmathsetmacro\tikzumlRelationPosition{(\thepos-200)/100}%
       \def\arcNum{3}%
 }{%
       \ifthenelse{\thepos<100}{%
         \def\arcNum{1}%
 }{%
-        \pgfmathsetmacro{\tikzumlRelationPosition}{(\thepos-100)/100}%
+        \pgfmathsetmacro\tikzumlRelationPosition{(\thepos-100)/100}%
         \def\arcNum{2}%
 }}%
     \ifnum\arcNum=1%
@@ -1545,13 +1532,13 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
       \def\posMultiplicityT{below right}%
 }{}%
     \ifthenelse{\theposT>200}{%
-      \pgfmathsetmacro{\tikzumlRelationPositionT}{(\theposT-200)/100}%
+      \pgfmathsetmacro\tikzumlRelationPositionT{(\theposT-200)/100}%
       \def\arcNumT{3}%
 }{%
       \ifthenelse{\theposT<100}{%
         \def\arcNumT{1}%
 }{%
-        \pgfmathsetmacro{\tikzumlRelationPositionT}{(\theposT-100)/100}%
+        \pgfmathsetmacro\tikzumlRelationPositionT{(\theposT-100)/100}%
         \def\arcNumT{2}%
 }}%
     %
@@ -1606,8 +1593,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlHVrelation[3][]{%
   \pgfkeys{/tikzuml/HVrelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{geometry}}{%
        \errmessage{TIKZUML ERROR : in umlHVrelation, forbidden option geometry}%
 }{}}}%
@@ -1618,8 +1605,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlVHrelation[3][]{%
   \pgfkeys{/tikzuml/VHrelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{geometry}}{%
        \errmessage{TIKZUML ERROR : in umlVHrelation, forbidden option geometry}%
 }{}}}%
@@ -1630,8 +1617,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlHVHrelation[3][]{%
   \pgfkeys{/tikzuml/HVHrelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{geometry}}{%
        \errmessage{TIKZUML ERROR : in umlHVHrelation, forbidden option geometry}%
 }{}}}%
@@ -1641,8 +1628,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlVHVrelation[3][]{%
   \pgfkeys{/tikzuml/VHVrelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{geometry}}{%
        \errmessage{TIKZUML ERROR : in umlVHVrelation, forbidden option geometry}%
 }{}}}%
@@ -1666,8 +1653,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlfriend[3][]{%
   \pgfkeys{/tikzuml/friendrelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlfriend, forbidden option stereo}%
 }{}}}%
@@ -1689,8 +1676,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlHVfriend[3][]{%
   \pgfkeys{/tikzuml/friendrelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlHVfriend, forbidden option stereo}%
 }{%
@@ -1715,8 +1702,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlVHfriend[3][]{%
   \pgfkeys{/tikzuml/friendrelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlVHfriend, forbidden option stereo}%
 }{%
@@ -1741,8 +1728,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlHVHfriend[3][]{%
   \pgfkeys{/tikzuml/friendrelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlHVHfriend, forbidden option stereo}%
 }{%
@@ -1767,8 +1754,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlVHVfriend[3][]{%
   \pgfkeys{/tikzuml/friendrelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlVHVfriend, forbidden option stereo}%
 }{%
@@ -1804,8 +1791,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
         stereo/.initial={}, pos stereo/.initial=1,%
         style/.initial=->, name/.initial=relation-\thetikzumlRelationNum,%
         .unknown/.code={%
-        \let\keyname=\pgfkeyscurrentname
-        \let\keyvalue=\pgfkeyscurrentvalue
+        \let\keyname\pgfkeyscurrentname
+        \let\keyvalue\pgfkeyscurrentvalue
         \errmessage{TIKZUML ERROR : in umlCNrelation, invalid option \keyname}%
 }}%
   \pgfkeys{/tikzuml/relation/.cd,#1}%
@@ -1900,14 +1887,14 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
   \end{pgfonlayer}%
   %
   \ifnum\theposStereo>100%
-    \pgfmathsetmacro{\tikzumlCNRelationPositionStereotype}{(\theposStereo-100)/100}%
+    \pgfmathsetmacro\tikzumlCNRelationPositionStereotype{(\theposStereo-100)/100}%
     \xdef\tikzumlLastArc{\tikzumlLastArc node[pos=\tikzumlCNRelationPositionStereotype, anchor=center] {\stereotype} }%
   \else
     \xdef\tikzumlFirstArc{\tikzumlFirstArc node[pos=\tikzumlCNRelationPositionStereotype, anchor=center] {\stereotype} }%
   \fi
   %
   \ifnum\thepos>100%
-    \pgfmathsetmacro{\tikzumlCNRelationPosition}{(\thepos-100)/100}%
+    \pgfmathsetmacro\tikzumlCNRelationPosition{(\thepos-100)/100}%
     \def\arcNum{2}%
   \else
     \def\arcNum{1}%
@@ -1927,7 +1914,7 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
   \fi
   %
   \ifnum\theposT>100%
-    \pgfmathsetmacro{\tikzumlCNRelationPositionT}{(\theposT-100)/100}%
+    \pgfmathsetmacro\tikzumlCNRelationPositionT{(\theposT-100)/100}%
     \def\arcNumT{2}%
   \else
     \def\arcNumT{1}%
@@ -1970,7 +1957,6 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
     \draw[auto, \tikzumlCNRelationStyle, font=\tikzumlDefaultFont] \tikzumlPath ;%
 }
   \end{pgfonlayer}%
-  %
   \stepcounter{tikzumlRelationNum}%
 }%
 % shortcuts for cnrelations
@@ -1989,8 +1975,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlCNfriend[4][]{%
   \pgfkeys{/tikzuml/friendrelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlCNfriend, forbidden option stereo}%
 }{}}}%
@@ -2020,8 +2006,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
     no coords/.is if=tikzumlnoteWithoutCoords,%
     no coords=false,%
     .unknown/.code={%
-    \let\keyname=\pgfkeyscurrentname
-    \let\keyvalue=\pgfkeyscurrentvalue
+    \let\keyname\pgfkeyscurrentname
+    \let\keyvalue\pgfkeyscurrentvalue
     \ifthenelse{\equal{\keyname}{above}\OR
         \equal{\keyname}{left}\OR
         \equal{\keyname}{below}\OR
@@ -2065,17 +2051,17 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
     \def\tikzumlNoteDestAnchor{.\tikzumlNoteDestAnchorold}%
 }%
   \iftikzumlnoteWithoutCoords
-    \node[text=\tikzumlNoteTextColor, text width=\tikzumlNoteTextWidth, font=\tikzumlDefaultFont, outer sep=0, inner xsep=1ex, inner ysep=3ex, /tikzuml/note/style] (note-\thetikzumlNoteNum-coord) {#3};%
+    \node[text=\tikzumlNoteTextColor, text width=\tikzumlNoteTextWidth, font=\tikzumlDefaultFont, outer sep=\z@, inner xsep=1ex, inner ysep=3ex, /tikzuml/note/style] (note-\thetikzumlNoteNum-coord) {#3};%
   \else
-    \node[text=\tikzumlNoteTextColor, text width=\tikzumlNoteTextWidth, font=\tikzumlDefaultFont, outer sep=0, inner xsep=1ex, inner ysep=3ex, /tikzuml/note/style] (note-\thetikzumlNoteNum-coord) at (\tikzumlNoteX, \tikzumlNoteY) {#3};%
+    \node[text=\tikzumlNoteTextColor, text width=\tikzumlNoteTextWidth, font=\tikzumlDefaultFont, outer sep=\z@, inner xsep=1ex, inner ysep=3ex, /tikzuml/note/style] (note-\thetikzumlNoteNum-coord) at (\tikzumlNoteX, \tikzumlNoteY) {#3};%
   \fi
   \draw (note-\thetikzumlNoteNum-coord.north east) node[name=note-\thetikzumlNoteNum-right-top, below=2ex, coordinate] {};%
   \draw (note-\thetikzumlNoteNum-coord.north east) node[name=note-\thetikzumlNoteNum-top-right, left=2ex, coordinate] {};%
   \draw[draw=\tikzumlNoteDrawColor, fill=\tikzumlNoteFillColor] (note-\thetikzumlNoteNum-coord.south west) -- (note-\thetikzumlNoteNum-coord.south east) -- (note-\thetikzumlNoteNum-right-top.base) -- (note-\thetikzumlNoteNum-top-right.base) -- (note-\thetikzumlNoteNum-coord.north west) -- cycle;%
-  \node[text=\tikzumlNoteTextColor, text width=\tikzumlNoteTextWidth, outer sep=0, inner xsep=1ex, inner ysep=3ex, font=\tikzumlDefaultFont] (note-\thetikzumlNoteNum) at (note-\thetikzumlNoteNum-coord) {#3};%
+  \node[text=\tikzumlNoteTextColor, text width=\tikzumlNoteTextWidth, outer sep=\z@, inner xsep=1ex, inner ysep=3ex, font=\tikzumlDefaultFont] (note-\thetikzumlNoteNum) at (note-\thetikzumlNoteNum-coord) {#3};%
   \draw[draw=\tikzumlNoteDrawColor] (note-\thetikzumlNoteNum-right-top) -| (note-\thetikzumlNoteNum-top-right);%
   %
-  \pgfmathsetmacro{\tikzumlNoteWeightT}{1.0-\tikzumlNoteWeight}%
+  \pgfmathsetmacro\tikzumlNoteWeightT{1-\tikzumlNoteWeight}%
   \node (note-\thetikzumlNoteNum-middle) at (barycentric cs:note-\thetikzumlNoteNum-coord=\tikzumlNoteWeight,\tikzumlClassNodeName=\tikzumlNoteWeightT) {};%
   %
   \ifthenelse{\equal{\tikzumlNoteGeometry}{--}%
@@ -2109,8 +2095,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlHVnote[3][]{%
   \pgfkeys{/tikzuml/note/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{geometry}}{%
        \errmessage{TIKZUML ERROR : in umlHVnote, forbidden option geometry}%
 }{}}}%
@@ -2120,8 +2106,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlVHnote[3][]{%
   \pgfkeys{/tikzuml/note/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{geometry}}{%
        \errmessage{TIKZUML ERROR : in umlVHnote, forbidden option geometry}%
 }{}}}%
@@ -2131,8 +2117,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlVHVnote[3][]{%
   \pgfkeys{/tikzuml/note/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{geometry}}{%
        \errmessage{TIKZUML ERROR : in umlVHVnote, forbidden option geometry}%
 }{}}}%
@@ -2142,8 +2128,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlHVHnote[3][]{%
   \pgfkeys{/tikzuml/note/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{geometry}}{%
        \errmessage{TIKZUML ERROR : in umlHVHnote, forbidden option geometry}%
 }{}}}%
@@ -2181,8 +2167,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
     no coords/.is if=tikzumlassocclassWithoutCoords,%
     no coords=false,%
     .unknown/.code={%
-        \let\keyname=\pgfkeyscurrentname
-        \let\keyvalue=\pgfkeyscurrentvalue
+        \let\keyname\pgfkeyscurrentname
+        \let\keyvalue\pgfkeyscurrentvalue
         \ifthenelse{\equal{\keyname}{above}\OR
     \equal{\keyname}{left}\OR
     \equal{\keyname}{below}\OR
@@ -2282,7 +2268,7 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
   \ifthenelse{\equal{\tikzumlAssocClassTemplateParam}{}}{}{%
     \draw (\tikzumlAssocClassNodeName.north east) node[tikzuml template style, name=\tikzumlAssocClassNodeName-template, draw=\tikzumlAssocClassDrawColor, fill=\tikzumlAssocClassTemplateFillColor, text=\tikzumlAssocClassTextColor, font=\tikzumlDefaultFont] {\tikzumlAssocClassTemplateParam};%
 }%
-  \pgfmathsetmacro{\tikzumlAssocClassWeightT}{1.0-\tikzumlAssocClassWeight}
+  \pgfmathsetmacro\tikzumlAssocClassWeightT{1-\tikzumlAssocClassWeight}
   \node (\tikzumlAssocClassNodeName-middle) at (barycentric cs:\tikzumlAssocClassNodeName=\tikzumlAssocClassWeight,\tikzumlAssocClassRelationNodeName=\tikzumlAssocClassWeightT) {};%
   %
   \ifthenelse{\equal{\tikzumlAssocClassGeometry}{--}\OR\equal{\tikzumlAssocClassGeometry}{-|}\OR\equal{\tikzumlAssocClassGeometry}{|-}}{%
@@ -2322,7 +2308,7 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 }%
 %  use case diagrams    %
 \tikzstyle{tikzuml usecase style}=[ellipse, text centered]%
-\tikzstyle{tikzuml actor style}=[ellipse, inner sep=\z@, outer sep=0]%
+\tikzstyle{tikzuml actor style}=[ellipse, inner sep=\z@, outer sep=\z@]%
 %
 \newcounter{tikzumlSystemUseCaseNum}%
 \newcounter{tikzumlSystemLevel}%
@@ -2345,8 +2331,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
         draw/.initial=\tikzumlDefaultDrawColor, fill/.initial=\tikzumlSystemDefaultFillColor,%
         text/.initial=\tikzumlDefaultTextColor,%
         .unknown/.code={%
-          \let\keyname=\pgfkeyscurrentname
-          \let\keyvalue=\pgfkeyscurrentvalue
+          \let\keyname\pgfkeyscurrentname
+          \let\keyvalue\pgfkeyscurrentvalue
           \errmessage{TIKZUML ERROR : in umlsystem, invalid option \keyname}%
 }}%
   \pgfkeys{/tikzuml/system/.cd, #1}%
@@ -2391,8 +2377,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
          no coords/.is if=tikzumlusecaseWithoutCoords,%
          no coords=false,%
          .unknown/.code={%
-    \let\keyname=\pgfkeyscurrentname
-    \let\keyvalue=\pgfkeyscurrentvalue
+    \let\keyname\pgfkeyscurrentname
+    \let\keyvalue\pgfkeyscurrentvalue
     \ifthenelse{\equal{\keyname}{above}\OR
     \equal{\keyname}{left}\OR
     \equal{\keyname}{below}\OR
@@ -2481,8 +2467,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
        no coords/.is if=tikzumlactorWithoutCoords,%
        no coords=false,%
        .unknown/.code={%
-         \let\keyname=\pgfkeyscurrentname
-         \let\keyvalue=\pgfkeyscurrentvalue
+         \let\keyname\pgfkeyscurrentname
+         \let\keyvalue\pgfkeyscurrentvalue
          \ifthenelse{\equal{\keyname}{above}\OR
      \equal{\keyname}{left}\OR
      \equal{\keyname}{below}\OR
@@ -2526,8 +2512,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlinclude[3][]{%
   \pgfkeys{/tikzuml/includerelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlinclude, forbidden option stereo}%
 }{%
@@ -2540,8 +2526,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlextend[3][]{%
   \pgfkeys{/tikzuml/extendrelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlextend, forbidden option stereo}%
 }{%
@@ -2555,8 +2541,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlHVinclude[3][]{%
   \pgfkeys{/tikzuml/includerelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlHVinclude, forbidden option stereo}%
 }{%
@@ -2569,8 +2555,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlHVextend[3][]{%
   \pgfkeys{/tikzuml/extendrelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlHVextend, forbidden option stereo}%
 }{%
@@ -2584,8 +2570,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlVHinclude[3][]{%
   \pgfkeys{/tikzuml/includerelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlVHinclude, forbidden option stereo}%
 }{%
@@ -2598,8 +2584,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlVHextend[3][]{%
   \pgfkeys{/tikzuml/extendrelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR :in umlVHextend,  forbidden option stereo}%
 }{%
@@ -2612,8 +2598,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlHVHinclude[3][]{%
   \pgfkeys{/tikzuml/includerelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlHVHinclude, forbidden option stereo}%
 }{%
@@ -2626,8 +2612,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlHVHextend[3][]{%
   \pgfkeys{/tikzuml/extendrelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlHVHextend, forbidden option stereo}%
 }{%
@@ -2641,8 +2627,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlVHVinclude[3][]{%
   \pgfkeys{/tikzuml/includerelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlVHVinclude, forbidden option stereo}%
 }{%
@@ -2655,8 +2641,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlVHVextend[3][]{%
   \pgfkeys{/tikzuml/extendrelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlVHVextend, forbidden option stereo}%
 }{%
@@ -2670,8 +2656,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlCNinclude[4][]{%
   \pgfkeys{/tikzuml/includerelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlCNinclude, forbidden option stereo}%
 }{}}}%
@@ -2681,8 +2667,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlCNextend[4][]{%
   \pgfkeys{/tikzuml/extendrelation/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlCNextend, forbidden option stereo}%
 }{}}}%
@@ -2733,8 +2719,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
     no coords/.is if=tikzumlstatejoinWithoutCoords,%
     no coords=false,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{above}\OR
       \equal{\keyname}{left}\OR
       \equal{\keyname}{below}\OR
@@ -2787,8 +2773,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
     no coords/.is if=tikzumlstatedecisionWithoutCoords,%
     no coords=false,%
     .unknown/.code={%
-        \let\keyname=\pgfkeyscurrentname
-        \let\keyvalue=\pgfkeyscurrentvalue
+        \let\keyname\pgfkeyscurrentname
+        \let\keyvalue\pgfkeyscurrentvalue
         \ifthenelse{\equal{\keyname}{above}\OR
     \equal{\keyname}{left}\OR
     \equal{\keyname}{below}\OR
@@ -2841,8 +2827,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
         no coords/.is if=tikzumlstateinitialWithoutCoords,%
         no coords=false,%
         .unknown/.code={%
-        \let\keyname=\pgfkeyscurrentname
-        \let\keyvalue=\pgfkeyscurrentvalue
+        \let\keyname\pgfkeyscurrentname
+        \let\keyvalue\pgfkeyscurrentvalue
         \ifthenelse{\equal{\keyname}{above}\OR
     \equal{\keyname}{left}\OR
     \equal{\keyname}{below}\OR
@@ -2897,8 +2883,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
         no coords/.is if=tikzumlstatefinalWithoutCoords,%
         no coords=false,%
         .unknown/.code={%
-    \let\keyname=\pgfkeyscurrentname
-    \let\keyvalue=\pgfkeyscurrentvalue
+    \let\keyname\pgfkeyscurrentname
+    \let\keyvalue\pgfkeyscurrentvalue
     \ifthenelse{\equal{\keyname}{above}\OR
      \equal{\keyname}{left}\OR
      \equal{\keyname}{below}\OR
@@ -2953,8 +2939,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
     no coords/.is if=tikzumlstateenterWithoutCoords,%
     no coords=false,%
     .unknown/.code={%
-        \let\keyname=\pgfkeyscurrentname
-        \let\keyvalue=\pgfkeyscurrentvalue
+        \let\keyname\pgfkeyscurrentname
+        \let\keyvalue\pgfkeyscurrentvalue
         \ifthenelse{\equal{\keyname}{above}\OR
     \equal{\keyname}{left}\OR
     \equal{\keyname}{below}\OR
@@ -3008,8 +2994,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
     no coords/.is if=tikzumlstateexitWithoutCoords,%
     no coords=false,%
     .unknown/.code={%
-        \let\keyname=\pgfkeyscurrentname
-        \let\keyvalue=\pgfkeyscurrentvalue
+        \let\keyname\pgfkeyscurrentname
+        \let\keyvalue\pgfkeyscurrentvalue
         \ifthenelse{\equal{\keyname}{above}\OR
     \equal{\keyname}{left}\OR
     \equal{\keyname}{below}\OR
@@ -3064,8 +3050,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
     no coords/.is if=tikzumlstateendWithoutCoords,%
     no coords=false,%
     .unknown/.code={%
-    \let\keyname=\pgfkeyscurrentname
-    \let\keyvalue=\pgfkeyscurrentvalue
+    \let\keyname\pgfkeyscurrentname
+    \let\keyvalue\pgfkeyscurrentvalue
     \ifthenelse{\equal{\keyname}{above}\OR
         \equal{\keyname}{left}\OR
         \equal{\keyname}{below}\OR
@@ -3125,8 +3111,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
   no coords/.is if=tikzumlstatehistoryWithoutCoords,%
   no coords=false,%
   .unknown/.code={%
-    \let\keyname=\pgfkeyscurrentname
-    \let\keyvalue=\pgfkeyscurrentvalue
+    \let\keyname\pgfkeyscurrentname
+    \let\keyvalue\pgfkeyscurrentvalue
     \ifthenelse{\equal{\keyname}{above}\OR
       \equal{\keyname}{left}\OR
       \equal{\keyname}{below}\OR
@@ -3188,8 +3174,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
   no coords/.is if=tikzumlstatedeephistoryWithoutCoords,%
   no coords=false,%
   .unknown/.code={%
-  \let\keyname=\pgfkeyscurrentname
-  \let\keyvalue=\pgfkeyscurrentvalue
+  \let\keyname\pgfkeyscurrentname
+  \let\keyvalue\pgfkeyscurrentvalue
   \ifthenelse{\equal{\keyname}{above}\OR
     \equal{\keyname}{left}\OR
     \equal{\keyname}{below}\OR
@@ -3253,8 +3239,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
   no coords/.is if=tikzumlstateWithoutCoords,%
   no coords=false,%
   .unknown/.code={%
-    \let\keyname=\pgfkeyscurrentname
-    \let\keyvalue=\pgfkeyscurrentvalue
+    \let\keyname\pgfkeyscurrentname
+    \let\keyvalue\pgfkeyscurrentvalue
     \ifthenelse{\equal{\keyname}{above}\OR
      \equal{\keyname}{left}\OR
      \equal{\keyname}{below}\OR
@@ -3439,8 +3425,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
   \ifx\@umlactor\@empty
     \newcommand\umlactor[2][]{%
       \pgfkeys{/tikzuml/actorobj/.cd, .unknown/.code={%
-        \let\keyname=\pgfkeyscurrentname
-        \let\keyvalue=\pgfkeyscurrentvalue
+        \let\keyname\pgfkeyscurrentname
+        \let\keyvalue\pgfkeyscurrentvalue
         \ifthenelse{\equal{\keyname}{stereo}}{%
           \errmessage{TIKZUML ERROR : in umlactor, forbidden option stereo}%
 }{}}}%
@@ -3450,8 +3436,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
   \else
     \renewcommand\umlactor[2][]{%
       \pgfkeys{/tikzuml/actorobj/.cd, .unknown/.code={%
-          \let\keyname=\pgfkeyscurrentname
-          \let\keyvalue=\pgfkeyscurrentvalue
+          \let\keyname\pgfkeyscurrentname
+          \let\keyvalue\pgfkeyscurrentvalue
           \ifthenelse{\equal{\keyname}{stereo}}{%
     \errmessage{TIKZUML ERROR : in umlactor, forbidden option stereo}%
 }{}}}%
@@ -3551,8 +3537,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
      no ddots/.is if=tikzumlobjectNoDDots,%
      no ddots=false,%
      .unknown/.code={%
-       \let\keyname=\pgfkeyscurrentname
-       \let\keyvalue=\pgfkeyscurrentvalue
+       \let\keyname\pgfkeyscurrentname
+       \let\keyvalue\pgfkeyscurrentvalue
        \errmessage{TIKZUML ERROR : in umlobject, invalid option \keyname}%
 }}%
   \pgfkeys{/tikzuml/obj/.cd, #1}%
@@ -3568,7 +3554,7 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
   \fi
   %
   \ifthenelse{\equal{\tikzumlObjectX}{tikzumlEmpty}}{%
-    \pgfmathsetmacro{\tikzumlObjectX}{4*(\thetikzumlObjectNum-1)}%
+    \pgfmathsetmacro\tikzumlObjectX{4*(\thetikzumlObjectNum-1)}%
 }{}%
   %
   \def\tikzumlObjectName{#2}%
@@ -3614,8 +3600,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 % shortcuts for objects
 \newcommand\umlbasicobject[2][]{%
   \pgfkeys{/tikzuml/basicobj/.cd, .unknown/.code={%
-    \let\keyname=\pgfkeyscurrentname
-    \let\keyvalue=\pgfkeyscurrentvalue
+    \let\keyname\pgfkeyscurrentname
+    \let\keyvalue\pgfkeyscurrentvalue
     \ifthenelse{\equal{\keyname}{no ddots}}{%
       \errmessage{TIKZUML ERROR : in umlbasicobject, forbidden option no ddots}%
 }{}}}%
@@ -3625,8 +3611,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 %
 \newcommand\umldatabase[2][]{%
   \pgfkeys{/tikzuml/databaseobj/.cd, .unknown/.code={%
-       \let\keyname=\pgfkeyscurrentname
-       \let\keyvalue=\pgfkeyscurrentvalue
+       \let\keyname\pgfkeyscurrentname
+       \let\keyvalue\pgfkeyscurrentvalue
        \ifthenelse{\equal{\keyname}{stereo}}{%
          \errmessage{TIKZUML ERROR : in umldatabase, forbidden option stereo}%
 }{}}}%
@@ -3635,8 +3621,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 }%
 \newcommand\umlentity[2][]{%
   \pgfkeys{/tikzuml/entityobj/.cd, .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlentity, forbidden option stereo}%
 }{}}}%
@@ -3645,8 +3631,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 }%
 \newcommand\umlcontrol[2][]{%
   \pgfkeys{/tikzuml/controlobj/.cd, .unknown/.code={%
-      \let\keyname=\pgfkeyscurrentname
-      \let\keyvalue=\pgfkeyscurrentvalue
+      \let\keyname\pgfkeyscurrentname
+      \let\keyvalue\pgfkeyscurrentvalue
       \ifthenelse{\equal{\keyname}{stereo}}{%
         \errmessage{TIKZUML ERROR : in umlcontrol, forbidden option stereo}%
 }{}}}%
@@ -3655,8 +3641,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 }%
 \newcommand\umlboundary[2][]{%
   \pgfkeys{/tikzuml/boundaryobj/.cd, .unknown/.code={%
-       \let\keyname=\pgfkeyscurrentname
-       \let\keyvalue=\pgfkeyscurrentvalue
+       \let\keyname\pgfkeyscurrentname
+       \let\keyvalue\pgfkeyscurrentvalue
        \ifthenelse{\equal{\keyname}{stereo}}{%
          \errmessage{TIKZUML ERROR : in umlboundary, forbidden option stereo}%
 }{}}}%
@@ -3665,8 +3651,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 }%
 \newcommand\umlmulti[2][]{%
   \pgfkeys{/tikzuml/multiobj/.cd, .unknown/.code={%
-    \let\keyname=\pgfkeyscurrentname
-    \let\keyvalue=\pgfkeyscurrentvalue
+    \let\keyname\pgfkeyscurrentname
+    \let\keyvalue\pgfkeyscurrentvalue
     \ifthenelse{\equal{\keyname}{stereo}}{%
       \errmessage{TIKZUML ERROR : in umlmulti, forbidden option stereo}%
 }{}}}%
@@ -3726,8 +3712,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
       text/.initial=\tikzumlDefaultTextColor,%
       padding/.initial=\tikzumlCallDefaultPadding,%
       .unknown/.code={%
-        \let\keyname=\pgfkeyscurrentname
-        \let\keyvalue=\pgfkeyscurrentvalue
+        \let\keyname\pgfkeyscurrentname
+        \let\keyvalue\pgfkeyscurrentvalue
         \ifthenelse{\equal{\keyname}{with return}}{%
           \def\tikzumlCallWithReturn{tikzumlTrue}%
 }{%
@@ -3837,9 +3823,9 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
       \node[tikzuml activity style] (sb-\tikzumlCall@nodeName) at (\tikzumlCallStartNodeName |- tikzumlTmpNode) {};%
 }{%
       \ifthenelse{\equal{\tikzumlCallReturn}{tikzumlEmpty}}{%
-        \pgfmathsetmacro{\tikzumlCallPaddingd}{.5*\tikzumlCallPadding}%
+        \pgfmathsetmacro\tikzumlCallPaddingd{.5*\tikzumlCallPadding}%
 }{%
-        \pgfmathsetmacro{\tikzumlCallPaddingd}{1.2*\tikzumlCallPadding}%
+        \pgfmathsetmacro\tikzumlCallPaddingd{1.2*\tikzumlCallPadding}%
 }%
       \draw (\tikzumlCallBottomSrc)+(0,-\tikzumlCallPaddingd ex) node[coordinate, name=tikzumlTmpNode] {};%
       \node[tikzuml activity style] (eb-\tikzumlCall@nodeName) at (\tikzumlCallEndNodeName |- tikzumlTmpNode) {};%
@@ -3995,7 +3981,7 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
   \providecommand\umlfpart[1][]{%
     \stepcounter{tikzumlFragmentPartNum}%
     %
-    \node[outer sep=0, inner xsep=\tikzumlFragmentXSep ex, inner ysep=\tikzumlFragmentYSep ex, fit=\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname, name=\tikzumlFragment@name-Part-tmp] {};%
+    \node[outer sep=\z@, inner xsep=\tikzumlFragmentXSep ex, inner ysep=\tikzumlFragmentYSep ex, fit=\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname, name=\tikzumlFragment@name-Part-tmp] {};%
     \node[anchor=east, name=\tikzumlFragment@name-PartType-\thetikzumlFragmentPartNum] at (\tikzumlFragment@name-Part-tmp.north west |- \tikzumlCallBottomSrc) {\phantom{\tikzumlFragmentType}};%
     \draw (\tikzumlFragment@name-PartType-\thetikzumlFragmentPartNum.north west |- \tikzumlCallBottomSrc)+(0,-.4*\tikzumlFragment@paddingy ex) node[name=\tikzumlFragment@name-PartWest-\thetikzumlFragmentPartNum] {};%
     \draw (\tikzumlFragment@name-Part-tmp.north east |- \tikzumlCallBottomSrc)+(0,-.4*\tikzumlFragment@paddingy ex) node[name=\tikzumlFragment@name-PartEast-\thetikzumlFragmentPartNum] {};%
@@ -4012,8 +3998,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
     draw/.initial=\tikzumlDefaultDrawColor, fill/.initial=\tikzumlFragmentDefaultFillColor,%
     text/.initial=\tikzumlDefaultTextColor,%
     .unknown/.code={%
-    \let\keyname=\pgfkeyscurrentname
-    \let\keyvalue=\pgfkeyscurrentvalue
+    \let\keyname\pgfkeyscurrentname
+    \let\keyvalue\pgfkeyscurrentvalue
     \errmessage{TIKZUML ERROR : in umlfragment, invalid option \keyname}%
 }}%
   \pgfkeys{/tikzuml/fragment/.cd, #1}%
@@ -4066,7 +4052,7 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
   %
   % draw working fragment box
   \begin{pgfonlayer}{fragment\thetikzumlFragmentLevel}%
-  \node[outer sep=0, inner xsep=\tikzumlFragmentXSep ex, inner ysep=\tikzumlFragmentYSep ex, fit=\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname, name=\tikzumlFragment@name-back] {};%
+  \node[outer sep=\z@, inner xsep=\tikzumlFragmentXSep ex, inner ysep=\tikzumlFragmentYSep ex, fit=\csname tikzumlFragmentFit\tikzumlFragment@name \endcsname, name=\tikzumlFragment@name-back] {};%
   \end{pgfonlayer}%
   %
   % draw type and label
@@ -4077,7 +4063,7 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
   %
   % draw final fragment box
   \begin{pgfonlayer}{fragment\thetikzumlFragmentLevel}%
-  \node[draw=\tikzumlFragmentDrawColor, fill=\tikzumlFragmentFillColor, outer sep=0, inner sep=\z@, font=\tikzumlDefaultFont, fit=(\tikzumlFragment@name-back) (\tikzumlFragment@name-type) (\tikzumlFragment@name-label), name=\tikzumlFragment@name] {};%
+  \node[draw=\tikzumlFragmentDrawColor, fill=\tikzumlFragmentFillColor, outer sep=\z@, inner sep=\z@, font=\tikzumlDefaultFont, fit=(\tikzumlFragment@name-back) (\tikzumlFragment@name-type) (\tikzumlFragment@name-label), name=\tikzumlFragment@name] {};%
   \end{pgfonlayer}%
   %
   \draw[draw=\tikzumlFragmentDrawColor] (\tikzumlFragment@name.north west) rectangle (\tikzumlFragment@name.south east);%
@@ -4114,8 +4100,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
         no ddots/.is if=tikzumlcreatecallNoDDots,%
         no ddots=false,%
         .unknown/.code={%
-    \let\keyname=\pgfkeyscurrentname
-    \let\keyvalue=\pgfkeyscurrentvalue
+    \let\keyname\pgfkeyscurrentname
+    \let\keyvalue\pgfkeyscurrentvalue
     \errmessage{TIKZUML ERROR : in umlcreatecall, invalid option \keyname}%
 }}%
   \pgfkeys{/tikzuml/createcall/.cd, #1}%
@@ -4261,8 +4247,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
     no coords/.is if=tikzumlcomponentWithoutCoords,%
     no coords=false,%
     .unknown/.code={%
-        \let\keyname=\pgfkeyscurrentname
-        \let\keyvalue=\pgfkeyscurrentvalue
+        \let\keyname\pgfkeyscurrentname
+        \let\keyvalue\pgfkeyscurrentvalue
         \ifthenelse{\equal{\keyname}{above}\OR
     \equal{\keyname}{left}\OR
     \equal{\keyname}{below}\OR
@@ -4393,8 +4379,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
   anchor/.initial=east,
   draw/.initial=\tikzumlDefaultDrawColor, fill/.initial=\tikzumlComponentDefaultFillColor,%
   .unknown/.code={%
-  \let\keyname=\pgfkeyscurrentname
-  \let\keyvalue=\pgfkeyscurrentvalue
+  \let\keyname\pgfkeyscurrentname
+  \let\keyvalue\pgfkeyscurrentvalue
   \ifthenelse{\equal{\keyname}{with port}}{%
     \def\tikzumlInterfaceWithPort{tikzumlTrue}%
 }{}}}%
@@ -4453,8 +4439,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
     draw/.initial=\tikzumlDefaultDrawColor, fill/.initial=\tikzumlComponentDefaultFillColor,%
     anchor/.initial=west,
     .unknown/.code={%
-        \let\keyname=\pgfkeyscurrentname
-        \let\keyvalue=\pgfkeyscurrentvalue
+        \let\keyname\pgfkeyscurrentname
+        \let\keyvalue\pgfkeyscurrentvalue
         \ifthenelse{\equal{\keyname}{with port}}{%
         \def\tikzumlInterfaceWithPort{tikzumlTrue}%
 }{}}}%
@@ -4580,8 +4566,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
     fill assembly connector/.initial=\tikzumlAssemblyConnectorDefaultFillColor,%
     fill port/.initial=\tikzumlPortDefaultFillColor,%
     .unknown/.code={%
-        \let\keyname=\pgfkeyscurrentname
-        \let\keyvalue=\pgfkeyscurrentvalue
+        \let\keyname\pgfkeyscurrentname
+        \let\keyvalue\pgfkeyscurrentvalue
         \ifthenelse{\equal{\keyname}{with port}}{%
         \def\tikzumlAssemblyConnectorWithPort{tikzumlTrue}%
 }{%
@@ -4770,8 +4756,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlHVassemblyconnector[3][]{%
   \pgfkeys{/tikzuml/HVassemblyconnector/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{geometry}}{%
        \errmessage{TIKZUML ERROR : in umlHVassemblyconnector, forbidden option geometry}%
 }{}}}%
@@ -4781,8 +4767,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlVHassemblyconnector[3][]{%
   \pgfkeys{/tikzuml/VHassemblyconnector/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{geometry}}{%
         \errmessage{TIKZUML ERROR : in umlVHassemblyconnector, forbidden option geometry}%
 }{}}}%
@@ -4792,8 +4778,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlHVHassemblyconnector[3][]{%
   \pgfkeys{/tikzuml/HVHassemblyconnector/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{geometry}}{%
        \errmessage{TIKZUML ERROR : in umlHVHassemblyconnector, forbidden option geometry}%
 }{}}}%
@@ -4803,8 +4789,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlVHVassemblyconnector[3][]{%
   \pgfkeys{/tikzuml/VHVassemblyconnector/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{geometry}}{%
        \errmessage{TIKZUML ERROR : in umlVHVassemblyconnector, forbidden option geometry}%
 }{}}}%
@@ -4815,8 +4801,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
   \pgfkeys{/tikzuml/port/.cd, draw/.initial=\tikzumlDefaultDrawColor, fill/.initial=\tikzumlPortDefaultFillColor,%
       width/.initial=\tikzumlPortDefaultWidth,%
       .unknown/.code={%
-        \let\keyname=\pgfkeyscurrentname
-        \let\keyvalue=\pgfkeyscurrentvalue
+        \let\keyname\pgfkeyscurrentname
+        \let\keyvalue\pgfkeyscurrentvalue
         \errmessage{TIKZUML ERROR : in umlport forbidden option \keyname}%
 }}%
   \pgfkeys{/tikzuml/port/.cd, #1}%
@@ -4834,8 +4820,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
   \def\tikzumlDelegateConnectorWithEndPort{tikzumlFalse}%
   \pgfkeys{/tikzuml/delegateconnector/.cd,
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umldelegateconnector, forbidden option stereo}%
 }{}}}%
@@ -4846,8 +4832,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlHVdelegateconnector[3][]{%
   \pgfkeys{/tikzuml/HVdelegateconnector/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{geometry}\OR\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlHVdelegateconnector, forbidden option \keyname}%
 }{}}}%
@@ -4858,8 +4844,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlVHdelegateconnector[3][]{%
   \pgfkeys{/tikzuml/VHdelegateconnector/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{geometry}\OR\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlVHdelegateconnector, forbidden option \keyname}%
 }{}}}%
@@ -4869,8 +4855,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlHVHdelegateconnector[3][]{%
   \pgfkeys{/tikzuml/HVHdelegateconnector/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{geometry}\OR\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlHVHdelegateconnector, forbidden option \keyname}%
 }{}}}%
@@ -4880,8 +4866,8 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 \newcommand\umlVHVdelegateconnector[3][]{%
   \pgfkeys{/tikzuml/VHVdelegateconnector/.cd,%
     .unknown/.code={%
-     \let\keyname=\pgfkeyscurrentname
-     \let\keyvalue=\pgfkeyscurrentvalue
+     \let\keyname\pgfkeyscurrentname
+     \let\keyvalue\pgfkeyscurrentvalue
      \ifthenelse{\equal{\keyname}{geometry}\OR\equal{\keyname}{stereo}}{%
        \errmessage{TIKZUML ERROR : in umlVHVdelegateconnector, forbidden option \keyname}%
 }{}}}%
