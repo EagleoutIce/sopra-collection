@@ -242,8 +242,7 @@
          inner sep=1.5/1.635,transform shape,minimum width=2em] at (0,0)
          {\color{sob@col@uulm@akzent!50!black}\sob@register@groupnum};}};
     \fi
-    \node[left,scale=.75] at($(current page.north east)+%
-        (-\sob@len@header,-\sob@len@logoheight/2)$) {\uulmlogo{\ifsob@printmode@ black\else sob@col@uulm\fi}};
+    \node[left=1.5pt,scale=.75] at($(current page.north east)+(-\sob@len@header,-\sob@len@logoheight/2)$) {\uulmlogo{\ifsob@printmode@ black\else sob@col@uulm\fi}};
     \fill[sob@col@uulm@cs] %
         ($(current page.north west)+(0,-\sob@len@logoheight)$) rectangle
         ($(current page.north east)+(0,-\sob@len@logoheight-1.2cm)$);
@@ -292,7 +291,7 @@
 % PGF commands, generated using http://sourceforge.net/projects/eps2pgf/
 % ----------
 
-\newcommand\uulmlogo[1]{
+\newcommand\uulmlogo[1]{%
 \ifsob@usedraft@\else
 \hspace*{-8pt}
 \begin{pgfpicture}
