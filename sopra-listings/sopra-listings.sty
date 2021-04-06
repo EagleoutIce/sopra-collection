@@ -194,31 +194,31 @@
 % styles. Will define e.g. \sol@styles@lst@keywo
 \ifsol@printmode@
 \sol@list@define@styles{%
- {keywordA:    \@declaredcolor{sol@colors@lst@keywordA}\bfseries},%
- {keywordB:    \@declaredcolor{sol@colors@lst@keywordB}},%
- {keywordC:    \@declaredcolor{sol@colors@lst@keywordC}},%
- {keywordD:    \itshape},%
- {numbers:     \@declaredcolor{sol@colors@lst@numbers}\itshape},%
- {linenumbers: \@declaredcolor{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
- {literals:    \@declaredcolor{sol@colors@lst@literals}\itshape},%
- {comments:    \@declaredcolor{sol@colors@lst@comments}},% \scshape
- {highlight:   \@declaredcolor{sol@colors@lst@highlight}\itshape},%
- {basic:       \sol@ttfamily},%
- {command:     \@declaredcolor{sol@colors@lst@command}}%
+ {keywordA: \@declaredcolor{sol@colors@lst@keywordA}\bfseries},%
+ {keywordB: \@declaredcolor{sol@colors@lst@keywordB}},%
+ {keywordC: \@declaredcolor{sol@colors@lst@keywordC}},%
+ {keywordD: \itshape},%
+ {numbers:  \@declaredcolor{sol@colors@lst@numbers}\itshape},%
+ {literals: \@declaredcolor{sol@colors@lst@literals}\itshape},%
+ {comments: \@declaredcolor{sol@colors@lst@comments}},% \scshape
+ {basic:    \sol@ttfamily},%
+ {command:  \@declaredcolor{sol@colors@lst@command}},%
+ {highlight: \@declaredcolor{sol@colors@lst@highlight}\itshape},%
+ {linenumbers: \@declaredcolor{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume}%
 }
 \else
 \sol@list@define@styles{%
- {keywordA:    \@declaredcolor{sol@colors@lst@keywordA}},%
- {keywordB:    \@declaredcolor{sol@colors@lst@keywordB}},%
- {keywordC:    \@declaredcolor{sol@colors@lst@keywordC}},%
- {keywordD:    \itshape},%
- {numbers:     \@declaredcolor{sol@colors@lst@numbers}},%
+ {keywordA: \@declaredcolor{sol@colors@lst@keywordA}},%
+ {keywordB: \@declaredcolor{sol@colors@lst@keywordB}},%
+ {keywordC: \@declaredcolor{sol@colors@lst@keywordC}},%
+ {keywordD: \itshape},%
+ {numbers:  \@declaredcolor{sol@colors@lst@numbers}},%
+ {literals: \@declaredcolor{sol@colors@lst@literals}},%
+ {comments: \@declaredcolor{sol@colors@lst@comments}},%
+ {basic:    \sol@ttfamily},%
+ {command:  \@declaredcolor{sol@colors@lst@command}},%
  {linenumbers: \@declaredcolor{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
- {literals:    \@declaredcolor{sol@colors@lst@literals}},%
- {comments:    \@declaredcolor{sol@colors@lst@comments}},%
- {highlight:   \@declaredcolor{sol@colors@lst@highlight}\itshape},%
- {basic:       \sol@ttfamily},%
- {command:     \@declaredcolor{sol@colors@lst@command}}%
+ {highlight:   \@declaredcolor{sol@colors@lst@highlight}\itshape}%
 }
 \fi
 
@@ -462,8 +462,7 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 \def\sol@@NewLstEnv#1#2#3{%
 \begingroup
 \edef\sol@xcurlst{\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/\environName/constructor command}\endcsname{#3}{#1}{\noexpand\lstset{style=\pgfkeysvalueof{/sol@lst@family/\environName/listing style},language=#2}}{}{#2}}%
-\global\sol@xcurlst\relax
-  \globaldefs=0%
+\global\sol@xcurlst
 \endgroup
 }
 
@@ -652,9 +651,7 @@ keepspaces=false}
 
 \def\@solLstHL#1{\begin{sol@listings@highlight@env}[#1]\begingroup\aftergroup\sol@highlights@endenv}
 
-\def\sol@highlights@endenv{%
-  \end{sol@listings@highlight@env}%
-  \endgroup}
+\def\sol@highlights@endenv{\end{sol@listings@highlight@env}\endgroup}
 
 \def\solhlboxd#1{\edef\@tmp{\noexpand\@solLstHL{#1}}\@tmp}
 \def\solhlbox#1{\@solLstHL{fill=#1!30,draw=#1}}
@@ -664,7 +661,6 @@ keepspaces=false}
 % only pmode
 % Comfort guards
 \def\solIfPmode#1#2{\ifnum\lst@mode=\lst@Pmode\relax#1\else#2\fi}
-
 % Hook discretionary
 \colorlet{sol@breakcolor}{gray}
 \preto\lst@@discretionary{\@declaredcolor{sol@breakcolor}}

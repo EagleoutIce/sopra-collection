@@ -1,7 +1,6 @@
 % sopra-base.cls
 % Version: 1.0
 % Author:  Florian Sihler, 02.12.2019
-%
 % This LaTeX2e Class should provide the basic layout to be used for
 % all documents created by sopra-team-020.
 %                      ulm university, WiSe2019
@@ -12,7 +11,6 @@
 \ProvidesClass{sopra-base}[2019/12/02 EagleoutIce - Basic Documentclass for the sopra-team-020]
 % this class won't base on KOMA or other nice Documentclass :/
 \LoadClass{article}
-
 % Lengths and Registers
 \newcounter{sobversion} \setcounter{sobversion}{1001}
 
@@ -20,7 +18,6 @@
 \newif\ifsob@printmode@% in print, no colors will be used
 \newif\ifsob@showmail@% with show mail, the mail adresses of the authors will
                       % be used
-
 \newlength\sob@len@parindent \sob@len@parindent=\parindent
 \newlength\sob@len@logoheight \sob@len@logoheight=2.6cm
 \newlength\sob@len@header \sob@len@header=2cm % header padding
@@ -28,7 +25,6 @@
 \newcounter{sob@counter@tmp@a}
 
 % Class-Args
-
 % draftmode:
 \DeclareOption{draft}{ \sob@usedraft@true }%
 \DeclareOption{final}{ \sob@usedraft@false }%
@@ -46,10 +42,9 @@
 \DeclareOption{hidemail}{ \sob@showmail@false }
 
 \ExecuteOptions{final,nopar,sffont,defaultmode,showmail}% set it explicitly
-\ProcessOptions\relax%
+\ProcessOptions\relax
 
 % Basic Packages
-
 \RequirePackage{tikz} % we need it anyways - will load xcolor
 \usetikzlibrary{calc}
 % encoding:
@@ -69,7 +64,6 @@
 
 \RequirePackage[hidelinks]{hyperref}
 
-
 % Color Definitions
 \definecolor{sob@col@uulm}{RGB}{130,161,180}            % RGB(130,161,180)
 \definecolor{sob@col@uulm@akzent}{RGB}{169,162,141}     % RGB(169,162,141)
@@ -78,9 +72,7 @@
 \definecolor{sob@col@text@header}{RGB}{255,255,255}     % RGB(255,255,255)
 \definecolor{sob@col@text@sub}{RGB}{000,000,000}        % RGB(000,000,000)
 
-
 % Color Palette & color styling
-
 \ifsob@printmode@ \selectcolormodel{gray}%
 \else \selectcolormodel{rgb}\fi %\maskcolors[cmy]{gray} \fi
 
