@@ -1,6 +1,6 @@
 \ProvidesPackage{sopra-ntts}[2021/03/23 EagleoutIce - The sopra ntts tikz font]
 \RequirePackage{tikz}
-\newcounter{sonversion} \setcounter{sonversion}{1000}
+\newcounter{sonversion} \setcounter{sonversion}\@m
 \def\son@thesonversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 \edef\son@version@str{\noexpand\son@thesonversion\arabic{sonversion}\noexpand\@nil}
 \edef\thesonversion{\son@version@str}
