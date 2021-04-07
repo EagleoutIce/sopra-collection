@@ -83,12 +83,10 @@
 
 % if sob is loaded, the default for the printmode will be passed,
 % otherwise we will use defaultmode as the default :D
-\ifcsname ifsob@printmode@\endcsname
-\ifsob@printmode@\sol@printmode@true
-    \else\sol@printmode@false\fi
-\else% not called from sopra-base-class, we use a
-    \sol@printmode@false
-\fi
+\@ifundefined{ifsob@printmode@}{% not called from sopra-base-class, we use a
+\sol@printmode@false
+}{\ifsob@printmode@\global\sol@printmode@true\else\global\sol@printmode@false\fi}
+
 
 \ProcessOptions\relax
 \ifsol@debug@\let\sol@debug\typeout\else\let\sol@debug\@gobble\fi
