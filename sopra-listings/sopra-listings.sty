@@ -1,20 +1,14 @@
 % sopra-listings.sty
-%
-% ----------
 % Version: 1.1
 % Author:  Florian Sihler, 08.01.2021
-%
 % Will contain all the definitions to highlight listings in a document. Note:
 % I've reused huge parts of the code I've written for sol@lst@family but ported
 % them to be standalone. Furthermore This Package contains 'other' mechanisms.
 % This Package doesn't work with the 'minted'-Package
-%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-listings}[2021/01/08 EagleoutIce - listings for the sopra-team-020]
-
 % Lengths and Registers
 \newcounter{solversion} \setcounter{solversion}{1021}
-
 % note this will be used with tcb:
 \newlength\sol@length@lst@outer@spacing \sol@length@lst@outer@spacing=3pt
 
@@ -46,112 +40,97 @@
 \newif\ifsol@lst@style@defaultfont@ % don't change font?
 \sol@lst@style@defaultfont@true
 
-\sol@lst@lastwas@character@false % explicitly false
-\sol@lst@lastwas@charkeep@false % explicitly false
-\sol@lst@style@upshape@false % explicitly false
-
 \newif\ifsol@debug@% typeout debug
 
 % Package-Args
 % Encoding:
-\DeclareOption{encoding}{ \sol@encoding@true }
-\DeclareOption{noencoding}{ \sol@encoding@false }
+\DeclareOption{encoding}{\sol@encoding@true}
+\DeclareOption{noencoding}{\sol@encoding@false}
 \sol@encoding@false
 % Numbers:
-\DeclareOption{hlnumbers}{ \sol@highlight@numbers@true } % will only disable
-\DeclareOption{nohlnumbers}{ \sol@highlight@numbers@false } % auto - highlight
+\DeclareOption{hlnumbers}{\sol@highlight@numbers@true} % will only disable
+\DeclareOption{nohlnumbers}{\sol@highlight@numbers@false} % auto - highlight
 \sol@highlight@numbers@true
 % Printmodes
-\DeclareOption{defaultmode}{ \sol@printmode@false }% probably shouldn't be used
-\DeclareOption{print}{ \sol@printmode@true }
+\DeclareOption{defaultmode}{\sol@printmode@false}% probably shouldn't be used
+\DeclareOption{print}{\sol@printmode@true}
 % Auto-Language
-\DeclareOption{loadlangs}{ \sol@defaultlang@true }
-\DeclareOption{noloadlangs}{ \sol@defaultlang@false }
+\DeclareOption{loadlangs}{\sol@defaultlang@true}
+\DeclareOption{noloadlangs}{\sol@defaultlang@false}
 \sol@defaultlang@true
 % Color-Palettes
-\DeclareOption{cpalette}{ \sol@cpalette@true }
-\DeclareOption{nocpalette}{ \sol@cpalette@false }
+\DeclareOption{cpalette}{\sol@cpalette@true}
+\DeclareOption{nocpalette}{\sol@cpalette@false}
 % upshape
-\DeclareOption{upshape}{ \sol@lst@style@upshape@true }
-\DeclareOption{noupshape}{ \sol@lst@style@upshape@false }
+\DeclareOption{upshape}{\sol@lst@style@upshape@true}
+\DeclareOption{noupshape}{\sol@lst@style@upshape@false}
 % guard
-\DeclareOption{guardspace}{ \sol@guardspace@true }
-\DeclareOption{noguardspace}{ \sol@guardspace@false }
+\DeclareOption{guardspace}{\sol@guardspace@true }
+\DeclareOption{noguardspace}{\sol@guardspace@false }
 \sol@guardspace@true
 % numinpar
-\DeclareOption{numinpar}{ \sol@numinpar@true }
-\DeclareOption{nonuminpar}{ \sol@numinpar@false }
+\DeclareOption{numinpar}{\sol@numinpar@true}
+\DeclareOption{nonuminpar}{\sol@numinpar@false}
 % numinpar
-\DeclareOption{defaultfont}{ \sol@lst@style@defaultfont@true }
-\DeclareOption{nodefaultfont}{ \sol@lst@style@defaultfont@false }
+\DeclareOption{defaultfont}{\sol@lst@style@defaultfont@true}
+\DeclareOption{nodefaultfont}{\sol@lst@style@defaultfont@false}
 % highlights
-\DeclareOption{highlights}{ \sol@lst@style@highlights@true }
-\DeclareOption{nohighlights}{ \sol@lst@style@highlights@false }
+\DeclareOption{highlights}{\sol@lst@style@highlights@true}
+\DeclareOption{nohighlights}{\sol@lst@style@highlights@false}
 % debug
-\DeclareOption{debug}{ \sol@debug@true }
-\DeclareOption{nodebug}{ \sol@debug@false }
+\DeclareOption{debug}{\sol@debug@true}
+\DeclareOption{nodebug}{\sol@debug@false}
 
 % if sob is loaded, the default for the printmode will be passed,
 % otherwise we will use defaultmode as the default :D
-\@ifundefined{ifsob@printmode@}{% not called from sopra-base-class, we use a
+\ifcsname ifsob@printmode@\endcsname
+\ifsob@printmode@\sol@printmode@true
+    \else\sol@printmode@false\fi
+\else% not called from sopra-base-class, we use a
     \sol@printmode@false
-}{%
-\ifsob@printmode@\global\sol@printmode@true
-    \else\global\sol@printmode@false\fi
-}
+\fi
 
 \ProcessOptions\relax
 \ifsol@debug@\let\sol@debug\typeout\else\let\sol@debug\@gobble\fi
 
-% Basic Packages
-% Encoding:
-\ifsol@encoding@
-\RequirePackage[T1]{fontenc}
-\RequirePackage[utf8]{inputenc}
-\fi
+% Basic Packages Encoding:
+\ifsol@encoding@\RequirePackage[T1]{fontenc}\RequirePackage[utf8]{inputenc}\fi
 \RequirePackage{etoolbox,xcolor,pgfkeys}
 
 % Listings-Base:
-\IfFileExists{listingsutf8.sty}{ \RequirePackage{listingsutf8} }%
-    {\RequirePackage{listings}}
+\IfFileExists{listingsutf8.sty}{\RequirePackage{listingsutf8} }%
+  {\RequirePackage{listings}}
 
-\IfFileExists{accsupp.sty}{ \RequirePackage{accsupp} %
-     \global\sol@accuspp@available@true }%
-    { \global\sol@accuspp@available@false }%
+\IfFileExists{accsupp.sty}{\RequirePackage{accsupp} %
+    \sol@accuspp@available@true}%
+  {\sol@accuspp@available@false}%
 
-\ifsol@guardspace@
-\RequirePackage{needspace}
-\fi
-
-\ifsol@lst@style@highlights@
-\RequirePackage{tikz}
-\fi
+\ifsol@guardspace@\RequirePackage{needspace}\fi
+\ifsol@lst@style@highlights@\RequirePackage{tikz}\fi
 
 % Font Definitions
 \ifsol@lst@style@defaultfont@
 \AtEndPreamble{\RequirePackage{AnonymousPro}}%
-\def\ttdefault{AnonymousPro}%
-\fi
+\def\ttdefault{AnonymousPro}\fi
 
-\let\sol@ttfamily\ttfamily
-\let\T\texttt
+\let\sol@ttfamily\ttfamily \def\T{\texttt}
 
 \def\sol@font@fs@numbers{\footnotesize}
 \def\solNumFs#1{\gdef\sol@font@fs@numbers{#1}}
 \def\sol@font@fs@normal{}
-\newcommand*\lstfs[2][1]{%
+\newcommand*\lstfs[2][\@ne]{%
   \def\sol@font@fs@normal{\fontsize{#2}{#2}\linespread{#1}\selectfont}%
-  \ifnum#2>7\edef\sol@lst@@subfs{\the\numexpr #2-4\relax}\def\sol@font@fs@numbers{\fontsize{\sol@lst@@subfs}{\sol@lst@@subfs}\linespread{#1}\selectfont}%
+  \ifnum#2>7\edef\sol@lst@@subfs{\the\numexpr #2-4}\def\sol@font@fs@numbers{\fontsize\sol@lst@@subfs\sol@lst@@subfs\linespread{#1}\selectfont}%
   \else\def\sol@font@fs@numbers{\tiny\linespread{#1}}\fi
 }
 
 % Color & Style Definitions
 \ifsol@printmode@
-\definecolor{sol@colors@border}{HTML}{DDDFE2}%
+\definecolor{sol@colors@border}{HTML}{DDDFE2}
 \definecolor{sol@colors@background}{HTML}{FFFFFF}% save ink :D
 \else
-\definecolor{sol@colors@border}{HTML}{EAECF0}%
-\definecolor{sol@colors@background}{HTML}{FCFBFB}%
+\definecolor{sol@colors@border}{HTML}{EAECF0}
+\definecolor{sol@colors@background}{HTML}{FCFBFB}
 \fi
 
 \@ifundefined{thesobversion}{% not called from sopra-base-class, we use a
@@ -166,20 +145,20 @@
 \colorlet{sol@colors@lst@command}{sol@colors@lst@keywordB} % sweetspots
 }{% we will use the secondary/akzent color as default and choose matching colors
 \colorlet{sol@colors@lst@keywordA}{sob@col@uulm@cs} % Examples as above
-\colorlet{sol@colors@lst@keywordB}{sob@col@uulm@cs!75!white} %
-\colorlet{sol@colors@lst@keywordC}{sob@col@uulm@cs!20!gray} %
-\colorlet{sol@colors@lst@numbers}{teal!60!gray} %
-\colorlet{sol@colors@lst@literals}{sob@col@uulm!90!blue} %
-\colorlet{sol@colors@lst@comments}{lightgray!65!darkgray} %
-\colorlet{sol@colors@lst@highlight}{purple} %
-\colorlet{sol@colors@lst@command}{sol@colors@lst@keywordB} %
+\colorlet{sol@colors@lst@keywordB}{sob@col@uulm@cs!75!white}
+\colorlet{sol@colors@lst@keywordC}{sob@col@uulm@cs!20!gray}
+\colorlet{sol@colors@lst@numbers}{teal!60!gray}
+\colorlet{sol@colors@lst@literals}{sob@col@uulm!90!blue}
+\colorlet{sol@colors@lst@comments}{lightgray!65!darkgray}
+\colorlet{sol@colors@lst@highlight}{purple}
+\colorlet{sol@colors@lst@command}{sol@colors@lst@keywordB}
 }
 
 % define the styling definitions
 % as we don't know, if 'foreach' is available, we will built our own iter:
 \def\sol@lst@style@iter@step#1: #2\@nil{%
 \ifx!#1!\else
-  \expandafter\gdef\csname#1\endcsname{#2}%
+  \expandafter\def\csname#1\endcsname{#2}%
 \fi}
 
 \def\sol@lst@style@iter#1,#2\@nil{%
@@ -187,7 +166,7 @@
   \sol@lst@style@iter@step sol@styles@lst@#1\@nil
   \ifx!#2!\else\sol@lst@style@iter#2,\@nil\fi\fi}
 
-\def\solSetStyle#1#2{\expandafter\gdef\csname sol@styles@lst@#1\endcsname{#2}}
+\def\solSetStyle#1#2{\expandafter\def\csname sol@styles@lst@#1\endcsname{#2}}
 
 \def\sol@list@define@styles#1{\sol@lst@style@iter#1,\@nil}
 % we will write the colors anyway. This way it is easy visible on how to change the
@@ -201,7 +180,7 @@
  {numbers:  \@declaredcolor{sol@colors@lst@numbers}\itshape},%
  {literals: \@declaredcolor{sol@colors@lst@literals}\itshape},%
  {comments: \@declaredcolor{sol@colors@lst@comments}},% \scshape
- {basic:    \sol@ttfamily},%
+ {basic: \sol@ttfamily},%
  {command:  \@declaredcolor{sol@colors@lst@command}},%
  {highlight: \@declaredcolor{sol@colors@lst@highlight}\itshape},%
  {linenumbers: \@declaredcolor{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume}%
@@ -299,11 +278,10 @@
 % modify lst-literate routine to apply to the mechanism
 \def\lst@Literate#1#2#3{%
 \ifx\relax#2\@empty\else
-\lst@CArgX #1\relax\lst@CDef
-  {}%
+\lst@CArgX #1\relax\lst@CDef\relax
   {\let\lst@next\@empty
   \lst@ifxliterate
-  \lst@ifmode \let\lst@next\lst@CArgEmpty \fi
+  \lst@ifmode\let\lst@next\lst@CArgEmpty\fi
   \fi\ifx\lst@next\@empty
     \ifx\lst@OutputBox\@gobble\else
     \lst@XPrintToken \let\lst@scanmode\lst@scan@m
@@ -361,11 +339,9 @@ numbers=none,numbersep=\z@}
 % Basic - we-work-in-the-back-hey-bud-environments
 % note that '\sol@lst@backcol' is optional and could be ignored by the
 % used style
-
 \lstnewenvironment{lstplain}[1][]
   {\def\sol@lst@backcol{white}\lstset{xleftmargin=\z@,xrightmargin=\z@,%
-  numbers=none,numbersep=\z@,frame=none,%
-  rulecolor={},backgroundcolor={},#1}}
+  numbers=none,numbersep=\z@,frame=none,rulecolor={},backgroundcolor={},#1}}
 {\def\sol@lst@backcol{MudWhite}}
 
 \lstnewenvironment{lstnonum}[1][]
@@ -378,8 +354,7 @@ numbers=none,numbersep=\z@}
 \pgfkeys{/sol@lst@family/.is family}
 % Here we define globals, which are basically applied to every listing - like for example the initial style
 \pgfkeys{/sol@lst@family/globals/.is family,%
-/sol@lst@family/globals,%
-listing style/.initial = {sol@SOPRA}}
+/sol@lst@family/globals,listing style/.initial={sol@SOPRA}}
 
 % Just to provide a clearer structure the keys will be defined seperate for all different styles.
 \pgfkeys{/sol@lst@family/default/.is family,%
@@ -405,22 +380,19 @@ constructor command/.initial={sol@NewLstEnvPlain}}
 /sol@lst@family/inline default,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
 command name prefix/.initial={c},command name suffix/.initial={},
-draw command/.initial={sol@dlst@default} %
-}
+draw command/.initial={sol@dlst@default}}
 
 \pgfkeys{/sol@lst@family/inline blank/.is family,%
 /sol@lst@family/inline blank,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
 command name prefix/.initial={b},command name suffix/.initial={},
-draw command/.initial={sol@dlst@blank} %
-}
+draw command/.initial={sol@dlst@blank}}
 
 \pgfkeys{/sol@lst@family/inline input/.is family,%
 /sol@lst@family/inline input,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
 command name prefix/.initial={i},command name suffix/.initial={},
-draw command/.initial={sol@dlst@input} %
-}
+draw command/.initial={sol@dlst@input}}
 
 % Language-Registration-Helper
 % spacing control
@@ -462,8 +434,7 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 \def\sol@@NewLstEnv#1#2#3{%
 \begingroup
 \edef\sol@xcurlst{\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/\environName/constructor command}\endcsname{#3}{#1}{\noexpand\lstset{style=\pgfkeysvalueof{/sol@lst@family/\environName/listing style},language=#2}}{}{#2}}%
-\global\sol@xcurlst
-\endgroup
+\global\sol@xcurlst\endgroup
 }
 
 % The colossos: core registration handler
@@ -511,8 +482,7 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 % The [hopefully] beautiful 'sopra-style'
 \lstdefinestyle{sol@SOPRA}{%
 % background and border, the frame
-frame           = single,
-framerule       = \sol@length@lst@famerule,
+frame = single,framerule = \sol@length@lst@famerule,
 rulecolor       = \@declaredcolor{sol@colors@border},
 backgroundcolor = \@declaredcolor{sol@colors@background},
 xleftmargin     = \sol@length@lst@xleftmargin,
@@ -549,9 +519,7 @@ keepspaces=false}
 \ifx!#1!\else
 \InputIfFileExists{#1language_\sol@curlanginputfile.cfg}{%
   \typeout{Loaded '\sol@curlanginputfile' from '#1language_\sol@curlanginputfile.cfg'}
-}{%
-\ifx!#2!\else\sol@LoadLanguage@iter#2,\@nil\fi
-}\fi
+}{\ifx!#2!\else\sol@LoadLanguage@iter#2,\@nil\fi}\fi
 }
 \def\sol@LoadLanguage@searchPath@resolve%
 {% empty-case
@@ -574,17 +542,17 @@ keepspaces=false}
 \ifsol@defaultlang@ \solLoadLanguage{java}\fi
 
 % Change colors
-\def\sol@registered@colors@keywordA{}
-\def\sol@registered@colors@keywordB{}
-\def\sol@registered@colors@keywordC{}
-\def\sol@registered@colors@numbers{}
-\def\sol@registered@colors@literals{}
-\def\sol@registered@colors@comments{}
-\def\sol@registered@colors@highlight{}
-\def\sol@registered@colors@command{}
+\let\sol@registered@colors@keywordA\@empty
+\let\sol@registered@colors@keywordB\@empty
+\let\sol@registered@colors@keywordC\@empty
+\let\sol@registered@colors@numbers\@empty
+\let\sol@registered@colors@literals\@empty
+\let\sol@registered@colors@comments\@empty
+\let\sol@registered@colors@highlight\@empty
+\let\sol@registered@colors@command\@empty
 
 % #1 color name #2 color
-\newcommand*{\lstcolorlet}[2]{%
+\newcommand*\lstcolorlet[2]{%
 \@ifundefined{sol@registered@colors@#1}{%
 \PackageError{sopra-listings}{The color '#1' is undefined.}%
 {Choose one of 'keywordA,keywordB,keywordC,numbers,literals,comments,highlight,command'}%
@@ -592,7 +560,7 @@ keepspaces=false}
 }
 
 % #1 color mode #2 color name #3 color
-\newcommand*{\lstcolordef}[3][RGB]{%
+\newcommand*\lstcolordef[3][RGB]{%
 \@ifundefined{sol@registered@colors@#2}{%
 \PackageError{sopra-listings}{The color '#2' is undefined.}%
 {Choose one of 'keywordA,keywordB,keywordC,numbers,literals,comments,highlight,command'}%
@@ -641,7 +609,7 @@ keepspaces=false}
 {\begingroup\tikzset{sol@listings@highlight/.style={#1}}\begin{lrbox}{\@tempboxa}}
 {\end{lrbox}\sol@highlights@box[sol@listings@highlight]{\@tempboxa}\endgroup}
 
-\newcommand*{\sol@highlights@box}[2][]{%
+\newcommand*\sol@highlights@box[2][]{%
   \hspace*{-.35pt}\tikz[#1]{%
   \pgfpathrectangle{\pgfpoint{\p@}{\z@}}{\pgfpoint{\wd #2}{\ht #2}}%
   \pgfusepath{use as bounding box}%
