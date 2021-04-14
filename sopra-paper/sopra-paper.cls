@@ -1,30 +1,21 @@
 % sopra-paper.cls
-%
-% ----------
 % Version: 1.0
 % Author:  Florian Sihler, 13.12.2019
 %
 % This LaTeX2e Class should provide the paper-layout to be used for
 % all documents created by sopra-team-020.
-%                      ulm university, WiSe2019
-
-
+%       ulm university, WiSe2019
 % Development notes:
 %    All internal commands and registers will be prefixed with 'sop@
 %
-
 % The general layout is inspired by the 'sopra-base' class but reimplemented
 % to offer a titlepage and other styling options
-
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sopra-paper}[2019/13/02 EagleoutIce - Paper Documentclass for the sopra-team-020]
 
 % Lengths and Registers
-
 \newcounter{sopversion} \setcounter{sopversion}{1007}
-
 \def\sop@AfterDate{}
-
 \newif\ifsop@usedraft@% in draft mode we won't render everything
 \newif\ifsop@sffmaily@% sf- or roman font?
 \newif\ifsop@printmode@% in print, no colors will be used
@@ -35,27 +26,23 @@
 \newif\ifsop@dopar@% parlen control
 
 \newif\ifsop@applystyle@% if set, style to sopra-* will be automatically set!
-
 \newif\ifsop@inappendix@% appendix flag
 
 \newcounter{sop@counter@tmp@a}
 \newcounter{sop@counter@chapter@counter}
 \newcounter{sop@counter@chapter@counter@appendix}
-
 \newlength\sop@len@tmp@a
 
-
 % Class-Args
-
 % draftmode:
-\DeclareOption{draft}{ \sop@usedraft@true }%
-\DeclareOption{final}{ \sop@usedraft@false }%
+\DeclareOption{draft}{ \sop@usedraft@true }
+\DeclareOption{final}{ \sop@usedraft@false }
 % parindent:
-\DeclareOption{nopar}{ \sop@dopar@false }%
-\DeclareOption{dopar}{ \sop@dopar@true }%
+\DeclareOption{nopar}{ \sop@dopar@false }
+\DeclareOption{dopar}{ \sop@dopar@true }
 % font:
-\DeclareOption{sffont}{ \sop@sffmaily@true }%
-\DeclareOption{rmfont}{ \sop@sffmaily@false }%
+\DeclareOption{sffont}{ \sop@sffmaily@true }
+\DeclareOption{rmfont}{ \sop@sffmaily@false }
 % mode
 \DeclareOption{defaultmode}{ \sop@printmode@false }% probably shouldn't be used
 \DeclareOption{print}{ \sop@printmode@true }%
@@ -89,20 +76,13 @@
 \newlength\sop@len@logoheight \setlength\sop@len@logoheight{2.6cm}
 \newlength\sop@len@header \setlength\sop@len@header{2cm}% header padding
 
-\ifsop@dopar@ \setlength\parindent\sop@len@parindent%
-\else \parindent=\z@ \fi
+\ifsop@dopar@ \parindent\sop@len@parindent \else \parindent\z@ \fi
 
 % Basic Packages
-
 \ifsop@sffmaily@
 \RequirePackage[defaultfam,tabular,lining]{montserrat}
 \RequirePackage{sfmath}
-% \usepackage[sfdefault]{overlock}
-% \usepackage{libertine}
-% \renewcommand*\familydefault{\sfdefault}
-\else
-\usepackage{CormorantGaramond}
-\fi
+\else \RequirePackage{CormorantGaramond} \fi
 
 \RequirePackage{tikz} % we need it anyways - will load xcolor
 \usetikzlibrary{calc}
@@ -114,23 +94,20 @@
 \RequirePackage[english,main=ngerman]{babel}
 % layout
 \pgfmathsetmacro\sop@headheight{2.6cm + \sop@len@logoheight/2}
-\edef\sop@footheight{\the\dimexpr\sop@len@header-8mm\relax}
+\edef\sop@footheight{\the\dimexpr\sop@len@header-8mm}
 \RequirePackage[margin=\sop@len@header,a4paper,%
     bottom=\sop@footheight,top=2.7cm]{geometry}
 % beautify:
-\RequirePackage{lmodern,microtype,scrlayer-scrpage}
-\RequirePackage{enumitem}
-
+\RequirePackage{lmodern,microtype,scrlayer-scrpage,enumitem}
 \RequirePackage[all]{nowidow}
 \RequirePackage[hidelinks]{hyperref}
 
 % Language
-
 \def\xcontentname{Inhalts\"{u}bersicht}
 
 \ifsop@usebook@
 \addto\captionsngerman{
-    \renewcommand{\contentsname}{\leavevmode\\[-0.75\baselineskip]\strut\xcontentname}
+    \renewcommand{\contentsname}{\leavevmode\\[-.75\baselineskip]\strut\xcontentname}
 }
 \else
 \addto\captionsngerman{
@@ -138,19 +115,14 @@
 }
 \fi
 % Color Definitions
-
 % We will define a main/primary color, a secondary/akzent color and a tertiary
 % /light color to be used everywhere throughout the document.
 % there will be further colors definied (like for example header-text)
-
 % black/contrast color to be used in the document
 \definecolor{sop@color@primary}  {RGB}{012,010,007}       % RGB(012,010,007)
 \definecolor{sop@color@akzent}   {RGB}{150,128,081}       % RGB(150,128,081)
 \definecolor{sop@color@light}    {RGB}{236,200,128}       % RGB(236,200,128)
-
 \definecolor{sop@color@white}{RGB}{252,252,252}           % RGB(252,252,252)
-
-% \definecolor{sop@color@highlight}{RGB}{135,076,150}     % RGB(135,076,150)
 \definecolor{sop@color@highlight}{RGB}{153,007,051}       % RGB(153,07,051)
 
 % main-colormappings
@@ -158,24 +130,18 @@
 \colorlet{cakzent}{sop@color@akzent}
 \colorlet{clight}{sop@color@light}
 \colorlet{cimportant}{sop@color@highlight}
-
 \colorlet{cwhite}{sop@color@white}
 \colorlet{chighlight}{sop@color@highlight}
-
 % titlepage (tp) styles
-
 \colorlet{ctpbackground}{cprimary}
 \colorlet{ctptext}{cwhite}
 \colorlet{ctpsymbol}{cakzent}
-
 % header (hd) styles
-
 \colorlet{chdtext}{cakzent}
 
 % Color Palette & color styling
-
-\ifsop@printmode@ \selectcolormodel{gray}%
-\else \selectcolormodel{rgb}\fi %\maskcolors[cmy]{gray} \fi
+\ifsop@printmode@ \selectcolormodel{gray}
+\else \selectcolormodel{rgb}\fi
 
 % some styling commands
 \long\def\sop@@imptext#1{\begingroup\slshape\color{cimportant}#1\endgroup}
@@ -185,17 +151,13 @@
 \let\notetext\sop@@notetext
 
 % lengthts:
-\renewcommand{\baselinestretch}{1.1}
-\setlength{\parskip}{0.75em}
+\def\baselinestretch{1.1}
+\parskip=.75em
 
 % beautify the footnotes:
-\renewcommand*{\thefootnote}{$\langle$\textbf{\arabic{footnote}}$\rangle$}
-\renewcommand*{\thempfootnote}{$\langle$\textbf{\roman{mpfootnote}}$\rangle$}
-
-% TODO: restyle chapters, sections, \ldots
-
+\def\thefootnote{$\langle$\textbf{\arabic{footnote}}$\rangle$}
+\def\thempfootnote{$\langle$\textbf{\roman{mpfootnote}}$\rangle$}
 % Helper Methods
-
 \def\sop@thesopversion#1#2#3#4\@nil{{#1.#2.#3#4}}
 
 \edef\sop@version@str{\noexpand\sop@thesopversion\arabic{sopversion}\noexpand\@nil}
@@ -212,7 +174,6 @@
 \def\DateConvert#1{\expandafter\ifx\expandafter!#1!\else\expandafter\sop@date@convert#1\@nil\fi}
 
 % Set the Document-Metadata
-
 % we will populate the following fields:
 % dates have to be given in YYYY-MM-DD!
 % authors can be also populated by the helper methods
@@ -228,11 +189,10 @@
     \expandafter\noexpand\gdef\csname sop@register@short@\field\endcsname{##1}}
     \expandafter\xdef\csname\field @noopt\endcsname##1%
     {\expandafter\noexpand\gdef\csname sop@register@\field\endcsname{##1}%
-    \expandafter\noexpand\gdef\csname sop@register@short@\field\endcsname{##1}}
-    \expandafter\gdef\csname sop@register@\field\endcsname{}
-    \expandafter\gdef\csname sop@register@short@\field\endcsname{}
+    \expandafter\noexpand\gdef\csname sop@register@short@\field\endcsname{##1}}%
+    \expandafter\gdef\csname sop@register@\field\endcsname{}%
+    \expandafter\gdef\csname sop@register@short@\field\endcsname{}%
 }
-
 
 % iterators for handling and parsing author information.
 \def\sop@@add@author#1{%
@@ -280,16 +240,13 @@
 }}
 
 % Header Metadata
-
 % We modify chapter to increase the total counter to get the total number of
 % chapters in the end
-
 % in artcile the store commands will refer to the section!
 \def\sop@store@chapter{\write\@auxout{\noexpand\global\noexpand \stepcounter{sop@counter@chapter@counter}}}
 \def\sop@store@chapter@appendix{\write\@auxout{\noexpand\global\noexpand \stepcounter{sop@counter@chapter@counter@appendix}}}
 \let\@sop@store@chpcount\sop@store@chapter
 
-% TODO: Document
 \def\sopDisableTocRegister{\let\@sop@store@chpcount\relax}
 \def\sopEnableTocRegister{\let\@sop@store@chpcount\sop@store@chapter}
 
@@ -346,7 +303,7 @@
 \else
 \chead{%
 \def\@doheader{0}
-\ifnum\value{\@sop@tlheadmarker}>0\relax \def\@doheader{1}\fi
+\ifnum\value{\@sop@tlheadmarker}>0 \def\@doheader{1}\fi
 \ifsop@notoc@\else\def\@doheader{1}\fi
 %
 \ifnum\@doheader>0\relax
@@ -354,15 +311,15 @@
     \coordinate (tl@pf@lockpos) at ($(current page.north east)+(-5.5cm,-1.25cm)$);
     \node[cprimary,left=2pt] at (tl@pf@lockpos) {\Huge$\thepage$};
     % Cur section rectangle
-    \fill[cakzent] (tl@pf@lockpos) rectangle ++(5.5cm,0.55pt);
-    \node[above right,yshift=-\p@,font=\footnotesize,text width=5cm,align=left,minimum height=0.736cm] at (tl@pf@lockpos) {\strut\ifx\rightmark\@empty \leftmark\else \rightmark\fi\strut};
+    \fill[cakzent] (tl@pf@lockpos) rectangle ++(5.5cm,.55pt);
+    \node[above right,yshift=-\p@,font=\footnotesize,text width=5cm,align=left,minimum height=.736cm] at (tl@pf@lockpos) {\strut\ifx\rightmark\@empty \leftmark\else \rightmark\fi\strut};
     \def\@sop@cury{0}
     \def\@sop@curxoff{0} % allow a second line
     \ifsop@notoc@ % normal mode
         \def\ioffset{0}
     \else % set Tableofcontents-Link and set offset of \i
         \def\ioffset{1}
-        \coordinate (chapnode0) at ($(tl@pf@lockpos)+(1/1.6-1/1.6+0.33+\@sop@curxoff,-0.35+\@sop@cury)$);
+        \coordinate (chapnode0) at ($(tl@pf@lockpos)+(1/1.6-1/1.6+.33+\@sop@curxoff,-.35+\@sop@cury)$);
         \ifnum0=\value{\@sop@tlheadmarker}  % in current chapter
         \sop@mchapsq{I}{cwhite}{chapnode0}{toc}%
         \else\sop@chapsq{I}{white}{chapnode0}{toc}\fi%
@@ -371,13 +328,13 @@
     \foreach \i in {1,...,\thesop@counter@chapter@counter}{%
         \edef\ix{\the\numexpr\i+\ioffset\relax}
         % \typeout{\i:\thesop@counter@chapter@counter:\thechapter x}
-        \coordinate (chapnode\i) at ($(tl@pf@lockpos)+(\ix/1.6-1/1.6+0.33+\@sop@curxoff,-0.35+\@sop@cury)$);
+        \coordinate (chapnode\i) at ($(tl@pf@lockpos)+(\ix/1.6-1/1.6+.33+\@sop@curxoff,-.35+\@sop@cury)$);
         \ifsop@inappendix@\sop@chapblob{\i}{white}{chapnode\i}{\@sop@tlheadmarker}\else
         \ifnum\i=\value{\@sop@tlheadmarker}  % in current chapter
             \sop@mchapblob{\i}{cwhite}{chapnode\i}{\@sop@tlheadmarker}%
         \else \sop@chapblob{\i}{white}{chapnode\i}{\@sop@tlheadmarker}%
         \fi\fi
-        \ifnum\ix=8 \gdef\@sop@cury{-0.575} \gdef\@sop@curxoff{-8/1.6}\fi
+        \ifnum\ix=8 \gdef\@sop@cury{-.575} \gdef\@sop@curxoff{-8/1.6}\fi
     }
     \fi
     % HWA
@@ -385,42 +342,41 @@
     \ifnum\value{sop@counter@chapter@counter@appendix}>0
     \foreach \i [evaluate=\i as \ai using {int(\i+\thesop@counter@chapter@counter+\ioffset)}]in {1,...,\thesop@counter@chapter@counter@appendix}{%
         % \typeout{\i:\thesop@counter@chapter@counter:\thechapter x}
-        \coordinate (achapnode\i) at ($(tl@pf@lockpos)+(\ai/1.6-1/1.6+0.33+\@sop@curxoff,-0.35+\@sop@cury)$);
+        \coordinate (achapnode\i) at ($(tl@pf@lockpos)+(\ai/1.6-1/1.6+.33+\@sop@curxoff,-.35+\@sop@cury)$);
         \ifsop@inappendix@
         \ifnum\i=\value{\@sop@tlheadmarker}  % in current chapter/section
             \sop@mchapblob{\@Alph\i}{cwhite}{achapnode\i}{appendix}%
         \else \sop@chapblob{\@Alph\i}{white}{achapnode\i}{appendix}%
         \fi
         \else \sop@chapblob{\@Alph\i}{white}{achapnode\i}{appendix}\fi
-        \ifnum\ai=8 \gdef\@sop@cury{-0.575} \gdef\@sop@curxoff{-8/1.5}\fi
+        \ifnum\ai=8 \gdef\@sop@cury{-.575} \gdef\@sop@curxoff{-8/1.5}\fi
     }
     \fi
     % Typeset Appendix
 \end{tikzpicture}%
-\fi
-}
+\fi}
 \fi
 
 % Structure Styles
 \def\sop@sepline{%
-    {\color{cakzent}{\Huge$\llap{$\diamond$}\hspace*{-\p@}$}\rule[0.41\baselineskip]{\linewidth}{0.55pt}{\Huge$\hspace*{-\p@}\rlap{$\diamond$}$}}%
+    {\color{cakzent}{\Huge$\llap{$\diamond$}\hspace*{-\p@}$}\rule[.41\baselineskip]{\linewidth}{.55pt}{\Huge$\hspace*{-\p@}\rlap{$\diamond$}$}}%
 }
 
 \ifsop@usebook@ \renewcommand\chapterformat{} %
 \renewcommand\chapterlinesformat[3]{%
 \vspace*{-2.5em}
-\ifnum\value{chapter}>0
+\ifnum\c@chapter>0
 \begin{center}
     \vspace*{-\topsep}
     \thechapter
 \end{center}
 \fi
-{\color{chdtext}{\Huge$\llap{$\diamond$}\hspace*{-\p@}$}\rule[0.22\baselineskip]{\linewidth}{0.55pt}{\Huge$\hspace*{-\p@}\rlap{$\diamond$}$}}%
+{\color{chdtext}{\Huge$\llap{$\diamond$}\hspace*{-\p@}$}\rule[.22\baselineskip]{\linewidth}{.55pt}{\Huge$\hspace*{-\p@}\rlap{$\diamond$}$}}%
     \begin{center}
         \vspace*{-\topsep}
         \color{chdtext}#2#3%
     \end{center}
-    {\color{chdtext}{\Huge$\llap{$\diamond$}\hspace*{-\p@}$}\rule[0.22\baselineskip]{\linewidth}{0.55pt}{\Huge$\hspace*{-\p@}\rlap{$\diamond$}$}}%
+    {\color{chdtext}{\Huge$\llap{$\diamond$}\hspace*{-\p@}$}\rule[.22\baselineskip]{\linewidth}{.55pt}{\Huge$\hspace*{-\p@}\rlap{$\diamond$}$}}%
 }%
 \fi
 
@@ -428,19 +384,17 @@
     \def\tmp@a{#1}\def\tmp@b{section}\ifx\tmp@a\tmp@b
     \parbox{\linewidth}{%
     {\color{chdtext}\strut#3#4}%{\Large\hspace*{-1ex}$\llap{$\diamond$}$\hspace*{1ex}}
-    \\[-0.7\baselineskip]
+    \\[-.7\baselineskip]
     \settowidth{\sop@len@tmp@a}{\strut#3#4}\pgfmathsetmacro\@sop@tmp@chk{\sop@len@tmp@a<(\linewidth-14pt)}
     \ifnum\@sop@tmp@chk=1\addtolength{\sop@len@tmp@a}{14pt}\else\setlength{\sop@len@tmp@a}{\linewidth}\fi
-    {\normalsize\color{chdtext}{\large$\llap{$\diamond$}\hspace*{-0.75pt}$}\rule[0.186\baselineskip]{\sop@len@tmp@a}{0.55pt}}}
+    {\normalsize\color{chdtext}{\large$\llap{$\diamond$}\hspace*{-.75pt}$}\rule[.186\baselineskip]{\sop@len@tmp@a}{.55pt}}}
     \else#3#4\fi
 }%
 
 \RedeclareSectionCommands[
-    beforeskip=-3.25ex plus -0.5ex minus -0.2ex,
-    runin=bysign,
-    afterindent=bysign,
-    afterskip=\parskip%
-    % font=\,
+    beforeskip=-3.25ex \@plus -.5ex \@minus -.2ex,
+    runin=bysign,afterindent=bysign,
+    afterskip=\parskip
 ]{paragraph,subparagraph}
 
 \setkomafont{section}{\LARGE}
@@ -451,62 +405,62 @@
 \RequirePackage{sopra-ntts}
 
 % set the titlepage
-\def\sop@layout@titlepage{
-    \begin{titlepage}
-        \pagecolor{ctpbackground}
-        % Here we will place the Tag (Sopra....)
-        \hbox{}\hfill\llap{\begin{tikzpicture}[scale=0.079]
-            \def\son@font@futura@color@current{ctptext}
-            \son@ntts
-            % lets draw a strw for 'Y'
-            \node[\son@font@futura@color@current] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\scriptsize\bfseries/};
-            % here we will plant the group-Tag at the 007 position, having a lot of fun :D
-            \ifx\sop@register@groupnum\@empty\else
-            \node[right=0.1cm,yshift=0.4cm,font=\fontsize{17}{17}\selectfont\sffamily,ctpsymbol] (ct@gnumt) at (ct@groupnum) {\son@titlepage@groupnum{\sop@register@groupnum}};
-            \node[right,yshift=0.10cm,xshift=0.4cm,font=\fontsize{8}{8}\selectfont\sffamily,ctpsymbol] at (ct@gnumt){\ifx\sop@register@group\@empty Team\else\rlap{\sop@register@group}\fi};
-            \fi
-        \end{tikzpicture}}\\[5em]
-        \sop@sepline
-        % Set the Documenttitle
-        \begin{center}
-        \scalebox{1.125}{\fontsize{30}{30}\selectfont\color{ctpsymbol}~{\sop@register@title}}
-        \end{center}
-        \sop@sepline
-        % Set the Subtitle
-        \begin{center}
-            \vspace*{-\topsep}
-            {\strut\color{ctpsymbol}\sop@register@subtitle}
-        \end{center}
-        \vfill
-        % Set The Author
-        \begin{minipage}{0.6\linewidth}\footnotesize\color{ctpsymbol}
-            \ifx\sop@register@duedate\@empty\else
-                \begingroup\hbox{}\quad\scriptsize\DateConvert{\sop@register@duedate}\sop@AfterDate\endgroup\\[-0.2\baselineskip]%
-            \fi
-            {\color{ctpsymbol}$\Large\llap{$\diamond$}\hspace*{-\p@}$\rule[0.275\baselineskip]{0.45\linewidth}{0.55pt}\\}%
-            \ignorespaces{{\bfseries{}Bearbeitung:}}\\
-            \ignorespaces\hbox{}\quad\parbox{\linewidth}{\typesetAuthors}\bigskip\par
-            \ifx\sop@register@brief\@empty\else
-            \ignorespaces{\bfseries{}Beschreibung:}\smallskip\\
-            \hbox{}\quad\parbox{\linewidth}{\sop@register@brief}\fi
-        \end{minipage}\vspace*{2em}
-    \end{titlepage}
-    \clearpage\nopagecolor
-    \thispagestyle{empty}%
-    \hbox{}\qquad\begin{tikzpicture}[scale=0.12]
-        \def\son@font@futura@color@current{cprimary}
+\def\sop@layout@titlepage{%
+\begin{titlepage}
+    \pagecolor{ctpbackground}
+    % Here we will place the Tag (Sopra....)
+    \hbox{}\hfill\llap{\begin{tikzpicture}[scale=.079]
+        \def\son@font@futura@color@current{ctptext}
         \son@ntts
         % lets draw a strw for 'Y'
-        \node[\son@font@futura@color@current] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\bfseries/};
-    \end{tikzpicture}
-    \hbox{}\vfill\begingroup\scriptsize
-    \begin{flushright}
-        \parbox{9cm}{\textbf{$-\,$\DateConvert{2019-12-15}$\,-$}\\
-        \color{cprimary}Dieses Layout wurde für das Softwaregrundprojekt
-        im Wintersemester 2019/2020 von Florian Sihler im Rahmen des
-        Informatikstudiums an der Universität Ulm vollständig in \LaTeXe{} erstellt.}
-    \end{flushright}\endgroup
-    \clearpage
+        \node[\son@font@futura@color@current] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\scriptsize\bfseries/};
+        % here we will plant the group-Tag at the 007 position, having a lot of fun :D
+        \ifx\sop@register@groupnum\@empty\else
+        \node[right=.1cm,yshift=.4cm,font=\fontsize{17}{17}\selectfont\sffamily,ctpsymbol] (ct@gnumt) at (ct@groupnum) {\son@titlepage@groupnum{\sop@register@groupnum}};
+        \node[right,yshift=.10cm,xshift=.4cm,font=\fontsize{8}{8}\selectfont\sffamily,ctpsymbol] at (ct@gnumt){\ifx\sop@register@group\@empty Team\else\rlap{\sop@register@group}\fi};
+        \fi
+    \end{tikzpicture}}\\[5em]
+    \sop@sepline
+    % Set the Documenttitle
+    \begin{center}
+    \scalebox{1.125}{\fontsize{30}{30}\selectfont\color{ctpsymbol}~{\sop@register@title}}
+    \end{center}
+    \sop@sepline
+    % Set the Subtitle
+    \begin{center}
+        \vspace*{-\topsep}
+        {\strut\color{ctpsymbol}\sop@register@subtitle}
+    \end{center}
+    \vfill
+    % Set The Author
+    \begin{minipage}{.6\linewidth}\footnotesize\color{ctpsymbol}
+        \ifx\sop@register@duedate\@empty\else
+            \begingroup\hbox{}\quad\scriptsize\DateConvert{\sop@register@duedate}\sop@AfterDate\endgroup\\[-.2\baselineskip]%
+        \fi
+        {\color{ctpsymbol}$\Large\llap{$\diamond$}\hspace*{-\p@}$\rule[.275\baselineskip]{.45\linewidth}{.55pt}\\}%
+        \ignorespaces{{\bfseries{}Bearbeitung:}}\\
+        \ignorespaces\hbox{}\quad\parbox{\linewidth}{\typesetAuthors}\bigskip\par
+        \ifx\sop@register@brief\@empty\else
+        \ignorespaces{\bfseries{}Beschreibung:}\smallskip\\
+        \hbox{}\quad\parbox{\linewidth}{\sop@register@brief}\fi
+    \end{minipage}\vspace*{2em}
+\end{titlepage}
+\clearpage\nopagecolor
+\thispagestyle{empty}%
+\hbox{}\qquad\begin{tikzpicture}[scale=.12]
+    \def\son@font@futura@color@current{cprimary}
+    \son@ntts
+    % lets draw a strw for 'Y'
+    \node[\son@font@futura@color@current] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\bfseries/};
+\end{tikzpicture}
+\hbox{}\vfill\begingroup\scriptsize
+\begin{flushright}
+    \parbox{9cm}{\textbf{$-\,$\DateConvert{2019-12-15}$\,-$}\\
+    \color{cprimary}Dieses Layout wurde für das Softwaregrundprojekt
+    im Wintersemester 2019/2020 von Florian Sihler im Rahmen des
+    Informatikstudiums an der Universität Ulm vollständig in \LaTeXe{} erstellt.}
+\end{flushright}\endgroup
+\clearpage
 }
 
 \AtBeginDocument{
@@ -525,36 +479,29 @@
 
 % Listings (sopra-listings), Attachments (sopra-attachments,...)
 \def\sop@SetListing{
-    \makeatletter
-    \colorlet{sol@colors@lst@keywordA}{cprimary} % e.g.: class, public, static...
-    \colorlet{sol@colors@lst@keywordB}{cakzent} % e.g.: int, double ...
-    \colorlet{sol@colors@lst@keywordC}{cakzent!85!black} % e.g.: class-names?
-    \colorlet{sol@colors@lst@numbers}{chighlight!90!cprimary} % well, numbers
-    \colorlet{sol@colors@lst@literals}{cakzent!90!brown} % well, numbers
-    \colorlet{sol@colors@lst@comments}{clight!10!gray} % well, comments
-    \colorlet{sol@colors@lst@highlight}{chighlight} % sweetspots
-    \sol@list@define@styles{%
-        {keywordA:      \color{sol@colors@lst@keywordA}\bfseries},%
-    }
-    \makeatother
-}
+\colorlet{sol@colors@lst@keywordA}{cprimary} % e.g.: class, public, static...
+\colorlet{sol@colors@lst@keywordB}{cakzent} % e.g.: int, double ...
+\colorlet{sol@colors@lst@keywordC}{cakzent!85!black} % e.g.: class-names?
+\colorlet{sol@colors@lst@numbers}{chighlight!90!cprimary} % well, numbers
+\colorlet{sol@colors@lst@literals}{cakzent!90!brown} % well, numbers
+\colorlet{sol@colors@lst@comments}{clight!10!gray} % well, comments
+\colorlet{sol@colors@lst@highlight}{chighlight} % sweetspots
+\sol@list@define@styles{%
+    {keywordA:      \color{sol@colors@lst@keywordA}\bfseries},%
+}}
 
 \def\sop@SetAttachment{
-\makeatletter
 \attachfilesetup{%
     author={\sop@register@authors},
     color=cakzent,icon=Tag,
     mimetype=text/plain % we assume
-}\makeatother
-}
+}}
 
-\def\sop@SetTables{
-    \makeatletter
-    \colorlet{HeaderColor}{cprimary!80!white}
-    \colorlet{NextHeaderColor}{cprimary!60!white}
-    \colorlet{MaterialHeaderColor}{HeaderColor}
-    \colorlet{NextMaterialHeaderColor}{NextHeaderColor}
-    \makeatother
+\def\sop@SetTables{%
+\colorlet{HeaderColor}{cprimary!80!white}
+\colorlet{NextHeaderColor}{cprimary!60!white}
+\colorlet{MaterialHeaderColor}{HeaderColor}
+\colorlet{NextMaterialHeaderColor}{NextHeaderColor}
 }
 
 \def\sop@SetModels{
