@@ -615,9 +615,8 @@ keepspaces=false}
   }\hspace*{.35pt}%
 }
 
-\def\@solLstHL#1{\begin{sol@listings@highlight@env}[#1]\begingroup\aftergroup\sol@highlights@endenv}
-
-\def\sol@highlights@endenv{\end{sol@listings@highlight@env}\endgroup}
+\def\@solLstHL#1{\begin{sol@listings@highlight@env}[#1]\bgroup\aftergroup\sol@highlights@endenv}
+\def\sol@highlights@endenv{\end{sol@listings@highlight@env}\egroup}
 
 \def\solhlboxd#1{\edef\@tmp{\noexpand\@solLstHL{#1}}\@tmp}
 \def\solhlbox#1{\@solLstHL{fill=#1!30,draw=#1}}
