@@ -10,12 +10,12 @@
 % Lengths and Registers
 \newcounter{solversion} \setcounter{solversion}{1021}
 % note this will be used with tcb:
-\newlength\sol@length@lst@outer@spacing \sol@length@lst@outer@spacing=3pt
+\newlength\sol@length@lst@outer@spacing \sol@length@lst@outer@spacing=3\p@
 
-\newlength\sol@length@lst@numsep \sol@length@lst@numsep=9pt
-\newlength\sol@length@lst@famerule \sol@length@lst@famerule=.75pt
-\newlength\sol@length@lst@xleftmargin \sol@length@lst@xleftmargin=3pt
-\newlength\sol@length@lst@xrightmargin \sol@length@lst@xrightmargin=3pt
+\newlength\sol@length@lst@numsep \sol@length@lst@numsep=9\p@
+\newlength\sol@length@lst@famerule \sol@length@lst@famerule=.75\p@
+\newlength\sol@length@lst@xleftmargin \sol@length@lst@xleftmargin=3\p@
+\newlength\sol@length@lst@xrightmargin \sol@length@lst@xrightmargin=3\p@
 
 \def\sol@lst@prebreak{\hbox{\sol@font@fs@numbers$\hookleftarrow$}} % allow definition of own symbol
 \let\sol@lst@inline@prebreak\sol@lst@prebreak
@@ -206,7 +206,7 @@
 \fi
 
 % Helper Functions
-\def\sol@font@size{\dimexpr\f@size pt\relax}
+\def\sol@font@size{\dimexpr\f@size\p@\relax}
 \def\sol@thesolversion#1#2#3#4\@nil{v#1.#2.#3#4}
 
 \edef\sol@version@str{\noexpand\sol@thesolversion\arabic{solversion}\noexpand\@nil}
@@ -331,7 +331,7 @@
 \newcommand*\sol@dlst@input[2][]{\begingroup\lstinputlisting[#1]{#2}\endgroup}
 
 % Lst styles that will be shipped in each case
-\lstdefinestyle{sol@nonum}{xleftmargin=3pt,xrightmargin=3pt,%will fix some overhead :D
+\lstdefinestyle{sol@nonum}{xleftmargin=3\p@,xrightmargin=3\p@,%will fix some overhead :D
 numbers=none,numbersep=\z@}
 
 % Basic - we-work-in-the-back-hey-bud-environments
@@ -608,11 +608,11 @@ keepspaces=false}
 {\end{lrbox}\sol@highlights@box[sol@listings@highlight]{\@tempboxa}\endgroup}
 
 \newcommand*\sol@highlights@box[2][]{%
-  \hspace*{-.35pt}\tikz[#1]{%
+  \hspace*{-.35\p@}\tikz[#1]{%
   \pgfpathrectangle{\pgfpoint{\p@}{\z@}}{\pgfpoint{\wd #2}{\ht #2}}%
   \pgfusepath{use as bounding box}%
-  \node[anchor=base west,outer sep=\z@,inner xsep=\z@,outer xsep=\p@, inner ysep=\z@, rounded corners=1.65pt, minimum height=\ht\strutbox+\p@,#1]{\hspace*{.35pt}\raisebox{\p@}{\strut}\strut\usebox{#2}\hspace*{-.35pt}};
-  }\hspace*{.35pt}%
+  \node[anchor=base west,outer sep=\z@,inner xsep=\z@,outer xsep=\p@, inner ysep=\z@, rounded corners=1.65\p@, minimum height=\ht\strutbox+\p@,#1]{\hspace*{.35\p@}\raisebox{\p@}{\strut}\strut\usebox{#2}\hspace*{-.35\p@}};
+  }\hspace*{.35\p@}%
 }
 
 \def\@solLstHL#1{\begin{sol@listings@highlight@env}[#1]\bgroup\aftergroup\sol@highlights@endenv}
