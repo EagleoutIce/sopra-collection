@@ -35,32 +35,32 @@
 
 % Class-Args
 % draftmode:
-\DeclareOption{draft}{ \sop@usedraft@true }
-\DeclareOption{final}{ \sop@usedraft@false }
+\DeclareOption{draft}{\sop@usedraft@true}
+\DeclareOption{final}{\sop@usedraft@false}
 % parindent:
-\DeclareOption{nopar}{ \sop@dopar@false }
-\DeclareOption{dopar}{ \sop@dopar@true }
+\DeclareOption{nopar}{\sop@dopar@false}
+\DeclareOption{dopar}{\sop@dopar@true}
 % font:
-\DeclareOption{sffont}{ \sop@sffmaily@true }
-\DeclareOption{rmfont}{ \sop@sffmaily@false }
+\DeclareOption{sffont}{\sop@sffmaily@true}
+\DeclareOption{rmfont}{\sop@sffmaily@false}
 % mode
-\DeclareOption{defaultmode}{ \sop@printmode@false }% probably shouldn't be used
-\DeclareOption{print}{ \sop@printmode@true }%
+\DeclareOption{defaultmode}{\sop@printmode@false}% probably shouldn't be used
+\DeclareOption{print}{\sop@printmode@true}%
 % mail show
-\DeclareOption{showmail}{ \sop@showmail@true }
-\DeclareOption{hidemail}{ \sop@showmail@false }
+\DeclareOption{showmail}{\sop@showmail@true}
+\DeclareOption{hidemail}{\sop@showmail@false}
 % do toc
-\DeclareOption{dotoc}{ \sop@notoc@false }
-\DeclareOption{notoc}{ \sop@notoc@true }
+\DeclareOption{dotoc}{\sop@notoc@false}
+\DeclareOption{notoc}{\sop@notoc@true}
 % use book
-\DeclareOption{usebook}{ \sop@usebook@true }
-\DeclareOption{useartcl}{ \sop@usebook@false }
+\DeclareOption{usebook}{\sop@usebook@true}
+\DeclareOption{useartcl}{\sop@usebook@false}
 
 % apply style
-\DeclareOption{setstyle}{ \sop@applystyle@true }
-\DeclareOption{nosetstyle}{ \sop@applystyle@false }
+\DeclareOption{setstyle}{\sop@applystyle@true}
+\DeclareOption{nosetstyle}{\sop@applystyle@false}
 
-\ExecuteOptions{final,nopar,sffont,defaultmode,showmail,dotoc,usebook,setstyle}% set it explicitly
+\ExecuteOptions{sffont,defaultmode,showmail,usebook,setstyle}% set it explicitly
 \ProcessOptions\relax%
 
 % Documentclass
