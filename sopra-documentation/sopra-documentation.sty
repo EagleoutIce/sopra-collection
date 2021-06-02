@@ -25,11 +25,7 @@
 
 \@ifundefined{thesobversion}{% not called from sopra-base-class
 \RequirePackage{hyperref}}{}
-\attachfilesetup{%
-author={Florian Sihler},
-color=0.6392 0.149 0.2314,
-icon=Tag,
-mimetype=text/plain}
+\attachfilesetup{author={Florian Sihler},color=0.6392 0.149 0.2314,icon=Tag,mimetype=text/plain}
 
 \def\email#1{\href{mailto:#1}{#1}}
 
@@ -48,12 +44,12 @@ mimetype=text/plain}
 \def\optArg#1{\T{\itshape[#1]}}
 \def\cmd#1{\solGet{command}{\textbackslash#1}}
 \def\env#1{\solGet{keywordC}{env@#1}}
-\def\cmdref#1{\hyperref[mrk:#1]{\solGet{command}{\textbackslash#1}}\textsuperscript{$\rightarrow\,$p. \pageref{mrk:#1}}}
-\def\envref#1{\hyperref[mrk:#1]{\solGet{keywordC}{env@#1}}\textsuperscript{$\rightarrow\,$p. \pageref{mrk:#1}}}
+\def\cmdref#1{\hyperref[mrk:#1]{\solGet{command}{\textbackslash#1}}\textsuperscript{$\rightarrow$\thinspace p. \pageref{mrk:#1}}}
+\def\envref#1{\hyperref[mrk:#1]{\solGet{keywordC}{env@#1}}\textsuperscript{$\rightarrow$\thinspace p. \pageref{mrk:#1}}}
 
 % TODO: document
 % #2 counter
-\def\argref#1#2{\hyperref[mrk:#1]{\T{#1 (#2)}}\textsuperscript{$\rightarrow\,$p. \pageref{mrk:#1}}}
+\def\argref#1#2{\hyperref[mrk:#1]{\T{#1 (#2)}}\textsuperscript{$\rightarrow$\thinspace p. \pageref{mrk:#1}}}
 
 % #1: name of the present-sequence #2: Args of the present-sequence #3: presenter style #4: prefix of cs-name
 \newenvironment{present}[4]{\phantomsection\label{mrk:#1}%
