@@ -93,10 +93,9 @@
 % language
 \RequirePackage[english,main=ngerman]{babel}
 % layout
-\pgfmathsetmacro\sop@headheight{2.6cm + \sop@len@logoheight/2}
-\edef\sop@footheight{\the\dimexpr\sop@len@header-8mm}
-\RequirePackage[margin=\sop@len@header,a4paper,%
-    bottom=\sop@footheight,top=2.7cm]{geometry}
+\edef\sop@headheight{\dimexpr26mm + .5\sop@len@logoheight}
+\edef\sop@footheight{\dimexpr\sop@len@header-8mm}
+\RequirePackage[margin=\sop@len@header,a4paper,bottom=\sop@footheight,top=27mm]{geometry}
 % beautify:
 \RequirePackage{lmodern,microtype,scrlayer-scrpage,enumitem}
 \RequirePackage[all]{nowidow}
@@ -211,7 +210,7 @@
 \def\sop@@typeset@author#1{%
     \setcounter{sop@counter@tmp@a}{0}% start with an offset
     \foreach \@tmp in {#1}%
-        {\ifx\@tmp\@empty\else%
+        {\ifx\@tmp\@empty\else
             \stepcounter{sop@counter@tmp@a}\fi}%
     \edef\sop@authors@totallength{\arabic{sop@counter@tmp@a}}%
     \setcounter{sop@counter@tmp@a}{0} % stored the length of the list
@@ -274,16 +273,16 @@
 
 % Total chapter number now in '\thesop@counter@chapter@counter'
 \def\sop@chapblob#1#2#3#4{%
-    \draw[fill=#2] (#3) circle (6pt) node[font=\scriptsize,align=center] {\hyperlink{#4.#1}{#1}};%
+    \path[draw,fill=#2] (#3) circle (6pt) node[font=\scriptsize,align=center] {\hyperlink{#4.#1}{#1}};%
 }
 \def\sop@mchapblob#1#2#3#4{%
-    \draw[fill=cprimary] (#3) circle (6pt) node[font=\scriptsize\bfseries,align=center,#2] {\hyperlink{#4.#1}{#1}};%
+    \path[draw,fill=cprimary] (#3) circle (6pt) node[font=\scriptsize\bfseries,align=center,#2] {\hyperlink{#4.#1}{#1}};%
 }
 \def\sop@chapsq#1#2#3#4{%
-    \draw[fill=#2,thin] (#3)++(-5.5pt,-5.5pt) rectangle ++(11pt,11pt) node[midway,centered,font=\scriptsize,align=center] {\hyperlink{#4.#1}{#1}};%
+    \path[draw,fill=#2,thin] (#3)++(-5.5pt,-5.5pt) rectangle ++(11pt,11pt) node[midway,centered,font=\scriptsize,align=center] {\hyperlink{#4.#1}{#1}};%
 }
 \def\sop@mchapsq#1#2#3#4{%
-    \draw[fill=cprimary,thin] (#3)++(-5.5pt,-5.5pt) rectangle ++(11pt,11pt) node[midway,centered,font=\scriptsize\bfseries,align=center,#2] {\hyperlink{#4.#1}{#1}};%
+    \path[draw,fill=cprimary,thin] (#3)++(-5.5pt,-5.5pt) rectangle ++(11pt,11pt) node[midway,centered,font=\scriptsize\bfseries,align=center,#2] {\hyperlink{#4.#1}{#1}};%
 }
 % Header
 \renewcommand\sectionmark[1]{\markright{\@arabic\c@section,~#1}}
@@ -311,7 +310,7 @@
     \coordinate (tl@pf@lockpos) at ($(current page.north east)+(-5.5cm,-1.25cm)$);
     \node[cprimary,left=2pt] at (tl@pf@lockpos) {\Huge$\thepage$};
     % Cur section rectangle
-    \fill[cakzent] (tl@pf@lockpos) rectangle ++(5.5cm,.55pt);
+    \path[fill=cakzent] (tl@pf@lockpos) rectangle ++(5.5cm,.55pt);
     \node[above right,yshift=-\p@,font=\footnotesize,text width=5cm,align=left,minimum height=.736cm] at (tl@pf@lockpos) {\strut\ifx\rightmark\@empty \leftmark\else \rightmark\fi\strut};
     \def\@sop@cury{0}
     \def\@sop@curxoff{0} % allow a second line
@@ -385,8 +384,8 @@
     \parbox{\linewidth}{%
     {\color{chdtext}\strut#3#4}%{\Large\hspace*{-1ex}$\llap{$\diamond$}$\hspace*{1ex}}
     \\[-.7\baselineskip]
-    \settowidth{\sop@len@tmp@a}{\strut#3#4}\pgfmathsetmacro\@sop@tmp@chk{\sop@len@tmp@a<(\linewidth-14pt)}
-    \ifnum\@sop@tmp@chk=1\addtolength{\sop@len@tmp@a}{14pt}\else\setlength{\sop@len@tmp@a}{\linewidth}\fi
+    \settowidth{\sop@len@tmp@a}{\strut#3#4}%
+    \ifdim\sop@len@tmp@a<\dimexpr\linewidth-14\p@\relax \addtolength\sop@len@tmp@a{14pt}\else \sop@len@tmp@a=\linewidth\fi
     {\normalsize\color{chdtext}{\large$\llap{$\diamond$}\hspace*{-.75pt}$}\rule[.186\baselineskip]{\sop@len@tmp@a}{.55pt}}}
     \else#3#4\fi
 }%
