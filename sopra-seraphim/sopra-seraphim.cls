@@ -407,9 +407,9 @@
 
 \defbeamertemplate*{footline}{seraphim}[1][] {
     \begin{tikzpicture}[remember picture,overlay]
-        \ifx\insertsectionhead\@empty\else%
-        \ifx\insertsubsectionhead\@empty\else%
-            \node[above right,yshift=.1cm,scale=.6,opacity=.7] at (current page.south west) {\strut\begingroup\insertsectionhead\endgroup\;--\;\begingroup\insertsubsectionhead\endgroup};
+        \ifx\insertsectionhead\@empty\else
+        \ifx\insertsubsectionhead\@empty\else
+            \node[above right,yshift=1mm,scale=.6,opacity=.7] at (current page.south west) {\strut\begingroup\insertsectionhead\endgroup\;--\;\begingroup\insertsubsectionhead\endgroup};
         \fi\fi
         \fill[cprimary] (current page.south west) rectangle ($(current page.south east)+(0,1mm)$);
         \pgfmathsetmacro\curprocess{(\thepage-2)/(\insertdocumentendpage-2)*\paperwidth}
@@ -499,11 +499,11 @@
 
 \ifsos@applystyle@
 \AtBeginDocument{
-    \@ifundefined{thesolversion}{}{\sos@SetListing} % listings
-    \@ifundefined{thesoaversion}{}{\sos@SetAttachment} % attachments
-    \@ifundefined{thesorversion}{}{\sos@SetTables} % requirements
-    \@ifundefined{thesotversion}{}{\sos@SetTables} % tables
-    \@ifundefined{thesomversion}{}{\sos@SetModels} % Models
+  \@ifundefined{thesolversion}{}{\sos@SetListing} % listings
+  \@ifundefined{thesoaversion}{}{\sos@SetAttachment} % attachments
+  \@ifundefined{thesorversion}{}{\sos@SetTables} % requirements
+  \@ifundefined{thesotversion}{}{\sos@SetTables} % tables
+  \@ifundefined{thesomversion}{}{\sos@SetModels} % Models
 }
 \fi
 \endinput

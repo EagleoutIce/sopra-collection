@@ -1,6 +1,4 @@
 % sopra-requirements.sty
-%
-% ----------
 % Version: 1.0
 % Author:  Florian Sihler, 03.12.2019
 %
@@ -35,24 +33,18 @@
 \newif\ifsor@showtag@ % should the nametag be shown?
 \newif\ifsor@showall@ % should all fields be shown?
 
-% TODO: highlight first, option to disable highlihgting of headerrow
-
 % Package-Args
 
 % allow debug-options :D
-\DeclareOption{usetabu}{ \sor@usetabu@true }
-\DeclareOption{notabu}{ \sor@usetabu@false }
-
-\DeclareOption{intoc}{ \sor@intoc@true }
-\DeclareOption{notoc}{ \sor@intoc@false }
-
-\DeclareOption{showtag}{ \sor@showtag@true }
-\DeclareOption{noshowtag}{ \sor@showtag@false }
-
-\DeclareOption{showallfields}{ \sor@showall@true }
-\DeclareOption{noshowallfields}{ \sor@showall@false }
-
-\ExecuteOptions{usetabu,intoc,showtag,noshowallfields}% set it explicitly
+\DeclareOption{usetabu}{\sor@usetabu@true}
+\DeclareOption{notabu}{\sor@usetabu@false}
+\DeclareOption{intoc}{\sor@intoc@true}
+\DeclareOption{notoc}{\sor@intoc@false}
+\DeclareOption{showtag}{\sor@showtag@true}
+\DeclareOption{noshowtag}{\sor@showtag@false}
+\DeclareOption{showallfields}{\sor@showall@true}
+\DeclareOption{noshowallfields}{\sor@showall@false}
+\ExecuteOptions{usetabu,intoc,showtag}%
 \ProcessOptions\relax
 
 % Basic Packages
@@ -157,12 +149,12 @@
         \else\def\@sor@r@id{##1}\fi%
         \def\@sor@r@title{##2}%
         \gdef\@sor@r@title{##2}
-        \long\def\@sor@r@description{}%
-        \long\def\@sor@r@priority{-1}%
-        \long\def\@sor@r@justification{}\long\def\@sor@r@dependencies{}%
-        \long\def\setDescription####1{\gdef\@sor@r@description{####1}}%
-        \long\def\setPriority####1{\gdef\@sor@r@priority{####1}}%
-        \long\def\setJustification####1{\gdef\@sor@r@justification{####1}}%
+        \def\@sor@r@description{}%
+        \def\@sor@r@priority{-1}%
+        \def\@sor@r@justification{}\def\@sor@r@dependencies{}%
+        \long\def\setDescription####1{\long\gdef\@sor@r@description{####1}}%
+        \long\def\setPriority####1{\long\gdef\@sor@r@priority{####1}}%
+        \long\def\setJustification####1{\long\gdef\@sor@r@justification{####1}}%
         \def\setDependencies####1{\gdef\@sor@r@dependencies{####1}}%
         \def\setTitle####1{\gdef\@sor@r@title{####1}}%
         %
