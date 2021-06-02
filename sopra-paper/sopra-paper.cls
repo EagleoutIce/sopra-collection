@@ -210,8 +210,7 @@
 \def\sop@@typeset@author#1{%
     \setcounter{sop@counter@tmp@a}{0}% start with an offset
     \foreach \@tmp in {#1}%
-        {\ifx\@tmp\@empty\else
-            \stepcounter{sop@counter@tmp@a}\fi}%
+        {\ifx\@tmp\@empty\else\stepcounter{sop@counter@tmp@a}\fi}%
     \edef\sop@authors@totallength{\arabic{sop@counter@tmp@a}}%
     \setcounter{sop@counter@tmp@a}{0} % stored the length of the list
     \foreach \sop@@tmp@curauthor in {#1} {%
@@ -305,12 +304,12 @@
 \ifnum\value{\@sop@tlheadmarker}>0 \def\@doheader{1}\fi
 \ifsop@notoc@\else\def\@doheader{1}\fi
 %
-\ifnum\@doheader>0\relax
+\ifnum\@doheader>0
 \begin{tikzpicture}[remember picture, overlay]
-    \coordinate (tl@pf@lockpos) at ($(current page.north east)+(-5.5cm,-1.25cm)$);
+    \coordinate (tl@pf@lockpos) at ($(current page.north east)+(-55mm,-1.25cm)$);
     \node[cprimary,left=2pt] at (tl@pf@lockpos) {\Huge$\thepage$};
     % Cur section rectangle
-    \path[fill=cakzent] (tl@pf@lockpos) rectangle ++(5.5cm,.55pt);
+    \path[fill=cakzent] (tl@pf@lockpos) rectangle ++(55mm,.55pt);
     \node[above right,yshift=-\p@,font=\footnotesize,text width=5cm,align=left,minimum height=.736cm] at (tl@pf@lockpos) {\strut\ifx\rightmark\@empty \leftmark\else \rightmark\fi\strut};
     \def\@sop@cury{0}
     \def\@sop@curxoff{0} % allow a second line
@@ -382,7 +381,7 @@
 \renewcommand\sectionlinesformat[4]{%
     \def\tmp@a{#1}\def\tmp@b{section}\ifx\tmp@a\tmp@b
     \parbox{\linewidth}{%
-    {\color{chdtext}\strut#3#4}%{\Large\hspace*{-1ex}$\llap{$\diamond$}$\hspace*{1ex}}
+    {\color{chdtext}\strut#3#4}%
     \\[-.7\baselineskip]
     \settowidth{\sop@len@tmp@a}{\strut#3#4}%
     \ifdim\sop@len@tmp@a<\dimexpr\linewidth-14\p@\relax \addtolength\sop@len@tmp@a{14pt}\else \sop@len@tmp@a=\linewidth\fi
@@ -391,10 +390,9 @@
 }%
 
 \RedeclareSectionCommands[
-    beforeskip=-3.25ex \@plus -.5ex \@minus -.2ex,
-    runin=bysign,afterindent=bysign,
-    afterskip=\parskip
-]{paragraph,subparagraph}
+  beforeskip=-3.25ex \@plus -.5ex \@minus -.2ex,
+  runin=bysign,afterindent=bysign,
+  afterskip=\parskip]{paragraph,subparagraph}
 
 \setkomafont{section}{\LARGE}
 \setkomafont{subsection}{\large}
@@ -415,8 +413,8 @@
         \node[\son@font@futura@color@current] at ($(ct@ystraw)+(-22.5mm,132mm)$) {\scriptsize\bfseries/};
         % here we will plant the group-Tag at the 007 position, having a lot of fun :D
         \ifx\sop@register@groupnum\@empty\else
-        \node[right=.1cm,yshift=.4cm,font=\fontsize{17}{17}\selectfont\sffamily,ctpsymbol] (ct@gnumt) at (ct@groupnum) {\son@titlepage@groupnum{\sop@register@groupnum}};
-        \node[right,yshift=.10cm,xshift=.4cm,font=\fontsize{8}{8}\selectfont\sffamily,ctpsymbol] at (ct@gnumt){\ifx\sop@register@group\@empty Team\else\rlap{\sop@register@group}\fi};
+        \node[right=1mm,yshift=4mm,font=\fontsize{17}{17}\selectfont\sffamily,ctpsymbol] (ct@gnumt) at (ct@groupnum) {\son@titlepage@groupnum{\sop@register@groupnum}};
+        \node[right,yshift=1mm,xshift=4mm,font=\fontsize{8}{8}\selectfont\sffamily,ctpsymbol] at (ct@gnumt){\ifx\sop@register@group\@empty Team\else\rlap{\sop@register@group}\fi};
         \fi
     \end{tikzpicture}}\\[5em]
     \sop@sepline
@@ -436,12 +434,12 @@
         \ifx\sop@register@duedate\@empty\else
             \begingroup\hbox{}\quad\scriptsize\DateConvert{\sop@register@duedate}\sop@AfterDate\endgroup\\[-.2\baselineskip]%
         \fi
-        {\color{ctpsymbol}$\Large\llap{$\diamond$}\hspace*{-\p@}$\rule[.275\baselineskip]{.45\linewidth}{.55pt}\\}%
-        \ignorespaces{{\bfseries{}Bearbeitung:}}\\
-        \ignorespaces\hbox{}\quad\parbox{\linewidth}{\typesetAuthors}\bigskip\par
+        {\color{ctpsymbol}$\Large\llap{$\diamond$}\hspace*{-\p@}$\rule[.275\baselineskip]{.45\linewidth}{.55\p@}\\}%
+        {{\bfseries Bearbeitung:}}\\
+        \hbox{}\quad\parbox{\linewidth}{\typesetAuthors}\bigskip\par
         \ifx\sop@register@brief\@empty\else
-        \ignorespaces{\bfseries{}Beschreibung:}\smallskip\\
-        \hbox{}\quad\parbox{\linewidth}{\sop@register@brief}\fi
+        {\bfseries Beschreibung:}\smallskip\\
+        \hbox{}\quad\parbox\linewidth{\sop@register@brief}\fi
     \end{minipage}\vspace*{2em}
 \end{titlepage}
 \clearpage\nopagecolor
@@ -456,7 +454,7 @@
 \begin{flushright}
     \parbox{9cm}{\textbf{$-\,$\DateConvert{2019-12-15}$\,-$}\\
     \color{cprimary}Dieses Layout wurde für das Softwaregrundprojekt
-    im Wintersemester 2019/2020 von Florian Sihler im Rahmen des
+    im Wintersemester 2019\thinspace /\thinspace 2020 von Florian Sihler im Rahmen des
     Informatikstudiums an der Universität Ulm vollständig in \LaTeXe{} erstellt.}
 \end{flushright}\endgroup
 \clearpage
