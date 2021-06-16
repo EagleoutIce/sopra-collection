@@ -390,9 +390,7 @@ draw command/.initial={sol@dlst@input}}
 \def\solguard#1{\gdef\@sol@guard@default{#1}}
 \solguard{.8}
 \def\sol@guardspace{\ifsol@guardspace@\sol@ensure{\@sol@guard@default}\fi}
-%\def\sol@guardend{}
 % on line:
-%\lst@AddToHook{DeInit}{\sol@guardend}
 \lst@AddToHook{PreInit}{\sol@font@fs@normal}
 
 % #1 Name #2 Key #3 In Extra #4 Out Extra #5 Language
@@ -530,14 +528,10 @@ keepspaces=false}
 \ifsol@defaultlang@ \solLoadLanguage{java}\fi
 
 % Change colors
-\let\sol@registered@colors@keywordA\@empty
-\let\sol@registered@colors@keywordB\@empty
-\let\sol@registered@colors@keywordC\@empty
-\let\sol@registered@colors@numbers\@empty
-\let\sol@registered@colors@literals\@empty
-\let\sol@registered@colors@comments\@empty
-\let\sol@registered@colors@highlight\@empty
-\let\sol@registered@colors@command\@empty
+\let\sol@registered@colors@keywordA\@empty  \let\sol@registered@colors@keywordB\@empty
+\let\sol@registered@colors@keywordC\@empty  \let\sol@registered@colors@numbers\@empty
+\let\sol@registered@colors@literals\@empty  \let\sol@registered@colors@comments\@empty
+\let\sol@registered@colors@highlight\@empty \let\sol@registered@colors@command\@empty
 
 % #1 color name #2 color
 \newcommand*\lstcolorlet[2]{%
@@ -564,9 +558,7 @@ keepspaces=false}
 }{% Add to the hook..
 }%
 \let\sol@old@cpl@hooks\cpl@hooks
-\def\cpl@hooks{% Add to the hook
-\sol@old@cpl@hooks\sol@cpalette@hook
-}%
+\def\cpl@hooks{\sol@old@cpl@hooks\sol@cpalette@hook}% Add to the hook
 \ifsol@printmode@
 \def\sol@cpalette@hook{%
 \lstcolorlet{keywordA}{paletteA!90!black}%
