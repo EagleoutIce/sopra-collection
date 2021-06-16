@@ -10,12 +10,12 @@
 % Lengths and Registers
 \newcounter{solversion} \setcounter{solversion}{1021}
 % note this will be used with tcb:
-\newlength\sol@length@lst@outer@spacing \sol@length@lst@outer@spacing=3\p@
+\newdimen\sol@length@lst@outer@spacing \sol@length@lst@outer@spacing=3\p@
 
-\newlength\sol@length@lst@numsep \sol@length@lst@numsep=9\p@
-\newlength\sol@length@lst@famerule \sol@length@lst@famerule=.75\p@
-\newlength\sol@length@lst@xleftmargin \sol@length@lst@xleftmargin=3\p@
-\newlength\sol@length@lst@xrightmargin \sol@length@lst@xrightmargin=3\p@
+\newdimen\sol@length@lst@numsep \sol@length@lst@numsep=9\p@
+\newdimen\sol@length@lst@famerule \sol@length@lst@famerule=.75\p@
+\newdimen\sol@length@lst@xleftmargin \sol@length@lst@xleftmargin=3\p@
+\newdimen\sol@length@lst@xrightmargin \sol@length@lst@xrightmargin=3\p@
 
 \def\sol@lst@prebreak{\hbox{\sol@font@fs@numbers$\hookleftarrow$}} % allow definition of own symbol
 \let\sol@lst@inline@prebreak\sol@lst@prebreak
