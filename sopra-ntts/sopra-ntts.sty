@@ -27,20 +27,20 @@
 % 40x99 [off: 13] ; middle: 47-|17 -- -53,115 -| 47 17
 \def\son@font@futura@letter@N{
 \path[fill,\son@font@futura@color@current] (\@son@font@futura@carriage) -- ++(32mm,0) -- ++(0,25mm) -- ++(-32mm,99mm-25mm) -- cycle; % lower left triangle
-\path[fill,\son@font@futura@color@current] (\@son@font@futura@carriage) ++(40mm+13mm,0) -| ++(47mm,17mm) -- ++(-53mm,++115mm) -| ++(-47mm,-15mm) -- cycle ; % middle block
+\path[fill,\son@font@futura@color@current] (\@son@font@futura@carriage) ++(40mm+13mm,0) -| ++(47mm,17mm) -- ++(-53mm,+115mm) -| ++(-47mm,-15mm) -- cycle ; % middle block
 \path[fill,\son@font@futura@color@current] (\@son@font@futura@carriage) ++(101mm,34mm) -- ++(-32mm,99mm-25mm) |- ++(32mm,25mm) -- cycle; % upper right triangle
 \addtocounter{son@counter@font@carriage@posX}{12}
 }
 
 \def\son@font@futura@letter@O{
-\begin{scope}
+\scope
     \clip (\@son@font@futura@carriage) rectangle ++ (53mm,132mm);
-    \path[fill,\son@font@futura@color@current] (\@son@font@futura@carriage)++(53mm,66mm) ellipse (53mm and 68mm);
-\end{scope}
-\begin{scope}[xshift=007mm]
+    \path[fill,\son@font@futura@color@current] (\@son@font@futura@carriage)++(53mm,66mm) ellipse [x radius=53mm, y radius=68mm];
+\endscope
+\scope[xshift=007mm]
     \clip (\@son@font@futura@carriage)++ (53mm,0mm) rectangle ++(53mm,132mm);
-    \path[fill,\son@font@futura@color@current] (\@son@font@futura@carriage)++(53mm,66mm) ellipse (53mm and 68mm);
-\end{scope}
+    \path[fill,\son@font@futura@color@current] (\@son@font@futura@carriage)++(53mm,66mm) ellipse [x radius=53mm, y radius=68mm];
+\endscope
 \addtocounter{son@counter@font@carriage@posX}{13}
 }
 
@@ -73,10 +73,10 @@
 
 \def\son@font@futura@letter@D{
     \path[fill,\son@font@futura@color@current] (\@son@font@futura@carriage) rectangle ++(43mm,132mm); % TBlock
-\begin{scope}[xshift=-2mm]
+\scope[xshift=-2mm]
     \clip (\@son@font@futura@carriage)++ (53mm,0mm) rectangle ++(53mm,132mm);
-    \path[fill,\son@font@futura@color@current] (\@son@font@futura@carriage)++(53mm,66mm) ellipse (53mm and 68mm);
-\end{scope}
+    \path[fill,\son@font@futura@color@current] (\@son@font@futura@carriage)++(53mm,66mm) ellipse [x radius=53mm,y radius=68mm];
+\endscope
 \addtocounter{son@counter@font@carriage@posX}{12}
 }
 
@@ -90,10 +90,10 @@
 
 \def\son@font@futura@letter@P{
 \path[fill,\son@font@futura@color@current] (\@son@font@futura@carriage) rectangle ++(43mm,132mm); % TBlock
-\begin{scope}[xshift=-2mm]
+\scope[xshift=-2mm]
     \clip (\@son@font@futura@carriage)++ (53mm,46mm) rectangle ++(53mm,132mm);
-    \path[fill,\son@font@futura@color@current] (\@son@font@futura@carriage)++(53mm,64mm+68mm/2.35) ellipse (43mm and 68mm/1.75);
-\end{scope}
+    \path[fill,\son@font@futura@color@current] (\@son@font@futura@carriage)++(53mm,64mm+68mm/2.35) ellipse [x radius=43mm, y radius=68mm/1.75];
+\endscope
 \addtocounter{son@counter@font@carriage@posX}{11}
 }
 
