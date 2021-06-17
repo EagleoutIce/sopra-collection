@@ -213,9 +213,9 @@
     tnode/.style={font=\large,sob@col@uulm@akzent!50!black,left}]
 \ifx\sob@register@groupnum\@empty
 \node[above right,sob@col@uulm@akzent,font=\small] at%
-($(current page.north west)+(\sob@len@header,-\sob@len@logoheight/2+.1cm)$)
+($(current page.north west)+(\sob@len@header,-\sob@len@logoheight/2+1mm)$)
 {\sob@team@name}; \node[right,sob@col@uulm@akzent] at%
-($(current page.north west)+(\sob@len@header,-\sob@len@logoheight/2-.3cm)$)
+($(current page.north west)+(\sob@len@header,-\sob@len@logoheight/2-3mm)$)
 {\Huge\sob@register@group};
 \else
 \usetikzlibrary{shapes}
@@ -227,17 +227,17 @@
         inner sep=1.5/1.635,transform shape,minimum width=2em] at (0,0)
         {\color{sob@col@uulm@akzent!50!black}\sob@register@groupnum};}};
 \fi
-\node[left=1.5pt,scale=.75] at($(current page.north east)+(-\sob@len@header,-\sob@len@logoheight/2)$) {\uulmlogo{\ifsob@printmode@ black\else sob@col@uulm\fi}};
+\node[left=1.5pt,scale=.75] at($(current page.north east)+(-\sob@len@header,-\sob@len@logoheight/2)$) {\uulmlogo{\ifsob@printmode@ black\else black!80!white\fi}};
 \fill[sob@col@uulm@cs] %
     ($(current page.north west)+(0,-\sob@len@logoheight)$) rectangle
     ($(current page.north east)+(0,-\sob@len@logoheight-1.2cm)$);
 \node[font=\huge,white,left] at%
-    ($(current page.north east)+(-\sob@len@header,-\sob@len@logoheight-.6cm)$)
+    ($(current page.north east)+(-\sob@len@header,-\sob@len@logoheight-6mm)$)
     {\strut\sob@register@title};
 
 \fill[sob@col@uulm@akzent!60]
-        ($(current page.north west)+(0,-\sob@len@logoheight-1.2cm)$) rectangle%
-        ($(current page.north east)+(0,-\sob@len@logoheight-2.8cm)$);
+        ($(current page.north west)+(0,-\sob@len@logoheight-12mm)$) rectangle%
+        ($(current page.north east)+(0,-\sob@len@logoheight-28mm)$);
 % set subtitle:
 \node[tnode] at ($(current page.north east)+%
         (-\sob@len@header,-\sob@len@logoheight-2cm+.65\baselineskip)$)
@@ -260,11 +260,11 @@
 \renewcommand\headfont{\normalfont}
 \chead{%
 \begin{tikzpicture}[remember picture, overlay]
-    \fill[sob@col@uulm@cs]($(current page.north west)+(1.5cm,0)$)
+    \fill[sob@col@uulm@cs]($(current page.north west)+(15mm,0)$)
         rectangle ($(current page.north west)+(0,-8mm)$) %
         node[midway,centered,text=sob@col@text@header] {\strut\pagemark};
     \fill[sob@col@uulm@akzent!40] (current page.north east) rectangle
-        ($(current page.north west)+(1.5cm,-8mm)$);
+        ($(current page.north west)+(15mm,-8mm)$);
     \node[right=\z@,text=sob@col@uulm@akzent!50!black,inner sep=\z@] at
         ($(current page.north west)+(\sob@len@header,-4mm)$)%
         {\strut\sob@register@title\space$\mid$ \sob@register@short@subtitle};
@@ -275,1370 +275,548 @@
 % PGF commands, generated using http://sourceforge.net/projects/eps2pgf/
 \newcommand*\uulmlogo[1]{%
 \ifsob@usedraft@\else
-\hspace*{-8pt}
-\begin{pgfpicture}
-\pgftransformscale{30mm/60mm}
-\begin{pgfscope}
-\pgfsetstrokecolor{#1}\pgfsetfillcolor{#1}
-\pgfpathmoveto{\pgfqpoint{3.307cm}{2.354cm}}
-\pgfpathcurveto{\pgfqpoint{3.292cm}{2.354cm}}{\pgfqpoint{3.279cm}{2.35cm}}{\pgfqpoint{3.268cm}{2.343cm}}
-\pgfpathcurveto{\pgfqpoint{3.205cm}{2.377cm}}{\pgfqpoint{3.132cm}{2.408cm}}{\pgfqpoint{3.05cm}{2.435cm}}
-\pgfpathcurveto{\pgfqpoint{3.19cm}{2.714cm}}{\pgfqpoint{3.217cm}{2.95cm}}{\pgfqpoint{3.084cm}{3.083cm}}
-\pgfpathcurveto{\pgfqpoint{3.011cm}{3.156cm}}{\pgfqpoint{2.905cm}{3.181cm}}{\pgfqpoint{2.778cm}{3.164cm}}
-\pgfpathcurveto{\pgfqpoint{2.776cm}{3.167cm}}{\pgfqpoint{2.774cm}{3.17cm}}{\pgfqpoint{2.771cm}{3.172cm}}
-\pgfpathcurveto{\pgfqpoint{2.742cm}{3.202cm}}{\pgfqpoint{2.693cm}{3.202cm}}{\pgfqpoint{2.663cm}{3.172cm}}
-\pgfpathcurveto{\pgfqpoint{2.652cm}{3.161cm}}{\pgfqpoint{2.645cm}{3.148cm}}{\pgfqpoint{2.643cm}{3.133cm}}
-\pgfpathcurveto{\pgfqpoint{2.578cm}{3.113cm}}{\pgfqpoint{2.509cm}{3.085cm}}{\pgfqpoint{2.437cm}{3.049cm}}
-\pgfpathcurveto{\pgfqpoint{2.339cm}{3.345cm}}{\pgfqpoint{2.191cm}{3.53cm}}{\pgfqpoint{2.004cm}{3.53cm}}
-\pgfpathcurveto{\pgfqpoint{1.901cm}{3.53cm}}{\pgfqpoint{1.811cm}{3.475cm}}{\pgfqpoint{1.734cm}{3.377cm}}
-\pgfpathcurveto{\pgfqpoint{1.727cm}{3.379cm}}{\pgfqpoint{1.72cm}{3.38cm}}{\pgfqpoint{1.712cm}{3.38cm}}
-\pgfpathcurveto{\pgfqpoint{1.67cm}{3.38cm}}{\pgfqpoint{1.636cm}{3.346cm}}{\pgfqpoint{1.636cm}{3.303cm}}
-\pgfpathcurveto{\pgfqpoint{1.636cm}{3.284cm}}{\pgfqpoint{1.643cm}{3.266cm}}{\pgfqpoint{1.655cm}{3.252cm}}
-\pgfpathcurveto{\pgfqpoint{1.624cm}{3.192cm}}{\pgfqpoint{1.595cm}{3.124cm}}{\pgfqpoint{1.57cm}{3.048cm}}
-\pgfpathcurveto{\pgfqpoint{1.291cm}{3.188cm}}{\pgfqpoint{1.056cm}{3.215cm}}{\pgfqpoint{.923cm}{3.082cm}}
-\pgfpathcurveto{\pgfqpoint{.852cm}{3.01cm}}{\pgfqpoint{.827cm}{2.909cm}}{\pgfqpoint{.84cm}{2.787cm}}
-\pgfpathcurveto{\pgfqpoint{.83cm}{2.783cm}}{\pgfqpoint{.821cm}{2.777cm}}{\pgfqpoint{.812cm}{2.769cm}}
-\pgfpathcurveto{\pgfqpoint{.783cm}{2.739cm}}{\pgfqpoint{.783cm}{2.691cm}}{\pgfqpoint{.812cm}{2.661cm}}
-\pgfpathcurveto{\pgfqpoint{.829cm}{2.644cm}}{\pgfqpoint{.851cm}{2.637cm}}{\pgfqpoint{.873cm}{2.639cm}}
-\pgfpathcurveto{\pgfqpoint{.893cm}{2.574cm}}{\pgfqpoint{.921cm}{2.506cm}}{\pgfqpoint{.957cm}{2.435cm}}
-\pgfpathcurveto{\pgfqpoint{.661cm}{2.336cm}}{\pgfqpoint{.476cm}{2.189cm}}{\pgfqpoint{.476cm}{2.001cm}}
-\pgfpathcurveto{\pgfqpoint{.476cm}{1.901cm}}{\pgfqpoint{.528cm}{1.813cm}}{\pgfqpoint{.621cm}{1.737cm}}
-\pgfpathcurveto{\pgfqpoint{.616cm}{1.727cm}}{\pgfqpoint{.613cm}{1.716cm}}{\pgfqpoint{.613cm}{1.704cm}}
-\pgfpathcurveto{\pgfqpoint{.613cm}{1.662cm}}{\pgfqpoint{.647cm}{1.628cm}}{\pgfqpoint{.69cm}{1.628cm}}
-\pgfpathcurveto{\pgfqpoint{.713cm}{1.628cm}}{\pgfqpoint{.734cm}{1.638cm}}{\pgfqpoint{.748cm}{1.655cm}}
-\pgfpathcurveto{\pgfqpoint{.809cm}{1.622cm}}{\pgfqpoint{.879cm}{1.593cm}}{\pgfqpoint{.957cm}{1.567cm}}
-\pgfpathcurveto{\pgfqpoint{.817cm}{1.288cm}}{\pgfqpoint{.791cm}{1.053cm}}{\pgfqpoint{.924cm}{.92cm}}
-\pgfpathcurveto{\pgfqpoint{.992cm}{.852cm}}{\pgfqpoint{1.086cm}{.825cm}}{\pgfqpoint{1.2cm}{.835cm}}
-\pgfpathcurveto{\pgfqpoint{1.204cm}{.825cm}}{\pgfqpoint{1.21cm}{.815cm}}{\pgfqpoint{1.218cm}{.807cm}}
-\pgfpathcurveto{\pgfqpoint{1.248cm}{.777cm}}{\pgfqpoint{1.296cm}{.777cm}}{\pgfqpoint{1.326cm}{.807cm}}
-\pgfpathcurveto{\pgfqpoint{1.341cm}{.823cm}}{\pgfqpoint{1.349cm}{.843cm}}{\pgfqpoint{1.348cm}{.864cm}}
-\pgfpathcurveto{\pgfqpoint{1.418cm}{.884cm}}{\pgfqpoint{1.493cm}{.915cm}}{\pgfqpoint{1.57cm}{.954cm}}
-\pgfpathcurveto{\pgfqpoint{1.669cm}{.657cm}}{\pgfqpoint{1.816cm}{.472cm}}{\pgfqpoint{2.004cm}{.472cm}}
-\pgfpathcurveto{\pgfqpoint{2.102cm}{.472cm}}{\pgfqpoint{2.188cm}{.521cm}}{\pgfqpoint{2.263cm}{.611cm}}
-\pgfpathcurveto{\pgfqpoint{2.27cm}{.609cm}}{\pgfqpoint{2.277cm}{.608cm}}{\pgfqpoint{2.285cm}{.608cm}}
-\pgfpathcurveto{\pgfqpoint{2.327cm}{.608cm}}{\pgfqpoint{2.361cm}{.642cm}}{\pgfqpoint{2.361cm}{.684cm}}
-\pgfpathcurveto{\pgfqpoint{2.361cm}{.703cm}}{\pgfqpoint{2.355cm}{.719cm}}{\pgfqpoint{2.344cm}{.733cm}}
-\pgfpathcurveto{\pgfqpoint{2.379cm}{.796cm}}{\pgfqpoint{2.41cm}{.87cm}}{\pgfqpoint{2.438cm}{.953cm}}
-\pgfpathcurveto{\pgfqpoint{2.717cm}{.813cm}}{\pgfqpoint{2.952cm}{.786cm}}{\pgfqpoint{3.085cm}{.919cm}}
-\pgfpathcurveto{\pgfqpoint{3.155cm}{.99cm}}{\pgfqpoint{3.18cm}{1.089cm}}{\pgfqpoint{3.168cm}{1.208cm}}
-\pgfpathcurveto{\pgfqpoint{3.171cm}{1.21cm}}{\pgfqpoint{3.174cm}{1.212cm}}{\pgfqpoint{3.176cm}{1.214cm}}
-\pgfpathcurveto{\pgfqpoint{3.206cm}{1.244cm}}{\pgfqpoint{3.206cm}{1.293cm}}{\pgfqpoint{3.176cm}{1.323cm}}
-\pgfpathcurveto{\pgfqpoint{3.166cm}{1.333cm}}{\pgfqpoint{3.154cm}{1.339cm}}{\pgfqpoint{3.141cm}{1.343cm}}
-\pgfpathcurveto{\pgfqpoint{3.121cm}{1.413cm}}{\pgfqpoint{3.09cm}{1.489cm}}{\pgfqpoint{3.051cm}{1.567cm}}
-\pgfpathcurveto{\pgfqpoint{3.347cm}{1.666cm}}{\pgfqpoint{3.532cm}{1.813cm}}{\pgfqpoint{3.532cm}{2.001cm}}
-\pgfpathcurveto{\pgfqpoint{3.532cm}{2.102cm}}{\pgfqpoint{3.478cm}{2.192cm}}{\pgfqpoint{3.383cm}{2.268cm}}
-\pgfpathcurveto{\pgfqpoint{3.383cm}{2.271cm}}{\pgfqpoint{3.383cm}{2.274cm}}{\pgfqpoint{3.383cm}{2.278cm}}
-\pgfpathcurveto{\pgfqpoint{3.383cm}{2.32cm}}{\pgfqpoint{3.349cm}{2.354cm}}{\pgfqpoint{3.307cm}{2.354cm}}
-\pgfpathmoveto{\pgfqpoint{.396cm}{2.001cm}}
-\pgfpathcurveto{\pgfqpoint{.396cm}{2.89cm}}{\pgfqpoint{1.116cm}{3.611cm}}{\pgfqpoint{2.004cm}{3.611cm}}
-\pgfpathcurveto{\pgfqpoint{2.893cm}{3.611cm}}{\pgfqpoint{3.613cm}{2.89cm}}{\pgfqpoint{3.613cm}{2.001cm}}
-\pgfpathcurveto{\pgfqpoint{3.613cm}{1.112cm}}{\pgfqpoint{2.893cm}{.391cm}}{\pgfqpoint{2.004cm}{.391cm}}
-\pgfpathcurveto{\pgfqpoint{1.116cm}{.391cm}}{\pgfqpoint{.396cm}{1.112cm}}{\pgfqpoint{.396cm}{2.001cm}}
-\pgfpathmoveto{\pgfqpoint{2.407cm}{.969cm}}
-\pgfpathcurveto{\pgfqpoint{2.378cm}{.888cm}}{\pgfqpoint{2.344cm}{.817cm}}{\pgfqpoint{2.307cm}{.758cm}}
-\pgfpathcurveto{\pgfqpoint{2.3cm}{.76cm}}{\pgfqpoint{2.292cm}{.761cm}}{\pgfqpoint{2.285cm}{.761cm}}
-\pgfpathcurveto{\pgfqpoint{2.243cm}{.761cm}}{\pgfqpoint{2.208cm}{.727cm}}{\pgfqpoint{2.208cm}{.684cm}}
-\pgfpathcurveto{\pgfqpoint{2.208cm}{.67cm}}{\pgfqpoint{2.212cm}{.657cm}}{\pgfqpoint{2.219cm}{.646cm}}
-\pgfpathcurveto{\pgfqpoint{2.155cm}{.583cm}}{\pgfqpoint{2.083cm}{.548cm}}{\pgfqpoint{2.004cm}{.548cm}}
-\pgfpathcurveto{\pgfqpoint{1.833cm}{.548cm}}{\pgfqpoint{1.696cm}{.709cm}}{\pgfqpoint{1.601cm}{.969cm}}
-\pgfpathcurveto{\pgfqpoint{1.728cm}{1.036cm}}{\pgfqpoint{1.864cm}{1.126cm}}{\pgfqpoint{2.004cm}{1.235cm}}
-\pgfpathcurveto{\pgfqpoint{2.143cm}{1.126cm}}{\pgfqpoint{2.28cm}{1.036cm}}{\pgfqpoint{2.407cm}{.969cm}}
-\pgfpathmoveto{\pgfqpoint{1.601cm}{3.032cm}}
-\pgfpathcurveto{\pgfqpoint{1.628cm}{3.107cm}}{\pgfqpoint{1.659cm}{3.173cm}}{\pgfqpoint{1.693cm}{3.229cm}}
-\pgfpathcurveto{\pgfqpoint{1.699cm}{3.228cm}}{\pgfqpoint{1.705cm}{3.227cm}}{\pgfqpoint{1.712cm}{3.227cm}}
-\pgfpathcurveto{\pgfqpoint{1.754cm}{3.227cm}}{\pgfqpoint{1.788cm}{3.261cm}}{\pgfqpoint{1.788cm}{3.303cm}}
-\pgfpathcurveto{\pgfqpoint{1.788cm}{3.318cm}}{\pgfqpoint{1.784cm}{3.332cm}}{\pgfqpoint{1.777cm}{3.343cm}}
-\pgfpathcurveto{\pgfqpoint{1.844cm}{3.415cm}}{\pgfqpoint{1.921cm}{3.454cm}}{\pgfqpoint{2.005cm}{3.454cm}}
-\pgfpathcurveto{\pgfqpoint{2.176cm}{3.454cm}}{\pgfqpoint{2.313cm}{3.293cm}}{\pgfqpoint{2.408cm}{3.034cm}}
-\pgfpathcurveto{\pgfqpoint{2.28cm}{2.966cm}}{\pgfqpoint{2.143cm}{2.876cm}}{\pgfqpoint{2.003cm}{2.767cm}}
-\pgfpathcurveto{\pgfqpoint{1.864cm}{2.876cm}}{\pgfqpoint{1.728cm}{2.965cm}}{\pgfqpoint{1.601cm}{3.032cm}}
-\pgfpathmoveto{\pgfqpoint{2.74cm}{2.001cm}}
-\pgfpathcurveto{\pgfqpoint{2.689cm}{1.935cm}}{\pgfqpoint{2.633cm}{1.867cm}}{\pgfqpoint{2.573cm}{1.8cm}}
-\pgfpathcurveto{\pgfqpoint{2.576cm}{1.866cm}}{\pgfqpoint{2.577cm}{1.933cm}}{\pgfqpoint{2.577cm}{2.001cm}}
-\pgfpathcurveto{\pgfqpoint{2.577cm}{2.069cm}}{\pgfqpoint{2.576cm}{2.137cm}}{\pgfqpoint{2.573cm}{2.203cm}}
-\pgfpathcurveto{\pgfqpoint{2.633cm}{2.136cm}}{\pgfqpoint{2.689cm}{2.068cm}}{\pgfqpoint{2.74cm}{2.001cm}}
-\pgfpathmoveto{\pgfqpoint{1.267cm}{2.002cm}}
-\pgfpathcurveto{\pgfqpoint{1.319cm}{2.068cm}}{\pgfqpoint{1.375cm}{2.136cm}}{\pgfqpoint{1.435cm}{2.204cm}}
-\pgfpathcurveto{\pgfqpoint{1.432cm}{2.137cm}}{\pgfqpoint{1.431cm}{2.07cm}}{\pgfqpoint{1.431cm}{2.001cm}}
-\pgfpathcurveto{\pgfqpoint{1.431cm}{1.932cm}}{\pgfqpoint{1.432cm}{1.865cm}}{\pgfqpoint{1.435cm}{1.799cm}}
-\pgfpathcurveto{\pgfqpoint{1.375cm}{1.867cm}}{\pgfqpoint{1.319cm}{1.934cm}}{\pgfqpoint{1.267cm}{2.002cm}}
-\pgfpathmoveto{\pgfqpoint{2.548cm}{1.484cm}}
-\pgfpathcurveto{\pgfqpoint{2.559cm}{1.574cm}}{\pgfqpoint{2.567cm}{1.669cm}}{\pgfqpoint{2.572cm}{1.766cm}}
-\pgfpathcurveto{\pgfqpoint{2.637cm}{1.839cm}}{\pgfqpoint{2.698cm}{1.911cm}}{\pgfqpoint{2.754cm}{1.982cm}}
-\pgfpathcurveto{\pgfqpoint{2.858cm}{1.845cm}}{\pgfqpoint{2.943cm}{1.711cm}}{\pgfqpoint{3.004cm}{1.587cm}}
-\pgfpathcurveto{\pgfqpoint{2.873cm}{1.542cm}}{\pgfqpoint{2.719cm}{1.507cm}}{\pgfqpoint{2.548cm}{1.484cm}}
-\pgfpathmoveto{\pgfqpoint{2.263cm}{1.456cm}}
-\pgfpathcurveto{\pgfqpoint{2.312cm}{1.501cm}}{\pgfqpoint{2.361cm}{1.547cm}}{\pgfqpoint{2.409cm}{1.596cm}}
-\pgfpathcurveto{\pgfqpoint{2.458cm}{1.644cm}}{\pgfqpoint{2.504cm}{1.693cm}}{\pgfqpoint{2.549cm}{1.742cm}}
-\pgfpathcurveto{\pgfqpoint{2.544cm}{1.652cm}}{\pgfqpoint{2.536cm}{1.564cm}}{\pgfqpoint{2.525cm}{1.48cm}}
-\pgfpathcurveto{\pgfqpoint{2.441cm}{1.47cm}}{\pgfqpoint{2.354cm}{1.461cm}}{\pgfqpoint{2.263cm}{1.456cm}}
-\pgfpathmoveto{\pgfqpoint{1.484cm}{1.48cm}}
-\pgfpathcurveto{\pgfqpoint{1.473cm}{1.564cm}}{\pgfqpoint{1.465cm}{1.651cm}}{\pgfqpoint{1.459cm}{1.741cm}}
-\pgfpathcurveto{\pgfqpoint{1.504cm}{1.692cm}}{\pgfqpoint{1.551cm}{1.644cm}}{\pgfqpoint{1.599cm}{1.595cm}}
-\pgfpathcurveto{\pgfqpoint{1.647cm}{1.547cm}}{\pgfqpoint{1.696cm}{1.501cm}}{\pgfqpoint{1.744cm}{1.456cm}}
-\pgfpathcurveto{\pgfqpoint{1.654cm}{1.461cm}}{\pgfqpoint{1.567cm}{1.47cm}}{\pgfqpoint{1.484cm}{1.48cm}}
-\pgfpathmoveto{\pgfqpoint{1.003cm}{1.587cm}}
-\pgfpathcurveto{\pgfqpoint{1.064cm}{1.711cm}}{\pgfqpoint{1.149cm}{1.845cm}}{\pgfqpoint{1.253cm}{1.982cm}}
-\pgfpathcurveto{\pgfqpoint{1.309cm}{1.911cm}}{\pgfqpoint{1.371cm}{1.838cm}}{\pgfqpoint{1.437cm}{1.765cm}}
-\pgfpathcurveto{\pgfqpoint{1.442cm}{1.668cm}}{\pgfqpoint{1.449cm}{1.574cm}}{\pgfqpoint{1.46cm}{1.483cm}}
-\pgfpathcurveto{\pgfqpoint{1.289cm}{1.507cm}}{\pgfqpoint{1.134cm}{1.542cm}}{\pgfqpoint{1.003cm}{1.587cm}}
-\pgfpathmoveto{\pgfqpoint{.972cm}{2.406cm}}
-\pgfpathcurveto{\pgfqpoint{1.039cm}{2.278cm}}{\pgfqpoint{1.129cm}{2.141cm}}{\pgfqpoint{1.238cm}{2.001cm}}
-\pgfpathcurveto{\pgfqpoint{1.13cm}{1.862cm}}{\pgfqpoint{1.04cm}{1.725cm}}{\pgfqpoint{.973cm}{1.598cm}}
-\pgfpathcurveto{\pgfqpoint{.894cm}{1.627cm}}{\pgfqpoint{.824cm}{1.659cm}}{\pgfqpoint{.766cm}{1.696cm}}
-\pgfpathlineto{\pgfqpoint{.766cm}{1.704cm}}
-\pgfpathcurveto{\pgfqpoint{.766cm}{1.747cm}}{\pgfqpoint{.732cm}{1.781cm}}{\pgfqpoint{.69cm}{1.781cm}}
-\pgfpathcurveto{\pgfqpoint{.679cm}{1.781cm}}{\pgfqpoint{.67cm}{1.779cm}}{\pgfqpoint{.661cm}{1.775cm}}
-\pgfpathcurveto{\pgfqpoint{.591cm}{1.842cm}}{\pgfqpoint{.552cm}{1.918cm}}{\pgfqpoint{.552cm}{2.002cm}}
-\pgfpathcurveto{\pgfqpoint{.552cm}{2.173cm}}{\pgfqpoint{.712cm}{2.31cm}}{\pgfqpoint{.972cm}{2.406cm}}
-\pgfpathmoveto{\pgfqpoint{1.46cm}{2.519cm}}
-\pgfpathcurveto{\pgfqpoint{1.449cm}{2.429cm}}{\pgfqpoint{1.441cm}{2.334cm}}{\pgfqpoint{1.437cm}{2.237cm}}
-\pgfpathcurveto{\pgfqpoint{1.371cm}{2.164cm}}{\pgfqpoint{1.31cm}{2.092cm}}{\pgfqpoint{1.253cm}{2.02cm}}
-\pgfpathcurveto{\pgfqpoint{1.149cm}{2.158cm}}{\pgfqpoint{1.064cm}{2.292cm}}{\pgfqpoint{1.004cm}{2.417cm}}
-\pgfpathcurveto{\pgfqpoint{1.135cm}{2.461cm}}{\pgfqpoint{1.289cm}{2.496cm}}{\pgfqpoint{1.46cm}{2.519cm}}
-\pgfpathmoveto{\pgfqpoint{1.744cm}{2.547cm}}
-\pgfpathcurveto{\pgfqpoint{1.696cm}{2.502cm}}{\pgfqpoint{1.647cm}{2.455cm}}{\pgfqpoint{1.599cm}{2.407cm}}
-\pgfpathcurveto{\pgfqpoint{1.55cm}{2.359cm}}{\pgfqpoint{1.504cm}{2.31cm}}{\pgfqpoint{1.459cm}{2.261cm}}
-\pgfpathcurveto{\pgfqpoint{1.465cm}{2.352cm}}{\pgfqpoint{1.473cm}{2.439cm}}{\pgfqpoint{1.484cm}{2.523cm}}
-\pgfpathcurveto{\pgfqpoint{1.567cm}{2.533cm}}{\pgfqpoint{1.654cm}{2.542cm}}{\pgfqpoint{1.744cm}{2.547cm}}
-\pgfpathmoveto{\pgfqpoint{2.23cm}{2.549cm}}
-\pgfpathcurveto{\pgfqpoint{2.285cm}{2.499cm}}{\pgfqpoint{2.34cm}{2.447cm}}{\pgfqpoint{2.395cm}{2.392cm}}
-\pgfpathcurveto{\pgfqpoint{2.449cm}{2.338cm}}{\pgfqpoint{2.501cm}{2.282cm}}{\pgfqpoint{2.551cm}{2.227cm}}
-\pgfpathcurveto{\pgfqpoint{2.555cm}{2.154cm}}{\pgfqpoint{2.557cm}{2.078cm}}{\pgfqpoint{2.557cm}{2.001cm}}
-\pgfpathcurveto{\pgfqpoint{2.557cm}{1.924cm}}{\pgfqpoint{2.555cm}{1.849cm}}{\pgfqpoint{2.551cm}{1.775cm}}
-\pgfpathcurveto{\pgfqpoint{2.501cm}{1.72cm}}{\pgfqpoint{2.449cm}{1.665cm}}{\pgfqpoint{2.394cm}{1.61cm}}
-\pgfpathcurveto{\pgfqpoint{2.34cm}{1.556cm}}{\pgfqpoint{2.285cm}{1.504cm}}{\pgfqpoint{2.23cm}{1.454cm}}
-\pgfpathcurveto{\pgfqpoint{2.156cm}{1.45cm}}{\pgfqpoint{2.081cm}{1.448cm}}{\pgfqpoint{2.003cm}{1.448cm}}
-\pgfpathcurveto{\pgfqpoint{1.926cm}{1.448cm}}{\pgfqpoint{1.851cm}{1.45cm}}{\pgfqpoint{1.777cm}{1.454cm}}
-\pgfpathcurveto{\pgfqpoint{1.722cm}{1.504cm}}{\pgfqpoint{1.668cm}{1.556cm}}{\pgfqpoint{1.613cm}{1.61cm}}
-\pgfpathcurveto{\pgfqpoint{1.559cm}{1.664cm}}{\pgfqpoint{1.507cm}{1.719cm}}{\pgfqpoint{1.457cm}{1.774cm}}
-\pgfpathcurveto{\pgfqpoint{1.454cm}{1.848cm}}{\pgfqpoint{1.452cm}{1.924cm}}{\pgfqpoint{1.452cm}{2.001cm}}
-\pgfpathcurveto{\pgfqpoint{1.452cm}{2.079cm}}{\pgfqpoint{1.454cm}{2.155cm}}{\pgfqpoint{1.457cm}{2.229cm}}
-\pgfpathcurveto{\pgfqpoint{1.507cm}{2.283cm}}{\pgfqpoint{1.558cm}{2.338cm}}{\pgfqpoint{1.613cm}{2.392cm}}
-\pgfpathcurveto{\pgfqpoint{1.667cm}{2.447cm}}{\pgfqpoint{1.722cm}{2.499cm}}{\pgfqpoint{1.777cm}{2.549cm}}
-\pgfpathcurveto{\pgfqpoint{1.851cm}{2.552cm}}{\pgfqpoint{1.926cm}{2.554cm}}{\pgfqpoint{2.003cm}{2.554cm}}
-\pgfpathcurveto{\pgfqpoint{2.08cm}{2.554cm}}{\pgfqpoint{2.156cm}{2.552cm}}{\pgfqpoint{2.23cm}{2.549cm}}
-\pgfpathmoveto{\pgfqpoint{2.525cm}{2.522cm}}
-\pgfpathcurveto{\pgfqpoint{2.536cm}{2.438cm}}{\pgfqpoint{2.544cm}{2.351cm}}{\pgfqpoint{2.549cm}{2.26cm}}
-\pgfpathcurveto{\pgfqpoint{2.504cm}{2.309cm}}{\pgfqpoint{2.458cm}{2.358cm}}{\pgfqpoint{2.409cm}{2.406cm}}
-\pgfpathcurveto{\pgfqpoint{2.361cm}{2.455cm}}{\pgfqpoint{2.312cm}{2.502cm}}{\pgfqpoint{2.263cm}{2.547cm}}
-\pgfpathcurveto{\pgfqpoint{2.353cm}{2.541cm}}{\pgfqpoint{2.441cm}{2.533cm}}{\pgfqpoint{2.525cm}{2.522cm}}
-\pgfpathmoveto{\pgfqpoint{3.004cm}{2.416cm}}
-\pgfpathcurveto{\pgfqpoint{2.943cm}{2.291cm}}{\pgfqpoint{2.858cm}{2.158cm}}{\pgfqpoint{2.754cm}{2.02cm}}
-\pgfpathcurveto{\pgfqpoint{2.698cm}{2.092cm}}{\pgfqpoint{2.637cm}{2.164cm}}{\pgfqpoint{2.571cm}{2.236cm}}
-\pgfpathcurveto{\pgfqpoint{2.567cm}{2.334cm}}{\pgfqpoint{2.559cm}{2.428cm}}{\pgfqpoint{2.548cm}{2.519cm}}
-\pgfpathcurveto{\pgfqpoint{2.719cm}{2.496cm}}{\pgfqpoint{2.873cm}{2.461cm}}{\pgfqpoint{3.004cm}{2.416cm}}
-\pgfpathmoveto{\pgfqpoint{3.355cm}{2.219cm}}
-\pgfpathcurveto{\pgfqpoint{3.42cm}{2.154cm}}{\pgfqpoint{3.455cm}{2.081cm}}{\pgfqpoint{3.455cm}{2.001cm}}
-\pgfpathcurveto{\pgfqpoint{3.455cm}{1.83cm}}{\pgfqpoint{3.295cm}{1.693cm}}{\pgfqpoint{3.035cm}{1.598cm}}
-\pgfpathcurveto{\pgfqpoint{2.968cm}{1.725cm}}{\pgfqpoint{2.878cm}{1.862cm}}{\pgfqpoint{2.769cm}{2.001cm}}
-\pgfpathcurveto{\pgfqpoint{2.878cm}{2.141cm}}{\pgfqpoint{2.968cm}{2.277cm}}{\pgfqpoint{3.035cm}{2.405cm}}
-\pgfpathcurveto{\pgfqpoint{3.112cm}{2.377cm}}{\pgfqpoint{3.18cm}{2.345cm}}{\pgfqpoint{3.237cm}{2.31cm}}
-\pgfpathcurveto{\pgfqpoint{3.233cm}{2.3cm}}{\pgfqpoint{3.23cm}{2.289cm}}{\pgfqpoint{3.23cm}{2.278cm}}
-\pgfpathcurveto{\pgfqpoint{3.23cm}{2.235cm}}{\pgfqpoint{3.264cm}{2.201cm}}{\pgfqpoint{3.307cm}{2.201cm}}
-\pgfpathcurveto{\pgfqpoint{3.325cm}{2.201cm}}{\pgfqpoint{3.342cm}{2.208cm}}{\pgfqpoint{3.355cm}{2.219cm}}
-\pgfpathmoveto{\pgfqpoint{2.545cm}{2.543cm}}
-\pgfpathcurveto{\pgfqpoint{2.523cm}{2.718cm}}{\pgfqpoint{2.491cm}{2.879cm}}{\pgfqpoint{2.448cm}{3.016cm}}
-\pgfpathcurveto{\pgfqpoint{2.517cm}{3.049cm}}{\pgfqpoint{2.584cm}{3.073cm}}{\pgfqpoint{2.647cm}{3.089cm}}
-\pgfpathcurveto{\pgfqpoint{2.65cm}{3.08cm}}{\pgfqpoint{2.656cm}{3.072cm}}{\pgfqpoint{2.663cm}{3.064cm}}
-\pgfpathcurveto{\pgfqpoint{2.693cm}{3.034cm}}{\pgfqpoint{2.742cm}{3.034cm}}{\pgfqpoint{2.771cm}{3.064cm}}
-\pgfpathcurveto{\pgfqpoint{2.785cm}{3.077cm}}{\pgfqpoint{2.792cm}{3.094cm}}{\pgfqpoint{2.794cm}{3.112cm}}
-\pgfpathcurveto{\pgfqpoint{2.89cm}{3.114cm}}{\pgfqpoint{2.971cm}{3.088cm}}{\pgfqpoint{3.03cm}{3.028cm}}
-\pgfpathcurveto{\pgfqpoint{3.151cm}{2.907cm}}{\pgfqpoint{3.135cm}{2.697cm}}{\pgfqpoint{3.018cm}{2.446cm}}
-\pgfpathcurveto{\pgfqpoint{2.88cm}{2.488cm}}{\pgfqpoint{2.721cm}{2.521cm}}{\pgfqpoint{2.545cm}{2.543cm}}
-\pgfpathmoveto{\pgfqpoint{2.238cm}{2.569cm}}
-\pgfpathcurveto{\pgfqpoint{2.166cm}{2.635cm}}{\pgfqpoint{2.094cm}{2.696cm}}{\pgfqpoint{2.022cm}{2.752cm}}
-\pgfpathcurveto{\pgfqpoint{2.16cm}{2.857cm}}{\pgfqpoint{2.294cm}{2.942cm}}{\pgfqpoint{2.419cm}{3.003cm}}
-\pgfpathcurveto{\pgfqpoint{2.464cm}{2.871cm}}{\pgfqpoint{2.498cm}{2.717cm}}{\pgfqpoint{2.522cm}{2.546cm}}
-\pgfpathcurveto{\pgfqpoint{2.431cm}{2.556cm}}{\pgfqpoint{2.336cm}{2.564cm}}{\pgfqpoint{2.238cm}{2.569cm}}
-\pgfpathmoveto{\pgfqpoint{1.802cm}{2.57cm}}
-\pgfpathcurveto{\pgfqpoint{1.869cm}{2.631cm}}{\pgfqpoint{1.937cm}{2.687cm}}{\pgfqpoint{2.004cm}{2.738cm}}
-\pgfpathcurveto{\pgfqpoint{2.071cm}{2.687cm}}{\pgfqpoint{2.138cm}{2.631cm}}{\pgfqpoint{2.206cm}{2.571cm}}
-\pgfpathcurveto{\pgfqpoint{2.14cm}{2.573cm}}{\pgfqpoint{2.072cm}{2.575cm}}{\pgfqpoint{2.004cm}{2.575cm}}
-\pgfpathcurveto{\pgfqpoint{1.935cm}{2.575cm}}{\pgfqpoint{1.868cm}{2.573cm}}{\pgfqpoint{1.802cm}{2.57cm}}
-\pgfpathmoveto{\pgfqpoint{1.487cm}{2.546cm}}
-\pgfpathcurveto{\pgfqpoint{1.51cm}{2.716cm}}{\pgfqpoint{1.545cm}{2.871cm}}{\pgfqpoint{1.59cm}{3.002cm}}
-\pgfpathcurveto{\pgfqpoint{1.715cm}{2.941cm}}{\pgfqpoint{1.848cm}{2.857cm}}{\pgfqpoint{1.985cm}{2.753cm}}
-\pgfpathcurveto{\pgfqpoint{1.913cm}{2.696cm}}{\pgfqpoint{1.841cm}{2.635cm}}{\pgfqpoint{1.769cm}{2.569cm}}
-\pgfpathcurveto{\pgfqpoint{1.671cm}{2.564cm}}{\pgfqpoint{1.577cm}{2.556cm}}{\pgfqpoint{1.487cm}{2.546cm}}
-\pgfpathmoveto{\pgfqpoint{.99cm}{2.445cm}}
-\pgfpathcurveto{\pgfqpoint{.956cm}{2.519cm}}{\pgfqpoint{.93cm}{2.59cm}}{\pgfqpoint{.914cm}{2.655cm}}
-\pgfpathlineto{\pgfqpoint{.92cm}{2.661cm}}
-\pgfpathcurveto{\pgfqpoint{.95cm}{2.691cm}}{\pgfqpoint{.95cm}{2.739cm}}{\pgfqpoint{.92cm}{2.769cm}}
-\pgfpathcurveto{\pgfqpoint{.913cm}{2.777cm}}{\pgfqpoint{.904cm}{2.782cm}}{\pgfqpoint{.895cm}{2.786cm}}
-\pgfpathcurveto{\pgfqpoint{.892cm}{2.885cm}}{\pgfqpoint{.918cm}{2.968cm}}{\pgfqpoint{.978cm}{3.029cm}}
-\pgfpathcurveto{\pgfqpoint{1.099cm}{3.15cm}}{\pgfqpoint{1.309cm}{3.133cm}}{\pgfqpoint{1.56cm}{3.017cm}}
-\pgfpathcurveto{\pgfqpoint{1.517cm}{2.879cm}}{\pgfqpoint{1.484cm}{2.719cm}}{\pgfqpoint{1.463cm}{2.543cm}}
-\pgfpathcurveto{\pgfqpoint{1.287cm}{2.521cm}}{\pgfqpoint{1.128cm}{2.488cm}}{\pgfqpoint{.99cm}{2.445cm}}
-\pgfpathmoveto{\pgfqpoint{1.463cm}{1.459cm}}
-\pgfpathcurveto{\pgfqpoint{1.484cm}{1.284cm}}{\pgfqpoint{1.517cm}{1.124cm}}{\pgfqpoint{1.56cm}{.987cm}}
-\pgfpathcurveto{\pgfqpoint{1.48cm}{.949cm}}{\pgfqpoint{1.403cm}{.922cm}}{\pgfqpoint{1.333cm}{.907cm}}
-\pgfpathcurveto{\pgfqpoint{1.331cm}{.91cm}}{\pgfqpoint{1.328cm}{.912cm}}{\pgfqpoint{1.326cm}{.915cm}}
-\pgfpathcurveto{\pgfqpoint{1.296cm}{.945cm}}{\pgfqpoint{1.248cm}{.945cm}}{\pgfqpoint{1.218cm}{.915cm}}
-\pgfpathcurveto{\pgfqpoint{1.211cm}{.908cm}}{\pgfqpoint{1.205cm}{.9cm}}{\pgfqpoint{1.202cm}{.891cm}}
-\pgfpathcurveto{\pgfqpoint{1.11cm}{.891cm}}{\pgfqpoint{1.033cm}{.918cm}}{\pgfqpoint{.976cm}{.975cm}}
-\pgfpathcurveto{\pgfqpoint{.856cm}{1.095cm}}{\pgfqpoint{.872cm}{1.306cm}}{\pgfqpoint{.989cm}{1.557cm}}
-\pgfpathcurveto{\pgfqpoint{1.127cm}{1.514cm}}{\pgfqpoint{1.287cm}{1.481cm}}{\pgfqpoint{1.463cm}{1.459cm}}
-\pgfpathmoveto{\pgfqpoint{1.769cm}{1.433cm}}
-\pgfpathcurveto{\pgfqpoint{1.841cm}{1.368cm}}{\pgfqpoint{1.913cm}{1.306cm}}{\pgfqpoint{1.985cm}{1.25cm}}
-\pgfpathcurveto{\pgfqpoint{1.848cm}{1.146cm}}{\pgfqpoint{1.714cm}{1.061cm}}{\pgfqpoint{1.59cm}{1.001cm}}
-\pgfpathcurveto{\pgfqpoint{1.545cm}{1.132cm}}{\pgfqpoint{1.51cm}{1.286cm}}{\pgfqpoint{1.487cm}{1.456cm}}
-\pgfpathcurveto{\pgfqpoint{1.577cm}{1.446cm}}{\pgfqpoint{1.671cm}{1.438cm}}{\pgfqpoint{1.769cm}{1.433cm}}
-\pgfpathmoveto{\pgfqpoint{2.205cm}{1.432cm}}
-\pgfpathcurveto{\pgfqpoint{2.138cm}{1.372cm}}{\pgfqpoint{2.07cm}{1.316cm}}{\pgfqpoint{2.004cm}{1.264cm}}
-\pgfpathcurveto{\pgfqpoint{1.937cm}{1.316cm}}{\pgfqpoint{1.869cm}{1.372cm}}{\pgfqpoint{1.802cm}{1.432cm}}
-\pgfpathcurveto{\pgfqpoint{1.868cm}{1.429cm}}{\pgfqpoint{1.935cm}{1.428cm}}{\pgfqpoint{2.004cm}{1.428cm}}
-\pgfpathcurveto{\pgfqpoint{2.072cm}{1.428cm}}{\pgfqpoint{2.139cm}{1.429cm}}{\pgfqpoint{2.205cm}{1.432cm}}
-\pgfpathmoveto{\pgfqpoint{2.522cm}{1.457cm}}
-\pgfpathcurveto{\pgfqpoint{2.498cm}{1.286cm}}{\pgfqpoint{2.464cm}{1.131cm}}{\pgfqpoint{2.418cm}{1cm}}
-\pgfpathcurveto{\pgfqpoint{2.294cm}{1.061cm}}{\pgfqpoint{2.16cm}{1.146cm}}{\pgfqpoint{2.023cm}{1.25cm}}
-\pgfpathcurveto{\pgfqpoint{2.094cm}{1.306cm}}{\pgfqpoint{2.166cm}{1.368cm}}{\pgfqpoint{2.239cm}{1.433cm}}
-\pgfpathcurveto{\pgfqpoint{2.336cm}{1.438cm}}{\pgfqpoint{2.431cm}{1.446cm}}{\pgfqpoint{2.522cm}{1.457cm}}
-\pgfpathmoveto{\pgfqpoint{3.018cm}{1.557cm}}
-\pgfpathcurveto{\pgfqpoint{3.054cm}{1.481cm}}{\pgfqpoint{3.08cm}{1.408cm}}{\pgfqpoint{3.096cm}{1.34cm}}
-\pgfpathcurveto{\pgfqpoint{3.086cm}{1.337cm}}{\pgfqpoint{3.076cm}{1.331cm}}{\pgfqpoint{3.068cm}{1.323cm}}
-\pgfpathcurveto{\pgfqpoint{3.038cm}{1.293cm}}{\pgfqpoint{3.038cm}{1.244cm}}{\pgfqpoint{3.068cm}{1.214cm}}
-\pgfpathcurveto{\pgfqpoint{3.081cm}{1.202cm}}{\pgfqpoint{3.097cm}{1.194cm}}{\pgfqpoint{3.114cm}{1.192cm}}
-\pgfpathcurveto{\pgfqpoint{3.112cm}{1.104cm}}{\pgfqpoint{3.086cm}{1.029cm}}{\pgfqpoint{3.03cm}{.974cm}}
-\pgfpathcurveto{\pgfqpoint{2.91cm}{.853cm}}{\pgfqpoint{2.699cm}{.869cm}}{\pgfqpoint{2.448cm}{.986cm}}
-\pgfpathcurveto{\pgfqpoint{2.491cm}{1.124cm}}{\pgfqpoint{2.524cm}{1.284cm}}{\pgfqpoint{2.545cm}{1.46cm}}
-\pgfpathcurveto{\pgfqpoint{2.721cm}{1.481cm}}{\pgfqpoint{2.881cm}{1.514cm}}{\pgfqpoint{3.018cm}{1.557cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{3.748cm}{2.691cm}}
-\pgfpathcurveto{\pgfqpoint{3.763cm}{2.676cm}}{\pgfqpoint{3.763cm}{2.652cm}}{\pgfqpoint{3.748cm}{2.637cm}}
-\pgfpathcurveto{\pgfqpoint{3.733cm}{2.622cm}}{\pgfqpoint{3.709cm}{2.622cm}}{\pgfqpoint{3.694cm}{2.637cm}}
-\pgfpathcurveto{\pgfqpoint{3.679cm}{2.652cm}}{\pgfqpoint{3.679cm}{2.676cm}}{\pgfqpoint{3.694cm}{2.691cm}}
-\pgfpathcurveto{\pgfqpoint{3.709cm}{2.706cm}}{\pgfqpoint{3.733cm}{2.706cm}}{\pgfqpoint{3.748cm}{2.691cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{.171cm}{2.811cm}}
-\pgfpathlineto{\pgfqpoint{.197cm}{2.797cm}}
-\pgfpathlineto{\pgfqpoint{.214cm}{2.828cm}}
-\pgfpathlineto{\pgfqpoint{.328cm}{2.766cm}}
-\pgfpathcurveto{\pgfqpoint{.371cm}{2.742cm}}{\pgfqpoint{.382cm}{2.739cm}}{\pgfqpoint{.399cm}{2.738cm}}
-\pgfpathcurveto{\pgfqpoint{.431cm}{2.739cm}}{\pgfqpoint{.462cm}{2.761cm}}{\pgfqpoint{.482cm}{2.797cm}}
-\pgfpathcurveto{\pgfqpoint{.499cm}{2.829cm}}{\pgfqpoint{.502cm}{2.861cm}}{\pgfqpoint{.49cm}{2.887cm}}
-\pgfpathcurveto{\pgfqpoint{.482cm}{2.906cm}}{\pgfqpoint{.466cm}{2.919cm}}{\pgfqpoint{.425cm}{2.941cm}}
-\pgfpathlineto{\pgfqpoint{.309cm}{3.004cm}}
-\pgfpathlineto{\pgfqpoint{.326cm}{3.035cm}}
-\pgfpathlineto{\pgfqpoint{.3cm}{3.05cm}}
-\pgfpathlineto{\pgfqpoint{.249cm}{2.956cm}}
-\pgfpathlineto{\pgfqpoint{.275cm}{2.941cm}}
-\pgfpathlineto{\pgfqpoint{.293cm}{2.973cm}}
-\pgfpathlineto{\pgfqpoint{.408cm}{2.91cm}}
-\pgfpathcurveto{\pgfqpoint{.445cm}{2.89cm}}{\pgfqpoint{.448cm}{2.888cm}}{\pgfqpoint{.455cm}{2.88cm}}
-\pgfpathcurveto{\pgfqpoint{.469cm}{2.863cm}}{\pgfqpoint{.469cm}{2.838cm}}{\pgfqpoint{.455cm}{2.813cm}}
-\pgfpathcurveto{\pgfqpoint{.443cm}{2.791cm}}{\pgfqpoint{.427cm}{2.78cm}}{\pgfqpoint{.407cm}{2.779cm}}
-\pgfpathcurveto{\pgfqpoint{.395cm}{2.778cm}}{\pgfqpoint{.395cm}{2.778cm}}{\pgfqpoint{.348cm}{2.803cm}}
-\pgfpathlineto{\pgfqpoint{.234cm}{2.865cm}}
-\pgfpathlineto{\pgfqpoint{.251cm}{2.897cm}}
-\pgfpathlineto{\pgfqpoint{.225cm}{2.911cm}}
-\pgfpathlineto{\pgfqpoint{.171cm}{2.811cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{.358cm}{3.14cm}}
-\pgfpathlineto{\pgfqpoint{.381cm}{3.121cm}}
-\pgfpathlineto{\pgfqpoint{.404cm}{3.149cm}}
-\pgfpathlineto{\pgfqpoint{.571cm}{3.015cm}}
-\pgfpathlineto{\pgfqpoint{.549cm}{2.988cm}}
-\pgfpathlineto{\pgfqpoint{.573cm}{2.969cm}}
-\pgfpathlineto{\pgfqpoint{.639cm}{3.052cm}}
-\pgfpathlineto{\pgfqpoint{.616cm}{3.07cm}}
-\pgfpathlineto{\pgfqpoint{.594cm}{3.041cm}}
-\pgfpathlineto{\pgfqpoint{.525cm}{3.096cm}}
-\pgfpathcurveto{\pgfqpoint{.515cm}{3.104cm}}{\pgfqpoint{.459cm}{3.147cm}}{\pgfqpoint{.428cm}{3.17cm}}
-\pgfpathcurveto{\pgfqpoint{.438cm}{3.169cm}}{\pgfqpoint{.448cm}{3.167cm}}{\pgfqpoint{.458cm}{3.164cm}}
-\pgfpathcurveto{\pgfqpoint{.513cm}{3.152cm}}{\pgfqpoint{.529cm}{3.149cm}}{\pgfqpoint{.578cm}{3.14cm}}
-\pgfpathlineto{\pgfqpoint{.694cm}{3.121cm}}
-\pgfpathlineto{\pgfqpoint{.718cm}{3.152cm}}
-\pgfpathlineto{\pgfqpoint{.527cm}{3.304cm}}
-\pgfpathlineto{\pgfqpoint{.549cm}{3.332cm}}
-\pgfpathlineto{\pgfqpoint{.526cm}{3.351cm}}
-\pgfpathlineto{\pgfqpoint{.459cm}{3.267cm}}
-\pgfpathlineto{\pgfqpoint{.482cm}{3.249cm}}
-\pgfpathlineto{\pgfqpoint{.505cm}{3.278cm}}
-\pgfpathlineto{\pgfqpoint{.567cm}{3.229cm}}
-\pgfpathcurveto{\pgfqpoint{.601cm}{3.203cm}}{\pgfqpoint{.631cm}{3.179cm}}{\pgfqpoint{.657cm}{3.16cm}}
-\pgfpathcurveto{\pgfqpoint{.612cm}{3.17cm}}{\pgfqpoint{.546cm}{3.183cm}}{\pgfqpoint{.509cm}{3.19cm}}
-\pgfpathlineto{\pgfqpoint{.411cm}{3.206cm}}
-\pgfpathlineto{\pgfqpoint{.358cm}{3.14cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{.593cm}{3.418cm}}
-\pgfpathlineto{\pgfqpoint{.614cm}{3.396cm}}
-\pgfpathlineto{\pgfqpoint{.639cm}{3.42cm}}
-\pgfpathlineto{\pgfqpoint{.786cm}{3.264cm}}
-\pgfpathlineto{\pgfqpoint{.762cm}{3.24cm}}
-\pgfpathlineto{\pgfqpoint{.782cm}{3.219cm}}
-\pgfpathlineto{\pgfqpoint{.863cm}{3.296cm}}
-\pgfpathlineto{\pgfqpoint{.843cm}{3.317cm}}
-\pgfpathlineto{\pgfqpoint{.817cm}{3.293cm}}
-\pgfpathlineto{\pgfqpoint{.669cm}{3.449cm}}
-\pgfpathlineto{\pgfqpoint{.694cm}{3.472cm}}
-\pgfpathlineto{\pgfqpoint{.674cm}{3.494cm}}
-\pgfpathlineto{\pgfqpoint{.593cm}{3.418cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{.742cm}{3.555cm}}
-\pgfpathlineto{\pgfqpoint{.758cm}{3.53cm}}
-\pgfpathlineto{\pgfqpoint{.788cm}{3.55cm}}
-\pgfpathlineto{\pgfqpoint{.995cm}{3.392cm}}
-\pgfpathlineto{\pgfqpoint{1.028cm}{3.415cm}}
-\pgfpathlineto{\pgfqpoint{.96cm}{3.669cm}}
-\pgfpathlineto{\pgfqpoint{.989cm}{3.689cm}}
-\pgfpathlineto{\pgfqpoint{.972cm}{3.713cm}}
-\pgfpathlineto{\pgfqpoint{.888cm}{3.656cm}}
-\pgfpathlineto{\pgfqpoint{.905cm}{3.631cm}}
-\pgfpathlineto{\pgfqpoint{.93cm}{3.648cm}}
-\pgfpathlineto{\pgfqpoint{.958cm}{3.548cm}}
-\pgfpathcurveto{\pgfqpoint{.96cm}{3.541cm}}{\pgfqpoint{.97cm}{3.507cm}}{\pgfqpoint{.974cm}{3.494cm}}
-\pgfpathcurveto{\pgfqpoint{.982cm}{3.469cm}}{\pgfqpoint{.988cm}{3.451cm}}{\pgfqpoint{.992cm}{3.44cm}}
-\pgfpathcurveto{\pgfqpoint{.986cm}{3.444cm}}{\pgfqpoint{.979cm}{3.45cm}}{\pgfqpoint{.973cm}{3.455cm}}
-\pgfpathcurveto{\pgfqpoint{.938cm}{3.485cm}}{\pgfqpoint{.927cm}{3.494cm}}{\pgfqpoint{.904cm}{3.512cm}}
-\pgfpathlineto{\pgfqpoint{.823cm}{3.574cm}}
-\pgfpathlineto{\pgfqpoint{.848cm}{3.592cm}}
-\pgfpathlineto{\pgfqpoint{.831cm}{3.617cm}}
-\pgfpathlineto{\pgfqpoint{.742cm}{3.555cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{1.258cm}{3.783cm}}
-\pgfpathlineto{\pgfqpoint{1.229cm}{3.844cm}}
-\pgfpathlineto{\pgfqpoint{1.05cm}{3.759cm}}
-\pgfpathlineto{\pgfqpoint{1.063cm}{3.732cm}}
-\pgfpathlineto{\pgfqpoint{1.095cm}{3.747cm}}
-\pgfpathlineto{\pgfqpoint{1.187cm}{3.553cm}}
-\pgfpathlineto{\pgfqpoint{1.155cm}{3.538cm}}
-\pgfpathlineto{\pgfqpoint{1.168cm}{3.511cm}}
-\pgfpathlineto{\pgfqpoint{1.349cm}{3.598cm}}
-\pgfpathlineto{\pgfqpoint{1.318cm}{3.664cm}}
-\pgfpathlineto{\pgfqpoint{1.286cm}{3.649cm}}
-\pgfpathlineto{\pgfqpoint{1.305cm}{3.61cm}}
-\pgfpathlineto{\pgfqpoint{1.225cm}{3.572cm}}
-\pgfpathlineto{\pgfqpoint{1.182cm}{3.66cm}}
-\pgfpathlineto{\pgfqpoint{1.272cm}{3.703cm}}
-\pgfpathlineto{\pgfqpoint{1.259cm}{3.73cm}}
-\pgfpathlineto{\pgfqpoint{1.169cm}{3.688cm}}
-\pgfpathlineto{\pgfqpoint{1.132cm}{3.765cm}}
-\pgfpathlineto{\pgfqpoint{1.21cm}{3.802cm}}
-\pgfpathlineto{\pgfqpoint{1.227cm}{3.768cm}}
-\pgfpathlineto{\pgfqpoint{1.258cm}{3.783cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{1.335cm}{3.886cm}}
-\pgfpathlineto{\pgfqpoint{1.343cm}{3.857cm}}
-\pgfpathlineto{\pgfqpoint{1.377cm}{3.867cm}}
-\pgfpathlineto{\pgfqpoint{1.435cm}{3.66cm}}
-\pgfpathlineto{\pgfqpoint{1.401cm}{3.65cm}}
-\pgfpathlineto{\pgfqpoint{1.409cm}{3.621cm}}
-\pgfpathlineto{\pgfqpoint{1.512cm}{3.65cm}}
-\pgfpathlineto{\pgfqpoint{1.505cm}{3.678cm}}
-\pgfpathlineto{\pgfqpoint{1.473cm}{3.669cm}}
-\pgfpathlineto{\pgfqpoint{1.448cm}{3.76cm}}
-\pgfpathlineto{\pgfqpoint{1.5cm}{3.775cm}}
-\pgfpathlineto{\pgfqpoint{1.586cm}{3.67cm}}
-\pgfpathlineto{\pgfqpoint{1.65cm}{3.688cm}}
-\pgfpathlineto{\pgfqpoint{1.642cm}{3.717cm}}
-\pgfpathlineto{\pgfqpoint{1.608cm}{3.708cm}}
-\pgfpathlineto{\pgfqpoint{1.535cm}{3.789cm}}
-\pgfpathcurveto{\pgfqpoint{1.573cm}{3.812cm}}{\pgfqpoint{1.585cm}{3.838cm}}{\pgfqpoint{1.575cm}{3.874cm}}
-\pgfpathcurveto{\pgfqpoint{1.568cm}{3.901cm}}{\pgfqpoint{1.55cm}{3.918cm}}{\pgfqpoint{1.523cm}{3.925cm}}
-\pgfpathcurveto{\pgfqpoint{1.501cm}{3.93cm}}{\pgfqpoint{1.485cm}{3.927cm}}{\pgfqpoint{1.431cm}{3.912cm}}
-\pgfpathlineto{\pgfqpoint{1.335cm}{3.886cm}}
-\pgfpathmoveto{\pgfqpoint{1.44cm}{3.79cm}}
-\pgfpathlineto{\pgfqpoint{1.416cm}{3.877cm}}
-\pgfpathlineto{\pgfqpoint{1.449cm}{3.886cm}}
-\pgfpathcurveto{\pgfqpoint{1.48cm}{3.894cm}}{\pgfqpoint{1.491cm}{3.896cm}}{\pgfqpoint{1.501cm}{3.894cm}}
-\pgfpathcurveto{\pgfqpoint{1.517cm}{3.892cm}}{\pgfqpoint{1.529cm}{3.882cm}}{\pgfqpoint{1.534cm}{3.863cm}}
-\pgfpathcurveto{\pgfqpoint{1.538cm}{3.847cm}}{\pgfqpoint{1.535cm}{3.833cm}}{\pgfqpoint{1.525cm}{3.822cm}}
-\pgfpathcurveto{\pgfqpoint{1.516cm}{3.813cm}}{\pgfqpoint{1.508cm}{3.809cm}}{\pgfqpoint{1.476cm}{3.8cm}}
-\pgfpathlineto{\pgfqpoint{1.44cm}{3.79cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{1.819cm}{3.989cm}}
-\pgfpathlineto{\pgfqpoint{1.822cm}{3.97cm}}
-\pgfpathcurveto{\pgfqpoint{1.802cm}{3.986cm}}{\pgfqpoint{1.783cm}{3.991cm}}{\pgfqpoint{1.756cm}{3.988cm}}
-\pgfpathcurveto{\pgfqpoint{1.709cm}{3.982cm}}{\pgfqpoint{1.679cm}{3.949cm}}{\pgfqpoint{1.684cm}{3.906cm}}
-\pgfpathcurveto{\pgfqpoint{1.686cm}{3.888cm}}{\pgfqpoint{1.694cm}{3.873cm}}{\pgfqpoint{1.708cm}{3.862cm}}
-\pgfpathcurveto{\pgfqpoint{1.721cm}{3.852cm}}{\pgfqpoint{1.735cm}{3.847cm}}{\pgfqpoint{1.769cm}{3.837cm}}
-\pgfpathcurveto{\pgfqpoint{1.81cm}{3.826cm}}{\pgfqpoint{1.82cm}{3.823cm}}{\pgfqpoint{1.83cm}{3.817cm}}
-\pgfpathcurveto{\pgfqpoint{1.837cm}{3.811cm}}{\pgfqpoint{1.843cm}{3.801cm}}{\pgfqpoint{1.844cm}{3.789cm}}
-\pgfpathcurveto{\pgfqpoint{1.848cm}{3.76cm}}{\pgfqpoint{1.83cm}{3.74cm}}{\pgfqpoint{1.797cm}{3.737cm}}
-\pgfpathcurveto{\pgfqpoint{1.775cm}{3.734cm}}{\pgfqpoint{1.755cm}{3.74cm}}{\pgfqpoint{1.743cm}{3.754cm}}
-\pgfpathcurveto{\pgfqpoint{1.734cm}{3.763cm}}{\pgfqpoint{1.73cm}{3.773cm}}{\pgfqpoint{1.727cm}{3.793cm}}
-\pgfpathlineto{\pgfqpoint{1.692cm}{3.789cm}}
-\pgfpathlineto{\pgfqpoint{1.703cm}{3.7cm}}
-\pgfpathlineto{\pgfqpoint{1.737cm}{3.704cm}}
-\pgfpathlineto{\pgfqpoint{1.735cm}{3.727cm}}
-\pgfpathcurveto{\pgfqpoint{1.756cm}{3.709cm}}{\pgfqpoint{1.778cm}{3.703cm}}{\pgfqpoint{1.807cm}{3.706cm}}
-\pgfpathcurveto{\pgfqpoint{1.86cm}{3.712cm}}{\pgfqpoint{1.893cm}{3.75cm}}{\pgfqpoint{1.887cm}{3.797cm}}
-\pgfpathcurveto{\pgfqpoint{1.885cm}{3.818cm}}{\pgfqpoint{1.876cm}{3.835cm}}{\pgfqpoint{1.862cm}{3.846cm}}
-\pgfpathcurveto{\pgfqpoint{1.847cm}{3.857cm}}{\pgfqpoint{1.835cm}{3.861cm}}{\pgfqpoint{1.789cm}{3.873cm}}
-\pgfpathcurveto{\pgfqpoint{1.74cm}{3.886cm}}{\pgfqpoint{1.728cm}{3.893cm}}{\pgfqpoint{1.726cm}{3.914cm}}
-\pgfpathcurveto{\pgfqpoint{1.723cm}{3.938cm}}{\pgfqpoint{1.74cm}{3.955cm}}{\pgfqpoint{1.77cm}{3.958cm}}
-\pgfpathcurveto{\pgfqpoint{1.805cm}{3.962cm}}{\pgfqpoint{1.824cm}{3.947cm}}{\pgfqpoint{1.831cm}{3.911cm}}
-\pgfpathlineto{\pgfqpoint{1.861cm}{3.915cm}}
-\pgfpathlineto{\pgfqpoint{1.852cm}{3.993cm}}
-\pgfpathlineto{\pgfqpoint{1.819cm}{3.989cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{1.958cm}{3.997cm}}
-\pgfpathlineto{\pgfqpoint{1.958cm}{3.967cm}}
-\pgfpathlineto{\pgfqpoint{1.992cm}{3.967cm}}
-\pgfpathlineto{\pgfqpoint{1.99cm}{3.752cm}}
-\pgfpathlineto{\pgfqpoint{1.956cm}{3.753cm}}
-\pgfpathlineto{\pgfqpoint{1.955cm}{3.723cm}}
-\pgfpathlineto{\pgfqpoint{2.067cm}{3.722cm}}
-\pgfpathlineto{\pgfqpoint{2.067cm}{3.751cm}}
-\pgfpathlineto{\pgfqpoint{2.032cm}{3.752cm}}
-\pgfpathlineto{\pgfqpoint{2.034cm}{3.967cm}}
-\pgfpathlineto{\pgfqpoint{2.068cm}{3.966cm}}
-\pgfpathlineto{\pgfqpoint{2.068cm}{3.996cm}}
-\pgfpathlineto{\pgfqpoint{1.958cm}{3.997cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{2.15cm}{3.994cm}}
-\pgfpathlineto{\pgfqpoint{2.141cm}{3.924cm}}
-\pgfpathlineto{\pgfqpoint{2.175cm}{3.92cm}}
-\pgfpathlineto{\pgfqpoint{2.18cm}{3.96cm}}
-\pgfpathlineto{\pgfqpoint{2.232cm}{3.953cm}}
-\pgfpathlineto{\pgfqpoint{2.204cm}{3.74cm}}
-\pgfpathlineto{\pgfqpoint{2.168cm}{3.745cm}}
-\pgfpathlineto{\pgfqpoint{2.164cm}{3.716cm}}
-\pgfpathlineto{\pgfqpoint{2.277cm}{3.701cm}}
-\pgfpathlineto{\pgfqpoint{2.281cm}{3.73cm}}
-\pgfpathlineto{\pgfqpoint{2.246cm}{3.735cm}}
-\pgfpathlineto{\pgfqpoint{2.274cm}{3.948cm}}
-\pgfpathlineto{\pgfqpoint{2.326cm}{3.941cm}}
-\pgfpathlineto{\pgfqpoint{2.321cm}{3.9cm}}
-\pgfpathlineto{\pgfqpoint{2.354cm}{3.896cm}}
-\pgfpathlineto{\pgfqpoint{2.363cm}{3.966cm}}
-\pgfpathlineto{\pgfqpoint{2.15cm}{3.994cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{2.559cm}{3.918cm}}
-\pgfpathlineto{\pgfqpoint{2.406cm}{3.705cm}}
-\pgfpathlineto{\pgfqpoint{2.373cm}{3.715cm}}
-\pgfpathlineto{\pgfqpoint{2.364cm}{3.686cm}}
-\pgfpathlineto{\pgfqpoint{2.461cm}{3.657cm}}
-\pgfpathlineto{\pgfqpoint{2.469cm}{3.684cm}}
-\pgfpathlineto{\pgfqpoint{2.44cm}{3.693cm}}
-\pgfpathlineto{\pgfqpoint{2.474cm}{3.74cm}}
-\pgfpathlineto{\pgfqpoint{2.563cm}{3.714cm}}
-\pgfpathlineto{\pgfqpoint{2.565cm}{3.656cm}}
-\pgfpathlineto{\pgfqpoint{2.534cm}{3.665cm}}
-\pgfpathlineto{\pgfqpoint{2.526cm}{3.638cm}}
-\pgfpathlineto{\pgfqpoint{2.633cm}{3.606cm}}
-\pgfpathlineto{\pgfqpoint{2.642cm}{3.635cm}}
-\pgfpathlineto{\pgfqpoint{2.607cm}{3.645cm}}
-\pgfpathlineto{\pgfqpoint{2.597cm}{3.906cm}}
-\pgfpathlineto{\pgfqpoint{2.559cm}{3.918cm}}
-\pgfpathmoveto{\pgfqpoint{2.563cm}{3.744cm}}
-\pgfpathlineto{\pgfqpoint{2.491cm}{3.765cm}}
-\pgfpathlineto{\pgfqpoint{2.518cm}{3.804cm}}
-\pgfpathcurveto{\pgfqpoint{2.543cm}{3.841cm}}{\pgfqpoint{2.557cm}{3.863cm}}{\pgfqpoint{2.565cm}{3.878cm}}
-\pgfpathcurveto{\pgfqpoint{2.563cm}{3.856cm}}{\pgfqpoint{2.563cm}{3.845cm}}{\pgfqpoint{2.562cm}{3.794cm}}
-\pgfpathlineto{\pgfqpoint{2.563cm}{3.744cm}}
-\pgfpathclose
-\pgfpathmoveto{\pgfqpoint{2.474cm}{3.943cm}}
-\pgfpathlineto{\pgfqpoint{2.46cm}{3.893cm}}
-\pgfpathlineto{\pgfqpoint{2.507cm}{3.879cm}}
-\pgfpathlineto{\pgfqpoint{2.522cm}{3.929cm}}
-\pgfpathlineto{\pgfqpoint{2.474cm}{3.943cm}}
-\pgfpathclose
-\pgfpathmoveto{\pgfqpoint{2.637cm}{3.89cm}}
-\pgfpathlineto{\pgfqpoint{2.622cm}{3.84cm}}
-\pgfpathlineto{\pgfqpoint{2.669cm}{3.826cm}}
-\pgfpathlineto{\pgfqpoint{2.684cm}{3.876cm}}
-\pgfpathlineto{\pgfqpoint{2.637cm}{3.89cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{2.791cm}{3.833cm}}
-\pgfpathlineto{\pgfqpoint{2.759cm}{3.77cm}}
-\pgfpathlineto{\pgfqpoint{2.79cm}{3.755cm}}
-\pgfpathlineto{\pgfqpoint{2.808cm}{3.791cm}}
-\pgfpathlineto{\pgfqpoint{2.855cm}{3.768cm}}
-\pgfpathlineto{\pgfqpoint{2.759cm}{3.576cm}}
-\pgfpathlineto{\pgfqpoint{2.727cm}{3.592cm}}
-\pgfpathlineto{\pgfqpoint{2.713cm}{3.565cm}}
-\pgfpathlineto{\pgfqpoint{2.815cm}{3.514cm}}
-\pgfpathlineto{\pgfqpoint{2.829cm}{3.541cm}}
-\pgfpathlineto{\pgfqpoint{2.797cm}{3.557cm}}
-\pgfpathlineto{\pgfqpoint{2.893cm}{3.749cm}}
-\pgfpathlineto{\pgfqpoint{2.94cm}{3.726cm}}
-\pgfpathlineto{\pgfqpoint{2.921cm}{3.689cm}}
-\pgfpathlineto{\pgfqpoint{2.952cm}{3.674cm}}
-\pgfpathlineto{\pgfqpoint{2.983cm}{3.737cm}}
-\pgfpathlineto{\pgfqpoint{2.791cm}{3.833cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{3.154cm}{3.633cm}}
-\pgfpathlineto{\pgfqpoint{3.135cm}{3.609cm}}
-\pgfpathlineto{\pgfqpoint{3.162cm}{3.587cm}}
-\pgfpathlineto{\pgfqpoint{3.08cm}{3.487cm}}
-\pgfpathcurveto{\pgfqpoint{3.048cm}{3.449cm}}{\pgfqpoint{3.042cm}{3.439cm}}{\pgfqpoint{3.039cm}{3.422cm}}
-\pgfpathcurveto{\pgfqpoint{3.034cm}{3.39cm}}{\pgfqpoint{3.049cm}{3.356cm}}{\pgfqpoint{3.081cm}{3.33cm}}
-\pgfpathcurveto{\pgfqpoint{3.108cm}{3.307cm}}{\pgfqpoint{3.139cm}{3.298cm}}{\pgfqpoint{3.167cm}{3.304cm}}
-\pgfpathcurveto{\pgfqpoint{3.187cm}{3.309cm}}{\pgfqpoint{3.203cm}{3.321cm}}{\pgfqpoint{3.233cm}{3.358cm}}
-\pgfpathlineto{\pgfqpoint{3.316cm}{3.459cm}}\pgfpathlineto{\pgfqpoint{3.344cm}{3.437cm}}
-\pgfpathlineto{\pgfqpoint{3.363cm}{3.46cm}}\pgfpathlineto{\pgfqpoint{3.28cm}{3.528cm}}
-\pgfpathlineto{\pgfqpoint{3.261cm}{3.505cm}}\pgfpathlineto{\pgfqpoint{3.289cm}{3.482cm}}
-\pgfpathlineto{\pgfqpoint{3.205cm}{3.38cm}}
-\pgfpathcurveto{\pgfqpoint{3.179cm}{3.348cm}}{\pgfqpoint{3.176cm}{3.345cm}}{\pgfqpoint{3.166cm}{3.34cm}}
-\pgfpathcurveto{\pgfqpoint{3.147cm}{3.33cm}}{\pgfqpoint{3.123cm}{3.335cm}}{\pgfqpoint{3.102cm}{3.353cm}}
-\pgfpathcurveto{\pgfqpoint{3.082cm}{3.368cm}}{\pgfqpoint{3.074cm}{3.387cm}}{\pgfqpoint{3.077cm}{3.406cm}}
-\pgfpathcurveto{\pgfqpoint{3.079cm}{3.419cm}}{\pgfqpoint{3.079cm}{3.419cm}}{\pgfqpoint{3.112cm}{3.46cm}}
-\pgfpathlineto{\pgfqpoint{3.194cm}{3.56cm}}\pgfpathlineto{\pgfqpoint{3.222cm}{3.537cm}}
-\pgfpathlineto{\pgfqpoint{3.241cm}{3.56cm}}\pgfpathlineto{\pgfqpoint{3.154cm}{3.633cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{3.303cm}{3.166cm}}\pgfpathlineto{\pgfqpoint{3.466cm}{3.306cm}}
-\pgfpathlineto{\pgfqpoint{3.489cm}{3.278cm}}\pgfpathlineto{\pgfqpoint{3.512cm}{3.298cm}}
-\pgfpathlineto{\pgfqpoint{3.439cm}{3.384cm}}\pgfpathlineto{\pgfqpoint{3.416cm}{3.365cm}}
-\pgfpathlineto{\pgfqpoint{3.439cm}{3.338cm}}\pgfpathlineto{\pgfqpoint{3.276cm}{3.198cm}}
-\pgfpathlineto{\pgfqpoint{3.253cm}{3.225cm}}\pgfpathlineto{\pgfqpoint{3.23cm}{3.206cm}}
-\pgfpathlineto{\pgfqpoint{3.362cm}{3.05cm}}\pgfpathlineto{\pgfqpoint{3.419cm}{3.099cm}}
-\pgfpathlineto{\pgfqpoint{3.396cm}{3.125cm}}\pgfpathlineto{\pgfqpoint{3.363cm}{3.097cm}}
-\pgfpathlineto{\pgfqpoint{3.303cm}{3.166cm}}\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{3.634cm}{3.149cm}}\pgfpathlineto{\pgfqpoint{3.608cm}{3.134cm}}
-\pgfpathlineto{\pgfqpoint{3.627cm}{3.102cm}}\pgfpathlineto{\pgfqpoint{3.442cm}{2.993cm}}
-\pgfpathlineto{\pgfqpoint{3.424cm}{3.024cm}}\pgfpathlineto{\pgfqpoint{3.398cm}{3.008cm}}
-\pgfpathlineto{\pgfqpoint{3.451cm}{2.917cm}}\pgfpathlineto{\pgfqpoint{3.476cm}{2.932cm}}
-\pgfpathlineto{\pgfqpoint{3.458cm}{2.963cm}}\pgfpathlineto{\pgfqpoint{3.544cm}{3.014cm}}
-\pgfpathcurveto{\pgfqpoint{3.606cm}{3.052cm}}{\pgfqpoint{3.612cm}{3.055cm}}{\pgfqpoint{3.643cm}{3.075cm}}
-\pgfpathcurveto{\pgfqpoint{3.615cm}{3.047cm}}{\pgfqpoint{3.586cm}{3.015cm}}{\pgfqpoint{3.554cm}{2.98cm}}
-\pgfpathlineto{\pgfqpoint{3.479cm}{2.898cm}}\pgfpathlineto{\pgfqpoint{3.498cm}{2.866cm}}
-\pgfpathlineto{\pgfqpoint{3.608cm}{2.889cm}}
-\pgfpathcurveto{\pgfqpoint{3.653cm}{2.898cm}}{\pgfqpoint{3.676cm}{2.903cm}}{\pgfqpoint{3.734cm}{2.918cm}}
-\pgfpathlineto{\pgfqpoint{3.699cm}{2.898cm}}\pgfpathlineto{\pgfqpoint{3.678cm}{2.885cm}}
-\pgfpathlineto{\pgfqpoint{3.655cm}{2.873cm}}
-\pgfpathcurveto{\pgfqpoint{3.645cm}{2.867cm}}{\pgfqpoint{3.636cm}{2.862cm}}{\pgfqpoint{3.634cm}{2.861cm}}
-\pgfpathlineto{\pgfqpoint{3.548cm}{2.81cm}}\pgfpathlineto{\pgfqpoint{3.529cm}{2.842cm}}
-\pgfpathlineto{\pgfqpoint{3.505cm}{2.827cm}}\pgfpathlineto{\pgfqpoint{3.561cm}{2.73cm}}
-\pgfpathlineto{\pgfqpoint{3.587cm}{2.745cm}}\pgfpathlineto{\pgfqpoint{3.569cm}{2.776cm}}
-\pgfpathlineto{\pgfqpoint{3.754cm}{2.885cm}}\pgfpathlineto{\pgfqpoint{3.772cm}{2.854cm}}
-\pgfpathlineto{\pgfqpoint{3.798cm}{2.87cm}}\pgfpathlineto{\pgfqpoint{3.75cm}{2.952cm}}
-\pgfpathlineto{\pgfqpoint{3.642cm}{2.928cm}}
-\pgfpathcurveto{\pgfqpoint{3.586cm}{2.915cm}}{\pgfqpoint{3.574cm}{2.912cm}}{\pgfqpoint{3.522cm}{2.898cm}}
-\pgfpathcurveto{\pgfqpoint{3.561cm}{2.937cm}}{\pgfqpoint{3.576cm}{2.953cm}}{\pgfqpoint{3.608cm}{2.987cm}}
-\pgfpathlineto{\pgfqpoint{3.683cm}{3.065cm}}\pgfpathlineto{\pgfqpoint{3.634cm}{3.149cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{3.939cm}{2.45cm}}\pgfpathlineto{\pgfqpoint{3.92cm}{2.446cm}}
-\pgfpathcurveto{\pgfqpoint{3.933cm}{2.467cm}}{\pgfqpoint{3.935cm}{2.487cm}}{\pgfqpoint{3.928cm}{2.513cm}}
-\pgfpathcurveto{\pgfqpoint{3.917cm}{2.559cm}}{\pgfqpoint{3.879cm}{2.584cm}}{\pgfqpoint{3.837cm}{2.573cm}}
-\pgfpathcurveto{\pgfqpoint{3.82cm}{2.569cm}}{\pgfqpoint{3.806cm}{2.558cm}}{\pgfqpoint{3.797cm}{2.543cm}}
-\pgfpathcurveto{\pgfqpoint{3.789cm}{2.529cm}}{\pgfqpoint{3.786cm}{2.514cm}}{\pgfqpoint{3.781cm}{2.479cm}}
-\pgfpathcurveto{\pgfqpoint{3.776cm}{2.437cm}}{\pgfqpoint{3.774cm}{2.427cm}}{\pgfqpoint{3.769cm}{2.416cm}}
-\pgfpathcurveto{\pgfqpoint{3.765cm}{2.408cm}}{\pgfqpoint{3.756cm}{2.401cm}}{\pgfqpoint{3.744cm}{2.398cm}}
-\pgfpathcurveto{\pgfqpoint{3.716cm}{2.391cm}}{\pgfqpoint{3.694cm}{2.405cm}}{\pgfqpoint{3.686cm}{2.437cm}}
-\pgfpathcurveto{\pgfqpoint{3.68cm}{2.459cm}}{\pgfqpoint{3.683cm}{2.479cm}}{\pgfqpoint{3.695cm}{2.494cm}}
-\pgfpathcurveto{\pgfqpoint{3.703cm}{2.504cm}}{\pgfqpoint{3.712cm}{2.509cm}}{\pgfqpoint{3.732cm}{2.515cm}}
-\pgfpathlineto{\pgfqpoint{3.723cm}{2.549cm}}
-\pgfpathlineto{\pgfqpoint{3.636cm}{2.526cm}}
-\pgfpathlineto{\pgfqpoint{3.645cm}{2.492cm}}
-\pgfpathlineto{\pgfqpoint{3.668cm}{2.498cm}}
-\pgfpathcurveto{\pgfqpoint{3.653cm}{2.474cm}}{\pgfqpoint{3.649cm}{2.452cm}}{\pgfqpoint{3.657cm}{2.423cm}}
-\pgfpathcurveto{\pgfqpoint{3.67cm}{2.372cm}}{\pgfqpoint{3.712cm}{2.344cm}}{\pgfqpoint{3.758cm}{2.356cm}}
-\pgfpathcurveto{\pgfqpoint{3.778cm}{2.361cm}}{\pgfqpoint{3.794cm}{2.373cm}}{\pgfqpoint{3.802cm}{2.388cm}}
-\pgfpathcurveto{\pgfqpoint{3.811cm}{2.404cm}}{\pgfqpoint{3.814cm}{2.417cm}}{\pgfqpoint{3.82cm}{2.465cm}}
-\pgfpathcurveto{\pgfqpoint{3.826cm}{2.515cm}}{\pgfqpoint{3.831cm}{2.527cm}}{\pgfqpoint{3.851cm}{2.533cm}}
-\pgfpathcurveto{\pgfqpoint{3.874cm}{2.538cm}}{\pgfqpoint{3.894cm}{2.524cm}}{\pgfqpoint{3.901cm}{2.496cm}}
-\pgfpathcurveto{\pgfqpoint{3.91cm}{2.461cm}}{\pgfqpoint{3.898cm}{2.44cm}}{\pgfqpoint{3.863cm}{2.428cm}}
-\pgfpathlineto{\pgfqpoint{3.871cm}{2.399cm}}
-\pgfpathlineto{\pgfqpoint{3.947cm}{2.418cm}}
-\pgfpathlineto{\pgfqpoint{3.939cm}{2.45cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{3.99cm}{2.123cm}}
-\pgfpathlineto{\pgfqpoint{3.969cm}{2.121cm}}
-\pgfpathcurveto{\pgfqpoint{3.985cm}{2.141cm}}{\pgfqpoint{3.991cm}{2.163cm}}{\pgfqpoint{3.988cm}{2.189cm}}
-\pgfpathcurveto{\pgfqpoint{3.98cm}{2.258cm}}{\pgfqpoint{3.919cm}{2.296cm}}{\pgfqpoint{3.832cm}{2.287cm}}
-\pgfpathcurveto{\pgfqpoint{3.745cm}{2.277cm}}{\pgfqpoint{3.696cm}{2.226cm}}{\pgfqpoint{3.705cm}{2.152cm}}
-\pgfpathcurveto{\pgfqpoint{3.709cm}{2.118cm}}{\pgfqpoint{3.724cm}{2.093cm}}{\pgfqpoint{3.749cm}{2.078cm}}
-\pgfpathcurveto{\pgfqpoint{3.768cm}{2.068cm}}{\pgfqpoint{3.786cm}{2.065cm}}{\pgfqpoint{3.818cm}{2.068cm}}
-\pgfpathlineto{\pgfqpoint{3.814cm}{2.103cm}}
-\pgfpathcurveto{\pgfqpoint{3.766cm}{2.101cm}}{\pgfqpoint{3.74cm}{2.118cm}}{\pgfqpoint{3.736cm}{2.155cm}}
-\pgfpathcurveto{\pgfqpoint{3.73cm}{2.201cm}}{\pgfqpoint{3.769cm}{2.234cm}}{\pgfqpoint{3.837cm}{2.242cm}}
-\pgfpathcurveto{\pgfqpoint{3.908cm}{2.25cm}}{\pgfqpoint{3.952cm}{2.228cm}}{\pgfqpoint{3.958cm}{2.179cm}}
-\pgfpathcurveto{\pgfqpoint{3.962cm}{2.143cm}}{\pgfqpoint{3.945cm}{2.122cm}}{\pgfqpoint{3.905cm}{2.114cm}}
-\pgfpathlineto{\pgfqpoint{3.909cm}{2.08cm}}
-\pgfpathlineto{\pgfqpoint{3.993cm}{2.089cm}}
-\pgfpathlineto{\pgfqpoint{3.99cm}{2.123cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{3.99cm}{1.97cm}}
-\pgfpathlineto{\pgfqpoint{3.961cm}{1.971cm}}
-\pgfpathlineto{\pgfqpoint{3.959cm}{1.937cm}}
-\pgfpathlineto{\pgfqpoint{3.745cm}{1.946cm}}
-\pgfpathlineto{\pgfqpoint{3.746cm}{1.981cm}}
-\pgfpathlineto{\pgfqpoint{3.716cm}{1.982cm}}
-\pgfpathlineto{\pgfqpoint{3.712cm}{1.87cm}}
-\pgfpathlineto{\pgfqpoint{3.741cm}{1.869cm}}
-\pgfpathlineto{\pgfqpoint{3.743cm}{1.904cm}}
-\pgfpathlineto{\pgfqpoint{3.957cm}{1.895cm}}
-\pgfpathlineto{\pgfqpoint{3.956cm}{1.861cm}}
-\pgfpathlineto{\pgfqpoint{3.986cm}{1.859cm}}
-\pgfpathlineto{\pgfqpoint{3.99cm}{1.97cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{3.878cm}{1.572cm}}
-\pgfpathlineto{\pgfqpoint{3.944cm}{1.56cm}}
-\pgfpathlineto{\pgfqpoint{3.977cm}{1.756cm}}
-\pgfpathlineto{\pgfqpoint{3.947cm}{1.762cm}}
-\pgfpathlineto{\pgfqpoint{3.942cm}{1.727cm}}
-\pgfpathlineto{\pgfqpoint{3.73cm}{1.762cm}}
-\pgfpathlineto{\pgfqpoint{3.736cm}{1.797cm}}
-\pgfpathlineto{\pgfqpoint{3.706cm}{1.802cm}}
-\pgfpathlineto{\pgfqpoint{3.673cm}{1.603cm}}
-\pgfpathlineto{\pgfqpoint{3.746cm}{1.591cm}}
-\pgfpathlineto{\pgfqpoint{3.752cm}{1.625cm}}
-\pgfpathlineto{\pgfqpoint{3.709cm}{1.633cm}}
-\pgfpathlineto{\pgfqpoint{3.724cm}{1.72cm}}
-\pgfpathlineto{\pgfqpoint{3.82cm}{1.704cm}}
-\pgfpathlineto{\pgfqpoint{3.804cm}{1.606cm}}
-\pgfpathlineto{\pgfqpoint{3.834cm}{1.601cm}}
-\pgfpathlineto{\pgfqpoint{3.85cm}{1.699cm}}
-\pgfpathlineto{\pgfqpoint{3.935cm}{1.685cm}}
-\pgfpathlineto{\pgfqpoint{3.92cm}{1.6cm}}
-\pgfpathlineto{\pgfqpoint{3.883cm}{1.606cm}}
-\pgfpathlineto{\pgfqpoint{3.878cm}{1.572cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{3.916cm}{1.449cm}}
-\pgfpathlineto{\pgfqpoint{3.888cm}{1.459cm}}
-\pgfpathlineto{\pgfqpoint{3.876cm}{1.426cm}}
-\pgfpathlineto{\pgfqpoint{3.674cm}{1.497cm}}
-\pgfpathlineto{\pgfqpoint{3.686cm}{1.531cm}}
-\pgfpathlineto{\pgfqpoint{3.657cm}{1.541cm}}
-\pgfpathlineto{\pgfqpoint{3.622cm}{1.441cm}}
-\pgfpathlineto{\pgfqpoint{3.649cm}{1.431cm}}
-\pgfpathlineto{\pgfqpoint{3.661cm}{1.465cm}}
-\pgfpathlineto{\pgfqpoint{3.744cm}{1.436cm}}
-\pgfpathcurveto{\pgfqpoint{3.756cm}{1.432cm}}{\pgfqpoint{3.823cm}{1.409cm}}{\pgfqpoint{3.859cm}{1.397cm}}
-\pgfpathcurveto{\pgfqpoint{3.849cm}{1.396cm}}{\pgfqpoint{3.84cm}{1.394cm}}{\pgfqpoint{3.829cm}{1.393cm}}
-\pgfpathcurveto{\pgfqpoint{3.774cm}{1.387cm}}{\pgfqpoint{3.758cm}{1.385cm}}{\pgfqpoint{3.709cm}{1.377cm}}
-\pgfpathlineto{\pgfqpoint{3.593cm}{1.358cm}}
-\pgfpathlineto{\pgfqpoint{3.579cm}{1.321cm}}
-\pgfpathlineto{\pgfqpoint{3.81cm}{1.239cm}}
-\pgfpathlineto{\pgfqpoint{3.798cm}{1.205cm}}
-\pgfpathlineto{\pgfqpoint{3.826cm}{1.195cm}}
-\pgfpathlineto{\pgfqpoint{3.862cm}{1.296cm}}
-\pgfpathlineto{\pgfqpoint{3.834cm}{1.305cm}}
-\pgfpathlineto{\pgfqpoint{3.822cm}{1.27cm}}
-\pgfpathlineto{\pgfqpoint{3.747cm}{1.297cm}}
-\pgfpathcurveto{\pgfqpoint{3.707cm}{1.311cm}}{\pgfqpoint{3.671cm}{1.323cm}}{\pgfqpoint{3.64cm}{1.333cm}}
-\pgfpathcurveto{\pgfqpoint{3.685cm}{1.338cm}}{\pgfqpoint{3.752cm}{1.347cm}}{\pgfqpoint{3.79cm}{1.353cm}}
-\pgfpathlineto{\pgfqpoint{3.888cm}{1.37cm}}
-\pgfpathlineto{\pgfqpoint{3.916cm}{1.449cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{3.772cm}{1.085cm}}
-\pgfpathlineto{\pgfqpoint{3.747cm}{1.101cm}}
-\pgfpathlineto{\pgfqpoint{3.729cm}{1.071cm}}
-\pgfpathlineto{\pgfqpoint{3.546cm}{1.183cm}}
-\pgfpathlineto{\pgfqpoint{3.564cm}{1.213cm}}
-\pgfpathlineto{\pgfqpoint{3.539cm}{1.229cm}}
-\pgfpathlineto{\pgfqpoint{3.494cm}{1.156cm}}
-\pgfpathcurveto{\pgfqpoint{3.467cm}{1.111cm}}{\pgfqpoint{3.459cm}{1.091cm}}{\pgfqpoint{3.459cm}{1.062cm}}
-\pgfpathcurveto{\pgfqpoint{3.459cm}{1.016cm}}{\pgfqpoint{3.484cm}{.973cm}}{\pgfqpoint{3.529cm}{.946cm}}
-\pgfpathcurveto{\pgfqpoint{3.569cm}{.921cm}}{\pgfqpoint{3.612cm}{.916cm}}{\pgfqpoint{3.649cm}{.931cm}}
-\pgfpathcurveto{\pgfqpoint{3.679cm}{.943cm}}{\pgfqpoint{3.696cm}{.96cm}}{\pgfqpoint{3.726cm}{1.009cm}}
-\pgfpathlineto{\pgfqpoint{3.772cm}{1.085cm}}
-\pgfpathmoveto{\pgfqpoint{3.524cm}{1.147cm}}
-\pgfpathlineto{\pgfqpoint{3.706cm}{1.035cm}}
-\pgfpathlineto{\pgfqpoint{3.695cm}{1.018cm}}
-\pgfpathcurveto{\pgfqpoint{3.677cm}{.987cm}}{\pgfqpoint{3.667cm}{.977cm}}{\pgfqpoint{3.649cm}{.969cm}}
-\pgfpathcurveto{\pgfqpoint{3.621cm}{.957cm}}{\pgfqpoint{3.586cm}{.962cm}}{\pgfqpoint{3.552cm}{.983cm}}
-\pgfpathcurveto{\pgfqpoint{3.52cm}{1.003cm}}{\pgfqpoint{3.499cm}{1.029cm}}{\pgfqpoint{3.494cm}{1.056cm}}
-\pgfpathcurveto{\pgfqpoint{3.49cm}{1.08cm}}{\pgfqpoint{3.495cm}{1.099cm}}{\pgfqpoint{3.515cm}{1.131cm}}
-\pgfpathlineto{\pgfqpoint{3.524cm}{1.147cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{3.498cm}{.682cm}}
-\pgfpathcurveto{\pgfqpoint{3.546cm}{.736cm}}{\pgfqpoint{3.536cm}{.811cm}}{\pgfqpoint{3.474cm}{.867cm}}
-\pgfpathcurveto{\pgfqpoint{3.408cm}{.925cm}}{\pgfqpoint{3.334cm}{.927cm}}{\pgfqpoint{3.284cm}{.871cm}}
-\pgfpathcurveto{\pgfqpoint{3.236cm}{.816cm}}{\pgfqpoint{3.246cm}{.742cm}}{\pgfqpoint{3.31cm}{.685cm}}
-\pgfpathcurveto{\pgfqpoint{3.374cm}{.628cm}}{\pgfqpoint{3.449cm}{.627cm}}{\pgfqpoint{3.498cm}{.682cm}}
-\pgfpathmoveto{\pgfqpoint{3.475cm}{.702cm}}
-\pgfpathcurveto{\pgfqpoint{3.442cm}{.665cm}}{\pgfqpoint{3.393cm}{.671cm}}{\pgfqpoint{3.34cm}{.718cm}}
-\pgfpathcurveto{\pgfqpoint{3.287cm}{.765cm}}{\pgfqpoint{3.275cm}{.814cm}}{\pgfqpoint{3.308cm}{.851cm}}
-\pgfpathcurveto{\pgfqpoint{3.341cm}{.888cm}}{\pgfqpoint{3.389cm}{.882cm}}{\pgfqpoint{3.444cm}{.834cm}}
-\pgfpathcurveto{\pgfqpoint{3.496cm}{.788cm}}{\pgfqpoint{3.507cm}{.739cm}}{\pgfqpoint{3.475cm}{.702cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{3.224cm}{.426cm}}
-\pgfpathlineto{\pgfqpoint{3.207cm}{.45cm}}
-\pgfpathlineto{\pgfqpoint{3.178cm}{.43cm}}
-\pgfpathlineto{\pgfqpoint{3.056cm}{.607cm}}
-\pgfpathlineto{\pgfqpoint{3.086cm}{.627cm}}
-\pgfpathlineto{\pgfqpoint{3.069cm}{.652cm}}
-\pgfpathlineto{\pgfqpoint{2.998cm}{.604cm}}
-\pgfpathcurveto{\pgfqpoint{2.955cm}{.574cm}}{\pgfqpoint{2.94cm}{.559cm}}{\pgfqpoint{2.928cm}{.532cm}}
-\pgfpathcurveto{\pgfqpoint{2.909cm}{.49cm}}{\pgfqpoint{2.915cm}{.441cm}}{\pgfqpoint{2.945cm}{.398cm}}
-\pgfpathcurveto{\pgfqpoint{2.972cm}{.358cm}}{\pgfqpoint{3.008cm}{.336cm}}{\pgfqpoint{3.049cm}{.335cm}}
-\pgfpathcurveto{\pgfqpoint{3.081cm}{.334cm}}{\pgfqpoint{3.103cm}{.343cm}}{\pgfqpoint{3.151cm}{.375cm}}
-\pgfpathlineto{\pgfqpoint{3.224cm}{.426cm}}
-\pgfpathmoveto{\pgfqpoint{3.022cm}{.583cm}}
-\pgfpathlineto{\pgfqpoint{3.143cm}{.407cm}}
-\pgfpathlineto{\pgfqpoint{3.126cm}{.395cm}}
-\pgfpathcurveto{\pgfqpoint{3.096cm}{.375cm}}{\pgfqpoint{3.083cm}{.369cm}}{\pgfqpoint{3.064cm}{.37cm}}
-\pgfpathcurveto{\pgfqpoint{3.033cm}{.37cm}}{\pgfqpoint{3.003cm}{.39cm}}{\pgfqpoint{2.981cm}{.422cm}}
-\pgfpathcurveto{\pgfqpoint{2.959cm}{.453cm}}{\pgfqpoint{2.951cm}{.486cm}}{\pgfqpoint{2.958cm}{.513cm}}
-\pgfpathcurveto{\pgfqpoint{2.963cm}{.536cm}}{\pgfqpoint{2.976cm}{.551cm}}{\pgfqpoint{3.007cm}{.573cm}}
-\pgfpathlineto{\pgfqpoint{3.022cm}{.583cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{2.802cm}{.17cm}}
-\pgfpathcurveto{\pgfqpoint{2.868cm}{.199cm}}{\pgfqpoint{2.891cm}{.271cm}}{\pgfqpoint{2.858cm}{.347cm}}
-\pgfpathcurveto{\pgfqpoint{2.823cm}{.428cm}}{\pgfqpoint{2.756cm}{.461cm}}{\pgfqpoint{2.688cm}{.432cm}}
-\pgfpathcurveto{\pgfqpoint{2.62cm}{.402cm}}{\pgfqpoint{2.598cm}{.331cm}}{\pgfqpoint{2.633cm}{.252cm}}
-\pgfpathcurveto{\pgfqpoint{2.667cm}{.173cm}}{\pgfqpoint{2.734cm}{.14cm}}{\pgfqpoint{2.802cm}{.17cm}}
-\pgfpathmoveto{\pgfqpoint{2.789cm}{.198cm}}
-\pgfpathcurveto{\pgfqpoint{2.744cm}{.178cm}}{\pgfqpoint{2.701cm}{.205cm}}{\pgfqpoint{2.673cm}{.27cm}}
-\pgfpathcurveto{\pgfqpoint{2.645cm}{.335cm}}{\pgfqpoint{2.655cm}{.384cm}}{\pgfqpoint{2.7cm}{.403cm}}
-\pgfpathcurveto{\pgfqpoint{2.746cm}{.423cm}}{\pgfqpoint{2.788cm}{.397cm}}{\pgfqpoint{2.817cm}{.33cm}}
-\pgfpathcurveto{\pgfqpoint{2.844cm}{.267cm}}{\pgfqpoint{2.834cm}{.218cm}}{\pgfqpoint{2.789cm}{.198cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{2.406cm}{.045cm}}
-\pgfpathlineto{\pgfqpoint{2.4cm}{.066cm}}
-\pgfpathcurveto{\pgfqpoint{2.423cm}{.052cm}}{\pgfqpoint{2.445cm}{.05cm}}{\pgfqpoint{2.471cm}{.056cm}}
-\pgfpathcurveto{\pgfqpoint{2.538cm}{.074cm}}{\pgfqpoint{2.567cm}{.14cm}}{\pgfqpoint{2.546cm}{.224cm}}
-\pgfpathcurveto{\pgfqpoint{2.524cm}{.31cm}}{\pgfqpoint{2.467cm}{.35cm}}{\pgfqpoint{2.395cm}{.332cm}}
-\pgfpathcurveto{\pgfqpoint{2.361cm}{.323cm}}{\pgfqpoint{2.339cm}{.305cm}}{\pgfqpoint{2.328cm}{.277cm}}
-\pgfpathcurveto{\pgfqpoint{2.32cm}{.257cm}}{\pgfqpoint{2.32cm}{.239cm}}{\pgfqpoint{2.328cm}{.208cm}}
-\pgfpathlineto{\pgfqpoint{2.361cm}{.217cm}}
-\pgfpathcurveto{\pgfqpoint{2.353cm}{.264cm}}{\pgfqpoint{2.366cm}{.292cm}}{\pgfqpoint{2.402cm}{.302cm}}
-\pgfpathcurveto{\pgfqpoint{2.447cm}{.313cm}}{\pgfqpoint{2.485cm}{.28cm}}{\pgfqpoint{2.502cm}{.213cm}}
-\pgfpathcurveto{\pgfqpoint{2.52cm}{.144cm}}{\pgfqpoint{2.504cm}{.097cm}}{\pgfqpoint{2.457cm}{.085cm}}
-\pgfpathcurveto{\pgfqpoint{2.422cm}{.076cm}}{\pgfqpoint{2.399cm}{.09cm}}{\pgfqpoint{2.385cm}{.128cm}}
-\pgfpathlineto{\pgfqpoint{2.352cm}{.119cm}}
-\pgfpathlineto{\pgfqpoint{2.373cm}{.037cm}}
-\pgfpathlineto{\pgfqpoint{2.406cm}{.045cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{2.055cm}{.072cm}}
-\pgfpathlineto{\pgfqpoint{2.06cm}{.005cm}}
-\pgfpathlineto{\pgfqpoint{2.258cm}{.02cm}}
-\pgfpathlineto{\pgfqpoint{2.255cm}{.05cm}}
-\pgfpathlineto{\pgfqpoint{2.22cm}{.047cm}}
-\pgfpathlineto{\pgfqpoint{2.203cm}{.261cm}}
-\pgfpathlineto{\pgfqpoint{2.239cm}{.264cm}}
-\pgfpathlineto{\pgfqpoint{2.236cm}{.294cm}}
-\pgfpathlineto{\pgfqpoint{2.036cm}{.278cm}}
-\pgfpathlineto{\pgfqpoint{2.042cm}{.204cm}}
-\pgfpathlineto{\pgfqpoint{2.076cm}{.207cm}}
-\pgfpathlineto{\pgfqpoint{2.073cm}{.25cm}}
-\pgfpathlineto{\pgfqpoint{2.162cm}{.257cm}}
-\pgfpathlineto{\pgfqpoint{2.169cm}{.16cm}}
-\pgfpathlineto{\pgfqpoint{2.071cm}{.152cm}}
-\pgfpathlineto{\pgfqpoint{2.073cm}{.122cm}}
-\pgfpathlineto{\pgfqpoint{2.172cm}{.129cm}}
-\pgfpathlineto{\pgfqpoint{2.178cm}{.044cm}}
-\pgfpathlineto{\pgfqpoint{2.092cm}{.037cm}}
-\pgfpathlineto{\pgfqpoint{2.089cm}{.075cm}}
-\pgfpathlineto{\pgfqpoint{2.055cm}{.072cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{1.94cm}{.003cm}}
-\pgfpathlineto{\pgfqpoint{1.942cm}{.033cm}}
-\pgfpathlineto{\pgfqpoint{1.907cm}{.036cm}}
-\pgfpathlineto{\pgfqpoint{1.928cm}{.25cm}}
-\pgfpathlineto{\pgfqpoint{1.963cm}{.246cm}}
-\pgfpathlineto{\pgfqpoint{1.966cm}{.276cm}}
-\pgfpathlineto{\pgfqpoint{1.86cm}{.286cm}}
-\pgfpathlineto{\pgfqpoint{1.857cm}{.258cm}}
-\pgfpathlineto{\pgfqpoint{1.894cm}{.254cm}}
-\pgfpathlineto{\pgfqpoint{1.885cm}{.167cm}}
-\pgfpathcurveto{\pgfqpoint{1.884cm}{.154cm}}{\pgfqpoint{1.878cm}{.084cm}}{\pgfqpoint{1.876cm}{.045cm}}
-\pgfpathcurveto{\pgfqpoint{1.872cm}{.054cm}}{\pgfqpoint{1.868cm}{.064cm}}{\pgfqpoint{1.865cm}{.073cm}}
-\pgfpathcurveto{\pgfqpoint{1.845cm}{.126cm}}{\pgfqpoint{1.839cm}{.141cm}}{\pgfqpoint{1.82cm}{.187cm}}
-\pgfpathlineto{\pgfqpoint{1.773cm}{.295cm}}
-\pgfpathlineto{\pgfqpoint{1.734cm}{.299cm}}
-\pgfpathlineto{\pgfqpoint{1.71cm}{.055cm}}
-\pgfpathlineto{\pgfqpoint{1.674cm}{.058cm}}
-\pgfpathlineto{\pgfqpoint{1.671cm}{.029cm}}
-\pgfpathlineto{\pgfqpoint{1.778cm}{.018cm}}
-\pgfpathlineto{\pgfqpoint{1.781cm}{.047cm}}
-\pgfpathlineto{\pgfqpoint{1.744cm}{.051cm}}
-\pgfpathlineto{\pgfqpoint{1.751cm}{.13cm}}
-\pgfpathcurveto{\pgfqpoint{1.755cm}{.172cm}}{\pgfqpoint{1.758cm}{.211cm}}{\pgfqpoint{1.76cm}{.243cm}}
-\pgfpathcurveto{\pgfqpoint{1.776cm}{.2cm}}{\pgfqpoint{1.801cm}{.137cm}}{\pgfqpoint{1.816cm}{.102cm}}
-\pgfpathlineto{\pgfqpoint{1.856cm}{.011cm}}
-\pgfpathlineto{\pgfqpoint{1.94cm}{.003cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{1.552cm}{.052cm}}
-\pgfpathlineto{\pgfqpoint{1.561cm}{.08cm}}
-\pgfpathlineto{\pgfqpoint{1.527cm}{.09cm}}
-\pgfpathlineto{\pgfqpoint{1.588cm}{.296cm}}
-\pgfpathlineto{\pgfqpoint{1.622cm}{.286cm}}
-\pgfpathlineto{\pgfqpoint{1.63cm}{.315cm}}
-\pgfpathlineto{\pgfqpoint{1.548cm}{.339cm}}
-\pgfpathcurveto{\pgfqpoint{1.498cm}{.354cm}}{\pgfqpoint{1.477cm}{.356cm}}{\pgfqpoint{1.449cm}{.349cm}}
-\pgfpathcurveto{\pgfqpoint{1.404cm}{.337cm}}{\pgfqpoint{1.37cm}{.302cm}}{\pgfqpoint{1.355cm}{.251cm}}
-\pgfpathcurveto{\pgfqpoint{1.341cm}{.206cm}}{\pgfqpoint{1.347cm}{.163cm}}{\pgfqpoint{1.372cm}{.131cm}}
-\pgfpathcurveto{\pgfqpoint{1.391cm}{.105cm}}{\pgfqpoint{1.412cm}{.093cm}}{\pgfqpoint{1.467cm}{.077cm}}
-\pgfpathlineto{\pgfqpoint{1.552cm}{.052cm}}
-\pgfpathmoveto{\pgfqpoint{1.548cm}{.308cm}}
-\pgfpathlineto{\pgfqpoint{1.487cm}{.103cm}}
-\pgfpathlineto{\pgfqpoint{1.467cm}{.109cm}}
-\pgfpathcurveto{\pgfqpoint{1.433cm}{.119cm}}{\pgfqpoint{1.42cm}{.126cm}}{\pgfqpoint{1.408cm}{.141cm}}
-\pgfpathcurveto{\pgfqpoint{1.389cm}{.165cm}}{\pgfqpoint{1.385cm}{.2cm}}{\pgfqpoint{1.397cm}{.239cm}}
-\pgfpathcurveto{\pgfqpoint{1.407cm}{.275cm}}{\pgfqpoint{1.427cm}{.301cm}}{\pgfqpoint{1.452cm}{.313cm}}
-\pgfpathcurveto{\pgfqpoint{1.474cm}{.324cm}}{\pgfqpoint{1.493cm}{.324cm}}{\pgfqpoint{1.53cm}{.313cm}}
-\pgfpathlineto{\pgfqpoint{1.548cm}{.308cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{1.094cm}{.216cm}}
-\pgfpathcurveto{\pgfqpoint{1.159cm}{.184cm}}{\pgfqpoint{1.229cm}{.213cm}}{\pgfqpoint{1.266cm}{.287cm}}
-\pgfpathcurveto{\pgfqpoint{1.305cm}{.366cm}}{\pgfqpoint{1.288cm}{.439cm}}{\pgfqpoint{1.221cm}{.472cm}}
-\pgfpathcurveto{\pgfqpoint{1.156cm}{.505cm}}{\pgfqpoint{1.087cm}{.475cm}}{\pgfqpoint{1.048cm}{.399cm}}
-\pgfpathcurveto{\pgfqpoint{1.01cm}{.322cm}}{\pgfqpoint{1.028cm}{.249cm}}{\pgfqpoint{1.094cm}{.216cm}}
-\pgfpathmoveto{\pgfqpoint{1.108cm}{.244cm}}
-\pgfpathcurveto{\pgfqpoint{1.064cm}{.266cm}}{\pgfqpoint{1.056cm}{.315cm}}{\pgfqpoint{1.088cm}{.379cm}}
-\pgfpathcurveto{\pgfqpoint{1.12cm}{.442cm}}{\pgfqpoint{1.164cm}{.466cm}}{\pgfqpoint{1.208cm}{.444cm}}
-\pgfpathcurveto{\pgfqpoint{1.252cm}{.422cm}}{\pgfqpoint{1.259cm}{.373cm}}{\pgfqpoint{1.227cm}{.308cm}}
-\pgfpathcurveto{\pgfqpoint{1.196cm}{.246cm}}{\pgfqpoint{1.152cm}{.222cm}}{\pgfqpoint{1.108cm}{.244cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{.634cm}{.545cm}}
-\pgfpathlineto{\pgfqpoint{.648cm}{.561cm}}
-\pgfpathcurveto{\pgfqpoint{.65cm}{.535cm}}{\pgfqpoint{.66cm}{.515cm}}{\pgfqpoint{.68cm}{.497cm}}
-\pgfpathcurveto{\pgfqpoint{.732cm}{.451cm}}{\pgfqpoint{.803cm}{.464cm}}{\pgfqpoint{.861cm}{.529cm}}
-\pgfpathcurveto{\pgfqpoint{.919cm}{.595cm}}{\pgfqpoint{.921cm}{.665cm}}{\pgfqpoint{.866cm}{.714cm}}
-\pgfpathcurveto{\pgfqpoint{.84cm}{.737cm}}{\pgfqpoint{.812cm}{.746cm}}{\pgfqpoint{.783cm}{.739cm}}
-\pgfpathcurveto{\pgfqpoint{.762cm}{.735cm}}{\pgfqpoint{.747cm}{.724cm}}{\pgfqpoint{.725cm}{.701cm}}
-\pgfpathlineto{\pgfqpoint{.752cm}{.678cm}}
-\pgfpathcurveto{\pgfqpoint{.786cm}{.712cm}}{\pgfqpoint{.817cm}{.716cm}}{\pgfqpoint{.845cm}{.691cm}}
-\pgfpathcurveto{\pgfqpoint{.88cm}{.661cm}}{\pgfqpoint{.873cm}{.61cm}}{\pgfqpoint{.827cm}{.559cm}}
-\pgfpathcurveto{\pgfqpoint{.78cm}{.505cm}}{\pgfqpoint{.732cm}{.492cm}}{\pgfqpoint{.696cm}{.525cm}}
-\pgfpathcurveto{\pgfqpoint{.669cm}{.549cm}}{\pgfqpoint{.667cm}{.576cm}}{\pgfqpoint{.691cm}{.609cm}}
-\pgfpathlineto{\pgfqpoint{.665cm}{.631cm}}
-\pgfpathlineto{\pgfqpoint{.609cm}{.568cm}}
-\pgfpathlineto{\pgfqpoint{.634cm}{.545cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{.533cm}{.641cm}}
-\pgfpathlineto{\pgfqpoint{.556cm}{.66cm}}
-\pgfpathlineto{\pgfqpoint{.534cm}{.687cm}}
-\pgfpathlineto{\pgfqpoint{.634cm}{.77cm}}
-\pgfpathcurveto{\pgfqpoint{.672cm}{.801cm}}{\pgfqpoint{.68cm}{.81cm}}{\pgfqpoint{.686cm}{.826cm}}
-\pgfpathcurveto{\pgfqpoint{.697cm}{.856cm}}{\pgfqpoint{.689cm}{.893cm}}{\pgfqpoint{.663cm}{.924cm}}
-\pgfpathcurveto{\pgfqpoint{.64cm}{.952cm}}{\pgfqpoint{.611cm}{.967cm}}{\pgfqpoint{.583cm}{.966cm}}
-\pgfpathcurveto{\pgfqpoint{.562cm}{.965cm}}{\pgfqpoint{.544cm}{.956cm}}{\pgfqpoint{.508cm}{.926cm}}
-\pgfpathlineto{\pgfqpoint{.406cm}{.842cm}}
-\pgfpathlineto{\pgfqpoint{.384cm}{.869cm}}
-\pgfpathlineto{\pgfqpoint{.361cm}{.85cm}}
-\pgfpathlineto{\pgfqpoint{.429cm}{.768cm}}
-\pgfpathlineto{\pgfqpoint{.452cm}{.787cm}}
-\pgfpathlineto{\pgfqpoint{.429cm}{.815cm}}
-\pgfpathlineto{\pgfqpoint{.531cm}{.899cm}}
-\pgfpathcurveto{\pgfqpoint{.563cm}{.925cm}}{\pgfqpoint{.566cm}{.927cm}}{\pgfqpoint{.577cm}{.931cm}}
-\pgfpathcurveto{\pgfqpoint{.597cm}{.937cm}}{\pgfqpoint{.62cm}{.928cm}}{\pgfqpoint{.638cm}{.906cm}}
-\pgfpathcurveto{\pgfqpoint{.654cm}{.887cm}}{\pgfqpoint{.658cm}{.867cm}}{\pgfqpoint{.652cm}{.849cm}}
-\pgfpathcurveto{\pgfqpoint{.648cm}{.836cm}}{\pgfqpoint{.648cm}{.836cm}}{\pgfqpoint{.607cm}{.803cm}}
-\pgfpathlineto{\pgfqpoint{.507cm}{.72cm}}
-\pgfpathlineto{\pgfqpoint{.484cm}{.748cm}}
-\pgfpathlineto{\pgfqpoint{.461cm}{.729cm}}
-\pgfpathlineto{\pgfqpoint{.533cm}{.641cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{.299cm}{.948cm}}
-\pgfpathlineto{\pgfqpoint{.326cm}{.962cm}}
-\pgfpathlineto{\pgfqpoint{.309cm}{.993cm}}
-\pgfpathlineto{\pgfqpoint{.497cm}{1.096cm}}
-\pgfpathlineto{\pgfqpoint{.514cm}{1.064cm}}
-\pgfpathlineto{\pgfqpoint{.54cm}{1.079cm}}
-\pgfpathlineto{\pgfqpoint{.489cm}{1.174cm}}
-\pgfpathlineto{\pgfqpoint{.464cm}{1.16cm}}
-\pgfpathlineto{\pgfqpoint{.479cm}{1.131cm}}
-\pgfpathlineto{\pgfqpoint{.396cm}{1.086cm}}
-\pgfpathlineto{\pgfqpoint{.371cm}{1.133cm}}
-\pgfpathlineto{\pgfqpoint{.453cm}{1.241cm}}
-\pgfpathlineto{\pgfqpoint{.421cm}{1.299cm}}
-\pgfpathlineto{\pgfqpoint{.395cm}{1.285cm}}
-\pgfpathlineto{\pgfqpoint{.411cm}{1.254cm}}
-\pgfpathlineto{\pgfqpoint{.349cm}{1.164cm}}
-\pgfpathcurveto{\pgfqpoint{.318cm}{1.196cm}}{\pgfqpoint{.29cm}{1.202cm}}{\pgfqpoint{.257cm}{1.184cm}}
-\pgfpathcurveto{\pgfqpoint{.232cm}{1.171cm}}{\pgfqpoint{.22cm}{1.149cm}}{\pgfqpoint{.22cm}{1.122cm}}
-\pgfpathcurveto{\pgfqpoint{.22cm}{1.1cm}}{\pgfqpoint{.225cm}{1.084cm}}{\pgfqpoint{.252cm}{1.035cm}}
-\pgfpathlineto{\pgfqpoint{.299cm}{.948cm}}
-\pgfpathmoveto{\pgfqpoint{.369cm}{1.071cm}}
-\pgfpathlineto{\pgfqpoint{.29cm}{1.028cm}}
-\pgfpathlineto{\pgfqpoint{.274cm}{1.059cm}}
-\pgfpathcurveto{\pgfqpoint{.259cm}{1.087cm}}{\pgfqpoint{.254cm}{1.097cm}}{\pgfqpoint{.254cm}{1.107cm}}
-\pgfpathcurveto{\pgfqpoint{.252cm}{1.124cm}}{\pgfqpoint{.26cm}{1.137cm}}{\pgfqpoint{.277cm}{1.146cm}}
-\pgfpathcurveto{\pgfqpoint{.292cm}{1.155cm}}{\pgfqpoint{.306cm}{1.155cm}}{\pgfqpoint{.319cm}{1.147cm}}
-\pgfpathcurveto{\pgfqpoint{.33cm}{1.141cm}}{\pgfqpoint{.336cm}{1.134cm}}{\pgfqpoint{.352cm}{1.104cm}}
-\pgfpathlineto{\pgfqpoint{.369cm}{1.071cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{.107cm}{1.361cm}}
-\pgfpathlineto{\pgfqpoint{.369cm}{1.358cm}}
-\pgfpathlineto{\pgfqpoint{.379cm}{1.325cm}}
-\pgfpathlineto{\pgfqpoint{.408cm}{1.335cm}}
-\pgfpathlineto{\pgfqpoint{.376cm}{1.43cm}}
-\pgfpathlineto{\pgfqpoint{.35cm}{1.421cm}}
-\pgfpathlineto{\pgfqpoint{.359cm}{1.393cm}}
-\pgfpathlineto{\pgfqpoint{.301cm}{1.393cm}}
-\pgfpathlineto{\pgfqpoint{.271cm}{1.482cm}}
-\pgfpathlineto{\pgfqpoint{.318cm}{1.516cm}}
-\pgfpathlineto{\pgfqpoint{.328cm}{1.486cm}}
-\pgfpathlineto{\pgfqpoint{.354cm}{1.495cm}}
-\pgfpathlineto{\pgfqpoint{.319cm}{1.601cm}}
-\pgfpathlineto{\pgfqpoint{.291cm}{1.591cm}}
-\pgfpathlineto{\pgfqpoint{.302cm}{1.557cm}}
-\pgfpathlineto{\pgfqpoint{.094cm}{1.4cm}}
-\pgfpathlineto{\pgfqpoint{.107cm}{1.361cm}}
-\pgfpathmoveto{\pgfqpoint{.247cm}{1.465cm}}
-\pgfpathlineto{\pgfqpoint{.27cm}{1.393cm}}
-\pgfpathlineto{\pgfqpoint{.223cm}{1.393cm}}
-\pgfpathcurveto{\pgfqpoint{.179cm}{1.392cm}}{\pgfqpoint{.152cm}{1.391cm}}{\pgfqpoint{.136cm}{1.389cm}}
-\pgfpathcurveto{\pgfqpoint{.155cm}{1.4cm}}{\pgfqpoint{.164cm}{1.406cm}}{\pgfqpoint{.206cm}{1.435cm}}
-\pgfpathlineto{\pgfqpoint{.247cm}{1.465cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{.039cm}{1.617cm}}
-\pgfpathlineto{\pgfqpoint{.068cm}{1.621cm}}
-\pgfpathlineto{\pgfqpoint{.064cm}{1.656cm}}
-\pgfpathlineto{\pgfqpoint{.276cm}{1.684cm}}
-\pgfpathlineto{\pgfqpoint{.281cm}{1.649cm}}
-\pgfpathlineto{\pgfqpoint{.31cm}{1.653cm}}
-\pgfpathlineto{\pgfqpoint{.297cm}{1.758cm}}
-\pgfpathlineto{\pgfqpoint{.268cm}{1.754cm}}
-\pgfpathlineto{\pgfqpoint{.273cm}{1.718cm}}
-\pgfpathlineto{\pgfqpoint{.186cm}{1.707cm}}
-\pgfpathcurveto{\pgfqpoint{.174cm}{1.705cm}}{\pgfqpoint{.104cm}{1.695cm}}{\pgfqpoint{.065cm}{1.688cm}}
-\pgfpathcurveto{\pgfqpoint{.074cm}{1.694cm}}{\pgfqpoint{.082cm}{1.7cm}}{\pgfqpoint{.09cm}{1.706cm}}
-\pgfpathcurveto{\pgfqpoint{.137cm}{1.737cm}}{\pgfqpoint{.15cm}{1.746cm}}{\pgfqpoint{.191cm}{1.775cm}}
-\pgfpathlineto{\pgfqpoint{.285cm}{1.845cm}}
-\pgfpathlineto{\pgfqpoint{.28cm}{1.884cm}}
-\pgfpathlineto{\pgfqpoint{.038cm}{1.852cm}}
-\pgfpathlineto{\pgfqpoint{.033cm}{1.888cm}}
-\pgfpathlineto{\pgfqpoint{.003cm}{1.884cm}}
-\pgfpathlineto{\pgfqpoint{.017cm}{1.778cm}}
-\pgfpathlineto{\pgfqpoint{.046cm}{1.782cm}}
-\pgfpathlineto{\pgfqpoint{.041cm}{1.819cm}}
-\pgfpathlineto{\pgfqpoint{.12cm}{1.829cm}}
-\pgfpathcurveto{\pgfqpoint{.162cm}{1.835cm}}{\pgfqpoint{.2cm}{1.841cm}}{\pgfqpoint{.232cm}{1.846cm}}
-\pgfpathcurveto{\pgfqpoint{.194cm}{1.82cm}}{\pgfqpoint{.138cm}{1.782cm}}{\pgfqpoint{.107cm}{1.76cm}}
-\pgfpathlineto{\pgfqpoint{.028cm}{1.7cm}}
-\pgfpathlineto{\pgfqpoint{.039cm}{1.617cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{0cm}{2.001cm}}
-\pgfpathlineto{\pgfqpoint{.03cm}{1.999cm}}
-\pgfpathlineto{\pgfqpoint{.032cm}{2.034cm}}
-\pgfpathlineto{\pgfqpoint{.246cm}{2.021cm}}
-\pgfpathlineto{\pgfqpoint{.244cm}{1.986cm}}
-\pgfpathlineto{\pgfqpoint{.274cm}{1.984cm}}
-\pgfpathlineto{\pgfqpoint{.279cm}{2.069cm}}
-\pgfpathcurveto{\pgfqpoint{.282cm}{2.121cm}}{\pgfqpoint{.28cm}{2.143cm}}{\pgfqpoint{.266cm}{2.168cm}}
-\pgfpathcurveto{\pgfqpoint{.244cm}{2.21cm}}{\pgfqpoint{.202cm}{2.235cm}}{\pgfqpoint{.15cm}{2.238cm}}
-\pgfpathcurveto{\pgfqpoint{.102cm}{2.241cm}}{\pgfqpoint{.062cm}{2.226cm}}{\pgfqpoint{.036cm}{2.195cm}}
-\pgfpathcurveto{\pgfqpoint{.016cm}{2.17cm}}{\pgfqpoint{.009cm}{2.147cm}}{\pgfqpoint{.005cm}{2.089cm}}
-\pgfpathlineto{\pgfqpoint{0cm}{2.001cm}}
-\pgfpathmoveto{\pgfqpoint{.248cm}{2.063cm}}
-\pgfpathlineto{\pgfqpoint{.035cm}{2.076cm}}
-\pgfpathlineto{\pgfqpoint{.036cm}{2.096cm}}
-\pgfpathcurveto{\pgfqpoint{.039cm}{2.132cm}}{\pgfqpoint{.042cm}{2.146cm}}{\pgfqpoint{.055cm}{2.161cm}}
-\pgfpathcurveto{\pgfqpoint{.074cm}{2.185cm}}{\pgfqpoint{.107cm}{2.197cm}}{\pgfqpoint{.147cm}{2.195cm}}
-\pgfpathcurveto{\pgfqpoint{.185cm}{2.192cm}}{\pgfqpoint{.215cm}{2.179cm}}{\pgfqpoint{.232cm}{2.157cm}}
-\pgfpathcurveto{\pgfqpoint{.247cm}{2.138cm}}{\pgfqpoint{.252cm}{2.119cm}}{\pgfqpoint{.249cm}{2.081cm}}
-\pgfpathlineto{\pgfqpoint{.248cm}{2.063cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{.056cm}{2.474cm}}
-\pgfpathcurveto{\pgfqpoint{.039cm}{2.403cm}}{\pgfqpoint{.082cm}{2.342cm}}{\pgfqpoint{.164cm}{2.322cm}}
-\pgfpathcurveto{\pgfqpoint{.249cm}{2.302cm}}{\pgfqpoint{.316cm}{2.335cm}}{\pgfqpoint{.333cm}{2.407cm}}
-\pgfpathcurveto{\pgfqpoint{.35cm}{2.479cm}}{\pgfqpoint{.306cm}{2.539cm}}{\pgfqpoint{.223cm}{2.559cm}}
-\pgfpathcurveto{\pgfqpoint{.139cm}{2.58cm}}{\pgfqpoint{.073cm}{2.545cm}}{\pgfqpoint{.056cm}{2.474cm}}
-\pgfpathmoveto{\pgfqpoint{.086cm}{2.467cm}}
-\pgfpathcurveto{\pgfqpoint{.097cm}{2.515cm}}{\pgfqpoint{.144cm}{2.533cm}}{\pgfqpoint{.212cm}{2.516cm}}
-\pgfpathcurveto{\pgfqpoint{.281cm}{2.5cm}}{\pgfqpoint{.314cm}{2.462cm}}{\pgfqpoint{.303cm}{2.414cm}}
-\pgfpathcurveto{\pgfqpoint{.291cm}{2.366cm}}{\pgfqpoint{.245cm}{2.348cm}}{\pgfqpoint{.174cm}{2.365cm}}
-\pgfpathcurveto{\pgfqpoint{.107cm}{2.381cm}}{\pgfqpoint{.074cm}{2.419cm}}{\pgfqpoint{.086cm}{2.467cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{.289cm}{2.691cm}}
-\pgfpathcurveto{\pgfqpoint{.304cm}{2.676cm}}{\pgfqpoint{.304cm}{2.652cm}}{\pgfqpoint{.289cm}{2.637cm}}
-\pgfpathcurveto{\pgfqpoint{.275cm}{2.622cm}}{\pgfqpoint{.25cm}{2.622cm}}{\pgfqpoint{.235cm}{2.637cm}}
-\pgfpathcurveto{\pgfqpoint{.221cm}{2.652cm}}{\pgfqpoint{.221cm}{2.676cm}}{\pgfqpoint{.235cm}{2.691cm}}
-\pgfpathcurveto{\pgfqpoint{.25cm}{2.706cm}}{\pgfqpoint{.275cm}{2.706cm}}{\pgfqpoint{.289cm}{2.691cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{.993cm}{.488cm}}
-\pgfpathcurveto{\pgfqpoint{1.008cm}{.473cm}}{\pgfqpoint{1.008cm}{.449cm}}{\pgfqpoint{.993cm}{.434cm}}
-\pgfpathcurveto{\pgfqpoint{.978cm}{.419cm}}{\pgfqpoint{.954cm}{.419cm}}{\pgfqpoint{.939cm}{.434cm}}
-\pgfpathcurveto{\pgfqpoint{.924cm}{.449cm}}{\pgfqpoint{.924cm}{.473cm}}{\pgfqpoint{.939cm}{.488cm}}
-\pgfpathcurveto{\pgfqpoint{.954cm}{.503cm}}{\pgfqpoint{.978cm}{.503cm}}{\pgfqpoint{.993cm}{.488cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{3.225cm}{.625cm}}
-\pgfpathcurveto{\pgfqpoint{3.24cm}{.61cm}}{\pgfqpoint{3.24cm}{.586cm}}{\pgfqpoint{3.225cm}{.571cm}}
-\pgfpathcurveto{\pgfqpoint{3.21cm}{.556cm}}{\pgfqpoint{3.186cm}{.556cm}}{\pgfqpoint{3.171cm}{.571cm}}
-\pgfpathcurveto{\pgfqpoint{3.156cm}{.586cm}}{\pgfqpoint{3.156cm}{.61cm}}{\pgfqpoint{3.171cm}{.625cm}}
-\pgfpathcurveto{\pgfqpoint{3.186cm}{.64cm}}{\pgfqpoint{3.21cm}{.64cm}}{\pgfqpoint{3.225cm}{.625cm}}
-\pgfusepath{fill}
-\pgfsetstrokecolor{white}\pgfsetfillcolor{white}
-\pgfpathmoveto{\pgfqpoint{2.028cm}{1.945cm}}
-\pgfpathlineto{\pgfqpoint{2.028cm}{1.742cm}}
-\pgfpathcurveto{\pgfqpoint{2.119cm}{1.75cm}}{\pgfqpoint{2.196cm}{1.798cm}}{\pgfqpoint{2.196cm}{1.844cm}}
-\pgfpathcurveto{\pgfqpoint{2.196cm}{1.89cm}}{\pgfqpoint{2.118cm}{1.937cm}}{\pgfqpoint{2.028cm}{1.945cm}}
-\pgfpathmoveto{\pgfqpoint{2.028cm}{2.195cm}}
-\pgfpathlineto{\pgfqpoint{2.028cm}{1.969cm}}
-\pgfpathcurveto{\pgfqpoint{2.13cm}{1.978cm}}{\pgfqpoint{2.217cm}{2.031cm}}{\pgfqpoint{2.217cm}{2.082cm}}
-\pgfpathcurveto{\pgfqpoint{2.217cm}{2.134cm}}{\pgfqpoint{2.13cm}{2.187cm}}{\pgfqpoint{2.028cm}{2.195cm}}
-\pgfpathmoveto{\pgfqpoint{1.978cm}{1.969cm}}
-\pgfpathlineto{\pgfqpoint{1.978cm}{2.195cm}}
-\pgfpathcurveto{\pgfqpoint{1.877cm}{2.187cm}}{\pgfqpoint{1.79cm}{2.134cm}}{\pgfqpoint{1.79cm}{2.082cm}}
-\pgfpathcurveto{\pgfqpoint{1.79cm}{2.031cm}}{\pgfqpoint{1.877cm}{1.978cm}}{\pgfqpoint{1.978cm}{1.969cm}}
-\pgfpathmoveto{\pgfqpoint{1.978cm}{1.742cm}}
-\pgfpathlineto{\pgfqpoint{1.978cm}{1.945cm}}
-\pgfpathcurveto{\pgfqpoint{1.888cm}{1.937cm}}{\pgfqpoint{1.811cm}{1.89cm}}{\pgfqpoint{1.811cm}{1.844cm}}
-\pgfpathcurveto{\pgfqpoint{1.811cm}{1.798cm}}{\pgfqpoint{1.888cm}{1.751cm}}{\pgfqpoint{1.978cm}{1.742cm}}
-\pgfpathmoveto{\pgfqpoint{2.028cm}{1.485cm}}
-\pgfpathcurveto{\pgfqpoint{2.028cm}{1.473cm}}{\pgfqpoint{2.017cm}{1.462cm}}{\pgfqpoint{2.003cm}{1.462cm}}
-\pgfpathcurveto{\pgfqpoint{1.989cm}{1.462cm}}{\pgfqpoint{1.978cm}{1.473cm}}{\pgfqpoint{1.978cm}{1.485cm}}
-\pgfpathlineto{\pgfqpoint{1.978cm}{1.721cm}}
-\pgfpathcurveto{\pgfqpoint{1.899cm}{1.713cm}}{\pgfqpoint{1.831cm}{1.67cm}}{\pgfqpoint{1.831cm}{1.63cm}}
-\pgfpathcurveto{\pgfqpoint{1.831cm}{1.592cm}}{\pgfqpoint{1.888cm}{1.553cm}}{\pgfqpoint{1.96cm}{1.541cm}}
-\pgfpathcurveto{\pgfqpoint{1.96cm}{1.541cm}}{\pgfqpoint{1.964cm}{1.536cm}}{\pgfqpoint{1.964cm}{1.531cm}}
-\pgfpathcurveto{\pgfqpoint{1.964cm}{1.526cm}}{\pgfqpoint{1.959cm}{1.522cm}}{\pgfqpoint{1.959cm}{1.522cm}}
-\pgfpathcurveto{\pgfqpoint{1.86cm}{1.533cm}}{\pgfqpoint{1.786cm}{1.577cm}}{\pgfqpoint{1.786cm}{1.63cm}}
-\pgfpathcurveto{\pgfqpoint{1.786cm}{1.674cm}}{\pgfqpoint{1.839cm}{1.713cm}}{\pgfqpoint{1.916cm}{1.73cm}}
-\pgfpathcurveto{\pgfqpoint{1.825cm}{1.748cm}}{\pgfqpoint{1.761cm}{1.792cm}}{\pgfqpoint{1.761cm}{1.844cm}}
-\pgfpathcurveto{\pgfqpoint{1.761cm}{1.894cm}}{\pgfqpoint{1.821cm}{1.937cm}}{\pgfqpoint{1.907cm}{1.956cm}}
-\pgfpathcurveto{\pgfqpoint{1.806cm}{1.976cm}}{\pgfqpoint{1.734cm}{2.025cm}}{\pgfqpoint{1.734cm}{2.082cm}}
-\pgfpathcurveto{\pgfqpoint{1.734cm}{2.138cm}}{\pgfqpoint{1.8cm}{2.186cm}}{\pgfqpoint{1.896cm}{2.207cm}}
-\pgfpathcurveto{\pgfqpoint{1.783cm}{2.229cm}}{\pgfqpoint{1.704cm}{2.283cm}}{\pgfqpoint{1.704cm}{2.347cm}}
-\pgfpathcurveto{\pgfqpoint{1.704cm}{2.4cm}}{\pgfqpoint{1.758cm}{2.447cm}}{\pgfqpoint{1.841cm}{2.474cm}}
-\pgfpathcurveto{\pgfqpoint{1.848cm}{2.486cm}}{\pgfqpoint{1.868cm}{2.497cm}}{\pgfqpoint{1.892cm}{2.501cm}}
-\pgfpathcurveto{\pgfqpoint{1.924cm}{2.507cm}}{\pgfqpoint{1.953cm}{2.498cm}}{\pgfqpoint{1.956cm}{2.482cm}}
-\pgfpathcurveto{\pgfqpoint{1.959cm}{2.466cm}}{\pgfqpoint{1.935cm}{2.448cm}}{\pgfqpoint{1.902cm}{2.443cm}}
-\pgfpathcurveto{\pgfqpoint{1.886cm}{2.44cm}}{\pgfqpoint{1.871cm}{2.44cm}}{\pgfqpoint{1.859cm}{2.444cm}}
-\pgfpathcurveto{\pgfqpoint{1.804cm}{2.419cm}}{\pgfqpoint{1.766cm}{2.383cm}}{\pgfqpoint{1.766cm}{2.347cm}}
-\pgfpathcurveto{\pgfqpoint{1.766cm}{2.29cm}}{\pgfqpoint{1.865cm}{2.23cm}}{\pgfqpoint{1.978cm}{2.221cm}}
-\pgfpathlineto{\pgfqpoint{1.978cm}{2.525cm}}
-\pgfpathcurveto{\pgfqpoint{1.978cm}{2.538cm}}{\pgfqpoint{1.989cm}{2.549cm}}{\pgfqpoint{2.003cm}{2.549cm}}
-\pgfpathcurveto{\pgfqpoint{2.017cm}{2.549cm}}{\pgfqpoint{2.028cm}{2.538cm}}{\pgfqpoint{2.028cm}{2.525cm}}
-\pgfpathlineto{\pgfqpoint{2.028cm}{2.221cm}}
-\pgfpathcurveto{\pgfqpoint{2.142cm}{2.23cm}}{\pgfqpoint{2.241cm}{2.29cm}}{\pgfqpoint{2.241cm}{2.347cm}}
-\pgfpathcurveto{\pgfqpoint{2.241cm}{2.383cm}}{\pgfqpoint{2.204cm}{2.419cm}}{\pgfqpoint{2.148cm}{2.444cm}}
-\pgfpathcurveto{\pgfqpoint{2.136cm}{2.44cm}}{\pgfqpoint{2.121cm}{2.44cm}}{\pgfqpoint{2.105cm}{2.443cm}}
-\pgfpathcurveto{\pgfqpoint{2.073cm}{2.448cm}}{\pgfqpoint{2.049cm}{2.466cm}}{\pgfqpoint{2.051cm}{2.482cm}}
-\pgfpathcurveto{\pgfqpoint{2.054cm}{2.498cm}}{\pgfqpoint{2.083cm}{2.507cm}}{\pgfqpoint{2.115cm}{2.501cm}}
-\pgfpathcurveto{\pgfqpoint{2.14cm}{2.497cm}}{\pgfqpoint{2.159cm}{2.486cm}}{\pgfqpoint{2.166cm}{2.474cm}}
-\pgfpathcurveto{\pgfqpoint{2.249cm}{2.447cm}}{\pgfqpoint{2.303cm}{2.4cm}}{\pgfqpoint{2.303cm}{2.347cm}}
-\pgfpathcurveto{\pgfqpoint{2.303cm}{2.283cm}}{\pgfqpoint{2.224cm}{2.229cm}}{\pgfqpoint{2.112cm}{2.207cm}}
-\pgfpathcurveto{\pgfqpoint{2.207cm}{2.186cm}}{\pgfqpoint{2.273cm}{2.138cm}}{\pgfqpoint{2.273cm}{2.082cm}}
-\pgfpathcurveto{\pgfqpoint{2.273cm}{2.025cm}}{\pgfqpoint{2.202cm}{1.976cm}}{\pgfqpoint{2.1cm}{1.956cm}}
-\pgfpathcurveto{\pgfqpoint{2.186cm}{1.937cm}}{\pgfqpoint{2.246cm}{1.894cm}}{\pgfqpoint{2.246cm}{1.844cm}}
-\pgfpathcurveto{\pgfqpoint{2.246cm}{1.792cm}}{\pgfqpoint{2.182cm}{1.748cm}}{\pgfqpoint{2.092cm}{1.73cm}}
-\pgfpathcurveto{\pgfqpoint{2.168cm}{1.713cm}}{\pgfqpoint{2.222cm}{1.674cm}}{\pgfqpoint{2.222cm}{1.63cm}}
-\pgfpathcurveto{\pgfqpoint{2.222cm}{1.577cm}}{\pgfqpoint{2.147cm}{1.533cm}}{\pgfqpoint{2.048cm}{1.522cm}}
-\pgfpathcurveto{\pgfqpoint{2.048cm}{1.522cm}}{\pgfqpoint{2.043cm}{1.526cm}}{\pgfqpoint{2.043cm}{1.531cm}}
-\pgfpathcurveto{\pgfqpoint{2.043cm}{1.536cm}}{\pgfqpoint{2.047cm}{1.541cm}}{\pgfqpoint{2.047cm}{1.541cm}}
-\pgfpathcurveto{\pgfqpoint{2.119cm}{1.553cm}}{\pgfqpoint{2.176cm}{1.592cm}}{\pgfqpoint{2.176cm}{1.63cm}}
-\pgfpathcurveto{\pgfqpoint{2.176cm}{1.671cm}}{\pgfqpoint{2.108cm}{1.713cm}}{\pgfqpoint{2.028cm}{1.721cm}}
-\pgfpathlineto{\pgfqpoint{2.028cm}{1.485cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\end{pgfscope}
-\end{pgfpicture}
-\hfill
-\begin{pgfpicture}
-\pgftransformscale{20mm/40mm}
-\pgfpathmoveto{\pgfqpoint{2.66cm}{4cm}}
-\pgfpathlineto{\pgfqpoint{20cm}{4cm}}
-\pgfpathlineto{\pgfqpoint{20cm}{0cm}}
-\pgfpathlineto{\pgfqpoint{2.66cm}{0cm}}
-\pgfpathlineto{\pgfqpoint{2.66cm}{4cm}}
-\pgfpathclose
-\pgfusepath{clip}
-\begin{pgfscope}
-\pgfsetstrokecolor{#1}\pgfsetfillcolor{#1}\pgfpathmoveto{\pgfqpoint{11.814cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{11.751cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{11.751cm}{3.199cm}}
-\pgfpathcurveto{\pgfqpoint{11.751cm}{3.114cm}}{\pgfqpoint{11.715cm}{3.013cm}}{\pgfqpoint{11.6cm}{3.013cm}}
-\pgfpathcurveto{\pgfqpoint{11.513cm}{3.013cm}}{\pgfqpoint{11.479cm}{3.075cm}}{\pgfqpoint{11.479cm}{3.171cm}}\pgfpathlineto{\pgfqpoint{11.479cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{11.416cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{11.416cm}{3.155cm}}
-\pgfpathcurveto{\pgfqpoint{11.416cm}{3.043cm}}{\pgfqpoint{11.464cm}{2.959cm}}{\pgfqpoint{11.59cm}{2.959cm}}
-\pgfpathcurveto{\pgfqpoint{11.696cm}{2.959cm}}{\pgfqpoint{11.734cm}{3.016cm}}{\pgfqpoint{11.755cm}{3.062cm}}\pgfpathlineto{\pgfqpoint{11.757cm}{3.062cm}}
-\pgfpathlineto{\pgfqpoint{11.757cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{11.818cm}{2.971cm}}
-\pgfpathcurveto{\pgfqpoint{11.814cm}{3.012cm}}{\pgfqpoint{11.814cm}{3.052cm}}{\pgfqpoint{11.814cm}{3.091cm}}
-\pgfpathlineto{\pgfqpoint{11.814cm}{3.481cm}}
-\pgfusepath{fill}\pgfpathmoveto{\pgfqpoint{12.002cm}{2.971cm}}
-\pgfpathlineto{\pgfqpoint{12.065cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{12.065cm}{3.253cm}}
-\pgfpathcurveto{\pgfqpoint{12.065cm}{3.338cm}}{\pgfqpoint{12.101cm}{3.439cm}}{\pgfqpoint{12.216cm}{3.439cm}}
-\pgfpathcurveto{\pgfqpoint{12.303cm}{3.439cm}}{\pgfqpoint{12.337cm}{3.377cm}}{\pgfqpoint{12.337cm}{3.281cm}}
-\pgfpathlineto{\pgfqpoint{12.337cm}{2.971cm}}
-\pgfpathlineto{\pgfqpoint{12.4cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{12.4cm}{3.297cm}}
-\pgfpathcurveto{\pgfqpoint{12.4cm}{3.409cm}}{\pgfqpoint{12.352cm}{3.493cm}}{\pgfqpoint{12.226cm}{3.493cm}}
-\pgfpathcurveto{\pgfqpoint{12.12cm}{3.493cm}}{\pgfqpoint{12.082cm}{3.436cm}}{\pgfqpoint{12.061cm}{3.39cm}}\pgfpathlineto{\pgfqpoint{12.059cm}{3.39cm}}
-\pgfpathlineto{\pgfqpoint{12.059cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{11.998cm}{3.481cm}}
-\pgfpathcurveto{\pgfqpoint{12.002cm}{3.44cm}}{\pgfqpoint{12.002cm}{3.4cm}}{\pgfqpoint{12.002cm}{3.361cm}}
-\pgfpathlineto{\pgfqpoint{12.002cm}{2.971cm}}
-\pgfusepath{fill}\pgfpathmoveto{\pgfqpoint{12.558cm}{2.971cm}}
-\pgfpathlineto{\pgfqpoint{12.621cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{12.621cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{12.558cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{12.558cm}{2.971cm}}
-\pgfpathclose\pgfpathmoveto{\pgfqpoint{12.558cm}{3.617cm}}
-\pgfpathlineto{\pgfqpoint{12.621cm}{3.617cm}}\pgfpathlineto{\pgfqpoint{12.621cm}{3.701cm}}
-\pgfpathlineto{\pgfqpoint{12.558cm}{3.701cm}}\pgfpathlineto{\pgfqpoint{12.558cm}{3.617cm}}
-\pgfpathclose\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{13.136cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{13.07cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{12.922cm}{3.04cm}}\pgfpathlineto{\pgfqpoint{12.92cm}{3.04cm}}
-\pgfpathlineto{\pgfqpoint{12.779cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{12.71cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{12.883cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{12.957cm}{2.971cm}}
-\pgfpathlineto{\pgfqpoint{13.136cm}{3.481cm}}\pgfpathclose
-\pgfusepath{fill}\pgfpathmoveto{\pgfqpoint{13.566cm}{3.051cm}}
-\pgfpathcurveto{\pgfqpoint{13.536cm}{3.032cm}}{\pgfqpoint{13.469cm}{3.013cm}}{\pgfqpoint{13.423cm}{3.013cm}}
-\pgfpathcurveto{\pgfqpoint{13.313cm}{3.013cm}}{\pgfqpoint{13.255cm}{3.1cm}}{\pgfqpoint{13.255cm}{3.208cm}}
-\pgfpathlineto{\pgfqpoint{13.604cm}{3.208cm}}
-\pgfpathlineto{\pgfqpoint{13.604cm}{3.24cm}}
-\pgfpathcurveto{\pgfqpoint{13.604cm}{3.377cm}}{\pgfqpoint{13.545cm}{3.493cm}}{\pgfqpoint{13.401cm}{3.493cm}}
-\pgfpathcurveto{\pgfqpoint{13.272cm}{3.493cm}}{\pgfqpoint{13.186cm}{3.382cm}}{\pgfqpoint{13.186cm}{3.226cm}}
-\pgfpathcurveto{\pgfqpoint{13.186cm}{3.073cm}}{\pgfqpoint{13.249cm}{2.959cm}}{\pgfqpoint{13.418cm}{2.959cm}}
-\pgfpathcurveto{\pgfqpoint{13.465cm}{2.959cm}}{\pgfqpoint{13.522cm}{2.969cm}}{\pgfqpoint{13.566cm}{2.987cm}}
-\pgfpathlineto{\pgfqpoint{13.566cm}{3.051cm}}
-\pgfpathmoveto{\pgfqpoint{13.255cm}{3.262cm}}
-\pgfpathcurveto{\pgfqpoint{13.255cm}{3.346cm}}{\pgfqpoint{13.312cm}{3.439cm}}{\pgfqpoint{13.405cm}{3.439cm}}
-\pgfpathcurveto{\pgfqpoint{13.499cm}{3.439cm}}{\pgfqpoint{13.535cm}{3.351cm}}{\pgfqpoint{13.535cm}{3.262cm}}
-\pgfpathlineto{\pgfqpoint{13.255cm}{3.262cm}}
-\pgfpathclose\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{13.724cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{13.787cm}{2.971cm}}
-\pgfpathlineto{\pgfqpoint{13.787cm}{3.223cm}}
-\pgfpathcurveto{\pgfqpoint{13.787cm}{3.315cm}}{\pgfqpoint{13.814cm}{3.427cm}}{\pgfqpoint{13.914cm}{3.427cm}}
-\pgfpathcurveto{\pgfqpoint{13.93cm}{3.427cm}}{\pgfqpoint{13.947cm}{3.425cm}}{\pgfqpoint{13.96cm}{3.421cm}}
-\pgfpathlineto{\pgfqpoint{13.96cm}{3.487cm}}
-\pgfpathcurveto{\pgfqpoint{13.949cm}{3.49cm}}{\pgfqpoint{13.931cm}{3.493cm}}{\pgfqpoint{13.916cm}{3.493cm}}
-\pgfpathcurveto{\pgfqpoint{13.851cm}{3.493cm}}{\pgfqpoint{13.808cm}{3.44cm}}{\pgfqpoint{13.785cm}{3.383cm}}\pgfpathlineto{\pgfqpoint{13.783cm}{3.383cm}}
-\pgfpathlineto{\pgfqpoint{13.783cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{13.72cm}{3.481cm}}
-\pgfpathcurveto{\pgfqpoint{13.724cm}{3.444cm}}{\pgfqpoint{13.724cm}{3.423cm}}{\pgfqpoint{13.724cm}{3.367cm}}
-\pgfpathlineto{\pgfqpoint{13.724cm}{2.971cm}}\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{14.011cm}{2.983cm}}
-\pgfpathcurveto{\pgfqpoint{14.056cm}{2.965cm}}{\pgfqpoint{14.105cm}{2.959cm}}{\pgfqpoint{14.154cm}{2.959cm}}
-\pgfpathcurveto{\pgfqpoint{14.231cm}{2.959cm}}{\pgfqpoint{14.332cm}{2.996cm}}{\pgfqpoint{14.332cm}{3.104cm}}
-\pgfpathcurveto{\pgfqpoint{14.332cm}{3.271cm}}{\pgfqpoint{14.081cm}{3.259cm}}{\pgfqpoint{14.081cm}{3.354cm}}
-\pgfpathcurveto{\pgfqpoint{14.081cm}{3.419cm}}{\pgfqpoint{14.126cm}{3.439cm}}{\pgfqpoint{14.191cm}{3.439cm}}
-\pgfpathcurveto{\pgfqpoint{14.226cm}{3.439cm}}{\pgfqpoint{14.271cm}{3.43cm}}{\pgfqpoint{14.304cm}{3.415cm}}
-\pgfpathlineto{\pgfqpoint{14.31cm}{3.47cm}}
-\pgfpathcurveto{\pgfqpoint{14.265cm}{3.487cm}}{\pgfqpoint{14.211cm}{3.493cm}}{\pgfqpoint{14.184cm}{3.493cm}}
-\pgfpathcurveto{\pgfqpoint{14.1cm}{3.493cm}}{\pgfqpoint{14.018cm}{3.455cm}}{\pgfqpoint{14.018cm}{3.354cm}}
-\pgfpathcurveto{\pgfqpoint{14.018cm}{3.206cm}}{\pgfqpoint{14.263cm}{3.225cm}}{\pgfqpoint{14.263cm}{3.104cm}}
-\pgfpathcurveto{\pgfqpoint{14.263cm}{3.046cm}}{\pgfqpoint{14.21cm}{3.013cm}}{\pgfqpoint{14.15cm}{3.013cm}}
-\pgfpathcurveto{\pgfqpoint{14.101cm}{3.013cm}}{\pgfqpoint{14.055cm}{3.026cm}}{\pgfqpoint{14.017cm}{3.045cm}}
-\pgfpathlineto{\pgfqpoint{14.011cm}{2.983cm}}\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{14.445cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{14.508cm}{2.971cm}}
-\pgfpathlineto{\pgfqpoint{14.508cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{14.445cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{14.445cm}{2.971cm}}\pgfpathclose
-\pgfpathmoveto{\pgfqpoint{14.445cm}{3.617cm}}\pgfpathlineto{\pgfqpoint{14.508cm}{3.617cm}}
-\pgfpathlineto{\pgfqpoint{14.508cm}{3.701cm}}\pgfpathlineto{\pgfqpoint{14.445cm}{3.701cm}}
-\pgfpathlineto{\pgfqpoint{14.445cm}{3.617cm}}\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{14.887cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{14.771cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{14.771cm}{3.626cm}}
-\pgfpathlineto{\pgfqpoint{14.708cm}{3.604cm}}\pgfpathlineto{\pgfqpoint{14.708cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{14.608cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{14.608cm}{3.427cm}}
-\pgfpathlineto{\pgfqpoint{14.708cm}{3.427cm}}\pgfpathlineto{\pgfqpoint{14.708cm}{3.129cm}}
-\pgfpathcurveto{\pgfqpoint{14.708cm}{3.036cm}}{\pgfqpoint{14.712cm}{2.959cm}}{\pgfqpoint{14.824cm}{2.959cm}}
-\pgfpathcurveto{\pgfqpoint{14.855cm}{2.959cm}}{\pgfqpoint{14.886cm}{2.967cm}}{\pgfqpoint{14.901cm}{2.973cm}}
-\pgfpathlineto{\pgfqpoint{14.897cm}{3.025cm}}
-\pgfpathcurveto{\pgfqpoint{14.879cm}{3.018cm}}{\pgfqpoint{14.863cm}{3.013cm}}{\pgfqpoint{14.839cm}{3.013cm}}
-\pgfpathcurveto{\pgfqpoint{14.788cm}{3.013cm}}{\pgfqpoint{14.771cm}{3.051cm}}{\pgfqpoint{14.771cm}{3.097cm}}
-\pgfpathlineto{\pgfqpoint{14.771cm}{3.427cm}}
-\pgfpathlineto{\pgfqpoint{14.887cm}{3.427cm}}\pgfpathlineto{\pgfqpoint{14.887cm}{3.481cm}}
-\pgfusepath{fill}\pgfpathmoveto{\pgfqpoint{15.218cm}{3.566cm}}
-\pgfpathlineto{\pgfqpoint{15.293cm}{3.566cm}}\pgfpathlineto{\pgfqpoint{15.293cm}{3.65cm}}
-\pgfpathlineto{\pgfqpoint{15.218cm}{3.65cm}}\pgfpathlineto{\pgfqpoint{15.218cm}{3.566cm}}
-\pgfpathclose\pgfpathmoveto{\pgfqpoint{15.047cm}{3.566cm}}
-\pgfpathlineto{\pgfqpoint{15.122cm}{3.566cm}}\pgfpathlineto{\pgfqpoint{15.122cm}{3.65cm}}
-\pgfpathlineto{\pgfqpoint{15.047cm}{3.65cm}}\pgfpathlineto{\pgfqpoint{15.047cm}{3.566cm}}
-\pgfpathclose
-\pgfpathmoveto{\pgfqpoint{15.292cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{15.354cm}{2.971cm}}
-\pgfpathcurveto{\pgfqpoint{15.349cm}{3.006cm}}{\pgfqpoint{15.349cm}{3.037cm}}{\pgfqpoint{15.349cm}{3.078cm}}
-\pgfpathlineto{\pgfqpoint{15.349cm}{3.303cm}}
-\pgfpathcurveto{\pgfqpoint{15.349cm}{3.436cm}}{\pgfqpoint{15.296cm}{3.493cm}}{\pgfqpoint{15.17cm}{3.493cm}}
-\pgfpathcurveto{\pgfqpoint{15.125cm}{3.493cm}}{\pgfqpoint{15.059cm}{3.477cm}}{\pgfqpoint{15.02cm}{3.458cm}}
-\pgfpathlineto{\pgfqpoint{15.02cm}{3.397cm}}
-\pgfpathcurveto{\pgfqpoint{15.067cm}{3.427cm}}{\pgfqpoint{15.117cm}{3.439cm}}{\pgfqpoint{15.17cm}{3.439cm}}
-\pgfpathcurveto{\pgfqpoint{15.255cm}{3.439cm}}{\pgfqpoint{15.286cm}{3.395cm}}{\pgfqpoint{15.286cm}{3.308cm}}
-\pgfpathlineto{\pgfqpoint{15.286cm}{3.282cm}}\pgfpathlineto{\pgfqpoint{15.274cm}{3.282cm}}
-\pgfpathcurveto{\pgfqpoint{15.142cm}{3.282cm}}{\pgfqpoint{14.96cm}{3.274cm}}{\pgfqpoint{14.96cm}{3.103cm}}
-\pgfpathcurveto{\pgfqpoint{14.96cm}{3.057cm}}{\pgfqpoint{14.983cm}{2.959cm}}{\pgfqpoint{15.128cm}{2.959cm}}
-\pgfpathcurveto{\pgfqpoint{15.191cm}{2.959cm}}{\pgfqpoint{15.262cm}{2.992cm}}{\pgfqpoint{15.29cm}{3.053cm}}
-\pgfpathlineto{\pgfqpoint{15.292cm}{3.053cm}}\pgfpathlineto{\pgfqpoint{15.292cm}{2.971cm}}
-\pgfpathclose\pgfpathmoveto{\pgfqpoint{15.286cm}{3.197cm}}
-\pgfpathcurveto{\pgfqpoint{15.286cm}{3.142cm}}{\pgfqpoint{15.283cm}{3.013cm}}{\pgfqpoint{15.135cm}{3.013cm}}
-\pgfpathcurveto{\pgfqpoint{15.077cm}{3.013cm}}{\pgfqpoint{15.029cm}{3.038cm}}{\pgfqpoint{15.029cm}{3.105cm}}
-\pgfpathcurveto{\pgfqpoint{15.029cm}{3.217cm}}{\pgfqpoint{15.159cm}{3.228cm}}{\pgfqpoint{15.268cm}{3.228cm}}
-\pgfpathlineto{\pgfqpoint{15.286cm}{3.228cm}}\pgfpathlineto{\pgfqpoint{15.286cm}{3.197cm}}
-\pgfpathclose
-\pgfusepath{fill}\pgfpathmoveto{\pgfqpoint{15.719cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{15.603cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{15.603cm}{3.626cm}}
-\pgfpathlineto{\pgfqpoint{15.54cm}{3.604cm}}\pgfpathlineto{\pgfqpoint{15.54cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{15.44cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{15.44cm}{3.427cm}}
-\pgfpathlineto{\pgfqpoint{15.54cm}{3.427cm}}\pgfpathlineto{\pgfqpoint{15.54cm}{3.129cm}}
-\pgfpathcurveto{\pgfqpoint{15.54cm}{3.036cm}}{\pgfqpoint{15.544cm}{2.959cm}}{\pgfqpoint{15.656cm}{2.959cm}}
-\pgfpathcurveto{\pgfqpoint{15.687cm}{2.959cm}}{\pgfqpoint{15.718cm}{2.967cm}}{\pgfqpoint{15.733cm}{2.973cm}}
-\pgfpathlineto{\pgfqpoint{15.729cm}{3.025cm}}
-\pgfpathcurveto{\pgfqpoint{15.711cm}{3.018cm}}{\pgfqpoint{15.695cm}{3.013cm}}{\pgfqpoint{15.671cm}{3.013cm}}
-\pgfpathcurveto{\pgfqpoint{15.62cm}{3.013cm}}{\pgfqpoint{15.603cm}{3.051cm}}{\pgfqpoint{15.603cm}{3.097cm}}
-\pgfpathlineto{\pgfqpoint{15.603cm}{3.427cm}}\pgfpathlineto{\pgfqpoint{15.719cm}{3.427cm}}
-\pgfpathlineto{\pgfqpoint{15.719cm}{3.481cm}}
-\pgfusepath{fill}\pgfpathmoveto{\pgfqpoint{13.383cm}{2.541cm}}
-\pgfpathlineto{\pgfqpoint{12.824cm}{2.541cm}}\pgfpathlineto{\pgfqpoint{12.824cm}{1.491cm}}
-\pgfpathcurveto{\pgfqpoint{12.824cm}{1.215cm}}{\pgfqpoint{12.737cm}{.778cm}}{\pgfqpoint{12.333cm}{.778cm}}
-\pgfpathcurveto{\pgfqpoint{11.974cm}{.778cm}}{\pgfqpoint{11.97cm}{1.132cm}}{\pgfqpoint{11.97cm}{1.395cm}}\pgfpathlineto{\pgfqpoint{11.97cm}{2.541cm}}
-\pgfpathlineto{\pgfqpoint{11.412cm}{2.541cm}}\pgfpathlineto{\pgfqpoint{11.412cm}{1.186cm}}
-\pgfpathcurveto{\pgfqpoint{11.412cm}{.702cm}}{\pgfqpoint{11.633cm}{.344cm}}{\pgfqpoint{12.141cm}{.344cm}}
-\pgfpathcurveto{\pgfqpoint{12.433cm}{.344cm}}{\pgfqpoint{12.674cm}{.477cm}}{\pgfqpoint{12.845cm}{.686cm}}
-\pgfpathlineto{\pgfqpoint{12.854cm}{.686cm}}\pgfpathlineto{\pgfqpoint{12.854cm}{.394cm}}
-\pgfpathlineto{\pgfqpoint{13.383cm}{.394cm}}\pgfpathlineto{\pgfqpoint{13.383cm}{2.541cm}}
-\pgfusepath{fill}\pgfpathmoveto{\pgfqpoint{15.717cm}{2.544cm}}
-\pgfpathlineto{\pgfqpoint{15.451cm}{2.544cm}}\pgfpathlineto{\pgfqpoint{15.451cm}{1.356cm}}
-\pgfpathcurveto{\pgfqpoint{15.451cm}{.997cm}}{\pgfqpoint{15.3cm}{.572cm}}{\pgfqpoint{14.815cm}{.572cm}}
-\pgfpathcurveto{\pgfqpoint{14.449cm}{.572cm}}{\pgfqpoint{14.306cm}{.833cm}}{\pgfqpoint{14.306cm}{1.237cm}}\pgfpathlineto{\pgfqpoint{14.306cm}{2.544cm}}
-\pgfpathlineto{\pgfqpoint{14.04cm}{2.544cm}}\pgfpathlineto{\pgfqpoint{14.04cm}{1.17cm}}
-\pgfpathcurveto{\pgfqpoint{14.04cm}{.698cm}}{\pgfqpoint{14.242cm}{.344cm}}{\pgfqpoint{14.773cm}{.344cm}}
-\pgfpathcurveto{\pgfqpoint{15.22cm}{.344cm}}{\pgfqpoint{15.38cm}{.584cm}}{\pgfqpoint{15.468cm}{.778cm}}\pgfpathlineto{\pgfqpoint{15.477cm}{.778cm}}
-\pgfpathlineto{\pgfqpoint{15.477cm}{.394cm}}\pgfpathlineto{\pgfqpoint{15.733cm}{.394cm}}
-\pgfpathcurveto{\pgfqpoint{15.717cm}{.567cm}}{\pgfqpoint{15.717cm}{.736cm}}{\pgfqpoint{15.717cm}{.9cm}}
-\pgfpathlineto{\pgfqpoint{15.717cm}{2.544cm}}
-\pgfusepath{fill}\pgfpathmoveto{\pgfqpoint{16.314cm}{3.622cm}}
-\pgfpathlineto{\pgfqpoint{16.577cm}{3.622cm}}\pgfpathlineto{\pgfqpoint{16.577cm}{.394cm}}
-\pgfpathlineto{\pgfqpoint{16.314cm}{.394cm}}\pgfpathlineto{\pgfqpoint{16.314cm}{3.622cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{20cm}{.394cm}}\pgfpathlineto{\pgfqpoint{20cm}{1.871cm}}
-\pgfpathcurveto{\pgfqpoint{20cm}{2.287cm}}{\pgfqpoint{19.756cm}{2.59cm}}{\pgfqpoint{19.323cm}{2.59cm}}
-\pgfpathcurveto{\pgfqpoint{18.987cm}{2.59cm}}{\pgfqpoint{18.735cm}{2.388cm}}{\pgfqpoint{18.638cm}{2.136cm}}
-\pgfpathlineto{\pgfqpoint{18.63cm}{2.136cm}}
-\pgfpathcurveto{\pgfqpoint{18.562cm}{2.51cm}}{\pgfqpoint{18.251cm}{2.59cm}}{\pgfqpoint{18.062cm}{2.59cm}}
-\pgfpathcurveto{\pgfqpoint{17.604cm}{2.59cm}}{\pgfqpoint{17.478cm}{2.321cm}}{\pgfqpoint{17.394cm}{2.173cm}}\pgfpathlineto{\pgfqpoint{17.385cm}{2.178cm}}
-\pgfpathlineto{\pgfqpoint{17.385cm}{2.539cm}}\pgfpathlineto{\pgfqpoint{17.129cm}{2.539cm}}
-\pgfpathcurveto{\pgfqpoint{17.146cm}{2.367cm}}{\pgfqpoint{17.146cm}{2.199cm}}{\pgfqpoint{17.146cm}{2.034cm}}\pgfpathlineto{\pgfqpoint{17.146cm}{.394cm}}
-\pgfpathlineto{\pgfqpoint{17.41cm}{.394cm}}\pgfpathlineto{\pgfqpoint{17.41cm}{1.58cm}}
-\pgfpathcurveto{\pgfqpoint{17.41cm}{2.114cm}}{\pgfqpoint{17.696cm}{2.363cm}}{\pgfqpoint{17.986cm}{2.363cm}}
-\pgfpathcurveto{\pgfqpoint{18.327cm}{2.363cm}}{\pgfqpoint{18.44cm}{2.123cm}}{\pgfqpoint{18.44cm}{1.82cm}}\pgfpathlineto{\pgfqpoint{18.44cm}{.394cm}}
-\pgfpathlineto{\pgfqpoint{18.705cm}{.394cm}}\pgfpathlineto{\pgfqpoint{18.705cm}{1.58cm}}
-\pgfpathcurveto{\pgfqpoint{18.705cm}{2.114cm}}{\pgfqpoint{18.991cm}{2.363cm}}{\pgfqpoint{19.281cm}{2.363cm}}
-\pgfpathcurveto{\pgfqpoint{19.622cm}{2.363cm}}{\pgfqpoint{19.735cm}{2.123cm}}{\pgfqpoint{19.735cm}{1.82cm}}
-\pgfpathlineto{\pgfqpoint{19.735cm}{.394cm}}\pgfpathlineto{\pgfqpoint{20cm}{.394cm}}
-\pgfusepath{fill}\pgfpathmoveto{\pgfqpoint{5.28cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{5.217cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{5.217cm}{3.199cm}}
-\pgfpathcurveto{\pgfqpoint{5.217cm}{3.114cm}}{\pgfqpoint{5.181cm}{3.013cm}}{\pgfqpoint{5.066cm}{3.013cm}}
-\pgfpathcurveto{\pgfqpoint{4.979cm}{3.013cm}}{\pgfqpoint{4.945cm}{3.075cm}}{\pgfqpoint{4.945cm}{3.171cm}}\pgfpathlineto{\pgfqpoint{4.945cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{4.882cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{4.882cm}{3.155cm}}
-\pgfpathcurveto{\pgfqpoint{4.882cm}{3.043cm}}{\pgfqpoint{4.93cm}{2.959cm}}{\pgfqpoint{5.056cm}{2.959cm}}
-\pgfpathcurveto{\pgfqpoint{5.162cm}{2.959cm}}{\pgfqpoint{5.2cm}{3.016cm}}{\pgfqpoint{5.221cm}{3.062cm}}\pgfpathlineto{\pgfqpoint{5.223cm}{3.062cm}}
-\pgfpathlineto{\pgfqpoint{5.223cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{5.284cm}{2.971cm}}
-\pgfpathcurveto{\pgfqpoint{5.28cm}{3.012cm}}{\pgfqpoint{5.28cm}{3.052cm}}{\pgfqpoint{5.28cm}{3.091cm}}
-\pgfpathlineto{\pgfqpoint{5.28cm}{3.481cm}}
-\pgfusepath{fill}\pgfpathmoveto{\pgfqpoint{5.438cm}{3.721cm}}
-\pgfpathlineto{\pgfqpoint{5.501cm}{3.721cm}}\pgfpathlineto{\pgfqpoint{5.501cm}{2.971cm}}
-\pgfpathlineto{\pgfqpoint{5.438cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{5.438cm}{3.721cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{6.338cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{6.338cm}{3.322cm}}
-\pgfpathcurveto{\pgfqpoint{6.338cm}{3.421cm}}{\pgfqpoint{6.28cm}{3.493cm}}{\pgfqpoint{6.178cm}{3.493cm}}
-\pgfpathcurveto{\pgfqpoint{6.098cm}{3.493cm}}{\pgfqpoint{6.038cm}{3.445cm}}{\pgfqpoint{6.015cm}{3.385cm}}\pgfpathlineto{\pgfqpoint{6.013cm}{3.385cm}}
-\pgfpathcurveto{\pgfqpoint{5.997cm}{3.474cm}}{\pgfqpoint{5.923cm}{3.493cm}}{\pgfqpoint{5.878cm}{3.493cm}}
-\pgfpathcurveto{\pgfqpoint{5.769cm}{3.493cm}}{\pgfqpoint{5.739cm}{3.429cm}}{\pgfqpoint{5.719cm}{3.394cm}}\pgfpathlineto{\pgfqpoint{5.717cm}{3.395cm}}
-\pgfpathlineto{\pgfqpoint{5.717cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{5.656cm}{3.481cm}}
-\pgfpathcurveto{\pgfqpoint{5.66cm}{3.44cm}}{\pgfqpoint{5.66cm}{3.4cm}}{\pgfqpoint{5.66cm}{3.361cm}}\pgfpathlineto{\pgfqpoint{5.66cm}{2.971cm}}
-\pgfpathlineto{\pgfqpoint{5.723cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{5.723cm}{3.253cm}}
-\pgfpathcurveto{\pgfqpoint{5.723cm}{3.38cm}}{\pgfqpoint{5.791cm}{3.439cm}}{\pgfqpoint{5.86cm}{3.439cm}}
-\pgfpathcurveto{\pgfqpoint{5.941cm}{3.439cm}}{\pgfqpoint{5.968cm}{3.382cm}}{\pgfqpoint{5.968cm}{3.31cm}}\pgfpathlineto{\pgfqpoint{5.968cm}{2.971cm}}
-\pgfpathlineto{\pgfqpoint{6.03cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{6.03cm}{3.253cm}}
-\pgfpathcurveto{\pgfqpoint{6.03cm}{3.38cm}}{\pgfqpoint{6.099cm}{3.439cm}}{\pgfqpoint{6.167cm}{3.439cm}}
-\pgfpathcurveto{\pgfqpoint{6.249cm}{3.439cm}}{\pgfqpoint{6.275cm}{3.382cm}}{\pgfqpoint{6.275cm}{3.31cm}}
-\pgfpathlineto{\pgfqpoint{6.275cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{6.338cm}{2.971cm}}
-\pgfusepath{fill}\pgfpathmoveto{\pgfqpoint{7.116cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{7.053cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{7.053cm}{3.199cm}}
-\pgfpathcurveto{\pgfqpoint{7.053cm}{3.114cm}}{\pgfqpoint{7.017cm}{3.013cm}}{\pgfqpoint{6.902cm}{3.013cm}}
-\pgfpathcurveto{\pgfqpoint{6.815cm}{3.013cm}}{\pgfqpoint{6.781cm}{3.075cm}}{\pgfqpoint{6.781cm}{3.171cm}}\pgfpathlineto{\pgfqpoint{6.781cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{6.718cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{6.718cm}{3.155cm}}
-\pgfpathcurveto{\pgfqpoint{6.718cm}{3.043cm}}{\pgfqpoint{6.766cm}{2.959cm}}{\pgfqpoint{6.892cm}{2.959cm}}
-\pgfpathcurveto{\pgfqpoint{6.998cm}{2.959cm}}{\pgfqpoint{7.036cm}{3.016cm}}{\pgfqpoint{7.057cm}{3.062cm}}\pgfpathlineto{\pgfqpoint{7.059cm}{3.062cm}}
-\pgfpathlineto{\pgfqpoint{7.059cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{7.12cm}{2.971cm}}
-\pgfpathcurveto{\pgfqpoint{7.116cm}{3.012cm}}{\pgfqpoint{7.116cm}{3.052cm}}{\pgfqpoint{7.116cm}{3.091cm}}
-\pgfpathlineto{\pgfqpoint{7.116cm}{3.481cm}}
-\pgfusepath{fill}\pgfpathmoveto{\pgfqpoint{7.274cm}{2.971cm}}
-\pgfpathlineto{\pgfqpoint{7.337cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{7.337cm}{3.253cm}}
-\pgfpathcurveto{\pgfqpoint{7.337cm}{3.338cm}}{\pgfqpoint{7.373cm}{3.439cm}}{\pgfqpoint{7.488cm}{3.439cm}}
-\pgfpathcurveto{\pgfqpoint{7.575cm}{3.439cm}}{\pgfqpoint{7.609cm}{3.377cm}}{\pgfqpoint{7.609cm}{3.281cm}}\pgfpathlineto{\pgfqpoint{7.609cm}{2.971cm}}
-\pgfpathlineto{\pgfqpoint{7.672cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{7.672cm}{3.297cm}}
-\pgfpathcurveto{\pgfqpoint{7.672cm}{3.409cm}}{\pgfqpoint{7.624cm}{3.493cm}}{\pgfqpoint{7.498cm}{3.493cm}}
-\pgfpathcurveto{\pgfqpoint{7.392cm}{3.493cm}}{\pgfqpoint{7.354cm}{3.436cm}}{\pgfqpoint{7.333cm}{3.39cm}}\pgfpathlineto{\pgfqpoint{7.331cm}{3.39cm}}
-\pgfpathlineto{\pgfqpoint{7.331cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{7.27cm}{3.481cm}}
-\pgfpathcurveto{\pgfqpoint{7.274cm}{3.44cm}}{\pgfqpoint{7.274cm}{3.4cm}}{\pgfqpoint{7.274cm}{3.361cm}}
-\pgfpathlineto{\pgfqpoint{7.274cm}{2.971cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{7.8cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{7.863cm}{2.971cm}}
-\pgfpathlineto{\pgfqpoint{7.863cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{7.8cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{7.8cm}{2.971cm}}
-\pgfpathclose\pgfpathmoveto{\pgfqpoint{7.8cm}{3.617cm}}
-\pgfpathlineto{\pgfqpoint{7.863cm}{3.617cm}}\pgfpathlineto{\pgfqpoint{7.863cm}{3.701cm}}
-\pgfpathlineto{\pgfqpoint{7.8cm}{3.701cm}}\pgfpathlineto{\pgfqpoint{7.8cm}{3.617cm}}
-\pgfpathclose
-\pgfusepath{fill}\pgfpathmoveto{\pgfqpoint{8.378cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{8.312cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{8.164cm}{3.04cm}}
-\pgfpathlineto{\pgfqpoint{8.162cm}{3.04cm}}\pgfpathlineto{\pgfqpoint{8.021cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{7.952cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{8.125cm}{2.971cm}}
-\pgfpathlineto{\pgfqpoint{8.199cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{8.378cm}{3.481cm}}
-\pgfpathclose
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{8.807cm}{3.051cm}}
-\pgfpathcurveto{\pgfqpoint{8.777cm}{3.032cm}}{\pgfqpoint{8.71cm}{3.013cm}}{\pgfqpoint{8.664cm}{3.013cm}}
-\pgfpathcurveto{\pgfqpoint{8.554cm}{3.013cm}}{\pgfqpoint{8.496cm}{3.1cm}}{\pgfqpoint{8.496cm}{3.208cm}}
-\pgfpathlineto{\pgfqpoint{8.845cm}{3.208cm}}\pgfpathlineto{\pgfqpoint{8.845cm}{3.24cm}}
-\pgfpathcurveto{\pgfqpoint{8.845cm}{3.377cm}}{\pgfqpoint{8.786cm}{3.493cm}}{\pgfqpoint{8.642cm}{3.493cm}}
-\pgfpathcurveto{\pgfqpoint{8.513cm}{3.493cm}}{\pgfqpoint{8.427cm}{3.382cm}}{\pgfqpoint{8.427cm}{3.226cm}}
-\pgfpathcurveto{\pgfqpoint{8.427cm}{3.073cm}}{\pgfqpoint{8.49cm}{2.959cm}}{\pgfqpoint{8.659cm}{2.959cm}}
-\pgfpathcurveto{\pgfqpoint{8.706cm}{2.959cm}}{\pgfqpoint{8.763cm}{2.969cm}}{\pgfqpoint{8.807cm}{2.987cm}}
-\pgfpathlineto{\pgfqpoint{8.807cm}{3.051cm}}\pgfpathmoveto{\pgfqpoint{8.496cm}{3.262cm}}
-\pgfpathcurveto{\pgfqpoint{8.496cm}{3.346cm}}{\pgfqpoint{8.553cm}{3.439cm}}{\pgfqpoint{8.646cm}{3.439cm}}
-\pgfpathcurveto{\pgfqpoint{8.74cm}{3.439cm}}{\pgfqpoint{8.776cm}{3.351cm}}{\pgfqpoint{8.776cm}{3.262cm}}
-\pgfpathlineto{\pgfqpoint{8.496cm}{3.262cm}}
-\pgfpathclose
-\pgfusepath{fill}\pgfpathmoveto{\pgfqpoint{8.965cm}{2.971cm}}
-\pgfpathlineto{\pgfqpoint{9.028cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{9.028cm}{3.223cm}}
-\pgfpathcurveto{\pgfqpoint{9.028cm}{3.315cm}}{\pgfqpoint{9.055cm}{3.427cm}}{\pgfqpoint{9.155cm}{3.427cm}}
-\pgfpathcurveto{\pgfqpoint{9.171cm}{3.427cm}}{\pgfqpoint{9.188cm}{3.425cm}}{\pgfqpoint{9.201cm}{3.421cm}}
-\pgfpathlineto{\pgfqpoint{9.201cm}{3.487cm}}
-\pgfpathcurveto{\pgfqpoint{9.19cm}{3.49cm}}{\pgfqpoint{9.172cm}{3.493cm}}{\pgfqpoint{9.157cm}{3.493cm}}
-\pgfpathcurveto{\pgfqpoint{9.092cm}{3.493cm}}{\pgfqpoint{9.049cm}{3.44cm}}{\pgfqpoint{9.026cm}{3.383cm}}\pgfpathlineto{\pgfqpoint{9.024cm}{3.383cm}}
-\pgfpathlineto{\pgfqpoint{9.024cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{8.961cm}{3.481cm}}
-\pgfpathcurveto{\pgfqpoint{8.965cm}{3.444cm}}{\pgfqpoint{8.965cm}{3.423cm}}{\pgfqpoint{8.965cm}{3.367cm}}
-\pgfpathlineto{\pgfqpoint{8.965cm}{2.971cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{9.222cm}{2.983cm}}
-\pgfpathcurveto{\pgfqpoint{9.267cm}{2.965cm}}{\pgfqpoint{9.316cm}{2.959cm}}{\pgfqpoint{9.365cm}{2.959cm}}
-\pgfpathcurveto{\pgfqpoint{9.442cm}{2.959cm}}{\pgfqpoint{9.543cm}{2.996cm}}{\pgfqpoint{9.543cm}{3.104cm}}
-\pgfpathcurveto{\pgfqpoint{9.543cm}{3.271cm}}{\pgfqpoint{9.292cm}{3.259cm}}{\pgfqpoint{9.292cm}{3.354cm}}
-\pgfpathcurveto{\pgfqpoint{9.292cm}{3.419cm}}{\pgfqpoint{9.337cm}{3.439cm}}{\pgfqpoint{9.402cm}{3.439cm}}
-\pgfpathcurveto{\pgfqpoint{9.437cm}{3.439cm}}{\pgfqpoint{9.482cm}{3.43cm}}{\pgfqpoint{9.515cm}{3.415cm}}
-\pgfpathlineto{\pgfqpoint{9.521cm}{3.47cm}}
-\pgfpathcurveto{\pgfqpoint{9.476cm}{3.487cm}}{\pgfqpoint{9.422cm}{3.493cm}}{\pgfqpoint{9.395cm}{3.493cm}}
-\pgfpathcurveto{\pgfqpoint{9.311cm}{3.493cm}}{\pgfqpoint{9.229cm}{3.455cm}}{\pgfqpoint{9.229cm}{3.354cm}}
-\pgfpathcurveto{\pgfqpoint{9.229cm}{3.206cm}}{\pgfqpoint{9.474cm}{3.225cm}}{\pgfqpoint{9.474cm}{3.104cm}}
-\pgfpathcurveto{\pgfqpoint{9.474cm}{3.046cm}}{\pgfqpoint{9.421cm}{3.013cm}}{\pgfqpoint{9.361cm}{3.013cm}}
-\pgfpathcurveto{\pgfqpoint{9.312cm}{3.013cm}}{\pgfqpoint{9.266cm}{3.026cm}}{\pgfqpoint{9.228cm}{3.045cm}}
-\pgfpathlineto{\pgfqpoint{9.222cm}{2.983cm}}
-\pgfusepath{fill}
-\pgfpathmoveto{\pgfqpoint{9.656cm}{2.971cm}}\pgfpathlineto{\pgfqpoint{9.719cm}{2.971cm}}
-\pgfpathlineto{\pgfqpoint{9.719cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{9.656cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{9.656cm}{2.971cm}}
-\pgfpathclose\pgfpathmoveto{\pgfqpoint{9.656cm}{3.617cm}}
-\pgfpathlineto{\pgfqpoint{9.719cm}{3.617cm}}\pgfpathlineto{\pgfqpoint{9.719cm}{3.701cm}}
-\pgfpathlineto{\pgfqpoint{9.656cm}{3.701cm}}\pgfpathlineto{\pgfqpoint{9.656cm}{3.617cm}}
-\pgfpathclose
-\pgfusepath{fill}\pgfpathmoveto{\pgfqpoint{10.098cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{9.982cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{9.982cm}{3.626cm}}
-\pgfpathlineto{\pgfqpoint{9.919cm}{3.604cm}}\pgfpathlineto{\pgfqpoint{9.919cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{9.819cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{9.819cm}{3.427cm}}
-\pgfpathlineto{\pgfqpoint{9.919cm}{3.427cm}}\pgfpathlineto{\pgfqpoint{9.919cm}{3.129cm}}
-\pgfpathcurveto{\pgfqpoint{9.919cm}{3.036cm}}{\pgfqpoint{9.923cm}{2.959cm}}{\pgfqpoint{10.035cm}{2.959cm}}
-\pgfpathcurveto{\pgfqpoint{10.066cm}{2.959cm}}{\pgfqpoint{10.097cm}{2.967cm}}{\pgfqpoint{10.112cm}{2.973cm}}
-\pgfpathlineto{\pgfqpoint{10.108cm}{3.025cm}}
-\pgfpathcurveto{\pgfqpoint{10.09cm}{3.018cm}}{\pgfqpoint{10.074cm}{3.013cm}}{\pgfqpoint{10.05cm}{3.013cm}}
-\pgfpathcurveto{\pgfqpoint{9.999cm}{3.013cm}}{\pgfqpoint{9.982cm}{3.051cm}}{\pgfqpoint{9.982cm}{3.097cm}}
-\pgfpathlineto{\pgfqpoint{9.982cm}{3.427cm}}\pgfpathlineto{\pgfqpoint{10.098cm}{3.427cm}}
-\pgfpathlineto{\pgfqpoint{10.098cm}{3.481cm}}
-\pgfusepath{fill}\pgfpathmoveto{\pgfqpoint{10.566cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{10.5cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{10.353cm}{3.056cm}}
-\pgfpathlineto{\pgfqpoint{10.351cm}{3.056cm}}\pgfpathlineto{\pgfqpoint{10.352cm}{3.055cm}}
-\pgfpathlineto{\pgfqpoint{10.209cm}{3.481cm}}\pgfpathlineto{\pgfqpoint{10.14cm}{3.481cm}}
-\pgfpathlineto{\pgfqpoint{10.321cm}{2.965cm}}\pgfpathlineto{\pgfqpoint{10.308cm}{2.92cm}}
-\pgfpathcurveto{\pgfqpoint{10.288cm}{2.854cm}}{\pgfqpoint{10.27cm}{2.809cm}}{\pgfqpoint{10.216cm}{2.809cm}}
-\pgfpathcurveto{\pgfqpoint{10.193cm}{2.809cm}}{\pgfqpoint{10.181cm}{2.813cm}}{\pgfqpoint{10.169cm}{2.817cm}}
-\pgfpathlineto{\pgfqpoint{10.163cm}{2.763cm}}
-\pgfpathcurveto{\pgfqpoint{10.184cm}{2.758cm}}{\pgfqpoint{10.208cm}{2.755cm}}{\pgfqpoint{10.231cm}{2.755cm}}
-\pgfpathcurveto{\pgfqpoint{10.302cm}{2.755cm}}{\pgfqpoint{10.338cm}{2.825cm}}{\pgfqpoint{10.362cm}{2.895cm}}
-\pgfpathlineto{\pgfqpoint{10.566cm}{3.481cm}}
-\pgfusepath{fill}
-\end{pgfscope}
-\end{pgfpicture}%
-\fi}%uulmlogo
+\begin{tikzpicture}[y=.8\p@, x=.8\p@,yscale=-1,every path/.style={fill=#1,even odd rule}]
+    \path (152.1,29.3)--(141.0,29.3)--(141.0,50.2)..controls
+    (141.0,55.7) and (139.3,64.4)..(131.2,64.4)..controls
+    (124.1,64.4) and (124.0,57.3)..(124.0,52.1)--
+    (124.0,29.3)--(112.9,29.3)--(112.9,56.3)..controls
+    (112.9,65.9) and (117.3,73.1)..(127.4,73.1)..controls
+    (133.2,73.1) and (138.0,70.4)..(141.4,66.3)--
+    (141.6,66.3)--(141.6,72.1)--(152.1,72.1)--
+    (152.1,29.3)--cycle;
+\path[rounded corners=\z@] (210.5,7.8) rectangle (215.7,72.1);
+  \path (199.2,11.2)--(196.9,11.2)--(196.9,8.3)--
+    (195.6,8.7)--(195.6,11.1)--(193.6,11.1)--
+    (193.6,12.2)--(195.6,12.2)--(195.6,18.1)..controls
+    (195.6,20) and (195.7,21.5)..(197.9,21.5)..controls
+    (198.5,21.5) and (199.1,21.3)..(199.4,21.2)--
+    (199.3,20.2)..controls(198.9,20.3) and (198.6,20.4)..
+    (198.1,20.4)..controls(197.1,20.4) and (196.7,19.6)..
+    (196.7,18.7)--(196.7,12.1)--(199.0,12.1)--
+    (199.0,11.2)--cycle(185.7,9.5)--(187.2,9.5)--
+    (187.2,7.8)--(185.7,7.8)--(185.7,9.5)--
+    cycle(189.1,9.5)--(190.6,9.5)--(190.6,7.8)--
+    (189.1,7.8)--(189.1,9.5)--cycle(190.5,16.8)..controls
+    (190.5,17.9) and (190.4,20.5)..(187.5,20.5)..controls
+    (186.3,20.5) and (185.4,20)..(185.4,18.7)..controls
+    (185.4,16.5) and (188.0,16.3)..(190.2,16.3)--
+    (190.6,16.3)--(190.6,16.8)--cycle(190.6,21.3)--
+    (191.8,21.3)..controls(191.7,20.6) and (191.7,20)..
+    (191.7,19.2)--(191.7,14.7)..controls(191.7,12.1) and
+    (190.6,10.9)..(188.1,10.9)..controls(187.2,10.9) and
+    (185.9,11.2)..(185.1,11.6)--(185.1,12.8)..controls
+    (186.0,12.2) and (187.0,12)..(188.1,12)..controls
+    (189.8,12) and (190.4,12.9)..(190.4,14.6)--
+    (190.4,15.1)--(190.2,15.1)..controls(187.6,15.1) and
+    (184.0,15.3)..(184.0,18.7)..controls(184.0,19.6) and
+    (184.5,21.6)..(187.3,21.6)..controls(188.6,21.6) and
+    (190.0,20.9)..(190.5,19.7)--(190.5,19.7)--
+    (190.5,21.3)--cycle(182.4,11.2)--(180.1,11.2)--
+    (180.1,8.3)--(178.8,8.7)--(178.8,11.1)--
+    (176.8,11.1)--(176.8,12.2)--(178.8,12.2)--
+    (178.8,18.1)..controls(178.8,20) and (178.9,21.5)..
+    (181.1,21.5)..controls(181.7,21.5) and (182.3,21.3)..
+    (182.6,21.2)--(182.5,20.2)..controls(182.1,20.3) and
+    (181.8,20.4)..(181.3,20.4)..controls(180.3,20.4) and
+    (179.9,19.6)..(179.9,18.7)--(179.9,12.1)--
+    (182.2,12.1)--(182.2,11.2)--cycle(174.7,6.8)--
+    (173.4,6.8)--(173.4,8.5)--(174.7,8.5)--
+    (174.7,6.8)--cycle(173.5,21.3)--(174.8,21.3)--
+    (174.8,11.2)--(173.5,11.2)--(173.5,21.3)--
+    cycle(164.7,21.1)..controls(165.6,21.5) and (166.6,21.6)
+  ..(167.5,21.6)..controls(169.0,21.6) and (171.0,20.9)..
+    (171.0,18.7)..controls(171.0,15.4) and (166.0,15.6)..
+    (166.0,13.7)..controls(166.0,12.4) and (166.9,12)..
+    (168.2,12)..controls(168.9,12) and (169.8,12.2)..
+    (170.4,12.5)--(170.5,11.4)..controls(169.6,11.1) and
+    (168.5,10.9)..(168.0,10.9)..controls(166.3,10.9) and
+    (164.7,11.7)..(164.7,13.7)..controls(164.7,16.6) and
+    (169.6,16.3)..(169.6,18.7)..controls(169.6,19.9) and
+    (168.5,20.5)..(167.4,20.5)..controls(166.4,20.5) and
+    (165.5,20.2)..(164.8,19.9)--(164.7,21.1)--
+    cycle(158.9,21.3)--(160.2,21.3)--(160.2,16.3)..
+    controls(160.2,14.5) and (160.7,12.2)..(162.7,12.2)..
+    controls(163.0,12.2) and (163.4,12.2)..(163.6,12.3)--
+    (163.6,11)..controls(163.4,10.9) and (163.0,10.9)..
+    (162.7,10.9)..controls(161.4,10.9) and (160.6,12)..
+    (160.1,13.1)--(160.1,13.1)--(160.1,11.1)--
+    (158.8,11.1)..controls(158.9,11.8) and (158.9,12.3)..
+    (158.9,13.4)--(158.9,21.3)--cycle(149.4,15.6)..
+    controls(149.4,13.9) and (150.5,12.1)..(152.4,12.1)..
+    controls(154.3,12.1) and (155.0,13.9)..(155.0,15.6)--
+    (149.4,15.6)--cycle(155.6,19.8)..controls(155.0,20.2)
+    and (153.7,20.6)..(152.8,20.6)..controls(150.6,20.6)
+    and (149.5,18.9)..(149.5,16.7)--(156.4,16.7)--
+    (156.4,16)..controls(156.4,13.3) and (155.2,11)..
+    (152.4,11)..controls(149.8,11) and (148.1,13.2)..
+    (148.1,16.3)..controls(148.1,19.3) and (149.4,21.6)..
+    (152.7,21.6)..controls(153.6,21.6) and (154.8,21.4)..
+    (155.6,21)--(155.6,19.8)--cycle(146.9,11.2)--
+    (145.6,11.2)--(142.7,20)--(142.7,20)--
+    (139.9,11.2)--(138.5,11.2)--(141.9,21.3)--
+    (143.4,21.3)--(146.9,11.2)--cycle(136.6,6.8)--
+    (135.3,6.8)--(135.3,8.5)--(136.6,8.5)--
+    (136.6,6.8)--cycle(135.3,21.3)--(136.6,21.3)--
+    (136.6,11.2)--(135.3,11.2)--(135.3,21.3)--
+    cycle(124.1,21.3)--(125.4,21.3)--(125.4,15.7)..
+    controls(125.4,14) and (126.1,12)..(128.4,12)..
+    controls(130.1,12) and (130.8,13.2)..(130.8,15.1)--
+    (130.8,21.3)--(132.1,21.3)--(132.1,14.8)..controls
+    (132.1,12.6) and (131.1,10.9)..(128.6,10.9)..controls
+    (126.5,10.9) and (125.7,12)..(125.3,13)--
+    (125.3,13)--(125.3,11.2)--(124.1,11.2)..controls
+    (124.2,12) and (124.2,12.8)..(124.2,13.6)--
+    (124.2,21.3)--cycle(120.9,11.2)--(119.6,11.2)--
+    (119.6,16.8)..controls(119.6,18.5) and (118.9,20.5)..
+    (116.6,20.5)..controls(114.9,20.5) and (114.2,19.3)..
+    (114.2,17.4)--(114.2,11.2)--(113.0,11.2)--
+    (113.0,17.7)..controls(113.0,19.9) and (114.0,21.6)..
+    (116.5,21.6)..controls(118.6,21.6) and (119.4,20.5)..
+    (119.8,19.6)--(119.8,19.6)--(119.8,21.4)--
+    (121.0,21.4)..controls(120.9,20.6) and (120.9,19.8)..
+    (120.9,19)--(120.9,11.2)--cycle;
+\path (198.6,29.2)--(193.3,29.2)--(193.3,52.9)..controls
+  (193.3,60) and (190.3,68.5)..(180.6,68.5)..controls
+  (173.3,68.5) and (170.4,63.3)..(170.4,55.2)--
+  (170.4,29.2)--(165.1,29.2)--(165.1,56.6)..controls
+  (165.1,66) and (169.1,73.1)..(179.7,73.1)..controls
+  (188.6,73.1) and (191.8,68.3)..(193.5,64.5)--
+  (193.7,64.5)--(193.7,72)--(198.8,72)..controls
+  (198.5,68.6) and (198.5,65.2)..(198.5,61.9)--
+  (198.5,29.2)--cycle;
+\path (283.9,72.1)--(283.9,42.6)..controls(283.9,34.3)
+  and (279.0,28.3)..(270.4,28.3)..controls(263.7,28.3)
+  and (258.7,32.3)..(256.7,37.4)--(256.5,37.4)..controls
+  (255.2,29.9) and (249.0,28.3)..(245.2,28.3)..controls
+  (236.1,28.3) and (233.6,33.7)..(231.9,36.6)--
+  (231.7,36.5)--(231.7,29.3)--(226.6,29.3)..controls
+  (226.9,32.7) and (226.9,36.1)..(226.9,39.4)--
+  (226.9,72.1)--(232.2,72.1)--(232.2,48.4)..controls
+  (232.2,37.8) and (237.9,32.8)..(243.7,32.8)..controls
+  (250.5,32.8) and (252.7,37.6)..(252.7,43.6)--
+  (252.7,72)--(258.0,72)--(258.0,48.4)..controls
+  (258.0,37.8) and (263.7,32.8)..(269.5,32.8)..controls
+  (276.3,32.8) and (278.5,37.6)..(278.5,43.6)--
+  (278.5,72)--(283.9,72)--cycle;
+\path (32.0,55.3)..controls(32.3,56.7) and (32.6,58)..
+(33.0,59.2)..controls(33.0,59.2) and (33.0,59.2)..
+(33.1,59.2)..controls(34.2,59.2) and (35.2,60.1)..
+(35.2,61.3)..controls(35.2,61.9) and (34.9,62.5)..
+(34.4,62.9)..controls(36.0,66.4) and (37.8,68.3)..
+(39.7,68.3)..controls(42.6,68.3) and (45.7,63.3)..
+(47.4,55)..controls(45.0,54.2) and (42.5,53.1)..
+(40.0,51.9)..controls(37.2,53.3) and (34.6,54.4)..
+(32.0,55.3);
+\path (34.5,49.1)..controls(33.3,48.4) and (32.0,47.6)..
+(30.8,46.8)..controls(31.0,49.4) and (31.3,51.7)..
+(31.7,53.9)..controls(33.8,53.1) and (36.0,52.2)..
+(38.3,51.2)..controls(37.1,50.5) and (35.8,49.8)..
+(34.5,49.1);
+\path (45.0,31)..controls(46.2,31.7) and (47.3,32.4)..
+(48.5,33.1)..controls(48.3,30.8) and (48.0,28.6)..
+(47.6,26.6)..controls(45.6,27.3) and (43.6,28.1)..
+(41.5,29.1)..controls(42.6,29.7) and (43.8,30.3)..
+(45.0,31);
+\path (24.8,25.7)..controls(23.8,25.7) and (23.0,25)..
+(22.8,24.1)..controls(22.0,24) and (21.3,24)..
+(20.7,24)..controls(18.0,24) and (16.2,24.7)..
+(15.4,26)..controls(14.0,28.5) and (16.7,33.6)..
+(23.0,39.2)..controls(25.0,37.5) and (27.1,35.9)..
+(29.4,34.3)..controls(29.6,31.4) and (30.0,28.5)..
+(30.5,25.9)..controls(29.1,25.5) and (27.8,25.1)..
+(26.5,24.8)..controls(26.2,25.4) and (25.5,25.7)..
+(24.8,25.7);
+\path (41.5,51.2)..controls(43.6,52.2) and (45.7,53)..
+(47.6,53.7)..controls(48.0,51.7) and (48.3,49.5)..
+(48.5,47.1)..controls(47.3,47.9) and (46.1,48.6)..
+(44.9,49.3)..controls(43.7,50) and (42.6,50.6)..
+(41.5,51.2);
+\path (47.3,25.2)..controls(47.0,23.6) and (46.6,22.1)..
+(46.1,20.7)..controls(45.0,20.6) and (44.1,19.7)..
+(44.1,18.6)..controls(44.1,18) and (44.3,17.5)..
+(44.7,17.2)..controls(43.2,14) and (41.4,12.2)..
+(39.6,12.2)..controls(36.7,12.2) and (33.7,17)..
+(32.0,25)..controls(34.5,25.9) and (37.2,27)..
+(39.8,28.3)..controls(42.4,27.1) and (44.9,26)..
+(47.3,25.2);
+\path (24.0,40.1)..controls(25.6,41.4) and (27.3,42.8)..
+(29.3,44.1)..controls(29.2,42.8) and (29.2,41.5)..
+(29.2,40.2)..controls(29.2,38.8) and (29.2,37.4)..
+(29.3,36)..controls(27.4,37.4) and (25.6,38.8)..
+(24.0,40.1);
+\path (38.3,29.1)..controls(36.1,28) and (33.9,27.1)..
+(31.7,26.4)..controls(31.3,28.5) and (31.0,30.9)..
+(30.8,33.4)..controls(32.0,32.6) and (33.2,31.9)..
+(34.4,31.2)..controls(35.7,30.5) and (37.0,29.7)..
+(38.3,29.1);
+\path (23.0,41)..controls(21.9,42) and (20.8,43)..
+(19.9,44)..controls(20.1,44.3) and (20.2,44.7)..
+(20.2,45)..controls(20.2,46.1) and (19.3,47.1)..
+(18.1,47.1)..controls(17.9,47.1) and (17.6,47.1)..
+(17.4,47)..controls(15.1,50.1) and (14.4,52.7)..
+(15.3,54.3)..controls(16.4,56.3) and (20.1,56.8)..
+(25.3,55.7)..controls(26.9,55.4) and (28.6,54.9)..
+(30.4,54.3)..controls(29.9,51.6) and (29.5,48.7)..
+(29.3,45.8)..controls(27.1,44.3) and (25.0,42.7)..
+(23.0,41);
+\path (36.9,45.2)..controls(36.9,45.8) and (37.9,46.6)..
+(39.4,46.8)..controls(39.4,46.8) and (39.4,46.8)..
+(39.4,46.8)--(39.4,43.7)..controls(38.2,43.8) and
+(36.9,44.5)..(36.9,45.2);
+\path (55.6,40.1)..controls(53.9,38.7) and (52.1,37.2)..
+(50.0,35.8)..controls(50.1,37.3) and (50.1,38.8)..
+(50.1,40.2)..controls(50.1,41.6) and (50.1,43)..
+(50.0,44.4)..controls(52.1,43) and (54.0,41.5)..
+(55.6,40.1);
+\path (56.6,41)..controls(54.6,42.8) and (52.3,44.5)..
+(49.9,46.1)..controls(49.7,48.9) and (49.4,51.6)..
+(48.9,54.1)..controls(50.4,54.6) and (51.9,55)..
+(53.4,55.3)..controls(53.7,54.6) and (54.4,54.2)..
+(55.2,54.2)..controls(56.2,54.2) and (57.1,54.9)..
+(57.2,55.9)..controls(60.7,56.2) and (63.1,55.5)..
+(64.0,54)..controls(65.5,51.6) and (62.8,46.6)..
+(56.6,41);
+\path (58.8,57.4)..controls(58.2,57.4) and (57.7,57.4)..
+(57.1,57.3)..controls(56.7,57.9) and (56.1,58.4)..
+(55.3,58.4)..controls(54.3,58.4) and (53.5,57.7)..
+(53.3,56.7)..controls(51.8,56.4) and (50.3,56)..
+(48.8,55.5)..controls(47.1,63.6) and (44.0,69.7)..
+(39.8,69.7)..controls(37.1,69.7) and (34.9,67.2)..
+(33.2,63.4)..controls(33.2,63.4) and (33.2,63.4)..
+(33.2,63.4)..controls(32.1,63.4) and (31.1,62.5)..
+(31.1,61.3)..controls(31.1,60.7) and (31.4,60.1)..
+(31.8,59.7)..controls(31.4,58.4) and (31.1,57.1)..
+(30.8,55.7)..controls(29.0,56.3) and (27.3,56.7)..
+(25.7,57.1)..controls(23.9,57.5) and (22.2,57.7)..
+(20.7,57.7)..controls(17.5,57.7) and (15.2,56.8)..
+(14.2,55.1)..controls(12.9,52.8) and (13.9,49.6)..
+(16.4,46.2)..controls(16.2,45.9) and (16.1,45.5)..
+(16.1,45.1)..controls(16.1,44) and (17.0,43)..
+(18.2,43)..controls(18.5,43) and (18.7,43.1)..
+(19.0,43.2)..controls(19.9,42.2) and (21.0,41.2)..
+(22.1,40.2)..controls(15.9,34.7) and (12.3,29)..
+(14.3,25.4)..controls(15.5,23.3) and (18.6,22.4)..
+(23.0,22.9)..controls(23.3,22.2) and (24.0,21.7)..
+(24.9,21.7)..controls(26.0,21.7) and (26.9,22.5)..
+(27.0,23.6)..controls(28.3,23.9) and (29.6,24.3)..
+(30.9,24.7)..controls(32.6,16.8) and (35.7,10.9)..
+(39.8,10.9)..controls(42.3,10.9) and (44.5,13.1)..
+(46.1,16.7)..controls(46.2,16.7) and (46.3,16.7)..
+(46.3,16.7)..controls(47.4,16.7) and (48.4,17.6)..
+(48.4,18.8)..controls(48.4,19.5) and (48.0,20.1)..
+(47.5,20.5)..controls(47.9,21.9) and (48.3,23.4)..
+(48.7,24.9)..controls(50.5,24.3) and (52.2,23.9)..
+(53.8,23.5)..controls(59.7,22.3) and (63.8,23.1)..
+(65.3,25.6)..controls(66.5,27.8) and (65.7,30.7)..
+(63.5,33.8)..controls(63.7,34.1) and (63.8,34.5)..
+(63.8,35)..controls(63.8,36.1) and (62.9,37.1)..
+(61.7,37.1)..controls(61.4,37.1) and (61.2,37)..
+(61.0,37)..controls(60.0,38.1) and (58.9,39.2)..
+(57.7,40.3)..controls(63.8,45.8) and (67.4,51.4)..
+(65.3,55)..controls(64.3,56.5) and (62.0,57.4)..
+(58.8,57.4)(39.7,8.6)..controls(22.2,8.6) and
+(8.0,22.8)..(8.0,40.2)..controls(8.0,57.7) and
+(22.2,71.8)..(39.6,71.8)..controls(57.0,71.8) and
+(71.2,57.6)..(71.2,40.2)..controls(71.3,22.8) and
+(57.1,8.6)..(39.7,8.6);
+\path (56.6,39.2)..controls(57.8,38.1) and (58.9,37)..
+(59.9,35.9)..controls(59.7,35.6) and (59.6,35.2)..
+(59.6,34.8)..controls(59.6,33.7) and (60.5,32.7)..
+(61.7,32.7)..controls(61.9,32.7) and (62.1,32.7)..
+(62.3,32.8)..controls(64.2,29.9) and (64.8,27.6)..
+(64.0,26.1)..controls(63.3,24.8) and (61.4,24.1)..
+(58.7,24.1)..controls(57.3,24.1) and (55.7,24.3)..
+(54.0,24.6)..controls(52.4,24.9) and (50.7,25.4)..
+(48.9,26)..controls(49.4,28.5) and (49.7,31.2)..
+(49.9,33.9)..controls(52.3,35.7) and (54.6,37.5)..
+(56.6,39.2);
+\path (36.5,40.9)..controls(36.5,41.6) and (37.9,42.5)..
+(39.4,42.7)--(39.4,39.2)..controls(37.9,39.4) and
+(36.5,40.2)..(36.5,40.9);
+\path (44.9,40.9)..controls(44.9,41.8) and (44.0,42.7)..
+(42.5,43.2)..controls(43.7,43.6) and (44.5,44.4)..
+(44.5,45.2)..controls(44.5,46.1) and (43.7,46.8)..
+(42.4,47.3)..controls(42.2,47.4) and (41.4,47.6)..
+(40.7,47.6)..controls(40.7,47.6) and (40.7,47.6)..
+(40.7,47.6)..controls(40.7,47.6) and (40.7,47.6)..
+(40.7,47.6)--(40.7,48.7)..controls(40.7,49) and
+(40.5,49.3)..(40.1,49.3)..controls(39.8,49.3) and
+(39.5,49.1)..(39.5,48.7)--(39.5,47.6)..controls
+(39.5,47.6) and (39.5,47.6)..(39.5,47.6)..controls
+(39.5,47.6) and (39.5,47.6)..(39.5,47.6)..controls
+(38.8,47.6) and (38.0,47.4)..(37.8,47.3)..controls
+(36.5,46.9) and (35.7,46.1)..(35.7,45.2)..controls
+(35.7,44.4) and (36.4,43.7)..(37.7,43.2)..controls
+(36.0,42.8) and (35.0,41.9)..(35.0,40.9)..controls
+(35.0,40) and (35.8,39.2)..(37.2,38.7)..controls
+(35.5,38.2) and (34.4,37.2)..(34.4,36.2)..controls
+(34.4,35.3) and (35.1,34.5)..(36.4,34)..controls
+(36.5,33.7) and (36.8,33.4)..(37.2,33.2)..controls
+(37.5,33.1) and (37.8,33.1)..(38.1,33.2)..controls
+(38.4,33.3) and (38.6,33.4)..(38.6,33.7)..controls
+(38.7,33.9) and (38.6,34.2)..(38.5,34.4)..controls
+(38.3,34.6) and (38.1,34.8)..(37.8,34.9)..controls
+(37.6,35) and (37.4,35)..(37.2,35)..controls
+(36.5,35.4) and (36.1,35.9)..(36.1,36.3)..controls
+(36.1,37.2) and (37.7,38.1)..(39.4,38.3)--
+(39.4,32)..controls(39.4,31.6) and (39.6,31.4)..
+(39.9,31.3)..controls(40.3,31.3) and (40.5,31.6)..
+(40.5,32)--(40.5,38.3)..controls(42.3,38.1) and
+(43.8,37.2)..(43.8,36.3)..controls(43.8,35.9) and
+(43.4,35.4)..(42.7,35)..controls(42.5,35) and
+(42.3,35)..(42.1,34.9)..controls(41.8,34.8) and
+(41.6,34.6)..(41.4,34.4)..controls(41.2,34.2) and
+(41.2,33.9)..(41.2,33.7)..controls(41.3,33.5) and
+(41.5,33.3)..(41.7,33.2)..controls(42.0,33.1) and
+(42.3,33.1)..(42.6,33.2)..controls(43.0,33.3) and
+(43.3,33.6)..(43.4,34)..controls(44.6,34.6) and
+(45.4,35.4)..(45.4,36.2)..controls(45.4,37.3) and
+(44.3,38.2)..(42.6,38.7)..controls(44.0,39.2) and
+(44.9,40.1)..(44.9,40.9)(44.3,32.2)..controls
+(42.8,31.4) and (41.4,30.6)..(39.9,29.8)..controls
+(38.3,30.6) and (36.7,31.4)..(35.1,32.4)..controls
+(33.6,33.3) and (32.1,34.2)..(30.7,35.1)..controls
+(30.6,36.7) and (30.5,38.5)..(30.5,40.2)..controls
+(30.5,41.9) and (30.5,43.5)..(30.6,45.1)..controls
+(32.0,46) and (33.5,47)..(35.1,47.9)..controls
+(36.7,48.8) and (38.2,49.6)..(39.8,50.4)..controls
+(41.2,49.7) and (42.7,48.9)..(44.1,48.1)..controls
+(45.6,47.2) and (47.1,46.3)..(48.5,45.4)..controls
+(48.6,43.8) and (48.7,42)..(48.7,40.3)..controls
+(48.7,38.4) and (48.6,36.6)..(48.5,34.9)..controls
+(47.2,34) and (45.8,33.1)..(44.3,32.2);
+\path (40.5,42.7)..controls(42.0,42.5) and (43.4,41.7)..
+(43.4,40.9)..controls(43.4,40.2) and (42.0,39.3)..
+(40.5,39.1)--(40.5,42.7)--cycle;
+\path (40.5,46.8)..controls(40.5,46.8) and (40.5,46.8)..
+(40.5,46.8)..controls(41.7,46.6) and (43.0,45.9)..
+(43.0,45.2)..controls(43.0,44.5) and (41.7,43.8)..
+(40.5,43.6)--(40.5,46.8)--cycle;
+\path (6.0,26.7)..controls(6.3,26.8) and (6.6,26.7)..
+(6.7,26.4)..controls(6.8,26.1) and (6.7,25.8)..
+(6.4,25.8)..controls(6.2,25.7) and (5.9,25.8)..
+(5.8,26.1)..controls(5.7,26.3) and (5.8,26.6)..
+(6.0,26.7)(3.5,33.8)..controls(5.2,34.3) and
+(6.7,33.6)..(7.2,31.8)..controls(7.7,30.1) and
+(6.7,28.7)..(5.0,28.3)..controls(3.3,27.8) and
+(1.8,28.5)..(1.3,30.3)..controls(0.8,32) and
+(1.8,33.4)..(3.5,33.8)(3.7,33)..controls
+(2.5,32.7) and (1.6,31.8)..(2.0,30.5)..controls
+(2.3,29.2) and (3.6,28.9)..(4.7,29.2)..controls
+(5.8,29.5) and (6.8,30.4)..(6.4,31.7)..controls
+(6.1,33) and (4.8,33.3)..(3.7,33)(0.8,39.2)--
+(0.9,38.2)..controls(1.0,37) and (1.8,36.1)..
+(3.2,36.2)..controls(4.7,36.3) and (5.4,37.1)..
+(5.3,38.6)--(5.2,39.5)--(0.8,39.2)--
+cycle(5.9,40.3)--(6.0,38.6)..controls(6.1,36.7) and
+(5.2,35.4)..(3.2,35.3)..controls(1.4,35.2) and
+(0.2,36.5)..(0.1,38.3)--(0.0,40)--(5.9,40.3)
+-- cycle(6.6,46.9)--(6.5,46.1)--(1.7,46.8)--
+(1.7,46.8)--(6.1,43.5)--(6.0,42.4)--(0.1,43.2)
+-- (0.2,44)--(4.9,43.3)--(4.9,43.3)--
+(0.5,46.5)--(0.7,47.6)--(6.6,46.9)--
+cycle(5.3,50.6)--(6.0,52.9)--(2.8,52.7)--
+(5.3,50.6)--cycle(8.7,53.8)--(8.4,53)--
+(6.8,52.9)--(5.9,50.2)--(7.1,49.1)--(6.8,48.2)
+-- (2.0,52.5)--(2.3,53.3)--(8.7,53.8)--
+cycle(6.1,59.9)--(5.7,59.2)..controls(5.3,58.5) and
+(5.4,58)..(5.9,57.7)..controls(6.4,57.4) and
+(6.9,57.7)..(7.3,58.4)--(7.6,59)--(6.1,59.9)
+-- cycle(11.1,58.2)--(10.7,57.5)--(8.4,58.8)--
+(8.2,58.4)..controls(8.0,58) and (7.9,57.8)..
+(8.2,57.3)--(9.6,55.5)--(9.1,54.7)--(7.6,56.8)
+.. controls(7.4,57.1) and (7.3,57.3)..(7.4,57.6)--
+(7.4,57.6)..controls(7.0,57.1) and (6.3,56.8)..
+(5.6,57.2)..controls(4.4,57.9) and (4.7,59)..
+(5.3,60)--(5.9,61)--(11.1,58.2)--
+cycle(7.4,63.5)--(8.0,64.1)--(10.6,62)..controls
+(11.5,61.3) and (12.3,61.1)..(13.0,61.9)..controls
+(13.7,62.7) and (13.3,63.5)..(12.4,64.2)--
+(9.8,66.3)--(10.3,67)--(13.0,64.8)..controls
+(14.3,63.7) and (14.4,62.5)..(13.5,61.4)..controls
+(12.6,60.3) and (11.4,60.2)..(10.1,61.3)--
+(7.4,63.5)--cycle(12.2,68.7)..controls(12.4,69.1) and
+(12.7,69.5)..(13.0,69.8)..controls(14.4,71) and
+(16.2,70.9)..(17.3,69.5)..controls(18.5,68.1) and
+(18.4,66.3)..(16.9,65.1)..controls(16.6,64.9) and
+(16.2,64.5)..(15.7,64.4)--(15.3,65)..controls
+(15.6,65.1) and (16.1,65.3)..(16.5,65.6)..controls
+(17.4,66.4) and (17.6,67.8)..(16.7,68.8)..controls
+(15.8,69.8) and (14.5,70)..(13.5,69.1)..controls
+(13.2,68.8) and (12.9,68.5)..(12.8,68.1)--
+(12.2,68.7)--cycle(20.0,70.8)..controls(20.1,70.6) and
+(20.1,70.2)..(19.9,70.1)..controls(19.7,69.9) and
+(19.4,70)..(19.2,70.3)..controls(19.0,70.5) and
+(19.1,70.8)..(19.3,71)..controls(19.5,71) and
+(19.9,71)..(20.0,70.8)(26.6,74.6)..controls
+(27.4,73) and (27.0,71.4)..(25.3,70.6)..controls
+(23.7,69.8) and (22.2,70.5)..(21.4,72.2)..controls
+(20.7,73.8) and (21.1,75.4)..(22.7,76.2)..controls
+(24.4,76.9) and (25.9,76.2)..(26.6,74.6)(25.8,74.2)
+.. controls(25.3,75.3) and (24.2,76)..(23.1,75.5)..
+controls(21.9,75) and (21.8,73.7)..(22.3,72.6)..
+controls(22.8,71.5) and (23.8,70.8)..(25.0,71.3)..
+controls(26.3,71.9) and (26.3,73.2)..
+(25.8,74.2)(31.2,78.2)--(30.2,77.9)..controls
+(29.0,77.6) and (28.3,76.6)..(28.7,75.2)..controls
+(29.1,73.7) and (30.1,73.3)..(31.5,73.6)--
+(32.4,73.8)--(31.2,78.2)--cycle(33.4,73.4)--
+(31.7,73)..controls(29.8,72.5) and (28.4,73.2)..
+(27.9,75.1)..controls(27.4,76.9) and (28.5,78.3)..
+(30.2,78.7)--(31.9,79.2)--(33.4,73.4)--
+cycle(39.9,74)--(39.0,74)--(38.7,78.9)--
+(38.7,78.9)--(36.3,73.9)--(35.2,73.8)--
+(34.9,79.7)--(35.7,79.7)--(36.0,74.9)--
+(36.0,74.9)--(38.3,79.8)--(39.5,79.9)--
+(39.9,74)--cycle(44.9,73.6)--(41.6,74)--
+(41.7,74.7)--(44.2,74.4)--(44.4,76.3)--
+(42.2,76.6)--(42.3,77.3)--(44.5,77)--
+(44.7,78.7)--(42.2,79)--(42.3,79.7)--
+(45.6,79.3)--(44.9,73.6)--cycle(48.0,78.9)..controls
+(48.5,79) and (48.9,78.9)..(49.3,78.8)..controls
+(51.0,78.3) and (52.0,76.8)..(51.5,75)..controls
+(51.0,73.2) and (49.4,72.4)..(47.6,72.9)..controls
+(47.3,73) and (46.7,73.2)..(46.4,73.5)--
+(46.7,74.3)..controls(46.9,74) and (47.4,73.8)..
+(47.9,73.7)..controls(49.1,73.4) and (50.3,74)..
+(50.7,75.3)..controls(51.1,76.6) and (50.5,77.8)..
+(49.2,78.2)..controls(48.8,78.3) and (48.4,78.3)..
+(47.9,78.2)--(48.0,78.9)--cycle(57.8,72.2)..controls
+(57.0,70.6) and (55.5,69.9)..(53.9,70.7)..controls
+(52.3,71.5) and (51.9,73.1)..(52.7,74.7)..controls
+(53.5,76.3) and (55.0,77)..(56.6,76.2)..controls
+(58.2,75.4) and (58.5,73.7)..(57.8,72.2)(57.0,72.6)
+.. controls(57.5,73.7) and (57.4,75)..(56.3,75.5)..
+controls(55.1,76.1) and (54.1,75.3)..(53.5,74.3)..
+controls(53.0,73.2) and (53.0,72)..(54.2,71.4)..
+controls(55.4,70.8) and (56.4,71.5)..
+(57.0,72.6)(63.5,71)--(62.7,71.6)..controls
+(61.7,72.3) and (60.5,72.2)..(59.7,71.1)..controls
+(58.8,69.9) and (59.1,68.8)..(60.3,68)--
+(61.0,67.5)--(63.5,71)--cycle(61.2,66.2)--
+(59.8,67.2)..controls(58.2,68.3) and (57.8,69.9)..
+(59.0,71.5)..controls(60.1,73) and (61.8,73.1)..
+(63.3,72)--(64.7,71)--(61.2,66.2)--
+cycle(65.0,66.2)..controls(64.8,66) and (64.5,66)..
+(64.3,66.2)..controls(64.1,66.4) and (64.1,66.7)..
+(64.3,66.9)..controls(64.5,67.1) and (64.8,67.1)..
+(65.0,66.9)..controls(65.1,66.7) and (65.2,66.4)..
+(65.0,66.2)(70.2,60.6)..controls(68.8,59.5) and
+(67.1,59.5)..(66.0,61)..controls(64.9,62.4) and
+(65.2,64)..(66.7,65.1)..controls(68.1,66.2) and
+(69.8,66.2)..(70.9,64.7)..controls(72.0,63.3) and
+(71.6,61.7)..(70.2,60.6)(69.7,61.3)..controls
+(70.6,62) and (71.1,63.2)..(70.3,64.3)..controls
+(69.5,65.3) and (68.2,65.2)..(67.3,64.4)..controls
+(66.4,63.7) and (65.8,62.5)..(66.7,61.4)..controls
+(67.5,60.3) and (68.7,60.6)..(69.7,61.3)(74.8,56.8)
+-- (74.3,57.7)..controls(73.7,58.8) and (72.6,59.2)..
+(71.3,58.6)..controls(70.0,57.9) and (69.7,56.8)..
+(70.4,55.6)--(70.8,54.8)--(74.8,56.8)--
+cycle(70.6,53.7)--(69.8,55.2)..controls(68.9,56.9) and
+(69.2,58.5)..(71.0,59.4)..controls(72.6,60.3) and
+(74.2,59.5)..(75.0,58)--(75.8,56.5)--
+(70.6,53.7)--cycle(72.6,47.5)--(72.4,48.3)--
+(77.1,49.7)--(77.1,49.7)--(71.7,50.9)--
+(71.4,51.9)--(77.1,53.6)--(77.3,52.8)--
+(72.7,51.5)--(72.7,51.5)--(78.0,50.3)--
+(78.3,49.2)--(72.6,47.5)--cycle(73.2,42.4)--
+(72.8,45.7)--(73.5,45.8)--(73.8,43.3)--
+(75.7,43.5)--(75.5,45.7)--(76.2,45.8)--
+(76.4,43.6)--(78.1,43.8)--(78.0,46.3)--
+(78.7,46.4)--(79.1,43.1)--(73.2,42.4)--
+cycle(73.2,39.3)--(73.2,40.1)--(79.1,40)--
+(79.1,39.2)--(73.2,39.3)--cycle(78.9,36.9)..controls
+(79.0,36.5) and (79.0,36)..(79.0,35.5)..controls
+(78.8,33.7) and (77.4,32.6)..(75.6,32.8)..controls
+(73.7,33.1) and (72.7,34.5)..(73.0,36.3)..controls
+(73.0,36.6) and (73.1,37.2)..(73.4,37.6)--
+(74.2,37.4)..controls(74.0,37.1) and (73.8,36.6)..
+(73.7,36.2)..controls(73.5,35) and (74.3,33.9)..
+(75.7,33.7)..controls(77.0,33.5) and (78.1,34.3)..
+(78.3,35.6)..controls(78.4,36) and (78.3,36.5)..
+(78.1,36.9)--(78.9,36.9)--cycle(77.8,30.3)..controls
+(77.8,29.9) and (77.8,29.4)..(77.6,29)..controls
+(77.3,28) and (76.5,27.3)..(75.5,27.6)..controls
+(73.7,28.1) and (74.8,30.5)..(73.5,30.8)..controls
+(72.8,31) and (72.4,30.4)..(72.2,30)..controls
+(72.1,29.6) and (72.1,29.1)..(72.1,28.7)--
+(71.3,28.8)..controls(71.3,29.2) and (71.3,29.6)..
+(71.4,30)..controls(71.7,31.1) and (72.5,31.9)..
+(73.7,31.6)..controls(75.6,31.1) and (74.6,28.7)..
+(75.7,28.4)..controls(76.3,28.2) and (76.6,28.7)..
+(76.7,29.2)..controls(76.8,29.6) and (76.8,29.9)..
+(76.8,30.3)--(77.8,30.3)--cycle(72.7,25.6)..controls
+(72.5,25.7) and (72.3,26)..(72.4,26.3)..controls
+(72.5,26.5) and (72.8,26.7)..(73.1,26.6)..controls
+(73.4,26.5) and (73.5,26.2)..(73.4,26)..controls
+(73.3,25.6) and (73.0,25.5)..(72.7,25.6)(66.2,19.4)
+-- (66.7,20.1)--(71.0,17.3)--(71.0,17.3)--
+(67.7,21.7)--(68.1,22.4)--(73.5,21.3)--
+(73.5,21.3)--(69.2,24.1)--(69.7,24.8)--
+(74.7,21.6)--(73.9,20.4)--(68.8,21.5)--
+(71.9,17.3)--(71.1,16.1)--(66.2,19.4)--
+cycle(63.2,16.3)--(65.5,18.7)--(66.0,18.2)--
+(64.3,16.4)--(68.0,12.8)--(67.4,12.2)--
+(63.2,16.3)--cycle(65.4,10.3)--(64.7,9.8)--
+(62.6,12.4)..controls(61.9,13.3) and (61.1,13.7)..
+(60.3,13)..controls(59.4,12.3) and (59.6,11.5)..
+(60.3,10.6)--(62.5,8)--(61.8,7.5)--(59.7,10.2)
+.. controls(58.7,11.5) and (58.8,12.7)..(59.9,13.6)..
+controls(61.1,14.5) and (62.3,14.3)..(63.3,13)--
+(65.4,10.3)--cycle(53.3,9.6)--(54.1,10)--
+(56.3,5.3)--(57.9,6)--(58.2,5.3)--(54.1,3.4)
+-- (53.8,4.1)--(55.5,4.9)--(53.3,9.6)--
+cycle(51.1,1.9)--(51.9,2.1)--(52.1,1.3)--
+(51.3,1.1)--(51.1,1.9)--cycle(49.7,1.5)--
+(50.5,1.7)--(50.7,0.9)--(50.0,0.7)--(49.7,1.5)
+-- cycle(50.7,6.2)--(48.4,5.5)--(50.4,3)--
+(50.7,6.2)--cycle(46.1,7.1)--(47.0,7.4)--
+(48.0,6.1)--(50.8,7)--(51.0,8.6)--(51.9,8.9)
+-- (51.2,2.5)--(50.3,2.2)--(46.1,7.1)--
+cycle(43.6,6.9)--(44.4,7)--(45.1,1.9)--
+(46.9,2.1)--(47.0,1.4)--(42.5,0.8)--(42.4,1.5)
+-- (44.2,1.7)--(43.6,6.9)--cycle(40.0,6.6)--
+(40.8,6.6)--(41.0,0.7)--(40.2,0.7)--(40.0,6.6)
+-- cycle(37.6,0.9)..controls(37.2,0.8) and (36.7,0.8)..
+(36.3,0.8)..controls(35.2,0.9) and (34.5,1.5)..
+(34.6,2.6)..controls(34.8,4.4) and (37.3,3.8)..
+(37.4,5.2)..controls(37.5,5.9) and (36.8,6.2)..
+(36.3,6.3)..controls(35.9,6.3) and (35.3,6.2)..
+(35.1,6.1)--(35.1,6.9)..controls(35.5,7) and
+(35.9,7.1)..(36.3,7)..controls(37.5,6.9) and
+(38.4,6.3)..(38.3,5.1)..controls(38.1,3.2) and
+(35.6,3.6)..(35.5,2.5)..controls(35.4,1.9) and
+(36.0,1.7)..(36.5,1.6)..controls(36.9,1.6) and
+(37.2,1.6)..(37.6,1.7)--(37.6,0.9)--
+cycle(29.4,2.8)--(30.2,2.6)..controls(31.0,2.4) and
+(31.4,2.7)..(31.6,3.2)..controls(31.7,3.8) and
+(31.4,4.2)..(30.6,4.4)--(29.9,4.6)--(29.4,2.8)
+-- cycle(29.8,8)--(30.6,7.8)--(30.0,5.3)--
+(30.5,5.2)..controls(31.0,5.1) and (31.2,5)..
+(31.6,5.5)--(33.0,7.3)--(33.9,7.1)--(32.3,5.1)
+.. controls(32.0,4.8) and (31.9,4.7)..(31.6,4.7)--
+(31.6,4.7)..controls(32.2,4.4) and (32.6,3.8)..
+(32.5,3.1)..controls(32.2,1.7) and (31.0,1.8)..
+(29.9,2.1)--(28.5,2.4)--(29.8,8)--
+cycle(25.1,9.9)--(28.1,8.6)--(27.8,7.9)--
+(25.5,8.9)--(24.7,7.1)--(26.8,6.2)--(26.5,5.5)
+-- (24.4,6.4)--(23.7,4.8)--(26.0,3.8)--
+(25.7,3.1)--(22.7,4.4)--(25.1,9.9)--
+cycle(20.7,5.4)--(20.0,5.9)--(21.2,11.3)--
+(21.2,11.3)--(16.9,7.9)--(16.1,8.4)--(21.2,12.2)
+-- (22.1,11.6)--(20.7,5.4)--cycle(17.7,14.8)--
+(18.4,14.3)--(14.6,9.7)--(13.9,10.2)--
+(17.7,14.8)--cycle(13.0,19.6)--(13.6,19)--
+(10.0,15.7)--(10.0,15.7)--(15.4,17)--
+(16.1,16.2)--(11.7,12.2)--(11.1,12.8)--
+(14.6,16)--(14.6,16)--(9.3,14.7)--(8.5,15.6)
+-- (13.0,19.6)--cycle(6.9,18)--(6.5,18.7)--
+(9.4,20.4)..controls(10.4,21) and (10.9,21.7)..
+(10.3,22.6)..controls(9.7,23.5) and (8.9,23.4)..
+(7.9,22.9)--(5.0,21.2)--(4.6,21.9)--(7.6,23.7)
+.. controls(9.0,24.6) and (10.2,24.3)..(11.0,23)..
+controls(11.7,21.7) and (11.4,20.6)..(10.0,19.7)--
+(6.9,18)--cycle;
+\end{tikzpicture}\fi}%uulmlogo
 \endinput
