@@ -590,11 +590,11 @@ keepspaces=false}
 {\end{lrbox}\sol@highlights@box[sol@listings@highlight]{\@tempboxa}\endgroup}
 
 \newcommand*\sol@highlights@box[2][]{%
-  \hspace*{-.35\p@}\tikz[#1]{%
+  \hspace*{-\p@}\tikz[#1]{%
   \pgfpathrectangle{\pgfpoint{\p@}{\z@}}{\pgfpoint{\wd #2}{\ht #2}}%
   \pgfusepath{use as bounding box}%
-  \node[anchor=base west,outer sep=\z@,inner xsep=\z@,outer xsep=\p@,inner ysep=\z@,rounded corners=1.65\p@,minimum height=\ht\strutbox+\p@,#1]{\hspace*{.35\p@}\strut\usebox{#2}\hspace*{-.35\p@}};
-  }\hspace*{.35\p@}%
+  \node[anchor=base west,outer sep=\z@,inner xsep=\z@,outer xsep=\p@,inner ysep=\z@,rounded corners=1.65\p@,minimum height=\ht\strutbox+\p@,#1]{\hspace*\p@\strut\usebox{#2}\hspace*{-.5\p@}};
+  }\hspace*{.5\p@}%
 }
 
 \def\@solLstHL#1{\begin{sol@listings@highlight@env}[#1]\bgroup\aftergroup\sol@highlights@endenv}
