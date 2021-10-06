@@ -99,8 +99,7 @@
 \IfFileExists{listingsutf8.sty}{\RequirePackage{listingsutf8} }%
   {\RequirePackage{listings}}
 
-\IfFileExists{accsupp.sty}{\RequirePackage{accsupp} %
-    \sol@accuspp@available@true}%
+\IfFileExists{accsupp.sty}{\RequirePackage{accsupp} \sol@accuspp@available@true}%
   {\sol@accuspp@available@false}%
 
 \ifsol@guardspace@\RequirePackage{needspace}\fi
@@ -116,7 +115,7 @@
 \def\sol@font@fs@numbers{\footnotesize}
 \def\solNumFs#1{\gdef\sol@font@fs@numbers{#1}}
 \def\sol@font@fs@normal{}
-\newcommand*\lstfs[2][\@ne]{%
+\newcommand*\lstfs[2][1]{%
   \def\sol@font@fs@normal{\fontsize{#2}{#2}\linespread{#1}\selectfont}%
   \ifnum#2>7\edef\sol@lst@@subfs{\the\numexpr #2-4}\def\sol@font@fs@numbers{\fontsize\sol@lst@@subfs\sol@lst@@subfs\linespread{#1}\selectfont}%
   \else\def\sol@font@fs@numbers{\tiny\linespread{#1}}\fi
@@ -200,9 +199,7 @@
 \fi
 
 \ifsol@lst@style@upshape@
-\sol@list@define@styles{%
- {basic: \sol@ttfamily\upshape},%
-}
+\sol@list@define@styles{{basic: \sol@ttfamily\upshape},}
 \fi
 
 % Helper Functions
@@ -591,7 +588,7 @@ keepspaces=false}
 
 \newcommand*\sol@highlights@box[2][]{%
   \hspace*{-\p@}\tikz[#1]{%
-  \pgfpathrectangle{\pgfpoint{\p@}{\z@}}{\pgfpoint{\wd #2}{\ht #2}}%
+  \pgfpathrectangle{\pgfpoint\p@\z@}{\pgfpoint{\wd #2}{\ht #2}}%
   \pgfusepath{use as bounding box}%
   \node[anchor=base west,outer sep=\z@,inner xsep=\z@,outer xsep=\p@,inner ysep=\z@,rounded corners=1.65\p@,minimum height=\ht\strutbox+\p@,#1]{\hspace*\p@\strut\usebox{#2}\hspace*{-.5\p@}};
   }\hspace*{\p@}%
