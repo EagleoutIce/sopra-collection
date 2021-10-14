@@ -43,7 +43,7 @@
             \def\pkgparse#1:#2\@nil{%
                 \T{#1}\ifx!#2!\else\textsuperscript{(#2)}\fi%
             }
-            \foreach \pkg in {xcolor:,attachfile2:,graphicx:{\jmark[\T{attsymbols}]{mrk:attsymbols}, \jmark[\T{usefa}]{mrk:usefa}},fontawesome:{\jmark[\T{usefa}]{mrk:usefa}}} {
+            \foreach \pkg in {xcolor:,attachfile2:,graphicx:{\jmark[\T{attsymbols}]{mrk:attsymbols}, \jmark[\T{usefa}]{mrk:usefa}},fontawesome5:{\jmark[\T{usefa}]{mrk:usefa}}} {
                 \item \expandafter\pkgparse\pkg\@nil
             }
         \end{itemize}
@@ -118,7 +118,7 @@ In Version \thesoaversion{} (\cmdref{thesoaversion}) gilt: es wird keine Standar
     \end{argument}
 
     \begin{argument}{usefa}{nousefa}
-        Mit \T{usefa} werden die Pakete \emph{fontawesome} sowie \emph{graphicx} geladen. Vor den angehängten Dateien wird bei den Text-Kommandos wie \cmdref{attachDocumentText} eine Papierklammer vorangestellt um das Anhängen deutlich zu machen. Mit \T{nousefa} erhält man das Verhalten vor Version \T{v1.1.00} zurück.
+        Mit \T{usefa} werden die Pakete \emph{fontawesome5} sowie \emph{graphicx} geladen. Vor den angehängten Dateien wird bei den Text-Kommandos wie \cmdref{attachDocumentText} eine Papierklammer vorangestellt um das Anhängen deutlich zu machen. Mit \T{nousefa} erhält man das Verhalten vor Version \T{v1.1.00} zurück.
     \end{argument}
 
 \subsection{Weitere Hinweise}
