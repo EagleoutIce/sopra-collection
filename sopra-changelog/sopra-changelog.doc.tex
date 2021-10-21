@@ -45,7 +45,7 @@
             \def\pkgparse#1:#2\@nil{%
                 \T{#1}\ifx!#2!\else\textsuperscript{(#2)}\fi%
             }
-            \foreach \pkg in {environ:,fontawesome5:,marginfix:,hyperref:} {
+            \foreach \pkg in {environ:,fontawesome:,marginfix:,hyperref:} {
                 \item \expandafter\pkgparse\pkg\@nil
             }
         \end{itemize}
