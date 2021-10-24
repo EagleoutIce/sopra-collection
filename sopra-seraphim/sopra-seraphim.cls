@@ -1,6 +1,4 @@
 % sopra-seraphim.cls
-%
-% ----------
 % Version: 1.0
 % Author:  Florian Sihler, 15.12.2019
 %
@@ -20,7 +18,6 @@
 
 
 % Lengths and Registers
-
 \newcounter{sosversion} \setcounter{sosversion}{1007}
 \newcounter{sos@counter@tmp@a}
 
