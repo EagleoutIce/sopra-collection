@@ -7,17 +7,14 @@
 % presentations
 %                      ulm university, WiSe2019
 
-
 % Development notes:
 %    All internal commands and registers will be prefixed with 'sos@
 %
-
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sopra-seraphim}[2019/15/02 EagleoutIce - Beamer Documentclass for the sopra-team-020]
 
 
-% Lengths and Registers
 \newcounter{sosversion} \setcounter{sosversion}{1007}
 \newcounter{sos@counter@tmp@a}
 
@@ -25,8 +22,6 @@
 
 \newif\ifsos@applystyle@% if set, style to sopra-* will be automatically set!
 \newif\ifsos@handout@
-
-% Class-Args
 
 % apply style
 \DeclareOption{setstyle}{ \sos@applystyle@true }
@@ -39,18 +34,12 @@
 \ProcessOptions\relax
 
 
-% Documentclass
-
-% \PassOptionsToPackage{}{beamer}
-
-% we set the metdata by our self
+% we set the metadata by our self
 \ifsos@handout@
 \LoadClass[aspectratio=169,usepdftitle=false,hyperref={colorlinks},handout,t]{beamer}
 \else
 \LoadClass[aspectratio=169,usepdftitle=false,hidelinks,t]{beamer}
 \fi
-
-% Basic Packages
 
 % encoding:
 \RequirePackage[T1]{fontenc}
@@ -65,8 +54,6 @@
 \RequirePackage[english,main=ngerman]{babel}
 \RequirePackage{microtype}
 
-
-% Helper Methods
 
 \def\sos@thesosversion#1#2#3#4\@nil{{v#1.#2.#3#4}}
 \edef\sos@version@str{\noexpand\sos@thesosversion\arabic{sosversion}\noexpand\@nil}
@@ -130,11 +117,11 @@
 % black/contrast color to be used in the document
 \definecolor{sos@color@primary}  {RGB}{012,010,007}       % RGB(012,010,007)
 \definecolor{sos@color@akzent}   {RGB}{150,128,081}       % RGB(150,128,081)
-% \definecolor{sos@color@akzent}   {RGB}{150,128,081}       % RGB(162,150,088)
+% \definecolor{sos@color@akzent}   {RGB}{150,128,081}     % RGB(162,150,088)
 
 \definecolor{sos@color@light}    {RGB}{236,200,128}       % RGB(236,200,128)
 
-\definecolor{sos@color@gray}{RGB}{ 99, 97, 96}           % RGB(99,97,96)
+\definecolor{sos@color@gray}{RGB}{ 99, 97, 96}            % RGB(99,97,96)
 \definecolor{sos@color@white}{RGB}{252,252,252}           % RGB(252,252,252)
 
 % \definecolor{sos@color@highlight}{RGB}{135,076,150}     % RGB(135,076,150)

@@ -1,7 +1,6 @@
 % sopra-requirements.sty
 % Version: 1.0
 % Author:  Florian Sihler, 03.12.2019
-%
 % Will contain all the definitions to easily typeset and reference
 % Functional-, Qualitative- and other Requirements.
 
@@ -33,8 +32,6 @@
 \newif\ifsor@showtag@ % should the nametag be shown?
 \newif\ifsor@showall@ % should all fields be shown?
 
-% Package-Args
-
 % allow debug-options :D
 \DeclareOption{usetabu}{\sor@usetabu@true}
 \DeclareOption{notabu}{\sor@usetabu@false}
@@ -47,16 +44,12 @@
 \ExecuteOptions{usetabu,intoc,showtag}%
 \ProcessOptions\relax
 
-% Basic Packages
-
 \ifsor@usetabu@ \RequirePackage{tabu} \RequirePackage{colortbl} \else \RequirePackage{booktabs} \fi
 \RequirePackage{makecell,longtable,xcolor,environ,amssymb,etoolbox,fontawesome,hyperref}
 
 % New Columns
-% 'Key'-column
-\newcolumntype{K}{p{.175\linewidth}}%>{\small}
-% 'Value'-column
-\newcolumntype{V}{p{.725\linewidth}}
+\newcolumntype{K}{p{.175\linewidth}}% 'Key'-column
+\newcolumntype{V}{p{.725\linewidth}}% 'Value'-column
 
 % Color Definitions
 
