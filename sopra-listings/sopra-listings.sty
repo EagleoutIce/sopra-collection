@@ -247,12 +247,12 @@
 \ifsol@numinpar@\solSetLeftMargin{\@@sol@numinpar@length}\fi
 
 % Handling of automated number-highlighting in listings;
-\def\sol@@lst@hl@digit#1{\begingroup
+\newcommand\sol@@lst@hl@digit[2][\sol@style@get{numbers}]{\begingroup
 \ifsol@lst@lastwas@character@
-\global\sol@lst@lastwas@charkeep@true#1\else\global\sol@lst@lastwas@charkeep@false
+\global\sol@lst@lastwas@charkeep@true#2\else\global\sol@lst@lastwas@charkeep@false
   \ifnum\lst@mode=\lst@Pmode\relax% PMode: Not in any special Mode
-  {\sol@style@get{numbers}#1}%
-  \else#1\fi
+  {#1#2}%
+  \else#2\fi
 \fi
 \endgroup}
 \ifsol@highlight@numbers@\let\sol@dgt\sol@@lst@hl@digit
