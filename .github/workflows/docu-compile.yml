@@ -2,9 +2,9 @@ name: Compile all documentations and examples
 
 on:
   push:
-    branches: [ master, main ]
+    branches: [master, main]
   pull_request:
-    branches: [ master, main ]
+    branches: [master, main]
 
 jobs:
   build:
@@ -18,8 +18,8 @@ jobs:
       - name: Setup Python environment for sltx
         uses: actions/setup-python@v2
         with:
-          python-version: '3.8'
-      - name: Setup and run sltx-install (and pu)
+          python-version: "3.8"
+      - name: Setup and run sltx-install \(and pu)
         run: |
           sudo apt install poppler-utils
           pip install six sltx
@@ -28,31 +28,31 @@ jobs:
       - name: Compile sopra-attachments
         run: |
           cd sopra-attachments
-          find \"../\" ( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' ) -type f -not -path \"../sopra-attachments/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages
+          find "../" \( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \) -type f -not -path "../sopra-attachments/*" -print0 | xargs -0 -I '{}' cp '{}' "./" && cp -r ../sopra-listings/Languages ./Languages
           sltx compile --root --profile "tx-default" "sopra-attachments.doc.tex"
 
       - name: Compile sopra-base
         run: |
           cd sopra-base
-          find \"../\" ( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' ) -type f -not -path \"../sopra-base/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages
+          find "../" \( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \) -type f -not -path "../sopra-base/*" -print0 | xargs -0 -I '{}' cp '{}' "./" && cp -r ../sopra-listings/Languages ./Languages
           sltx compile --root --profile "tx-default" "sopra-base.doc.tex"
 
       - name: Compile sopra-changelog
         run: |
           cd sopra-changelog
-          find \"../\" ( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' ) -type f -not -path \"../sopra-changelog/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages
+          find "../" \( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \) -type f -not -path "../sopra-changelog/*" -print0 | xargs -0 -I '{}' cp '{}' "./" && cp -r ../sopra-listings/Languages ./Languages
           sltx compile --root --profile "tx-default" "sopra-changelog.doc.tex"
 
       - name: Compile sopra-documentation
         run: |
           cd sopra-documentation
-          find \"../\" ( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' ) -type f -not -path \"../sopra-documentation/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages
+          find "../" \( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \) -type f -not -path "../sopra-documentation/*" -print0 | xargs -0 -I '{}' cp '{}' "./" && cp -r ../sopra-listings/Languages ./Languages
           sltx compile --root --profile "tx-default" "sopra-documentation.doc.tex"
 
       - name: Compile sopra-listings
         run: |
           cd sopra-listings
-          find \"../\" ( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' ) -type f -not -path \"../sopra-listings/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\"
+          find "../" \( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \) -type f -not -path "../sopra-listings/*" -print0 | xargs -0 -I '{}' cp '{}' "./"
           sltx compile --root --profile "tx-default" "sopra-listings.doc.tex"
 
       - name: Compile sopra-listings example
@@ -64,43 +64,43 @@ jobs:
       - name: Compile sopra-models
         run: |
           cd sopra-models
-          find \"../\" ( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' ) -type f -not -path \"../sopra-models/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages
+          find "../" \( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \) -type f -not -path "../sopra-models/*" -print0 | xargs -0 -I '{}' cp '{}' "./" && cp -r ../sopra-listings/Languages ./Languages
           sltx compile --root --profile "tx-default" "sopra-models.doc.tex"
 
       - name: Compile sopra-paper
         run: |
           cd sopra-paper
-          find \"../\" ( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' ) -type f -not -path \"../sopra-paper/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages
+          find "../" \( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \) -type f -not -path "../sopra-paper/*" -print0 | xargs -0 -I '{}' cp '{}' "./" && cp -r ../sopra-listings/Languages ./Languages
           sltx compile --root --profile "tx-default" "sopra-paper.doc.tex"
 
       - name: Compile sopra-requirements
         run: |
           cd sopra-requirements
-          find \"../\" ( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' ) -type f -not -path \"../sopra-requirements/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages
+          find "../" \( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \) -type f -not -path "../sopra-requirements/*" -print0 | xargs -0 -I '{}' cp '{}' "./" && cp -r ../sopra-listings/Languages ./Languages
           sltx compile --root --profile "tx-default" "sopra-requirements.doc.tex"
 
       - name: Compile sopra-seraphim
         run: |
           cd sopra-seraphim
-          find \"../\" ( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' ) -type f -not -path \"../sopra-seraphim/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages
+          find "../" \( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \) -type f -not -path "../sopra-seraphim/*" -print0 | xargs -0 -I '{}' cp '{}' "./" && cp -r ../sopra-listings/Languages ./Languages
           sltx compile --root --profile "tx-default" "sopra-seraphim.doc.tex"
 
       - name: Compile sopra-ntts
         run: |
           cd sopra-ntts
-          find \"../\" ( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' ) -type f -not -path \"../sopra-ntts/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages
+          find "../" \( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \) -type f -not -path "../sopra-ntts/*" -print0 | xargs -0 -I '{}' cp '{}' "./" && cp -r ../sopra-listings/Languages ./Languages
           sltx compile --root --profile "tx-default" "sopra-ntts.doc.tex"
 
       - name: Compile sopra-standard
         run: |
           cd sopra-standard
-          find \"../\" ( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' ) -type f -not -path \"../sopra-standard/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages
+          find "../" \( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \) -type f -not -path "../sopra-standard/*" -print0 | xargs -0 -I '{}' cp '{}' "./" && cp -r ../sopra-listings/Languages ./Languages
           sltx compile --root --profile "tx-default" "sopra-standard.doc.tex"
 
       - name: Compile sopra-tables
         run: |
           cd sopra-tables
-          find \"../\" ( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' ) -type f -not -path \"../sopra-tables/*\" -print0 | xargs -0 -I '{}' cp '{}' \"./\" && cp -r ../sopra-listings/Languages ./Languages
+          find "../" \( -name '*.sty' -o -name '*.cls'  -o -name 'installer.py' \) -type f -not -path "../sopra-tables/*" -print0 | xargs -0 -I '{}' cp '{}' "./" && cp -r ../sopra-listings/Languages ./Languages
           sltx compile --root --profile "tx-default" "sopra-tables.doc.tex"
 
       - name: Compile sopra-tables example
@@ -121,4 +121,3 @@ jobs:
           branch: "gh-pages"
           github_token: ${{ secrets.GITHUB_TOKEN }}
           force: true
-
