@@ -1,6 +1,4 @@
 % sopra-tables.sty
-%
-% ----------
 % Version: 1.0
 % Author:  Florian Sihler, 03.12.2019
 %
@@ -16,12 +14,10 @@
 \newcounter{sotversion} \setcounter{sotversion}{1004}
 
 \newif\ifsot@usetabu@ % we can use regular tabular - if tabu won't work.
-
 \newif\ifsot@cpalette@ % if enabled, tables will adapt to color-palettes
 \newif\ifsot@invert@ % if enabled invert color definitions
 
 % Package-Args
-
 % allow debug-options :D
 \DeclareOption{usetabu}{ \sot@usetabu@true }%
 \DeclareOption{notabu}{ \sot@usetabu@false }%
@@ -48,8 +44,6 @@
 \ifsot@invert@\let\sot@table@headerstyle\sot@table@headerstyle@inv
 \else\let\sot@table@headerstyle\sot@table@headerstyle@norm\fi
 
-
-
 \@ifundefined{thesobversion}{% not called from sopra-base-class
     \colorlet{MaterialHeaderColor}{purple}
     \colorlet{NextMaterialHeaderColor}{purple!75!white}
@@ -60,20 +54,12 @@
 
 
 % Fixes for the tabu-package
-
 \ifsot@usetabu@
-\def\tabu@classz{%
-    %  \ifx\tabu@prepnext@tok\prepnext@tok% in tabu
-        %    \expandafter\tabu@classz@oldarray
-        %  \else
-        \tabu@classzORI
-        %  \fi
-    }%
-    \def\tabu@ignorehfil{\tabu@nohfil}
+\def\tabu@classz{\tabu@classzORI}
+\def\tabu@ignorehfil{\tabu@nohfil}
 \fi
 
 % Define the Header and next-header commands
-
 \def\sot@init{%
 \ifsot@usetabu@
     \def\sot@table@headerrow{%
