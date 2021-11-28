@@ -454,7 +454,6 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 \fi}%
 \def\sol@foreach@inline@env##1{\sol@foreach@inline@env@iter##1,\@nil}
 \sol@foreach@inline@env{default,blank,input}%,present}
-%
 % END: Register Language as present, by definig a command
 \endgroup}
 
@@ -562,8 +561,7 @@ keepspaces=false}
 \lstcolorlet{comments}{lightgray!45!darkgray!90!black}%
 \lstcolorlet{highlight}{paletteD!90!black}%
 \lstcolorlet{command}{paletteB!90!black}%
-}%
-\else
+}\else
 \def\sol@cpalette@hook{%
 \lstcolorlet{keywordA}{paletteA!90!black}%
 \lstcolorlet{keywordB}{paletteB!90!black}%
