@@ -203,7 +203,6 @@
 
 
 % Set the Title for the maketitle command
-
 \def\sob@team@name{Gruppe}
 
 \renewcommand{\maketitle}{
@@ -253,8 +252,7 @@
 \vspace*{\sob@headheight pt}\par
 }
 
-% Footer
-
+% pagestyle
 \clearpairofpagestyles
 \renewcommand\headfont{\normalfont}
 \chead{%
@@ -264,8 +262,7 @@
         node[midway,centered,text=sob@col@text@header] {\strut\pagemark};
     \fill[sob@col@uulm@akzent!40] (current page.north east) rectangle
         ($(current page.north west)+(15mm,-8mm)$);
-    \node[right=\z@,text=sob@col@uulm@akzent!50!black,inner sep=\z@] at
-        ($(current page.north west)+(\sob@len@header,-4mm)$)%
+    \path ($(current page.north west)+(\sob@len@header,0)$) -- ++(0,-8mm) node[right=\z@,text=sob@col@uulm@akzent!50!black,inner sep=\z@,pos=.5]%
         {\strut\sob@register@title\space$\mid$ \sob@register@short@subtitle};
 \end{tikzpicture}%.75*\sob@len@header
 }
