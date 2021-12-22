@@ -10,7 +10,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sopra-base}[2019/12/02 EagleoutIce - Basic Documentclass for the sopra-team-020]
 % this class won't base on KOMA or other nice Documentclass :/
-\LoadClass{article}
+\LoadClass[twoside]{article}
 % Lengths and Registers
 \newcounter{sobversion} \setcounter{sobversion}{1001}
 
@@ -258,7 +258,7 @@
 
 \clearpairofpagestyles
 \renewcommand\headfont{\normalfont}
-\chead{%
+\cehead{%
 \begin{tikzpicture}[remember picture, overlay]
     \fill[sob@col@uulm@cs]($(current page.north west)+(15mm,0)$)
         rectangle ($(current page.north west)+(0,-8mm)$) %
@@ -266,11 +266,22 @@
     \fill[sob@col@uulm@akzent!40] (current page.north east) rectangle
         ($(current page.north west)+(15mm,-8mm)$);
     \node[right=\z@,text=sob@col@uulm@akzent!50!black,inner sep=\z@] at
-        ($(current page.north west)+(\sob@len@header,-4mm)$)%
+        ($(current page.north west)+(\sob@len@header,-4.2mm)$)%
         {\strut\sob@register@title\space$\mid$ \sob@register@short@subtitle};
 \end{tikzpicture}%.75*\sob@len@header
 }
-
+\cohead{%
+\begin{tikzpicture}[remember picture, overlay]
+    \fill[sob@col@uulm@cs]($(current page.north east)+(-15mm,0)$)
+        rectangle ($(current page.north east)+(0,-8mm)$) %
+        node[midway,centered,text=sob@col@text@header] {\strut\pagemark};
+    \fill[sob@col@uulm@akzent!40] (current page.north west) rectangle
+        ($(current page.north east)+(-15mm,-8mm)$);
+    \node[left=\z@,text=sob@col@uulm@akzent!50!black,inner sep=\z@] at
+        ($(current page.north east)+(-\sob@len@header,-4.2mm)$)%
+        {\strut\sob@register@title\space$\mid$ \sob@register@short@subtitle};
+\end{tikzpicture}%.75*\sob@len@header
+}
 % Logo stuff
 % PGF commands, generated using http://sourceforge.net/projects/eps2pgf/
 \newcommand*\uulmlogo[1]{%
