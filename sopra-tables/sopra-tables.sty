@@ -1,12 +1,9 @@
 % sopra-tables.sty
 % Version: 1.0
 % Author:  Florian Sihler, 03.12.2019
-%
 % Will contain all the definitions to easily typeset and reference
 % Tables with tabu or booktabs. The design might be a reminiscence
 % to sopra-requirements but won't need the package to be happy :D
-%
-
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-tables}[2019/12/03 EagleoutIce - tables for the sopra-team-020]
 
@@ -19,26 +16,24 @@
 
 % Package-Args
 % allow debug-options :D
-\DeclareOption{usetabu}{ \sot@usetabu@true }%
-\DeclareOption{notabu}{ \sot@usetabu@false }%
+\DeclareOption{usetabu}{ \sot@usetabu@true }
+\DeclareOption{notabu}{ \sot@usetabu@false }
 
 % Color-Palettes
-\DeclareOption{cpalette}{ \sot@cpalette@true }%
-\DeclareOption{nocpalette}{ \sot@cpalette@false }%
+\DeclareOption{cpalette}{ \sot@cpalette@true }
+\DeclareOption{nocpalette}{ \sot@cpalette@false }
 
-\DeclareOption{invert}{ \sot@invert@true }%
-\DeclareOption{noinvert}{ \sot@invert@false }%
+\DeclareOption{invert}{ \sot@invert@true }
+\DeclareOption{noinvert}{ \sot@invert@false }
 
 \ExecuteOptions{usetabu}% set it explicitly
-\ProcessOptions\relax%
+\ProcessOptions\relax
 
 % Basic Packages
-
 \ifsot@usetabu@ \RequirePackage{tabu} \RequirePackage{colortbl} \else \RequirePackage{booktabs} \fi
 \RequirePackage{makecell,longtable,amssymb,xcolor,etoolbox}
 
 % Color Definitions
-
 \def\sot@table@headerstyle@inv{\color{MaterialHeaderColor}}
 \def\sot@table@headerstyle@norm{\color{white}}
 \ifsot@invert@\let\sot@table@headerstyle\sot@table@headerstyle@inv
@@ -137,11 +132,7 @@
     {You have to load the 'color-palettes' package yourself if you use the 'cpalette'-Option.}%
 }{% Add to the hook..
 }
-\let\sot@old@cpl@hooks\cpl@hooks
-\def\cpl@hooks{% Add to the hook
-    \sot@old@cpl@hooks
-    \sot@cpalette@hook
-}
+\appto\cpl@hooks{\sot@cpalette@hook}
 % TODO: maybe change later?
 \def\sot@cpalette@hook{%
     \colorlet{MaterialHeaderColor}{paletteA}%
