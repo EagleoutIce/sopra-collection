@@ -8,7 +8,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-listings}[2021/01/08 EagleoutIce - listings for the sopra-team-020]
 % Lengths and Registers
-\newcounter{solversion} \setcounter{solversion}{1021}
+\newcounter{solversion} \setcounter{solversion}{1022}
 % note this will be used with tcb:
 \newdimen\sol@length@lst@outer@spacing \sol@length@lst@outer@spacing=3\p@
 
@@ -428,13 +428,13 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 % #2: Name of the Language [java,latex]
 % #3: Name of the corresponding lst-Language [lJava, lLatex,...]
 \newcommand*\RegisterLanguage[3][]{\begingroup\makeatletter
-\edef\@tmp{#1}\ifx\@tmp\@empty
+\ifsol@lst@fake@minted@\edef\@tmp{#1}\ifx\@tmp\@empty
 % register a mapping
 \expandafter\gdef\csname sol@@minted@#2\endcsname{#3}%
 \else
 % register all aliases instead
 \@for\@alias:=\@tmp\do{\expandafter\gdef\csname sol@@minted@\@alias\endcsname{#3}}%
-\fi
+\fi\fi
 % Register the Environments
 \def\sol@foreach@basic@env@iter##1,##2\@nil{%
 \ifx!##1!\else
@@ -622,6 +622,7 @@ keepspaces=false}
 % allows to map languages
 
 \def\sol@minted@language@mapping#1{\@ifundefined{sol@@minted@#1}{#1}{\csname sol@@minted@#1\endcsname}}
+\def\solmintedmap#1#2{\expandafter\def\csname sol@@minted@#1\endcsname{#2}}
 
 \def\solsetmintedstyle#1{\def\sol@minted@style{#1}}
 \solsetmintedstyle{default}

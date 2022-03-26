@@ -110,7 +110,12 @@ Sichert nun auch die letzte Zeile eines Listings im Falle von \argref{guardspace
 \paragraph{Version v1.0.19:}
 Kursive Schrift für Typewriter Schriftart wird nun sicherer angewendet. Ein paar ungenutzte Komfort-Funktionen wurden entfernt.
 \paragraph{Version v1.0.20:}
-Die Funktion \T{autogobble} wurde wieder entfernt, ebenso wurde die Paketstruktur intern überarbeite.
+Die Funktion \T{autogobble} wurde wieder entfernt, ebenso wurde die Paketstruktur intern überarbeitet.
+\paragraph{Version v1.0.21:}
+Es wurden einige Code-Interne Restrukturierungen durchgeführt.
+\paragraph{Version v1.0.22:}
+Unterstützung für \T{fakeminted}.
+
 % In Version \thesolversion{} (\cmdref{thesolversion}) gibt es (sonst) keine weiteren
 % Besonderheiten.
 
@@ -179,9 +184,20 @@ Die Funktion \T{autogobble} wurde wieder entfernt, ebenso wurde die Paketstruktu
     \end{argument}
 
 
+    \begin{argument}{nofakeminted}{fakeminted}
+        Ist die Option gesetzt, so wird eine \env{minted} Umgebung erzeugt, welche es erlaubt dieses Paket wie \env{minted} zu verwenden. In diesem Fall heißt es:
+\begin{plainlatex}
+\begin{minted}{java}
+public static void main(String[] args) { }
+\end{minted}
+\end{plainlatex}
+        Mit \cmdref{solmintedmap} kann ein Sprach-Mapping erzeugt werden. So wird beispielsweise automatisch \T{java} auf die interne Sprache \T{lJava} abgebildet.
+        Durch \cmdref{solsetmintedstyle} kann gewählt werden, welcher der internen Stile für das Listing verwendet werden soll. Zur Verfügung stehen \T{default}, \T{nonumber} und \T{plain}.
+    \end{argument}
+
 \subsection{Farben}
 
-    Dieses Paket definiert einige Farben mittels \cmd{colorlet}. Wird \T{sopra-base} als geladen erkannt, wird versucht passende Farben zu setzen. \imptext{Alle folgenden Farben tragen das Präfix \T{sol@colors@}}: \T{border}, \T{background}, \T{lst@keywordA}, \T{lst@keywordB}, \T{lst@keywordC}, \T{lst@numbers}, \T{lst@literals}, \T{lst@comments}, \T{lst@highlight} und \T{lst@command}, wobei die Bedeutung der einzelnen Farben aufgrund ihres Namens hervorgehen sollte (jeder Sprache steht es frei die gleich zu besprechenden Stile, die
+    Dieses Paket definiert einige Farben mittels \cmd{colorlet}. Wird \T{sopra-base} als geladen erkannt, wird versucht passende Farben zu setzen. \imptext{Alle folgenden Farben tragen das Präfix \T{sol@colors@}}: \T{border}, \T{background}, \T{lst@keywordA}, \T{lst@keywordB}, \T{lst@keywordC}, \T{lst@numbers}, \T{lst@literals}, \T{lst@comments}, \T{lst@highlight} und zuletzt \T{lst@command}, wobei die Bedeutung der einzelnen Farben aufgrund ihres Namens hervorgehen sollte (jeder Sprache steht es frei die gleich zu besprechenden Stile, die
     auf diesen Farben aufbauen, (beliebig) zu verwenden). Beispielsweise kann man die Farbe
     von Kommentaren wie folgt ändern (\cmdref{lstcolorlet}):
 \begin{plainlatex}[morekeywords={[2]{\\lstcolorlet}}]
@@ -203,7 +219,7 @@ public static void main(...){ /* ... */ }
 
 \subsection{Stile}
     Zur Hervorhebung der einzelnen Segmente im Listing werden den Farben entlehnte Stile definiert, die ebenfalls frei verändert werden können. \notetext{Entwicklernotiz, die
-    Stile sollten bei einer kompletten Neudefintion über \cmd{sol@list@define@styles}
+    Stile sollten bei einer kompletten Neudefintion mithilfe des Befehls \cmd{sol@list@define@styles}
     definiert werden. Sonst ist das Präfix, das im Folgenden verwendet werden soll in
     \cmd{sol@lst@style@prefix} abgespeichert.}\par{}
     Alle im folgenden aufgeführten Befehle tragen (sofern nicht modifiziert) das Präfix
@@ -325,7 +341,7 @@ Dies ist ein Test für \cjava{public static void main} - hat er geklappt?
     Sucht und Lädt Sprachen in \T{solLanguageSearchPath}. Es können mehrere Sprachen mittels Kommaseparierung angegeben werden. Der Befehl kann mehrfach aufgerufen werden, erlaubt aber nicht, die selbe Sprache mehrfach zu laden. Die Sprache muss in einer Datei mit dem Namensschema \T{language\_<LanguageName>.cfg} definiert sein. Also zum Beispiel \T{language\_java.cfg}. Wie die Definition einer Sprache auszusehen hat, erklärt \cmdref{RegisterLanguage}. \notetext{Die Sprache \T{lVoid} mit \T{void} wird immer geladen und kann als Verbatim-Umgebung verwendet werden.}
 \end{command}
 
-\begin{command}{RegisterLanguage}{\manArg{Sprache}\manArg{LanguageName}}
+\begin{command}{RegisterLanguage}{\optArg{Aliasse}\manArg{Sprache}\manArg{LanguageName}}
     Registriert eine Sprache mit dem Namen \T{LanguageName} als \T{Sprache}. Dieser Aufruf muss von jeder Konfiguration selbst durchgeführt werden. \par{}
     Im Folgenden Beispiel gilt es die Sprache \T{Rubberduck} zu definieren und zu laden. In die Konfigurationsdatei schreiben wir:
 \begin{latex}
@@ -359,7 +375,10 @@ Quack jens ::{
     Quack Quack. # Entisch, es ist so simpel
 }
 \end{rubberduck}
-    \notetext{Die Befehle wie \cmdref{c<Sprache>}, also \cmd{crubberduck} funkionieren natürlich auch: \crubberduck{Duck jens}.}
+    \notetext{Die Befehle wie \cmdref{c<Sprache>}, also \cmd{crubberduck} funktionieren natürlich auch: \crubberduck{Duck jens}.}
+
+    Ist \T{fakeminted} nicht gesetzt, so haben die Aliasse aktuell keine Bedeutung.
+    Werden sonst keine Aliasse übergeben, so wird automatisch ein mapping (\cmdref{solmintedmap}) von \T{Sprache} zu \T{LanguageName} erstellt. Andernfalls, wird für jedes (kommasepariertes) Alias, ein Mapping zu \T{LanguageName} kreiert, sodass es mit \envref{minted} verwendbar ist.
 \end{command}
 
 \subsection{Allgemeine Befehle}
@@ -410,7 +429,7 @@ public static void main(...){ /* ... */ }
 \end{command}
 
 \begin{command}{solGet}{\manArg{StilName}\manArg{Text}}
-    Setzt \T{Text} im Stil von \T{StilName} wie ihn das Paket auch selbst verwendet. So zum Beispiel: \bjava{\\solGet\{comments\}\{Hallo Welt\}} ergibt: \solGet{comments}{Hallo Welt}.
+    Setzt \T{Text} im Stil von \T{StilName} wie ihn das Paket auch selbst verwendet. So zum Beispiel:\\*\bjava{\\solGet\{comments\}\{Hallo Welt\}} ergibt: \solGet{comments}{Hallo Welt}.
 \end{command}
 
 \begin{command}{solNumFs}{\manArg{size}}
@@ -467,6 +486,23 @@ public static int add(int a, int b){ return a + b; }
 \begin{command}{solguard}{\manArg{Zeilen}}
     Mit der Paketoption \argref{guardspace}{noguardspace} kann so angegeben werden, wie viele Zeilen geschützt werden müssen.
     Der Standard ist: \glqq{}{\makeatletter\@sol@guard@default}\grqq. Hinweis: Dies betrifft nur die Zeilen für den Beginn. Die letzte Zeile wird aktuell immer mit \cmd{nobreak} gesichert.
+\end{command}
+
+\subsection{Minted spezifisches}
+
+Ist die Paketoption \T{fakeminted} gesetzt, so existieren weiter die folgenden Befehle und Umgebungen.
+
+\begin{environment}{minted}{\optArg{lising-Args}\manArg{language}}
+    Setzt den eingeschlossenen Text im Stil von \cmdref{solsetmintedstyle}, wobei die Sprache wie in \cmdref{solmintedmap} konfiguriert, abgebildet wird.
+\end{environment}
+
+\begin{command}{solmintedmap}{\manArg{from}\manArg{to}}
+    Erstellt oder überschreibt eine Sprachabbildung für \envref{minted}.
+    Durch \cmdref{RegisterLanguage} wird dies automatisch vollzogen (allerdings direkt durch interne Mechanismen).
+\end{command}
+
+\begin{command}{solsetmintedstyle}{\manArg{default/nonumber/plain}}
+    Aktualisiert den von \envref{minted} zu verwendenden Stil.
 \end{command}
 
 \clearpage
