@@ -40,6 +40,8 @@
 \newif\ifsol@lst@style@defaultfont@ % don't change font?
 \sol@lst@style@defaultfont@true
 
+\newif\ifsol@lst@fake@minted@
+
 \newif\ifsol@debug@% typeout debug
 
 % Package-Args
@@ -77,6 +79,9 @@
 % highlights
 \DeclareOption{highlights}{\sol@lst@style@highlights@true}
 \DeclareOption{nohighlights}{\sol@lst@style@highlights@false}
+% minted
+\DeclareOption{fakeminted}{\sol@lst@fake@minted@true}
+\DeclareOption{nofakeminted}{\sol@lst@fake@minted@false}
 % debug
 \DeclareOption{debug}{\sol@debug@true}
 \DeclareOption{nodebug}{\sol@debug@false}
@@ -419,16 +424,24 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 }
 
 % The colossos: core registration handler
-% #1: Name of the Language [java,latex]
-% #2: Name of the corresponding lst-Language [lJava, lLatex,...]
-\def\RegisterLanguage#1#2{\begingroup\makeatletter
+% #1 list of aliases
+% #2: Name of the Language [java,latex]
+% #3: Name of the corresponding lst-Language [lJava, lLatex,...]
+\newcommand*\RegisterLanguage[3][]{\begingroup\makeatletter
+\edef\@tmp{#1}\ifx\@tmp\@empty
+% register a mapping
+\expandafter\gdef\csname sol@@minted@#2\endcsname{#3}%
+\else
+% register all aliases instead
+\@for\@alias:=\@tmp\do{\expandafter\gdef\csname sol@@minted@\@alias\endcsname{#3}}%
+\fi
 % Register the Environments
 \def\sol@foreach@basic@env@iter##1,##2\@nil{%
 \ifx!##1!\else
 \def\environName{##1}%
-\edef\environCurName{\pgfkeysvalueof{/sol@lst@family/\environName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/\environName/command name suffix}}% assign
-\sol@debug{> #1/#2 e '##1' (name: \environCurName, ctor: \pgfkeysvalueof{/sol@lst@family/\environName/constructor command})}%
-\edef\sol@CreateAnLstEnviron{\noexpand\sol@@NewLstEnv{\environName}{#2}{\environCurName}}% fully expand the Name, otherwise it would be undefined when the environment gets used
+\edef\environCurName{\pgfkeysvalueof{/sol@lst@family/\environName/command name prefix}#2\pgfkeysvalueof{/sol@lst@family/\environName/command name suffix}}% assign
+\sol@debug{> #2/#3 e '##1' (name: \environCurName, ctor: \pgfkeysvalueof{/sol@lst@family/\environName/constructor command})}%
+\edef\sol@CreateAnLstEnviron{\noexpand\sol@@NewLstEnv{\environName}{#3}{\environCurName}}% fully expand the Name, otherwise it would be undefined when the environment gets used
 \sol@CreateAnLstEnviron
 \ifx!##2!\else\sol@foreach@basic@env@iter##2,\@nil\fi
 \fi}
@@ -441,14 +454,14 @@ rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
 \def\sol@foreach@inline@env@iter##1,##2\@nil{%
 \ifx!##1!\else
 \def\inlineName{##1}%
-\edef\inlineCurName{\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name prefix}#1\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name suffix}}% assign
-\sol@debug{> #1/#2 i '\inlineName' (cmd: \inlineCurName, sty: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style}, d: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command})}%
+\edef\inlineCurName{\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name prefix}#2\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name suffix}}% assign
+\sol@debug{> #2/#3 i '\inlineName' (cmd: \inlineCurName, sty: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style}, d: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command})}%
 % We will construct those with optional arguments, to give the user a chance to pass optional Arguments :D
 % luckily we can construct the main Argument without any expansion problems :D
 \expandafter\xdef\csname\inlineCurName\endcsname{\noexpand\protect\noexpand\@ifnextchar[{\noexpand\protect\expandafter\noexpand\csname @@hasopt@@\inlineCurName\endcsname}{\noexpand\protect\expandafter\noexpand\csname @@noopt@@\inlineCurName\endcsname}}%
 % Variant without optionals :D
-\expandafter\xdef\csname @@noopt@@\inlineCurName\endcsname####1{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#2]{####1}}%
-\expandafter\xdef\csname @@hasopt@@\inlineCurName\endcsname[####1]####2{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#2,####1]{####2}}%
+\expandafter\xdef\csname @@noopt@@\inlineCurName\endcsname####1{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#3]{####1}}%
+\expandafter\xdef\csname @@hasopt@@\inlineCurName\endcsname[####1]####2{\noexpand\protect\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command}\endcsname[style=\pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style},language=#3,####1]{####2}}%
 \expandafter\robustify\csname\inlineCurName\endcsname% robustify
 \ifx!##2!\else\sol@foreach@inline@env@iter##2,\@nil\fi
 \fi}%
@@ -603,4 +616,14 @@ keepspaces=false}
 \colorlet{sol@breakcolor}{gray}
 \preto\lst@@discretionary{\@declaredcolor{sol@breakcolor}}
 \appto\lst@@discretionary{\normalcolor}
+
+\ifsol@lst@fake@minted@
+\def\sol@minted@setup#1#2#3{\lstset{style=#1,language=#2,#3}}
+% allows to map languages
+
+\def\sol@minted@language@mapping#1{\@ifundefined{sol@@minted@#1}{#1}{\csname sol@@minted@#1\endcsname}}
+
+\def\sol@minted@style{default}
+\lstnewenvironment{minted}[2][]{\edef\@tmp{\pgfkeysvalueof{/sol@lst@family/\sol@minted@style/listing style}}\expandafter\sol@minted@setup\expandafter{\@tmp}{\sol@minted@language@mapping{#2}}{#1}}{}
+\fi
 \endinput
