@@ -624,6 +624,6 @@ keepspaces=false}
 \def\sol@minted@language@mapping#1{\@ifundefined{sol@@minted@#1}{#1}{\csname sol@@minted@#1\endcsname}}
 
 \def\sol@minted@style{default}
-\lstnewenvironment{minted}[2][]{\edef\@tmp{\pgfkeysvalueof{/sol@lst@family/\sol@minted@style/listing style}}\expandafter\sol@minted@setup\expandafter{\@tmp}{\sol@minted@language@mapping{#2}}{#1}}{}
+\lstnewenvironment{minted}[2][]{\edef\@tmp{\pgfkeysvalueof{/sol@lst@family/\sol@minted@style/listing style}}\edef\@temp{\sol@minted@language@mapping{#2}}\expandafter\expandafter\expandafter\sol@minted@setup\expandafter\expandafter\expandafter{\expandafter\@tmp\expandafter}\expandafter{\@temp}{#1}}{}
 \fi
 \endinput
