@@ -49,6 +49,9 @@
 % TODO: document
 % #2 counter
 \def\argref#1#2{\hyperref[mrk:#1]{\T{#1 (#2)}}\textsuperscript{$\rightarrow$\thinspace p. \pageref{mrk:#1}}}
+% only shows second
+\def\firstargref#1#2{\hyperref[mrk:#1]{\T{#1}}\textsuperscript{$\rightarrow$\thinspace p. \pageref{mrk:#1}}}
+\def\secondargref#1#2{\hyperref[mrk:#1]{\T{#2}}\textsuperscript{$\rightarrow$\thinspace p. \pageref{mrk:#1}}}
 
 % #1: name of the present-sequence #2: Args of the present-sequence #3: presenter style #4: prefix of cs-name
 \newenvironment{present}[4]{\phantomsection\label{mrk:#1}%

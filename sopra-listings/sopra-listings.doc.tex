@@ -114,7 +114,7 @@ Die Funktion \T{autogobble} wurde wieder entfernt, ebenso wurde die Paketstruktu
 \paragraph{Version v1.0.21:}
 Es wurden einige Code-Interne Restrukturierungen durchgeführt.
 \paragraph{Version v1.0.22:}
-Unterstützung für \T{fakeminted}.
+Unterstützung für \argref{nofakeminted}{fakeminted}.
 
 % In Version \thesolversion{} (\cmdref{thesolversion}) gibt es (sonst) keine weiteren
 % Besonderheiten.
@@ -377,7 +377,7 @@ Quack jens ::{
 \end{rubberduck}
     \notetext{Die Befehle wie \cmdref{c<Sprache>}, also \cmd{crubberduck} funktionieren natürlich auch: \crubberduck{Duck jens}.}
 
-    Ist \T{fakeminted} nicht gesetzt, so haben die Aliasse aktuell keine Bedeutung.
+    Ist \secondargref{nofakeminted}{fakeminted} nicht gesetzt, so haben die Aliasse aktuell keine Bedeutung.
     Werden sonst keine Aliasse übergeben, so wird automatisch ein mapping (\cmdref{solmintedmap}) von \T{Sprache} zu \T{LanguageName} erstellt. Andernfalls, wird für jedes (kommasepariertes) Alias, ein Mapping zu \T{LanguageName} kreiert, sodass es mit \envref{minted} verwendbar ist.
 \end{command}
 
@@ -490,7 +490,7 @@ public static int add(int a, int b){ return a + b; }
 
 \subsection{Minted spezifisches}
 
-Ist die Paketoption \T{fakeminted} gesetzt, so existieren weiter die folgenden Befehle und Umgebungen.
+Ist die Paketoption \secondargref{nofakeminted}{fakeminted} gesetzt, so existieren weiter die folgenden Befehle und Umgebungen.
 
 \begin{environment}{minted}{\optArg{lising-Args}\manArg{language}}
     Setzt den eingeschlossenen Text im Stil von \cmdref{solsetmintedstyle}, wobei die Sprache wie in \cmdref{solmintedmap} konfiguriert, abgebildet wird.
