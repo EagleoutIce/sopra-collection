@@ -344,8 +344,7 @@ numbers=none,numbersep=\z@}
   numbers=none,numbersep=\z@,frame=none,rulecolor={},backgroundcolor={},#1}}
 {\def\sol@lst@backcol{MudWhite}}
 
-\lstnewenvironment{lstnonum}[1][]
-  {\lstset{style=sol@nonum,#1}}{}
+\lstnewenvironment{lstnonum}[1][]{\lstset{style=sol@nonum,#1}}{}
 
 % Here we will handle the language-control - right now, tcb will not be used
 % for cleaner setup, we will use pgfkeys
