@@ -334,6 +334,12 @@
 
 \newcommand*\sol@dlst@input[2][]{\begingroup\lstinputlisting[#1]{#2}\endgroup}
 
+% the defaults come second to overwrite the "ultimate"/global defaults passed in ##1 :D
+\def\SolSetInputDefaults#1{\renewcommand*\sol@dlst@input[2][]{\begingroup \lstinputlisting[##1,#1]{##2}\endgroup}}
+
+\def\SolRemoveInputBackground{\SolSetInputDefaults{frame=none,%
+rulecolor={},backgroundcolor={}}}
+
 % Lst styles that will be shipped in each case
 \lstdefinestyle{sol@nonum}{xleftmargin=3\p@,xrightmargin=3\p@,%will fix some overhead :D
 numbers=none,numbersep=\z@}
