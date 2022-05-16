@@ -296,7 +296,8 @@
 \fi}
 
 % The basic literate table
-\lstset{literate=%
+\def\SolSetLiterateTable{%
+\lstset{add to literate=%
   {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1 {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1
   {ù}{{\`u}}1 {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1 {ä}{{\"a}}1
   {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1 {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1
@@ -319,7 +320,8 @@
   {.4}{{\sol@dgt{.4}}}2 {.5}{{\sol@dgt{.5}}}2 {.6}{{\sol@dgt{.6}}}2
   {.7}{{\sol@dgt{.7}}}2 {.8}{{\sol@dgt{.8}}}2 {.9}{{\sol@dgt{.9}}}2
   {:lmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash(}}}2 {:rmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash)}}}2 {:ldmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash[}}}2 {:rdmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash]}}}2 {:ul:}{{\_}}1}
-
+}
+\SolSetLiterateTable
 % Basic and internal highlighting definitions
 % please note, that they will apply under every condition!
 \newcommand*\sol@dlst@default[2][]{%
