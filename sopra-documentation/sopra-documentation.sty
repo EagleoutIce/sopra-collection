@@ -41,6 +41,8 @@
 % Commands and Environments
 \def\manArg#1{\T{\{#1\}}}
 \def\optArg#1{\T{\itshape[#1]}}
+\def\optFlag#1{\T{\itshape$\langle$*$\rangle$}}
+\def\optStar{\optFlag*}
 \def\cmd#1{\solGet{command}{\textbackslash#1}}
 \def\env#1{\solGet{keywordC}{env@#1}}
 \def\cmdref#1{\hyperref[mrk:#1]{\solGet{command}{\textbackslash#1}}\textsuperscript{$\rightarrow$\thinspace p. \pageref{mrk:#1}}}

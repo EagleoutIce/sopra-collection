@@ -436,8 +436,9 @@ public static void main(...){ /* ... */ }
     Ändert die Schriftgröße der Zeilennummern separat.
 \end{command}
 
-\begin{command}{lstfs}{\optArg{linespread}\manArg{size}}
-    Passt die Schriftgröße des Codes wie auch die der Zeilennummern an. Bei letzteren wird versucht eine geeignete Größe zu finden:
+\begin{command}{lstfs}{\optStar\optArg{linespread}\manArg{size}}
+    Passt die Schriftgröße des Codes wie auch die der Zeilennummern an. Bei letzteren wird versucht eine geeignete Größe zu finden.
+    Die Variante mit Stern hat \textit{keine} Angabe der \T{size}, in diesem Fall wird automatisch die aktuelle Schriftgröße gesetzt.
 \begin{latex}[morekeywords={[5]{\\lstfs}}]
 \begin{java}
 public static int add(int a, int b){ return a + b; }
