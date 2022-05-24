@@ -40,6 +40,8 @@
 \newif\ifsol@lst@style@defaultfont@ % don't change font?
 \sol@lst@style@defaultfont@true
 
+\newif\ifsol@lst@style@inlinesize@ % don't change font?
+
 \newif\ifsol@lst@fake@minted@
 
 \newif\ifsol@debug@% typeout debug
@@ -76,6 +78,10 @@
 % numinpar
 \DeclareOption{defaultfont}{\sol@lst@style@defaultfont@true}
 \DeclareOption{nodefaultfont}{\sol@lst@style@defaultfont@false}
+% inlinesize
+\DeclareOption{inlinesize}{\sol@lst@style@inlinesize@true}
+\DeclareOption{noinlinesize}{\sol@lst@style@inlinesize@false}
+\sol@lst@style@inlinesize@true
 % highlights
 \DeclareOption{highlights}{\sol@lst@style@highlights@true}
 \DeclareOption{nohighlights}{\sol@lst@style@highlights@false}
@@ -326,18 +332,19 @@
 \SolSetLiterateTable
 % Basic and internal highlighting definitions
 % please note, that they will apply under every condition!
+\newif\if@lst@within@inline@
 \newcommand*\sol@dlst@default[2][]{%
 \begingroup\fboxsep=\z@\fcolorbox{sol@colors@border}{sol@colors@background}{%
-  \thinspace\strut\lstinline[#1,keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak]`#2`\thinspace
+  \ifsol@lst@style@inlinesize@\@lst@within@inline@true\fi\thinspace\strut\lstinline[#1,keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak]`#2`\thinspace
 }\endgroup}
 
 \newcommand*\sol@dlst@blank[2][]{%
-\begingroup\thinspace\lstinline[#1,keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak]`#2`\endgroup}
+\begingroup\thinspace\ifsol@lst@style@inlinesize@\@lst@within@inline@true\fi\lstinline[#1,keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak]`#2`\endgroup}
 
-\newcommand*\sol@dlst@input[2][]{\begingroup\lstinputlisting[#1]{#2}\endgroup}
+\newcommand*\sol@dlst@input[2][]{\begingroup\ifsol@lst@style@inlinesize@\@lst@within@inline@true\fi\lstinputlisting[#1]{#2}\endgroup}
 
 % the defaults come second to overwrite the "ultimate"/global defaults passed in ##1 :D
-\def\SolSetInputDefaults#1{\renewcommand*\sol@dlst@input[2][]{\begingroup \lstinputlisting[##1,#1]{##2}\endgroup}}
+\def\SolSetInputDefaults#1{\renewcommand*\sol@dlst@input[2][]{\begingroup\ifsol@lst@style@inlinesize@\@lst@within@inline@true\fi\lstinputlisting[##1,#1]{##2}\endgroup}}
 
 \def\SolRemoveInputBackground{\SolSetInputDefaults{frame=none,%
 rulecolor={},backgroundcolor={}}}
@@ -398,7 +405,7 @@ draw command/.initial={sol@dlst@input}}
 \solguard{.8}
 \def\sol@guardspace{\ifsol@guardspace@\sol@ensure{\@sol@guard@default}\fi}
 % on line:
-\lst@AddToHook{PreInit}{\sol@font@fs@normal}
+\lst@AddToHook{PreInit}{\if@lst@within@inline@\else\sol@font@fs@normal\fi}
 
 % #1 Name #2 Key #3 In Extra #4 Out Extra #5 Language
 \def\sol@NewLstEnvCore#1#2#3#4#5{%
