@@ -120,7 +120,9 @@
 \def\sol@font@fs@numbers{\footnotesize}
 \def\solNumFs#1{\gdef\sol@font@fs@numbers{#1}}
 \def\sol@font@fs@normal{}
-\newcommand*\lstfs[2][1]{%
+% \sol@font@size
+\newcommand*\lstfs[1][1]{\@ifstar{\@lstfs{#1}{\sol@font@size}}{\@lstfs{#1}}}
+\def\@lstfs#1#2{%
   \def\sol@font@fs@normal{\fontsize{#2}{#2}\linespread{#1}\selectfont}%
   \ifnum#2>7\edef\sol@lst@@subfs{\the\numexpr #2-4}\def\sol@font@fs@numbers{\fontsize\sol@lst@@subfs\sol@lst@@subfs\linespread{#1}\selectfont}%
   \else\def\sol@font@fs@numbers{\tiny\linespread{#1}}\fi
