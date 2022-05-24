@@ -183,7 +183,6 @@ Unterstützung für \argref{nofakeminted}{fakeminted}.
         Wenn die Option gesetzt ist, wird die Typewriter-Schriftart auf \say{AnonymousPro} geändert, sonst nicht.
     \end{argument}
 
-
     \begin{argument}{nofakeminted}{fakeminted}
         Ist die Option gesetzt, so wird eine \env{minted} Umgebung erzeugt, welche es erlaubt dieses Paket wie \env{minted} zu verwenden. In diesem Fall heißt es:
 \begin{plainlatex}
@@ -195,6 +194,9 @@ public static void main(String[] args) { }
         Durch \cmdref{solsetmintedstyle} kann gewählt werden, welcher der internen Stile für das Listing verwendet werden soll. Zur Verfügung stehen \T{default}, \T{nonumber} und \T{plain}.
     \end{argument}
 
+    \begin{argument}{inlinesize}{noinlinesize}
+        Wenn die Option gesetzt ist, wird in den inline-Befehlen wie \cmd{bjava} die Schriftgröße nicht angepasst (siehe hierfür auch \cmdref{lstfs} mit Sternchen).
+    \end{argument}
 \subsection{Farben}
 
     Dieses Paket definiert einige Farben mittels \cmd{colorlet}. Wird \T{sopra-base} als geladen erkannt, wird versucht passende Farben zu setzen. \imptext{Alle folgenden Farben tragen das Präfix \T{sol@colors@}}: \T{border}, \T{background}, \T{lst@keywordA}, \T{lst@keywordB}, \T{lst@keywordC}, \T{lst@numbers}, \T{lst@literals}, \T{lst@comments}, \T{lst@highlight} und zuletzt \T{lst@command}, wobei die Bedeutung der einzelnen Farben aufgrund ihres Namens hervorgehen sollte (jeder Sprache steht es frei die gleich zu besprechenden Stile, die
