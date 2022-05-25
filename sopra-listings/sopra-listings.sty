@@ -410,19 +410,19 @@ draw command/.initial={sol@dlst@input}}
 % #1 Name #2 Key #3 In Extra #4 Out Extra #5 Language
 \def\sol@NewLstEnvCore#1#2#3#4#5{%
 %This does already work, but has the drawback of not being able to provide the (wanted) different styles
-\lstnewenvironment{#1}[1][]{#3\lstset{##1}\sol@guardspace}{#4}%
+\lstnewenvironment{#1}[1][]{#3\lstset{##1}\sol@guardspace}{\lstset{lineskip=0pt}#4}%
 }
 
 % #1 Name #2 Key #3 In Extra #4 Out Extra #5 Language
 \def\sol@NewLstEnvCoreStarred#1#2#3#4#5{%
-\lstnewenvironment{#1}[1][]{#3\lstset{style=sol@nonum,##1}\sol@guardspace}{#4}%
+\lstnewenvironment{#1}[1][]{#3\lstset{style=sol@nonum,##1}\sol@guardspace}{\lstset{lineskip=0pt}#4}%
 }
 
 % #1 Name #2 Key #3 In Extra #4 Out Extra #5 Language
 \def\sol@NewLstEnvPlain#1#2#3#4#5{%
 \lstnewenvironment{#1}[1][]{#3\lstset{xleftmargin=\z@,xrightmargin=\z@,%
 numbers=none,numbersep=\z@,frame=none,%
-rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
+rulecolor={},backgroundcolor={},##1}\sol@guardspace}{\lstset{lineskip=0pt}#4}%
 }
 
 % #1 Name #2 Key #3 In Extra #4 Out Extra #5 Language
