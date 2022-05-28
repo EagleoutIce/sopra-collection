@@ -17,7 +17,7 @@
 \newdimen\sol@length@lst@xleftmargin \sol@length@lst@xleftmargin=3\p@
 \newdimen\sol@length@lst@xrightmargin \sol@length@lst@xrightmargin=3\p@
 
-\def\sol@lst@prebreak{\hbox{\sol@font@fs@numbers$\hookleftarrow$}} % allow definition of own symbol
+\def\sol@lst@prebreak{\rlap{\sol@font@fs@numbers$\hookleftarrow$}} % allow definition of own symbol
 \let\sol@lst@inline@prebreak\sol@lst@prebreak
 
 \newif\ifsol@encoding@ %  automatically load encoding packages
