@@ -380,7 +380,9 @@ listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}
 command name prefix/.initial={},command name suffix/.initial={*},%
 constructor command/.initial={sol@NewLstEnvCoreStarred}}
 \pgfkeys{/sol@lst@family/plain/.cd,
-listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
+listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style},xleftmargin=\z@,xrightmargin=\z@,%
+numbers=none,numbersep=\z@,frame=none,%
+rulecolor={},backgroundcolor={}},
 command name prefix/.initial={plain},command name suffix/.initial={},%
 constructor command/.initial={sol@NewLstEnvPlain}}
 
@@ -420,9 +422,7 @@ draw command/.initial={sol@dlst@input}}
 
 % #1 Name #2 Key #3 In Extra #4 Out Extra #5 Language
 \def\sol@NewLstEnvPlain#1#2#3#4#5{%
-\lstnewenvironment{#1}[1][]{#3\lstset{xleftmargin=\z@,xrightmargin=\z@,%
-numbers=none,numbersep=\z@,frame=none,%
-rulecolor={},backgroundcolor={},##1}\sol@guardspace}{#4}%
+\lstnewenvironment{#1}[1][]{#3\lstset{##1}\sol@guardspace}{#4}%
 }
 
 % #1 Name #2 Key #3 In Extra #4 Out Extra #5 Language
