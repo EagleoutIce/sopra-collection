@@ -264,8 +264,8 @@
 \ifsol@lst@lastwas@character@
 \global\sol@lst@lastwas@charkeep@true#2\else\global\sol@lst@lastwas@charkeep@false
   \ifnum\lst@mode=\lst@Pmode\relax% PMode: Not in any special Mode
-  {#1#2}%
-  \else#2\fi
+  {#1#2}% or if keywords are active:
+  \else\lst@ifkeywords{#1#2}\else#2\fi\fi
 \fi
 \endgroup}
 \ifsol@highlight@numbers@\let\sol@dgt\sol@@lst@hl@digit
