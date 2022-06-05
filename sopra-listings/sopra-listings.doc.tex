@@ -191,7 +191,7 @@ public static void main(String[] args) { }
 \end{minted}
 \end{plainlatex}
         Mit \cmdref{solmintedmap} kann ein Sprach-Mapping erzeugt werden. So wird beispielsweise automatisch \T{java} auf die interne Sprache \T{lJava} abgebildet.
-        Durch \cmdref{solsetmintedstyle} kann gewählt werden, welcher der internen Stile für das Listing verwendet werden soll. Zur Verfügung stehen \T{default}, \T{nonumber} und \T{plain}.
+        Durch \cmdref{solsetmintedstyle} kann gewählt werden, welcher der internen Stile für das Listing verwendet werden soll. Zur Verfügung stehen \T{default}, \T{nonumber}, \T{plain} und \T{plain number}.
     \end{argument}
 
     \begin{argument}{inlinesize}{noinlinesize}
@@ -504,7 +504,7 @@ Ist die Paketoption \secondargref{nofakeminted}{fakeminted} gesetzt, so existier
     Durch \cmdref{RegisterLanguage} wird dies automatisch vollzogen (allerdings direkt durch interne Mechanismen).
 \end{command}
 
-\begin{command}{solsetmintedstyle}{\manArg{default/nonumber/plain}}
+\begin{command}{solsetmintedstyle}{\manArg{default/nonumber/plain/plain number}}
     Aktualisiert den von \envref{minted} zu verwendenden Stil.
 \end{command}
 
