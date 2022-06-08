@@ -163,6 +163,7 @@
 \colorlet{sol@colors@lst@highlight}{purple}
 \colorlet{sol@colors@lst@command}{sol@colors@lst@keywordB}
 }
+\colorlet{sol@colors@lst@linenumbers}{gray}
 
 % define the styling definitions
 % as we don't know, if 'foreach' is available, we will built our own iter:
@@ -193,7 +194,7 @@
  {basic: \sol@ttfamily},%
  {command:  \@declaredcolor{sol@colors@lst@command}},%
  {highlight: \@declaredcolor{sol@colors@lst@highlight}\itshape},%
- {linenumbers: \@declaredcolor{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume}%
+ {linenumbers: \@declaredcolor{sol@colors@lst@linenumbers}\sol@font@fs@numbers\sffamily\sol@lst@num@consume}%
 }
 \else
 \sol@list@define@styles{%
@@ -206,7 +207,7 @@
  {comments: \@declaredcolor{sol@colors@lst@comments}},%
  {basic:    \sol@ttfamily},%
  {command:  \@declaredcolor{sol@colors@lst@command}},%
- {linenumbers: \@declaredcolor{gray}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
+ {linenumbers: \@declaredcolor{sol@colors@lst@linenumbers}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
  {highlight:   \@declaredcolor{sol@colors@lst@highlight}\itshape}%
 }
 \fi
@@ -559,6 +560,7 @@ keepspaces=false}
 \let\sol@registered@colors@keywordC\@empty  \let\sol@registered@colors@numbers\@empty
 \let\sol@registered@colors@literals\@empty  \let\sol@registered@colors@comments\@empty
 \let\sol@registered@colors@highlight\@empty \let\sol@registered@colors@command\@empty
+\let\sol@registered@colors@linenumbers\@empty
 
 % #1 color name #2 color
 \newcommand*\lstcolorlet[2]{%
