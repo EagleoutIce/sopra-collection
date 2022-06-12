@@ -82,6 +82,8 @@
 \DeclareOption{inlinesize}{\sol@lst@style@inlinesize@true}
 \DeclareOption{noinlinesize}{\sol@lst@style@inlinesize@false}
 \sol@lst@style@inlinesize@true
+\let\soladaptinline\sol@lst@style@inlinesize@true
+\let\sollockinline\sol@lst@style@inlinesize@false
 % highlights
 \DeclareOption{highlights}{\sol@lst@style@highlights@true}
 \DeclareOption{nohighlights}{\sol@lst@style@highlights@false}
