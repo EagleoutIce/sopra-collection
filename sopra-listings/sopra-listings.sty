@@ -43,6 +43,7 @@
 \newif\ifsol@lst@style@inlinesize@ % don't change font?
 
 \newif\ifsol@lst@fake@minted@
+\newif\ifsol@lst@extended@numerals@
 
 \newif\ifsol@debug@% typeout debug
 
@@ -90,6 +91,9 @@
 % minted
 \DeclareOption{fakeminted}{\sol@lst@fake@minted@true}
 \DeclareOption{nofakeminted}{\sol@lst@fake@minted@false}
+% extended numbers
+\DeclareOption{extendednums}{\sol@lst@extended@numerals@true}
+\DeclareOption{noextendednums}{\sol@lst@extended@numerals@false}
 % debug
 \DeclareOption{debug}{\sol@debug@true}
 \DeclareOption{nodebug}{\sol@debug@false}
@@ -263,12 +267,12 @@
 \ifsol@numinpar@\solSetLeftMargin{\@@sol@numinpar@length}\fi
 
 % Handling of automated number-highlighting in listings;
-\newcommand\sol@@lst@hl@digit[2][\sol@style@get{numbers}]{\begingroup
+\def\sol@@lst@hl@digit#1{\begingroup
 \ifsol@lst@lastwas@character@
-\global\sol@lst@lastwas@charkeep@true#2\else\global\sol@lst@lastwas@charkeep@false
+\global\sol@lst@lastwas@charkeep@true#1\else\global\sol@lst@lastwas@charkeep@false
   \ifnum\lst@mode=\lst@Pmode\relax% PMode: Not in any special Mode
-  {#1#2}% or if keywords are active:
-  \else\lst@ifkeywords{#1#2}\else#2\fi\fi
+  {\sol@style@get{numbers}#1}% or if keywords are active:
+  \else\lst@ifkeywords{\sol@style@get{numbers}#1}\else#1\fi\fi
 \fi
 \endgroup}
 \ifsol@highlight@numbers@\let\sol@dgt\sol@@lst@hl@digit
@@ -332,6 +336,27 @@
   {.7}{{\sol@dgt{.7}}}2 {.8}{{\sol@dgt{.8}}}2 {.9}{{\sol@dgt{.9}}}2
   {:lmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash(}}}2 {:rmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash)}}}2 {:ldmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash[}}}2 {:rdmath:}{{\textcolor{sol@colors@lst@numbers}{\textbackslash]}}}2 {:ul:}{{\_}}1}
 }
+
+\ifsol@lst@extended@numerals@
+\def\sol@lst@Ox{\textcolor{gray}{0x}} \def\sol@lst@Ob{\textcolor{gray}{0b}} \def\sol@lst@Oo{\textcolor{gray}{0o}}
+\lstset{add to literate={_0}{{\sol@dgt{\textunderscore0}}}2 {_1}{{\sol@dgt{\textunderscore1}}}2 {_2}{{\sol@dgt{\textunderscore2}}}2 {_3}{{\sol@dgt{\textunderscore3}}}2
+{_4}{{\sol@dgt{\textunderscore4}}}2 {_5}{{\sol@dgt{\textunderscore5}}}2 {_6}{{\sol@dgt{\textunderscore6}}}2
+{_7}{{\sol@dgt{\textunderscore7}}}2 {_8}{{\sol@dgt{\textunderscore8}}}2 {_9}{{\sol@dgt{\textunderscore9}}}2
+% TODO: hexa toggle
+{0x0}{{\sol@lst@Ox\sol@dgt{0}}}3
+{0x1}{{\sol@lst@Ox\sol@dgt{1}}}3 {0x2}{{\sol@lst@Ox\sol@dgt{2}}}3 {0x3}{{\sol@lst@Ox\sol@dgt{3}}}3
+{0x4}{{\sol@lst@Ox\sol@dgt{4}}}3 {0x5}{{\sol@lst@Ox\sol@dgt{5}}}3 {0x6}{{\sol@lst@Ox\sol@dgt{6}}}3
+{0x6}{{\sol@lst@Ox\sol@dgt{7}}}3 {0x8}{{\sol@lst@Ox\sol@dgt{8}}}3 {0x9}{{\sol@lst@Ox\sol@dgt{9}}}3
+% TODO: binary toggle
+{0b0}{{\sol@lst@Ob\sol@dgt{0}}}3 {0b1}{{\sol@lst@Ob\sol@dgt{1}}}3
+% TODO: octa goggle
+{0o0}{{\sol@lst@Oo\sol@dgt{0}}}3
+{0o1}{{\sol@lst@Oo\sol@dgt{1}}}3 {0o2}{{\sol@lst@Oo\sol@dgt{2}}}3 {0o3}{{\sol@lst@Oo\sol@dgt{3}}}3
+{0o4}{{\sol@lst@Oo\sol@dgt{4}}}3 {0o5}{{\sol@lst@Oo\sol@dgt{5}}}3 {0o6}{{\sol@lst@Oo\sol@dgt{6}}}3
+{0o6}{{\sol@lst@Oo\sol@dgt{7}}}3
+}
+\fi
+
 \SolSetLiterateTable
 % Basic and internal highlighting definitions
 % please note, that they will apply under every condition!
