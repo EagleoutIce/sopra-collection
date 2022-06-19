@@ -114,7 +114,7 @@ Die Funktion \T{autogobble} wurde wieder entfernt, ebenso wurde die Paketstruktu
 \paragraph{Version v1.0.21:}
 Es wurden einige Code-Interne Restrukturierungen durchgeführt.
 \paragraph{Version v1.0.22:}
-Unterstützung für \argref{nofakeminted}{fakeminted}.
+Unterstützung für \argref{nofakeminted}{fakeminted} und \argref{noextendednums}{extendednums}.
 
 % In Version \thesolversion{} (\cmdref{thesolversion}) gibt es (sonst) keine weiteren
 % Besonderheiten.
@@ -192,6 +192,10 @@ public static void main(String[] args) { }
 \end{plainlatex}
         Mit \cmdref{solmintedmap} kann ein Sprach-Mapping erzeugt werden. So wird beispielsweise automatisch \T{java} auf die interne Sprache \T{lJava} abgebildet.
         Durch \cmdref{solsetmintedstyle} kann gewählt werden, welcher der internen Stile für das Listing verwendet werden soll. Zur Verfügung stehen \T{default}, \T{nonumber}, \T{plain} und \T{plain number}.
+    \end{argument}
+
+    \begin{argument}{noextendednums}{extendednums}
+        Ist die Option gesetzt, so werden auch Zahlen gehighlighted, die intern Unterstriche verwenden oder die klassischen \T{0x}-, \T{0b}- oder \T{0o}-Präfixe verwenden.
     \end{argument}
 
     \begin{argument}{inlinesize}{noinlinesize}
