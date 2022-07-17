@@ -8,7 +8,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sopra-listings}[2021/01/08 EagleoutIce - listings for the sopra-team-020]
 % Lengths and Registers
-\newcounter{solversion} \setcounter{solversion}{1022}
+\newcounter{solversion} \setcounter{solversion}{1023}
 % note this will be used with tcb:
 \newdimen\sol@length@lst@outer@spacing \sol@length@lst@outer@spacing=3\p@
 
@@ -249,8 +249,8 @@
 \lst@AddToHook{PreInit}{\c@sol@lst@blacklisted@linenum@counter\z@}
 
 \ifsol@accuspp@available@
-\def\sol@lst@num@consume#1{\@ifundefined{sol@lst@nl@blacklist@#1}{\BeginAccSupp{method=escape,ActualText={}}\the\numexpr#1-\c@sol@lst@blacklisted@linenum@counter\EndAccSupp{}}{\if@sol@lst@blacklist@is@ghost@\global\advance\c@sol@lst@blacklisted@linenum@counter\m@ne\fi}}%\if@sol@lst@blacklist@is@ghost@
-\else\def\sol@lst@num@consume#1{\@ifundefined{sol@lst@nl@blacklist@#1}{\the\numexpr#1-\c@sol@lst@blacklisted@linenum@counter}{\if@sol@lst@blacklist@is@ghost@\global\advance\c@sol@lst@blacklisted@linenum@counter\m@ne\fi}}\fi
+\def\sol@lst@num@consume#1{\@ifundefined{sol@lst@nl@blacklist@#1}{\BeginAccSupp{method=escape,ActualText={}}\the\numexpr#1+\c@sol@lst@blacklisted@linenum@counter\EndAccSupp{}}{\if@sol@lst@blacklist@is@ghost@\global\advance\c@sol@lst@blacklisted@linenum@counter\m@ne\fi}}%\if@sol@lst@blacklist@is@ghost@
+\else\def\sol@lst@num@consume#1{\@ifundefined{sol@lst@nl@blacklist@#1}{\the\numexpr#1+\c@sol@lst@blacklisted@linenum@counter}{\if@sol@lst@blacklist@is@ghost@\global\advance\c@sol@lst@blacklisted@linenum@counter\m@ne\fi}}\fi
 % So if possible we will eat the number and produce unmarkable text
 
 % Here we will make a small rainbow to present the selected color-theme :D
