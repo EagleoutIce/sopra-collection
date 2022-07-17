@@ -242,9 +242,15 @@
 \let\solblacklistispresent\@sol@lst@blacklist@is@ghost@false
 \def\solblacklistlinenumbers{\@ifstar\solblacklistispresent\solblacklistisghost\@sol@lst@blacklistlinenumers}
 \def\@sol@lst@blacklistlinenumers#1{\@for\@num:={#1}\do{\expandafter\let\csname sol@lst@nl@blacklist@\@num\endcsname\@empty}}
+% we have to keep a different offset for blacklisted and ghost line numbers
+% 1. we must keep ranges intact and
+% 2. otherwise the line to be blacklisted would repeat
+\newcount\c@sol@lst@blacklisted@linenum@counter
+\lst@AddToHook{PreInit}{\c@sol@lst@blacklisted@linenum@counter\z@}
+
 \ifsol@accuspp@available@
-\def\sol@lst@num@consume#1{\@ifundefined{sol@lst@nl@blacklist@#1}{\BeginAccSupp{method=escape,ActualText={}}#1\EndAccSupp{}}{\if@sol@lst@blacklist@is@ghost@\global\advance\c@lstnumber\m@ne\fi}}%\if@sol@lst@blacklist@is@ghost@
-\else\def\sol@lst@num@consume#1{\@ifundefined{sol@lst@nl@blacklist@#1}{#1}{\if@sol@lst@blacklist@is@ghost@\global\advance\c@lstnumber\m@ne\fi}}\fi
+\def\sol@lst@num@consume#1{\@ifundefined{sol@lst@nl@blacklist@#1}{\BeginAccSupp{method=escape,ActualText={}}\the\numexpr#1-\c@sol@lst@blacklisted@linenum@counter\EndAccSupp{}}{\if@sol@lst@blacklist@is@ghost@\global\advance\c@sol@lst@blacklisted@linenum@counter\m@ne\fi}}%\if@sol@lst@blacklist@is@ghost@
+\else\def\sol@lst@num@consume#1{\@ifundefined{sol@lst@nl@blacklist@#1}{\the\numexpr#1-\c@sol@lst@blacklisted@linenum@counter}{\if@sol@lst@blacklist@is@ghost@\global\advance\c@sol@lst@blacklisted@linenum@counter\m@ne\fi}}\fi
 % So if possible we will eat the number and produce unmarkable text
 
 % Here we will make a small rainbow to present the selected color-theme :D
