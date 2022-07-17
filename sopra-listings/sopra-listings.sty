@@ -200,7 +200,7 @@
  {basic: \sol@ttfamily},%
  {command:  \@declaredcolor{sol@colors@lst@command}},%
  {highlight: \@declaredcolor{sol@colors@lst@highlight}\itshape},%
- {linenumbers: \@declaredcolor{sol@colors@lst@linenumbers}\sol@font@fs@numbers\sffamily\sol@lst@num@consume}%
+ {linenumbers: \@declaredcolor{sol@colors@lst@linenumbers}\sol@font@fs@numbers\sffamily}%
 }
 \else
 \sol@list@define@styles{%
@@ -213,7 +213,7 @@
  {comments: \@declaredcolor{sol@colors@lst@comments}},%
  {basic:    \sol@ttfamily},%
  {command:  \@declaredcolor{sol@colors@lst@command}},%
- {linenumbers: \@declaredcolor{sol@colors@lst@linenumbers}\sol@font@fs@numbers\sffamily\sol@lst@num@consume},%
+ {linenumbers: \@declaredcolor{sol@colors@lst@linenumbers}\sol@font@fs@numbers\sffamily},%
  {highlight:   \@declaredcolor{sol@colors@lst@highlight}\itshape}%
 }
 \fi
@@ -548,7 +548,7 @@ keywordstyle = [4]{\sol@styles@lst@basic\sol@styles@lst@keywordD},
 basicstyle   = \sol@styles@lst@basic,
 % line numbers:
 numbers     = left, numbersep = \sol@length@lst@numsep,
-numberstyle = \sol@styles@lst@basic\sol@styles@lst@linenumbers,
+numberstyle = \sol@styles@lst@basic\sol@styles@lst@linenumbers\sol@lst@num@consume,
 % line break:
 breaklines  = true, extendedchars = true,
 prebreak    = \sol@lst@prebreak,
