@@ -22,18 +22,6 @@
     %\tableofcontents
 %
 
-%
-%
-% ....###....##.......##........######...########.##.....##.########.####.##....##.########..######.
-% ...##.##...##.......##.......##....##..##.......###...###.##........##..###...##.##.......##....##
-% ..##...##..##.......##.......##........##.......####.####.##........##..####..##.##.......##......
-% .##.....##.##.......##.......##...####.######...##.###.##.######....##..##.##.##.######....######.
-% .#########.##.......##.......##....##..##.......##.....##.##........##..##..####.##.............##
-% .##.....##.##.......##.......##....##..##.......##.....##.##........##..##...###.##.......##....##
-% .##.....##.########.########..######...########.##.....##.########.####.##....##.########..######.
-%
-%
-
 \section{Allgemeines}
 \subsection{Warum, wieso, weshalb?}
     Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im
@@ -115,21 +103,8 @@ Die Funktion \T{autogobble} wurde wieder entfernt, ebenso wurde die Paketstruktu
 Es wurden einige Code-Interne Restrukturierungen durchgeführt.
 \paragraph{Version v1.0.22:}
 Unterstützung für \argref{nofakeminted}{fakeminted} und \argref{noextendednums}{extendednums}.
-
-% In Version \thesolversion{} (\cmdref{thesolversion}) gibt es (sonst) keine weiteren
-% Besonderheiten.
-
-%
-%
-% .##....##..#######..##....##.########.####..######...##.....##.########.....###....########.####..#######..##....##
-% .##...##..##.....##.###...##.##........##..##....##..##.....##.##.....##...##.##......##.....##..##.....##.###...##
-% .##..##...##.....##.####..##.##........##..##........##.....##.##.....##..##...##.....##.....##..##.....##.####..##
-% .#####....##.....##.##.##.##.######....##..##...####.##.....##.########..##.....##....##.....##..##.....##.##.##.##
-% .##..##...##.....##.##..####.##........##..##....##..##.....##.##...##...#########....##.....##..##.....##.##..####
-% .##...##..##.....##.##...###.##........##..##....##..##.....##.##....##..##.....##....##.....##..##.....##.##...###
-% .##....##..#######..##....##.##.......####..######....#######..##.....##.##.....##....##....####..#######..##....##
-%
-%
+\paragraph{Version v1.0.23:}
+Unterstützung für \cmdref{solblacklistlinenumbers}, \cmdref{solblacklistisghost} und \cmdref{solblacklistispresent}.
 
 \subsection{Akzeptierte Parameter}
     Das Paket akzeptiert, so wie die meisten, Argumente.
@@ -262,17 +237,6 @@ public static void main(...){ /* ... */ }
         {comments: \color{sol@colors@lst@comments}}%
     }
 }
-%
-%
-% .########..########.########.########.##.....##.##.......########
-% .##.....##.##.......##.......##.......##.....##.##.......##......
-% .##.....##.##.......##.......##.......##.....##.##.......##......
-% .########..######...######...######...#########.##.......######..
-% .##.....##.##.......##.......##.......##.....##.##.......##......
-% .##.....##.##.......##.......##.......##.....##.##.......##......
-% .########..########.##.......########.##.....##.########.########
-%
-%
 
 \section{Befehle- und Umgebungen}
 
@@ -493,6 +457,57 @@ public static int add(int a, int b){ return a + b; }
 \begin{command}{solguard}{\manArg{Zeilen}}
     Mit der Paketoption \argref{guardspace}{noguardspace} kann so angegeben werden, wie viele Zeilen geschützt werden müssen.
     Der Standard ist: \glqq{}{\makeatletter\@sol@guard@default}\grqq. Hinweis: Dies betrifft nur die Zeilen für den Beginn. Die letzte Zeile wird aktuell immer mit \cmd{nobreak} gesichert.
+\end{command}
+
+\begin{command}{solblacklistlinenumbers}{\optStar\manArg{Zeilennummern}}
+    Eine kommaseparierte Liste an Zeilennummern, welche nicht angezeigt werden sollen. Die Sperre erfolgt lokal, mittels \TeX-Gruppen kann das blacklisting demnach kontrolliert werden.
+    Mit \cmdref{solblacklistisghost} \cmdref{solblacklistispresent} kann kontrolliert werden, ob die ausgeblendeten Zeilennummern aus der Zählung entfernt werden sollen.
+    Dies kann auch über den optionalen Stern geregelt werden (\cmdref{solblacklistisghost} ist standard, mit Stern wird \cmdref{solblacklistispresent} ausgeführt).
+\begin{latex}[morekeywords={[5]{\\solblacklistlinenumbers}}]
+\solblacklistlinenumbers{3}
+\begin{java}
+public static void main(String[] args){
+    System.out.println("Hello World");
+    System.out.println("Ghooost!");
+}
+\end{java}
+\end{latex}
+Ergibt: {
+\solblacklistlinenumbers{3}
+\begin{java}
+public static void main(String[] args){
+    System.out.println("Hello World");
+    System.out.println("Ghooost!");
+}
+\end{java}
+}
+Im Gegensatz dazu, mit Stern:
+\begin{latex}[morekeywords={[5]{\\solblacklistlinenumbers}}]
+\solblacklistlinenumbers!**!*{3}
+\begin{java}
+public static void main(String[] args){
+    System.out.println("Hello World");
+    System.out.println("Ghooost!");
+}
+\end{java}
+\end{latex}
+Ergibt: {
+\solblacklistlinenumbers*{3}
+\begin{java}
+public static void main(String[] args){
+    System.out.println("Hello World");
+    System.out.println("Ghooost!");
+}
+\end{java}
+}
+\end{command}
+
+\begin{command}{solblacklistisghost}{}
+    Mit \cmdref{solblacklistlinenumbers} ausgeblendete Zeilen werden auch nicht gezählt.
+\end{command}
+
+\begin{command}{solblacklistispresent}{}
+    Mit \cmdref{solblacklistlinenumbers} ausgeblendete Zeilen werden dennoch gezählt.
 \end{command}
 
 \subsection{Minted spezifisches}
