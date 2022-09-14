@@ -3285,7 +3285,7 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
 }{%
   \def\tikzumlstaterootlabel{\phantom{\tikzumlState@nodeName}}%
   \def\tikzumlstaterootinnerysep{.5ex}%
-  \def\tikzumlstatebodyinnerysep{2ex}%
+  \def\tikzumlstatebodyinnerysep{1ex}%
   \ifthenelse{\equal{\tikzumlStateEntry}{}}{}{%
     \ifnum\c@tikzumlStateText=0%
       \def\tikzumlStateText{entry/\tikzumlStateEntry}%
@@ -3342,9 +3342,9 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
   % if contains nothing, one define a fictive node to enable the fit option
   \ifnum\c@tikzumlStateSubStateNum=0%
     \iftikzumlstateWithoutCoords
-      \node[inner ysep=\tikzumlstaterootinnerysep, minimum width=\tikzumlStateMinimumWidth, /tikzuml/state/style] (\tikzumlState@nodeName-root) {\tikzumlstaterootlabel};%
+      \node[inner ysep=\tikzumlstaterootinnerysep, minimum width=\tikzumlStateMinimumWidth, /tikzuml/state/style] (\tikzumlState@nodeName-root) {};%
     \else
-      \node[inner ysep=\tikzumlstaterootinnerysep, minimum width=\tikzumlStateMinimumWidth, /tikzuml/state/style] (\tikzumlState@nodeName-root) at (0,0) {\tikzumlstaterootlabel};%
+      \node[inner ysep=\tikzumlstaterootinnerysep, minimum width=\tikzumlStateMinimumWidth, /tikzuml/state/style] (\tikzumlState@nodeName-root) at (0,0) {};%
     \fi
     \expandafter\xdef\csname tikzumlStateFit\tikzumlState@parent @@\tikzumlState@fitname\endcsname{(\tikzumlState@nodeName-root)}%
   \fi
@@ -3365,7 +3365,7 @@ node[pos=\tikzumlRelationPositionT, swap, \posMultiplicityT, \multAlignT] {\tikz
   \ifnum\c@tikzumlStateText=1%
     \node[rounded corners, draw=\tikzumlStateDrawColor, fill=\tikzumlStateFillColor, name=\tikzumlState@nodeName, fit=(\tikzumlState@nodeName-body) (\tikzumlState@nodeName-texttmp) (\tikzumlState@nodeName-captiontmp)] {};%
   \else
-    \node[rounded corners, draw=\tikzumlStateDrawColor, fill=\tikzumlStateFillColor, name=\tikzumlState@nodeName, fit=(\tikzumlState@nodeName-body) (\tikzumlState@nodeName-captiontmp)] {};%
+    \node[rounded corners, red, draw=\tikzumlStateDrawColor, fill=\tikzumlStateFillColor, name=\tikzumlState@nodeName, fit=(\tikzumlState@nodeName-body) (\tikzumlState@nodeName-captiontmp)] {};%
   \fi
   \ifnum\c@tikzumlStateText=1%
     \node (\tikzumlState@nodeName-text) at (\tikzumlState@nodeName-texttmp) {\begin{tabular}{l}\tikzumlStateText \end{tabular}};%
