@@ -112,7 +112,7 @@
         \begin{tabular}{>{~}#1<{~}}
             \toprule
             \sot@table@headerrow*% style the first row :D
-    }{\bottomrule\end{tabu}}
+    }{\bottomrule\end{tabular}}
 
     % Matieal styled long table.
     \newenvironment{mltabular}[2][]{%
@@ -121,7 +121,7 @@
             \ifx!#1!\sot@table@headerrow*\else% style the first row :D
             \sot@table@headerrow*#1\vspace*{-.1\baselineskip}\\\midrule\endfirsthead
             \sot@table@headerrow@next#1\vspace*{-.1\baselineskip}\\\midrule\endhead\fi
-    }{\bottomrule\end{longtabu}}
+    }{\bottomrule\end{longtable}}
 \fi
 
 % Cp-Palette support
