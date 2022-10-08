@@ -17,7 +17,7 @@ Es grüßt: Florian (`team-020`).
   - [Motivation](#motivation)
   - [Inhaltsübersicht](#inhaltsübersicht)
   - [Installation](#installation)
-    - [Eigenständige Installtion](#eigenständige-installtion)
+    - [Eigenständige Installation](#eigenständige-installation)
     - [Installation mit sltx](#installation-mit-sltx)
   - [Paketübersicht](#paketübersicht)
     - [sopra-base (Dokumentation)](#sopra-base-dokumentation)
@@ -35,7 +35,7 @@ Es grüßt: Florian (`team-020`).
 
 ## Installation
 
-### Eigenständige Installtion
+### Eigenständige Installation
 
 Die Installation kann entweder je nach Dokumentation, oder durch das mitgelieferte python-skript erfolgen. Bei
 einem installierten python3.5+ Interpreter genügt:
@@ -107,7 +107,7 @@ Dateien einbetten mit: [sopra-attachments](sopra-attachments):
 ### sopra-listings ([Dokumentation](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-listings/sopra-listings.doc.pdf))
 
 Listings mit: [sopra-listings](sopra-listings):
-  Dieses Paket erlaubt es, Quellcode in PDF mit Syntaxhighlighting zu setzen:
+  Dieses Paket erlaubt es, Quellcode in PDF mit Syntax-Highlighting zu setzen:
 
 - [sopra-listings.sty](sopra-listings/sopra-listings.sty): Dies ist das versprochene Paket.
 - [sopra-listings.doc.tex](sopra-listings/sopra-listings.doc.tex): Für sie wird das Paket selbst benötigt, dann reicht: `pdflatex sopra-listings.doc.tex`.
