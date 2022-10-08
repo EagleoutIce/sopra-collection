@@ -414,18 +414,17 @@ numbers=none,numbersep=\z@}
 \pgfkeys{/sol@lst@family/default/.cd,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
 command name prefix/.initial={},command name suffix/.initial={},%
-constructor command/.initial={sol@NewLstEnvCore}}
-\pgfkeys{/sol@lst@family/nonumber/.cd,
+constructor command/.initial={sol@NewLstEnvCore},
+/sol@lst@family/nonumber/.cd,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style}},
 command name prefix/.initial={},command name suffix/.initial={*},%
-constructor command/.initial={sol@NewLstEnvCoreStarred}}
-\pgfkeys{/sol@lst@family/plain/.cd,
-listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style},xleftmargin=\z@,xrightmargin=\z@,%
-numbers=none,numbersep=\z@,frame=none,%
+constructor command/.initial={sol@NewLstEnvCoreStarred},
+/sol@lst@family/plain/.cd,
+listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style},xleftmargin=\z@,xrightmargin=\z@,numbers=none,numbersep=\z@,frame=none,%
 rulecolor={},backgroundcolor={}},
 command name prefix/.initial={plain},command name suffix/.initial={},%
-constructor command/.initial={sol@NewLstEnvPlain}}
-\pgfkeys{/sol@lst@family/plain number/.cd,
+constructor command/.initial={sol@NewLstEnvPlain},
+/sol@lst@family/plain number/.cd,
 listing style/.initial = {\pgfkeysvalueof{/sol@lst@family/globals/listing style},%
 xrightmargin=\z@,xleftmargin=\z@,frame=none,rulecolor={},backgroundcolor={}},
 command name prefix/.initial={plain},command name suffix/.initial={},%
