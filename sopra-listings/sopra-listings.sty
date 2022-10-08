@@ -570,13 +570,13 @@ keepspaces=false}
 \def\sol@LoadLanguage@searchPath@iter#1,#2\@nil{%
 \ifx!#1!\else
 \InputIfFileExists{#1language_\sol@curlanginputfile.cfg}{%
-  \typeout{Loaded '\sol@curlanginputfile' from '#1language_\sol@curlanginputfile.cfg'}
+  \sol@debug{Loaded '\sol@curlanginputfile' from '#1language_\sol@curlanginputfile.cfg'}
 }{\ifx!#2!\else\sol@LoadLanguage@iter#2,\@nil\fi}\fi
 }
 \def\sol@LoadLanguage@searchPath@resolve%
 {% empty-case
 \InputIfFileExists{language_\sol@curlanginputfile.cfg}{
-  \typeout{Loaded '\sol@curlanginputfile' (language_\sol@curlanginputfile.cfg)}
+  \sol@debug{Loaded '\sol@curlanginputfile' (language_\sol@curlanginputfile.cfg)}
 }{\expandafter\sol@LoadLanguage@searchPath@iter\solLanguageSearchPath,\@nil}}
 
 \def\sol@LoadLanguage@single#1\@nil{\def\sol@curlanginputfile{#1}\sol@LoadLanguage@searchPath@resolve{}}
