@@ -384,7 +384,7 @@
 \newcommand*\sol@dlst@input[2][]{\begingroup\ifsol@lst@style@inlinesize@\@lst@within@inline@true\fi\lstinputlisting[#1]{#2}\endgroup}
 
 % the defaults come second to overwrite the "ultimate"/global defaults passed in ##1 :D
-\def\SolSetInputDefaults#1{\renewcommand*\sol@dlst@input[2][]{\begingroup\ifsol@lst@style@inlinesize@\@lst@within@inline@true\fi\lstinputlisting[#1,##1]{##2}\endgroup}}
+\def\SolSetInputDefaults#1{\renewcommand*\sol@dlst@input[2][]{\begingroup\ifsol@lst@style@inlinesize@\@lst@within@inline@true\fi\lstinputlisting[##1,#1]{##2}\endgroup}}
 
 \def\SolRemoveInputBackground{\SolSetInputDefaults{frame=none,%
 rulecolor={},backgroundcolor={}}}
