@@ -375,11 +375,11 @@
 \newif\if@lst@within@inline@
 \newcommand*\sol@dlst@default[2][]{%
 \begingroup\fboxsep=\z@\fcolorbox{sol@colors@border}{sol@colors@background}{%
-  \ifsol@lst@style@inlinesize@\@lst@within@inline@true\fi\thinspace\strut\lstinline[keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak,#1]`#2`\thinspace
+  \ifsol@lst@style@inlinesize@\@lst@within@inline@true\fi\thinspace\strut\lstinline[prebreak=\sol@lst@inline@prebreak,#1,keepspaces=true,breakatwhitespace,]`#2`\thinspace
 }\endgroup}
 
 \newcommand*\sol@dlst@blank[2][]{%
-\begingroup\thinspace\ifsol@lst@style@inlinesize@\@lst@within@inline@true\fi\lstinline[keepspaces=true,breakatwhitespace,prebreak=\sol@lst@inline@prebreak,#1]`#2`\endgroup}
+\begingroup\thinspace\ifsol@lst@style@inlinesize@\@lst@within@inline@true\fi\lstinline[prebreak=\sol@lst@inline@prebreak,#1,keepspaces=true,breakatwhitespace]`#2`\endgroup}
 
 \newcommand*\sol@dlst@input[2][]{\begingroup\ifsol@lst@style@inlinesize@\@lst@within@inline@true\fi\lstinputlisting[#1]{#2}\endgroup}
 
