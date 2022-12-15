@@ -10,12 +10,12 @@
 \newif\ifsod@uselistings@
 % Package-Args
 % allow debug-options :D
-\DeclareOption{debug}{ \errorcontextlines 99999 }
-\DeclareOption{nodebug}{ \errorcontextlines 4 }
-\DeclareOption{dummy}{ \sod@usedummy@true }
-\DeclareOption{nodummy}{ \sod@usedummy@false }
-\DeclareOption{listings}{ \sod@uselistings@true }
-\DeclareOption{nolistings}{ \sod@uselistings@false }
+\DeclareOption{debug}{\errorcontextlines99999}
+\DeclareOption{nodebug}{\errorcontextlines4}
+\DeclareOption{dummy}{\sod@usedummy@true}
+\DeclareOption{nodummy}{\sod@usedummy@false}
+\DeclareOption{listings}{\sod@uselistings@true}
+\DeclareOption{nolistings}{\sod@uselistings@false}
 \ExecuteOptions{nodebug,dummy,listings}% set it explicitly
 \ProcessOptions\relax
 % Basic Packages
@@ -48,7 +48,6 @@
 \def\cmdref#1{\hyperref[mrk:#1]{\solGet{command}{\textbackslash#1}}\textsuperscript{$\rightarrow$\thinspace p. \pageref{mrk:#1}}}
 \def\envref#1{\hyperref[mrk:#1]{\solGet{keywordC}{env@#1}}\textsuperscript{$\rightarrow$\thinspace p. \pageref{mrk:#1}}}
 
-% TODO: document
 % #2 counter
 \def\argref#1#2{\hyperref[mrk:#1]{\T{#1 (#2)}}\textsuperscript{$\rightarrow$\thinspace p. \pageref{mrk:#1}}}
 % only shows second
