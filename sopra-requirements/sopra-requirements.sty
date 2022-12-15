@@ -170,7 +170,7 @@
         \tabulinesep = ^2mm_2mm
         \begin{longtabu}{>{~}KV<{~}}
             % init the headerrow
-            \sor@table@headerrow*{ID} & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\ifsor@showtag@\hfill\T{##2}\fi\\\endfirsthead
+            \sor@table@headerrow*{ID} & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\ifsor@showtag@\hfill\texttt{##2}\fi\\\endfirsthead
             \sor@table@headerrow@next{ID} & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\\\endhead
             % i do not want to make a token iter, i'm sorry
             \sor@requirement@leftcolstyle{Titel:} & \@sor@r@title \hfill\sor@setpriority{\@sor@r@priority}\\
@@ -186,7 +186,7 @@
         \begin{longtable}{>{~}KV<{~}}
             % init the headerrow
             \toprule
-            \sor@table@headerrow* ID & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\ifsor@showtag@\hfill\T{##2}\fi\\\midrule\endfirsthead
+            \sor@table@headerrow* ID & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\ifsor@showtag@\hfill\texttt{##2}\fi\\\midrule\endfirsthead
             \sor@table@headerrow@next ID & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\\\midrule\endhead
             % i do not want to make a token iter, i'm sorry
             \sor@requirement@leftcolstyle{Titel:} & \@sor@r@title \hfill\sor@setpriority{\@sor@r@priority}\\
