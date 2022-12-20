@@ -688,4 +688,21 @@ keepspaces=false}
 \solsetmintedstyle{default}
 \lstnewenvironment{minted}[2][]{\edef\@tmp{\pgfkeysvalueof{/sol@lst@family/\sol@minted@style/listing style}}\edef\@temp{\sol@minted@language@mapping{#2}}\expandafter\expandafter\expandafter\sol@minted@setup\expandafter\expandafter\expandafter{\expandafter\@tmp\expandafter}\expandafter{\@temp}{#1}}{}
 \fi
+% based on https://tex.stackexchange.com/a/545948
+\def\sol@glowWithColor@#1#2#3#4{\pgfsys@beginscope
+\pgfsetroundjoin\pgfsetroundcap
+\pdfliteral{1 Tr}% no pgf alternative
+\foreach\ind in{#3,...,1}{%
+    \pgfmathsetmacro\per{(11-\ind)*5}%
+    \color{#1!\per}%
+    \pgfsetstrokeopacity{#4}%
+    \pgfsetlinewidth{\ind/#2}%
+    \rlap{\sol@text@}%
+}%
+\pgfsys@endscope}
+\def\sol@glowWithColor#1#2{%
+\def\sol@text@{#2}%
+\sol@glowWithColor@{#1}{2.85}{8}{.025}%
+\sol@text@}
+
 \endinput
