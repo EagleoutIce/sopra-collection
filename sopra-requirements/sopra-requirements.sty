@@ -113,7 +113,7 @@
 
 % \ifcase#1 Unwichtig\or Niedrig\or Nett\or Neutral\or Wichtig\or Elementar\else Nicht angegeben\fi
 % \colorlet{sor@color@star}{HeaderColor}
-\def\sor@setpriority#1{\begingroup\ifnum#1<0\else\color{HeaderColor}\foreach \i in {5,...,1}{\ifnum\i<5\relax \thinspace\fi\ifnum\i>#1\relax \faStarO\else\faStar\fi}\fi\endgroup}
+\def\sor@setpriority#1{\begingroup\ifnum#1<0\else\color{HeaderColor}\foreach \i in {1,...,5}{\ifnum\i>1\relax \thinspace\fi\ifnum\i>#1\relax \relax \faStarO\else\faStar\fi}\fi\endgroup}
 \let\sorSetPriority\sor@setpriority
 
 % Create the basic environments to filter for requirementstype :D
