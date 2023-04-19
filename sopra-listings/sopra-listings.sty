@@ -191,6 +191,7 @@
 \def\solSetStyle#1#2{\expandafter\def\csname sol@styles@lst@#1\endcsname{#2}}
 
 \def\sol@list@define@styles#1{\sol@lst@style@iter#1,\@nil}
+\let\SolDefineStyles\sol@list@define@styles
 % we will write the colors anyway. This way it is easy visible on how to change the
 % styles. Will define e.g. \sol@styles@lst@keywo
 \ifsol@printmode@
