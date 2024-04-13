@@ -141,7 +141,7 @@
 \newcommand*\lstfs[1][1]{\@ifstar{\@lstfs{#1}{\sol@font@size}}{\@lstfs{#1}}}
 \def\@lstfs#1#2{%
   \def\sol@font@fs@normal{\fontsize{#2}{#2}\linespread{#1}\selectfont}%
-  \ifnum#2>7\edef\sol@lst@@subfs{\the\numexpr #2-4}\def\sol@font@fs@numbers{\fontsize\sol@lst@@subfs\sol@lst@@subfs\linespread{#1}\selectfont}%
+  \ifnum#2>7\protected@edef\sol@lst@@subfs{\the\numexpr #2-4}\def\sol@font@fs@numbers{\fontsize\sol@lst@@subfs\sol@lst@@subfs\linespread{#1}\selectfont}%
   \else\def\sol@font@fs@numbers{\tiny\linespread{#1}}\fi
 }
 
@@ -232,8 +232,8 @@
 \def\sol@font@size{\dimexpr\f@size\p@\relax}
 \def\sol@thesolversion#1#2#3#4\@nil{v#1.#2.#3#4}
 
-\edef\sol@version@str{\noexpand\sol@thesolversion\arabic{solversion}\noexpand\@nil}
-\edef\thesolversion{\sol@version@str}
+\protected@edef\sol@version@str{\noexpand\sol@thesolversion\arabic{solversion}\noexpand\@nil}
+\protected@edef\thesolversion{\sol@version@str}
 
 % We want language specific literate additions:
 \def\sol@lst@addToLiterate#1{\protected@edef\lst@literate{\unexpanded\expandafter{\lst@literate}\unexpanded{#1}}}
@@ -459,9 +459,17 @@ draw command/.initial={sol@dlst@input}}
 % on line:
 \lst@AddToHook{PreInit}{\if@lst@within@inline@\else\sol@font@fs@normal\fi}
 
+% we want to allow to overwrite existing envs
+\def\lst@allow@redefinition#1{%
+\ifcsname #1\endcsname
+  \PackageWarning{sopra-listings}{Environment '#1' already defined, overwriting it!}%
+  \expandafter\let\csname#1\endcsname\relax
+  \expandafter\let\csname end#1\endcsname\relax
+\fi
+}
+
 % #1 Name #2 Key #3 In Extra #4 Out Extra #5 Language
 \def\sol@NewLstEnvCore#1#2#3#4#5{%
-%This does already work, but has the drawback of not being able to provide the (wanted) different styles
 \lstnewenvironment{#1}[1][]{#3\lstset{##1}\sol@guardspace}{#4}%
 }
 
@@ -485,7 +493,9 @@ draw command/.initial={sol@dlst@input}}
 % #1 KeyName, #2 LanguageName, #3 EnvironName
 \def\sol@@NewLstEnv#1#2#3{%
 \begingroup
-\edef\sol@xcurlst{\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/\environName/constructor command}\endcsname{#3}{#1}{\noexpand\lstset{style=\pgfkeysvalueof{/sol@lst@family/\environName/listing style},language=#2}}{}{#2}}%
+\lst@allow@redefinition{#3}%
+\lst@allow@redefinition{#3@}% lstlistings wrap
+\protected@edef\sol@xcurlst{\expandafter\noexpand\csname\pgfkeysvalueof{/sol@lst@family/\environName/constructor command}\endcsname{#3}{#1}{\noexpand\lstset{style=\pgfkeysvalueof{/sol@lst@family/\environName/listing style},language=#2}}{}{#2}}%
 \global\sol@xcurlst\endgroup
 }
 
@@ -494,7 +504,7 @@ draw command/.initial={sol@dlst@input}}
 % #2: Name of the Language [java,latex]
 % #3: Name of the corresponding lst-Language [lJava, lLatex,...]
 \newcommand*\RegisterLanguage[3][]{\begingroup\makeatletter
-\ifsol@lst@fake@minted@\edef\@tmp{#1}\ifx\@tmp\@empty
+\ifsol@lst@fake@minted@\protected@edef\@tmp{#1}\ifx\@tmp\@empty
 % register a mapping
 \expandafter\gdef\csname sol@@minted@#2\endcsname{#3}%
 \else
@@ -505,9 +515,9 @@ draw command/.initial={sol@dlst@input}}
 \def\sol@foreach@basic@env@iter##1,##2\@nil{%
 \ifx!##1!\else
 \def\environName{##1}%
-\edef\environCurName{\pgfkeysvalueof{/sol@lst@family/\environName/command name prefix}#2\pgfkeysvalueof{/sol@lst@family/\environName/command name suffix}}% assign
+\protected@edef\environCurName{\pgfkeysvalueof{/sol@lst@family/\environName/command name prefix}#2\pgfkeysvalueof{/sol@lst@family/\environName/command name suffix}}% assign
 \sol@debug{> #2/#3 e '##1' (name: \environCurName, ctor: \pgfkeysvalueof{/sol@lst@family/\environName/constructor command})}%
-\edef\sol@CreateAnLstEnviron{\noexpand\sol@@NewLstEnv{\environName}{#3}{\environCurName}}% fully expand the Name, otherwise it would be undefined when the environment gets used
+\protected@edef\sol@CreateAnLstEnviron{\noexpand\sol@@NewLstEnv{\environName}{#3}{\environCurName}}% fully expand the Name, otherwise it would be undefined when the environment gets used
 \sol@CreateAnLstEnviron
 \ifx!##2!\else\sol@foreach@basic@env@iter##2,\@nil\fi
 \fi}
@@ -520,7 +530,7 @@ draw command/.initial={sol@dlst@input}}
 \def\sol@foreach@inline@env@iter##1,##2\@nil{%
 \ifx!##1!\else
 \def\inlineName{##1}%
-\edef\inlineCurName{\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name prefix}#2\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name suffix}}% assign
+\protected@edef\inlineCurName{\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name prefix}#2\pgfkeysvalueof{/sol@lst@family/inline \inlineName/command name suffix}}% assign
 \sol@debug{> #2/#3 i '\inlineName' (cmd: \inlineCurName, sty: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/listing style}, d: \pgfkeysvalueof{/sol@lst@family/inline \inlineName/draw command})}%
 % We will construct those with optional arguments, to give the user a chance to pass optional Arguments :D
 % luckily we can construct the main Argument without any expansion problems :D
@@ -670,7 +680,7 @@ keepspaces=false}
 \def\@solLstHL#1{\begin{sol@listings@highlight@env}[#1]\bgroup\aftergroup\sol@highlights@endenv}
 \def\sol@highlights@endenv{\end{sol@listings@highlight@env}\egroup}
 
-\def\solhlboxd#1{\edef\@tmp{\noexpand\@solLstHL{#1}}\@tmp}
+\def\solhlboxd#1{\protected@edef\@tmp{\noexpand\@solLstHL{#1}}\@tmp}
 \def\solhlbox#1{\@solLstHL{fill=#1!30,draw=#1}}
 \colorlet{solwarning}{yellow!90!red}
 \def\solcustom{fill=purple!30}
@@ -692,7 +702,7 @@ keepspaces=false}
 
 \def\solsetmintedstyle#1{\def\sol@minted@style{#1}}
 \solsetmintedstyle{default}
-\lstnewenvironment{minted}[2][]{\edef\@tmp{\pgfkeysvalueof{/sol@lst@family/\sol@minted@style/listing style}}\edef\@temp{\sol@minted@language@mapping{#2}}\expandafter\expandafter\expandafter\sol@minted@setup\expandafter\expandafter\expandafter{\expandafter\@tmp\expandafter}\expandafter{\@temp}{#1}}{}
+\lstnewenvironment{minted}[2][]{\protected@edef\@tmp{\pgfkeysvalueof{/sol@lst@family/\sol@minted@style/listing style}}\protected@edef\@temp{\sol@minted@language@mapping{#2}}\expandafter\expandafter\expandafter\sol@minted@setup\expandafter\expandafter\expandafter{\expandafter\@tmp\expandafter}\expandafter{\@temp}{#1}}{}
 \fi
 % based on https://tex.stackexchange.com/a/545948
 \def\sol@glowWithColor@#1#2#3#4{\pgfsys@beginscope

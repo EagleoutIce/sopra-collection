@@ -313,7 +313,7 @@ Dies ist ein Test für \cjava{public static void main} - hat er geklappt?
 
 \begin{command}{RegisterLanguage}{\optArg{Aliasse}\manArg{Sprache}\manArg{LanguageName}}
     Registriert eine Sprache mit dem Namen \T{LanguageName} als \T{Sprache}. Dieser Aufruf muss von jeder Konfiguration selbst durchgeführt werden. \par{}
-    Im Folgenden Beispiel gilt es die Sprache \T{Rubberduck} zu definieren und zu laden. In die Konfigurationsdatei schreiben wir:
+    Im folgenden Beispiel gilt es die Sprache \T{Rubberduck} zu definieren und zu laden. In die Konfigurationsdatei schreiben wir:
 \begin{latex}
 \lstdefinelanguage{lRubberduck}{
     comment=[l]{\#},
@@ -348,7 +348,7 @@ Quack jens ::{
     \notetext{Die Befehle wie \cmdref{c<Sprache>}, also \cmd{crubberduck} funktionieren natürlich auch: \crubberduck{Duck jens}.}
 
     Ist \secondargref{nofakeminted}{fakeminted} nicht gesetzt, so haben die Aliasse aktuell keine Bedeutung.
-    Werden sonst keine Aliasse übergeben, so wird automatisch ein mapping (\cmdref{solmintedmap}) von \T{Sprache} zu \T{LanguageName} erstellt. Andernfalls, wird für jedes (kommasepariertes) Alias, ein Mapping zu \T{LanguageName} kreiert, sodass es mit \envref{minted} verwendbar ist.
+    Werden sonst keine Aliasse übergeben, so wird automatisch ein mapping (\cmdref{solmintedmap}) von \T{Sprache} zu \T{LanguageName} erstellt. Andernfalls, wird für jedes (Komma-separierte) Alias, ein Mapping zu \T{LanguageName} kreiert, sodass es mit \envref{minted} verwendbar ist.
 \end{command}
 
 \subsection{Allgemeine Befehle}
@@ -607,7 +607,7 @@ import java.util.Scanner;
  * @brief Die Hauptklasse des Programms, in ihr 'lebt' der gesamte Code
  */
 public class ean {
-    ///@brief der Einsteigspunkt des Programms
+    ///@brief der Einstiegspunkt des Programms
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in); //Initialisierung
         int sum = 0; boolean toggle = false;
