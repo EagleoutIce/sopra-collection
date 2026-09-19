@@ -111,7 +111,7 @@
     \ifsor@showall@#2\else\expandafter\ifx\expandafter!#1!\else#2\fi\fi
 }
 
-% \ifcase#1 Unwichtig\or Niedrig\or Nett\or Neutral\or Wichtig\or Elementar\else Nicht angegeben\fi
+% \ifcase#1 Unimportant\or Low\or Nice\or Neutral\or Important\or Essential\else Not specified\fi
 % \colorlet{sor@color@star}{HeaderColor}
 \def\sor@setpriority#1{\begingroup\ifnum#1<0\else\color{HeaderColor}\foreach \i in {1,...,5}{\ifnum\i>1\relax \thinspace\fi\ifnum\i>#1\relax \relax \faStarO\else\faStar\fi}\fi\endgroup}
 \let\sorSetPriority\sor@setpriority
@@ -171,11 +171,11 @@
             \sor@table@headerrow*{ID} & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\ifsor@showtag@\hfill\texttt{##2}\fi\\\endfirsthead
             \sor@table@headerrow@next{ID} & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\\\endhead
             % i do not want to make a token iter, i'm sorry
-            \sor@requirement@leftcolstyle{Titel:} & \@sor@r@title \hfill\sor@setpriority{\@sor@r@priority}\\
+            \sor@requirement@leftcolstyle{Title:} & \@sor@r@title \hfill\sor@setpriority{\@sor@r@priority}\\
             % only typeset them if they are not empty :D
-            \sor@showifgivenorforced{\@sor@r@description}{\sor@requirement@leftcolstyle{Beschreibung:} & \@sor@r@description \\}
-            \sor@showifgivenorforced{\@sor@r@justification}{\sor@requirement@leftcolstyle{Begründung:} & \@sor@r@justification \\}
-            \sor@showifgivenorforced{\@sor@r@dependencies}{\sor@requirement@leftcolstyle{Abhängigkeiten:} & \foreach[count=\i] \@sor@dpc in \@sor@r@dependencies{%
+            \sor@showifgivenorforced{\@sor@r@description}{\sor@requirement@leftcolstyle{Description:} & \@sor@r@description \\}
+            \sor@showifgivenorforced{\@sor@r@justification}{\sor@requirement@leftcolstyle{Justification:} & \@sor@r@justification \\}
+            \sor@showifgivenorforced{\@sor@r@dependencies}{\sor@requirement@leftcolstyle{Dependencies:} & \foreach[count=\i] \@sor@dpc in \@sor@r@dependencies{%
                 \ifnum\i>1\relax, \fi% correct comma
                 \preqref*{\@sor@dpc}%
             }}%
@@ -187,11 +187,11 @@
             \sor@table@headerrow* ID & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\ifsor@showtag@\hfill\texttt{##2}\fi\\\midrule\endfirsthead
             \sor@table@headerrow@next ID & \@sor@currequirementprefix\@sor@r@id\vspace*{-0.1\baselineskip}\\\midrule\endhead
             % i do not want to make a token iter, i'm sorry
-            \sor@requirement@leftcolstyle{Titel:} & \@sor@r@title \hfill\sor@setpriority{\@sor@r@priority}\\
+            \sor@requirement@leftcolstyle{Title:} & \@sor@r@title \hfill\sor@setpriority{\@sor@r@priority}\\
             % only typeset them if they are not empty :D
-            \sor@showifgivenorforced{\@sor@r@description}{\sor@requirement@leftcolstyle{Beschreibung:} & \@sor@r@description \\}
-            \sor@showifgivenorforced{\@sor@r@justification}{\sor@requirement@leftcolstyle{Begründung:} & \@sor@r@justification \\}
-            \sor@showifgivenorforced{\@sor@r@dependencies}{\sor@requirement@leftcolstyle{Abhängigkeiten:} & \foreach[count=\i] \@sor@dpc in \@sor@r@dependencies{%
+            \sor@showifgivenorforced{\@sor@r@description}{\sor@requirement@leftcolstyle{Description:} & \@sor@r@description \\}
+            \sor@showifgivenorforced{\@sor@r@justification}{\sor@requirement@leftcolstyle{Justification:} & \@sor@r@justification \\}
+            \sor@showifgivenorforced{\@sor@r@dependencies}{\sor@requirement@leftcolstyle{Dependencies:} & \foreach[count=\i] \@sor@dpc in \@sor@r@dependencies{%
                 \ifnum\i>1\relax, \fi% correct comma
                 \preqref*{\@sor@dpc}%
             }\\}%

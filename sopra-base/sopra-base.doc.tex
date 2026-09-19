@@ -2,12 +2,12 @@
 
 \usepackage{sopra-documentation}
 
-\title{Die 'sopra-base'-Klasse}
-\subtitle[Dokumentation für die 'sopra-base'-Klasse]{Dokumentation für die 'sopra-base'-Klasse | Version \thesobversion}
+\title{The 'sopra-base' class}
+\subtitle[Documentation for the 'sopra-base' class]{Documentation for the 'sopra-base' class | Version \thesobversion}
 
 \duedate{2019-12-2}
 
-\keywords{Dokumentation,sopra-base,sopra,uni ulm,uulm}
+\keywords{Documentation,sopra-base,sopra,uni ulm,uulm}
 \authors{Florian Sihler (florian.sihler@uni-ulm.de)}
 
 \group{Die Affenbande}
@@ -17,224 +17,222 @@
     %\tableofcontents
 %
 
-\section{Allgemeines}
-\subsection{Warum, wieso, weshalb?}
-    Diese \LaTeXe-Dokumentlasse wurde im Rahmen des Sopras im
-    Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
-    Grundlage für die Optik aller Dokumente des \imptext{Teams 20} und kann
-    binnen seiner Entwicklung noch grundlegend verändert werden. Das
-    bisherige Design ist an das Aufgabentemplate der Universität Ulm, wobei
-    eine Schnittstelle geschaffen wurde, die auch bei varrierenden optischen
-    Eigenschaftendes Dokuments keine Änderungen im \LaTeX-Codes erfordern
-    sollten.\par
-    Zum Visualisieren der einzelnen Code-Ausschnitte wird das
-    \T{sopra-listings}-Paket verwendet. Es ist für die Verwendung der Dokumentklasse
-    nicht relevant.\par
-    Die zugehörige Klasse sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile[subject={sopra-base.cls}]{sopra-base.cls}}.
-\subsection{Abhängigkeiten}
-    Dieses Paket basiert auf der, jeder \LaTeX-Distribution beigelegten,
-    \T{article}-Klasse,\footnote{\url{https://ctan.org/pkg/article}}
-    sowie den folgenden Paketen (alle übergebenen Argumente werden ebenfalls
-    angegeben, wobei im Fall einer Werteübergabe ein Stern gesetzt wird.):
+\section{General}
+\subsection{Why, wherefore, what for?}
+    This \LaTeXe document class was written as part of the Sopra in the
+    2019 winter semester and 2020 summer semester and serves as the
+    foundation for the look of all documents of \imptext{Team 20}, and may
+    still be fundamentally changed over the course of its development. The
+    design so far is based on the assignment template of Ulm University,
+    whereby an interface was created that should not require changes to the
+    \LaTeX{} code even for varying visual properties of the
+    document.\par
+    To visualize the individual code excerpts, the
+    \T{sopra-listings} package is used. It is not relevant for the use of
+    the document class itself.\par
+    The associated class should also be embedded in this document: \scalebox{0.65}{\attachfile[subject={sopra-base.cls}]{sopra-base.cls}}.
+\subsection{Dependencies}
+    This package is based on the \T{article} class,\footnote{\url{https://ctan.org/pkg/article}}
+    which is included with every \LaTeX{} distribution,
+    as well as the following packages (all passed arguments are also
+    given, whereby a star is set in case a value is passed):
     \begin{multicols}{3}
         \begin{itemize}
             \def\pkgparse#1:#2\@nil{%
                 \T{#1}\ifx!#2!\else\textsuperscript{[#2]}\fi%
             }
             \foreach \pkg in {tikz:,fontenc:T1, inputenc:utf8,
-                babel:{english,main=ngerman},geometry:{margin*,
+                babel:{ngerman,main=english},geometry:{margin*,
                 a4paper,bottom*},sfmath:,lmodern:,microtype:,
                 scrlayer-scrpage:,titlesec:,enumitem:,nowidow:all,hyperref:hidelinks}{
                 \item \expandafter\pkgparse\pkg\@nil
             }
         \end{itemize}
     \end{multicols}
-    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein (weiter
-    wird noch die Ti\textit{k}Z-Bibliothek \T{calc} verwendet, sowie \T{shapes}
-    wenn eine Grupennummer mittels \cmdref{groupnum} oder \cmdref{setTeam}
-    angegeben wird.)
-\subsection{Die Installation}
-    Die Klasse wird nicht als \T{.dtx} ausgeliefert, weswegen sich die
-    folgenden Möglichkeiten ergeben:
+    All of these packages should be part of the common \LaTeX{} distribution
+    (in addition, the Ti\textit{k}Z library \T{calc} is used, as well as \T{shapes}
+    if a group number is given via \cmdref{groupnum} or \cmdref{setTeam}).
+\subsection{Installation}
+    The class is not shipped as a \T{.dtx}, which is why the
+    following options are available:
     \begin{itemize}
-        \item Die Dokumentklasse kann in dasselbe Verzeichnis wie das Dokument
-                gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+        \item The document class can be placed in the same directory as the
+                document. In this case, the inclusion instruction is:
 \begin{plainlatex}
 \documentclass{sopra-base}
 \end{plainlatex}
-        \item Die Dokumentklasse kann in ein Unterverzeichnis/in ein mit
-                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
-                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+        \item The document class can be placed in a subdirectory/in a
+                directory shipped with the document. In this case, it is
+                specified via the (relative) path:
 \begin{plainlatex}
-\documentclass{./Mein/Pfad/zu/sopra-base}
+\documentclass{./My/Path/to/sopra-base}
 \end{plainlatex}
-        \item Man kann die Klasse (mittels eines Symlinks oder ähnlichem)
-              in einen eigenen \emph{texmf}-Baum ablegen.
-              So kann zum Beispiel auf Linux unter der Verwendung von texlive
-              die Klasse hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
-              Das Verzeichnis kann erstellt und anschließend mittels
-              \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
-              die Klasse wie jede andere installierte Klasse verwendet werden:
+        \item One can place the class (via a symlink or similar) into
+              one's own \emph{texmf} tree.
+              For example, on Linux using texlive, the class can be
+              placed here: \bvoid{\~/texmf/tex/latex/}.
+              The directory can be created and subsequently updated via
+              \bbash{texhash \~/texmf}. Now the class can be used like
+              any other installed class:
 \begin{plainlatex}
 \documentclass{sopra-base}
 \end{plainlatex}
     \end{itemize}
-    \subsection{Weitere Besonderheiten}
-    In Version \thesobversion{} (\cmdref{thesobversion}) gibt es keine weiteren
-    Besonderheiten.
+    \subsection{Further peculiarities}
+    In version \thesobversion{} (\cmdref{thesobversion}) there are no further
+    peculiarities.
 
-\section{Klassen-Konfiguration}
-    \subsection{Akzeptierte Parameter}
-    Die Dokumentklasse akzeptiert, so wie die meisten, Argumente. So können
-    nebst den für \T{article} akzeptierten Argumente die im folgenden
-    aufgelistet werden, wobei bei Argumenten mit einer \say{Counter}-Option
-    das jeweils standardmäßig aktive zuerst und das andere in Klammern
-    geschrieben. So wird implizit:
+\section{Class configuration}
+    \subsection{Accepted parameters}
+    Like most, the document class accepts arguments. In addition to the
+    arguments accepted by \T{article}, the following are listed below,
+    whereby for arguments with a \say{counter} option the one active by
+    default is written first and the other in brackets. So implicitly:
 \begin{plainlatex}
     \documentclass[final,nopar,sffont,defaultmode,showmail]{sopra-base}
 \end{plainlatex}
-    aufgerufen. Während wir mit:
+    is invoked. Whereas with:
 \begin{plainlatex}
     \documentclass[rmfont]{sopra-base}
 \end{plainlatex}
-    das Dokument in der altbekannten \emph{Roman}-Schrift setzen lassen können.
+    we can have the document set in the well-known \emph{Roman} font.
 
     \begin{argument}{final}{draft}
-        Im \T{draft}-Modus können einige Elemente so wie Grafiken nicht
-        gesetzt werden um so den Kompilierprozess zu beschleunigen.
-        Diese Option wird analog auch von vielen weiteren Paketen akzeptiert.
+        In \T{draft} mode some elements such as graphics cannot be
+        typeset, in order to speed up the compilation process.
+        This option is likewise accepted by many other packages as well.
     \end{argument}
 
     \begin{argument}{nopar}{dopar}
-        Mittels \T{dopar} setzen wir die Einrückung bei einem Paragraphen
-        auf den von \LaTeX-gesetzten Standartwert.
+        Using \T{dopar} we set the paragraph indentation
+        to the default value set by \LaTeX.
     \end{argument}
 
 
     \begin{argument}{sffont}{rmfont}
-        Durch \T{rmfont} wird die Schriftart wieder auf \emph{Roman} gesetzt.
+        Using \T{rmfont} the font is set back to \emph{Roman}.
     \end{argument}
 
     \begin{argument}{defaultmode}{print}
-        Mittels \T{print} werden die Farben verringt beziehungsweise in Teilen
-        komplett entfernt (in Graustufen konvertiert) um ein besseres Ergebnis
-        im Druck zu erzielen.
+        Using \T{print}, colors are reduced, or in part
+        completely removed (converted to grayscale), in order to achieve
+        a better result in print.
     \end{argument}
 
     \begin{argument}{showmail}{hidemail}
-        Mit \T{hidemail} wird die E-Mail-Adresse bei der Angabe der Autoren
-        nicht angezeigt.
+        With \T{hidemail} the e-mail address is not shown when
+        listing the authors.
     \end{argument}
 
-    \subsection{Weitere Stile}
-    In der aktuellen Version (\thesobversion) werden noch keine alternativen
-    Stile und Varianten unterstützt. Sie werden vermutlich über weitere
-    Parameter oder Subklassen realisiert werden.
+    \subsection{Further styles}
+    In the current version (\thesobversion) no alternative
+    styles and variants are supported yet. They will presumably be realized
+    via further parameters or subclasses.
 
-\section{Befehlsübersicht}
+\section{Command overview}
 
-Die Klasse fügt als \emph{base}-Klasse keinen großen Satz an Befehlen für
-den Nutzer hinzu. Diese Aufgabe gebührt den erweiternden Klassen und Paketen.
+As a \emph{base} class, the class does not add a large set of commands for
+the user. This task falls to the extending classes and packages.
 
-\subsection{Daten setzen}
+\subsection{Setting data}
 \label{sec:DatenSetzen}
-Die Folgenden Befehle sollten in der Präambel gesetzt werden und konfigurieren
-auch die Metadaten des jeweiligen Dokuments (also die Dokumenteigenschaften).
-Sie können beliebig oft überschrieben werden (bis zu dem Punkt, an dem
-das Dokument beginnt). \notetext{Entwicklernotiz: Alle diese Felder stehen über
-\T{\textbackslash sob@register@$\langle$Name$\rangle$}, beziehungsweise ihre 'short'-Varianten
-über \T{\textbackslash sob@register@short@$\langle$Name$\rangle$} zur Verfügung.}
+The following commands should be set in the preamble and also configure
+the metadata of the respective document (i.e. the document properties).
+They can be overwritten as often as desired (up to the point at which
+the document begins). \notetext{Developer note: All of these fields are available via
+\T{\textbackslash sob@register@$\langle$Name$\rangle$}, or their 'short' variants
+via \T{\textbackslash sob@register@short@$\langle$Name$\rangle$}.}
 
-\begin{command}{title}{\optArg{short}\manArg{NeuerTitel}}
-    Setzt den Titel des Dokuments auf \T{NeuerTitel}.
+\begin{command}{title}{\optArg{short}\manArg{NewTitle}}
+    Sets the title of the document to \T{NewTitle}.
 \end{command}
 
-\begin{command}{subtitle}{\optArg{short}\manArg{NeuerTitel}}
-    Setzt den Untertitel des Dokuments auf \T{NeuerTitel}.
+\begin{command}{subtitle}{\optArg{short}\manArg{NewTitle}}
+    Sets the subtitle of the document to \T{NewTitle}.
 \end{command}
 
-\begin{command}{brief}{\optArg{short}\manArg{Kurzbeschreibung}}
-    Setzt die Kurzbeschreibung des Dokuments auf \T{Kurzbeschreibung}.
-    Dieses Datenfeld wird in der Basis-Klasse nicht verwendet.
+\begin{command}{brief}{\optArg{short}\manArg{ShortDescription}}
+    Sets the short description of the document to \T{ShortDescription}.
+    This data field is not used in the base class.
 \end{command}
 
-\begin{command}{authors}{\optArg{short}\manArg{Autorenliste}}
-    Hierrüber kann die Liste der Autoren gesetzt werden. Es empfiehlt sich
-    hierfür \cmdref{addAuthor} zu verwenden.
+\begin{command}{authors}{\optArg{short}\manArg{AuthorList}}
+    This can be used to set the list of authors. It is recommended
+    to use \cmdref{addAuthor} for this.
 \end{command}
 
 \begin{command}{duedate}{\optArg{short}\manArg{YYYY-MM-DD}}
-   Setzt das Datum des Dokuments. Zur Konvertierung wird \cmdref{DateConvert}
-   verwendet.
+   Sets the date of the document. \cmdref{DateConvert} is used
+   for the conversion.
 \end{command}
 
 \begin{command}{supervisor}{\optArg{short}\manArg{Name}}
-    Setzt den Betreuer auf \T{Name}. Dieses Datenfeld wird in der Basis-Klasse nicht verwendet.
+    Sets the supervisor to \T{Name}. This data field is not used in the base class.
 \end{command}
 
-\begin{command}{keywords}{\optArg{short}\manArg{Schlüsselwörter}}
-    Setzt die Keywords für die Metadaten auf \T{Schlüselwörter}.
+\begin{command}{keywords}{\optArg{short}\manArg{Keywords}}
+    Sets the keywords for the metadata to \T{Keywords}.
 \end{command}
 
 \begin{command}{group}{\optArg{short}\manArg{Name}}
-    Setzt die Gruppe des jeweiligen Erstellers auf \T{Name}.
+    Sets the group of the respective creator to \T{Name}.
 \end{command}
 
-\begin{command}{groupnum}{\optArg{short}\manArg{Nummer}}
-    Setzt im Falle einer Nummerierung (oder Symbol, etc.) der Gruppe dieses
-    auf \T{Nummer}.
+\begin{command}{groupnum}{\optArg{short}\manArg{Number}}
+    In case of a numbering (or symbol, etc.) of the group, sets this
+    to \T{Number}.
 \end{command}
 
-\subsection{Beim Datensetzen hilfreiches}
+\subsection{Helpful when setting data}
 \begin{command}{addAuthor}{\manArg{Name (Email)}}
-    Fügt einen Autor der Liste der Autoren (\cmdref{authors}) hinzu. So zum
-    Beispiel: \blatex[morekeywords={[5]{\\addAuthor}}]{\\addAuthor\{Florian Sihler (florian.sihler@uni-ulm.de)\}}.
+    Adds an author to the list of authors (\cmdref{authors}). For
+    example: \blatex[morekeywords={[5]{\\addAuthor}}]{\\addAuthor\{Florian Sihler (florian.sihler@uni-ulm.de)\}}.
 \end{command}
 
-\begin{command}{setTeam}{\manArg{Name Nummer}}
-    Erlaubt es \cmdref{group} und \cmdref{groupnum} in einem Aufruf zu setzen.
-    So zum Beispiel: \T{\cmd{setTeam}\{Affenbande 42\}} oder
+\begin{command}{setTeam}{\manArg{Name Number}}
+    Allows \cmdref{group} and \cmdref{groupnum} to be set in a single call.
+    For example: \T{\cmd{setTeam}\{Affenbande 42\}} or
     \T{\cmd{setTeam}\{\{Mega Team\} A\}}.
 \end{command}
 
-\subsection{Die Daten anzeigen}
+\subsection{Displaying the data}
 
 \begin{command}{typesetAuthors}{}
-    Setzt die Autoren gemäß \jmark[\T{showmail}]{mrk:showmail} mit oder
-    ohne E-Mail-Adresse, so ergibt \cmd{typesetAuthors}: \typesetAuthors.
-    Bei mehreren werden Kommas und das \say{und} korrekt gesetzt.
+    Typesets the authors according to \jmark[\T{showmail}]{mrk:showmail} with or
+    without an e-mail address, so \cmd{typesetAuthors} yields: \typesetAuthors.
+    For multiple authors, commas and the \say{and} are set correctly.
 \end{command}
 
 \begin{command}{maketitle}{}
-    Setzt den Titel auf Basis der \jmark[gesetzten Daten]{sec:DatenSetzen}
+    Sets the title based on the \jmark[data set]{sec:DatenSetzen}
 \end{command}
 
 \begin{command}{thesobversion}{}
-    Gibt die aktuelle Version der \T{sopra-base}-Dokumentklasse aus. \notetext{Hinweis: über \blatex{\\value\{sobversion\}} lässt sich
-    die Version als $4$-stellige Nummer erhalten: \arabic{sobversion}.}
+    Outputs the current version of the \T{sopra-base} document class. \notetext{Note: via \blatex{\\value\{sobversion\}} the
+    version can be obtained as a $4$-digit number: \arabic{sobversion}.}
 \end{command}
 
 \begin{command}{DateConvert}{\manArg{YYYY-MM-DD}}
-    Konvertiert ein Datum in eine schönere Form, so:
+    Converts a date into a nicer form, like so:
 \begin{plainlatex}[morekeywords={[5]{\\DateConvert}}]
 \DateConvert{2019-12-02} % :yields: !*\solGet{comments}{\DateConvert{2019-12-02}}*!
 \end{plainlatex}
 \end{command}
 
-\subsection{Generelle Formatierungsbefehle}
+\subsection{General formatting commands}
 
 \begin{command}{imptext}{\manArg{Text}}
-    Hebt \T{Text} als \imptext{sehr wichtig} hervor.
+    Highlights \T{Text} as \imptext{very important}.
 \end{command}
 
 \begin{command}{notetext}{\manArg{Text}}
-    Setzt \T{Text} als eine \notetext{beiläufige Notiz}.
+    Sets \T{Text} as an \notetext{incidental note}.
 \end{command}
 
 \appendix
-\section{Verbundene Klassen und Pakete}
+\section{Related classes and packages}
 
-Im Zuge dieser \LaTeXe-Dokumentklasse sind noch einige andere Pakete entstanden. Zum aktuellen Kompilierstand existiert (Pakete und Klassen, ohne Link sind dieser beigelegt und hier: \url{https://github.com/EagleoutIce/sopra-collection} zu finden):
+In the course of this \LaTeXe document class, a few other packages have also come into being. As of the current compilation state, the following exist (packages and classes without a link are included alongside this one and can be found here: \url{https://github.com/EagleoutIce/sopra-collection}):
 \begin{multicols}{3}
     \begin{itemize}
         \foreach \i/\u in {eagle-maps/{https://github.com/EagleoutIce/eagle-maps},LILLY-Framework/{https://github.com/EagleoutIce/LILLY},sopra-documentation/,sopra-models/,sopra-listings/,sopra-requirements/,sopra-attachments/} {

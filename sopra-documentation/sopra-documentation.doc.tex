@@ -2,12 +2,12 @@
 
 \usepackage{sopra-documentation}
 
-\title{Das 'sopra-documentation'-Paket}
-\subtitle[Dokumentation für das 'sopra-documentation'-Paket]{Dokumentation für das 'sopra-documentation'-Paket | Version \thesodversion}
+\title{The 'sopra-documentation' package}
+\subtitle[Documentation for the 'sopra-documentation' package]{Documentation for the 'sopra-documentation' package | Version \thesodversion}
 
 \duedate{2019-12-2}
 
-\keywords{Dokumentation,sopra-documentation,sopra,uni ulm,uulm,Paket}
+\keywords{Documentation,sopra-documentation,sopra,uni ulm,uulm,Package}
 \authors{Florian Sihler (florian.sihler@uni-ulm.de)}
 
 \group{Die Affenbande}
@@ -17,190 +17,188 @@
     %\tableofcontents
 %
 
-\section{Allgemeines}
-\subsection{Warum, wieso, weshalb?}
-    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im
-    Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
-    Grundlage für die Erstellung von Dokumentationen für die anderen Pakete und Klassen
-    des \imptext{Teams 20}, welche zusammen mit der \T{sopra-base.cls} kreiert
-    werden.\par
-    Zum Visualisieren der einzelnen Code-Ausschnitte wird das
-    \T{sopra-listings}-Paket verwendet. Es ist für die Verwendung des Pakets (\jmark[\T{nolistings}]{mrk:nolistings})
-    nicht relevant.\par
-    Das zugehörige Paket sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile[subject={sopra-documentation.sty}]{sopra-documentation.sty}}.
-\subsection{Abhängigkeiten}
-    Dieses Paket bindet die folgenden Paketen mit ein:
+\section{General}
+\subsection{Why, wherefore, what for?}
+    This \LaTeXe package was written as part of the Sopra in the
+    2019 winter semester and 2020 summer semester and serves as the
+    foundation for creating documentation for the other packages and classes
+    of \imptext{Team 20}, which are created together with
+    \T{sopra-base.cls}.\par
+    To visualize the individual code excerpts, the
+    \T{sopra-listings} package is used. It is not relevant for the use of the package (\jmark[\T{nolistings}]{mrk:nolistings}).\par
+    The associated package should also be embedded in this document: \scalebox{0.65}{\attachfile[subject={sopra-documentation.sty}]{sopra-documentation.sty}}.
+\subsection{Dependencies}
+    This package includes the following packages:
     \begin{multicols}{3}
         \begin{itemize}
             \def\pkgparse#1:#2\@nil{%
                 \T{#1}\ifx!#2!\else\textsuperscript{(#2)}\fi%
             }
-            \foreach \pkg in {xcolor:,attachfile2:,multicol:,sopra-listings:{nur \jmark[\T{listings}]{mrk:listings}},blindtext:{nur \jmark[\T{dummy}]{mrk:dummy}},
+            \foreach \pkg in {xcolor:,attachfile2:,multicol:,sopra-listings:{only \jmark[\T{listings}]{mrk:listings}},blindtext:{only \jmark[\T{dummy}]{mrk:dummy}},
                 hyperref:} {
                 \item \expandafter\pkgparse\pkg\@nil
             }
         \end{itemize}
     \end{multicols}
-    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution/mit diesem ausgeliefert worden sein.
+    All of these packages should be part of the common \LaTeX{} distribution or shipped alongside it.
 
-\subsection{Die Installation}
-    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die
-    folgenden Möglichkeiten ergeben:
+\subsection{Installation}
+    The package is not shipped as a \T{.dtx}, which is why the
+    following options are available:
     \begin{itemize}
-        \item Das Paket kann in dasselbe Verzeichnis wie das Dokument
-                gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+        \item The package can be placed in the same directory as the
+                document. In this case, the inclusion instruction is:
 \begin{plainlatex}
 \usepackage{sopra-documentation}
 \end{plainlatex}
-        \item Das Paket kann in ein Unterverzeichnis/in ein mit
-                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
-                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+        \item The package can be placed in a subdirectory/in a
+                directory shipped with the document. In this case, it is
+                specified via the (relative) path:
 \begin{plainlatex}
-\usepackage{./Mein/Pfad/zu/sopra-documentation}
+\usepackage{./My/Path/to/sopra-documentation}
 \end{plainlatex}
-        \item Man kann das Paket (mittels eines Symlinks oder ähnlichem)
-              in einen eigenen \emph{texmf}-Baum ablegen.
-              So kann zum Beispiel auf Linux unter der Verwendung von texlive
-              das Paket hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
-              Das Verzeichnis kann erstellt und anschließend mittels
-              \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
-              das Paket wie jede andere installierte Paket verwendet werden:
+        \item One can place the package (via a symlink or similar)
+              into one's own \emph{texmf} tree.
+              For example, on Linux using texlive, the package can be
+              placed here: \bvoid{\~/texmf/tex/latex/}.
+              The directory can be created and subsequently updated via
+              \bbash{texhash \~/texmf}. Now the package can be used like
+              any other installed package:
 \begin{plainlatex}
 \usepackage{sopra-documentation}
 \end{plainlatex}
     \end{itemize}
-    \subsection{Weitere Besonderheiten}
+    \subsection{Further peculiarities}
     \paragraph{v1.0.0:}
-    In dieser Version gibt es keine weiteren Besonderheiten.
+    In this version there are no further peculiarities.
     \paragraph{\protect\thesodversion:}
-    In dieser Version wurde \T{LILLYxLISTINGS} durch \T{sopra-listings} ersetzt!
+    In this version \T{LILLYxLISTINGS} was replaced by \T{sopra-listings}!
 
-\section{Paket-Konfiguration}
-    \subsection{Akzeptierte Parameter}
-    Das Paket akzeptiert, so wie die meisten, Argumente.
-    Bei Argumenten mit einer \say{Counter}-Option wird das jeweils standardmäßig aktive zuerst und das andere in Klammern
-    geschrieben. So wird implizit:
+\section{Package configuration}
+    \subsection{Accepted parameters}
+    Like most, the package accepts arguments.
+    For arguments with a \say{counter} option, the one active by default is written first and the other in brackets.
+    So implicitly:
 \begin{plainlatex}
     \usepackage[nodebug,dummy,listings]{sopra-documentation}
 \end{plainlatex}
-    aufgerufen. Während wir mit:
+    is invoked. Whereas with:
 \begin{plainlatex}
     \usepackage[nolistings]{sopra-documentation}
 \end{plainlatex}
-    das Dokument ohne das \T{LILLYxLISTINGS}-Paket kompilieren.
+    we compile the document without the \T{LILLYxLISTINGS} package.
 
     \begin{argument}{nodebug}{debug}
-        \label{mrk:debug}Im \T{debug}-Modus wird der Log, dank \cmd{errorcontextlines} ausführlicher gefasst (im Falle eines Fehlers).
+        \label{mrk:debug}In \T{debug} mode, the log is made more verbose thanks to \cmd{errorcontextlines} (in case of an error).
     \end{argument}
 
     \begin{argument}{dummy}{nodummy}
-        \label{mrk:nodummy}Im \T{dummy}-Modus wird das Paket \T{blindtext} eingebunden, sonst nicht.
+        \label{mrk:nodummy}In \T{dummy} mode, the \T{blindtext} package is included, otherwise not.
     \end{argument}
 
     \begin{argument}{listings}{nolistings}
-        \label{mrk:nolistings}Im \T{listings}-Modus wird das Paket \T{LILLYxLISTINGS} eingebunden, sonst nicht.
+        \label{mrk:nolistings}In \T{listings} mode, the \T{LILLYxLISTINGS} package is included, otherwise not.
     \end{argument}
 
-\section{Befehle- und Umgebungen}
+\section{Commands and environments}
 
-Es gilt zu beachten, dass das Präfix \T{env@} nur auf die Natur einer Umgebung hinweist und nicht zum eigentlichen Bezeichner zuzuordnen ist!
+Note that the prefix \T{env@} only indicates the nature of an environment and is not to be considered part of the actual identifier!
 
 
-\subsection{Kompatibilitätsmodus}
+\subsection{Compatibility mode}
 
 \begin{center}
-    \imptext{Dieser Modus steht in \thesodversion{} nicht zur Verfügung!}
+    \imptext{This mode is not available in \thesodversion{}!}
 \end{center}
 
-Diese Befehle werden nur mit \jmark[\T{nolistings}]{mrk:nolistings} definiert, da sie sonst von \T{LILLYxLISTINGS} eingebunden
-werden würden:
+These commands are only defined with \jmark[\T{nolistings}]{mrk:nolistings}, since otherwise they would be included by \T{LILLYxLISTINGS}:
 
 \begin{command}{T}{\manArg{Text}}
-    Wird hier als Alias für \cmd{texttt} umgesetzt; setzt \T{Text} also in Schreibmaschinenschrift.
+    Implemented here as an alias for \cmd{texttt}; sets \T{Text} in typewriter font.
 \end{command}
 
 
 \begin{command}{lstcomment}{\manArg{Text}}
-    Analog existieren \cmd{lstkwone}, \cmd{lstkwtwo}, \cmd{lstkwthree}, \cmd{lstkwfour}, \cmd{lstkwfive}, \cmd{lstkwsix}, \cmd{lststring} und \cmd{lstnumber} die \T{Text} farblich hervorheben.
+    Similarly, \cmd{lstkwone}, \cmd{lstkwtwo}, \cmd{lstkwthree}, \cmd{lstkwfour}, \cmd{lstkwfive}, \cmd{lstkwsix}, \cmd{lststring} and \cmd{lstnumber} exist, which highlight \T{Text} in color.
 \end{command}
 
 
-\subsection{Generelle Befehle}
+\subsection{General commands}
 
 \begin{command}{email}{\manArg{E-Mail}}
-    Setzt \T{E-Mail} als klickbare E-Mail-Adresse.
+    Sets \T{E-Mail} as a clickable e-mail address.
 \end{command}
 
 \begin{command}{thesodversion}{}
-    Liefert die aktuelle Version des Pakets. So ergibt: \cmd{thesodversion}: \thesodversion\\
-    \notetext{Hinweis: über \blatex{\\value\{sodversion\}} lässt sich
-    die Version als $4$-stellige Nummer erhalten: \arabic{sodversion}.}
+    Returns the current version of the package. So \cmd{thesodversion} yields: \thesodversion\\
+    \notetext{Note: via \blatex{\\value\{sodversion\}} the
+    version can be obtained as a $4$-digit number: \arabic{sodversion}.}
 \end{command}
 
 \begin{command}{manArg}{\manArg{Text}}
-    Erlaubt es in \envref{command} oder vergleichbaren Umgebungen ein verpflichtendes Argument anzugeben. \notetext{So ist \T{Text} in der Befehlsdefinition mittels \cmd{manArg} gesetzt!}
+    Allows a mandatory argument to be specified in \envref{command} or comparable environments. \notetext{For example, \T{Text} in the command definition is set using \cmd{manArg}!}
 \end{command}
 
 \begin{command}{optArg}{\manArg{Text}}
-    Erlaubt es in \envref{command} oder vergleichbaren Umgebungen ein optionales Argument anzugeben.
+    Allows an optional argument to be specified in \envref{command} or comparable environments.
 \end{command}
 
 \begin{command}{cmd}{\manArg{Name}}
-    Setzt \T{Name} als Befehl: \T{\cmd{cmd}\{Hi\}}: \cmd{Hi}.
+    Sets \T{Name} as a command: \T{\cmd{cmd}\{Hi\}}: \cmd{Hi}.
 \end{command}
 
 \begin{command}{env}{\manArg{Name}}
-    Setzt \T{Name} als Umgebung: \T{\cmd{env}\{Hi\}}: \env{Hi}.
+    Sets \T{Name} as an environment: \T{\cmd{env}\{Hi\}}: \env{Hi}.
 \end{command}
 
 \begin{command}{cmdref}{\manArg{Name}}
-    Analog zu \cmdref{cmd}, allerdings wird (so wie genau hier auch) ein Link zur Erklärung von \T{Name} erstellt.
+    Similar to \cmdref{cmd}, however (just as here) a link to the explanation of \T{Name} is created.
 \end{command}
 
 \begin{command}{envref}{\manArg{Name}}
-    Analog zu \cmdref{env}, allerdings wird ein Link zur Erklärung von \T{Name} erstellt.
+    Similar to \cmdref{env}, however a link to the explanation of \T{Name} is created.
 \end{command}
 
 \begin{command}{argref}{\manArg{Name}\manArg{Counter}}
-    Setzt ein Argument mit entsprechender Counter-Option.
+    Sets an argument with the corresponding counter option.
 \end{command}
 
 
-\begin{environment}{command}{\manArg{Name}\manArg{Argumente}}
-    Startet die Erklärung eines neuen Befehls mit Bezeichner \T{Name} (für \cmdref{cmdref}) und den Argumenten \T{Argumente}.
+\begin{environment}{command}{\manArg{Name}\manArg{Arguments}}
+    Starts the explanation of a new command with identifier \T{Name} (for \cmdref{cmdref}) and the arguments \T{Arguments}.
 \end{environment}
 
-\begin{environment}{environment}{\manArg{Name}\manArg{Argumente}}
-    Startet die Erklärung einer neuen Umgebung mit Bezeichner \T{Name} (für \cmdref{envref}) und den Argumenten \T{Argumente} (so wie hier).
+\begin{environment}{environment}{\manArg{Name}\manArg{Arguments}}
+    Starts the explanation of a new environment with identifier \T{Name} (for \cmdref{envref}) and the arguments \T{Arguments} (as here).
 \end{environment}
 
-\begin{environment}{argument}{\manArg{Name}\manArg{Conter-Name}}
-    Startet die Erklärung eins neuen Arguments für das Paket/die Klasse mit Bezeichner \T{Name} und dem Konter-Bezeichner \T{Conter-Name}.
+\begin{environment}{argument}{\manArg{Name}\manArg{Counter-Name}}
+    Starts the explanation of a new argument for the package/class with identifier \T{Name} and the counter identifier \T{Counter-Name}.
 \end{environment}
 
 \begin{command}{say}{\manArg{Text}}
-    Setzt \T{Text} in \say{Anführungszeichen}.
+    Sets \T{Text} in \say{quotation marks}.
 \end{command}
 
-\begin{command}{jmark}{\optArg{Text}\manArg{Linkziel}}
-    Funktioniert analog zum Pendant in \T{Lilly}, weil ich es so lieber mag und aus Reflex schreibe :D.
+\begin{command}{jmark}{\optArg{Text}\manArg{LinkTarget}}
+    Works analogously to its counterpart in \T{Lilly}, because I like it better that way and write it out of reflex :D.
 \end{command}
 
-\subsection{Weitere Befehle}
+\subsection{Further commands}
 
-Diese Befehle entstammen den eingebundenen Paketen und werden lediglich konfiguriert.
+These commands originate from the included packages and are merely configured here.
 
-\begin{command}{attachfile}{\optArg{Options}\manArg{Pfad}}
-    Bindet die Datei in \T{Pfad} ein. Als \T{Options} bietet sich zumindest \T{subject} an. So wird in dieser Dokumentation zum Beispiel das Paket mit folgender Zeile eingebunden:
+\begin{command}{attachfile}{\optArg{Options}\manArg{Path}}
+    Embeds the file at \T{Path}. As \T{Options}, at least \T{subject} is worth using. For example, in this documentation the package is embedded with the following line:
 \begin{plainlatex}
 \attachfile[subject={sopra-documentation.sty}]{sopra-documentation.sty}
 \end{plainlatex}
 \end{command}
 
-\begin{command}{textattachfile}{\optArg{Options}\manArg{Pfad}\manArg{Text}}
-    Bindet die Datei in \T{Pfad} ein, macht aber anstelle eines Symbols \T{Text} zum klickbaren Link zum öffnen. Die Optionen sind analog zu \cmdref{attachfile}.
+\begin{command}{textattachfile}{\optArg{Options}\manArg{Path}\manArg{Text}}
+    Embeds the file at \T{Path}, but instead of a symbol makes \T{Text} the clickable link to open it. The options are analogous to \cmdref{attachfile}.
 \end{command}
 
-Für alle anderen verwendeten Methoden empfiehlt es sich, den Quellcode selbst oder den Quellcode der Dokumentation näher zu betrachten.
+For all other methods used, it is recommended to take a closer look at the source code itself or the source code of the documentation.
 
 \end{document}

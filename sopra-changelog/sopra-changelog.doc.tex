@@ -3,18 +3,18 @@
 \usepackage{sopra-documentation}
 \usepackage{sopra-changelog}
 
-\title{Das 'sopra-changelog'-Paket}
-\subtitle[Dokumentation für das 'sopra-changelog'-Paket]{Dokumentation für das 'sopra-changelog'-Paket | Version \thesocversion}
+\title{The 'sopra-changelog' Package}
+\subtitle[Documentation for the 'sopra-changelog' package]{Documentation for the 'sopra-changelog' package | Version \thesocversion}
 
 \duedate{2019-12-2}
 
-\keywords{Dokumentation,sopra-changelog,sopra,uni ulm,uulm,Paket}
+\keywords{Documentation,sopra-changelog,sopra,uni ulm,uulm,package}
 \authors{Florian Sihler (florian.sihler@uni-ulm.de)}
 
 \group{Die Affenbande}
 
 \setTargetVersion{4}
-\setVersionData{4}{2019-12-2}{Hier war alles voll supi und so. Diese Version fügt Affen hinzu!}
+\setVersionData{4}{2019-12-2}{Everything was totally super here. This version adds monkeys!}
 \begin{document}
 
     \maketitle
@@ -30,16 +30,16 @@
 %
 %
 
-\section{Allgemeines}
-\subsection{Warum, wieso, weshalb?}
-    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im
-    Wintersemester 2019 und Sommersemester 2020 verfasst und dient zur automatischen generierung von Changelogs für das \imptext{Teams 20}. Diese Dokumentation wurde zusammen mit der
-    \T{sopra-base.cls} sowie dem Paket \T{sopra-documentation.sty} kreiert.\par
-    Zum Visualisieren der einzelnen Code-Ausschnitte wird das
-    \T{sopra-listings}-Paket verwendet.
-    Das zugehörige Paket sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile[subject={sopra-changelog.sty}]{sopra-changelog.sty}}. \notetext{Date Paket wurde binnen drei Stunden entwickelt und programmiert, es befindet sich aktuell in der Entwicklung.}
-\subsection{Abhängigkeiten}
-    Dieses Paket bindet die folgenden Paketen mit ein:
+\section{General}
+\subsection{Why, what for?}
+    This \LaTeXe\ package was written as part of the Sopra in the
+    winter semester 2019 and summer semester 2020 and serves for the automatic generation of changelogs for \imptext{Team 20}. This documentation was created together with the
+    \T{sopra-base.cls} as well as the \T{sopra-documentation.sty} package.\par
+    The \T{sopra-listings} package is used to visualize the individual code
+    excerpts.
+    The associated package should also be embedded in this document: \scalebox{0.65}{\attachfile[subject={sopra-changelog.sty}]{sopra-changelog.sty}}. \notetext{This package was developed and programmed within three hours; it is currently under development.}
+\subsection{Dependencies}
+    This package includes the following packages:
     \begin{multicols}{4}
         \begin{itemize}
             \def\pkgparse#1:#2\@nil{%
@@ -50,38 +50,38 @@
             }
         \end{itemize}
     \end{multicols}
-    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein.
+    All of these packages should be part of a common \LaTeX\ distribution.
 
-\subsection{Die Installation}
-    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die
-    folgenden Möglichkeiten ergeben:
+\subsection{Installation}
+    The package is not delivered as a \T{.dtx}, which is why the
+    following options arise:
     \begin{itemize}
-        \item Das Paket kann in dasselbe Verzeichnis wie das Dokument
-                gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+        \item The package can be placed in the same directory as the
+                document. In this case the inclusion instruction reads:
 \begin{plainlatex}
 \usepackage{sopra-changelog}
 \end{plainlatex}
-        \item Das Paket kann in ein Unterverzeichnis/in ein mit
-                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
-                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+        \item The package can be placed in a subdirectory/a directory
+                shipped with the document. In this case it is specified
+                via the (relative) path:
 \begin{plainlatex}
-\usepackage{./Mein/Pfad/zu/sopra-changelog}
+\usepackage{./My/Path/to/sopra-changelog}
 \end{plainlatex}
-        \item Man kann das Paket (mittels eines Symlinks oder ähnlichem)
-              in einen eigenen \emph{texmf}-Baum ablegen.
-              So kann zum Beispiel auf Linux unter der Verwendung von texlive
-              das Paket hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
-              Das Verzeichnis kann erstellt und anschließend mittels
-              \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
-              das Paket wie jede andere installierte Paket verwendet werden:
+        \item The package can be placed (via a symlink or similar)
+              in one's own \emph{texmf} tree.
+              For example, on Linux using texlive,
+              the package can be placed here: \bvoid{\~/texmf/tex/latex/}.
+              The directory can be created and then updated using
+              \bbash{texhash \~/texmf}. Now
+              the package can be used like any other installed package:
 \begin{plainlatex}
 \usepackage{sopra-changelog}
 \end{plainlatex}
     \end{itemize}
 
-\subsection{Weitere Besonderheiten}
-In Version \thesocversion{} (\cmdref{thesocversion}) gibt es keine weiteren
-Besonderheiten.
+\subsection{Further peculiarities}
+In version \thesocversion{} (\cmdref{thesocversion}) there are no further
+peculiarities.
 
 %
 %
@@ -96,9 +96,9 @@ Besonderheiten.
 %
 
 
-\section{Paket-Konfiguration}
-    \subsection{Akzeptierte Parameter}
-    In Version \thesocversion{} werden keine Parameter akzeptiert.
+\section{Package Configuration}
+    \subsection{Accepted Parameters}
+    In version \thesocversion{} no parameters are accepted.
 
 %
 %
@@ -112,67 +112,67 @@ Besonderheiten.
 %
 %
 
-\section{Befehle- und Umgebungen}
+\section{Commands and Environments}
 
-Es gilt zu beachten, dass das Präfix \T{env@} nur auf die Natur einer Umgebung hinweist und nicht zum eigentlichen Bezeichner zuzuordnen ist!\par{}
-Weiter gilt: Damit die Änderungen richtig aufgelöst werden können, muss das Dokument
-in der Regel zwei mal kompiliert werden um eine korrekte Anzeige zu erzeugen.
+Note that the prefix \T{env@} only indicates the nature of an environment and is not part of the actual identifier!\par{}
+Also: For the changes to be resolved correctly, the document
+usually has to be compiled twice to produce a correct display.
 
-\subsection{Versionsänderungen angeben}
+\subsection{Specifying Version Changes}
 
 \begin{environment}{version}{\optArg{changes}\manArg{Introduced Version}\manArg{Title}}
-    Die Hauptumgebung des Paketes und wird für die Versionierung verwendet. Ein wichtiger Hinweis vorne weg: \imptext{Der Inhalt der Umgebung wird nur dann gesetzt, wenn \cmdref{setTargetVersion} mindestens auf \T{Introduced Version} gesetzt ist! Sonst gibt es die Änderung ja noch nicht.}\par{}
-    Das Feld \T{Introduced Version} gibt an mit welcher Versionsnummer (von \(1\) an gezählt) die in der Umgebung eingeschlossenen Komponenten zur Verfügung stehen. Identifiziert werden diese durch den \emph{eindeutigen} Titel in \T{Title}.\par{}
-    Das wichtigste Feld ist allerdings \T{changes}. Hierbei kann eine kommaseparierte Liste an Feldern übergeben die entweder der Syntax \say{\bvoid{changed in: :lan:VerID:ran: (:lan:Description:ran:)}} oder der Syntax \say{\bvoid{removed in: :lan:VerID:ran: (:lan:Description:ran:)}} gehorchen müssen. Ein Beispiel:
+    The main environment of the package, used for versioning. An important note upfront: \imptext{The content of the environment is only typeset if \cmdref{setTargetVersion} is set to at least \T{Introduced Version}! Otherwise the change doesn't exist yet.}\par{}
+    The field \T{Introduced Version} specifies the version number (counted from \(1\)) with which the components enclosed in the environment become available. These are identified by the \emph{unique} title in \T{Title}.\par{}
+    The most important field, however, is \T{changes}. Here a comma-separated list of fields can be passed, which must follow either the syntax \say{\bvoid{changed in: :lan:VerID:ran: (:lan:Description:ran:)}} or the syntax \say{\bvoid{removed in: :lan:VerID:ran: (:lan:Description:ran:)}}. An example:
 \begin{latex}
 \begin{version}[%
     changed in: 2 (Added Some funny stuff),%
     changed in: 3 (Removed stupid sentences),%
     removed in: 4 (Rendered to be stupid!)
-]{1}{Koordinaten des Spielfeldes}
-    Hier kann nun alles stehen was man sich so vorstellen kann. Auch normaler \LaTeX-Code!
+]{1}{Coordinates of the Game Board}
+    Now anything one can imagine can go here. Also normal \LaTeX\ code!
 \end{version}
 \end{latex}
-    Dies erzeugt (Hinweis: Dieses Dokument wurde mit \blatex{\\setTargetVersion\{5\}} kompiliert):\\
+    This produces (note: this document was compiled with \blatex{\\setTargetVersion\{5\}}):\\
 \begin{version}[%
     changed in: 2 (Added Some funny stuff),%
     changed in: 3 (Removed stupid sentences),%
     removed in: 4 (Rendered to be stupid!)
-]{1}{Koordinaten des Spielfeldes}
-Hier kann nun alles stehen was man sich so vorstellen kann. Auch normaler \LaTeX-Code!
+]{1}{Coordinates of the Game Board}
+Now anything one can imagine can go here. Also normal \LaTeX\ code!
 \end{version}
 \end{environment}
 
 \begin{command}{simpleversion}{\optArg{changes}\manArg{Introduced Version}\manArg{Title}\manArg{Content}}
-    Einfach nur ein kleiner Wrapper, der \envref{version} mit \T{Content} aufruft.
+    Simply a small wrapper that calls \envref{version} with \T{Content}.
 \end{command}
 
 \begin{command}{setVersionData}{\manArg{Version ID}\manArg{Version Date}\manArg{Version Description}}
-    Speichert für \cmdref{thechangelog} Metadaten zur Version mit Versionsnummer \T{Version ID}. Das \T{Version-Date} ist in \T{YYYY-MM-DD} anzugeben!
+    Stores metadata for \cmdref{thechangelog} regarding the version with version number \T{Version ID}. The \T{Version-Date} must be given in \T{YYYY-MM-DD} format!
 \end{command}
 
-\subsection{Versionänderungen setzen}
+\subsection{Typesetting Version Changes}
 
 \begin{command}{thechangelog}{}
-    Setzt den Verlauf über alle Änderungen. Für die Gliederung wird \cmd{section} und \cmd{subsection} verwendet. Ein Beispiel findet sich am \jmark[Ende des Dokuments]{mrk:docend}.
+    Typesets the history of all changes. \cmd{section} and \cmd{subsection} are used for the structure. An example can be found at the \jmark[end of the document]{mrk:docend}.
 \end{command}
 
-\subsection{Weitere Daten zuweisen}
+\subsection{Assigning Further Data}
 
 \begin{command}{setTargetVersion}{\manArg{VersionID}}
-    Sorgt dafür, dass alle Änderungen bis zur Version \T{VersionID} ausgegeben werden (bezüglich des Changelogs). Dieser Wert sollte mit jedem Änderungsdurchlauf inkrementiert werden. \imptext{Bisher ist keine automatisierte Lösung vorgehesehen!}
+    Ensures that all changes up to version \T{VersionID} are output (with regard to the changelog). This value should be incremented with each change cycle. \imptext{So far no automated solution is planned!}
 \end{command}
 
 \begin{command}{setTargetVersionDate}{\manArg{Date}}
-    Bisher ohne Bedeutung!
+    Has no meaning so far!
 \end{command}
 
 
-\subsection{Hilfreiche Befehle}
+\subsection{Helpful Commands}
 
 \begin{command}{thesocversion}{}
-    Gibt die aktuelle Version der \T{sopra-paper}-Dokumentklasse aus. \notetext{Hinweis: über \blatex{\\value\{socversion\}} lässt sich
-    die Version als $4$-stellige Nummer erhalten: \arabic{socversion}.}
+    Outputs the current version of the \T{sopra-paper} document class. \notetext{Note: via \blatex{\\value\{socversion\}} the
+    version can be obtained as a $4$-digit number: \arabic{socversion}.}
 \end{command}
 
 \phantomsection\label{mrk:docend}

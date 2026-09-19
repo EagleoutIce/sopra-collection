@@ -3,11 +3,11 @@
 \usepackage{sopra-documentation}
 \usepackage{sopra-tables}
 
-\title{Das 'sopra-tables'-Paket}
-\subtitle[Dokumentation für das 'sopra-tables'-Paket]{Dokumentation für das 'sopra-tables'-Paket | Version \thesotversion}
+\title{The 'sopra-tables' package}
+\subtitle[Documentation for the 'sopra-tables' package]{Documentation for the 'sopra-tables' package | Version \thesotversion}
 \duedate{2019-12-5}
 
-\keywords{Dokumentation,sopra-tables,sopra,uni ulm,uulm,Paket}
+\keywords{Documentation,sopra-tables,sopra,uni ulm,uulm,package}
 \authors{Florian Sihler (florian.sihler@uni-ulm.de)}
 
 \group{Die Affenbande}
@@ -20,28 +20,28 @@
 
 %
 %
-% ....###....##.......##........######...########.##.....##.########.####.##....##.########..######.
-% ...##.##...##.......##.......##....##..##.......###...###.##........##..###...##.##.......##....##
-% ..##...##..##.......##.......##........##.......####.####.##........##..####..##.##.......##......
-% .##.....##.##.......##.......##...####.######...##.###.##.######....##..##.##.##.######....######.
-% .#########.##.......##.......##....##..##.......##.....##.##........##..##..####.##.............##
-% .##.....##.##.......##.......##....##..##.......##.....##.##........##..##...###.##.......##....##
-% .##.....##.########.########..######...########.##.....##.########.####.##....##.########..######.
+% ..######...########.##....##.########.########.....###....##......
+% .##....##..##.......###...##.##.......##.....##...##.##...##......
+% .##........##.......####..##.##.......##.....##..##...##..##......
+% .##...####.######...##.##.##.######...########..##.....##.##......
+% .##....##..##.......##..####.##.......##...##...#########.##......
+% .##....##..##.......##...###.##.......##....##..##.....##.##......
+% ..######...########.##....##.########.##.....##.##.....##.########
 %
 %
 
-\section{Allgemeines}
-\subsection{Warum, wieso, weshalb?}
-    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im
-    Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
-    Grundlage für die Erstellung von Tabellen
-    des \imptext{Teams 20}. Diese Dokumentation wurde zusammen mit der
-    \T{sopra-base.cls} sowie dem Paket \T{sopra-documentation.sty} kreiert.\par
-    Zum Visualisieren der einzelnen Code-Ausschnitte wird das
-    \T{sopra-listings}-Paket verwendet.
-    Das zugehörige Paket sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile[subject={sopra-tables.sty}]{sopra-tables.sty}}.
-\subsection{Abhängigkeiten}
-    Dieses Paket bindet die folgenden Paketen mit ein:
+\section{General}
+\subsection{Why, wherefore, whence?}
+    This \LaTeXe-package was written as part of the Sopra project in the
+    winter semester of 2019 and summer semester of 2020, and serves as the
+    basis for creating tables
+    for \imptext{Team 20}. This documentation was created together with
+    \T{sopra-base.cls} and the \T{sopra-documentation.sty} package.\par
+    The \T{sopra-listings} package is used to visualize the
+    individual code snippets.
+    The corresponding package should also be embedded in this document: \scalebox{0.65}{\attachfile[subject={sopra-tables.sty}]{sopra-tables.sty}}.
+\subsection{Dependencies}
+    This package includes the following packages:
     \begin{multicols}{3}
         \begin{itemize}
             \def\pkgparse#1:#2\@nil{%
@@ -52,139 +52,139 @@
             }
         \end{itemize}
     \end{multicols}
-    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein.
+    All of these packages should be part of any common \LaTeX-distribution.
 
-\subsection{Die Installation}
-    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die
-    folgenden Möglichkeiten ergeben:
+\subsection{Installation}
+    The package is not distributed as a \T{.dtx} file, which is why the
+    following options are available:
     \begin{itemize}
-        \item Das Paket kann in dasselbe Verzeichnis wie das Dokument
-                gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+        \item The package can be placed in the same directory as the document.
+                In this case, the inclusion command reads:
 \begin{plainlatex}
 \usepackage{sopra-tables}
 \end{plainlatex}
-        \item Das Paket kann in ein Unterverzeichnis/in ein mit
-                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
-                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+        \item The package can be placed in a subdirectory, or in a
+                directory shipped alongside the document. In
+                this case, it is specified via the (relative) path:
 \begin{plainlatex}
-\usepackage{./Mein/Pfad/zu/sopra-tables}
+\usepackage{./My/Path/to/sopra-tables}
 \end{plainlatex}
-        \item Man kann das Paket (mittels eines Symlinks oder ähnlichem)
-              in einen eigenen \emph{texmf}-Baum ablegen.
-              So kann zum Beispiel auf Linux unter der Verwendung von texlive
-              das Paket hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
-              Das Verzeichnis kann erstellt und anschließend mittels
-              \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
-              das Paket wie jede andere installierte Paket verwendet werden:
+        \item The package can be placed (via a symlink or similar)
+              into your own \emph{texmf} tree.
+              For example, on Linux using texlive,
+              the package can be placed here: \bvoid{\~/texmf/tex/latex/}.
+              The directory can be created and then
+              updated using \bbash{texhash \~/texmf}. The
+              package can now be used like any other installed package:
 \begin{plainlatex}
 \usepackage{sopra-tables}
 \end{plainlatex}
     \end{itemize}
 
-\subsection{Weitere Besonderheiten}
-In Version \thesotversion{} (\cmdref{thesotversion}) gibt es keine weiteren
-Besonderheiten.
+\subsection{Further Notes}
+In version \thesotversion{} (\cmdref{thesotversion}) there are no further
+notes.
 
 %
 %
-% .##....##..#######..##....##.########.####..######...##.....##.########.....###....########.####..#######..##....##
-% .##...##..##.....##.###...##.##........##..##....##..##.....##.##.....##...##.##......##.....##..##.....##.###...##
-% .##..##...##.....##.####..##.##........##..##........##.....##.##.....##..##...##.....##.....##..##.....##.####..##
-% .#####....##.....##.##.##.##.######....##..##...####.##.....##.########..##.....##....##.....##..##.....##.##.##.##
-% .##..##...##.....##.##..####.##........##..##....##..##.....##.##...##...#########....##.....##..##.....##.##..####
-% .##...##..##.....##.##...###.##........##..##....##..##.....##.##....##..##.....##....##.....##..##.....##.##...###
-% .##....##..#######..##....##.##.......####..######....#######..##.....##.##.....##....##....####..#######..##....##
+% ..######...#######..##....##.########.####..######...##.....##.########.....###....########.####..#######..##....##
+% .##....##.##.....##.###...##.##........##..##....##..##.....##.##.....##...##.##......##.....##..##.....##.###...##
+% .##.......##.....##.####..##.##........##..##........##.....##.##.....##..##...##.....##.....##..##.....##.####..##
+% .##.......##.....##.##.##.##.######....##..##...####.##.....##.########..##.....##....##.....##..##.....##.##.##.##
+% .##.......##.....##.##..####.##........##..##....##..##.....##.##...##...#########....##.....##..##.....##.##..####
+% .##....##.##.....##.##...###.##........##..##....##..##.....##.##....##..##.....##....##.....##..##.....##.##...###
+% ..######...#######..##....##.##.......####..######....#######..##.....##.##.....##....##....####..#######..##....##
 %
 %
 
-\subsection{Akzeptierte Parameter}
-    Das Paket akzeptiert, so wie die meisten, Argumente.
-    Bei Argumenten mit einer \say{Counter}-Option wird das jeweils standardmäßig aktive zuerst und das andere in Klammern
-    geschrieben. So wird implizit:
+\subsection{Accepted Parameters}
+    Like most packages, this package accepts arguments.
+    For arguments with a \say{Counter} option, the one active by default is written first and the other in parentheses.
+    So the following is called implicitly:
 \begin{plainlatex}
     \usepackage[usetabu]{sopra-tables}
 \end{plainlatex}
-    aufgerufen. Während wir mit:
+    While with:
 \begin{plainlatex}
     \usepackage[notabu]{sopra-tables}
 \end{plainlatex}
-    das Dokument ohne das \T{tabu}-Paket kompilieren.
+    we compile the document without the \T{tabu} package.
 
     \begin{argument}{usetabu}{notabu}
-        Analog zur \T{notabu} option der \T{sopra-requirements.sty}: Standardmäßig verwendet dieses Paket aus optischen Gründen \T{tabu} um die Tabellen zu visualisieren. Sollten die in diesem paket enthaltenen (bug-)fixes (nicht mehr) funktionieren, oder einem die in \T{notabu} verwendeten \T{booktabs} Tabellen einem bessere gefallen, so kann diese Option entsprechend umgestellt werden.  \notetext{Hinweis: Mit \T{usetabu} wird innerhalb von \env{mtabular} auf \cmd{relax} gesetzt, damit kein Fehler/keine horizontalen Linien entstehen, wenn man für beide designs schreiben möchte.}
+        Analogous to the \T{notabu} option of \T{sopra-requirements.sty}: by default, this package uses \T{tabu} for visual reasons to render the tables. Should the (bug) fixes contained in this package (no longer) work, or should the \T{booktabs} tables used in \T{notabu} be preferred, this option can be switched accordingly.  \notetext{Note: With \T{usetabu}, \cmd{relax} is set within \env{mtabular} so that no error/horizontal lines occur when one wants to write for both designs.}
     \end{argument}
 
     \begin{argument}{cpalette}{nocpalette}
-        Bietet Unterstützung für \href{color-palettes}{https://github.com/EagleoutIce/color-palettes}. In diesem Fall wird das highlighting der Tabelle automatisch an die aktuelle Palette angepasst.
+        Offers support for \href{color-palettes}{https://github.com/EagleoutIce/color-palettes}. In this case, the table's highlighting is automatically adapted to the current palette.
     \end{argument}
 
     \begin{argument}{invert}{noinvert}
-        Invertiert die Hervorhebungen für die Kopfzeile.
+        Inverts the highlighting for the header row.
     \end{argument}
 
-    \subsection{Farben}
+    \subsection{Colors}
 
-    Mit \jmark[\T{usetabu}]{mrk:usetabu} definiert die Farbe \T{MaterialHeaderColor} die Farbe der Titelspalte und \T{NextMaterialHeaderColor} die Farbe im Falle eines Seitenumbruchs. Die Farben können wie jede andere geändert werden. Innerhalb von \T{sopra-base} wird automatisch eine dem Design angepasste Farbe gewählt.
+    With \jmark[\T{usetabu}]{mrk:usetabu}, the color \T{MaterialHeaderColor} defines the color of the title column and \T{NextMaterialHeaderColor} the color in case of a page break. The colors can be changed like any other. Within \T{sopra-base}, a color adapted to the design is chosen automatically.
 
 %
 %
-% .########..########.########.########.##.....##.##.......########
-% .##.....##.##.......##.......##.......##.....##.##.......##......
-% .##.....##.##.......##.......##.......##.....##.##.......##......
-% .########..######...######...######...#########.##.......######..
-% .##.....##.##.......##.......##.......##.....##.##.......##......
-% .##.....##.##.......##.......##.......##.....##.##.......##......
-% .########..########.##.......########.##.....##.########.########
+% ..######...#######..##.....##.##.....##....###....##....##.########...######..
+% .##....##.##.....##.###...###.###...###...##.##...###...##.##.....##.##....##.
+% .##.......##.....##.####.####.####.####..##...##..####..##.##.....##.##......
+% .##.......##.....##.##.###.##.##.###.##.##.....##.##.##.##.##.....##..######.
+% .##.......##.....##.##.....##.##.....##.#########.##..####.##.....##.......##
+% .##....##.##.....##.##.....##.##.....##.##.....##.##...###.##.....##.##....##
+% ..######...#######..##.....##.##.....##.##.....##.##....##.########...######.
 %
 %
 
-\section{Befehle- und Umgebungen}
+\section{Commands and Environments}
 
-Es gilt zu beachten, dass das Präfix \T{env@} nur auf die Natur einer Umgebung hinweist und nicht zum eigentlichen Bezeichner zuzuordnen ist!
+Note that the prefix \T{env@} only indicates the nature of an environment and is not part of the actual identifier!
 
-\subsection{Die Tabellen}
+\subsection{The Tables}
 
-\begin{environment}{mtabular}{\manArg{Spaltendefinition}}
-    Setzt eine \T{tabu}/\T{tabular} Tabelle, wobei die erste Zeile automatisch zur Titelzeile wird und entsprechend farblich hervorgehoben.
+\begin{environment}{mtabular}{\manArg{Column definition}}
+    Sets a \T{tabu}/\T{tabular} table, where the first row automatically becomes the title row and is highlighted accordingly.
 \end{environment}
 
-\begin{environment}{mltabular}{\optArg{Header}\manArg{Spaltendefinition}}
-    Setzt eine \T{longtabu}/\T{longtable} Tabelle, wobei man durch Angabe des \T{Header} die Kopfspalte definiert, die im Falle eines Seitenumbruchs immer angefügt wird. Sollte dies nicht gewünscht sein, so genügt es den \T{Header} nicht anzugeben und ganz normal die erste Zeile als Titelzeile zu schreiben,
-    die nicht an jeden Seitenanfang gesetzt werden. Es gelten die von \T{longtable} bekannten und typischen Einschränkungen.
+\begin{environment}{mltabular}{\optArg{Header}\manArg{Column definition}}
+    Sets a \T{longtabu}/\T{longtable} table, where specifying \T{Header} defines the header column, which is always appended in case of a page break. Should this not be desired, it suffices to not specify the \T{Header} and simply write the first row as the title row as usual,
+    which is not placed at the start of every page. The restrictions known and typical for \T{longtable} apply.
 \end{environment}
 
-\subsection{Allgemeine Hinweise und Tipps}
+\subsection{General Notes and Tips}
 
-Damit ein \T{longtabu}/\T{longtable} korrekt angezeigt wird, wird in der Regel ein zweiter Kompiliervorgang benötigt.\par{}
-Es empfiehlt sich die \env{table}-Umgebung zusammen mit \cmd{caption} zu verwenden umd die Tabelle sinnvoll einzubetten. Es kommt auch \env{wrapfigure} in Frage.\par{}
-Wird auch das \T{sopra-requirements}-Paket eingebunden, können für zweispaltige Tabellen die Spaltentypen \T{K} und \T{V} verwendet werden.
+For a \T{longtabu}/\T{longtable} to be displayed correctly, a second compilation pass is usually required.\par{}
+It is recommended to use the \env{table} environment together with \cmd{caption} to embed the table sensibly. \env{wrapfigure} is also an option.\par{}
+If the \T{sopra-requirements} package is also included, the column types \T{K} and \T{V} can be used for two-column tables.
 
-\subsection{Beispiel}
+\subsection{Example}
 
-Im Folgenden seien zwei Tabellen veranschaulicht, es gilt zu beachten, dass \envref{mltabular} seines Ursprungs wegen automatisch zentriert vorliegt.
+In the following, two tables are illustrated; note that \envref{mltabular} is automatically centered by its very nature.
 \begin{latex}
 \begin{mtabular}{lcr}
-    Hallo & Welt & \texttt{Wie} gehts? \\
-    Wie stehts & denn heute & so dir und so? \\
+    Hello & World & \texttt{How}'s it going? \\
+    How are & you doing & today then? \\
     Bi & Bu & bo \\
     Hi & Hi & Hi \\
 \end{mtabular}
 \end{latex}
-\textit{Ergibt:}\par{}
+\textit{Gives:}\par{}
  \begin{mtabular}{lcr}
-    Hallo & Welt & \texttt{Wie} gehts? \\
-    Wie stehts & denn heute & so dir und so? \\
+    Hello & World & \texttt{How}'s it going? \\
+    How are & you doing & today then? \\
     Hi & Hi & Hi \\
     Bi & Bu & bo \\
 \end{mtabular}\par{}
-Und analog:\par{}
+And similarly:\par{}
 \begin{latex}
-\begin{mltabular}[Isch & bin & a Hädder! & Epic-Row]%
+\begin{mltabular}[I & am & a Header! & Epic-Row]%
         {lcr>{\raggedleft!**!\arraybackslash}m{5cm}}
-    Hallo & Welt & \texttt{Wie} gehts? & HUHU ERDE \\
-    Wie stehts & denn heute & so dir und so? &  Hi\\
-    Bi & Bu & bo & Man merkt ich bin \\
-    Suuper & Lange Tabelle & Weil Grund  & echt Kreativ\\
+    Hello & World & \texttt{How}'s it going? & HELLO EARTH \\
+    How are & you doing & today then? &  Hi\\
+    Bi & Bu & bo & You can tell I'm \\
+    Suuper & Long table & because reason  & really creative\\
     A1 & B8 & C1 & D8 \\
     A2 & B7 & C2 & D7 \\
     A3 & B6 & C3 & D6 \\
@@ -195,12 +195,12 @@ Und analog:\par{}
     A8 & B1 & C8 & D1 \\
 \end{mltabular}
 \end{latex}
-\textit{Ergibt \notetext{Hinweis: der extra Abstand hier ist künstlich und dient der Veranschualichung eines Seitenumbruchs}:}\vspace*{4cm}
-\begin{mltabular}[Isch & bin & a Hädder! & Epic-Row]{lcr>{\raggedleft\arraybackslash}m{5cm}}
-    Hallo & Welt & \texttt{Wie} gehts? & HUHU ERDE \\
-    Wie stehts & denn heute & so dir und so? & Hi\\
-    Bi & Bu & bo & Man merkt ich bin \\
-    Suuper & Lange Tabelle & Weil Grund  & echt Kreativ\\
+\textit{Gives \notetext{Note: the extra spacing here is artificial and serves to illustrate a page break}:}\vspace*{4cm}
+\begin{mltabular}[I & am & a Header! & Epic-Row]{lcr>{\raggedleft\arraybackslash}m{5cm}}
+    Hello & World & \texttt{How}'s it going? & HELLO EARTH \\
+    How are & you doing & today then? & Hi\\
+    Bi & Bu & bo & You can tell I'm \\
+    Suuper & Long table & because reason  & really creative\\
     A1 & B8 & C1 & D8 \\
     A2 & B7 & C2 & D7 \\
     A3 & B6 & C3 & D6 \\

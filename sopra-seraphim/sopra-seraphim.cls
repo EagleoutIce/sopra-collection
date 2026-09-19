@@ -51,7 +51,7 @@
 \RequirePackage{tikz} % we need it anyways - will load xcolor
 \usetikzlibrary{calc}
 
-\RequirePackage[english,main=ngerman]{babel}
+\RequirePackage[ngerman,main=english]{babel}
 \RequirePackage{microtype}
 
 
@@ -62,8 +62,8 @@
 \def\sos@mail#1{\href{mailto:#1}{#1}}
 \let\mail\sos@mail%
 \def\sos@month@to@name#1{%
-    \ifcase#1\or{Januar}\or{Februar}\or{M\"{a}rz}\or{April}\or{Mai}\or{Juni}%
-    \or{Juli}\or{August}\or{September}\or{Oktober}\or{November}\or{Dezember}%
+    \ifcase#1\or{January}\or{February}\or{March}\or{April}\or{May}\or{June}%
+    \or{July}\or{August}\or{September}\or{October}\or{November}\or{December}%
     \else\@ctrerr\fi
 }
 
@@ -238,7 +238,7 @@
         \else\stepcounter{sos@counter@tmp@a}%
             \ifnum\thesos@counter@tmp@a>1%
             \ifnum\thesos@counter@tmp@a=\sos@authors@totallength%
-                ~und \else,\space\fi\fi
+                ~and \else,\space\fi\fi
             \expandafter\sos@@parse@author\sos@@tmp@curauthor\@nil%
         \fi%
     }%
@@ -316,7 +316,7 @@
 
 \InformationPage
 
-\begin{frame}[c]{Inhaltsübersicht}
+\begin{frame}[c]{Table of Contents}
     \begin{center}
         \begin{columns}
             \begin{column}[c]{.45\textwidth}
@@ -343,7 +343,7 @@
     \end{tikzpicture}
     \vskip4.225em% Fake header
     \parbox{12cm}{
-        Bearbeitung:\\
+        Prepared by:\\
         {\scriptsize\typesetAuthors\authorOutro}
         \\[1cm]
     }\hbox{}\hfill\llap{\begin{tikzpicture}[scale=.035]
@@ -355,9 +355,9 @@
     \leavevmode\vspace*{2cm}\\
     \parbox{9cm}{\scriptsize
         \textbf{\(-\)\thinspace\DateConvert{2019-12-15}\thinspace\(-\)}\\
-        \color{cprimary}Dieses Layout wurde für das Softwaregrundprojekt
-        im Wintersemester 2019/2020 von Florian Sihler im Rahmen des
-        Informatikstudiums an der Universität Ulm vollständig in \LaTeXe{} erstellt.
+        \color{cprimary}This layout was created for the Softwaregrundprojekt
+        in the winter semester of 2019/2020 by Florian Sihler as part of his
+        computer science studies at Ulm University, entirely in \LaTeXe{}.
     }
     \begin{tikzpicture}[remember picture,overlay]
         \fill[cprimary] (current page.south west) rectangle ($(current page.south east)+(0,1mm)$);

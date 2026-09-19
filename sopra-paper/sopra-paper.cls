@@ -91,7 +91,7 @@
 \RequirePackage[utf8]{inputenc}
 
 % language
-\RequirePackage[english,main=ngerman]{babel}
+\RequirePackage[ngerman,main=english]{babel}
 % layout
 \edef\sop@headheight{\dimexpr26mm + .5\sop@len@logoheight}
 \edef\sop@footheight{\dimexpr\sop@len@header-8mm}
@@ -102,14 +102,14 @@
 \RequirePackage[hidelinks]{hyperref}
 
 % Language
-\def\xcontentname{Inhalts\"{u}bersicht}
+\def\xcontentname{Table of Contents}
 
 \ifsop@usebook@
-\addto\captionsngerman{
+\addto\captionsenglish{
     \renewcommand{\contentsname}{\leavevmode\\[-.75\baselineskip]\strut\xcontentname}
 }
 \else
-\addto\captionsngerman{
+\addto\captionsenglish{
     \renewcommand{\contentsname}{\strut\xcontentname}
 }
 \fi
@@ -165,8 +165,8 @@
 \def\sop@mail#1{\href{mailto:#1}{#1}}
 \let\mail\sop@mail
 \def\sop@month@to@name#1{%
-    \ifcase#1\or{Januar}\or{Februar}\or{M\"{a}rz}\or{April}\or{Mai}\or{Juni}%
-    \or{Juli}\or{August}\or{September}\or{Oktober}\or{November}\or{Dezember}%
+    \ifcase#1\or{January}\or{February}\or{March}\or{April}\or{May}\or{June}%
+    \or{July}\or{August}\or{September}\or{October}\or{November}\or{December}%
     \else\@ctrerr\fi}
 
 \def\sop@date@convert#1-#2-#3\@nil{\begingroup#3.\space{\sop@month@to@name{#2}}\space#1\endgroup}
@@ -218,7 +218,7 @@
         \else\stepcounter{sop@counter@tmp@a}%
             \ifnum\thesop@counter@tmp@a>1\relax
             \ifnum\thesop@counter@tmp@a=\sop@authors@totallength\relax
-                ~und \else,\space\fi\fi
+                ~and \else,\space\fi\fi
             \expandafter\sop@@parse@author\sop@@tmp@curauthor\@nil
         \fi
     }%
@@ -435,10 +435,10 @@
             \begingroup\hbox{}\quad\scriptsize\DateConvert{\sop@register@duedate}\sop@AfterDate\endgroup\\[-.2\baselineskip]%
         \fi
         {\color{ctpsymbol}$\Large\llap{$\diamond$}\hspace*{-\p@}$\rule[.275\baselineskip]{.45\linewidth}{.55\p@}\\}%
-        {{\bfseries Bearbeitung:}}\\
+        {{\bfseries Prepared by:}}\\
         \hbox{}\quad\parbox{\linewidth}{\typesetAuthors}\bigskip\par
         \ifx\sop@register@brief\@empty\else
-        {\bfseries Beschreibung:}\smallskip\\
+        {\bfseries Description:}\smallskip\\
         \hbox{}\quad\parbox\linewidth{\sop@register@brief}\fi
     \end{minipage}\vspace*{2em}
 \end{titlepage}
@@ -453,9 +453,9 @@
 \hbox{}\vfill\begingroup\scriptsize
 \begin{flushright}
     \parbox{9cm}{\textbf{$-\,$\DateConvert{2019-12-15}$\,-$}\\
-    \color{cprimary}Dieses Layout wurde für das Softwaregrundprojekt
-    im Wintersemester 2019\thinspace /\thinspace 2020 von Florian Sihler im Rahmen des
-    Informatikstudiums an der Universität Ulm vollständig in \LaTeXe{} erstellt.}
+    \color{cprimary}This layout was created for the Softwaregrundprojekt
+    in the winter semester of 2019\thinspace /\thinspace 2020 by Florian Sihler as part of his
+    computer science studies at Ulm University, entirely in \LaTeXe{}.}
 \end{flushright}\endgroup
 \clearpage
 }

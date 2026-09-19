@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <collection>
-    <book category="Roman">
-        <!-- Ich bin ein Kommentar -->
-        <title>Tolles Buch</title>
-        <author>Netter Mensch</author>
-        <date> heute, wann sonst? </date>
+    <book category="Novel">
+        <!-- I am a comment -->
+        <title>Great Book</title>
+        <author>Nice Person</author>
+        <date> today, when else? </date>
     </book>
-    <book category="Gute Bücher" />
+    <book category="Good Books" />
 </collection>

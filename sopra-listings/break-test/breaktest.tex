@@ -1,55 +1,58 @@
 \documentclass{scrartcl}
 
 \usepackage[encoding]{../sopra-listings}
+% the languages live one folder up
+\renewcommand\solLanguageSearchPath{{Languages/}{../Languages/}}
+\solLoadLanguage{java}
 \usepackage{microtype}
-\usepackage[main=ngerman,english]{babel}
+\usepackage[ngerman,main=english]{babel}
 
-\title{Break-Test}
+\title{Break Test}
 \author{Florian Sihler}
 \date{\today}
 
 \begin{document}
-\maketitle    
+\maketitle
 
-Um die Seitengröße konstant zu halten beginnt der Test auf der
-nächsten Seite.\clearpage
+To keep the page size constant, the test starts on the
+next page.\clearpage
 {\makeatletter\global\sol@guardspace@false}
-Hier erzwingen wir einen Bruch auf der ersten Zeile:\par
+Here we force a break on the first line:\par
 \vspace*{20cm}
 \begin{java}
 public static void main(String[] args) {
-    System.out.println("Hallo Welt");
+    System.out.println("Hello World");
 }
-// Superzeile
+// Super line
 \end{java}
 \clearpage
 {\makeatletter\global\sol@guardspace@true}
-Analog mit Guard:\par
+Analogous with guard:\par
 \vspace*{20cm}
 \begin{java}
 public static void main(String[] args) {
-    System.out.println("Hallo Welt");
+    System.out.println("Hello World");
 }
-// Superzeile
+// Super line
 \end{java}
 \clearpage
 {\makeatletter\global\sol@guardspace@false}
-Nun Break am Ende ohne Guard:\par
+Now a break at the end without guard:\par
 \vspace*{18.4cm}
 \begin{java}
 public static void main(String[] args) {
-    System.out.println("Hallo Welt");
+    System.out.println("Hello World");
 }
-// Superzeile
+// Super line
 \end{java}
 \clearpage
 {\makeatletter\global\sol@guardspace@true}
-Break am Ende mit Guard:\par
+Break at the end with guard:\par
 \vspace*{18.4cm}
 \begin{java}
 public static void main(String[] args) {
-    System.out.println("Hallo Welt");
+    System.out.println("Hello World");
 }
-// Superzeile
+// Super line
 \end{java}
 \end{document}

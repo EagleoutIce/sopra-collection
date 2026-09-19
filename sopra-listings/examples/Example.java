@@ -1,6 +1,6 @@
 import java.util.Scanner;
 // Further imports, maybe
-|ihl|Diese Zeile wird künstlich hervorgehoben|ihl|
+|ihl|This line is artificially highlighted|ihl|
 
 @ImportantAnnotation
 public class Example {

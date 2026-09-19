@@ -3,12 +3,12 @@
 \usepackage{sopra-documentation}
 \usepackage{sopra-ntts}
 
-\title{Das 'sopra-ntts'-Paket}
-\subtitle[Dokumentation für das 'sopra-ntts'-Paket]{Dokumentation für das 'sopra-ntts'-Paket | Version \thesonversion}
+\title{The 'sopra-ntts' package}
+\subtitle[Documentation for the 'sopra-ntts' package]{Documentation for the 'sopra-ntts' package | Version \thesonversion}
 
 \duedate{2019-12-2}
 
-\keywords{Dokumentation,sopra-ntts,sopra,uni ulm,uulm,Paket}
+\keywords{Documentation,sopra-ntts,sopra,uni ulm,uulm,package}
 \authors{Florian Sihler (florian.sihler@uni-ulm.de)}
 
 \group{Die Affenbande}
@@ -16,17 +16,17 @@
 
     \maketitle
 
-\section{Allgemeines}
-\subsection{Warum, wieso, weshalb?}
-    Dieses \LaTeXe-Paket lagert die Futura-ähnliche Ti\textit{k}Z Font aus dem Sopra des
-    Wintersemester 2019 und Sommersemester 2020 aus.
-    Diese Dokumentation wurde zusammen mit der
-    \T{sopra-base.cls}, sowie dem Paket \T{sopra-documentation.sty} kreiert.\par
-    Zum Visualisieren der einzelnen Code-Ausschnitte wird das
-    \T{sopra-listings}-Paket verwendet.
-    Das zugehörige Paket sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{.65}{\attachfile[subject={sopra-ntts.sty}]{sopra-ntts.sty}}.
-\subsection{Abhängigkeiten}
-    Dieses Paket bindet die folgenden Paketen mit ein:
+\section{General}
+\subsection{Why, wherefore, whence?}
+    This \LaTeXe-package outsources the Futura-like Ti\textit{k}Z font from the Sopra project of the
+    winter semester 2019 and summer semester 2020.
+    This documentation was created together with
+    \T{sopra-base.cls}, as well as the \T{sopra-documentation.sty} package.\par
+    The \T{sopra-listings} package is used to visualize the
+    individual code snippets.
+    The corresponding package should also be embedded in this document: \scalebox{.65}{\attachfile[subject={sopra-ntts.sty}]{sopra-ntts.sty}}.
+\subsection{Dependencies}
+    This package includes the following packages:
     \begin{multicols}{3}
         \begin{itemize}
             \def\pkgparse#1:#2\@nil{%
@@ -37,60 +37,60 @@
             }
         \end{itemize}
     \end{multicols}
-    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein.
+    All of these packages should be part of any common \LaTeX-distribution.
 
-\subsection{Die Installation}
-    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die
-    folgenden Möglichkeiten ergeben:
+\subsection{Installation}
+    The package is not distributed as a \T{.dtx} file, which is why the
+    following options are available:
     \begin{itemize}
-        \item Das Paket kann in dasselbe Verzeichnis wie das Dokument
-                gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+        \item The package can be placed in the same directory as the document.
+                In this case, the inclusion command reads:
 \begin{plainlatex}
 \usepackage{sopra-ntts}
 \end{plainlatex}
-        \item Das Paket kann in ein Unterverzeichnis/in ein mit
-                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
-                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+        \item The package can be placed in a subdirectory, or in a
+                directory shipped alongside the document. In
+                this case, it is specified via the (relative) path:
 \begin{plainlatex}
-\usepackage{./Mein/Pfad/zu/sopra-ntts}
+\usepackage{./My/Path/to/sopra-ntts}
 \end{plainlatex}
-        \item Man kann das Paket (mittels eines Symlinks oder ähnlichem)
-              in einen eigenen \emph{texmf}-Baum ablegen.
-              So kann zum Beispiel auf Linux unter der Verwendung von texlive
-              das Paket hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
-              Das Verzeichnis kann erstellt und anschließend mittels
-              \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
-              das Paket wie jede andere installierte Paket verwendet werden:
+        \item The package can be placed (via a symlink or similar)
+              into your own \emph{texmf} tree.
+              For example, on Linux using texlive,
+              the package can be placed here: \bvoid{\~/texmf/tex/latex/}.
+              The directory can be created and then
+              updated using \bbash{texhash \~/texmf}. The
+              package can now be used like any other installed package:
 \begin{plainlatex}
 \usepackage{sopra-ntts}
 \end{plainlatex}
     \end{itemize}
 
-\subsection{Weitere Besonderheiten}
-In Version \thesonversion{} (\cmdref{thesonversion}) gibt es keine weiteren
-Besonderheiten.
+\subsection{Further Notes}
+In version \thesonversion{} (\cmdref{thesonversion}) there are no further
+notes.
 
-\section{Befehle- und Umgebungen}
+\section{Commands and Environments}
 
-Es gilt zu beachten, dass das Präfix \T{env@} nur auf die Natur einer Umgebung hinweist und nicht zum eigentlichen Bezeichner zuzuordnen ist!\par{}
-Weiter gilt: Damit alle Titel und Längen richtig aufgelöst werden können, muss das Dokument
-in der Regel zwei mal kompiliert werden um eine korrekte Anzeige zu erzeugen.
+Note that the prefix \T{env@} only indicates the nature of an environment and is not part of the actual identifier!\par{}
+Also note: for all titles and lengths to be resolved correctly, the document
+generally needs to be compiled twice to produce a correct display.
 
 \begin{command}{sonNtts}{\optArg{scale=0.06}\manArg{color}}
-    Muss in eine \say{tikzpicture}-Umgebung gesetzt werden und schreibt den Schriftzug (hier mit schwarzer Farbe):
+    Must be placed inside a \say{tikzpicture} environment and writes the lettering (here in black):
     \begin{center}
         \begin{tikzpicture}
             \sonNtts{black}
         \end{tikzpicture}
     \end{center}
-    Der Befehl wurde nie grundlegend für die allgemeine Nutzung konzipiert. Die Verwendung der Koordinaten findet sich in der Definition der Titelseiten der Dokumentklassen.
+    The command was never fundamentally designed for general use. The use of the coordinates can be found in the definition of the title pages of the document classes.
 \end{command}
 
-\subsection{Allgemeine Befehle}
+\subsection{General Commands}
 \begin{command}{thesonversion}{}
-    Liefert die aktuelle Version des Pakets. So ergibt: \cmd{thesonversion}: \thesonversion\\
-    \notetext{Hinweis: über \blatex{\\value\{sonversion\}} lässt sich
-    die Version als $4$-stellige Nummer erhalten: \arabic{sonversion}.}
+    Returns the current version of the package. This gives: \cmd{thesonversion}: \thesonversion\\
+    \notetext{Note: via \blatex{\\value\{sonversion\}} the
+    version can be obtained as a $4$-digit number: \arabic{sonversion}.}
 \end{command}
 
 \end{document}

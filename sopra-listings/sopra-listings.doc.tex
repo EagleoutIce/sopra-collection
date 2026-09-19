@@ -7,11 +7,11 @@
 \usepackage{sopra-listings}
 \solLoadLanguage{latex,bash,rubberduck,xml,json}
 
-\title{Das 'sopra-listings'-Paket}
-\subtitle[Dokumentation für das 'sopra-listings'-Paket]{Dokumentation für das 'sopra-listings'-Paket | Version \thesolversion}
+\title{The 'sopra-listings' Package}
+\subtitle[Documentation for the 'sopra-listings' package]{Documentation for the 'sopra-listings' package | Version \thesolversion}
 \duedate{2020-10-1}
 
-\keywords{Dokumentation,sopra-listings,sopra,uni ulm,uulm,Paket}
+\keywords{Documentation,sopra-listings,sopra,uni ulm,uulm,package}
 \authors{Florian Sihler (florian.sihler@uni-ulm.de)}
 
 \group{Die Affenbande}
@@ -22,16 +22,16 @@
     %\tableofcontents
 %
 
-\section{Allgemeines}
-\subsection{Warum, wieso, weshalb?}
-    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im
-    Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
-    Grundlage für die das Highlight von Codes
-    des \imptext{Teams 20}. Diese Dokumentation wurde zusammen mit der
-    \T{sopra-base.cls} sowie dem Paket \T{sopra-documentation.sty} kreiert.\par
-    Zum Visualisieren der einzelnen Code-Ausschnitte wird das Paket selbst verwendet, welches ebenfalls in hier eingebettet sein sollte: \attachTex{sopra-listings.sty}. \notetext{Dieses Paket benötigt weder \T{shell-escape} noch \T{minted} um zu funktionieren. Es baut auf \T{listings} auf!}
-\subsection{Abhängigkeiten}
-    Dieses Paket bindet die folgenden Paketen mit ein:
+\section{General}
+\subsection{Why, wherefore, what for?}
+    This \LaTeXe{} package was written as part of the Sopra project in the
+    winter semester 2019 and summer semester 2020 and serves as a
+    foundation for highlighting the code
+    of \imptext{Team 20}. This documentation was created together with the
+    \T{sopra-base.cls} class as well as the package \T{sopra-documentation.sty}.\par
+    To visualize the individual code snippets, the package itself is used, which should also be embedded here: \attachTex{sopra-listings.sty}. \notetext{This package needs neither \T{shell-escape} nor \T{minted} to work. It builds on \T{listings}!}
+\subsection{Dependencies}
+    This package includes the following packages:
     \begin{multicols}{3}
         \begin{itemize}
             \def\pkgparse#1:#2\@nil{%
@@ -45,169 +45,169 @@
             }
         \end{itemize}
     \end{multicols}
-    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein. \notetext{Hinweis: \say{$\ll$try$\gg$} notiert hierbei, dass das Paket nicht vorhanden sein muss, aber eventuell zusätzliche Möglichkeiten bietet. So gestattet es \T{accsupp} zum Beispiel,
-    die Zeilennummern \say{unkopierbar} zu machen und so besser mit den Listings zu arbeiten
-    und \T{listings} wird nur dann geladen, wenn \T{listingsutf8} nicht gefunden wird.}
+    All these packages should be part of a common \LaTeX{} distribution. \notetext{Note: \say{$\ll$try$\gg$} indicates that the package does not need to be present, but may offer additional possibilities. For example, \T{accsupp} allows
+    the line numbers to be made \say{uncopyable}, making it easier to work with the listings,
+    and \T{listings} is only loaded when \T{listingsutf8} cannot be found.}
 \begin{center}
-    Aktuell sind noch einige Dinge wie Optionen und weitere Umgebungen geplant.
+    Currently, a few things like options and further environments are still planned.
 \end{center}
 
-\subsection{Die Installation}
-    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die
-    folgenden Möglichkeiten ergeben:
+\subsection{Installation}
+    The package is not distributed as a \T{.dtx} file, which is why the
+    following options are available:
     \begin{itemize}
-        \item Das Paket kann in dasselbe Verzeichnis wie das Dokument
-                gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+        \item The package can be placed in the same directory as the document.
+                In this case, the include instruction is:
 \begin{plainlatex}
 \usepackage{sopra-listings}
 \end{plainlatex}
-        \item Das Paket kann in ein Unterverzeichnis/in ein mit
-                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
-                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+        \item The package can be placed in a subdirectory/a directory
+                shipped with the document. In
+                this case, it is specified via the (relative) path:
 \begin{plainlatex}
-\usepackage{./Mein/Pfad/zu/sopra-listings}
+\usepackage{./My/Path/to/sopra-listings}
 \end{plainlatex}
-        \item Man kann das Paket (mittels eines Symlinks oder ähnlichem)
-              in einen eigenen \emph{texmf}-Baum ablegen.
-              So kann zum Beispiel auf Linux unter der Verwendung von texlive
-              das Paket hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
-              Das Verzeichnis kann erstellt und anschließend mittels
-              \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
-              das Paket wie jede andere installierte Paket verwendet werden:
+        \item The package can be placed (via a symlink or similar)
+              in a \emph{texmf} tree of your own.
+              For example, on Linux when using texlive,
+              the package can be placed here: \bvoid{\~/texmf/tex/latex/}.
+              The directory can be created and afterwards updated using
+              \bbash{texhash \~/texmf}. Now
+              the package can be used like any other installed package:
 \begin{plainlatex}
 \usepackage{sopra-listings}
 \end{plainlatex}
     \end{itemize}
 
-    \imptext{Wichtiger Hinweis:} Dieses Paket kommt mit Sprachkonfigurationen, die sich im Unterordner \say{\T{Languages}} befinden. Die Sprachen stehen nur dann zur Verfügung,
-    wenn sie mit dem Paket platziert werden (nach einer der eben genannten Möglichkeiten) oder sie sich im gleichen Verzeichnis wie die \LaTeXe-Datei befinden. Sollte dies
-    nicht gewünscht oder möglich sein, so \emph{muss} \cmdref{solLanguageSearchPath} angepasst werden! Es steht jedem Frei, das Laden der Sprachen mittels \jmark[\T{noloadlangs}]{mrk:loadlangs} zu deaktivieren und seine eigenen Sprachdefinitionen
-    oder Sprachen zu verwenden. Damit dieses Paket allerdings Sinn macht, sollte das \cmdref{RegisterLanguage}-Makro verwendet werden.
+    \imptext{Important note:} This package comes with language configurations located in the subfolder \say{\T{Languages}}. The languages are only available
+    if they are placed with the package (following one of the options just mentioned) or if they are located in the same directory as the \LaTeXe{} file. Should this
+    not be desired or possible, \cmdref{solLanguageSearchPath} \emph{must} be adjusted! Everyone is free to disable the loading of the languages via \jmark[\T{noloadlangs}]{mrk:loadlangs} and to use their own language definitions
+    or languages. However, for this package to make sense, the \cmdref{RegisterLanguage} macro should be used.
 
-\subsection{Weitere Besonderheiten}
-\paragraph{Version v1.0.0:} Es wird \cmd{ttfamily} modifiziert, so dass die \say{Typewriter}-Schrift auch hier identisch zu der allgemein verwendeten ist.
-\paragraph{Version v1.0.10:} Der Befehl \cmdref{lstfs} wurde hinzugefügt um die
-Schriftgrößen von Listings anzupassen.
-\paragraph{Version v1.0.12:} Die Paketoption \texttt{cpalette} wurde samt Gegenoption hinzugefügt.
-\paragraph{Version v1.0.13:} Die Befehle \cmdref{lstcolorlet} und \cmdref{lstcolordef} wurden zur einfachen Farbmanipulation hinzugefügt.
-\paragraph{Version v1.0.14:} Abstände bei Literates korrigiert. Sollten nun auch beim Ersetzen von Ziffern in inline-Listings die korrekte Anzahl an Leerfeldern behalten
-\paragraph{Version v1.0.15:} Mit \argref{guardspace}{noguardspace} wurde eine (vertikale) Abstands-sicherungs-option hinzugefügt.
-\paragraph{Version v1.0.17:} Mit \T{autogobble} können nun anführende Leerfelder entfernt werden.
+\subsection{Further Notes}
+\paragraph{Version v1.0.0:} \cmd{ttfamily} is modified so that the \say{typewriter} font here is also identical to the one used generally.
+\paragraph{Version v1.0.10:} The command \cmdref{lstfs} was added to
+adjust the font sizes of listings.
+\paragraph{Version v1.0.12:} The package option \texttt{cpalette} was added along with its counter-option.
+\paragraph{Version v1.0.13:} The commands \cmdref{lstcolorlet} and \cmdref{lstcolordef} were added for easy color manipulation.
+\paragraph{Version v1.0.14:} Spacing for literates fixed. The correct number of blank fields should now also be kept when replacing digits in inline listings
+\paragraph{Version v1.0.15:} With \argref{guardspace}{noguardspace} a (vertical) space-guarding option was added.
+\paragraph{Version v1.0.17:} With \T{autogobble}, leading blank fields can now be removed.
 \paragraph{Version v1.0.18:}
-Sichert nun auch die letzte Zeile eines Listings im Falle von \argref{guardspace}{noguardspace}.
+Now also secures the last line of a listing in case of \argref{guardspace}{noguardspace}.
 \paragraph{Version v1.0.19:}
-Kursive Schrift für Typewriter Schriftart wird nun sicherer angewendet. Ein paar ungenutzte Komfort-Funktionen wurden entfernt.
+Italic font for the typewriter typeface is now applied more reliably. A few unused convenience functions were removed.
 \paragraph{Version v1.0.20:}
-Die Funktion \T{autogobble} wurde wieder entfernt, ebenso wurde die Paketstruktur intern überarbeitet.
+The \T{autogobble} function was removed again, and the package structure was also reworked internally.
 \paragraph{Version v1.0.21:}
-Es wurden einige Code-Interne Restrukturierungen durchgeführt.
+Some internal code restructurings were carried out.
 \paragraph{Version v1.0.22:}
-Unterstützung für \argref{nofakeminted}{fakeminted} und \argref{noextendednums}{extendednums}.
+Support for \argref{nofakeminted}{fakeminted} and \argref{noextendednums}{extendednums}.
 \paragraph{Version v1.0.23:}
-Unterstützung für \cmdref{solblacklistlinenumbers}, \cmdref{solblacklistisghost} und \cmdref{solblacklistispresent}.
+Support for \cmdref{solblacklistlinenumbers}, \cmdref{solblacklistisghost} and \cmdref{solblacklistispresent}.
 
-\subsection{Akzeptierte Parameter}
-    Das Paket akzeptiert, so wie die meisten, Argumente.
-    Bei Argumenten mit einer \say{Counter}-Option wird das jeweils standardmäßig aktive zuerst und das andere in Klammern
-    geschrieben. So wird implizit:
+\subsection{Accepted Parameters}
+    Like most packages, this one accepts arguments.
+    For arguments with a \say{counter} option, the one active by default is written first and the other in parentheses.
+    So the following is implicitly:
 \begin{plainlatex}
 \usepackage[noencoding,hlnumbers,loadlangs,guardspace]{sopra-listings}
 \end{plainlatex}
-    aufgerufen. Während mit:
+    invoked. While with:
 \begin{plainlatex}
 \usepackage[noloadlangs]{sopra-listings}
 \end{plainlatex}
-    das automatische Laden gewisser Sprachen verhindert wird.
+    the automatic loading of certain languages is prevented.
 
     \begin{argument}{noencoding}{encoding}
-        \label{mrk:encoding}\T{encoding} lädt die für Umlaute nötigen Pakete. Diese Option kann dann benutzt werden wenn man sie nicht extra laden, oder einfach sicher gehen möchte.
+        \label{mrk:encoding}\T{encoding} loads the packages needed for umlauts. This option can be used if you do not want to load them separately, or simply want to be on the safe side.
     \end{argument}
 
     \begin{argument}{hlnumbers}{nohlnumbers}
-        Das Paket versucht automatisch Zahlen zu markieren und zwar nur da, wo es sich auch um eine Zahl handelt. Dieses Verfahren funktioniert gut, kann aber - sofern als störend empfunden, oder es sich doch als unartig herausstellen sollte - mittels \T{nohlnumbers} deaktiviert werden.
+        The package automatically tries to mark numbers, and only where it is actually a number. This procedure works well, but can - should it be perceived as disturbing, or turn out to misbehave after all - be disabled via \T{nohlnumbers}.
     \end{argument}
 
     \begin{argument}{defaultmode}{print}
-        Diese Funktionen arbeiten analog zu den gleichnamigen Vertretern in \T{sopra-base.cls}. Wird \T{print} gewählt, so wird versucht möglichst Tinte einzusparen (kein Hintegrund bei Codes, \ldots) und weiter werden gewisse
-        Schlüsselbegriffe fett/kursiv gedruckt um auch im einfarbigen Ausdruck eine
-        (möglichst gute) Unterscheidbarkeit zu erhalten.
+        These functions work analogously to the like-named counterparts in \T{sopra-base.cls}. If \T{print} is chosen, an attempt is made to save as much ink as possible (no background for code, \ldots) and furthermore certain
+        key terms are printed bold/italic in order to retain
+        (as good as possible) distinguishability even in a single-color printout.
     \end{argument}
 
     \begin{argument}{loadlangs}{noloadlangs}
-        Lädt mittels \cmdref{solLoadLanguage} die Sprache \T{java} (siehe \jmark[Abschnitt \ref{sec:vordefinierteSprachen} (Vordefinierte Sprachen)]{sec:vordefinierteSprachen} für mehr Informationen). Dies kann durch \T{noloadlangs} deaktiviert werden. \notetext{Hinweis: Die Sprachen werden nur geladen, wenn die Konfigurationsdateien gefunden werden. Siehe hierzu \cmdref{solLoadLanguage}.}
+        Loads the language \T{java} via \cmdref{solLoadLanguage} (see \jmark[Section \ref{sec:vordefinierteSprachen} (Predefined Languages)]{sec:vordefinierteSprachen} for more information). This can be disabled via \T{noloadlangs}. \notetext{Note: The languages are only loaded if the configuration files are found. See \cmdref{solLoadLanguage} for this.}
     \end{argument}
 
     \begin{argument}{nocpalette}{cpalette}
-        Bietet Unterstützung für \href{color-palettes}{https://github.com/EagleoutIce/color-palettes}. In diesem Fall wird das code-highlighting automatisch an die aktuelle Palette angepasst und auch mit dem Ändern der Palette von da an aktualisiert.
+        Offers support for \href{color-palettes}{https://github.com/EagleoutIce/color-palettes}. In this case the code highlighting is automatically adapted to the current palette and is also updated from then on whenever the palette changes.
     \end{argument}
 
     \begin{argument}{noupshape}{upshape}
-        Fügt \cmd{upshape} zum Stil hinzu. Dies sorgt dafür, dass sich Listings nichtmehr an kursiv gesetzte Schrift anpassen.
+        Adds \cmd{upshape} to the style. This ensures that listings no longer adapt to italic text.
     \end{argument}
 
     \begin{argument}{guardspace}{noguardspace}
-        Mit \T{guardspace} werden dem Listing jeweils auch zugesichert, dass es die nächste Zeile setzen darf. Dies kann dafür sorgen, dass ein Seitenumbruch erzeugt wird (wenn weniger als eine Zeile des Listings noch auf die Seite passt). Der Zweck dieser Option ist es, bei einer Hintergrundfarbe anfängliche Streifen zu vermeiden. Siehe \cmdref{solguard}.
+        With \T{guardspace}, the listing is each time also guaranteed to be allowed to set the next line. This can cause a page break to occur (if less than one line of the listing still fits on the page). The purpose of this option is to avoid initial stripes with a background color. See \cmdref{solguard}.
     \end{argument}
 
     \begin{argument}{nonuminpar}{numinpar}
-        Kurzform für \cmdref{solSetLeftMargin} mit dem Wert \glqq{}{\makeatletter\@@sol@numinpar@length}\grqq{}, kann also dazu verwendet
-        werden um die Listings automatisch einzurücken und die Nummern so nicht über den Dokumentenrand hinausragen zu lassen.
+        Short form for \cmdref{solSetLeftMargin} with the value ``{\makeatletter\@@sol@numinpar@length}'', can thus be used
+        to automatically indent listings and thereby prevent the numbers from protruding beyond the document margin.
     \end{argument}
 
     \begin{argument}{defaultfont}{nodefaultfont}
-        Wenn die Option gesetzt ist, wird die Typewriter-Schriftart auf \say{AnonymousPro} geändert, sonst nicht.
+        If the option is set, the typewriter font is changed to \say{AnonymousPro}, otherwise not.
     \end{argument}
 
     \begin{argument}{nofakeminted}{fakeminted}
-        Ist die Option gesetzt, so wird eine \env{minted} Umgebung erzeugt, welche es erlaubt dieses Paket wie \env{minted} zu verwenden. In diesem Fall heißt es:
+        If the option is set, a \env{minted} environment is created which allows this package to be used like \env{minted}. In this case it reads:
 \begin{plainlatex}
 \begin{minted}{java}
 public static void main(String[] args) { }
 \end{minted}
 \end{plainlatex}
-        Mit \cmdref{solmintedmap} kann ein Sprach-Mapping erzeugt werden. So wird beispielsweise automatisch \T{java} auf die interne Sprache \T{lJava} abgebildet.
-        Durch \cmdref{solsetmintedstyle} kann gewählt werden, welcher der internen Stile für das Listing verwendet werden soll. Zur Verfügung stehen \T{default}, \T{nonumber}, \T{plain} und \T{plain number}.
+        With \cmdref{solmintedmap} a language mapping can be created. For example, \T{java} is automatically mapped to the internal language \T{lJava}.
+        Using \cmdref{solsetmintedstyle} you can choose which of the internal styles should be used for the listing. Available are \T{default}, \T{nonumber}, \T{plain} and \T{plain number}.
     \end{argument}
 
     \begin{argument}{noextendednums}{extendednums}
-        Ist die Option gesetzt, so werden auch Zahlen gehighlighted, die intern Unterstriche verwenden oder die klassischen \T{0x}-, \T{0b}- oder \T{0o}-Präfixe verwenden.
+        If the option is set, numbers are also highlighted that internally use underscores or the classic \T{0x}, \T{0b} or \T{0o} prefixes.
     \end{argument}
 
     \begin{argument}{inlinesize}{noinlinesize}
-        Wenn die Option gesetzt ist, wird in den inline-Befehlen wie \cmd{bjava} die Schriftgröße nicht angepasst (siehe hierfür auch \cmdref{lstfs} mit Sternchen). Im Dokument kann diese Konfiguration jederzeit mit \cmd{soladaptinline} aktiviert und mit \cmd{sollockinline} deaktiviert werden.
+        If the option is set, the font size in the inline commands such as \cmd{bjava} is not adjusted (see also \cmdref{lstfs} with an asterisk for this). Within the document, this configuration can be enabled at any time with \cmd{soladaptinline} and disabled with \cmd{sollockinline}.
     \end{argument}
-\subsection{Farben}
+\subsection{Colors}
 
-    Dieses Paket definiert einige Farben mittels \cmd{colorlet}. Wird \T{sopra-base} als geladen erkannt, wird versucht passende Farben zu setzen. \imptext{Alle folgenden Farben tragen das Präfix \T{sol@colors@}}: \T{border}, \T{background}, \T{lst@keywordA}, \T{lst@keywordB}, \T{lst@keywordC}, \T{lst@numbers}, \T{lst@literals}, \T{lst@comments}, \T{lst@highlight}, \T{lst@linenumbers} und zuletzt \T{lst@command}, wobei die Bedeutung der einzelnen Farben aufgrund ihres Namens hervorgehen sollte (jeder Sprache steht es frei die gleich zu besprechenden Stile, die
-    auf diesen Farben aufbauen, (beliebig) zu verwenden). Beispielsweise kann man die Farbe
-    von Kommentaren wie folgt ändern (\cmdref{lstcolorlet}):
+    This package defines a few colors using \cmd{colorlet}. If \T{sopra-base} is detected as loaded, an attempt is made to set matching colors. \imptext{All of the following colors carry the prefix \T{sol@colors@}}: \T{border}, \T{background}, \T{lst@keywordA}, \T{lst@keywordB}, \T{lst@keywordC}, \T{lst@numbers}, \T{lst@literals}, \T{lst@comments}, \T{lst@highlight}, \T{lst@linenumbers} and lastly \T{lst@command}, where the meaning of each color should be apparent from its name (every language is free to use the styles discussed below, which
+    build on these colors, (in any way it wishes)). For example, the color
+    of comments can be changed as follows (\cmdref{lstcolorlet}):
 \begin{plainlatex}[morekeywords={[2]{\\lstcolorlet}}]
 \lstcolorlet{comments}{orange}
 \end{plainlatex}
-    Wir erhalten(exemplarisch in Java, zuerst standard, danach mit geänderter Farbe):
+    We get (exemplarily in Java, first the default, then with the changed color):
     \begingroup
 \begin{java}
-// Vor der Neuzuweisung der Farbe
+// Before reassigning the color
 public static void main(...){ /* ... */ }
 \end{java}
 \lstcolorlet{comments}{orange}
 \begin{java}
-// Nach Neuzuweisung der Farbe
+// After reassigning the color
 public static void main(...){ /* ... */ }
     \end{java}
     \endgroup
- Es ist möglich jede Farbe (nach \T{xcolor}) zu verwenden (siehe auch \cmdref{lstcolordef}).
+ It is possible to use any color (following \T{xcolor}) (see also \cmdref{lstcolordef}).
 
-\subsection{Stile}
-    Zur Hervorhebung der einzelnen Segmente im Listing werden den Farben entlehnte Stile definiert, die ebenfalls frei verändert werden können. \notetext{Entwicklernotiz, die
-    Stile sollten bei einer kompletten Neudefintion mithilfe des Befehls \cmd{sol@list@define@styles}
-    definiert werden. Sonst ist das Präfix, das im Folgenden verwendet werden soll in
-    \cmd{sol@lst@style@prefix} abgespeichert.}\par{}
-    Alle im folgenden aufgeführten Befehle tragen (sofern nicht modifiziert) das Präfix
-    \T{sol@styles@lst@} und können (ohne dieses Präfix) mittels \cmdref{solGet} beziehungsweise \cmdref{solGetStyle} abgefragt werden. Einzelne Sprachen können
-    weitere Befehle und Stile fordern und hinzufügen, davon sollte aber nur im Notfall gebraucht gemacht werden (so fügt die Sprache \T{Latex} den Stil \T{command} hinzu. Für mehr Informationen, siehe: \jmark[Abschnitt \ref{sec:vordefinierteSprachen} (Vordefinierte Sprachen)]{sec:vordefinierteSprachen})\par{}
-    Es gibt die folgenden Stile: \T{keywordA}, \T{keywordB}, \T{keywordC}, \T{keywordD}, \T{numbers}, \T{linenumbers}, \T{literals}, \T{comments}, \T{highlight}, \T{command} und \T{basic}, wobei letzterer jedem Stil vorangestellt wird. Die Neudefinition eines Stils sollte
-    nicht leichtfertig getätigt werden und benötigt deswegen etwas mehr Aufwand. Hier ein Beispiel:
+\subsection{Styles}
+    To highlight the individual segments in the listing, styles derived from the colors are defined, which can likewise be freely changed. \notetext{Developer note: the
+    styles should, in the case of a complete redefinition, be defined with the help of the command \cmd{sol@list@define@styles}.
+    Otherwise, the prefix to be used below is stored in
+    \cmd{sol@lst@style@prefix}.}\par{}
+    All commands listed below carry (unless modified) the prefix
+    \T{sol@styles@lst@} and can be queried (without this prefix) via \cmdref{solGet} or \cmdref{solGetStyle} respectively. Individual languages can
+    require and add further commands and styles, but this should only be done in case of emergency (for example, the language \T{Latex} adds the style \T{command}. For more information, see: \jmark[Section \ref{sec:vordefinierteSprachen} (Predefined Languages)]{sec:vordefinierteSprachen})\par{}
+    There are the following styles: \T{keywordA}, \T{keywordB}, \T{keywordC}, \T{keywordD}, \T{numbers}, \T{linenumbers}, \T{literals}, \T{comments}, \T{highlight}, \T{command} and \T{basic}, the latter being prepended to every style. Redefining a style should
+    not be done lightly and therefore requires a bit more effort. Here is an example:
 \begin{plainlatex}[morekeywords={[5]{\\sol@list@define@styles,\\scshape}}]
 {\makeatletter
     \sol@list@define@styles{%
@@ -215,10 +215,10 @@ public static void main(...){ /* ... */ }
     }
 }
 \end{plainlatex}
-Wir erhalten(exemplarisch in Java):
+We get (exemplarily in Java):
     \begingroup
 \begin{java}
-// Vor der Neuzuweisung des Stils
+// Before redefining the style
 public static void main(...){ /* ... */ }
 \end{java}
 {\makeatletter
@@ -227,93 +227,93 @@ public static void main(...){ /* ... */ }
     }
 }
 \begin{java}
-// Nach Neuzuweisung des Stils
+// After redefining the style
 public static void main(...){ /* ... */ }
     \end{java}
     \endgroup
-    \notetext{Mehrere Stile können durch Kommas voneinander abgetrennt in einem Zug definiert werden und überleben Gruppen.}
+    \notetext{Multiple styles can be defined in one go, separated by commas, and survive groups.}
 {\makeatletter
     \sol@list@define@styles{%
         {comments: \color{sol@colors@lst@comments}}%
     }
 }
 
-\section{Befehle- und Umgebungen}
+\section{Commands and Environments}
 
-Es gilt zu beachten, dass das Präfix \T{env@} nur auf die Natur einer Umgebung hinweist und nicht zum eigentlichen Bezeichner zuzuordnen ist!
+Note that the prefix \T{env@} only indicates the nature of an environment and is not to be attributed to the actual identifier!
 
 % TODO: mke command for lengths
 
-\subsection{Die Umgebungen zum Setzen}
+\subsection{The Setting Environments}
 
-\notetext{Diese Umgebungen werden für jede geladene Sprache erstellt. Jede in diesem Paket enthaltene Sprache folgt der Regel, dass sie mit einem \say{l} (für \textbf{l}anguage) beginnt und dann ein Großbuchstabe folgt. Möchte man also \T{java} aus irgendeinem Grunde
-manuel in \env{lstlisting} oder so verwenden, so heißt die Sprache hier \T{lJava}.}
+\notetext{These environments are created for every loaded language. Every language contained in this package follows the rule that it begins with an \say{l} (for \textbf{l}anguage) followed by an uppercase letter. So if, for whatever reason, you want to use \T{java}
+manually in \env{lstlisting} or similar, the language here is called \T{lJava}.}
 
-\begin{environment}{<Sprache>}{\optArg{Stildefinitionen}}
-    Setzt den eingeschlossenen Code in einer durch \cmdref{solLoadLanguage} \T{<Sprache>}. \notetext{Also, wichtig: \env{<Sprache>} selbst, gibt es nicht.}.
-    Beispiel:\smallskip\\ % gosh i should have implemented the ltx preview
+\begin{environment}{<Language>}{\optArg{Style definitions}}
+    Sets the enclosed code in \T{<Language>} loaded via \cmdref{solLoadLanguage}. \notetext{So, important: \env{<Language>} itself does not exist.}.
+    Example:\smallskip\\ % gosh i should have implemented the ltx preview
     \begin{latex}
 \begin{java}
-// Ein Kommentar!!
+// A comment!!
 public static void main(...){ /* ... */ }
 \end{java}
     \end{latex}
-    Ergibt (\notetext{Meta-Kommentar: Die Anzeige des \LaTeXe-Codes wurde mit \env{latex} vollzogen}):
+    Yields (\notetext{Meta comment: the display of the \LaTeXe{} code was carried out with \env{latex}}):
 \begin{java}
-// Ein Kommentar!!
+// A comment!!
 public static void main(...){ /* ... */ }
 \end{java}
-    Bei \T{Stildefinitionen} handelt es sich übrigens um Definitionen für \T{listings}.
+    \T{Style definitions}, by the way, are definitions for \T{listings}.
 \end{environment}
 
-\begin{environment}{<Sprache>*}{\optArg{Stildefinitionen}}
-    Analog zu \envref{<Sprache>}, allerdings ohne Zeilennummern.
+\begin{environment}{<Language>*}{\optArg{Style definitions}}
+    Analogous to \envref{<Language>}, but without line numbers.
 \end{environment}
 
-\begin{environment}{plain<Sprache>}{\optArg{Stildefinitionen}}
-    Analog zu \envref{<Sprache>}, allerdings ohne Zeilennummern und Hintegrund.
+\begin{environment}{plain<Language>}{\optArg{Style definitions}}
+    Analogous to \envref{<Language>}, but without line numbers and background.
 \end{environment}
 
-\begin{command}{c<Sprache>}{\optArg{Stildefinitionen}\manArg{Code}}
-    Setzt den \T{Code} in einer Zeile in der jeweiligen Sprache. \notetext{Wichtige Bemerkung: Da \LaTeXe{} nicht davon abgehalten werden kann die Zeichen zumindest einfach zu expandieren, müssen Zeichen wie ein Anführungszeichen oder geschwungene Klammern mittels eines Backslash escaped werden. Dies kann weiter dafür sorgen, dass in diesem
-    Fall Leerfelder verloren gehen. Ein solches Leerfeld kann durch \say{\T{:ws:}}, ein \jmark[Literate]{mrk:Literates}, forciert werden.}\\
-    Beispiel:
+\begin{command}{c<Language>}{\optArg{Style definitions}\manArg{Code}}
+    Sets the \T{Code} on one line in the respective language. \notetext{Important note: since \LaTeXe{} cannot be prevented from at least simply expanding the characters, characters such as a quotation mark or curly braces must be escaped using a backslash. This can further cause blank fields to be lost in this
+    case. Such a blank field can be forced via \say{\T{:ws:}}, a \jmark[literate]{mrk:Literates}.}\\
+    Example:
     \begin{plainlatex}
-Dies ist ein Test für \cjava{public static void main} - hat er geklappt?
+This is a test for \cjava{public static void main} - did it work?
     \end{plainlatex}
-    Ergibt: \\
-Dies ist ein Test für \cjava{public static void main} - hat er geklappt?
+    Yields: \\
+This is a test for \cjava{public static void main} - did it work?
 \end{command}
 
-\begin{command}{b<Sprache>}{\optArg{Stildefinitionen}\manArg{Code}}
-   Analog zu \cmdref{c<Sprache>}, allerdings wird kein Hintergrund und kein Rahmen gesetzt, was dafür sorgt, dass auch Zeilenumbrüche kein Problem sind.
+\begin{command}{b<Language>}{\optArg{Style definitions}\manArg{Code}}
+   Analogous to \cmdref{c<Language>}, but no background and no frame are set, which means line breaks are also not a problem.
 \end{command}
 
-\begin{command}{i<Sprache>}{\optArg{Stildefinitionen}\manArg{Dateipfad}}
-    Bindet die Datei in \T{Dateipfad} in das Dokument ein, wobei \envref{<Sprache>} zum Highlighting verwendet wird.
+\begin{command}{i<Language>}{\optArg{Style definitions}\manArg{File path}}
+    Includes the file at \T{File path} into the document, using \envref{<Language>} for highlighting.
  \end{command}
 
-\subsection{Sprachverwaltung}
+\subsection{Language Management}
 
 \begin{command}{solStyles}{}
-    Zeigt die Formatierung und Farbe der verschiedenen Stile an und ist wohl nur zu Testzwecken von nutzen. So ergibt \cmd{solStyles}: \solStyles
+    Shows the formatting and color of the various styles and is probably only useful for testing purposes. So \cmd{solStyles} yields: \solStyles
 \end{command}
 
 \begin{command}{solLanguageSearchPath}{}
-    Dieser Befehl enthält alle Pfade an denen \cmdref{solLoadLanguage} nach sprachen suchen soll. Dies ist überflüssig, wenn sich die Sprache im \T{texmf}-Baum des Systems befindet. Die Pfade können durch \cmd{renewcommand} aktualisiert werden. Beispiel:
+    This command contains all the paths in which \cmdref{solLoadLanguage} should search for languages. This is unnecessary if the language is located in the system's \T{texmf} tree. The paths can be updated via \cmd{renewcommand}. Example:
 \begin{plainlatex}
-\renewcommand{\solLanguageSearchPath}{{OrdnerA/}{OrdnerB/UnterordnerA/}{/home/}}
+\renewcommand{\solLanguageSearchPath}{{FolderA/}{FolderB/SubfolderA/}{/home/}}
 \end{plainlatex}
-    \notetext{Im lokalen Verzeichnis in dem \bbash{pdflatex} aufgerufen wird, wird immer gesucht! Sollte es mehrere Dateien mit gleichem Namen geben, so hat die Datei im lokalen Verzeichnis die höchste Priorität und anschließend werden die Ordner in der Reihenfolge durchsucht, bis die Datei das erste mal gefunden wurde.}
+    \notetext{The local directory in which \bbash{pdflatex} is invoked is always searched! Should there be several files with the same name, the file in the local directory has the highest priority, and afterwards the folders are searched in order until the file is found for the first time.}
 \end{command}
 
 \begin{command}{solLoadLanguage}{\manArg{LanguageName}}
-    Sucht und Lädt Sprachen in \T{solLanguageSearchPath}. Es können mehrere Sprachen mittels Kommaseparierung angegeben werden. Der Befehl kann mehrfach aufgerufen werden, erlaubt aber nicht, die selbe Sprache mehrfach zu laden. Die Sprache muss in einer Datei mit dem Namensschema \T{language\_<LanguageName>.cfg} definiert sein. Also zum Beispiel \T{language\_java.cfg}. Wie die Definition einer Sprache auszusehen hat, erklärt \cmdref{RegisterLanguage}. \notetext{Die Sprache \T{lVoid} mit \T{void} wird immer geladen und kann als Verbatim-Umgebung verwendet werden.}
+    Searches for and loads languages in \T{solLanguageSearchPath}. Several languages can be specified by comma-separating them. The command can be called multiple times, but does not allow the same language to be loaded multiple times. The language must be defined in a file with the naming scheme \T{language\_<LanguageName>.cfg}. So, for example, \T{language\_java.cfg}. \cmdref{RegisterLanguage} explains what the definition of a language has to look like. \notetext{The language \T{lVoid} with \T{void} is always loaded and can be used as a verbatim environment.}
 \end{command}
 
-\begin{command}{RegisterLanguage}{\optArg{Aliasse}\manArg{Sprache}\manArg{LanguageName}}
-    Registriert eine Sprache mit dem Namen \T{LanguageName} als \T{Sprache}. Dieser Aufruf muss von jeder Konfiguration selbst durchgeführt werden. \par{}
-    Im folgenden Beispiel gilt es die Sprache \T{Rubberduck} zu definieren und zu laden. In die Konfigurationsdatei schreiben wir:
+\begin{command}{RegisterLanguage}{\optArg{Aliases}\manArg{Language}\manArg{LanguageName}}
+    Registers a language named \T{LanguageName} as \T{Language}. This call must be performed by each configuration itself. \par{}
+    In the following example, the language \T{Rubberduck} is to be defined and loaded. In the configuration file we write:
 \begin{latex}
 \lstdefinelanguage{lRubberduck}{
     comment=[l]{\#},
@@ -322,93 +322,93 @@ Dies ist ein Test für \cjava{public static void main} - hat er geklappt?
 }
 \RegisterLanguage{rubberduck}{lRubberduck}
 \end{latex}
-    Also eine Sprache, die Raute für Kommentare verwendet, die beiden Schlüsselbegriffe \T{Quack} und \T{new} besitzt sowie noch ein \say{keywordB} (\notetext{so Formal ist die Sprache jetzt ja auch nicht :)}): \T{Duck}
-    Im Dokument laden wir die Sprache mit:
+    So, a language that uses a hash for comments, has the two key terms \T{Quack} and \T{new}, and also a \say{keywordB} (\notetext{well, the language is not exactly formal anyway :)}): \T{Duck}
+    In the document we load the language with:
 \begin{latex}
 \solLoadLanguage{rubberduck}
 \end{latex}
-    Nun können wir die Umgebungen wie \envref{<Sprache>} auch mit \T{rubberduck} verwenden:
+    Now we can also use environments like \envref{<Language>} with \T{rubberduck}:
 \begin{latex}[morekeywords={[3]{rubberduck}}]
 \begin{rubberduck}
-Duck jens = new Duck(); # Eine neue Ente
+Duck jens = new Duck(); # A new duck
 Quack jens ::{
     Quack Quack, Quack Quack
-    Quack Quack. # Entisch, es ist so simpel
+    Quack Quack. # Duckish, it's that simple
 }
 \end{rubberduck}
 \end{latex}
-Ergibt:
+Yields:
 \begin{rubberduck}
-Duck jens = new Duck(); # Eine neue Ente
+Duck jens = new Duck(); # A new duck
 Quack jens ::{
     Quack Quack, Quack Quack
-    Quack Quack. # Entisch, es ist so simpel
+    Quack Quack. # Duckish, it's that simple
 }
 \end{rubberduck}
-    \notetext{Die Befehle wie \cmdref{c<Sprache>}, also \cmd{crubberduck} funktionieren natürlich auch: \crubberduck{Duck jens}.}
+    \notetext{Commands such as \cmdref{c<Language>}, i.e. \cmd{crubberduck}, of course also work: \crubberduck{Duck jens}.}
 
-    Ist \secondargref{nofakeminted}{fakeminted} nicht gesetzt, so haben die Aliasse aktuell keine Bedeutung.
-    Werden sonst keine Aliasse übergeben, so wird automatisch ein mapping (\cmdref{solmintedmap}) von \T{Sprache} zu \T{LanguageName} erstellt. Andernfalls, wird für jedes (Komma-separierte) Alias, ein Mapping zu \T{LanguageName} kreiert, sodass es mit \envref{minted} verwendbar ist.
+    If \secondargref{nofakeminted}{fakeminted} is not set, the aliases currently have no meaning.
+    If no aliases are otherwise passed, a mapping (\cmdref{solmintedmap}) from \T{Language} to \T{LanguageName} is automatically created. Otherwise, a mapping to \T{LanguageName} is created for each (comma-separated) alias, so that it can be used with \envref{minted}.
 \end{command}
 
-\subsection{Allgemeine Befehle}
+\subsection{General Commands}
 
 \begin{command}{thesolversion}{}
-    Liefert die aktuelle Version des Pakets. So ergibt: \cmd{thesolversion}: \thesolversion\\
-    \notetext{Hinweis: über \blatex{\\value\{solversion\}} lässt sich
-    die Version als $4$-stellige Nummer erhalten: \arabic{solversion}.}
+    Returns the current version of the package. So \cmd{thesolversion} yields: \thesolversion\\
+    \notetext{Note: via \blatex{\\value\{solversion\}} the
+    version can be obtained as a $4$-digit number: \arabic{solversion}.}
 \end{command}
 
-\begin{command}{solSetLeftMargin}{\manArg{Länge}}
-    Setzt den Abstand der linken Seite des Listings und kann so dafür sorgen, dass zum
-    Beispiel auch die Zeilennummern nicht über den Dokumentrand hinausragen. Beispiel:
+\begin{command}{solSetLeftMargin}{\manArg{Length}}
+    Sets the spacing of the left side of the listing and can thereby ensure that, for
+    example, the line numbers also do not protrude beyond the document margin. Example:
 \begin{latex}[morekeywords={[5]{\\solSetLeftMargin}}]
 \solSetLeftMargin{15pt}
 \begin{java}
-// Ein Kommentar!!
+// A comment!!
 public static void main(...){ /* ... */ }
 \end{java}
 \end{latex}
-Ergibt: {
+Yields: {
 \solSetLeftMargin{15pt}
 \begin{java}
-// Ein Kommentar!!
+// A comment!!
 public static void main(...){ /* ... */ }
 \end{java}
 }
 \end{command}
 
-\begin{command}{solSetRightMargin}{\manArg{Länge}}
-    Setzt den Abstand der rechten Seite des Listings, sonst analog zu \cmdref{solSetLeftMargin}.
+\begin{command}{solSetRightMargin}{\manArg{Length}}
+    Sets the spacing of the right side of the listing, otherwise analogous to \cmdref{solSetLeftMargin}.
 \end{command}
 
-\begin{command}{solSetNumSep}{\manArg{Länge}}
-    Setzt den Abstand der Zeilennummern zum Code.
+\begin{command}{solSetNumSep}{\manArg{Length}}
+    Sets the distance between the line numbers and the code.
 \end{command}
 
-\begin{command}{solSetFrameRule}{\manArg{Länge}}
-    Setzt die Dicke der Umrandung (Standard ist hier \bvoid{0.75pt}, also nicht übertreiben :P).
+\begin{command}{solSetFrameRule}{\manArg{Length}}
+    Sets the thickness of the border (the default here is \bvoid{0.75pt}, so don't overdo it :P).
 \end{command}
 
 \begin{command}{T}{\manArg{Text}}
-    Setzt den \T{Text} in \T{Schreibmaschinenschrift}.
+    Sets the \T{Text} in \T{typewriter font}.
 \end{command}
 
-\begin{command}{solGetStyle}{\manArg{StilName}}
-    Expandiert zum Stil von \T{StilName} wie ihn das Paket auch selbst verwendet.
+\begin{command}{solGetStyle}{\manArg{StyleName}}
+    Expands to the style of \T{StyleName} as used by the package itself.
 \end{command}
 
-\begin{command}{solGet}{\manArg{StilName}\manArg{Text}}
-    Setzt \T{Text} im Stil von \T{StilName} wie ihn das Paket auch selbst verwendet. So zum Beispiel:\\*\bjava{\\solGet\{comments\}\{Hallo Welt\}} ergibt: \solGet{comments}{Hallo Welt}.
+\begin{command}{solGet}{\manArg{StyleName}\manArg{Text}}
+    Sets \T{Text} in the style of \T{StyleName} as used by the package itself. For example:\\*\bjava{\\solGet\{comments\}\{Hello World\}} yields: \solGet{comments}{Hello World}.
 \end{command}
 
 \begin{command}{solNumFs}{\manArg{size}}
-    Ändert die Schriftgröße der Zeilennummern separat.
+    Changes the font size of the line numbers separately.
 \end{command}
 
 \begin{command}{lstfs}{\optStar\optArg{linespread}\manArg{size}}
-    Passt die Schriftgröße des Codes wie auch die der Zeilennummern an. Bei letzteren wird versucht eine geeignete Größe zu finden.
-    Die Variante mit Stern hat \textit{keine} Angabe der \T{size}, in diesem Fall wird automatisch die aktuelle Schriftgröße gesetzt.
+    Adjusts the font size of the code as well as that of the line numbers. For the latter, an attempt is made to find a suitable size.
+    The starred variant has \textit{no} specification of \T{size}; in this case, the current font size is set automatically.
 \begin{latex}[morekeywords={[5]{\\lstfs}}]
 \begin{java}
 public static int add(int a, int b){ return a + b; }
@@ -447,22 +447,22 @@ public static int add(int a, int b){ return a + b; }
 \end{command}
 
 \begin{command}{lstcolorlet}{\manArg{lstcolor}\manArg{normalcolor}}
-    Weißt eine Farbe mittels \cmd{colorlet} zu. Hierbei darf \emph{lstcolor} nur einen der folgenden Werte annehmen: \emph{keywordA}, \emph{keywordB}, \emph{keywordC}, \emph{numbers}, \emph{literals}, \emph{comments}, \emph{highlight} oder \emph{command}.
+    Assigns a color via \cmd{colorlet}. Here, \emph{lstcolor} may only take one of the following values: \emph{keywordA}, \emph{keywordB}, \emph{keywordC}, \emph{numbers}, \emph{literals}, \emph{comments}, \emph{highlight} or \emph{command}.
 \end{command}
 
 \begin{command}{lstcolordef}{\optArg{mode=RGB}\manArg{lstcolor}\manArg{colorcode}}
-    Weißt eine Farbe mittels \cmd{definecolor} zu. Hierbei darf \emph{lstcolor} nur einen der folgenden Werte annehmen: \emph{keywordA}, \emph{keywordB}, \emph{keywordC}, \emph{numbers}, \emph{literals}, \emph{comments}, \emph{highlight} oder \emph{command}. Das erste Argument gibt den Modus nach \emph{xcolor} an.
+    Assigns a color via \cmd{definecolor}. Here, \emph{lstcolor} may only take one of the following values: \emph{keywordA}, \emph{keywordB}, \emph{keywordC}, \emph{numbers}, \emph{literals}, \emph{comments}, \emph{highlight} or \emph{command}. The first argument specifies the mode according to \emph{xcolor}.
 \end{command}
 
-\begin{command}{solguard}{\manArg{Zeilen}}
-    Mit der Paketoption \argref{guardspace}{noguardspace} kann so angegeben werden, wie viele Zeilen geschützt werden müssen.
-    Der Standard ist: \glqq{}{\makeatletter\@sol@guard@default}\grqq. Hinweis: Dies betrifft nur die Zeilen für den Beginn. Die letzte Zeile wird aktuell immer mit \cmd{nobreak} gesichert.
+\begin{command}{solguard}{\manArg{Lines}}
+    With the package option \argref{guardspace}{noguardspace}, this can be used to specify how many lines need to be protected.
+    The default is: ``{\makeatletter\@sol@guard@default}''. Note: this only concerns the lines for the beginning. The last line is currently always secured with \cmd{nobreak}.
 \end{command}
 
-\begin{command}{solblacklistlinenumbers}{\optStar\manArg{Zeilennummern}}
-    Eine kommaseparierte Liste an Zeilennummern, welche nicht angezeigt werden sollen. Die Sperre erfolgt lokal, mittels \TeX-Gruppen kann das blacklisting demnach kontrolliert werden.
-    Mit \cmdref{solblacklistisghost} \cmdref{solblacklistispresent} kann kontrolliert werden, ob die ausgeblendeten Zeilennummern aus der Zählung entfernt werden sollen.
-    Dies kann auch über den optionalen Stern geregelt werden (\cmdref{solblacklistisghost} ist standard, mit Stern wird \cmdref{solblacklistispresent} ausgeführt). Wiederholte Aufrufe fügen die zu versteckenden Zeilen den Bestehenden hinzu.
+\begin{command}{solblacklistlinenumbers}{\optStar\manArg{LineNumbers}}
+    A comma-separated list of line numbers which should not be displayed. The blocking occurs locally; the blacklisting can thus be controlled via \TeX{} groups.
+    With \cmdref{solblacklistisghost} \cmdref{solblacklistispresent} it can be controlled whether the hidden line numbers should be removed from the count.
+    This can also be regulated via the optional star (\cmdref{solblacklistisghost} is the default; with a star, \cmdref{solblacklistispresent} is executed instead). Repeated calls add the lines to be hidden to the existing ones.
 \begin{latex}[morekeywords={[5]{\\solblacklistlinenumbers}}]
 \solblacklistlinenumbers{3}
 \begin{java}
@@ -472,7 +472,7 @@ public static void main(String[] args){
 }
 \end{java}
 \end{latex}
-Ergibt: {
+Yields: {
 \solblacklistlinenumbers{3}
 \begin{java}
 public static void main(String[] args){
@@ -481,7 +481,7 @@ public static void main(String[] args){
 }
 \end{java}
 }
-Im Gegensatz dazu, mit Stern:
+In contrast, with a star:
 \begin{latex}[morekeywords={[5]{\\solblacklistlinenumbers}}]
 \solblacklistlinenumbers!**!*{3}
 \begin{java}
@@ -491,7 +491,7 @@ public static void main(String[] args){
 }
 \end{java}
 \end{latex}
-Ergibt: {
+Yields: {
 \solblacklistlinenumbers*{2,3}
 \begin{java}
 public static void main(String[] args){
@@ -503,68 +503,68 @@ public static void main(String[] args){
 \end{command}
 
 \begin{command}{solblacklistisghost}{}
-    Mit \cmdref{solblacklistlinenumbers} ausgeblendete Zeilen werden auch nicht gezählt.
+    Lines hidden with \cmdref{solblacklistlinenumbers} are also not counted.
 \end{command}
 
 \begin{command}{solblacklistispresent}{}
-    Mit \cmdref{solblacklistlinenumbers} ausgeblendete Zeilen werden dennoch gezählt.
+    Lines hidden with \cmdref{solblacklistlinenumbers} are nevertheless counted.
 \end{command}
 
-\subsection{Minted spezifisches}
+\subsection{Minted-Specific}
 
-Ist die Paketoption \secondargref{nofakeminted}{fakeminted} gesetzt, so existieren weiter die folgenden Befehle und Umgebungen.
+If the package option \secondargref{nofakeminted}{fakeminted} is set, the following commands and environments also exist.
 
-\begin{environment}{minted}{\optArg{lising-Args}\manArg{language}}
-    Setzt den eingeschlossenen Text im Stil von \cmdref{solsetmintedstyle}, wobei die Sprache wie in \cmdref{solmintedmap} konfiguriert, abgebildet wird.
+\begin{environment}{minted}{\optArg{listing-args}\manArg{language}}
+    Sets the enclosed text in the style of \cmdref{solsetmintedstyle}, with the language mapped as configured in \cmdref{solmintedmap}.
 \end{environment}
 
 \begin{command}{solmintedmap}{\manArg{from}\manArg{to}}
-    Erstellt oder überschreibt eine Sprachabbildung für \envref{minted}.
-    Durch \cmdref{RegisterLanguage} wird dies automatisch vollzogen (allerdings direkt durch interne Mechanismen).
+    Creates or overwrites a language mapping for \envref{minted}.
+    This is done automatically by \cmdref{RegisterLanguage} (though directly through internal mechanisms).
 \end{command}
 
 \begin{command}{solsetmintedstyle}{\manArg{default/nonumber/plain/plain number}}
-    Aktualisiert den von \envref{minted} zu verwendenden Stil.
+    Updates the style to be used by \envref{minted}.
 \end{command}
 
 \clearpage
 \appendix
-\section{Sprachdefinition}
+\section{Language Definition}
 
-\subsection{Vordefinierte Sprachen}
+\subsection{Predefined Languages}
 \label{sec:vordefinierteSprachen}
 
-Die hier definierten Sprachdateien befinden sich im Unterordner \T{Languages} und können auch nur als Basis für eine eigene Sprachdefinition genutzt werden. Sie enthalten schon einige Beispielwerte, so wie ich sie verwende, können aber in der Hinsicht auch komplett
-auf \say{Blank} zurückgesetzt werden. \notetext{Hinweis: Die Definition der Sprachen verläuft, Überraschung, analog zu Lilly (\url{https://github.com/EagleoutIce/LILLY}, nur die geforderte Dateinennung und die weiteren Möglichkeiten unterscheiden sich.), also können auch
-diese Sprachdefinitionen als Beispiel herangezogen werden. Weitere Informationen bietet die Dokumentation zu \T{listings}.}
+The language files defined here are located in the subfolder \T{Languages} and can also be used only as a basis for your own language definition. They already contain a few example values, as I use them, but can in that regard also be completely
+reset to \say{Blank}. \notetext{Note: the definition of languages proceeds, surprise, analogously to Lilly (\url{https://github.com/EagleoutIce/LILLY}, only the required file naming and the further options differ.), so
+these language definitions can also be used as an example. Further information is provided by the documentation of \T{listings}.}
 
 \paragraph{Java (\T{lJava}, \T{java})}
 
-Definiert in diesem Kontext nichts besonderes.
+Defines nothing special in this context.
 
 \paragraph{Bash (\T{lBash}, \T{bash})}
 
-Definiert in diesem Kontext nichts besonderes.
+Defines nothing special in this context.
 
 \paragraph{Json (\T{lJson}, \T{json})}
 
-Definiert in diesem Kontext nichts besonderes.
+Defines nothing special in this context.
 
 \paragraph{latex (\T{lLatex}, \T{latex})}
 
-Definiert \T{command} als zusätzlichen Stil für Befehle.
+Defines \T{command} as an additional style for commands.
 
 \paragraph{XML (\T{lXml}, \T{xml})}
 
-Definiert in diesem Kontext nichts besonderes.
+Defines nothing special in this context.
 
 \paragraph{Rubberduck (\T{lRubberduck}, \T{rubberduck})}
 
-Definiert in diesem Kontext nichts besonderes. Auch keine echte Sprache :P.
+Defines nothing special in this context. Not a real language either :P.
 
 \subsection{Literates}
 \label{mrk:Literates}
-Im Kontext verschiedener Programmiersprachen kam bald der Wunsch auf verschiedene Symbole entsprechend einfach Setzen zu können. Die Ersetzungsregeln werden grundlegend geladen, wenn das Paket geladen wird, allerdings können einzelne Programmiersprachen (so wie Java mit seinen Escape-Sequenzen) noch eigene definieren. Die Ersetzungsregeln ermöglichen es, neben Umlauten auch Symbole einzubinden. Die Ersetzungsregeln werden nicht über eine Liste gehandhabt und sind ebenso vielfältig wie es die Bedürfnisse erfordern. Im Folgenden eine Auflistung aller wichtigen Ersetzungsregeln:
+In the context of various programming languages, the wish soon arose to be able to set various symbols correspondingly easily. The replacement rules are loaded by default when the package is loaded, but individual programming languages (such as Java with its escape sequences) can define their own on top. The replacement rules make it possible to include not only umlauts but also symbols. The replacement rules are not handled via a list and are as varied as the needs require. Below is a listing of all the important replacement rules:
 \begin{multicols}{4}
     \begin{description}
         \newcommand{\lstshowcmd}[2][]{\edef\tmpdocsolb{\noexpand\lstinline[#1]!#2!}\tmpdocsolb}
@@ -573,20 +573,20 @@ Im Kontext verschiedener Programmiersprachen kam bald der Wunsch auf verschieden
         }
     \end{description}
 \end{multicols}
-\notetext{Hinweis: Ja, \T{:c:} expandiert zu nichts. Es kann als Trenner verwendet werden. Allerdings sollte dies nicht notwendig sein,
-da das Paket von Version \T{1.0.14} an automatische Maßnahmen ergreift: \bjava{14 + 3 = 17 * (4 - 3) :yields: :bmath: 17:emath::ldots: !}}
+\notetext{Note: yes, \T{:c:} expands to nothing. It can be used as a separator. However, this should not be necessary,
+since from version \T{1.0.14} onward the package takes automatic measures: \bjava{14 + 3 = 17 * (4 - 3) :yields: :bmath: 17:emath::ldots: !}}
 
 \clearpage
 
-\section{Beispiele und Tests}
+\section{Examples and Tests}
 
-Die Codes hierzu finden sich am Ende des Quellcodes der Dokumentation:
+The code for this can be found at the end of the documentation's source code:
 
-So gilt: \cjava{public static void main(:ldots:)} definiert die \bjava{main}-Methode\ldots\blindtext[1]
+So: \cjava{public static void main(:ldots:)} defines the \bjava{main} method\ldots\blindtext[1]
 \begin{plainjava}
-// Dies ist sehr guter Code
+// This is very good code
 public static void main(String[] args){
-    System.out.println("Hallo Welt");
+    System.out.println("Hello World");
     System.out.print(2+3*4-5)
 }
 \end{plainjava}
@@ -597,27 +597,27 @@ import java.util.Scanner;
 /**
  *  @file ean.java
  *  @author Florian Sihler, Raphael Straub
- *  @brief Das Programm berechnet anhand den ersten 12 Stellen einer EAN die zugehörige Prüfsumme
+ *  @brief The program calculates the corresponding checksum from the first 12 digits of an EAN
  *  @version 1.0
  *  @date 2.11.2018
  */
 
 /**
  * @class ean
- * @brief Die Hauptklasse des Programms, in ihr 'lebt' der gesamte Code
+ * @brief The main class of the program; the entire code 'lives' in it
  */
 public class ean {
-    ///@brief der Einstiegspunkt des Programms
+    ///@brief the entry point of the program
     public static void main(String[] args){
-        Scanner scanner = new Scanner(System.in); //Initialisierung
+        Scanner scanner = new Scanner(System.in); //Initialization
         int sum = 0; boolean toggle = false;
-        for(int i = 0; i < 12; i++){ //Einlesen der 12 Zahlen
-                                         /* abwechselnd *1 und *3 */
-            sum += (scanner.nextInt() * ((toggle)?3:1)); //Summieren der Zahl
-            toggle = !toggle; //Invertieren des Multiplikators
+        for(int i = 0; i < 12; i++){ //Reading in the 12 numbers
+                                         /* alternating *1 and *3 */
+            sum += (scanner.nextInt() * ((toggle)?3:1)); //Summing the number
+            toggle = !toggle; //Inverting the multiplier
         }
         System.out.println( (10 - (sum % 10)) % 10 );
-        // Gibt die Prüfsumme als den Abstand zum nächsten Vielfachen von 10
+        // Outputs the checksum as the distance to the next multiple of 10
         scanner.close();
     }
 }
@@ -626,17 +626,17 @@ public class ean {
 \begin{xml*}[morekeywords={[3]{collection,book,title,authorlist,description,date,author}}]
 <?xml version="1.0" encoding="UTF-8"?>
 <collection>
-    <book category="Roman">
-        <!-- Ich bin ein Kommentar -->
-        <title>Tolles Buch</title>
+    <book category="Novel">
+        <!-- I am a comment -->
+        <title>Great Book</title>
         <authorlist>
-            <author>Netter Mensch</author>
-            <author>Noch netterer Mensch</author>
+            <author>Nice Person</author>
+            <author>Even Nicer Person</author>
         </authorlist>
         <description />
-        <date> heute, wann sonst? </date>
+        <date> today, when else? </date>
     </book>
-    <book category="Gute Bücher">
+    <book category="Good Books">
         ...
     </book>
 </collection>
@@ -657,7 +657,7 @@ public class ean {
 \end{json}
 
 \begin{void}
-Einfach nur eine Verbatim-Ausgabe. 1234 Hallo42, Hallo 42, Hallo 42
+Just a plain verbatim output. 1234 Hello42, Hello 42, Hello 42
 \end{void}
 
 \end{document}

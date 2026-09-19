@@ -4,152 +4,152 @@
 
 ## Motivation
 
-Dies ist eine Ansammlung (hoffentlich) wundertoller LaTeX2e Klassen und Pakete, für das Softwaregrundprojekt
-im Rahmen des Informatikstudiums an der Universität Ulm im Wintersemester 2019/20 sowie dem sich anschließendem
-Sommersemester.
-Einige Pakete, wie `sopra-listings` wurden im Anschluss noch bedeutend Weiterentwickelt.
+This is a collection of (hopefully) wonderful LaTeX2e classes and packages for the Softwaregrundprojekt
+as part of the computer science studies at Ulm University in the 2019/20 winter semester and the following
+summer semester.
+Some packages, such as `sopra-listings`, were subsequently developed significantly further.
 
-Es grüßt: Florian (`team-020`).
+Greetings: Florian (`team-020`).
 
-## Inhaltsübersicht
+## Table of Contents
 
 - [sopra-collection](#sopra-collection)
   - [Motivation](#motivation)
-  - [Inhaltsübersicht](#inhaltsübersicht)
+  - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
-    - [Eigenständige Installation](#eigenständige-installation)
-    - [Installation mit sltx](#installation-mit-sltx)
-  - [Paketübersicht](#paketübersicht)
-    - [sopra-base (Dokumentation)](#sopra-base-dokumentation)
-    - [sopra-documentation (Dokumentation)](#sopra-documentation-dokumentation)
-    - [sopra-models (Dokumentation)](#sopra-models-dokumentation)
-    - [sopra-requirements (Dokumentation)](#sopra-requirements-dokumentation)
-    - [sopra-tables (Dokumentation)](#sopra-tables-dokumentation)
-    - [sopra-attachments (Dokumentation)](#sopra-attachments-dokumentation)
-    - [sopra-listings (Dokumentation)](#sopra-listings-dokumentation)
-    - [sopra-changelog (Dokumentation)](#sopra-changelog-dokumentation)
-    - [sopra-standard (Dokumentation)](#sopra-standard-dokumentation)
-    - [sopra-paper (Dokumentation)](#sopra-paper-dokumentation)
-    - [sopra-seraphim (Dokumentation)](#sopra-seraphim-dokumentation)
-    - [sopra-ntts (Dokumentation)](#sopra-ntts-dokumentation)
+    - [Standalone Installation](#standalone-installation)
+    - [Installation with sltx](#installation-with-sltx)
+  - [Package Overview](#package-overview)
+    - [sopra-base (Documentation)](#sopra-base-documentation)
+    - [sopra-documentation (Documentation)](#sopra-documentation-documentation)
+    - [sopra-models (Documentation)](#sopra-models-documentation)
+    - [sopra-requirements (Documentation)](#sopra-requirements-documentation)
+    - [sopra-tables (Documentation)](#sopra-tables-documentation)
+    - [sopra-attachments (Documentation)](#sopra-attachments-documentation)
+    - [sopra-listings (Documentation)](#sopra-listings-documentation)
+    - [sopra-changelog (Documentation)](#sopra-changelog-documentation)
+    - [sopra-standard (Documentation)](#sopra-standard-documentation)
+    - [sopra-paper (Documentation)](#sopra-paper-documentation)
+    - [sopra-seraphim (Documentation)](#sopra-seraphim-documentation)
+    - [sopra-ntts (Documentation)](#sopra-ntts-documentation)
 
 ## Installation
 
-### Eigenständige Installation
+### Standalone Installation
 
-Die Installation kann entweder je nach Dokumentation, oder durch das mitgelieferte python-skript erfolgen. Bei
-einem installierten python3.5+ Interpreter genügt:
+Installation can be done either according to the respective documentation, or via the included Python script. With
+an installed Python 3.5+ interpreter, it suffices to run:
 `python3 installer.py`.
 
-Genauere Informationen zur Angabe des Pfades lassen sich hier finden: [wikibooks](https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages).
+More detailed information on specifying the path can be found here: [wikibooks](https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages).
 
-### Installation mit sltx
+### Installation with sltx
 
-Die Kollektion wird auch mit [sltx](https://github.com/EagleoutIce/sltx) geliefert.
-Sie befindet sich hier in den vorgeschlagenen Paketquellen und im Docker-Container ab `tx-default`.
-Die Verwendung wird hier über [lithie-util](https://github.com/EagleoutIce/lithie-util) eingerichtet.
+The collection is also shipped with [sltx](https://github.com/EagleoutIce/sltx).
+It can be found there among the suggested package sources, and in the Docker container starting from `tx-default`.
+Its usage is set up there via [lithie-util](https://github.com/EagleoutIce/lithie-util).
 
-## Paketübersicht
+## Package Overview
 
-Bisher verfügt dieses Repository über die folgenden Klassen und Pakete, die alle jeweils ihre eigene Dokumentation
-besitzen und weitestgehend unabhängig voneinander verwendet werden können:
+So far, this repository contains the following classes and packages, each of which has its own documentation
+and can largely be used independently of one another:
 
-### sopra-base ([Dokumentation](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-base/sopra-base.doc.pdf))
+### sopra-base ([Documentation](https://raw.githubusercontent.com/EagleoutIce/sopra-collection/gh-pages/sopra-base/sopra-base.doc.pdf))
 
-Die Basis Dokumentklasse: [sopra-base](sopra-base):
-  Hier wird mittels `sopra-base.cls` die Basisklasse für alle Dokumente im Rahmen der Arbeit definiert.
-  Es steht frei sie während der Arbeit hinsichtlich ihres Erscheinungsbild zu erweitern und/oder zu
-  modifizieren. Hierbei soll die Kompatibilität mit bereits erstellten Dokumenten nicht verletzt werden:
+The base document class: [sopra-base](sopra-base):
+  Here, `sopra-base.cls` defines the base class for all documents within the project.
+  It is free to be extended and/or modified in terms of its appearance during the course of the work.
+  In doing so, compatibility with documents already created should not be broken:
 
-- [sopra-base.cls](sopra-base/sopra-base.cls): Dies ist die versprochene Klassendatei.
-- [sopra-base.doc.tex](sopra-base/sopra-base.doc.tex): Dieses Dokument erzeugt die zugehörige Dokumentation. Für sie wird das `sopra-listings`-Paket, sofern es installiert ist, reicht: `pdflatex sopra-base.doc.tex`.
+- [sopra-base.cls](sopra-base/sopra-base.cls): This is the promised class file.
+- [sopra-base.doc.tex](sopra-base/sopra-base.doc.tex): This document generates the corresponding documentation. For it, the `sopra-listings` package is used, if installed; then it suffices to run: `pdflatex sopra-base.doc.tex`.
 
-### sopra-documentation ([Dokumentation](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-documentation/sopra-documentation.doc.pdf))
+### sopra-documentation ([Documentation](https://raw.githubusercontent.com/EagleoutIce/sopra-collection/gh-pages/sopra-documentation/sopra-documentation.doc.pdf))
 
-Dokumentieren mit: [sopra-documentation](sopra-documentation):
-  Dieses Paket definiert alle Befehle die für die Dokumentation verwendet werden (auch die, für die Dokumentation über dieses Paket :smile:)
+Documenting with: [sopra-documentation](sopra-documentation):
+  This package defines all commands used for documentation (including those for the documentation of this package itself :smile:)
 
-- [sopra-documentation.sty](sopra-documentation/sopra-documentation.sty): Dies ist das versprochene Paket.
-- [sopra-documentation.doc.tex](sopra-documentation/sopra-documentation.doc.tex): Für sie wird das `sopra-listings`-Paket, sofern es installiert ist, reicht: `pdflatex sopra-documentation.doc.tex`.
+- [sopra-documentation.sty](sopra-documentation/sopra-documentation.sty): This is the promised package.
+- [sopra-documentation.doc.tex](sopra-documentation/sopra-documentation.doc.tex): For it, the `sopra-listings` package is used, if installed; then it suffices to run: `pdflatex sopra-documentation.doc.tex`.
 
-### sopra-models ([Dokumentation](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-models/sopra-models.doc.pdf))
+### sopra-models ([Documentation](https://raw.githubusercontent.com/EagleoutIce/sopra-collection/gh-pages/sopra-models/sopra-models.doc.pdf))
 
-Modelle mit: [sopra-models](sopra-models):
-  Dieses Paket erlaubt es, gemeinsam mit dem integrierten (modifizierten) [tikz-uml](https://perso.ensta-paris.fr/~kielbasi/tikzuml/) (UML)-Modelle zu setzen.
+Modeling with: [sopra-models](sopra-models):
+  This package, together with the integrated (modified) [tikz-uml](https://perso.ensta-paris.fr/~kielbasi/tikzuml/), allows (UML) models to be typeset.
 
-- [sopra-models.sty](sopra-models/sopra-models.sty): Dies ist das versprochene Paket.
-- [sopra-models.doc.tex](sopra-models/sopra-models.doc.tex): Für sie wird das `sopra-listings`-Paket, sofern es installiert ist, reicht: `pdflatex sopra-models.doc.tex`.
+- [sopra-models.sty](sopra-models/sopra-models.sty): This is the promised package.
+- [sopra-models.doc.tex](sopra-models/sopra-models.doc.tex): For it, the `sopra-listings` package is used, if installed; then it suffices to run: `pdflatex sopra-models.doc.tex`.
 
-### sopra-requirements ([Dokumentation](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-requirements/sopra-requirements.doc.pdf))
+### sopra-requirements ([Documentation](https://raw.githubusercontent.com/EagleoutIce/sopra-collection/gh-pages/sopra-requirements/sopra-requirements.doc.pdf))
 
-Anforderungsdefinitionen mit: [sopra-requirements](sopra-requirements):
-  Dieses Paket erlaubt es, funktionale und nicht-funktionale Anforderungen zu definieren und zu referenzieren.
+Requirement definitions with: [sopra-requirements](sopra-requirements):
+  This package allows functional and non-functional requirements to be defined and referenced.
 
-- [sopra-requirements.sty](sopra-requirements/sopra-requirements.sty): Dies ist das versprochene Paket.
-- [sopra-requirements.doc.tex](sopra-requirements/sopra-requirements.doc.tex): Für sie wird das `sopra-listings`-Paket, sofern es installiert ist, reicht: `pdflatex sopra-requirements.doc.tex`.
+- [sopra-requirements.sty](sopra-requirements/sopra-requirements.sty): This is the promised package.
+- [sopra-requirements.doc.tex](sopra-requirements/sopra-requirements.doc.tex): For it, the `sopra-listings` package is used, if installed; then it suffices to run: `pdflatex sopra-requirements.doc.tex`.
 
-### sopra-tables ([Dokumentation](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-tables/sopra-tables.doc.pdf))
+### sopra-tables ([Documentation](https://raw.githubusercontent.com/EagleoutIce/sopra-collection/gh-pages/sopra-tables/sopra-tables.doc.pdf))
 
-Tabellen mit: [sopra-tables](sopra-tables):
-  Dieses Paket erlaubt es, Tabellen hübsch zu gestalten:
+Tables with: [sopra-tables](sopra-tables):
+  This package allows tables to be styled nicely:
 
-- [sopra-tables.sty](sopra-tables/sopra-tables.sty): Dies ist das versprochene Paket.
-- [sopra-tables.doc.tex](sopra-tables/sopra-tables.doc.tex): Für sie wird das `sopra-listings`-Paket, sofern es installiert ist, reicht: `pdflatex sopra-tables.doc.tex`.
+- [sopra-tables.sty](sopra-tables/sopra-tables.sty): This is the promised package.
+- [sopra-tables.doc.tex](sopra-tables/sopra-tables.doc.tex): For it, the `sopra-listings` package is used, if installed; then it suffices to run: `pdflatex sopra-tables.doc.tex`.
 
-### sopra-attachments ([Dokumentation](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-attachments/sopra-attachments.doc.pdf))
+### sopra-attachments ([Documentation](https://raw.githubusercontent.com/EagleoutIce/sopra-collection/gh-pages/sopra-attachments/sopra-attachments.doc.pdf))
 
-Dateien einbetten mit: [sopra-attachments](sopra-attachments):
-  Dieses Paket erlaubt es, Dokumente in eine PDF einzubetten:
+Embedding files with: [sopra-attachments](sopra-attachments):
+  This package allows documents to be embedded into a PDF:
 
-- [sopra-attachments.sty](sopra-attachments/sopra-attachments.sty): Dies ist das versprochene Paket.
-- [sopra-attachments.doc.tex](sopra-attachments/sopra-attachments.doc.tex): Für sie wird das `sopra-listings`-Paket, sofern es installiert ist, reicht: `pdflatex sopra-attachments.doc.tex`.
+- [sopra-attachments.sty](sopra-attachments/sopra-attachments.sty): This is the promised package.
+- [sopra-attachments.doc.tex](sopra-attachments/sopra-attachments.doc.tex): For it, the `sopra-listings` package is used, if installed; then it suffices to run: `pdflatex sopra-attachments.doc.tex`.
 
-### sopra-listings ([Dokumentation](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-listings/sopra-listings.doc.pdf))
+### sopra-listings ([Documentation](https://raw.githubusercontent.com/EagleoutIce/sopra-collection/gh-pages/sopra-listings/sopra-listings.doc.pdf))
 
-Listings mit: [sopra-listings](sopra-listings):
-  Dieses Paket erlaubt es, Quellcode in PDF mit Syntax-Highlighting zu setzen:
+Listings with: [sopra-listings](sopra-listings):
+  This package allows source code to be typeset in PDF with syntax highlighting:
 
-- [sopra-listings.sty](sopra-listings/sopra-listings.sty): Dies ist das versprochene Paket.
-- [sopra-listings.doc.tex](sopra-listings/sopra-listings.doc.tex): Für sie wird das Paket selbst benötigt, dann reicht: `pdflatex sopra-listings.doc.tex`.
+- [sopra-listings.sty](sopra-listings/sopra-listings.sty): This is the promised package.
+- [sopra-listings.doc.tex](sopra-listings/sopra-listings.doc.tex): For it, the package itself is required, then it suffices: `pdflatex sopra-listings.doc.tex`.
 
-Das Paket bietet eine Unterstützung für [color-palettes](https://github.com/EagleoutIce/color-palettes), Beispiele befinden sich [hier](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-listings/examples/cp-listings.example.pdf) und [hier](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-tables/examples/cp-tables.example.pdf).
+The package offers support for [color-palettes](https://github.com/EagleoutIce/color-palettes); examples can be found [here](https://raw.githubusercontent.com/EagleoutIce/sopra-collection/gh-pages/sopra-listings/examples/cp-listings.example.pdf) and [here](https://raw.githubusercontent.com/EagleoutIce/sopra-collection/gh-pages/sopra-tables/examples/cp-tables.example.pdf).
 
-### sopra-changelog ([Dokumentation](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-changelog/sopra-changelog.doc.pdf))
+### sopra-changelog ([Documentation](https://raw.githubusercontent.com/EagleoutIce/sopra-collection/gh-pages/sopra-changelog/sopra-changelog.doc.pdf))
 
-Changelogs mit: [sopra-changelog](sopra-changelog):
-  Dieses Paket erlaubt es, Änderungen in Dokumenten festzuhalten:
+Changelogs with: [sopra-changelog](sopra-changelog):
+  This package allows changes in documents to be recorded:
 
-- [sopra-changelog.sty](sopra-changelog/sopra-changelog.sty): Dies ist das versprochene Paket.
-- [sopra-changelog.doc.tex](sopra-changelog/sopra-changelog.doc.tex): Für sie wird das `sopra-listings`-Paket, sofern es installiert ist, reicht: `pdflatex sopra-changelog.doc.tex`.
+- [sopra-changelog.sty](sopra-changelog/sopra-changelog.sty): This is the promised package.
+- [sopra-changelog.doc.tex](sopra-changelog/sopra-changelog.doc.tex): For it, the `sopra-listings` package is used, if installed; then it suffices to run: `pdflatex sopra-changelog.doc.tex`.
 
-### sopra-standard ([Dokumentation](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-standard/sopra-standard.doc.pdf))
+### sopra-standard ([Documentation](https://raw.githubusercontent.com/EagleoutIce/sopra-collection/gh-pages/sopra-standard/sopra-standard.doc.pdf))
 
-Sopra-Standard mit: [sopra-standard](sopra-standard):
-  Dieses Paket wurde für das Standardisierungsdokument verwendet:
+Sopra standard with: [sopra-standard](sopra-standard):
+  This package was used for the standardization document:
 
-- [sopra-standard.sty](sopra-standard/sopra-standard.sty): Dies ist das versprochene Paket.
-- [sopra-standard.doc.tex](sopra-standard/sopra-standard.doc.tex): Für sie wird das `sopra-listings`-Paket, sofern es installiert ist, reicht: `pdflatex sopra-standard.doc.tex`.
+- [sopra-standard.sty](sopra-standard/sopra-standard.sty): This is the promised package.
+- [sopra-standard.doc.tex](sopra-standard/sopra-standard.doc.tex): For it, the `sopra-listings` package is used, if installed; then it suffices to run: `pdflatex sopra-standard.doc.tex`.
 
-### sopra-paper ([Dokumentation](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-paper/sopra-paper.doc.pdf))
+### sopra-paper ([Documentation](https://raw.githubusercontent.com/EagleoutIce/sopra-collection/gh-pages/sopra-paper/sopra-paper.doc.pdf))
 
-Das Dokumentlayout mit: [sopra-paper](sopra-paper):
-  Diese Dokumentklasse wurde für den Standard, und die Meilensteine von Team020 verwendet:
+The document layout with: [sopra-paper](sopra-paper):
+  This document class was used for the standard, and the milestones of Team020:
 
-- [sopra-paper.cls](sopra-paper/sopra-paper.cls): Dies ist die versprochene Dokumentklasse.
-- [sopra-paper.doc.tex](sopra-listings/sopra-paper.doc.tex): Für sie wird das Paket selbst benötigt, dann reicht: `pdflatex sopra-paper.doc.tex`.
+- [sopra-paper.cls](sopra-paper/sopra-paper.cls): This is the promised document class.
+- [sopra-paper.doc.tex](sopra-listings/sopra-paper.doc.tex): For it, the package itself is required, then it suffices: `pdflatex sopra-paper.doc.tex`.
 
-### sopra-seraphim ([Dokumentation](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-seraphim/sopra-seraphim.doc.pdf))
+### sopra-seraphim ([Documentation](https://raw.githubusercontent.com/EagleoutIce/sopra-collection/gh-pages/sopra-seraphim/sopra-seraphim.doc.pdf))
 
-Präsentationen mit: [sopra-seraphim](sopra-seraphim):
-  Diese Dokumentklasse wurde für die Telegramme und die Abschlusspräsentation von Team020 verwendet:
+Presentations with: [sopra-seraphim](sopra-seraphim):
+  This document class was used for the telegrams and the final presentation of Team020:
 
-- [sopra-seraphim.cls](sopra-changelog/sopra-seraphim.cls): Dies ist das versprochene Dokumentklasse.
-- [sopra-seraphim.doc.tex](sopra-changelog/sopra-seraphim.doc.tex): Für sie wird das `sopra-listings`-Paket, sofern es installiert ist, reicht: `pdflatex sopra-seraphim.doc.tex`.
+- [sopra-seraphim.cls](sopra-changelog/sopra-seraphim.cls): This is the promised document class.
+- [sopra-seraphim.doc.tex](sopra-changelog/sopra-seraphim.doc.tex): For it, the `sopra-listings` package is used, if installed; then it suffices to run: `pdflatex sopra-seraphim.doc.tex`.
 
-### sopra-ntts ([Dokumentation](https://media.githubusercontent.com/media/EagleoutIce/sopra-collection/gh-pages/sopra-ntts/sopra-ntts.doc.pdf))
+### sopra-ntts ([Documentation](https://raw.githubusercontent.com/EagleoutIce/sopra-collection/gh-pages/sopra-ntts/sopra-ntts.doc.pdf))
 
-Schriftzüge mit: [sopra-ntts](sopra-ntts):
-  Dieses Paket enthält den ntts-Schriftzug.
+Lettering with: [sopra-ntts](sopra-ntts):
+  This package contains the ntts lettering.
 
-- [sopra-ntts.cls](sopra-changelog/sopra-ntts.cls): Dies ist das versprochene Dokumentklasse.
-- [sopra-ntts.doc.tex](sopra-changelog/sopra-ntts.doc.tex): Für sie wird das `sopra-listings`-Paket, sofern es installiert ist, reicht: `pdflatex sopra-ntts.doc.tex`.
+- [sopra-ntts.cls](sopra-changelog/sopra-ntts.cls): This is the promised document class.
+- [sopra-ntts.doc.tex](sopra-changelog/sopra-ntts.doc.tex): For it, the `sopra-listings` package is used, if installed; then it suffices to run: `pdflatex sopra-ntts.doc.tex`.

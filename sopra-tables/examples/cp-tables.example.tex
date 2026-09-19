@@ -5,7 +5,7 @@
 \usepackage[cpalette]{sopra-tables}
 \usepackage{pgffor}
 
-\title{Tables-Beispiel}
+\title{Tables example}
 \author{Florian Sihler}
 \date{\today}
 
@@ -23,8 +23,8 @@
 \tableofcontents
 \clearpage
 \edef\AP{\AllPalettes}
-\foreach \mode/\c in {Normal/{},Invertiert/\doinvert} {
-\section{Die Auswirkungen der Paletten (\mode)}
+\foreach \mode/\c in {Normal/{},Inverted/\doinvert} {
+\section{The Effects of the Palettes (\mode)}
 \c%
 \foreach \i in \AP {\UsePalette{\i}%
 % to assure the breaks :D
@@ -33,31 +33,31 @@
     \ShowcaseCurrentPalette%
 \end{center}\medskip
 \begin{mtabular}{lcr}
-    Kleine & Feine & Tabelle \\
-    Ja was & denkt man & auf die \\
-    schnelle & denn vom & Gefährten \\
-    der da & wandelt. & \\
-    Er strandet gar & im Glücke war & und lebte \\
-    dar was & ewig war & und offen bar \\
+    Little & Fine & Table \\
+    Now what & does one think & of the \\
+    quick one & then, of the & companion \\
+    that wanders & there. & \\
+    He even got stranded & was in fortune & and lived \\
+    there was & forever was & and openly \\
     Jap & dap & jeah.
 \end{mtabular}
 
-\begin{mltabular}[Ich bin & ein langer & Tabular]{lcr}
-    Hipp & Hipp & Jaha \\
-    Ja ich & bin ein & tabular \\
-    und ein & langer offen & bar. \\
-    Ganz zentriert, & dass bin ich & Tscha-ka\\
-    & Ich brauch noch & ein zwei Zeilen ja \\
-    und schon & ist der & Seitenumbruch \\
-    da. & Hoffe ich & denn irgendwie \\
-    schreibe ich die & Zeilen nie & ohne einen Plan. \\
-    & Wer das & liest \\
-    der & sei gewarnt & \\
-    verzählten & & Zeilen stählen \\
-    Unsinn er- & zählen & \\
+\begin{mltabular}[I am & a long & Tabular]{lcr}
+    Hip & Hip & Yeah \\
+    Yes I & am a & tabular \\
+    and a & long open & bar. \\
+    Quite centered, & that's what I & am, cha-ka\\
+    & I still need & a line or two, yeah \\
+    and already & is the & page break \\
+    there. & I hope & somehow then \\
+    I never write & the lines & without a plan. \\
+    & Whoever & reads this \\
+    shall & be warned & \\
+    miscounted & & lines of steel \\
+    Talking non- & -sense & \\
     Tra- & la- & la. \\
-    Neue Seite & Sonna klar  & \\
-    Ih mag net mehr & soh'n schwachsinn & mach-a \\
+    New page & sure thing  & \\
+    I don't wanna & do such nonsense & no more \\
     Ha & Ha & Ha
 \end{mltabular}\clearpage
 }

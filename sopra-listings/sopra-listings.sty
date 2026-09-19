@@ -583,17 +583,21 @@ keepspaces=false}
 % a language will be loaded by the default latex-file mechanis
 % the file has to have the signature: 'language_<Name>.cfg'
 
-\def\sol@LoadLanguage@searchPath@iter#1,#2\@nil{%
-\ifx!#1!\else
-\InputIfFileExists{#1language_\sol@curlanginputfile.cfg}{%
-  \sol@debug{Loaded '\sol@curlanginputfile' from '#1language_\sol@curlanginputfile.cfg'}
-}{\ifx!#2!\else\sol@LoadLanguage@iter#2,\@nil\fi}\fi
-}
+\newif\ifsol@langfound
 \def\sol@LoadLanguage@searchPath@resolve%
 {% empty-case
 \InputIfFileExists{language_\sol@curlanginputfile.cfg}{
   \sol@debug{Loaded '\sol@curlanginputfile' (language_\sol@curlanginputfile.cfg)}
-}{\expandafter\sol@LoadLanguage@searchPath@iter\solLanguageSearchPath,\@nil}}
+}{\sol@langfoundfalse
+  % every brace group of the search path is one folder; the first match wins
+  \expandafter\@tfor\expandafter\sol@curlangdir\expandafter:\expandafter=\solLanguageSearchPath\do{%
+    \ifsol@langfound\else
+      \IfFileExists{\sol@curlangdir language_\sol@curlanginputfile.cfg}{%
+        \sol@langfoundtrue
+        \input{\sol@curlangdir language_\sol@curlanginputfile.cfg}%
+        \sol@debug{Loaded '\sol@curlanginputfile' from '\sol@curlangdir language_\sol@curlanginputfile.cfg'}%
+      }{}%
+    \fi}}}
 
 \def\sol@LoadLanguage@single#1\@nil{\def\sol@curlanginputfile{#1}\sol@LoadLanguage@searchPath@resolve{}}
 \def\sol@LoadLanguage@iter#1,#2\@nil{%

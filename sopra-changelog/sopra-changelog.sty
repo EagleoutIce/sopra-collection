@@ -129,7 +129,7 @@
 \else% only set if in range:
     \ifnum\@nameuse{@sop@registers@#1@introduced}=\tmp@counterval\relax
         \@ifundefined{@sop@registers@#1@changes@\tmp@counterval}{%
-            \item[\faPlusCircle] \soc@curtag Neues Element! %
+            \item[\faPlusCircle] \soc@curtag New element! %
         }{\item[\faPlusCircle] \soc@curtag\@nameuse{@sop@registers@#1@changes@\tmp@counterval} }%
     \else%check if there is a edit in this version:
         \@ifundefined{@sop@registers@#1@changes@\tmp@counterval}{%
@@ -147,8 +147,8 @@
 
 \def\soc@month@unknown{??}
 \def\soc@month@to@name#1{%
-    \def\tmp@a{#1}\ifx\soc@month@unknown\tmp@a??\else\ifcase#1\or{Januar}\or{Februar}\or{M\"{a}rz}\or{April}\or{Mai}\or{Juni}%
-    \or{Juli}\or{August}\or{September}\or{Oktober}\or{November}\or{Dezember}%
+    \def\tmp@a{#1}\ifx\soc@month@unknown\tmp@a??\else\ifcase#1\or{January}\or{February}\or{March}\or{April}\or{May}\or{June}%
+    \or{July}\or{August}\or{September}\or{October}\or{November}\or{December}%
     \else\@ctrerr\fi\fi}
 
 \def\soc@date@convert#1-#2-#3\@nil{%
@@ -168,17 +168,17 @@
     % do we have date for this version?
     \edef\tmp@counterval{\arabic{soc@counter@tmp@a}}%
     \@ifundefined{soc@versions@data@\tmp@counterval}{% Dummy Tag:
-        \soc@changelog@upper@subsection{Changelog für Version \tmp@counterval}
+        \soc@changelog@upper@subsection{Changelog for version \tmp@counterval}
     }{%
         \edef\soc@tmpdate{\@nameuse{soc@versions@data@\tmp@counterval}}
-        \soc@changelog@upper@subsection{Changelog für Version \tmp@counterval{} (\soc@changelog@getDate{\soc@tmpdate})}
+        \soc@changelog@upper@subsection{Changelog for version \tmp@counterval{} (\soc@changelog@getDate{\soc@tmpdate})}
     }\label{soc@changelog@version:\tmp@counterval}%
     % now we have to iter through all registered environments and
     % check if there is a tag for this version :D
     % recursive call:
     \begin{itemize}
         \@ifundefined{soc@versions@data@\tmp@counterval}{% Dummy Tag:
-            \item[\faInfoCircle] Für diese Version liegen keine Informationen vor.%
+            \item[\faInfoCircle] No information is available for this version.%
         }{%
             \item[\faInfoCircle] \edef\soc@tmp{\noexpand\soc@changelog@version@format\@nameuse{soc@versions@data@\tmp@counterval}\noexpand\@nil}\soc@tmp
         }%

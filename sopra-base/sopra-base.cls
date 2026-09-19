@@ -50,7 +50,7 @@
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
 % language
-\RequirePackage[english,main=ngerman]{babel}
+\RequirePackage[ngerman,main=english]{babel}
 % layout
 \pgfmathsetmacro\sob@headheight{2.6cm + \sob@len@logoheight/2}
 \edef\sob@footheight{\the\dimexpr\sob@len@header-8mm\relax}
@@ -116,8 +116,8 @@
 \def\sob@mail#1{\href{mailto:#1}{#1}}
 \let\mail\sob@mail%
 \def\sob@month@to@name#1{%
-    \ifcase#1\or{Januar}\or{Februar}\or{M\"{a}rz}\or{April}\or{Mai}\or{Juni}%
-    \or{Juli}\or{August}\or{September}\or{Oktober}\or{November}\or{Dezember}%
+    \ifcase#1\or{January}\or{February}\or{March}\or{April}\or{May}\or{June}%
+    \or{July}\or{August}\or{September}\or{October}\or{November}\or{December}%
     \else\@ctrerr\fi
 }
 
@@ -178,7 +178,7 @@
         \else\stepcounter{sob@counter@tmp@a}%
             \ifnum\thesob@counter@tmp@a>1%
             \ifnum\thesob@counter@tmp@a=\sob@authors@totallength
-                ~und \else,\space\fi\fi
+                ~and \else,\space\fi\fi
             \expandafter\sob@@parse@author\sob@@tmp@curauthor\@nil
         \fi%
     }%
@@ -203,7 +203,7 @@
 
 
 % Set the Title for the maketitle command
-\def\sob@team@name{Gruppe}
+\def\sob@team@name{Group}
 
 \renewcommand{\maketitle}{
 \thispagestyle{empty}

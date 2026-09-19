@@ -6,22 +6,24 @@ on:
   pull_request:
     branches: [master, main]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
-          lfs: true
           submodules: true
       - name: Setup Python environment for sltx
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.8"
+          python-version: "3.11"
       - name: Setup and run sltx-install (and pu)
         run: |
-          sudo apt install poppler-utils
+          sudo apt-get install -y poppler-utils
           pip install six sltx
           echo "tx-default" | sltx docker
 
@@ -109,13 +111,15 @@ jobs:
           sltx compile --root --profile "tx-default" "cp-tables.example.tex"
 
       - name: Commit PDF
+        if: github.event_name == 'push'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -f ./**/*.doc.pdf ./**/*.example.pdf
+          git add -f '*.doc.pdf' '*.example.pdf'
           git commit -m "Updated documentations and examples PDFs by workflow"
 
       - name: Push changes
+        if: github.event_name == 'push'
         uses: ad-m/github-push-action@master
         with:
           branch: "gh-pages"

@@ -14,12 +14,12 @@
 
 \usepackage{sopra-attachments}
 
-\title{Die 'sopra-seraphim'-Klasse}
-\subtitle{Dokumentation für die 'sopra-seraphim'-Klasse, Version \thesosversion}
+\title{The 'sopra-seraphim' class}
+\subtitle{Documentation for the 'sopra-seraphim' class, version \thesosversion}
 
 \duedate{2019-12-15}
 
-\keywords{Dokumentation,sopra-seraphim,sopra,uni ulm,uulm}
+\keywords{Documentation,sopra-seraphim,sopra,uni ulm,uulm}
 \authors{Florian Sihler (florian.sihler@uni-ulm.de)}
 
 % \group{Die Affenbande}
@@ -28,23 +28,23 @@
 \begin{document}
     \Intro
 
-    \section{Die 'sopra-seraphim'-Klasse}
-    \subsection{Warum, wieso, weshalb?}
-    \begin{frame}{Warum 'sopra-seraphim'?}
-        Diese \LaTeXe-Dokumentlasse wurde im Rahmen des Sopras im
-        Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
-        Grundlage für die Optik aller Dokumente des \notetext{Teams 20}.
-        Das Layout basiert auf \T{beamer}. Die Dokumentation wurde aus strukturellen Gründen in letzterem angefertigt, es werden also keine Titel platziert, analog passt sich die Kopfzeile an den Umstand an!\par
-        Zum Visualisieren der einzelnen Code-Ausschnitte wird das
-        \T{sopra-listings}-Paket verwendet. Es ist für die Verwendung der Dokumentklasse
-        nicht relevant.\par
-        Die zugehörige Klasse sollte ebenfalls in dieses Dokument eingebettet sein: \textattachfile[subject={sopra-seraphim.cls}]{sopra-seraphim.cls}{sopra-seraphim.cls}.
+    \section{The 'sopra-seraphim' class}
+    \subsection{Why, what for, and wherefore?}
+    \begin{frame}{Why 'sopra-seraphim'?}
+        This \LaTeXe\ document class was written as part of the Sopra in the
+        winter semester 2019 and summer semester 2020 and serves as
+        the basis for the look of all documents of \notetext{Team 20}.
+        The layout is based on \T{beamer}. For structural reasons, this documentation was prepared in the latter, so no titles are placed; the header adapts accordingly to this circumstance!\par
+        To visualize the individual code snippets, the
+        \T{sopra-listings} package is used. It is not relevant
+        for the use of the document class.\par
+        The corresponding class should also be embedded in this document: \textattachfile[subject={sopra-seraphim.cls}]{sopra-seraphim.cls}{sopra-seraphim.cls}.
     \end{frame}
 
-    \subsection{Abhängigkeiten}
-    \begin{frame}[fragile]{Abhängigkeiten}
-    Dieses Paket basiert auf \T{beamer}, sowie den folgenden Paketen (alle übergebenen Argumente werden ebenfalls
-    angegeben, wobei im Fall einer Werteübergabe ein Stern gesetzt wird. Ein Ausrufezeichen vor einem \say{Argument} deklariert, dass es sich hier um eine Option handelt die das Laden des Pakets kontrolliert):
+    \subsection{Dependencies}
+    \begin{frame}[fragile]{Dependencies}
+    This package is based on \T{beamer}, as well as the following packages (all passed arguments are also
+    listed, whereby an asterisk is set in the case of a value being passed. An exclamation mark before an \say{argument} declares that this is an option that controls the loading of the package):
     \begingroup\footnotesize
     \begin{multicols}{3}
         \begin{itemize}
@@ -58,24 +58,24 @@
         \end{itemize}
     \end{multicols}
     \endgroup
-    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein (weiter
-    wird noch die Ti\textit{k}Z-Bibliothek \T{calc} verwendet.
+    All of these packages should be part of a common \LaTeX\ distribution (furthermore
+    the Ti\textit{k}Z library \T{calc} is also used.
     \end{frame}
 
 
-    \subsection{Die Installation}
-    \begin{frame}[fragile]{Installation: Pfadangabe}
-        Die Klasse wird nicht als \T{.dtx} ausgeliefert, weswegen sich die
-    folgenden Möglichkeiten ergeben:
+    \subsection{Installation}
+    \begin{frame}[fragile]{Installation: Path Specification}
+        The class is not distributed as a \T{.dtx} file, which is why the
+    following options are available:
 \begin{itemize}
-    \item Die Dokumentklasse kann in dasselbe Verzeichnis wie das Dokument
-    gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+    \item The document class can be placed in the same directory as the document.
+    In this case, the inclusion instruction reads:
 \begin{plainlatex}
 \documentclass{sopra-seraphim}
 \end{plainlatex}
-    \item Die Dokumentklasse kann in ein Unterverzeichnis/in ein mit
-                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
-                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+    \item The document class can be placed in a subdirectory / in a
+                directory shipped with the document. In
+                this case, it is specified via the (relative) path:
 \begin{plainlatex}
 \documentclass{./Mein/Pfad/zu/sopra-seraphim}
 \end{plainlatex}
@@ -83,159 +83,159 @@
 
     \end{frame}
 
-    \begin{frame}[fragile]{Installation: Im texmf-Baum}
-        Man kann die Klasse (mittels eines Symlinks oder ähnlichem)
-        in einen eigenen \emph{texmf}-Baum ablegen.
-        So kann zum Beispiel auf Linux unter der Verwendung von texlive
-        die Klasse hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
-        Das Verzeichnis kann erstellt und anschließend mittels
-        \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
-        die Klasse wie jede andere installierte Klasse verwendet werden:
+    \begin{frame}[fragile]{Installation: In the texmf Tree}
+        The class can be placed (using a symlink or something similar)
+        into your own \emph{texmf} tree.
+        For example, on Linux using texlive
+        the class can be placed here: \bvoid{\~/texmf/tex/latex/}.
+        The directory can be created and then updated using
+        \bbash{texhash \~/texmf}. Now
+        the class can be used like any other installed class:
 \begin{plainlatex}
 \documentclass{sopra-seraphim}
 \end{plainlatex}
-        \notetext{Hinweis: Hierfür existiert ein Python3.5-Skript namens \textattachfile{installer.py}{installer.py} welches, im darüberliegenden Ordner plaziert, die Installation/Aktualisierung übernehmen kann.}
+        \notetext{Note: for this purpose there is a Python3.5 script called \textattachfile{installer.py}{installer.py} which, when placed in the folder above, can take care of the installation/update.}
     \end{frame}
 
-    \subsection{Weitere Besonderheiten}
-    \begin{frame}[fragile]{Weitere Besonderheiten}
-        In Version \thesosversion{} (\cmdref{thesosversion}) gibt es keine weiteren Besonderheiten.
+    \subsection{Further Particularities}
+    \begin{frame}[fragile]{Further Particularities}
+        In version \thesosversion{} (\cmdref{thesosversion}) there are no further particularities.
     \end{frame}
 
 
 
-    \section{Klassen-Konfiguration}
-    \subsection{Akzeptierte Parameter}
-    \begin{frame}[fragile]{Allgemeines zu Parametern}
-    Die Dokumentklasse akzeptiert, so wie die meisten, Argumente. So können
-    nebst den für \T{article} akzeptierten Argumente die im folgenden
-    aufgelistet werden, wobei bei Argumenten mit einer \say{Counter}-Option
-    das jeweils standardmäßig aktive zuerst und das andere in Klammern
-    geschrieben. So wird implizit:
+    \section{Class Configuration}
+    \subsection{Accepted Parameters}
+    \begin{frame}[fragile]{General Information on Parameters}
+    Like most, the document class accepts arguments. In addition to
+    the arguments accepted for \T{article}, the ones listed below
+    can be used, whereby for arguments with a \say{counter} option
+    the one active by default is written first and the other in parentheses.
+    Implicitly, this means:
 \begin{plainlatex}
 \documentclass[setstyle]{sopra-seraphim}
 \end{plainlatex}
-    aufgerufen. Während dieses Dokument mit:
+    is called. While this document is invoked with:
 \begin{plainlatex}
 \documentclass[nosetstyle]{sopra-seraphim}
 \end{plainlatex}
-    der Stil anderer \T{sopra-*} Pakete nicht modifiziert wird.
+    the style of other \T{sopra-*} packages is not modified.
     \end{frame}
 
-    \begin{frame}[fragile]{Die Parameter}
+    \begin{frame}[fragile]{The Parameters}
         \begin{argument}{setstyle}{nosetstyle}
-            Mit \T{setstyle} wird automatisch geprüft, welche Pakete der \T{sopra-collection} (\url{https://github.com/EagleoutIce/sopra-collection}) geladen sind und entsprechende Stile gesetzt um ein einheitliches Layout zu erzeugen.
+            With \T{setstyle}, it is automatically checked which packages of the \T{sopra-collection} (\url{https://github.com/EagleoutIce/sopra-collection}) are loaded, and the corresponding styles are set to produce a consistent layout.
         \end{argument}
     \end{frame}
 
 
-    \section{Befehlsübersicht}
-    \begin{frame}{Befehlsübersicht}
-        Die Klasse fügt als Basis-Klasse keinen großen Satz an Befehlen für
-        den Nutzer hinzu. Diese Aufgabe gebührt den erweiternden Paketen.
+    \section{Command Overview}
+    \begin{frame}{Command Overview}
+        As a base class, the class does not add a large set of commands for
+        the user. This task is left to the extending packages.
     \end{frame}
 
 
-    \subsection{Daten setzen}
+    \subsection{Setting Data}
     \label{sec:DatenSetzen}
-    \begin{frame}[fragile,allowframebreaks]{Daten setzen}
-        Die Folgenden Befehle sollten in der Präambel gesetzt werden und konfigurieren
-        auch die Metadaten des jeweiligen Dokuments (also die Dokumenteigenschaften).
-        Sie können beliebig oft überschrieben werden (bis zu dem Punkt, an dem
-        das Dokument beginnt). \notetext{Entwicklernotiz: Alle diese Felder stehen über
-        \T{\textbackslash sos@register@$\langle$Name$\rangle$}, beziehungsweise ihre 'short'-Varianten
-        über \T{\textbackslash sos@register@short@$\langle$Name$\rangle$} zur Verfügung.}
+    \begin{frame}[fragile,allowframebreaks]{Setting Data}
+        The following commands should be set in the preamble and also configure
+        the metadata of the respective document (i.e. the document properties).
+        They can be overwritten as often as desired (up to the point at which
+        the document begins). \notetext{Developer note: all these fields are available via
+        \T{\textbackslash sos@register@$\langle$Name$\rangle$}, or their 'short' variants
+        via \T{\textbackslash sos@register@short@$\langle$Name$\rangle$}.}
 
-        \begin{command}{brief}{\optArg{short}\manArg{Kurzbeschreibung}}
-            Setzt die Kurzbeschreibung des Dokuments auf \T{Kurzbeschreibung}. Sie wird auf der Titelseite links unten angezeigt. \imptext{Wird aktuell nicht verwendet.}
+        \begin{command}{brief}{\optArg{short}\manArg{ShortDescription}}
+            Sets the short description of the document to \T{ShortDescription}. It is shown at the bottom left of the title page. \imptext{Currently not used.}
         \end{command}
 
-        \begin{command}{authors}{\optArg{short}\manArg{Autorenliste}}
-            Hierrüber kann die Liste der Autoren gesetzt werden. Es empfiehlt sich
-            hierfür \cmdref{addAuthor} zu verwenden.
+        \begin{command}{authors}{\optArg{short}\manArg{AuthorList}}
+            This can be used to set the list of authors. It is recommended
+            to use \cmdref{addAuthor} for this.
         \end{command}
 
         \begin{command}{duedate}{\optArg{short}\manArg{YYYY-MM-DD}}
-           Setzt das Datum des Dokuments. Zur Konvertierung wird \cmdref{DateConvert}
-           verwendet.
+           Sets the date of the document. \cmdref{DateConvert} is used
+           for the conversion.
         \end{command}
 
         \begin{command}{supervisor}{\optArg{short}\manArg{Name}}
-            Setzt den Betreuer auf \T{Name}. Dieses Datenfeld wird in der Basis-Klasse nicht verwendet. \imptext{Wird aktuell nicht verwendet.}
+            Sets the supervisor to \T{Name}. This data field is not used in the base class. \imptext{Currently not used.}
         \end{command}
 
-        \begin{command}{keywords}{\optArg{short}\manArg{Schlüsselwörter}}
-            Setzt die Keywords für die Metadaten auf \T{Schlüselwörter}.
+        \begin{command}{keywords}{\optArg{short}\manArg{Keywords}}
+            Sets the keywords for the metadata to \T{Keywords}.
         \end{command}
 
         \begin{command}{group}{\optArg{short}\manArg{Name}}
-            Setzt die Gruppe des jeweiligen Erstellers auf \T{Name}.% Maybe show?
+            Sets the group of the respective author to \T{Name}.% Maybe show?
         \end{command}
 
-        \begin{command}{groupnum}{\optArg{short}\manArg{Nummer}}
-            Setzt im Falle einer Nummerierung (oder Symbol, etc.) der Gruppe dieses
-            auf \T{Nummer}.
+        \begin{command}{groupnum}{\optArg{short}\manArg{Number}}
+            In case of a numbering (or symbol, etc.) of the group, sets this
+            to \T{Number}.
         \end{command}
     \end{frame}
 
 
-    \subsection{Beim Datensetzen hilfreiches}
-    \begin{frame}[fragile]{Beim Datensetzen hilfreiches}
+    \subsection{Helpful When Setting Data}
+    \begin{frame}[fragile]{Helpful When Setting Data}
     \begin{command}{addAuthor}{\manArg{Name (Email)}}
-        Fügt einen Autor der Liste der Autoren (\cmdref{authors}) hinzu. So zum
-        Beispiel: \blatex[morekeywords={[5]{\\addAuthor}}]{\\addAuthor\{Florian Sihler (florian.sihler@uni-ulm.de)\}}.
+        Adds an author to the list of authors (\cmdref{authors}). For
+        example: \blatex[morekeywords={[5]{\\addAuthor}}]{\\addAuthor\{Florian Sihler (florian.sihler@uni-ulm.de)\}}.
     \end{command}
 
-    \begin{command}{setTeam}{\manArg{Name Nummer}}
-        Erlaubt es \cmdref{group} und \cmdref{groupnum} in einem Aufruf zu setzen.
-        So zum Beispiel: \T{\cmd{setTeam}\{Affenbande 42\}} oder
+    \begin{command}{setTeam}{\manArg{Name Number}}
+        Allows \cmdref{group} and \cmdref{groupnum} to be set in a single call.
+        For example: \T{\cmd{setTeam}\{Affenbande 42\}} or
         \T{\cmd{setTeam}\{\{Mega Team\} A\}}.
     \end{command}
     \end{frame}
 
 
-\subsection{Die Daten anzeigen}
+\subsection{Displaying the Data}
 
-\begin{frame}[fragile,allowframebreaks]{Die Daten anzeigen}
+\begin{frame}[fragile,allowframebreaks]{Displaying the Data}
     \begin{command}{typesetAuthors}{}
-        Setzt die Autoren gemäß \jmark[\T{showmail}]{mrk:showmail} mit oder
-        ohne E-Mail-Adresse, so ergibt \cmd{typesetAuthors}: \typesetAuthors.
-        Bei mehreren werden Kommas und das \say{und} korrekt gesetzt.
+        Typesets the authors according to \jmark[\T{showmail}]{mrk:showmail} with or
+        without email address, so \cmd{typesetAuthors} yields: \typesetAuthors.
+        With multiple authors, commas and the \say{and} are set correctly.
     \end{command}
 
     \begin{command}{thesosversion}{}
-        Gibt die aktuelle Version der \T{sopra-seraphim}-Dokumentklasse aus. \notetext{Hinweis: über \blatex{\\value\{sosversion\}} lässt sich
-        die Version als $4$-stellige Nummer erhalten: \arabic{sosversion}.}
+        Outputs the current version of the \T{sopra-seraphim} document class. \notetext{Note: via \blatex{\\value\{sosversion\}} the
+        version can be obtained as a $4$-digit number: \arabic{sosversion}.}
     \end{command}
 
     \begin{command}{DateConvert}{\manArg{YYYY-MM-DD}}
-        Konvertiert ein Datum in eine schönere Form, so:
+        Converts a date into a nicer form, thus:
     \begin{plainlatex}[morekeywords={[5]{\\DateConvert}}]
 \DateConvert{2019-12-02} % :yields: !*\solGet{comments}{\DateConvert{2019-12-02}}*!
     \end{plainlatex}
     \end{command}
 \end{frame}
 
-\subsection{Generelle Formatierungsbefehle}
-\begin{frame}[fragile]{Generelle Formatierungsbefehle}
+\subsection{General Formatting Commands}
+\begin{frame}[fragile]{General Formatting Commands}
 \begin{command}{imptext}{\manArg{Text}}
-    Hebt \T{Text} als \imptext{sehr wichtig} hervor.
+    Highlights \T{Text} as \imptext{very important}.
 \end{command}
 
 \begin{command}{notetext}{\manArg{Text}}
-    Setzt \T{Text} als eine \notetext{beiläufige Notiz}.
+    Sets \T{Text} as an \notetext{incidental note}.
 \end{command}
 \end{frame}
 
-\subsection{Farben}
-\begin{frame}[fragile]{Farben}
+\subsection{Colors}
+\begin{frame}[fragile]{Colors}
     \def\colshow#1{\T{#1} \tikz[baseline=-0.6ex]{\draw[fill=#1] circle (4pt);}}
-    Die folgenden Farben stehen zur Verfügung: \foreach[count=\i] \col in {cprimary,cakzent,clight,cimportant,cwhite} {\ifnum\i>1,~\fi\colshow{\col}} und \colshow{chighlight}.
+    The following colors are available: \foreach[count=\i] \col in {cprimary,cakzent,clight,cimportant,cwhite} {\ifnum\i>1,~\fi\colshow{\col}} and \colshow{chighlight}.
 \end{frame}
 
-\section{Verbundene Klassen und Pakete}
-\begin{frame}[fragile]{Verbundene Klassen und Pakete}
-Im Zuge dieser \LaTeXe-Dokumentklasse sind noch einige andere Pakete entstanden. Zum aktuellen Kompilierstand existiert (Pakete und Klassen, ohne Link sind dieser beigelegt und hier: \url{https://github.com/EagleoutIce/sopra-collection} zu finden):
+\section{Related Classes and Packages}
+\begin{frame}[fragile]{Related Classes and Packages}
+In the course of this \LaTeXe\ document class, a few other packages have also come into being. As of the current build, the following exist (packages and classes without a link are included alongside this one and can be found here: \url{https://github.com/EagleoutIce/sopra-collection}):
 \begin{multicols}{3}
     \begin{itemize}
         \foreach \i/\u in {eagle-maps/{https://github.com/EagleoutIce/eagle-maps},LILLY-Framework/{https://github.com/EagleoutIce/LILLY},sopra-documentation/,sopra-models/,sopra-listings/,sopra-requirements/,sopra-attachments/} {

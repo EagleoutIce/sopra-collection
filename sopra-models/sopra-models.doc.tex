@@ -4,32 +4,32 @@
 \usepackage{sopra-documentation}
 \usepackage{sopra-models}
 
-\title{Das 'sopra-models'-Paket}
-\subtitle[Dokumentation für das 'sopra-models'-Paket]{Dokumentation für das 'sopra-models'-Paket | Version \thesomversion}
+\title{The 'sopra-models' package}
+\subtitle[Documentation for the 'sopra-models' package]{Documentation for the 'sopra-models' package | Version \thesomversion}
 
 \duedate{2019-12-2}
 
-\keywords{Dokumentation,sopra-models,sopra,uni ulm,uulm,Paket}
+\keywords{Documentation,sopra-models,sopra,uni ulm,uulm,package}
 \authors{Florian Sihler (florian.sihler@uni-ulm.de)}
 
 \group{Die Affenbande}
 \begin{document}
     \maketitle
 
-\section{Allgemeines}
-\subsection{Warum, wieso, weshalb?}
-    Dieses \LaTeXe-Paket wurde im Rahmen des Sopras im
-    Wintersemester 2019 und Sommersemester 2020 verfasst und dient als
-    Grundlage für die Präsentation von (UML)-Diagrammen und Modellen
-    des \imptext{Teams 20}. Diese Dokumentation wurde zusammen mit der
-    \T{sopra-base.cls} sowie dem Paket \T{sopra-documentation.sty} kreiert.\par
-    \imptext{Wichtig: Ein großteil dieses Pakets basiert auf \T{tikz-uml} und
-    wird hier dokumentiert: \url{https://perso.ensta-paris.fr/~kielbasi/tikzuml/}}.\newline
-    Zum Visualisieren der einzelnen Code-Ausschnitte wird das
-    \T{sopra-listings}-Paket verwendet. Es ist für die Verwendung des Pakets nicht relevant.\par
-    Das zugehörige Paket sollte ebenfalls in dieses Dokument eingebettet sein: \scalebox{0.65}{\attachfile[subject={sopra-models.sty}]{sopra-models.sty}}.
-\subsection{Abhängigkeiten}
-    Dieses Paket bindet die folgenden Paketen mit ein:
+\section{General}
+\subsection{Why, wherefore, whence?}
+    This \LaTeXe-package was written as part of the Sopra project in the
+    winter semester of 2019 and summer semester of 2020, and serves as the
+    basis for presenting (UML) diagrams and models
+    for \imptext{Team 20}. This documentation was created together with
+    \T{sopra-base.cls} and the \T{sopra-documentation.sty} package.\par
+    \imptext{Important: A large part of this package is based on \T{tikz-uml} and
+    is documented here: \url{https://perso.ensta-paris.fr/~kielbasi/tikzuml/}}.\newline
+    The \T{sopra-listings} package is used to visualize the
+    individual code snippets. It is not relevant for using the package.\par
+    The corresponding package should also be embedded in this document: \scalebox{0.65}{\attachfile[subject={sopra-models.sty}]{sopra-models.sty}}.
+\subsection{Dependencies}
+    This package includes the following packages:
     \begin{multicols}{3}
         \begin{itemize}
             \def\pkgparse#1:#2\@nil{%
@@ -40,85 +40,85 @@
             }
         \end{itemize}
     \end{multicols}
-    All diese Pakete sollten Teil der gängigen \LaTeX-Distribution sein. Weiter werden von Ti\textit{k}Z die folgenden
-    Bibliotheken benutzt: \T{backgrounds}, \T{arrows}, \T{shapes}, \T{fit}, \T{shadows} und \T{decorations.markings}.
+    All of these packages should be part of any common \LaTeX-distribution. Furthermore, Ti\textit{k}Z uses the following
+    libraries: \T{backgrounds}, \T{arrows}, \T{shapes}, \T{fit}, \T{shadows} and \T{decorations.markings}.
 
-\subsection{Die Installation}
-    Das Paket wird nicht als \T{.dtx} ausgeliefert, weswegen sich die
-    folgenden Möglichkeiten ergeben:
+\subsection{Installation}
+    The package is not distributed as a \T{.dtx} file, which is why the
+    following options are available:
     \begin{itemize}
-        \item Das Paket kann in dasselbe Verzeichnis wie das Dokument
-                gesetzt werden. In diesem Fall lautet die Einbindungsanweisung:
+        \item The package can be placed in the same directory as the document.
+                In this case, the inclusion command reads:
 \begin{plainlatex}
 \usepackage{sopra-models}
 \end{plainlatex}
-        \item Das Paket kann in ein Unterverzeichnis/in ein mit
-                dem Dokument ausgeliefertes Verzeichnis gelegt werden. In
-                diesem Fall erfolgt die Angabe durch den (relativen-) Pfad:
+        \item The package can be placed in a subdirectory, or in a
+                directory shipped alongside the document. In
+                this case, it is specified via the (relative) path:
 \begin{plainlatex}
-\usepackage{./Mein/Pfad/zu/sopra-models}
+\usepackage{./My/Path/to/sopra-models}
 \end{plainlatex}
-        \item Man kann das Paket (mittels eines Symlinks oder ähnlichem)
-              in einen eigenen \emph{texmf}-Baum ablegen.
-              So kann zum Beispiel auf Linux unter der Verwendung von texlive
-              das Paket hier abgelegt werden: \bvoid{\~/texmf/tex/latex/}.
-              Das Verzeichnis kann erstellt und anschließend mittels
-              \bbash{texhash \~/texmf} aktualisiert werden. Nun kann
-              das Paket wie jede andere installierte Paket verwendet werden:
+        \item The package can be placed (via a symlink or similar)
+              into your own \emph{texmf} tree.
+              For example, on Linux using texlive,
+              the package can be placed here: \bvoid{\~/texmf/tex/latex/}.
+              The directory can be created and then
+              updated using \bbash{texhash \~/texmf}. The
+              package can now be used like any other installed package:
 \begin{plainlatex}
 \usepackage{sopra-models}
 \end{plainlatex}
     \end{itemize}
 
-\subsection{Weitere Besonderheiten}
-In Version \thesomversion{} (\cmdref{thesomversion}) gibt es keine weiteren
-Besonderheiten.
+\subsection{Further Notes}
+In version \thesomversion{} (\cmdref{thesomversion}) there are no further
+notes.
 
-\section{Paket-Konfiguration}
-    \subsection{Akzeptierte Parameter}
-    Dieses Paket akzeptiert selbst keine weiteren Pakete!
+\section{Package Configuration}
+    \subsection{Accepted Parameters}
+    This package itself does not accept any further options!
 
-\section{Befehle- und Umgebungen}
+\section{Commands and Environments}
 
-Es gilt zu beachten, dass das Präfix \T{env@} nur auf die Natur einer Umgebung hinweist und nicht zum eigentlichen Bezeichner zuzuordnen ist!
+Note that the prefix \T{env@} only indicates the nature of an environment and is not part of the actual identifier!
 
-\subsection{Allgemeine Befehle}
+\subsection{General Commands}
 
 \begin{command}{thesomversion}{}
-    Liefert die aktuelle Version des Pakets. So ergibt: \cmd{thesomversion}: \thesomversion\\
-    \notetext{Hinweis: über \blatex{\\value\{somversion\}} lässt sich
-    die Version als $4$-stellige Nummer erhalten: \arabic{somversion}.}
+    Returns the current version of the package. This gives: \cmd{thesomversion}: \thesomversion\\
+    \notetext{Note: via \blatex{\\value\{somversion\}} the
+    version can be obtained as a $4$-digit number: \arabic{somversion}.}
 \end{command}
 
 \subsection{Floats}
 
 \begin{environment}{model}{\optArg{Placement}}
-    Ein \T{float}, ganz analog zu \env{figure} und \env{table}.
+    A \T{float}, completely analogous to \env{figure} and \env{table}.
 \end{environment}
 
-Beispiel:
+Example:
 \begin{plainlatex}[morekeywords={[3]{model}}]
 \begin{model}
     \centering
-    Isch bin ein Modell.
-    \caption[Und ich eigentlich kürzer.]{Ich bin der Titel.}
+    I'm a model.
+    \caption[And I'm actually shorter.]{I am the title.}
 \end{model}
 \end{plainlatex}
-Ergibt:
+Gives:
 \begin{model}
     \centering
-    Isch bin ein Modell.
-    \caption[Und ich eigentlich kürzer.]{Ich bin der Titel.}
+    I'm a model.
+    \caption[And I'm actually shorter.]{I am the title.}
 \end{model}
 
-Diese lassen durch \cmd{listofmodel} auflisten:
+These can be listed via \cmd{listofmodel}:
 
 \listofmodel
 
-\subsubsection{Ein Modell}
-Durch die Einbettung des modifizierten \href{https://perso.ensta-paris.fr/~kielbasi/tikzuml/}{Ti\textit{k}Z-UML} sind eine ganze Reihe an Modellen möglich. So zum Beispiel das in \autoref{fig:example-model} (welches auf die Seitenbreite skaliert wird). Ein weiteres Beispiel findet sich in \autoref{fig:example-model2}.
+\subsubsection{A Model}
+By embedding the modified \href{https://perso.ensta-paris.fr/~kielbasi/tikzuml/}{Ti\textit{k}Z-UML}, a whole range of models becomes possible. For example, the one in \autoref{fig:example-model} (which is scaled to the page width). Another example can be found in \autoref{fig:example-model2}.
 
-Hübschere Stile werden durch \href{https://github.com/EagleoutIce/lithie-util}{lithie-util} zur Verfügung gestellt.
+Prettier styles are provided by \href{https://github.com/EagleoutIce/lithie-util}{lithie-util}.
 
 
 \begin{model}
@@ -127,23 +127,23 @@ Hübschere Stile werden durch \href{https://github.com/EagleoutIce/lithie-util}{
 \begin{tikzpicture}[%
         conn/.style={rectangle,draw,fill,gray,rounded corners=1pt,minimum height=0.15cm,minimum height=0.15cm},
         desc/.style={gray,font=\footnotesize\sffamily,align=center}]
-    \begin{umlcomponent}[body=false,x=1]{Hardwarezugriffsschicht}
+    \begin{umlcomponent}[body=false,x=1]{Hardware access layer}
     \end{umlcomponent}
     \begin{umlcomponent}[artefact=true,stereotype=artefact,x=1,y=-1.75]{oracle}
     \end{umlcomponent}
-    \umlprovidedinterface[interface={\noexpand\space},distance=-0.65cm,name=data,anchor=east]{Hardwarezugriffsschicht}
-    \node[above right=8pt,xshift=-0.4cm] at(data-1) {Dateizugriff};
+    \umlprovidedinterface[interface={\noexpand\space},distance=-0.65cm,name=data,anchor=east]{Hardware access layer}
+    \node[above right=8pt,xshift=-0.4cm] at(data-1) {File access};
 
-    \begin{umlcomponent}[x=11.15,body=false,name=tv]{Teilnehmerverwaltung}
+    \begin{umlcomponent}[x=11.15,body=false,name=tv]{Subscriber management}
     \end{umlcomponent}
-    \draw[densely dashed, -angle 45] (oracle) to[edge node={node[right=4pt,scale=0.65] {$\ll$manifest$\gg$}}] (Hardwarezugriffsschicht);
+    \draw[densely dashed, -angle 45] (oracle) to[edge node={node[right=4pt,scale=0.65] {$\ll$manifest$\gg$}}] (Hardware access layer);
 
 
-    \begin{umlcomponent}[y=-3.75, x=8.65,width=11.5cm,name=dbms]{Datenbankmanagementsystem}
-        \begin{umlcomponent}[symbol=false,body=false,stereotype=subsystem,name=ea]{Ein-/Ausgabesystem}
+    \begin{umlcomponent}[y=-3.75, x=8.65,width=11.5cm,name=dbms]{Database management system}
+        \begin{umlcomponent}[symbol=false,body=false,stereotype=subsystem,name=ea]{Input/output system}
         \end{umlcomponent}
 
-        \begin{umlcomponent}[x=5.5,symbol=false,body=false,name=xml]{XML-Schnittstelle}
+        \begin{umlcomponent}[x=5.5,symbol=false,body=false,name=xml]{XML interface}
         \end{umlcomponent}
 
         \umlassemblyconnector[interface={\noexpand\space},name=examl]{xml}{ea}
@@ -151,20 +151,20 @@ Hübschere Stile werden durch \href{https://github.com/EagleoutIce/lithie-util}{
     \node[conn] (dbms-w) at(dbms.west|-ea.west) {};
     \umlassemblyconnector[interface={\noexpand\space},name=edbmsw]{ea}{dbms-w}
     \umlrequiredinterface[distance=-1.25cm,name=hwd]{dbms-w}
-    \node[below,text width=2cm,align=center] at(hwd.south) {Hardware\-zugriff};
+    \node[below,text width=2cm,align=center] at(hwd.south) {Hardware access};
     \draw[densely dashed, -angle 45] (hwd-|data) to[edge node={coordinate (hwddata)}] (data);
     \umlassemblyconnector[interface={\noexpand\space},anchors=270 and 98,name=savemed]{tv}{dbms}
-    \node[right=8pt] at (savemed-1.east) {Speichermedium};
-    \begin{umlcomponent}[x=19,symbol=false,body=false,name=lg]{Listengenerator}
+    \node[right=8pt] at (savemed-1.east) {Storage medium};
+    \begin{umlcomponent}[x=19,symbol=false,body=false,name=lg]{List generator}
     \end{umlcomponent}
     \umlassemblyconnector[name=lgtv,interface={\noexpand\space}]{lg}{tv}
-    \node[below=8pt] at(lgtv-1) {Sortierter Zugriff};
-    \umlprovidedinterface[interface={Unsortierter Zugriff},distance=-0.75cm,name=random-access,anchor=10]{tv}
+    \node[below=8pt] at(lgtv-1) {Sorted access};
+    \umlprovidedinterface[interface={Unsorted access},distance=-0.75cm,name=random-access,anchor=10]{tv}
 
     \draw[fill=white] ($(tv.-4)+(-0.125,0)$) rectangle ($(tv.13)+(0.125,0)$);
 
-    \node[rectangle,draw,above left,yshift=0.66cm,xshift=0.25cm,inner sep=1.5ex] (pag) at(lg.135) {Paginierer};
-    \node[rectangle,draw,above right,yshift=0.66cm,xshift=-0.25cm,inner sep=1.5ex] (sat) at(lg.45) {Satzprogramm};
+    \node[rectangle,draw,above left,yshift=0.66cm,xshift=0.25cm,inner sep=1.5ex] (pag) at(lg.135) {Paginator};
+    \node[rectangle,draw,above right,yshift=0.66cm,xshift=-0.25cm,inner sep=1.5ex] (sat) at(lg.45) {Typesetting program};
     \draw[densely dashed,-angle 45] (pag.-50-|lg.150) -- (lg.150);
     \draw[densely dashed,-angle 45] (sat.230-|lg.30) to[edge node={coordinate (sathalf)}] (lg.30);
     \def\rsdot{.}
@@ -173,43 +173,43 @@ Hübschere Stile werden durch \href{https://github.com/EagleoutIce/lithie-util}{
     \draw[densely dashed, -angle 45] (lear) to[edge node={node[right=4pt,scale=0.65] (manifest) {$\ll$manifest$\gg$}}] (lg);
 
     % descs
-    \node[below right=8pt,xshift=0.25cm,desc] (ddata) at(data) {Angebotene\\Schnittstelle};
+    \node[below right=8pt,xshift=0.25cm,desc] (ddata) at(data) {Provided\\interface};
     \draw[densely dashed] (ddata) -- (data);
 
-    \node[left=8pt,xshift=-0.85cm,yshift=-1.125cm,desc] (dhwd) at(hwd) {Benötigte Schnittstelle};
+    \node[left=8pt,xshift=-0.85cm,yshift=-1.125cm,desc] (dhwd) at(hwd) {Required interface};
     \draw[densely dashed] (dhwd) -- (hwd);
 
-    \node[below right,yshift=-1.35cm,xshift=0.125cm,desc] (ddbms-w) at(dbms-w) {Einfacher Port};
+    \node[below right,yshift=-1.35cm,xshift=0.125cm,desc] (ddbms-w) at(dbms-w) {Simple port};
     \draw[densely dashed] (ddbms-w) -- (dbms-w);
 
-    \node[below left,yshift=-0.6cm,xshift=-1.75cm,desc] (dhwddata) at(hwddata) {Abhängigkeit, die\\die Kompatibilität\\der beiden Schnitt-\\stellen ausdrückt.};
+    \node[below left,yshift=-0.6cm,xshift=-1.75cm,desc] (dhwddata) at(hwddata) {Dependency that\\expresses the\\compatibility of\\the two interfaces.};
     \draw[densely dashed] (dhwddata) -- (hwddata);
 
     \node[below right,yshift=-2cm,xshift=-0.45cm,desc] (dea) at(ea) {Subsystem};
     \draw[densely dashed] (dea) -- (ea);
 
-    \node[below right,yshift=-1cm,xshift=-0.45cm,desc] (dexaml) at(examl-1) {Kompositions-\\konnektor};
+    \node[below right,yshift=-1cm,xshift=-0.45cm,desc] (dexaml) at(examl-1) {Composition\\connector};
     \draw[densely dashed] (dexaml) -- ([yshift=-6.5pt]examl-1.south);
 
-    \node[below right,yshift=-1.3cm,xshift=0.75cm,desc] (dxml) at(xml) {Komponente};
+    \node[below right,yshift=-1.3cm,xshift=0.75cm,desc] (dxml) at(xml) {Component};
     \draw[densely dashed] (dxml) -- (xml);
 
-    \node[below right,yshift=-0.95cm,xshift=0cm,desc] (dlear) at(lear) {Artefakt};
+    \node[below right,yshift=-0.95cm,xshift=0cm,desc] (dlear) at(lear) {Artifact};
     \draw[densely dashed] (dlear) -- (lear);
 
-    \node[below right,yshift=-0.95cm,xshift=0cm,desc] (dlear) at(lear) {Artefakt};
+    \node[below right,yshift=-0.95cm,xshift=0cm,desc] (dlear) at(lear) {Artifact};
     \draw[densely dashed] (dlear) -- (lear);
 
-    \node[right,yshift=-0.25cm,xshift=1.125cm,desc] (dmanifest) at(manifest) {Implementierungs-\\Beziehung};
+    \node[right,yshift=-0.25cm,xshift=1.125cm,desc] (dmanifest) at(manifest) {Implementation\\relationship};
     \draw[densely dashed] (dmanifest) -- (manifest);
 
-    \node[right,yshift=-0.25cm,xshift=1.25cm,desc] (dsathalf) at(sathalf) {Abhängigkeit};
+    \node[right,yshift=-0.25cm,xshift=1.25cm,desc] (dsathalf) at(sathalf) {Dependency};
     \draw[densely dashed] (dsathalf) -- (sathalf);
 
-    \node[above left,yshift=0.25cm,xshift=-1.25cm,desc] (dcomplex) at($(tv.13)-(0.125,0)$) {Komplexer Port};
+    \node[above left,yshift=0.25cm,xshift=-1.25cm,desc] (dcomplex) at($(tv.13)-(0.125,0)$) {Complex port};
     \draw[densely dashed] (dcomplex) -- ($(tv.13)-(0.125,0)$);
 \end{tikzpicture}}
-    \caption{Ein volles Modell.}
+    \caption{A complete model.}
     \label{fig:example-model}
 \end{model}
 
@@ -220,21 +220,21 @@ Hübschere Stile werden durch \href{https://github.com/EagleoutIce/lithie-util}{
 \begin{tikzpicture}
     \begin{scope}[every node/.style={font=\scriptsize}]
         \begin{umlsystem}[x=4]{Hexxagon}
-            \umlusecase[name=main-menu]{Hauptmenü anzeigen}
-            \umlusecase[name=lobby,y=-2]{Lobbys verwalten}
+            \umlusecase[name=main-menu]{Show main menu}
+            \umlusecase[name=lobby,y=-2]{Manage lobbies}
 
-            \umlusecase[name=create,y=-1,x=-4]{Lobby Erstellen}
-            \umlusecase[name=enter,y=-1,x=+4]{Lobby beitreten/verlassen}
+            \umlusecase[name=create,y=-1,x=-4]{Create lobby}
+            \umlusecase[name=enter,y=-1,x=+4]{Join/leave lobby}
 
-            \umlusecase[name=play,y=-4]{Hexxagon spielen}
+            \umlusecase[name=play,y=-4]{Play Hexxagon}
 
-            \umlusecase[name=mv-stone,y=-5,x=+4]{Stein bewegen}
-            \umlusecase[name=game-over,y=-6]{Game-Over B. anzeigen}
-            \umlusecase[name=show-game,y=-5,x=-4]{Spiel darstellen}
+            \umlusecase[name=mv-stone,y=-5,x=+4]{Move stone}
+            \umlusecase[name=game-over,y=-6]{Show Game Over screen}
+            \umlusecase[name=show-game,y=-5,x=-4]{Display game}
         \end{umlsystem}
-        \umlactor[x=-4]{Benutzer}
+        \umlactor[x=-4]{User}
 
-        \umlassoc{Benutzer}{main-menu}
+        \umlassoc{User}{main-menu}
 
         \umlactor[x=13, y=-2.5]{Server}
 
@@ -257,7 +257,7 @@ Hübschere Stile werden durch \href{https://github.com/EagleoutIce/lithie-util}{
         \umlHVinclude[name=lshow]{play}{show-game}
     \end{scope}
 \end{tikzpicture}}
-    \caption{Ein weiteres volles Modell.}
+    \caption{Another complete model.}
     \label{fig:example-model2}
 \end{model}
 \end{document}
